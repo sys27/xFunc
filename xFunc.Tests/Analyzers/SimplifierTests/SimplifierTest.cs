@@ -13,8 +13,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Matrices;
+using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Statistical;
 using Xunit;
 
@@ -287,5 +290,39 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
 
             SimpleTest(exp, expected);
         }
+
+        [Fact]
+        public void MatrixTest()
+        {
+            var exp = new Matrix(new[]
+            {
+                new Vector(new IExpression[]
+                {
+                    new Add(Number.One, Number.Two),
+                }),
+            });
+            var expected = new Matrix(new[]
+            {
+                new Vector(new IExpression[]
+                {
+                    new Number(3),
+                }),
+            });
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void AddAssignTest()
+        {
+            var exp = new AddAssign(Variable.X, new Add(Number.One, Number.Two));
+            var expected = new AddAssign(Variable.X, new Number(3));
+
+            SimpleTest(exp, expected);
+        }
+
+        [Theory]
+        [ClassData(typeof(AllExpressionsData))]
+        public void TestNullException(Type type) => TestNullExp(type);
     }
 }

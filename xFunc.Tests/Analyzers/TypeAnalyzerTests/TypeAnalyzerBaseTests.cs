@@ -15,9 +15,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using Xunit;
+using Xunit.Sdk;
 
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
 {
@@ -66,5 +68,24 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
 
         protected DifferentParametersExpression CreateDiff(Type type, IList<IExpression> arguments)
             => (DifferentParametersExpression)Activator.CreateInstance(type, arguments);
+
+        protected void TestNullExp(Type type)
+        {
+            try
+            {
+                var method = typeof(TypeAnalyzer)
+                    .GetMethod(nameof(TypeAnalyzer.Analyze), new[] { type });
+                method.Invoke(analyzer, new object[] { null });
+            }
+            catch (TargetInvocationException e)
+            {
+                if (e.InnerException is ArgumentNullException)
+                    return;
+
+                throw;
+            }
+
+            throw new XunitException("The exception is expected.");
+        }
     }
 }

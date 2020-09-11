@@ -14,9 +14,11 @@
 // limitations under the License.
 
 using System;
+using System.Reflection;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using Xunit;
+using Xunit.Sdk;
 
 namespace xFunc.Tests.Analyzers.SimplifierTests
 {
@@ -37,6 +39,25 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var simple = exp.Analyze(simplifier);
 
             Assert.Equal(expected, simple);
+        }
+
+        protected void TestNullExp(Type type)
+        {
+            try
+            {
+                var method = typeof(Simplifier)
+                    .GetMethod(nameof(Simplifier.Analyze), new[] { type });
+                method.Invoke(simplifier, new object[] { null });
+            }
+            catch (TargetInvocationException e)
+            {
+                if (e.InnerException is ArgumentNullException)
+                    return;
+
+                throw;
+            }
+
+            throw new XunitException("The exception is expected.");
         }
     }
 }

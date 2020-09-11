@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
@@ -818,5 +819,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             TestException(new ToNumber(Bool.True));
         }
+
+        [Theory]
+        [ClassData(typeof(AllExpressionsData))]
+        public void TestNullException(Type type) => TestNullExp(type);
     }
 }

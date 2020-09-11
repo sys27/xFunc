@@ -14,6 +14,8 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Angles;
@@ -21,26 +23,30 @@ using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
+using Xunit.Sdk;
 
-namespace xFunc.Tests.Analyzers
+namespace xFunc.Tests.Analyzers.DifferentiatorTests
 {
     public class DifferentiatorTest
     {
+        private readonly Differentiator differentiator;
+
         private readonly Number zero;
 
         public DifferentiatorTest()
         {
+            differentiator = new Differentiator();
             zero = Number.Zero;
         }
 
         private IExpression Differentiate(IExpression exp)
-            => exp.Analyze(new Differentiator(), DifferentiatorContext.Default());
+            => exp.Analyze(differentiator, DifferentiatorContext.Default());
 
         private IExpression Differentiate(IExpression exp, Variable variable)
-            => exp.Analyze(new Differentiator(), new DifferentiatorContext(new ExpressionParameters(), variable));
+            => exp.Analyze(differentiator, new DifferentiatorContext(new ExpressionParameters(), variable));
 
         private IExpression Differentiate(IExpression exp, Variable variable, ExpressionParameters parameters)
-            => exp.Analyze(new Differentiator(), new DifferentiatorContext(parameters, variable));
+            => exp.Analyze(differentiator, new DifferentiatorContext(parameters, variable));
 
         #region Common
 

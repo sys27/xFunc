@@ -13,9 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// TODO:
-#pragma warning disable CA1062
-
+using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -35,8 +33,19 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
     /// <seealso cref="IAnalyzer{ResultType}" />
     public class TypeAnalyzer : ITypeAnalyzer
     {
-        private ResultTypes CheckTrigonometric(UnaryExpression exp)
+        private ResultTypes CheckArgument([NotNull] IExpression exp, ResultTypes result)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
+            return result;
+        }
+
+        private ResultTypes CheckTrigonometric([NotNull] UnaryExpression exp)
+        {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
 
             return result switch
@@ -49,8 +58,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             };
         }
 
-        private ResultTypes CheckInverseTrigonometric(UnaryExpression exp)
+        private ResultTypes CheckInverseTrigonometric([NotNull] UnaryExpression exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
 
             return result switch
@@ -62,8 +74,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             };
         }
 
-        private ResultTypes CheckStatistical(DifferentParametersExpression exp)
+        private ResultTypes CheckStatistical([NotNull] DifferentParametersExpression exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             if (exp.ParametersCount == 1)
             {
                 var result = exp[0].Analyze(this);
@@ -86,8 +101,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             return ResultTypes.Number;
         }
 
-        private ResultTypes AnalyzeForNumber(BinaryExpression exp)
+        private ResultTypes AnalyzeForNumber([NotNull] BinaryExpression exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
 
@@ -112,8 +130,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             };
         }
 
-        private ResultTypes AnalyzeLogical(BinaryExpression exp)
+        private ResultTypes AnalyzeLogical([NotNull] BinaryExpression exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
 
@@ -131,8 +152,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             };
         }
 
-        private ResultTypes AnalyzeLogicalAndBitwise(BinaryExpression exp)
+        private ResultTypes AnalyzeLogicalAndBitwise([NotNull] BinaryExpression exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
 
@@ -154,8 +178,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             };
         }
 
-        private ResultTypes AnalyzeEquality(BinaryExpression exp)
+        private ResultTypes AnalyzeEquality([NotNull] BinaryExpression exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
 
@@ -186,8 +213,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             };
         }
 
-        private ResultTypes AnalyzeBinaryAssign(VariableBinaryExpression exp)
+        private ResultTypes AnalyzeBinaryAssign([NotNull] VariableBinaryExpression exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var rightResult = exp.Value.Analyze(this);
 
             return rightResult switch
@@ -198,8 +228,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             };
         }
 
-        private ResultTypes AnalyzeShift(BinaryExpression exp)
+        private ResultTypes AnalyzeShift([NotNull] BinaryExpression exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
 
@@ -225,6 +258,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Abs exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
 
             return result switch
@@ -245,6 +281,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Add exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
 
@@ -289,6 +328,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Ceil exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
 
             return result switch
@@ -305,14 +347,14 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Define exp) => ResultTypes.Undefined;
+        public virtual ResultTypes Analyze(Define exp) => CheckArgument(exp, ResultTypes.Undefined);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Del exp) => ResultTypes.Vector;
+        public virtual ResultTypes Analyze(Del exp) => CheckArgument(exp, ResultTypes.Vector);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -321,6 +363,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Derivative exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             if (exp.ParametersCount == 1)
                 return ResultTypes.Expression;
 
@@ -340,6 +385,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Div exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
 
@@ -375,6 +423,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Exp exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
 
             return result switch
@@ -393,6 +444,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Fact exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.Number)
                 return ResultTypes.Number;
@@ -407,6 +461,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Floor exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
 
             return result switch
@@ -425,6 +482,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Trunc exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
 
             return result switch
@@ -443,6 +503,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Frac exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
 
             return result switch
@@ -461,6 +524,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(GCD exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             using var enumerator = exp.Arguments.GetEnumerator();
             for (var i = 0; enumerator.MoveNext(); i++)
             {
@@ -481,6 +547,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Lb exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.Number)
                 return ResultTypes.Number;
@@ -495,6 +564,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(LCM exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             using var enumerator = exp.Arguments.GetEnumerator();
             for (var i = 0; enumerator.MoveNext(); i++)
             {
@@ -515,6 +587,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Lg exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
 
             return result switch
@@ -533,6 +608,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Ln exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
 
             return result switch
@@ -551,6 +629,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Log exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
 
@@ -575,6 +656,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Mod exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
 
@@ -601,6 +685,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Mul exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
 
@@ -650,15 +737,14 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Number exp) => ResultTypes.Number;
+        public virtual ResultTypes Analyze(Number exp) => CheckArgument(exp, ResultTypes.Number);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Angle exp)
-            => ResultTypes.AngleNumber;
+        public virtual ResultTypes Analyze(Angle exp) => CheckArgument(exp, ResultTypes.AngleNumber);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -667,6 +753,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(ToDegree exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
 
             return result switch
@@ -684,6 +773,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(ToRadian exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
 
             return result switch
@@ -701,6 +793,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(ToGradian exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
 
             return result switch
@@ -718,6 +813,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(ToNumber exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
 
             return result switch
@@ -734,6 +832,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Pow exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
 
@@ -759,6 +860,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Root exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
 
@@ -785,6 +889,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Round exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             using var enumerator = exp.Arguments.GetEnumerator();
             for (var i = 0; enumerator.MoveNext(); i++)
             {
@@ -801,14 +908,14 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Simplify exp) => ResultTypes.Undefined;
+        public virtual ResultTypes Analyze(Simplify exp) => CheckArgument(exp, ResultTypes.Undefined);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Sqrt exp) => ResultTypes.Undefined;
+        public virtual ResultTypes Analyze(Sqrt exp) => CheckArgument(exp, ResultTypes.Undefined);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -817,6 +924,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Sub exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
 
@@ -861,6 +971,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(UnaryMinus exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
 
             return result switch
@@ -878,28 +991,29 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Undefine exp) => ResultTypes.Undefined;
+        public virtual ResultTypes Analyze(Undefine exp) => CheckArgument(exp, ResultTypes.Undefined);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(UserFunction exp) => ResultTypes.Undefined;
+        public virtual ResultTypes Analyze(UserFunction exp) => CheckArgument(exp, ResultTypes.Undefined);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Variable exp) => ResultTypes.Undefined;
+        public virtual ResultTypes Analyze(Variable exp) => CheckArgument(exp, ResultTypes.Undefined);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(DelegateExpression exp) => ResultTypes.Undefined;
+        public virtual ResultTypes Analyze(DelegateExpression exp)
+            => CheckArgument(exp, ResultTypes.Undefined);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -908,6 +1022,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Sign exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
 
             return result switch
@@ -930,6 +1047,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Vector exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             using var enumerator = exp.Arguments.GetEnumerator();
             for (var i = 0; enumerator.MoveNext(); i++)
             {
@@ -950,6 +1070,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Matrix exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             foreach (var item in exp.Vectors)
             {
                 var result = item.Analyze(this);
@@ -967,6 +1090,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Determinant exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.Matrix)
                 return ResultTypes.Number;
@@ -981,6 +1107,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Inverse exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.Matrix)
                 return ResultTypes.Matrix;
@@ -995,6 +1124,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Transpose exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined ||
                 result == ResultTypes.Vector ||
@@ -1011,6 +1143,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(DotProduct exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
 
@@ -1034,6 +1169,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(CrossProduct exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
 
@@ -1059,7 +1197,8 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(ComplexNumber exp) => ResultTypes.ComplexNumber;
+        public virtual ResultTypes Analyze(ComplexNumber exp)
+            => CheckArgument(exp, ResultTypes.ComplexNumber);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1068,6 +1207,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Conjugate exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.ComplexNumber)
                 return ResultTypes.ComplexNumber;
@@ -1082,6 +1224,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Im exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.ComplexNumber)
                 return ResultTypes.Number;
@@ -1096,6 +1241,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Phase exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.ComplexNumber)
                 return ResultTypes.Number;
@@ -1110,6 +1258,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Re exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.ComplexNumber)
                 return ResultTypes.Number;
@@ -1124,6 +1275,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Reciprocal exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.ComplexNumber)
                 return ResultTypes.ComplexNumber;
@@ -1397,7 +1551,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Bool exp) => ResultTypes.Boolean;
+        public virtual ResultTypes Analyze(Bool exp) => CheckArgument(exp, ResultTypes.Boolean);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1434,6 +1588,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Not exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Argument.Analyze(this);
 
             return result switch
@@ -1482,7 +1639,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Dec exp) => ResultTypes.Number;
+        public virtual ResultTypes Analyze(Dec exp) => CheckArgument(exp, ResultTypes.Number);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1505,6 +1662,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(For exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var result = exp.Condition.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.Boolean)
                 return ResultTypes.Undefined;
@@ -1533,6 +1693,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(If exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var conditionResult = exp.Condition.Analyze(this);
             if (conditionResult == ResultTypes.Undefined)
                 return ResultTypes.Undefined;
@@ -1549,7 +1712,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Inc exp) => ResultTypes.Number;
+        public virtual ResultTypes Analyze(Inc exp) => CheckArgument(exp, ResultTypes.Number);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1600,6 +1763,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(While exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             var rightResult = exp.Right.Analyze(this);
             if (rightResult == ResultTypes.Undefined || rightResult == ResultTypes.Boolean)
                 return ResultTypes.Undefined;
@@ -1638,5 +1804,3 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         #endregion Programming
     }
 }
-
-#pragma warning restore CA1062

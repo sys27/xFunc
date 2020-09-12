@@ -23,96 +23,27 @@ namespace xFunc.Tests.ParserTests
         [Fact]
         public void ParseLog()
         {
-            var tokens = Builder()
-                .Id("log")
-                .OpenParenthesis()
-                .Number(9)
-                .Comma()
-                .Number(3)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
             var expected = new Log(new Number(9), new Number(3));
 
-            Assert.Equal(expected, exp);
+            ParseTest("log(9, 3)", expected);
         }
 
         [Fact]
         public void ParseLogWithOneParam()
-        {
-            var tokens = Builder()
-                .Id("log")
-                .OpenParenthesis()
-                .Number(9)
-                .CloseParenthesis()
-                .Tokens;
+            => ParseErrorTest("log(9)");
 
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void Log2Test()
-        {
-            var tokens = Builder()
-                .Id("lb")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Lb(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void LbTest()
-        {
-            var tokens = Builder()
-                .Id("log2")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Lb(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
+        [Theory]
+        [InlineData("lb(2)")]
+        [InlineData("log2(2)")]
+        public void LbTest(string function)
+            => ParseTest(function, new Lb(Number.Two));
 
         [Fact]
         public void LgTest()
-        {
-            var tokens = Builder()
-                .Id("lg")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Lg(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
+            => ParseTest("lg(2)", new Lg(Number.Two));
 
         [Fact]
         public void LnTest()
-        {
-            var tokens = Builder()
-                .Id("ln")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Ln(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
+            => ParseTest("ln(2)", new Ln(Number.Two));
     }
 }

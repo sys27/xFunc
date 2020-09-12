@@ -21,6 +21,7 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Resources;
+using xFunc.Maths.Tokenization;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths
@@ -57,14 +58,16 @@ namespace xFunc.Maths
         /// <summary>
         /// Parses the specified function.
         /// </summary>
-        /// <param name="tokens">The list of tokens.</param>
+        /// <param name="function">The string that contains the functions and operators.</param>
         /// <returns>The parsed expression.</returns>
-        public IExpression Parse(IEnumerable<IToken> tokens)
+        public IExpression Parse(string function)
         {
-            if (tokens == null)
-                throw new ArgumentNullException(nameof(tokens));
+            if (string.IsNullOrWhiteSpace(function))
+                throw new ArgumentNullException(nameof(function), Resource.NotSpecifiedFunction);
 
-            var tokenReader = new TokenReader(tokens);
+            var lexer = new Lexer(function);
+            var tokenReader = new TokenReader(ref lexer);
+
             try
             {
                 var exp = Statement(ref tokenReader);

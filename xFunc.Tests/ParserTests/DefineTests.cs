@@ -23,89 +23,18 @@ namespace xFunc.Tests.ParserTests
         [Fact]
         public void DefTest()
         {
-            var tokens = Builder()
-                .Def()
-                .OpenParenthesis()
-                .VariableX()
-                .Comma()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
             var expected = new Define(Variable.X, Number.Two);
 
-            Assert.Equal(expected, exp);
+            ParseTest("def(x, 2)", expected);
         }
 
-        [Fact]
-        public void DefMissingOpenParen()
-        {
-            var tokens = Builder()
-                .Def()
-                .VariableX()
-                .Comma()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void DefMissingKey()
-        {
-            var tokens = Builder()
-                .Def()
-                .OpenParenthesis()
-                .Comma()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void DefMissingComma()
-        {
-            var tokens = Builder()
-                .Def()
-                .OpenParenthesis()
-                .VariableX()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void DefMissingValue()
-        {
-            var tokens = Builder()
-                .Def()
-                .OpenParenthesis()
-                .VariableX()
-                .Comma()
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void DefMissingCloseParen()
-        {
-            var tokens = Builder()
-                .Def()
-                .OpenParenthesis()
-                .VariableX()
-                .Comma()
-                .Number(2)
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
+        [Theory]
+        [InlineData("def x, 2)")]
+        [InlineData("def(, 2)")]
+        [InlineData("def(x 2)")]
+        [InlineData("def(x,)")]
+        [InlineData("def(x, 2")]
+        public void DefMissingOpenParen(string function)
+            => ParseErrorTest(function);
     }
 }

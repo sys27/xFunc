@@ -385,7 +385,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dmitry Kischenko.
+        ///   Looks up a localized string similar to Dmytro Kyshchenko.
         /// </summary>
         public static string Author {
             get {

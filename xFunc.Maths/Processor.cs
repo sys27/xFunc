@@ -35,14 +35,12 @@ namespace xFunc.Maths
         private readonly IDifferentiator differentiator;
         private readonly ISimplifier simplifier;
         private readonly IParser parser;
-        private readonly ILexer lexer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Processor"/> class.
         /// </summary>
         public Processor()
         {
-            lexer = new Lexer();
             simplifier = new Simplifier();
             differentiator = new Differentiator();
             parser = new Parser(differentiator, simplifier);
@@ -81,7 +79,6 @@ namespace xFunc.Maths
             ITypeAnalyzer typeAnalyzer,
             ExpressionParameters parameters)
         {
-            lexer = new Lexer();
             parser = new Parser();
 
             this.simplifier = simplifier ??
@@ -232,15 +229,7 @@ namespace xFunc.Maths
         /// <exception cref="ArgumentNullException"><paramref name="function"/> is null.</exception>
         /// <exception cref="ParseException">Error while parsing.</exception>
         public IExpression Parse(string function)
-            => parser.Parse(lexer.Tokenize(function));
-
-        /// <summary>
-        /// Converts the string into a sequence of tokens.
-        /// </summary>
-        /// <param name="function">The string that contains the functions and operators.</param>
-        /// <returns>The sequence of tokens.</returns>
-        public IEnumerable<IToken> Tokenize(string function)
-            => lexer.Tokenize(function);
+            => parser.Parse(function);
 
         /// <summary>
         /// Gets expression parameters object.

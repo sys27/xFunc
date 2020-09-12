@@ -23,146 +23,32 @@ namespace xFunc.Tests.ParserTests
     {
         [Fact]
         public void ArcsinTest()
-        {
-            var tokens = Builder()
-                .Id("arcsin")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arcsin(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
+            => ParseTest("arcsin(2)", new Arcsin(Number.Two));
 
         [Fact]
         public void ArccosTest()
-        {
-            var tokens = Builder()
-                .Id("arccos")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
+            => ParseTest("arccos(2)", new Arccos(Number.Two));
 
-            var exp = parser.Parse(tokens);
-            var expected = new Arccos(Number.Two);
+        [Theory]
+        [InlineData("arctan(2)")]
+        [InlineData("arctg(2)")]
+        public void ArctanTest(string function)
+            => ParseTest(function, new Arctan(Number.Two));
 
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArctanTest()
-        {
-            var tokens = Builder()
-                .Id("arctan")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arctan(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArctgTest()
-        {
-            var tokens = Builder()
-                .Id("arctg")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arctan(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArccotTest()
-        {
-            var tokens = Builder()
-                .Id("arccot")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arccot(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArcctgTest()
-        {
-            var tokens = Builder()
-                .Id("arcctg")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arccot(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
+        [Theory]
+        [InlineData("arccot(2)")]
+        [InlineData("arcctg(2)")]
+        public void ArccotTest(string function)
+            => ParseTest(function, new Arccot(Number.Two));
 
         [Fact]
         public void ArcsecTest()
-        {
-            var tokens = Builder()
-                .Id("arcsec")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
+            => ParseTest("arcsec(2)", new Arcsec(Number.Two));
 
-            var exp = parser.Parse(tokens);
-            var expected = new Arcsec(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArccscTest()
-        {
-            var tokens = Builder()
-                .Id("arccsc")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arccsc(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArccosecTest()
-        {
-            var tokens = Builder()
-                .Id("arccosec")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arccsc(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
+        [Theory]
+        [InlineData("arccsc(2)")]
+        [InlineData("arccosec(2)")]
+        public void ArccscTest(string function)
+            => ParseTest(function, new Arccsc(Number.Two));
     }
 }

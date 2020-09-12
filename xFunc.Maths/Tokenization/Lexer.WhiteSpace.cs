@@ -13,22 +13,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Linq;
-using Xunit;
+using System;
+using xFunc.Maths.Tokenization.Tokens;
 
-namespace xFunc.Tests.Tokenization
+namespace xFunc.Maths.Tokenization
 {
-    public class OctNumberTests : BaseLexerTests
+    /// <summary>
+    /// The lexer for mathematical expressions.
+    /// </summary>
+    internal partial struct Lexer
     {
-        [Fact]
-        public void OctTest()
+        private IToken? SkipWhiteSpaces(ref ReadOnlySpan<char> function)
         {
-            var tokens = lexer.Tokenize("0436");
-            var expected = Builder()
-                .Number(286)
-                .Tokens;
+            var index = 0;
+            while (char.IsWhiteSpace(function[index]))
+                index++;
 
-            Assert.Equal(expected, tokens.ToList());
+            if (index > 0)
+                function = function[index..];
+
+            return null;
         }
     }
 }

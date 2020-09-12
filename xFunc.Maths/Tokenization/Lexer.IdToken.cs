@@ -22,20 +22,18 @@ namespace xFunc.Maths.Tokenization
     /// <summary>
     /// The lexer for mathematical expressions.
     /// </summary>
-    public partial class Lexer
+    internal partial struct Lexer
     {
-        private IToken? CreateIdToken(ref ReadOnlyMemory<char> function)
+        private IToken? CreateIdToken(ref ReadOnlySpan<char> function)
         {
-            var span = function.Span;
-
-            if (!char.IsLetter(span[0]))
+            if (!char.IsLetter(function[0]))
                 return null;
 
             var endIndex = 1;
-            while (endIndex < span.Length && char.IsLetterOrDigit(span[endIndex]))
+            while (endIndex < function.Length && char.IsLetterOrDigit(function[endIndex]))
                 endIndex++;
 
-            var id = span[..endIndex];
+            var id = function[..endIndex];
 
             IToken token;
 

@@ -15,7 +15,6 @@
 
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Programming;
-using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
 namespace xFunc.Tests.ParserTests
@@ -25,121 +24,21 @@ namespace xFunc.Tests.ParserTests
         [Fact]
         public void WhileTest()
         {
-            var tokens = Builder()
-                .While()
-                .OpenParenthesis()
-                .VariableX()
-                .Operation(OperatorToken.Assign)
-                .VariableX()
-                .Operation(OperatorToken.Plus)
-                .Number(1)
-                .Comma()
-                .Number(1)
-                .Operation(OperatorToken.Equal)
-                .Number(1)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
             var expected = new While(
                 new Define(Variable.X, new Add(Variable.X, Number.One)),
-                new Equal(Number.One, Number.One));
+                new Equal(Number.One, Number.One)
+            );
 
-            Assert.Equal(expected, exp);
+            ParseTest("while(x := x + 1, 1 == 1)", expected);
         }
 
-        [Fact]
-        public void WhileMissingOpenParen()
-        {
-            var tokens = Builder()
-                .While()
-                .VariableX()
-                .Operation(OperatorToken.Assign)
-                .VariableX()
-                .Operation(OperatorToken.Plus)
-                .Number(1)
-                .Comma()
-                .Number(1)
-                .Operation(OperatorToken.Equal)
-                .Number(1)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void WhileMissingBody()
-        {
-            var tokens = Builder()
-                .While()
-                .OpenParenthesis()
-                .Comma()
-                .Number(1)
-                .Operation(OperatorToken.Equal)
-                .Number(1)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void WhileMissingBodyComma()
-        {
-            var tokens = Builder()
-                .While()
-                .OpenParenthesis()
-                .VariableX()
-                .Operation(OperatorToken.Assign)
-                .VariableX()
-                .Operation(OperatorToken.Plus)
-                .Number(1)
-                .Number(1)
-                .Operation(OperatorToken.Equal)
-                .Number(1)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void WhileMissingCondition()
-        {
-            var tokens = Builder()
-                .While()
-                .OpenParenthesis()
-                .VariableX()
-                .Operation(OperatorToken.Assign)
-                .VariableX()
-                .Operation(OperatorToken.Plus)
-                .Number(1)
-                .Comma()
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void WhileMissingCloseParen()
-        {
-            var tokens = Builder()
-                .While()
-                .OpenParenthesis()
-                .VariableX()
-                .Operation(OperatorToken.Assign)
-                .VariableX()
-                .Operation(OperatorToken.Plus)
-                .Number(1)
-                .Comma()
-                .Number(1)
-                .Operation(OperatorToken.Equal)
-                .Number(1)
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
+        [Theory]
+        [InlineData("while x := x + 1, 1 == 1)")]
+        [InlineData("while(, 1 == 1)")]
+        [InlineData("while(x := x + 1 1 == 1)")]
+        [InlineData("while(x := x + 1, )")]
+        [InlineData("while(x := x + 1, 1 == 1")]
+        public void WhileMissingPartsTest(string function)
+            => ParseErrorTest(function);
     }
 }

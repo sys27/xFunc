@@ -15,7 +15,6 @@
 
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Programming;
-using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
 namespace xFunc.Tests.ParserTests
@@ -25,268 +24,40 @@ namespace xFunc.Tests.ParserTests
         [Fact]
         public void ForTest()
         {
-            var tokens = Builder()
-                .For()
-                .OpenParenthesis()
-                .Number(2)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.Assign)
-                .Number(0)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.LessThan)
-                .Number(10)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.Assign)
-                .VariableX()
-                .Operation(OperatorToken.Plus)
-                .Number(1)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
             var expected = new For(
                 Number.Two,
                 new Define(Variable.X, Number.Zero),
                 new LessThan(Variable.X, new Number(10)),
-                new Define(Variable.X, new Add(Variable.X, Number.One)));
+                new Define(Variable.X, new Add(Variable.X, Number.One))
+            );
 
-            Assert.Equal(expected, exp);
+            ParseTest("for(2, x := 0, x < 10, x := x + 1)", expected);
         }
 
         [Fact]
-        public void IncForTest()
+        public void ForWithIncTest()
         {
-            var tokens = Builder()
-                .For()
-                .OpenParenthesis()
-                .Number(2)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.Assign)
-                .Number(0)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.LessThan)
-                .Number(10)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.Increment)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
             var expected = new For(
                 Number.Two,
                 new Define(Variable.X, Number.Zero),
                 new LessThan(Variable.X, new Number(10)),
-                new Inc(Variable.X));
+                new Inc(Variable.X)
+            );
 
-            Assert.Equal(expected, exp);
+            ParseTest("for(2, x := 0, x < 10, x++)", expected);
         }
 
-        [Fact]
-        public void ForMissingOpenParen()
-        {
-            var tokens = Builder()
-                .For()
-                .Number(2)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.Assign)
-                .Number(0)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.LessThan)
-                .Number(10)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.Increment)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void ForMissingBody()
-        {
-            var tokens = Builder()
-                .For()
-                .OpenParenthesis()
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.Assign)
-                .Number(0)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.LessThan)
-                .Number(10)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.Increment)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void ForMissingBodyComma()
-        {
-            var tokens = Builder()
-                .For()
-                .OpenParenthesis()
-                .Number(2)
-                .VariableX()
-                .Operation(OperatorToken.Assign)
-                .Number(0)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.LessThan)
-                .Number(10)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.Increment)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void ForMissingInit()
-        {
-            var tokens = Builder()
-                .For()
-                .OpenParenthesis()
-                .Number(2)
-                .Comma()
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.LessThan)
-                .Number(10)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.Increment)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void ForMissingInitComma()
-        {
-            var tokens = Builder()
-                .For()
-                .OpenParenthesis()
-                .Number(2)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.Assign)
-                .Id("z")
-                .VariableX()
-                .Operation(OperatorToken.LessThan)
-                .Number(10)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.Increment)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void ForMissingCondition()
-        {
-            var tokens = Builder()
-                .For()
-                .OpenParenthesis()
-                .Number(2)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.Assign)
-                .Number(0)
-                .Comma()
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.Increment)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void ForMissingConditionComma()
-        {
-            var tokens = Builder()
-                .For()
-                .OpenParenthesis()
-                .Number(2)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.Assign)
-                .Number(0)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.LessThan)
-                .Number(10)
-                .VariableX()
-                .Operation(OperatorToken.Increment)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void ForMissingIter()
-        {
-            var tokens = Builder()
-                .For()
-                .OpenParenthesis()
-                .Number(2)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.Assign)
-                .Number(0)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.LessThan)
-                .Number(10)
-                .Comma()
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void ForMissingCloseParen()
-        {
-            var tokens = Builder()
-                .For()
-                .OpenParenthesis()
-                .Number(2)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.Assign)
-                .Number(0)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.LessThan)
-                .Number(10)
-                .Comma()
-                .VariableX()
-                .Operation(OperatorToken.Increment)
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
+        [Theory]
+        [InlineData("for 2, x := 0, x < 10, x++)")]
+        [InlineData("for(, x := 0, x < 10, x++)")]
+        [InlineData("for(2 x := 0, x < 10, x++)")]
+        [InlineData("for(2, , x < 10, x++)")]
+        [InlineData("for(2, x := z x < 10, x++)")]
+        [InlineData("for(2, x := 0, , x++)")]
+        [InlineData("for(2, x := 0, x < 10 x++)")]
+        [InlineData("for(2, x := 0, x < 10, )")]
+        [InlineData("for(2, x := 0, x < 10, x++")]
+        public void ForMissingPartsTest(string function)
+            => ParseErrorTest(function);
     }
 }

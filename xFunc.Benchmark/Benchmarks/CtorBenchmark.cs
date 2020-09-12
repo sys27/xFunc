@@ -15,18 +15,11 @@
 
 using BenchmarkDotNet.Attributes;
 using xFunc.Maths;
-using xFunc.Maths.Tokenization;
 
 namespace xFunc.Benchmark.Benchmarks
 {
     public class CtorBenchmark
     {
-        [Benchmark]
-        public ILexer LexerCtor()
-        {
-            return new Lexer();
-        }
-
         [Benchmark]
         public IParser ParserCtor()
         {

@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Diagnostics;
 
 namespace xFunc.Maths.Tokenization.Tokens
@@ -22,18 +21,16 @@ namespace xFunc.Maths.Tokenization.Tokens
     /// Represents a operator token.
     /// </summary>
     [DebuggerDisplay("Operator: {@" + nameof(@operator) + "}")]
-    public sealed class OperatorToken : IToken
+    internal sealed class OperatorToken : IToken
     {
         private readonly string @operator;
 
         private OperatorToken(string @operator)
-            => this.@operator = @operator ?? throw new ArgumentNullException(nameof(@operator));
+        {
+            Debug.Assert(!string.IsNullOrWhiteSpace(@operator), "The operator should not be empty.");
 
-        /// <summary>
-        /// Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>A string that represents the current object.</returns>
-        public override string ToString() => @operator;
+            this.@operator = @operator;
+        }
 
         /// <summary>
         /// Gets the '+' token.

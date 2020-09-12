@@ -14,12 +14,8 @@
 // limitations under the License.
 
 using BenchmarkDotNet.Attributes;
-using System.Collections.Generic;
-using System.Linq;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Tokenization;
-using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Benchmark.Benchmarks
 {
@@ -27,20 +23,14 @@ namespace xFunc.Benchmark.Benchmarks
     {
         private Parser parser;
 
-        private IList<IToken> tokens;
-
         [GlobalSetup]
         public void Setup()
         {
             parser = new Parser();
-
-            var lexer = new Lexer();
-
-            tokens = lexer.Tokenize("(100.1 + 2(3sin(4cos(5tan(6ctg(10x)))) * 3) / (func(a, b, c) ^ 2)) - (cos(y) - 111.3) & (true | false -> true <-> false eq true) + (det({{1, 2}, {3, 4}}) * 10log(2, 3)) + re(3 + 2i) - im(2 - 9i) + (9 + 2i)").ToList();
         }
 
         [Benchmark]
         public IExpression Parse()
-            => parser.Parse(tokens);
+            => parser.Parse("(100.1 + 2(3sin(4cos(5tan(6ctg(10x)))) * 3) / (func(a, b, c) ^ 2)) - (cos(y) - 111.3) & (true | false -> true <-> false eq true) + (det({{1, 2}, {3, 4}}) * 10log(2, 3)) + re(3 + 2i) - im(2 - 9i) + (9 + 2i)");
     }
 }

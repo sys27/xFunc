@@ -55,20 +55,20 @@ namespace xFunc.Maths
         /// <summary>
         /// Gets parameters of expression.
         /// </summary>
-        /// <param name="tokens">The list of tokens.</param>
+        /// <param name="expression">The expression.</param>
         /// <returns>A collection of parameters.</returns>
-        public static ParameterCollection GetParameters(IEnumerable<IToken> tokens)
+        public static ParameterCollection GetParameters(IExpression expression)
         {
-            if (tokens == null)
-                throw new ArgumentNullException(nameof(tokens));
+            if (expression == null)
+                throw new ArgumentNullException(nameof(expression));
 
-            var c = new SortedSet<Parameter>();
+            var parameters = new SortedSet<Parameter>();
+            var variables = GetAllVariables(expression);
 
-            foreach (var token in tokens)
-                if (token is IdToken var)
-                    c.Add(new Parameter(var.Id, false));
+            foreach (var variable in variables)
+                parameters.Add(new Parameter(variable.Name, false));
 
-            return new ParameterCollection(c, false);
+            return new ParameterCollection(parameters, false);
         }
 
         /// <summary>

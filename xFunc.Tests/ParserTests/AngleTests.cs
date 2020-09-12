@@ -14,186 +14,54 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions.Angles;
-using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
 namespace xFunc.Tests.ParserTests
 {
     public class AngleTests : BaseParserTests
     {
-        [Fact]
-        public void AngleDegree()
-        {
-            var tokens = Builder()
-                .Number(1)
-                .Keyword(KeywordToken.Degree)
-                .Tokens;
+        [Theory]
+        [InlineData("1 deg")]
+        [InlineData("1 degree")]
+        [InlineData("1 degrees")]
+        [InlineData("1°")]
+        public void AngleDeg(string function)
+            => ParseTest(function, AngleValue.Degree(1).AsExpression());
 
-            var exp = parser.Parse(tokens);
-            var expected = AngleValue.Degree(1).AsExpression();
+        [Theory]
+        [InlineData("1 rad")]
+        [InlineData("1 radian")]
+        [InlineData("1 radians")]
+        public void AngleRad(string function)
+            => ParseTest(function, AngleValue.Radian(1).AsExpression());
 
-            Assert.Equal(expected, exp);
-        }
+        [Theory]
+        [InlineData("1 grad")]
+        [InlineData("1 gradian")]
+        [InlineData("1 gradians")]
+        public void AngleGrad(string function)
+            => ParseTest(function, AngleValue.Gradian(1).AsExpression());
 
-        [Fact]
-        public void AngleDegreeSymbol()
-        {
-            var tokens = Builder()
-                .Number(1)
-                .Symbol(SymbolToken.Degree)
-                .Tokens;
+        [Theory]
+        [InlineData("todeg(1 deg)")]
+        [InlineData("todegree(1 deg)")]
+        public void ToDegTest(string function)
+            => ParseTest(function, new ToDegree(AngleValue.Degree(1).AsExpression()));
 
-            var exp = parser.Parse(tokens);
-            var expected = AngleValue.Degree(1).AsExpression();
+        [Theory]
+        [InlineData("torad(1 deg)")]
+        [InlineData("toradian(1 deg)")]
+        public void ToRadTest(string function)
+            => ParseTest(function, new ToRadian(AngleValue.Degree(1).AsExpression()));
 
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void AngleRadian()
-        {
-            var tokens = Builder()
-                .Number(1)
-                .Keyword(KeywordToken.Radian)
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = AngleValue.Radian(1).AsExpression();
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void AngleGradian()
-        {
-            var tokens = Builder()
-                .Number(1)
-                .Keyword(KeywordToken.Gradian)
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = AngleValue.Gradian(1).AsExpression();
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ToDegTest()
-        {
-            var tokens = Builder()
-                .Id("todeg")
-                .OpenParenthesis()
-                .Number(1)
-                .Keyword(KeywordToken.Degree)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new ToDegree(AngleValue.Degree(1).AsExpression());
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ToDegreeTest()
-        {
-            var tokens = Builder()
-                .Id("todegree")
-                .OpenParenthesis()
-                .Number(1)
-                .Keyword(KeywordToken.Degree)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new ToDegree(AngleValue.Degree(1).AsExpression());
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ToRadTest()
-        {
-            var tokens = Builder()
-                .Id("torad")
-                .OpenParenthesis()
-                .Number(1)
-                .Keyword(KeywordToken.Degree)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new ToRadian(AngleValue.Degree(1).AsExpression());
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ToRadianTest()
-        {
-            var tokens = Builder()
-                .Id("toradian")
-                .OpenParenthesis()
-                .Number(1)
-                .Keyword(KeywordToken.Degree)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new ToRadian(AngleValue.Degree(1).AsExpression());
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ToGradTest()
-        {
-            var tokens = Builder()
-                .Id("tograd")
-                .OpenParenthesis()
-                .Number(1)
-                .Keyword(KeywordToken.Degree)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new ToGradian(AngleValue.Degree(1).AsExpression());
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ToGradianTest()
-        {
-            var tokens = Builder()
-                .Id("togradian")
-                .OpenParenthesis()
-                .Number(1)
-                .Keyword(KeywordToken.Degree)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new ToGradian(AngleValue.Degree(1).AsExpression());
-
-            Assert.Equal(expected, exp);
-        }
+        [Theory]
+        [InlineData("tograd(1 deg)")]
+        [InlineData("togradian(1 deg)")]
+        public void ToGradTest(string function)
+            => ParseTest(function, new ToGradian(AngleValue.Degree(1).AsExpression()));
 
         [Fact]
         public void ToNumberTest()
-        {
-            var tokens = Builder()
-                .Id("tonumber")
-                .OpenParenthesis()
-                .Number(1)
-                .Keyword(KeywordToken.Degree)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new ToNumber(AngleValue.Degree(1).AsExpression());
-
-            Assert.Equal(expected, exp);
-        }
+            => ParseTest("tonumber(1 deg)", new ToNumber(AngleValue.Degree(1).AsExpression()));
     }
 }

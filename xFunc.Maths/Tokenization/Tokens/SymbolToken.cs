@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System.Diagnostics;
-using System.Globalization;
 
 namespace xFunc.Maths.Tokenization.Tokens
 {
@@ -22,17 +21,11 @@ namespace xFunc.Maths.Tokenization.Tokens
     /// Represents a symbol token.
     /// </summary>
     [DebuggerDisplay("Symbol: {" + nameof(symbol) + "}")]
-    public sealed class SymbolToken : IToken
+    internal sealed class SymbolToken : IToken
     {
         private readonly char symbol;
 
         private SymbolToken(char symbol) => this.symbol = symbol;
-
-        /// <summary>
-        /// Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>A string that represents the current object.</returns>
-        public override string ToString() => symbol.ToString(CultureInfo.InvariantCulture);
 
         /// <summary>
         /// Gets the '(' token.

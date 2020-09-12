@@ -22,41 +22,18 @@ namespace xFunc.Maths.Tokenization.Tokens
     /// Represents a id token.
     /// </summary>
     [DebuggerDisplay("Id: {" + nameof(Id) + "}")]
-    public class IdToken : IToken
+    internal sealed class IdToken : IToken
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IdToken"/> class.
         /// </summary>
         /// <param name="id">An id.</param>
         public IdToken(string id)
-            => Id = id ?? throw new ArgumentNullException(nameof(id));
-
-        /// <summary>
-        /// Determines whether the specified object is equal to the current object.
-        /// </summary>
-        /// <param name="obj">The object to compare with the current object.</param>
-        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
-        public override bool Equals(object? obj)
         {
-            if (obj == null)
-                return false;
+            Debug.Assert(!string.IsNullOrWhiteSpace(id), "The id should not be empty.");
 
-            if (this == obj)
-                return true;
-
-            if (typeof(IdToken) != obj.GetType())
-                return false;
-
-            var token = (IdToken)obj;
-
-            return Id == token.Id;
+            Id = id;
         }
-
-        /// <summary>
-        /// Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>A string that represents the current object.</returns>
-        public override string ToString() => Id;
 
         /// <summary>
         /// Gets an id.

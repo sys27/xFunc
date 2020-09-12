@@ -22,14 +22,13 @@ namespace xFunc.Maths.Tokenization
     /// <summary>
     /// The lexer for mathematical expressions.
     /// </summary>
-    public partial class Lexer
+    internal partial struct Lexer
     {
-        private IToken? CreateOperatorToken(ref ReadOnlyMemory<char> function)
+        private IToken? CreateOperatorToken(ref ReadOnlySpan<char> function)
         {
-            var span = function.Span;
-            var first = span[0];
-            var second = span.Length >= 2 ? span[1] : default;
-            var third = span.Length >= 3 ? span[2] : default;
+            var first = function[0];
+            var second = function.Length >= 2 ? function[1] : default;
+            var third = function.Length >= 3 ? function[2] : default;
 
             var (token, size) = (first, second, third) switch
             {

@@ -17,7 +17,6 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Trigonometric;
-using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
 namespace xFunc.Tests.ParserTests
@@ -27,269 +26,73 @@ namespace xFunc.Tests.ParserTests
         [Fact]
         public void IfThenElseTest()
         {
-            var tokens = Builder()
-                .If()
-                .OpenParenthesis()
-                .VariableX()
-                .Operation(OperatorToken.Equal)
-                .Number(0)
-                .Operation(OperatorToken.ConditionalAnd)
-                .VariableY()
-                .Operation(OperatorToken.NotEqual)
-                .Number(0)
-                .Comma()
-                .Number(2)
-                .Comma()
-                .Number(8)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
             var expected = new If(
                 new ConditionalAnd(
                     new Equal(Variable.X, Number.Zero),
                     new NotEqual(new Variable("y"), Number.Zero)),
                 Number.Two,
-                new Number(8));
+                new Number(8)
+            );
 
-            Assert.Equal(expected, exp);
+            ParseTest("if(x == 0 && y != 0, 2, 8)", expected);
         }
 
         [Fact]
         public void IfThenTest()
         {
-            var tokens = Builder()
-                .If()
-                .OpenParenthesis()
-                .VariableX()
-                .Operation(OperatorToken.Equal)
-                .Number(0)
-                .Operation(OperatorToken.ConditionalAnd)
-                .VariableY()
-                .Operation(OperatorToken.NotEqual)
-                .Number(0)
-                .Comma()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
             var expected = new If(
                 new ConditionalAnd(
                     new Equal(Variable.X, Number.Zero),
-                    new NotEqual(new Variable("y"), Number.Zero)),
-                Number.Two);
+                    new NotEqual(new Variable("y"), Number.Zero)
+                ),
+                Number.Two
+            );
 
-            Assert.Equal(expected, exp);
+            ParseTest("if(x == 0 && y != 0, 2)", expected);
         }
 
-        [Fact]
-        public void IfMissingOpenParen()
-        {
-            var tokens = Builder()
-                .If()
-                .VariableX()
-                .Operation(OperatorToken.Equal)
-                .Number(0)
-                .Comma()
-                .Number(2)
-                .Comma()
-                .Number(8)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void IfMissingCondition()
-        {
-            var tokens = Builder()
-                .If()
-                .OpenParenthesis()
-                .Comma()
-                .Number(2)
-                .Comma()
-                .Number(8)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void IfMissingConditionComma()
-        {
-            var tokens = Builder()
-                .If()
-                .OpenParenthesis()
-                .VariableX()
-                .Operation(OperatorToken.Equal)
-                .Number(0)
-                .Number(2)
-                .Comma()
-                .Number(8)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void IfMissingThen()
-        {
-            var tokens = Builder()
-                .If()
-                .OpenParenthesis()
-                .VariableX()
-                .Operation(OperatorToken.Equal)
-                .Number(0)
-                .Comma()
-                .Comma()
-                .Number(8)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void IfMissingThenComma()
-        {
-            var tokens = Builder()
-                .If()
-                .OpenParenthesis()
-                .VariableX()
-                .Operation(OperatorToken.Equal)
-                .Number(0)
-                .Comma()
-                .Number(2)
-                .Number(8)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void IfMissingElse()
-        {
-            var tokens = Builder()
-                .If()
-                .OpenParenthesis()
-                .VariableX()
-                .Operation(OperatorToken.Equal)
-                .Number(0)
-                .Comma()
-                .Number(2)
-                .Comma()
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void IfMissingClose()
-        {
-            var tokens = Builder()
-                .If()
-                .OpenParenthesis()
-                .VariableX()
-                .Operation(OperatorToken.Equal)
-                .Number(0)
-                .Comma()
-                .Number(2)
-                .Comma()
-                .Number(8)
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
+        [Theory]
+        [InlineData("if x == 0 && y != 0, 2, 8)")]
+        [InlineData("if(, 2, 8)")]
+        [InlineData("if(x == 0 && y != 0 2, 8)")]
+        [InlineData("if(x == 0 && y != 0, , 8)")]
+        [InlineData("if(x == 0 && y != 0, 2 8)")]
+        [InlineData("if(x == 0 && y != 0, 2, )")]
+        [InlineData("if(x == 0 && y != 0, 2, 8")]
+        public void IfMissingPartsTest(string function)
+            => ParseErrorTest(function);
 
         [Fact]
         public void TernaryTest()
         {
-            var tokens = Builder()
-                .True()
-                .QuestionMark()
-                .Number(1)
-                .Colon()
-                .Operation(OperatorToken.Minus)
-                .Number(1)
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
             var expected = new If(
                 Bool.True,
                 Number.One,
-                new UnaryMinus(Number.One));
+                new UnaryMinus(Number.One)
+            );
 
-            Assert.Equal(expected, exp);
+            ParseTest("true ? 1 : -1", expected);
         }
 
-        [Fact]
-        public void TernaryElseMissingTest()
-        {
-            var tokens = Builder()
-                .True()
-                .QuestionMark()
-                .Number(1)
-                .Colon()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void TernaryIfMissingTest()
-        {
-            var tokens = Builder()
-                .True()
-                .QuestionMark()
-                .Colon()
-                .Operation(OperatorToken.Minus)
-                .Number(1)
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void TernaryColonMissingTest()
-        {
-            var tokens = Builder()
-                .True()
-                .QuestionMark()
-                .Number(1)
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
+        [Theory]
+        [InlineData("true ? 1 :")]
+        [InlineData("true ? : -1")]
+        [InlineData("true ? 1")]
+        public void TernaryElseMissingTest(string function)
+            => ParseErrorTest(function);
 
         [Fact]
         public void TernaryAsExpressionTest()
         {
-            var tokens = Builder()
-                .Id("sin")
-                .OpenParenthesis()
-                .True()
-                .QuestionMark()
-                .Number(1)
-                .Colon()
-                .Operation(OperatorToken.Minus)
-                .Number(1)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
             var expected = new Sin(
                 new If(
                     Bool.True,
                     Number.One,
-                    new UnaryMinus(Number.One)));
+                    new UnaryMinus(Number.One)
+                )
+            );
 
-            Assert.Equal(expected, exp);
+            ParseTest("sin(true ? 1 : -1)", expected);
         }
     }
 }

@@ -23,56 +23,16 @@ namespace xFunc.Tests.ParserTests
         [Fact]
         public void UndefParseTest()
         {
-            var tokens = Builder()
-                .Undef()
-                .OpenParenthesis()
-                .Id("f")
-                .OpenParenthesis()
-                .VariableX()
-                .CloseParenthesis()
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
             var expected = new Undefine(new UserFunction("f", new IExpression[] { Variable.X }));
 
-            Assert.Equal(expected, exp);
+            ParseTest("undef(f(x))", expected);
         }
 
-        [Fact]
-        public void UndefMissingOpenParen()
-        {
-            var tokens = Builder()
-                .Undef()
-                .VariableX()
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void UndefMissingKey()
-        {
-            var tokens = Builder()
-                .Undef()
-                .OpenParenthesis()
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void UndefMissingCloseParen()
-        {
-            var tokens = Builder()
-                .Undef()
-                .OpenParenthesis()
-                .VariableX()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
+        [Theory]
+        [InlineData("undef x)")]
+        [InlineData("undef()")]
+        [InlineData("undef(x")]
+        public void UndefMissingPartsTest(string function)
+            => ParseErrorTest(function);
     }
 }

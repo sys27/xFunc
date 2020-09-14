@@ -19,23 +19,18 @@ using System.Linq;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
-using xFunc.Maths.Tokenization;
 using xFunc.ViewModels;
 
 namespace xFunc.Presenters
 {
-
     public class TruthTablePresenter
     {
-
-        private readonly Lexer lexer;
         private readonly Parser parser;
 
         private List<TruthTableRowViewModel> table;
 
         public TruthTablePresenter()
         {
-            lexer = new Lexer();
             parser = new Parser();
         }
 
@@ -47,12 +42,9 @@ namespace xFunc.Presenters
 
         public void Generate(string strExp)
         {
-            var tokens = lexer.Tokenize(strExp);
-
-            Expression = parser.Parse(tokens);
-
+            Expression = parser.Parse(strExp);
             Expressions = Helpers.ConvertExpressionToCollection(Expression);
-            Parameters = Helpers.GetParameters(tokens);
+            Parameters = Helpers.GetParameters(Expression);
             table = new List<TruthTableRowViewModel>();
 
             var parametersCount = Parameters.Count();
@@ -87,7 +79,5 @@ namespace xFunc.Presenters
         public ParameterCollection Parameters { get; private set; }
 
         public IEnumerable<TruthTableRowViewModel> Table => table;
-
     }
-
 }

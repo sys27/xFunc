@@ -23,146 +23,32 @@ namespace xFunc.Tests.ParserTests
     {
         [Fact]
         public void SinTest()
-        {
-            var tokens = Builder()
-                .Id("sin")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Sin(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
+            => ParseTest("sin(2)", new Sin(Number.Two));
 
         [Fact]
         public void CosTest()
-        {
-            var tokens = Builder()
-                .Id("cos")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
+            => ParseTest("cos(2)", new Cos(Number.Two));
 
-            var exp = parser.Parse(tokens);
-            var expected = new Cos(Number.Two);
+        [Theory]
+        [InlineData("tan(2)")]
+        [InlineData("tg(2)")]
+        public void TanTest(string function)
+            => ParseTest(function, new Tan(Number.Two));
 
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void TanTest()
-        {
-            var tokens = Builder()
-                .Id("tan")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Tan(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void TgTest()
-        {
-            var tokens = Builder()
-                .Id("tg")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Tan(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void CotTest()
-        {
-            var tokens = Builder()
-                .Id("cot")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Cot(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void CtgTest()
-        {
-            var tokens = Builder()
-                .Id("ctg")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Cot(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
+        [Theory]
+        [InlineData("cot(2)")]
+        [InlineData("ctg(2)")]
+        public void CotTest(string function)
+            => ParseTest(function, new Cot(Number.Two));
 
         [Fact]
         public void SecTest()
-        {
-            var tokens = Builder()
-                .Id("sec")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
+            => ParseTest("sec(2)", new Sec(Number.Two));
 
-            var exp = parser.Parse(tokens);
-            var expected = new Sec(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void CscTest()
-        {
-            var tokens = Builder()
-                .Id("csc")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Csc(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void CosecTest()
-        {
-            var tokens = Builder()
-                .Id("cosec")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Csc(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
+        [Theory]
+        [InlineData("csc(2)")]
+        [InlineData("cosec(2)")]
+        public void CscTest(string function)
+            => ParseTest(function, new Csc(Number.Two));
     }
 }

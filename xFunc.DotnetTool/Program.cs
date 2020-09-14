@@ -28,16 +28,6 @@ namespace xFunc.DotnetTool
     {
         private static readonly Processor processor = new Processor();
 
-        private static void Tokenize(TokenizeOptions options)
-        {
-            Run(options, () =>
-            {
-                var tokens = processor.Tokenize(options.StringExpression);
-                foreach (var token in tokens)
-                    Console.WriteLine(token);
-            });
-        }
-
         private static void Parse(ParseOptions options)
         {
             Run(options, () =>
@@ -161,8 +151,7 @@ namespace xFunc.DotnetTool
         public static void Main(string[] args)
         {
             CommandLine.Parser.Default
-                .ParseArguments<TokenizeOptions, ParseOptions, SolveOptions, InteractiveOptions>(args)
-                .WithParsed<TokenizeOptions>(Tokenize)
+                .ParseArguments<ParseOptions, SolveOptions, InteractiveOptions>(args)
                 .WithParsed<ParseOptions>(Parse)
                 .WithParsed<SolveOptions>(Solve)
                 .WithParsed<InteractiveOptions>(Interactive);

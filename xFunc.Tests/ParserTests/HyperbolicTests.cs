@@ -21,164 +21,40 @@ namespace xFunc.Tests.ParserTests
 {
     public class HyperbolicTests : BaseParserTests
     {
-        [Fact]
-        public void SinhTest()
+        [Theory]
+        [InlineData("sinh(2)")]
+        [InlineData("sh(2)")]
+        public void SinhTest(string function)
+            => ParseTest(function, new Sinh(Number.Two));
+
+        [Theory]
+        [InlineData("cosh(2)")]
+        [InlineData("ch(2)")]
+        public void CoshTest(string function)
+            => ParseTest(function, new Cosh(Number.Two));
+
+        [Theory]
+        [InlineData("tanh(2)")]
+        [InlineData("th(2)")]
+        public void TanhTest(string function)
         {
-            var tokens = Builder()
-                .Id("sinh")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Sinh(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ShTest()
-        {
-            var tokens = Builder()
-                .Id("sh")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Sinh(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void CoshTest()
-        {
-            var tokens = Builder()
-                .Id("cosh")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Cosh(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ChTest()
-        {
-            var tokens = Builder()
-                .Id("ch")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Cosh(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void TanhTest()
-        {
-            var tokens = Builder()
-                .Id("tanh")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
             var expected = new Tanh(Number.Two);
 
-            Assert.Equal(expected, exp);
+            ParseTest(function, expected);
         }
 
-        [Fact]
-        public void ThTest()
-        {
-            var tokens = Builder()
-                .Id("th")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Tanh(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void CothTest()
-        {
-            var tokens = Builder()
-                .Id("coth")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Coth(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void CthTest()
-        {
-            var tokens = Builder()
-                .Id("cth")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Coth(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
+        [Theory]
+        [InlineData("coth(2)")]
+        [InlineData("cth(2)")]
+        public void CothTest(string function)
+            => ParseTest(function, new Coth(Number.Two));
 
         [Fact]
         public void SechTest()
-        {
-            var tokens = Builder()
-                .Id("sech")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Sech(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
+            => ParseTest("sech(2)", new Sech(Number.Two));
 
         [Fact]
         public void CschTest()
-        {
-            var tokens = Builder()
-                .Id("csch")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Csch(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
+            => ParseTest("csch(2)", new Csch(Number.Two));
     }
 }

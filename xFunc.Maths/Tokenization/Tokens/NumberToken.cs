@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System.Diagnostics;
-using System.Globalization;
 
 namespace xFunc.Maths.Tokenization.Tokens
 {
@@ -22,40 +21,13 @@ namespace xFunc.Maths.Tokenization.Tokens
     /// Represents a number token.
     /// </summary>
     [DebuggerDisplay("Number: {" + nameof(Number) + "}")]
-    public class NumberToken : IToken
+    internal sealed class NumberToken : IToken
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="NumberToken"/> class.
         /// </summary>
         /// <param name="number">A number.</param>
         public NumberToken(double number) => Number = number;
-
-        /// <summary>
-        /// Determines whether the specified object is equal to the current object.
-        /// </summary>
-        /// <param name="obj">The object to compare with the current object.</param>
-        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
-        public override bool Equals(object? obj)
-        {
-            if (obj == null)
-                return false;
-
-            if (this == obj)
-                return true;
-
-            if (typeof(NumberToken) != obj.GetType())
-                return false;
-
-            var token = (NumberToken)obj;
-
-            return MathExtensions.Equals(Number, token.Number);
-        }
-
-        /// <summary>
-        /// Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>A string that represents the current object.</returns>
-        public override string ToString() => Number.ToString(CultureInfo.InvariantCulture);
 
         /// <summary>
         /// Gets the number.

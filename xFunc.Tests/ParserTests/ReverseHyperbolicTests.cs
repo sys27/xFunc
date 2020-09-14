@@ -21,180 +21,38 @@ namespace xFunc.Tests.ParserTests
 {
     public class ReverseHyperbolicTests : BaseParserTests
     {
-        [Fact]
-        public void ArsinhTest()
-        {
-            var tokens = Builder()
-                .Id("arsinh")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
+        [Theory]
+        [InlineData("arsinh(2)")]
+        [InlineData("arsh(2)")]
+        public void ArsinhTest(string function)
+            => ParseTest(function, new Arsinh(Number.Two));
 
-            var exp = parser.Parse(tokens);
-            var expected = new Arsinh(Number.Two);
+        [Theory]
+        [InlineData("arcosh(2)")]
+        [InlineData("arch(2)")]
+        public void ArcoshTest(string function)
+            => ParseTest(function, new Arcosh(Number.Two));
 
-            Assert.Equal(expected, exp);
-        }
+        [Theory]
+        [InlineData("artanh(2)")]
+        [InlineData("arth(2)")]
+        public void ArtanhTest(string function)
+            => ParseTest(function, new Artanh(Number.Two));
 
-        [Fact]
-        public void ArshTest()
-        {
-            var tokens = Builder()
-                .Id("arsh")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
+        [Theory]
+        [InlineData("arcoth(2)")]
+        [InlineData("arcth(2)")]
+        public void ArcothTest(string function)
+            => ParseTest(function, new Arcoth(Number.Two));
 
-            var exp = parser.Parse(tokens);
-            var expected = new Arsinh(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArcoshTest()
-        {
-            var tokens = Builder()
-                .Id("arcosh")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arcosh(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArchTest()
-        {
-            var tokens = Builder()
-                .Id("arch")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arcosh(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArtanhTest()
-        {
-            var tokens = Builder()
-                .Id("artanh")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Artanh(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArthTest()
-        {
-            var tokens = Builder()
-                .Id("arth")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Artanh(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArcothTest()
-        {
-            var tokens = Builder()
-                .Id("arcoth")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arcoth(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArcthTest()
-        {
-            var tokens = Builder()
-                .Id("arcth")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arcoth(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArsechTest()
-        {
-            var tokens = Builder()
-                .Id("arsech")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arsech(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArschTest()
-        {
-            var tokens = Builder()
-                .Id("arsch")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arsech(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
+        [Theory]
+        [InlineData("arsech(2)")]
+        [InlineData("arsch(2)")]
+        public void ArsechTest(string function)
+            => ParseTest(function, new Arsech(Number.Two));
 
         [Fact]
         public void ArcschTest()
-        {
-            var tokens = Builder()
-                .Id("arcsch")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arcsch(Number.Two);
-
-            Assert.Equal(expected, exp);
-        }
+            => ParseTest("arcsch(2)", new Arcsch(Number.Two));
     }
 }

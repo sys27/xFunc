@@ -13,10 +13,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
+using System;
 using xFunc.Maths;
-using xFunc.Maths.Tokenization;
-using xFunc.Maths.Tokenization.Tokens;
+using xFunc.Maths.Expressions;
 using Xunit;
 
 namespace xFunc.Tests.ParserTests
@@ -30,14 +29,21 @@ namespace xFunc.Tests.ParserTests
             parser = new Parser();
         }
 
-        protected TokensBuilder Builder()
+        protected void ParseTest(string function, IExpression expected)
         {
-            return new TokensBuilder();
+            var exp = parser.Parse(function);
+
+            Assert.Equal(expected, exp);
         }
 
-        protected void ParseErrorTest(IList<IToken> tokens)
+        protected void ParseErrorTest(string function)
         {
-            Assert.Throws<ParseException>(() => parser.Parse(tokens));
+            Assert.Throws<ParseException>(() => parser.Parse(function));
+        }
+
+        protected void ErrorTest<T>(string function) where T : Exception
+        {
+            Assert.Throws<T>(() => parser.Parse(function));
         }
     }
 }

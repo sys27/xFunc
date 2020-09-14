@@ -23,9 +23,9 @@ namespace xFunc.Maths.Tokenization
     /// <summary>
     /// The lexer for mathematical expressions.
     /// </summary>
-    public partial class Lexer
+    internal partial struct Lexer
     {
-        private IToken? CreateNumberToken(ref ReadOnlyMemory<char> function)
+        private IToken? CreateNumberToken(ref ReadOnlySpan<char> function)
         {
             return CreateBinToken(ref function) ??
                    CreateHexToken(ref function) ??
@@ -33,21 +33,19 @@ namespace xFunc.Maths.Tokenization
                    CreateDecToken(ref function);
         }
 
-        private IToken? CreateBinToken(ref ReadOnlyMemory<char> function)
+        private IToken? CreateBinToken(ref ReadOnlySpan<char> function)
         {
-            var span = function.Span;
-
             const int prefixLength = 2;
 
-            if (span.Length > prefixLength && CheckBinPrefix(span))
+            if (function.Length > prefixLength && CheckBinPrefix(function))
             {
                 var numberEnd = prefixLength;
-                while (numberEnd < function.Length && IsBinaryNumber(span[numberEnd]))
+                while (numberEnd < function.Length && IsBinaryNumber(function[numberEnd]))
                     numberEnd++;
 
                 if (numberEnd > prefixLength)
                 {
-                    var numberString = span[prefixLength..numberEnd];
+                    var numberString = function[prefixLength..numberEnd];
                     var token = new NumberToken(ParseNumbers.ToInt64(numberString, 2));
 
                     function = function[numberEnd..];
@@ -59,21 +57,19 @@ namespace xFunc.Maths.Tokenization
             return null;
         }
 
-        private IToken? CreateHexToken(ref ReadOnlyMemory<char> function)
+        private IToken? CreateHexToken(ref ReadOnlySpan<char> function)
         {
-            var span = function.Span;
-
             const int prefixLength = 2;
 
-            if (span.Length > prefixLength && CheckHexPrefix(span))
+            if (function.Length > prefixLength && CheckHexPrefix(function))
             {
                 var numberEnd = prefixLength;
-                while (numberEnd < span.Length && IsHexNumber(span[numberEnd]))
+                while (numberEnd < function.Length && IsHexNumber(function[numberEnd]))
                     numberEnd++;
 
                 if (numberEnd > prefixLength)
                 {
-                    var numberString = span[prefixLength..numberEnd];
+                    var numberString = function[prefixLength..numberEnd];
                     var token = new NumberToken(ParseNumbers.ToInt64(numberString, 16));
 
                     function = function[numberEnd..];
@@ -85,21 +81,19 @@ namespace xFunc.Maths.Tokenization
             return null;
         }
 
-        private IToken? CreateOctToken(ref ReadOnlyMemory<char> function)
+        private IToken? CreateOctToken(ref ReadOnlySpan<char> function)
         {
-            var span = function.Span;
-
             const int prefixLength = 1;
 
-            if (span.Length > prefixLength && span[0] == '0')
+            if (function.Length > prefixLength && function[0] == '0')
             {
                 var numberEnd = prefixLength;
-                while (numberEnd < span.Length && IsOctNumber(span[numberEnd]))
+                while (numberEnd < function.Length && IsOctNumber(function[numberEnd]))
                     numberEnd++;
 
                 if (numberEnd > prefixLength)
                 {
-                    var numberString = span[prefixLength..numberEnd];
+                    var numberString = function[prefixLength..numberEnd];
                     var token = new NumberToken(ParseNumbers.ToInt64(numberString, 8));
 
                     function = function[numberEnd..];
@@ -111,35 +105,33 @@ namespace xFunc.Maths.Tokenization
             return null;
         }
 
-        private IToken? CreateDecToken(ref ReadOnlyMemory<char> function)
+        private IToken? CreateDecToken(ref ReadOnlySpan<char> function)
         {
-            var span = function.Span;
-
             var endIndex = 0;
-            ReadDigits(span, ref endIndex);
+            ReadDigits(function, ref endIndex);
 
-            if (endIndex > 0 && span.Length >= endIndex)
+            if (endIndex > 0 && function.Length >= endIndex)
             {
-                if (CheckNextSymbol(span, ref endIndex, '.'))
+                if (CheckNextSymbol(function, ref endIndex, '.'))
                 {
                     var dotIndex = endIndex;
 
-                    ReadDigits(span, ref endIndex);
+                    ReadDigits(function, ref endIndex);
 
                     if (dotIndex == endIndex)
                         return null;
                 }
 
-                if (CheckNextSymbol(span, ref endIndex, 'e') ||
-                    CheckNextSymbol(span, ref endIndex, 'E'))
+                if (CheckNextSymbol(function, ref endIndex, 'e') ||
+                    CheckNextSymbol(function, ref endIndex, 'E'))
                 {
-                    _ = CheckNextSymbol(span, ref endIndex, '+') ||
-                        CheckNextSymbol(span, ref endIndex, '-');
+                    _ = CheckNextSymbol(function, ref endIndex, '+') ||
+                        CheckNextSymbol(function, ref endIndex, '-');
 
-                    ReadDigits(span, ref endIndex);
+                    ReadDigits(function, ref endIndex);
                 }
 
-                var numberString = span[..endIndex];
+                var numberString = function[..endIndex];
                 var number = double.Parse(numberString, provider: CultureInfo.InvariantCulture);
                 var token = new NumberToken(number);
 

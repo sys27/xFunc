@@ -14,90 +14,72 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokenization.Tokens;
-using static xFunc.Maths.Tokenization.Tokens.SymbolToken;
 
 namespace xFunc.Maths.Tokenization
 {
     /// <summary>
     /// The lexer for mathematical expressions.
     /// </summary>
-    public partial class Lexer : ILexer
+    internal ref partial struct Lexer
     {
+        private ReadOnlySpan<char> function;
+        private IToken? current;
+
         /// <summary>
-        /// Converts the string into a sequence of tokens.
+        /// Initializes a new instance of the <see cref="Lexer"/> struct.
         /// </summary>
         /// <param name="function">The string that contains the functions and operators.</param>
-        /// <returns>The sequence of tokens.</returns>
-        /// <seealso cref="IToken"/>
         /// <exception cref="ArgumentNullException">Throws when the <paramref name="function"/> parameter is null or empty.</exception>
-        /// <exception cref="TokenizeException">Throws when <paramref name="function"/> has the not supported symbol.</exception>
-        public IEnumerable<IToken> Tokenize(string function)
+        public Lexer(string function)
         {
-            if (string.IsNullOrWhiteSpace(function))
-                throw new ArgumentNullException(nameof(function), Resource.NotSpecifiedFunction);
+            Debug.Assert(!string.IsNullOrWhiteSpace(function), Resource.NotSpecifiedFunction);
 
-            var memory = function.AsMemory();
+            current = default;
+            this.function = function.AsSpan();
+        }
 
-            while (memory.Length > 0)
+        /// <summary>
+        /// Advances the enumerator to the next element of the collection.
+        /// </summary>
+        /// <exception cref="TokenizeException">Thrown when input string has the not supported symbol.</exception>
+        /// <returns>
+        /// <c>true</c> if the enumerator was successfully advanced to the next element;
+        /// <c>false</c> if the enumerator has passed the end of the collection.
+        /// </returns>
+        public bool MoveNext()
+        {
+            while (function.Length > 0)
             {
-                var result = SkipWhiteSpaces(ref memory) ??
-                             CreateNumberToken(ref memory) ??
-                             CreateIdToken(ref memory) ??
-                             CreateOperatorToken(ref memory) ??
-                             CreateSymbol(ref memory);
+                current = SkipWhiteSpaces(ref function) ??
+                          CreateNumberToken(ref function) ??
+                          CreateIdToken(ref function) ??
+                          CreateOperatorToken(ref function) ??
+                          CreateSymbol(ref function);
 
-                if (result == null)
-                    throw new TokenizeException(string.Format(CultureInfo.InvariantCulture, Resource.NotSupportedSymbol, memory.Span[0]));
+                if (current == null)
+                    throw new TokenizeException(string.Format(CultureInfo.InvariantCulture, Resource.NotSupportedSymbol, function[0]));
 
-                yield return result;
+                return true;
             }
-        }
 
-        private IToken? SkipWhiteSpaces(ref ReadOnlyMemory<char> function)
-        {
-            var span = function.Span;
-
-            var index = 0;
-            while (char.IsWhiteSpace(span[index]))
-                index++;
-
-            if (index > 0)
-                function = function[index..];
-
-            return null;
-        }
-
-        private IToken? CreateSymbol(ref ReadOnlyMemory<char> function)
-        {
-            var symbol = function.Span[0] switch
-            {
-                '(' => OpenParenthesis,
-                ')' => CloseParenthesis,
-                '{' => OpenBrace,
-                '}' => CloseBrace,
-                ',' => Comma,
-                '∠' => Angle,
-                '°' => Degree,
-                ':' => Colon,
-                '?' => QuestionMark,
-                _ => null,
-            };
-
-            if (symbol == null)
-                return null;
-
-            function = function[1..];
-
-            return symbol;
+            return false;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool Compare(ReadOnlySpan<char> id, string str)
             => id.Equals(str, StringComparison.OrdinalIgnoreCase);
+
+        /// <summary>
+        /// Gets the element in the collection at the current position of the enumerator.
+        /// </summary>
+        /// <returns>
+        /// The element in the collection at the current position of the enumerator.
+        /// </returns>
+        public IToken? Current => current;
     }
 }

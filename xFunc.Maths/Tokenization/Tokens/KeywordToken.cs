@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Diagnostics;
 
 namespace xFunc.Maths.Tokenization.Tokens
@@ -22,18 +21,16 @@ namespace xFunc.Maths.Tokenization.Tokens
     /// Represents a keyword token.
     /// </summary>
     [DebuggerDisplay("Keyword: {" + nameof(keyword) + "}")]
-    public sealed class KeywordToken : IToken
+    internal sealed class KeywordToken : IToken
     {
         private readonly string keyword;
 
         private KeywordToken(string keyword)
-            => this.keyword = keyword ?? throw new ArgumentNullException(nameof(keyword));
+        {
+            Debug.Assert(!string.IsNullOrWhiteSpace(keyword), "The keyword should not be empty.");
 
-        /// <summary>
-        /// Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>A string that represents the current object.</returns>
-        public override string ToString() => keyword;
+            this.keyword = keyword;
+        }
 
         /// <summary>
         /// Gets the 'true' token.

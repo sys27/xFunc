@@ -15,8 +15,8 @@
 
 using System;
 using System.Buffers;
-using System.Collections.Generic;
 using System.Diagnostics;
+using xFunc.Maths.Tokenization;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths
@@ -30,7 +30,9 @@ namespace xFunc.Maths
         {
             private const int BufferSize = 64;
 
-            private readonly IEnumerator<IToken> enumerator;
+            // TODO: do not mark as 'readonly'
+            private Lexer lexer;
+
             private bool enumerableEnded;
 
             // points to read position (item != null)
@@ -43,9 +45,10 @@ namespace xFunc.Maths
 
             private int scopeCount;
 
-            public TokenReader(IEnumerable<IToken> tokens)
+            public TokenReader(ref Lexer lexer)
             {
-                enumerator = tokens.GetEnumerator();
+                this.lexer = lexer;
+
                 enumerableEnded = false;
                 readIndex = -1;
                 writeIndex = -1;
@@ -55,7 +58,6 @@ namespace xFunc.Maths
 
             public void Dispose()
             {
-                enumerator.Dispose();
                 ArrayPool<IToken?>.Shared.Return(buffer);
             }
 
@@ -78,7 +80,7 @@ namespace xFunc.Maths
                 // read from enumerator and write to buffer
                 if (readIndex == writeIndex)
                 {
-                    var result = enumerator.MoveNext();
+                    var result = lexer.MoveNext();
                     if (!result)
                     {
                         enumerableEnded = true;
@@ -93,7 +95,7 @@ namespace xFunc.Maths
 
                     EnsureEnoughSpace();
 
-                    return (buffer[writeIndex] = enumerator.Current) as TToken;
+                    return (buffer[writeIndex] = lexer.Current) as TToken;
                 }
 
                 // readIndex < writeIndex

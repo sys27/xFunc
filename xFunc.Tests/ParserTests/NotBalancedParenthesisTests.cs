@@ -17,94 +17,35 @@ using Xunit;
 
 namespace xFunc.Tests.ParserTests
 {
+    // TODO: remove tests?
     public class NotBalancedParenthesisTests : BaseParserTests
     {
         [Fact]
         public void NotBalancedOpen()
-        {
-            var tokens = Builder()
-                .Id("sin")
-                .OpenParenthesis()
-                .Number(2)
-                .OpenParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
+            => ParseErrorTest("sin(2(");
 
         [Fact]
         public void NotBalancedClose()
-        {
-            var tokens = Builder()
-                .Id("sin")
-                .CloseParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
+            => ParseErrorTest("sin)2)");
 
         [Fact]
         public void NotBalancedFirstClose()
-        {
-            var tokens = Builder()
-                .Id("sin")
-                .CloseParenthesis()
-                .Number(2)
-                .OpenParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
+            => ParseErrorTest("sin)2(");
 
         [Fact]
         public void NotBalancedBracesOpen()
-        {
-            var tokens = Builder()
-                .OpenBrace()
-                .Number(2)
-                .Comma()
-                .Number(1)
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
+            => ParseErrorTest("{2,1");
 
         [Fact]
         public void NotBalancedBracesClose()
-        {
-            var tokens = Builder()
-                .CloseBrace()
-                .Number(2)
-                .Comma()
-                .Number(1)
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
+            => ParseErrorTest("}2,1");
 
         [Fact]
         public void NoCloseParen()
-        {
-            var tokens = Builder()
-                .OpenParenthesis()
-                .Number(2)
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
+            => ParseErrorTest("(2");
 
         [Fact]
         public void NoCloseParenInFunc()
-        {
-            var tokens = Builder()
-                .Id("fund")
-                .OpenParenthesis()
-                .Number(2)
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
+            => ParseErrorTest("func(2");
     }
 }

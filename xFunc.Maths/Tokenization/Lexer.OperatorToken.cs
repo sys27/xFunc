@@ -14,73 +14,78 @@
 // limitations under the License.
 
 using System;
-using xFunc.Maths.Tokenization.Tokens;
-using static xFunc.Maths.Tokenization.Tokens.OperatorToken;
+using static xFunc.Maths.Tokenization.TokenKind;
 
 namespace xFunc.Maths.Tokenization
 {
     /// <summary>
     /// The lexer for mathematical expressions.
     /// </summary>
-    internal partial struct Lexer
+    internal ref partial struct Lexer
     {
-        private IToken? CreateOperatorToken(ref ReadOnlySpan<char> function)
+        private bool CreateOperatorToken(ref ReadOnlySpan<char> function)
         {
             var first = function[0];
             var second = function.Length >= 2 ? function[1] : default;
             var third = function.Length >= 3 ? function[2] : default;
 
-            var (token, size) = (first, second, third) switch
+            var (kind, size) = (first, second, third) switch
             {
-                ('<', '-', '>') => (Equality, 3),
-                ('<', '−', '>') => (Equality, 3),
-                ('<', '=', '>') => (Equality, 3),
-                ('<', '<', '=') => (LeftShiftAssign, 3),
-                ('>', '>', '=') => (RightShiftAssign, 3),
+                ('<', '-', '>') => (EqualityOperator, 3),
+                ('<', '−', '>') => (EqualityOperator, 3),
+                ('<', '=', '>') => (EqualityOperator, 3),
+                ('<', '<', '=') => (LeftShiftAssignOperator, 3),
+                ('>', '>', '=') => (RightShiftAssignOperator, 3),
 
-                (':', '=', _) => (Assign, 2),
-                ('+', '=', _) => (AddAssign, 2),
-                ('-', '=', _) => (SubAssign, 2),
-                ('−', '=', _) => (SubAssign, 2),
-                ('*', '=', _) => (MulAssign, 2),
-                ('×', '=', _) => (MulAssign, 2),
-                ('/', '=', _) => (DivAssign, 2),
-                ('&', '&', _) => (ConditionalAnd, 2),
-                ('|', '|', _) => (ConditionalOr, 2),
-                ('=', '=', _) => (Equal, 2),
-                ('!', '=', _) => (NotEqual, 2),
-                ('<', '=', _) => (LessOrEqual, 2),
-                ('>', '=', _) => (GreaterOrEqual, 2),
-                ('+', '+', _) => (Increment, 2),
-                ('-', '-', _) => (Decrement, 2),
-                ('−', '−', _) => (Decrement, 2),
-                ('-', '>', _) => (Implication, 2),
-                ('−', '>', _) => (Implication, 2),
-                ('=', '>', _) => (Implication, 2),
-                ('<', '<', _) => (LeftShift, 2),
-                ('>', '>', _) => (RightShift, 2),
+                (':', '=', _) => (AssignOperator, 2),
+                ('+', '=', _) => (AddAssignOperator, 2),
+                ('-', '=', _) => (SubAssignOperator, 2),
+                ('−', '=', _) => (SubAssignOperator, 2),
+                ('*', '=', _) => (MulAssignOperator, 2),
+                ('×', '=', _) => (MulAssignOperator, 2),
+                ('/', '=', _) => (DivAssignOperator, 2),
+                ('&', '&', _) => (ConditionalAndOperator, 2),
+                ('|', '|', _) => (ConditionalOrOperator, 2),
+                ('=', '=', _) => (EqualOperator, 2),
+                ('!', '=', _) => (NotEqualOperator, 2),
+                ('<', '=', _) => (LessOrEqualOperator, 2),
+                ('>', '=', _) => (GreaterOrEqualOperator, 2),
+                ('+', '+', _) => (IncrementOperator, 2),
+                ('-', '-', _) => (DecrementOperator, 2),
+                ('−', '−', _) => (DecrementOperator, 2),
+                ('-', '>', _) => (ImplicationOperator, 2),
+                ('−', '>', _) => (ImplicationOperator, 2),
+                ('=', '>', _) => (ImplicationOperator, 2),
+                ('<', '<', _) => (LeftShiftOperator, 2),
+                ('>', '>', _) => (RightShiftOperator, 2),
 
-                ('+', _, _) => (Plus, 1),
-                ('-', _, _) => (Minus, 1),
-                ('−', _, _) => (Minus, 1),
-                ('*', _, _) => (Multiplication, 1),
-                ('×', _, _) => (Multiplication, 1),
-                ('/', _, _) => (Division, 1),
-                ('^', _, _) => (Exponentiation, 1),
-                ('!', _, _) => (Factorial, 1),
-                ('%', _, _) => (Modulo, 1),
-                ('<', _, _) => (LessThan, 1),
-                ('>', _, _) => (GreaterThan, 1),
-                ('~', _, _) => (Not, 1),
-                ('&', _, _) => (And, 1),
-                ('|', _, _) => (Or, 1),
+                ('+', _, _) => (PlusOperator, 1),
+                ('-', _, _) => (MinusOperator, 1),
+                ('−', _, _) => (MinusOperator, 1),
+                ('*', _, _) => (MultiplicationOperator, 1),
+                ('×', _, _) => (MultiplicationOperator, 1),
+                ('/', _, _) => (DivisionOperator, 1),
+                ('^', _, _) => (ExponentiationOperator, 1),
+                ('!', _, _) => (FactorialOperator, 1),
+                ('%', _, _) => (ModuloOperator, 1),
+                ('<', _, _) => (LessThanOperator, 1),
+                ('>', _, _) => (GreaterThanOperator, 1),
+                ('~', _, _) => (NotOperator, 1),
+                ('&', _, _) => (AndOperator, 1),
+                ('|', _, _) => (OrOperator, 1),
 
-                _ => (null, 0),
+                _ => (Empty, 0),
             };
 
             function = function[size..];
 
-            return token;
+            if (kind != Empty)
+            {
+                current = new Token(kind);
+                return true;
+            }
+
+            return false;
         }
     }
 }

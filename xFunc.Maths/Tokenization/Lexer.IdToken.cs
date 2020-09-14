@@ -14,20 +14,19 @@
 // limitations under the License.
 
 using System;
-using xFunc.Maths.Tokenization.Tokens;
-using static xFunc.Maths.Tokenization.Tokens.KeywordToken;
+using static xFunc.Maths.Tokenization.TokenKind;
 
 namespace xFunc.Maths.Tokenization
 {
     /// <summary>
     /// The lexer for mathematical expressions.
     /// </summary>
-    internal partial struct Lexer
+    internal ref partial struct Lexer
     {
-        private IToken? CreateIdToken(ref ReadOnlySpan<char> function)
+        private bool CreateIdToken(ref ReadOnlySpan<char> function)
         {
             if (!char.IsLetter(function[0]))
-                return null;
+                return false;
 
             var endIndex = 1;
             while (endIndex < function.Length && char.IsLetterOrDigit(function[endIndex]))
@@ -35,52 +34,55 @@ namespace xFunc.Maths.Tokenization
 
             var id = function[..endIndex];
 
-            IToken token;
+            var kind = Empty;
 
             if (Compare(id, "true"))
-                token = True;
+                kind = TrueKeyword;
             else if (Compare(id, "false"))
-                token = False;
+                kind = FalseKeyword;
             else if (Compare(id, "degrees") || Compare(id, "degree") || Compare(id, "deg"))
-                token = Degree;
+                kind = DegreeKeyword;
             else if (Compare(id, "radians") || Compare(id, "radian") || Compare(id, "rad"))
-                token = Radian;
+                kind = RadianKeyword;
             else if (Compare(id, "gradians") || Compare(id, "gradian") || Compare(id, "grad"))
-                token = Gradian;
+                kind = GradianKeyword;
             else if (Compare(id, "def") || Compare(id, "define"))
-                token = Define;
+                kind = DefineKeyword;
             else if (Compare(id, "undef") || Compare(id, "undefine"))
-                token = Undefine;
+                kind = UndefineKeyword;
             else if (Compare(id, "if"))
-                token = If;
+                kind = IfKeyword;
             else if (Compare(id, "for"))
-                token = For;
+                kind = ForKeyword;
             else if (Compare(id, "while"))
-                token = While;
+                kind = WhileKeyword;
             else if (Compare(id, "nand"))
-                token = NAnd;
+                kind = NAndKeyword;
             else if (Compare(id, "nor"))
-                token = NOr;
+                kind = NOrKeyword;
             else if (Compare(id, "and"))
-                token = And;
+                kind = AndKeyword;
             else if (Compare(id, "or"))
-                token = Or;
+                kind = OrKeyword;
             else if (Compare(id, "xor"))
-                token = XOr;
+                kind = XOrKeyword;
             else if (Compare(id, "not"))
-                token = Not;
+                kind = NotKeyword;
             else if (Compare(id, "eq"))
-                token = Eq;
+                kind = EqKeyword;
             else if (Compare(id, "impl"))
-                token = Impl;
+                kind = ImplKeyword;
             else if (Compare(id, "mod"))
-                token = Mod;
-            else
-                token = new IdToken(id.ToString().ToLowerInvariant()); // TODO:
+                kind = ModKeyword;
 
             function = function[endIndex..];
 
-            return token;
+            if (kind == Empty)
+                current = new Token(id.ToString().ToLowerInvariant()); // TODO:
+            else
+                current = new Token(kind);
+
+            return true;
         }
     }
 }

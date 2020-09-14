@@ -16,24 +16,23 @@
 using System;
 using System.Globalization;
 using System.Runtime.CompilerServices;
-using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization
 {
     /// <summary>
     /// The lexer for mathematical expressions.
     /// </summary>
-    internal partial struct Lexer
+    internal ref partial struct Lexer
     {
-        private IToken? CreateNumberToken(ref ReadOnlySpan<char> function)
+        private bool CreateNumberToken(ref ReadOnlySpan<char> function)
         {
-            return CreateBinToken(ref function) ??
-                   CreateHexToken(ref function) ??
-                   CreateOctToken(ref function) ??
+            return CreateBinToken(ref function) ||
+                   CreateHexToken(ref function) ||
+                   CreateOctToken(ref function) ||
                    CreateDecToken(ref function);
         }
 
-        private IToken? CreateBinToken(ref ReadOnlySpan<char> function)
+        private bool CreateBinToken(ref ReadOnlySpan<char> function)
         {
             const int prefixLength = 2;
 
@@ -46,18 +45,18 @@ namespace xFunc.Maths.Tokenization
                 if (numberEnd > prefixLength)
                 {
                     var numberString = function[prefixLength..numberEnd];
-                    var token = new NumberToken(ParseNumbers.ToInt64(numberString, 2));
+                    current = new Token(ParseNumbers.ToInt64(numberString, 2));
 
                     function = function[numberEnd..];
 
-                    return token;
+                    return true;
                 }
             }
 
-            return null;
+            return false;
         }
 
-        private IToken? CreateHexToken(ref ReadOnlySpan<char> function)
+        private bool CreateHexToken(ref ReadOnlySpan<char> function)
         {
             const int prefixLength = 2;
 
@@ -70,18 +69,18 @@ namespace xFunc.Maths.Tokenization
                 if (numberEnd > prefixLength)
                 {
                     var numberString = function[prefixLength..numberEnd];
-                    var token = new NumberToken(ParseNumbers.ToInt64(numberString, 16));
+                    current = new Token(ParseNumbers.ToInt64(numberString, 16));
 
                     function = function[numberEnd..];
 
-                    return token;
+                    return true;
                 }
             }
 
-            return null;
+            return false;
         }
 
-        private IToken? CreateOctToken(ref ReadOnlySpan<char> function)
+        private bool CreateOctToken(ref ReadOnlySpan<char> function)
         {
             const int prefixLength = 1;
 
@@ -94,18 +93,18 @@ namespace xFunc.Maths.Tokenization
                 if (numberEnd > prefixLength)
                 {
                     var numberString = function[prefixLength..numberEnd];
-                    var token = new NumberToken(ParseNumbers.ToInt64(numberString, 8));
+                    current = new Token(ParseNumbers.ToInt64(numberString, 8));
 
                     function = function[numberEnd..];
 
-                    return token;
+                    return true;
                 }
             }
 
-            return null;
+            return false;
         }
 
-        private IToken? CreateDecToken(ref ReadOnlySpan<char> function)
+        private bool CreateDecToken(ref ReadOnlySpan<char> function)
         {
             var endIndex = 0;
             ReadDigits(function, ref endIndex);
@@ -119,7 +118,7 @@ namespace xFunc.Maths.Tokenization
                     ReadDigits(function, ref endIndex);
 
                     if (dotIndex == endIndex)
-                        return null;
+                        return false;
                 }
 
                 if (CheckNextSymbol(function, ref endIndex, 'e') ||
@@ -133,14 +132,14 @@ namespace xFunc.Maths.Tokenization
 
                 var numberString = function[..endIndex];
                 var number = double.Parse(numberString, provider: CultureInfo.InvariantCulture);
-                var token = new NumberToken(number);
+                current = new Token(number);
 
                 function = function[endIndex..];
 
-                return token;
+                return true;
             }
 
-            return null;
+            return false;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

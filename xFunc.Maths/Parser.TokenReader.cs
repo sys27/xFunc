@@ -17,7 +17,6 @@ using System;
 using System.Buffers;
 using System.Diagnostics;
 using xFunc.Maths.Tokenization;
-using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths
 {
@@ -30,7 +29,6 @@ namespace xFunc.Maths
         {
             private const int BufferSize = 64;
 
-            // TODO: do not mark as 'readonly'
             private Lexer lexer;
 
             private bool enumerableEnded;
@@ -41,7 +39,7 @@ namespace xFunc.Maths
             // points to last write position (item != null)
             private int writeIndex;
 
-            private IToken?[] buffer;
+            private Token[] buffer;
 
             private int scopeCount;
 
@@ -52,13 +50,13 @@ namespace xFunc.Maths
                 enumerableEnded = false;
                 readIndex = -1;
                 writeIndex = -1;
-                buffer = ArrayPool<IToken?>.Shared.Rent(BufferSize);
+                buffer = ArrayPool<Token>.Shared.Rent(BufferSize);
                 scopeCount = 0;
             }
 
             public void Dispose()
             {
-                ArrayPool<IToken?>.Shared.Return(buffer);
+                ArrayPool<Token>.Shared.Return(buffer);
             }
 
             private void EnsureEnoughSpace()
@@ -66,13 +64,13 @@ namespace xFunc.Maths
                 if (writeIndex < buffer.Length)
                     return;
 
-                var newBuffer = ArrayPool<IToken>.Shared.Rent(buffer.Length * 2);
+                var newBuffer = ArrayPool<Token>.Shared.Rent(buffer.Length * 2);
                 Array.Copy(buffer, newBuffer, buffer.Length);
-                ArrayPool<IToken?>.Shared.Return(buffer);
+                ArrayPool<Token>.Shared.Return(buffer);
                 buffer = newBuffer;
             }
 
-            private TToken? Read<TToken>() where TToken : class, IToken
+            private ref readonly Token Read()
             {
                 // readIndex > writeIndex
                 Debug.Assert(readIndex <= writeIndex, "The read index should be less than or equal to write index.");
@@ -82,11 +80,7 @@ namespace xFunc.Maths
                 {
                     var result = lexer.MoveNext();
                     if (!result)
-                    {
                         enumerableEnded = true;
-
-                        return null;
-                    }
 
                     if (scopeCount == 0)
                         Flush();
@@ -95,14 +89,14 @@ namespace xFunc.Maths
 
                     EnsureEnoughSpace();
 
-                    return (buffer[writeIndex] = lexer.Current) as TToken;
+                    buffer[writeIndex] = lexer.Current;
                 }
 
                 // readIndex < writeIndex
                 Debug.Assert(writeIndex >= 0, "The write index should be greater than or equal to 0.");
 
                 // read from buffer
-                return buffer[readIndex + 1] as TToken;
+                return ref buffer[readIndex + 1];
             }
 
             private void Rollback(int index)
@@ -148,55 +142,26 @@ namespace xFunc.Maths
                     Flush();
             }
 
-            public TToken? GetCurrent<TToken>() where TToken : class, IToken
+            public Token GetCurrent() => Read();
+
+            public Token GetCurrent(TokenKind kind)
             {
-                var token = Read<TToken>();
-                if (token != null)
-                    AdvanceToNextPosition();
-
-                return token;
-            }
-
-            public bool Symbol(SymbolToken symbolToken)
-            {
-                var token = Read<SymbolToken>();
-                var result = token == symbolToken;
-                if (result)
-                    AdvanceToNextPosition();
-
-                return result;
-            }
-
-            public OperatorToken? Operator(OperatorToken operatorToken)
-            {
-                var token = Read<OperatorToken>();
-                if (token == operatorToken)
+                var token = Read();
+                if (token.Is(kind))
                 {
                     AdvanceToNextPosition();
 
                     return token;
                 }
 
-                return null;
+                return Token.Empty;
             }
 
-            public KeywordToken? Keyword(KeywordToken keywordToken)
-            {
-                var token = Read<KeywordToken>();
-                if (token == keywordToken)
-                {
-                    AdvanceToNextPosition();
+            public bool Check(TokenKind kind) => !GetCurrent(kind).IsEmpty();
 
-                    return token;
-                }
+            public bool IsEnd => enumerableEnded;
 
-                return null;
-            }
-
-            public bool IsEnd
-                => enumerableEnded && readIndex == writeIndex;
-
-            public readonly struct Scope
+            public readonly ref struct Scope
             {
                 private readonly int position;
 

@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 using xFunc.Maths.Resources;
@@ -26,6 +27,7 @@ namespace xFunc.Maths.Expressions
     /// </summary>
     public abstract class UnaryExpression : IExpression
     {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private IExpression argument = default!;
 
         /// <summary>

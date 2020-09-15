@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
@@ -26,7 +27,9 @@ namespace xFunc.Maths.Expressions
     /// </summary>
     public class Define : IExpression
     {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private IExpression key = default!;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private IExpression value = default!;
 
         /// <summary>

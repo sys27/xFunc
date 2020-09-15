@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
@@ -27,6 +28,7 @@ namespace xFunc.Maths.Expressions
     /// </summary>
     public abstract class DifferentParametersExpression : IExpression
     {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly IList<IExpression> arguments;
 
         /// <summary>

@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
@@ -28,6 +29,7 @@ namespace xFunc.Maths
     /// </summary>
     public class Builder : IExpression
     {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private IExpression current = default!;
 
         /// <summary>

@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
@@ -29,6 +30,7 @@ namespace xFunc.Maths.Expressions.Matrices
     {
         private const int MinParametersCount = 1;
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly IList<Vector> vectors;
 
         /// <summary>

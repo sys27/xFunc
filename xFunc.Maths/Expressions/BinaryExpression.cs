@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 using xFunc.Maths.Resources;
@@ -26,7 +27,9 @@ namespace xFunc.Maths.Expressions
     /// </summary>
     public abstract class BinaryExpression : IExpression
     {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private IExpression left = default!;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private IExpression right = default!;
 
         /// <summary>

@@ -25,7 +25,9 @@ namespace xFunc.Maths.Tokenization
     internal readonly struct Token
     {
         private readonly TokenKind kind;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly string? stringValue;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly double numberValue;
 
         /// <summary>

@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Diagnostics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 
@@ -24,7 +25,9 @@ namespace xFunc.Maths.Expressions.Programming
     /// </summary>
     public abstract class VariableBinaryExpression : IExpression
     {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private Variable variable = default!;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private IExpression value = default!;
 
         /// <summary>

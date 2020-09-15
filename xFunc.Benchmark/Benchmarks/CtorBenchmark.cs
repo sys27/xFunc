@@ -22,12 +22,6 @@ namespace xFunc.Benchmark.Benchmarks
     public class CtorBenchmark
     {
         [Benchmark]
-        public ILexer LexerCtor()
-        {
-            return new Lexer();
-        }
-
-        [Benchmark]
         public IParser ParserCtor()
         {
             return new Parser();

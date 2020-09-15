@@ -14,16 +14,15 @@
 // limitations under the License.
 
 using System;
-using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization
 {
     /// <summary>
     /// The lexer for mathematical expressions.
     /// </summary>
-    internal partial struct Lexer
+    internal ref partial struct Lexer
     {
-        private IToken? SkipWhiteSpaces(ref ReadOnlySpan<char> function)
+        private void SkipWhiteSpaces(ref ReadOnlySpan<char> function)
         {
             var index = 0;
             while (char.IsWhiteSpace(function[index]))
@@ -31,8 +30,6 @@ namespace xFunc.Maths.Tokenization
 
             if (index > 0)
                 function = function[index..];
-
-            return null;
         }
     }
 }

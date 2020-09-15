@@ -14,15 +14,12 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Results;
-using xFunc.Maths.Tokenization;
-using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths
 {

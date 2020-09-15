@@ -26,7 +26,8 @@ using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
-using xFunc.Maths.Tokenization.Tokens;
+using xFunc.Maths.Tokenization;
+using static xFunc.Maths.Tokenization.TokenKind;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Maths
@@ -36,9 +37,12 @@ namespace xFunc.Maths
     /// </summary>
     public partial class Parser
     {
-        private IExpression CreateFunction(IdToken token, IList<IExpression> arguments)
+        private IExpression CreateFunction(in Token token, IList<IExpression> arguments)
         {
-            return token.Id switch
+            Debug.Assert(token.IsId(), "Token should be Id.");
+            Debug.Assert(!string.IsNullOrWhiteSpace(token.StringValue), "Id is empty.");
+
+            return token.StringValue switch
             {
                 "add" => new Add(arguments),
                 "sub" => new Sub(arguments),
@@ -171,130 +175,122 @@ namespace xFunc.Maths
             => new Define(first, second);
 
         private IExpression CreateBinaryAssign(
-            OperatorToken token,
+            in Token token,
             Variable first,
             IExpression second)
         {
-            if (token == OperatorToken.AddAssign)
+            if (token.Is(AddAssignOperator))
                 return new AddAssign(first, second);
-            if (token == OperatorToken.SubAssign)
+            if (token.Is(SubAssignOperator))
                 return new SubAssign(first, second);
-            if (token == OperatorToken.MulAssign)
+            if (token.Is(MulAssignOperator))
                 return new MulAssign(first, second);
-            if (token == OperatorToken.DivAssign)
+            if (token.Is(DivAssignOperator))
                 return new DivAssign(first, second);
-            if (token == OperatorToken.LeftShiftAssign)
+            if (token.Is(LeftShiftAssignOperator))
                 return new LeftShiftAssign(first, second);
 
-            // if (token == OperatorToken.RightShiftAssign)
-            Debug.Assert(token == OperatorToken.RightShiftAssign, "Only '+=', '-=', '*=', '/=', '<<=', '>>=' operators are allowed here.");
+            Debug.Assert(token.Is(RightShiftAssignOperator), "Only '+=', '-=', '*=', '/=', '<<=', '>>=' operators are allowed here.");
 
             return new RightShiftAssign(first, second);
         }
 
-        private IExpression CreateUnaryAssign(OperatorToken token, Variable first)
+        private IExpression CreateUnaryAssign(in Token token, Variable first)
         {
-            if (token == OperatorToken.Increment)
+            if (token.Is(IncrementOperator))
                 return new Inc(first);
 
-            // if (token == OperatorToken.Decrement)
-            Debug.Assert(token == OperatorToken.Decrement, "Only '++' and '--' operators are allowed here.");
+            Debug.Assert(token.Is(DecrementOperator), "Only '++' and '--' operators are allowed here.");
 
             return new Dec(first);
         }
 
         private IExpression CreateConditionalOperator(
-            OperatorToken token,
+            in Token token,
             IExpression first,
             IExpression second)
         {
-            if (token == OperatorToken.ConditionalAnd)
+            if (token.Is(ConditionalAndOperator))
                 return new ConditionalAnd(first, second);
 
-            // if (token == OperatorToken.ConditionalOr)
-            Debug.Assert(token == OperatorToken.ConditionalOr, "Only '&&' and '||' are allowed here.");
+            Debug.Assert(token.Is(ConditionalOrOperator), "Only '&&' and '||' are allowed here.");
 
             return new ConditionalOr(first, second);
         }
 
         private IExpression CreateBitwiseOperator(
-            IToken token,
+            in Token token,
             IExpression first,
             IExpression second)
         {
-            if (token == OperatorToken.And || token == KeywordToken.And)
+            if (token.Is(AndOperator) || token.Is(AndKeyword))
                 return new And(first, second);
-            if (token == OperatorToken.Or || token == KeywordToken.Or)
+            if (token.Is(OrOperator) || token.Is(OrKeyword))
                 return new Or(first, second);
-            if (token == OperatorToken.Implication || token == KeywordToken.Impl)
+            if (token.Is(ImplicationOperator) || token.Is(ImplKeyword))
                 return new Implication(first, second);
-            if (token == OperatorToken.Equality || token == KeywordToken.Eq)
+            if (token.Is(TokenKind.EqualityOperator) || token.Is(EqKeyword))
                 return new Equality(first, second);
 
-            if (token == KeywordToken.NAnd)
+            if (token.Is(NAndKeyword))
                 return new NAnd(first, second);
-            if (token == KeywordToken.NOr)
+            if (token.Is(NOrKeyword))
                 return new NOr(first, second);
 
-            // if (token == KeywordToken.XOr)
-            Debug.Assert(token == KeywordToken.XOr, "Incorrect token type.");
+            Debug.Assert(token.Is(XOrKeyword), "Incorrect token type.");
 
             return new XOr(first, second);
         }
 
         private IExpression CreateEqualityOperator(
-            OperatorToken token,
+            in Token token,
             IExpression first,
             IExpression second)
         {
-            if (token == OperatorToken.Equal)
+            if (token.Is(EqualOperator))
                 return new Equal(first, second);
-            if (token == OperatorToken.NotEqual)
+            if (token.Is(NotEqualOperator))
                 return new NotEqual(first, second);
-            if (token == OperatorToken.LessThan)
+            if (token.Is(LessThanOperator))
                 return new LessThan(first, second);
-            if (token == OperatorToken.LessOrEqual)
+            if (token.Is(LessOrEqualOperator))
                 return new LessOrEqual(first, second);
-            if (token == OperatorToken.GreaterThan)
+            if (token.Is(GreaterThanOperator))
                 return new GreaterThan(first, second);
 
-            // if (token == OperatorToken.GreaterOrEqual)
-            Debug.Assert(token == OperatorToken.GreaterOrEqual, "Incorrect token type.");
+            Debug.Assert(token.Is(GreaterOrEqualOperator), "Incorrect token type.");
 
             return new GreaterOrEqual(first, second);
         }
 
-        private IExpression CreateShift(OperatorToken token, IExpression first, IExpression second)
+        private IExpression CreateShift(in Token token, IExpression first, IExpression second)
         {
-            if (token == OperatorToken.LeftShift)
+            if (token.Is(LeftShiftOperator))
                 return new LeftShift(first, second);
 
-            // if (token == OperatorToken.RightShift)
-            Debug.Assert(token == OperatorToken.RightShift, "Only '<<', '>>' are allowed here.");
+            Debug.Assert(token.Is(RightShiftOperator), "Only '<<', '>>' are allowed here.");
 
             return new RightShift(first, second);
         }
 
-        private IExpression CreateAddSub(OperatorToken token, IExpression first, IExpression second)
+        private IExpression CreateAddSub(in Token token, IExpression first, IExpression second)
         {
-            if (token == OperatorToken.Plus)
+            if (token.Is(PlusOperator))
                 return new Add(first, second);
 
-            // if (token == OperatorToken.Minus)
-            Debug.Assert(token == OperatorToken.Minus, "Only '+', '-' are allowed here.");
+            Debug.Assert(token.Is(MinusOperator), "Only '+', '-' are allowed here.");
 
             return new Sub(first, second);
         }
 
-        private IExpression CreateMulDivMod(IToken token, IExpression first, IExpression second)
+        private IExpression CreateMulDivMod(in Token token, IExpression first, IExpression second)
         {
-            if (token == OperatorToken.Multiplication)
+            if (token.Is(MultiplicationOperator))
                 return new Mul(first, second);
-            if (token == OperatorToken.Division)
+            if (token.Is(DivisionOperator))
                 return new Div(first, second);
 
-            // if (token == OperatorToken.Modulo || token == KeywordToken.Mod)
-            Debug.Assert(token == OperatorToken.Modulo || token == KeywordToken.Mod, "Only '*', '/', '%', 'mod' are allowed here.");
+            Debug.Assert(token.Is(ModuloOperator) || token.Is(ModKeyword), "Only '*', '/', '%', 'mod' are allowed here.");
 
             return new Mod(first, second);
         }
@@ -311,44 +307,47 @@ namespace xFunc.Maths
         private IExpression CreateFactorial(IExpression first)
             => new Fact(first);
 
-        private IExpression CreateBoolean(KeywordToken keywordToken)
+        private IExpression CreateBoolean(in Token token)
         {
-            if (keywordToken == KeywordToken.True)
+            if (token.Is(TrueKeyword))
                 return Bool.True;
 
-            // if (keywordToken == KeywordToken.False)
-            Debug.Assert(keywordToken == KeywordToken.False, "Only True and False keywords are allowed here.");
+            Debug.Assert(token.Is(FalseKeyword), "Only True and False keywords are allowed here.");
 
             return Bool.False;
         }
 
         // TODO: positional cache
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private IExpression CreateNumber(NumberToken numberToken)
-            => new Number(numberToken.Number);
+        private IExpression CreateNumber(in Token numberToken)
+            => new Number(numberToken.NumberValue);
 
-        private IExpression CreateAngleNumber(NumberToken numberToken, AngleUnit unit)
-            => new AngleValue(numberToken.Number, unit).AsExpression();
+        private IExpression CreateAngleNumber(in Token numberToken, AngleUnit unit)
+            => new AngleValue(numberToken.NumberValue, unit).AsExpression();
 
         private IExpression CreateComplexNumber(
-            OperatorToken? magnitudeSign,
-            NumberToken magnitude,
-            OperatorToken? phaseSign,
-            NumberToken phase)
+            in Token magnitudeSign,
+            in Token magnitude,
+            in Token phaseSign,
+            in Token phase)
         {
-            static int GetSign(OperatorToken? token)
-                => token == OperatorToken.Minus ? -1 : 1;
+            static int GetSign(Token token)
+                => token.Is(MinusOperator) ? -1 : 1;
 
-            var magnitudeNumber = magnitude.Number * GetSign(magnitudeSign);
-            var phaseNumber = phase.Number * GetSign(phaseSign);
+            var magnitudeNumber = magnitude.NumberValue * GetSign(magnitudeSign);
+            var phaseNumber = phase.NumberValue * GetSign(phaseSign);
             var complex = Complex.FromPolarCoordinates(magnitudeNumber, phaseNumber);
 
             return new ComplexNumber(complex);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private Variable CreateVariable(IdToken variableToken)
-            => new Variable(variableToken.Id);
+        private Variable CreateVariable(in Token token)
+        {
+            Debug.Assert(!string.IsNullOrWhiteSpace(token.StringValue), "Id is null.");
+
+            return new Variable(token.StringValue);
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private Vector CreateVector(IList<IExpression> arguments)

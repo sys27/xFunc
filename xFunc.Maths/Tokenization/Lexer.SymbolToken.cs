@@ -14,38 +14,40 @@
 // limitations under the License.
 
 using System;
-using xFunc.Maths.Tokenization.Tokens;
-using static xFunc.Maths.Tokenization.Tokens.SymbolToken;
+using static xFunc.Maths.Tokenization.TokenKind;
 
 namespace xFunc.Maths.Tokenization
 {
     /// <summary>
     /// The lexer for mathematical expressions.
     /// </summary>
-    internal partial struct Lexer
+    internal ref partial struct Lexer
     {
-        private IToken? CreateSymbol(ref ReadOnlySpan<char> function)
+        private bool CreateSymbol(ref ReadOnlySpan<char> function)
         {
             var symbol = function[0] switch
             {
-                '(' => OpenParenthesis,
-                ')' => CloseParenthesis,
-                '{' => OpenBrace,
-                '}' => CloseBrace,
-                ',' => Comma,
-                '∠' => Angle,
-                '°' => Degree,
-                ':' => Colon,
-                '?' => QuestionMark,
-                _ => null,
+                '(' => OpenParenthesisSymbol,
+                ')' => CloseParenthesisSymbol,
+                '{' => OpenBraceSymbol,
+                '}' => CloseBraceSymbol,
+                ',' => CommaSymbol,
+                '∠' => AngleSymbol,
+                '°' => DegreeSymbol,
+                ':' => ColonSymbol,
+                '?' => QuestionMarkSymbol,
+                _ => Empty,
             };
 
-            if (symbol == null)
-                return null;
+            if (symbol != Empty)
+            {
+                function = function[1..];
 
-            function = function[1..];
+                current = new Token(symbol);
+                return true;
+            }
 
-            return symbol;
+            return false;
         }
     }
 }

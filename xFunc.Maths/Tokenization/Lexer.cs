@@ -18,7 +18,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using xFunc.Maths.Resources;
-using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization
 {
@@ -28,7 +27,7 @@ namespace xFunc.Maths.Tokenization
     internal ref partial struct Lexer
     {
         private ReadOnlySpan<char> function;
-        private IToken? current;
+        private Token current;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Lexer"/> struct.
@@ -55,18 +54,20 @@ namespace xFunc.Maths.Tokenization
         {
             while (function.Length > 0)
             {
-                current = SkipWhiteSpaces(ref function) ??
-                          CreateNumberToken(ref function) ??
-                          CreateIdToken(ref function) ??
-                          CreateOperatorToken(ref function) ??
-                          CreateSymbol(ref function);
+                SkipWhiteSpaces(ref function);
 
-                if (current == null)
+                var result = CreateNumberToken(ref function) ||
+                             CreateIdToken(ref function) ||
+                             CreateOperatorToken(ref function) ||
+                             CreateSymbol(ref function);
+
+                if (!result)
                     throw new TokenizeException(string.Format(CultureInfo.InvariantCulture, Resource.NotSupportedSymbol, function[0]));
 
                 return true;
             }
 
+            current = default;
             return false;
         }
 
@@ -80,6 +81,6 @@ namespace xFunc.Maths.Tokenization
         /// <returns>
         /// The element in the collection at the current position of the enumerator.
         /// </returns>
-        public IToken? Current => current;
+        public Token Current => current;
     }
 }

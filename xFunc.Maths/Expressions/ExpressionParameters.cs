@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using xFunc.Maths.Expressions.Collections;
 
 namespace xFunc.Maths.Expressions
@@ -46,6 +47,19 @@ namespace xFunc.Maths.Expressions
         public ExpressionParameters(FunctionCollection functions)
             : this(new ParameterCollection(), functions)
         {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpressionParameters"/> class.
+        /// </summary>
+        /// <param name="parameters">Expression parameters.</param>
+        public ExpressionParameters(ExpressionParameters parameters)
+        {
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
+
+            Variables = new ParameterCollection(parameters.Variables);
+            Functions = parameters.Functions;
         }
 
         /// <summary>

@@ -117,15 +117,14 @@ namespace xFunc.Maths.Expressions
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
 
-            var func = parameters.Functions.GetKeyByKey(this);
+            var func = parameters.Functions.GetKey(this);
 
-            var newParameters = new ParameterCollection(parameters.Variables.Collection);
+            var newParams = new ExpressionParameters(parameters);
             for (var i = 0; i < ParametersCount; i++)
                 if (func.arguments[i] is Variable arg)
-                    newParameters[arg.Name] = (double)arguments[i].Execute(parameters);
+                    newParams.Variables[arg.Name] = arguments[i].Execute(parameters);
 
-            var expParam = new ExpressionParameters(newParameters, parameters.Functions);
-            return parameters.Functions[this].Execute(expParam);
+            return parameters.Functions[this].Execute(newParams);
         }
 
         /// <summary>

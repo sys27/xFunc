@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Programming;
 using Xunit;
 
@@ -59,6 +60,19 @@ namespace xFunc.Tests.Expressions
             var func = new UserFunction("f", new[] { new Number(4) });
 
             Assert.Equal(24.0, func.Execute(expParams));
+        }
+
+        [Fact]
+        public void ExecuteBoolTest()
+        {
+            var expParams = new ExpressionParameters();
+
+            var exp = new Not(Variable.X);
+            expParams.Functions.Add(new UserFunction("f", new[] { Variable.X }), exp);
+
+            var func = new UserFunction("f", new[] { Bool.False });
+
+            Assert.Equal(true, func.Execute(expParams));
         }
 
         [Fact]
@@ -115,6 +129,14 @@ namespace xFunc.Tests.Expressions
             var exp = new UserFunction("f", new[] { new Number(5) });
 
             Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
+        }
+
+        [Fact]
+        public void ComplexNumberAnalyzeContextNull()
+        {
+            var exp = new UserFunction("f", new[] { new Number(5) });
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
         }
 
         [Fact]

@@ -35,8 +35,6 @@ namespace xFunc.Views
 
         public static readonly DependencyProperty StatusProperty = DependencyProperty.Register(nameof(Status), typeof(string), typeof(TruthTableControl));
 
-        private TruthTablePresenter presenter;
-
         public TruthTableControl()
         {
             InitializeComponent();
@@ -44,7 +42,7 @@ namespace xFunc.Views
 
         public TruthTableControl(TruthTablePresenter presenter)
         {
-            this.presenter = presenter;
+            Presenter = presenter;
 
             InitializeComponent();
         }
@@ -58,7 +56,7 @@ namespace xFunc.Views
                 Header = "#",
                 DisplayMemberBinding = new Binding("Index")
             });
-            for (int i = 0; i < parameters.Collection.Count(); i++)
+            for (int i = 0; i < parameters.Count(); i++)
             {
                 truthTableGridView.Columns.Add(new GridViewColumn
                 {
@@ -88,9 +86,9 @@ namespace xFunc.Views
             {
                 try
                 {
-                    presenter.Generate(truthTableExpressionBox.Text);
-                    GenerateTruthTable(presenter.Expressions, presenter.Parameters);
-                    truthTableList.ItemsSource = presenter.Table;
+                    Presenter.Generate(truthTableExpressionBox.Text);
+                    GenerateTruthTable(Presenter.Expressions, Presenter.Parameters);
+                    truthTableList.ItemsSource = Presenter.Table;
 
                     Status = string.Empty;
                 }
@@ -163,11 +161,7 @@ namespace xFunc.Views
             set => SetValue(StatusProperty, value);
         }
 
-        public TruthTablePresenter Presenter
-        {
-            get => presenter;
-            set => presenter = value;
-        }
+        public TruthTablePresenter Presenter { get; set; }
 
     }
 

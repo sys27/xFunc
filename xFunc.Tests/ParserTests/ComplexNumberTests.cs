@@ -182,17 +182,12 @@ namespace xFunc.Tests.ParserTests
             ParseTest("-10∠7.1°", expected);
         }
 
-        [Fact]
-        public void ComplexFromPolarMissingPhaseTest()
-            => ParseErrorTest("10∠°");
-
-        [Fact]
-        public void ComplexFromPolarMissingDegreeTest()
-            => ParseErrorTest("10∠0.78539816339744828");
-
-        [Fact]
-        public void ComplexPolarPhaseVariableExceptionTest()
-            => ParseErrorTest("x°");
+        [Theory]
+        [InlineData("10∠°")]
+        [InlineData("10∠0.78539816339744828")]
+        [InlineData("x°")]
+        public void ComplexFromPolarMissingPartsTest(string exp)
+            => ParseErrorTest(exp);
 
         [Theory]
         [InlineData("im(3-2*i)")]

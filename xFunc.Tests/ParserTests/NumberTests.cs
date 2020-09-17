@@ -25,21 +25,13 @@ namespace xFunc.Tests.ParserTests
         public void NumberFormatTest()
             => Assert.Throws<TokenizeException>(() => parser.Parse("0."));
 
-        [Fact]
-        public void ExpNegativeNumber()
-            => ParseTest("1.2345E-10", new Number(0.00000000012345));
-
-        [Fact]
-        public void ExpNumber()
-            => ParseTest("1.2345E10", new Number(12345000000));
-
-        [Fact]
-        public void ExpPositiveNumber()
-            => ParseTest("1.2345E+10", new Number(12345000000));
-
-        [Fact]
-        public void ExpNumberLowerCase()
-            => ParseTest("1.2e2", new Number(120));
+        [Theory]
+        [InlineData("1.2345E-10", 0.00000000012345)]
+        [InlineData("1.2345E10", 12345000000)]
+        [InlineData("1.2345E+10", 12345000000)]
+        [InlineData("1.2e2", 120)]
+        public void ExpNegativeNumber(string exp, double number)
+            => ParseTest(exp, new Number(number));
 
         [Theory]
         [InlineData("0b01100110")]

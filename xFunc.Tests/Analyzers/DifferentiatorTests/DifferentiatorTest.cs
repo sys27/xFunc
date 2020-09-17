@@ -14,8 +14,6 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
-using System.Reflection;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Angles;
@@ -23,7 +21,6 @@ using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
-using Xunit.Sdk;
 
 namespace xFunc.Tests.Analyzers.DifferentiatorTests
 {

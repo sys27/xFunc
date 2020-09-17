@@ -13,13 +13,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
+using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
-using xFunc.Maths.Expressions.ComplexNumbers;
-using System.Numerics;
-using xFunc.Maths.Expressions.Angles;
-using xFunc.Maths.Expressions.LogicalAndBitwise;
 
 namespace xFunc.Tests.Expressions.Trigonometric
 {

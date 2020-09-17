@@ -30,7 +30,7 @@ namespace xFunc.Tests.Expressions.Collections
         {
             var parameters = new ParameterCollection(true);
 
-            Assert.True(parameters.Constants.Any());
+            Assert.NotEmpty(parameters);
         }
 
         [Fact]
@@ -38,7 +38,25 @@ namespace xFunc.Tests.Expressions.Collections
         {
             var parameters = new ParameterCollection(false);
 
-            Assert.False(parameters.Constants.Any());
+            Assert.Empty(parameters);
+        }
+
+        [Fact]
+        public void InitializeDuplicatesTest()
+        {
+            var array = new[]
+            {
+                new Parameter("x", 1.0),
+                new Parameter("x", 2.0),
+            };
+
+            Assert.Throws<ArgumentException>(() => new ParameterCollection(array));
+        }
+
+        [Fact]
+        public void InitializeNullTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new ParameterCollection(null));
         }
 
         [Fact]
@@ -97,19 +115,6 @@ namespace xFunc.Tests.Expressions.Collections
             var result = parameters[parameter.Key];
 
             Assert.Equal(parameter.Value, result);
-        }
-
-        [Fact]
-        public void AddStringParameter()
-        {
-            var parameters = new ParameterCollection(true);
-            var key = "xxx";
-
-            parameters.Add(key);
-
-            var result = parameters[key];
-
-            Assert.Equal(0.0, result);
         }
 
         [Fact]
@@ -172,9 +177,17 @@ namespace xFunc.Tests.Expressions.Collections
                 ["x"] = 2.3
             };
 
-            Assert.Single(parameters.Collection);
             Assert.True(parameters.ContainsKey("x"));
+            Assert.True(parameters.Contains(new Parameter("x", 2.3)));
             Assert.Equal(2.3, parameters["x"]);
+        }
+
+        [Fact]
+        public void ContainsNullTest()
+        {
+            var parameters = new ParameterCollection();
+
+            Assert.Throws<ArgumentNullException>(() => parameters.Contains(null));
         }
 
         [Fact]
@@ -186,7 +199,6 @@ namespace xFunc.Tests.Expressions.Collections
             };
             parameters["x"] = 3.3;
 
-            Assert.Single(parameters.Collection);
             Assert.True(parameters.ContainsKey("x"));
             Assert.Equal(3.3, parameters["x"]);
         }
@@ -210,7 +222,6 @@ namespace xFunc.Tests.Expressions.Collections
                 ["π"] = 4
             };
 
-            Assert.Single(parameters.Collection);
             Assert.True(parameters.ContainsKey("π"));
             Assert.Equal(4.0, parameters["π"]);
         }
@@ -218,14 +229,14 @@ namespace xFunc.Tests.Expressions.Collections
         [Fact]
         public void OverrideRemoveTest()
         {
-            var parameters = new ParameterCollection
+            var parameters = new ParameterCollection(false)
             {
                 new Parameter("a", 1)
             };
             parameters["a"] = 2;
             parameters.Remove("a");
 
-            Assert.Empty(parameters.Collection);
+            Assert.Empty(parameters);
         }
 
         [Fact]
@@ -239,95 +250,6 @@ namespace xFunc.Tests.Expressions.Collections
             parameters.Clear();
 
             Assert.Empty(parameters);
-        }
-
-        [Fact]
-        public void GetByIndexOutOfRangeLowerTest()
-        {
-            var parameters = new ParameterCollection(true);
-
-            Assert.Throws<IndexOutOfRangeException>(() => parameters[-1]);
-        }
-
-        [Fact]
-        public void GetByIndexOutOfRangeHigherTest()
-        {
-            var parameters = new ParameterCollection(true)
-            {
-                new Parameter("x", 1.0)
-            };
-
-            Assert.Throws<IndexOutOfRangeException>(() => parameters[parameters.Count()]);
-        }
-
-        [Fact]
-        public void GetConstantByIndexTest()
-        {
-            var parameters = new ParameterCollection(true)
-            {
-                new Parameter("x", 1.0)
-            };
-
-            var parameter = parameters[0];
-
-            Assert.Equal(AngleValue.Radian(Math.PI), parameter);
-        }
-
-        [Fact]
-        public void GetParameterByIndexTest()
-        {
-            var parameters = new ParameterCollection(true)
-            {
-                new Parameter("x", 1.0)
-            };
-
-            var parameter = parameters[parameters.Constants.Count()];
-
-            Assert.Equal(1.0, parameter);
-        }
-
-        [Fact]
-        public void SetByIndexOutOfRangeLowerTest()
-        {
-            var parameters = new ParameterCollection(true);
-
-            Assert.Throws<IndexOutOfRangeException>(() => parameters[-1] = new Parameter("x", 1.0));
-        }
-
-        [Fact]
-        public void SetByIndexOutOfRangeHigherTest()
-        {
-            var parameters = new ParameterCollection(true)
-            {
-                new Parameter("x", 1.0)
-            };
-
-            Assert.Throws<IndexOutOfRangeException>(() => parameters[parameters.Count()] = new Parameter("x", 1.0));
-        }
-
-        [Fact]
-        public void SetConstantByIndexTest()
-        {
-            var parameters = new ParameterCollection(true)
-            {
-                new Parameter("x", 1.0)
-            };
-
-            Assert.Throws<ParameterIsReadOnlyException>(() => parameters[0] = 1.0);
-        }
-
-        [Fact]
-        public void SetParameterByIndexTest()
-        {
-            var parameters = new ParameterCollection(true)
-            {
-                new Parameter("x", 1.0)
-            };
-
-            parameters[parameters.Constants.Count()] = 2.0;
-            var parameter = parameters[parameters.Constants.Count()];
-
-            Assert.Equal(2.0, parameter);
         }
     }
 }

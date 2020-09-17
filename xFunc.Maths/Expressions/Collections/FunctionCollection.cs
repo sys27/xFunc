@@ -16,6 +16,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -46,6 +47,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="info">The info.</param>
         /// <param name="context">The context.</param>
+        [ExcludeFromCodeCoverage]
         protected FunctionCollection(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
@@ -77,9 +79,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="args">The <see cref="NotifyCollectionChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
-        {
-            CollectionChanged?.Invoke(this, args);
-        }
+            => CollectionChanged?.Invoke(this, args);
 
         /// <summary>
         /// Adds new function.
@@ -109,7 +109,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="function">The function.</param>
         /// <returns>An user function.</returns>
         /// <exception cref="KeyNotFoundException">The exception that is thrown when the key specified for accessing an element in a collection does not match any key in the collection.</exception>
-        public UserFunction GetKeyByKey(UserFunction function)
+        public UserFunction GetKey(UserFunction function)
         {
             var func = Keys.FirstOrDefault(uf => uf.Equals(function));
             if (func == null)

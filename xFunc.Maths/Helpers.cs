@@ -17,7 +17,6 @@ using System;
 using System.Collections.Generic;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
-using xFunc.Maths.Tokenization;
 
 namespace xFunc.Maths
 {
@@ -77,7 +76,7 @@ namespace xFunc.Maths
         /// <param name="expression">The expression.</param>
         /// <returns>The collection of expression parts.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="expression"/> variable is null.</exception>
-        public static IEnumerable<IExpression> ConvertExpressionToCollection(IExpression expression)
+        public static List<IExpression> ConvertExpressionToCollection(IExpression expression)
         {
             if (expression == null)
                 throw new ArgumentNullException(nameof(expression));

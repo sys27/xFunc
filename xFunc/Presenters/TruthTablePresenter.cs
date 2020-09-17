@@ -34,10 +34,15 @@ namespace xFunc.Presenters
             parser = new Parser();
         }
 
-        private void SetBits(int bits, int parametersCount)
+        private void SetBits(int bits)
         {
-            for (int i = 0; i < parametersCount; i++)
-                Parameters[i] = ((bits >> i) & 1) == 1;
+            var i = 0;
+            foreach (var param in Parameters)
+            {
+                Parameters[param.Key] = ((bits >> i) & 1) == 1;
+
+                i++;
+            }
         }
 
         public void Generate(string strExp)
@@ -48,25 +53,28 @@ namespace xFunc.Presenters
             table = new List<TruthTableRowViewModel>();
 
             var parametersCount = Parameters.Count();
-            for (int i = (int)Math.Pow(2, parametersCount) - 1; i >= 0; i--)
+            var expressionCount = Expressions.Count();
+            var allBitsSet = (int)Math.Pow(2, parametersCount) - 1;
+
+            for (int i = allBitsSet; i >= 0; i--)
             {
-                SetBits(i, parametersCount);
+                SetBits(i);
 
-                var b = (bool)Expression.Execute(Parameters);
+                var result = (bool)Expression.Execute(Parameters);
 
-                var row = new TruthTableRowViewModel(parametersCount, Expressions.Count())
+                var row = new TruthTableRowViewModel(parametersCount, expressionCount)
                 {
-                    Index = (int)Math.Pow(2, parametersCount) - i
+                    Index = allBitsSet - i + 1
                 };
 
                 for (int j = 0; j < parametersCount; j++)
                     row.VarsValues[j] = (bool)Parameters[Parameters.ElementAt(j).Key];
 
-                for (int j = 0; j < Expressions.Count() - 1; j++)
+                for (int j = 0; j < expressionCount - 1; j++)
                     row.Values[j] = (bool)Expressions.ElementAt(j).Execute(Parameters);
 
-                if (Expressions.Count() != 0)
-                    row.Result = b;
+                if (expressionCount != 0)
+                    row.Result = result;
 
                 table.Add(row);
             }

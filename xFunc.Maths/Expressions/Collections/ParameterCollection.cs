@@ -18,7 +18,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
-using System.Linq;
 using System.Numerics;
 using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Resources;
@@ -30,8 +29,8 @@ namespace xFunc.Maths.Expressions.Collections
     /// </summary>
     public class ParameterCollection : IEnumerable<Parameter>, INotifyCollectionChanged
     {
-        private readonly HashSet<Parameter> constants;
-        private readonly HashSet<Parameter> collection;
+        private readonly Dictionary<string, Parameter> constants;
+        private readonly Dictionary<string, Parameter> collection;
 
         /// <summary>
         /// Occurs when the collection changes.
@@ -51,7 +50,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="initConstants">if set to <c>true</c> initialize constants.</param>
         public ParameterCollection(bool initConstants)
-            : this(Enumerable.Empty<Parameter>(), initConstants)
+            : this(Array.Empty<Parameter>(), initConstants)
         {
         }
 
@@ -65,14 +64,28 @@ namespace xFunc.Maths.Expressions.Collections
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="ParameterCollection"/> class.
+        /// </summary>
+        /// <param name="parameters">The parameters.</param>
+        public ParameterCollection(ParameterCollection parameters)
+            : this(parameters?.collection.Values, true)
+        {
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ParameterCollection" /> class.
         /// </summary>
         /// <param name="parameters">The parameters.</param>
         /// <param name="initConstants">if set to <c>true</c> initialize constants.</param>
-        public ParameterCollection(IEnumerable<Parameter> parameters, bool initConstants)
+        public ParameterCollection(IEnumerable<Parameter>? parameters, bool initConstants)
         {
-            constants = new HashSet<Parameter>();
-            collection = new HashSet<Parameter>(parameters);
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
+
+            constants = new Dictionary<string, Parameter>();
+            collection = new Dictionary<string, Parameter>();
+            foreach (var item in parameters)
+                collection.Add(item.Key, item);
 
             if (initConstants)
                 InitializeConstants();
@@ -83,26 +96,24 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="args">The <see cref="NotifyCollectionChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
-        {
-            CollectionChanged?.Invoke(this, args);
-        }
+            => CollectionChanged?.Invoke(this, args);
 
         private void InitializeConstants()
         {
-            constants.Add(Parameter.CreateConstant("π", AngleValue.Radian(Math.PI))); // Archimedes' constant
-            constants.Add(Parameter.CreateConstant("pi", AngleValue.Radian(Math.PI))); // Archimedes' constant
-            constants.Add(Parameter.CreateConstant("e", Math.E)); // Euler's number
-            constants.Add(Parameter.CreateConstant("i", Complex.ImaginaryOne)); // Imaginary unit
-            constants.Add(Parameter.CreateConstant("g", 9.80665)); // Gravity on Earth
-            constants.Add(Parameter.CreateConstant("c", 299792458)); // Speed of Light (c0)
-            constants.Add(Parameter.CreateConstant("h", 6.62607004E-34)); // Planck Constant
-            constants.Add(Parameter.CreateConstant("F", 96485.33289)); // Faraday Constant
-            constants.Add(Parameter.CreateConstant("ε", 8.854187817E-12)); // Electric Constant (ε0)
-            constants.Add(Parameter.CreateConstant("µ", 1.2566370614E-6)); // Magnetic constant (µ0)
-            constants.Add(Parameter.CreateConstant("G", 6.64078E-11)); // Gravitational constant
-            constants.Add(Parameter.CreateConstant("α", 2.5029078750958928222839)); // Feigenbaum constant
-            constants.Add(Parameter.CreateConstant("σ", 5.670367E-8)); // Stefan-Boltzmann constant
-            constants.Add(Parameter.CreateConstant("γ", 0.57721566490153286060651)); // Euler–Mascheroni constant
+            AddConstant(Parameter.CreateConstant("π", AngleValue.Radian(Math.PI))); // Archimedes' constant
+            AddConstant(Parameter.CreateConstant("pi", AngleValue.Radian(Math.PI))); // Archimedes' constant
+            AddConstant(Parameter.CreateConstant("e", Math.E)); // Euler's number
+            AddConstant(Parameter.CreateConstant("i", Complex.ImaginaryOne)); // Imaginary unit
+            AddConstant(Parameter.CreateConstant("g", 9.80665)); // Gravity on Earth
+            AddConstant(Parameter.CreateConstant("c", 299792458)); // Speed of Light (c0)
+            AddConstant(Parameter.CreateConstant("h", 6.62607004E-34)); // Planck Constant
+            AddConstant(Parameter.CreateConstant("F", 96485.33289)); // Faraday Constant
+            AddConstant(Parameter.CreateConstant("ε", 8.854187817E-12)); // Electric Constant (ε0)
+            AddConstant(Parameter.CreateConstant("µ", 1.2566370614E-6)); // Magnetic constant (µ0)
+            AddConstant(Parameter.CreateConstant("G", 6.64078E-11)); // Gravitational constant
+            AddConstant(Parameter.CreateConstant("α", 2.5029078750958928222839)); // Feigenbaum constant
+            AddConstant(Parameter.CreateConstant("σ", 5.670367E-8)); // Stefan-Boltzmann constant
+            AddConstant(Parameter.CreateConstant("γ", 0.57721566490153286060651)); // Euler–Mascheroni constant
         }
 
         /// <summary>
@@ -121,46 +132,11 @@ namespace xFunc.Maths.Expressions.Collections
         /// </returns>
         public IEnumerator<Parameter> GetEnumerator()
         {
-            foreach (var item in constants)
+            foreach (var (_, item) in constants)
                 yield return item;
 
-            foreach (var item in collection)
+            foreach (var (_, item) in collection)
                 yield return item;
-        }
-
-        /// <summary>
-        /// Gets or sets the value of variable.
-        /// </summary>
-        /// <value>
-        /// The value of parameter.
-        /// </value>
-        /// <param name="index">The index of variable.</param>
-        /// <returns>The value of variable.</returns>
-        public object this[int index]
-        {
-            get
-            {
-                if (index < 0 || index >= constants.Count + collection.Count)
-                    throw new IndexOutOfRangeException();
-
-                if (index < constants.Count)
-                    return constants.ElementAt(index).Value;
-
-                return collection.ElementAt(index - constants.Count).Value;
-            }
-            set
-            {
-                if (index < 0 || index >= constants.Count + collection.Count)
-                    throw new IndexOutOfRangeException();
-
-                if (index < constants.Count)
-                    throw new ParameterIsReadOnlyException(Resource.ReadOnlyError, collection.ElementAt(index).Key);
-
-                var element = collection.ElementAt(index - constants.Count);
-                element.Value = value;
-
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-            }
         }
 
         /// <summary>
@@ -179,8 +155,7 @@ namespace xFunc.Maths.Expressions.Collections
             }
             set
             {
-                var param = collection.FirstOrDefault(p => p.Key == key);
-                if (param == null)
+                if (!collection.TryGetValue(key, out var param))
                 {
                     Add(key, value);
                 }
@@ -192,14 +167,15 @@ namespace xFunc.Maths.Expressions.Collections
             }
         }
 
+        private void AddConstant(Parameter parameter)
+            => constants.Add(parameter.Key, parameter);
+
         private Parameter GetParameterByKey(string key)
         {
-            var item = collection.FirstOrDefault(p => p.Key == key);
-            if (!(item is null))
-                return item;
+            if (collection.TryGetValue(key, out var param))
+                return param;
 
-            var param = constants.FirstOrDefault(p => p.Key == key);
-            if (!(param is null))
+            if (constants.TryGetValue(key, out param))
                 return param;
 
             throw new KeyNotFoundException(string.Format(CultureInfo.InvariantCulture, Resource.VariableNotFoundExceptionError, key));
@@ -218,17 +194,10 @@ namespace xFunc.Maths.Expressions.Collections
             if (param.Type == ParameterType.Constant)
                 throw new ArgumentException(Resource.ConstError);
 
-            collection.Add(param);
+            collection.Add(param.Key, param);
 
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, param));
         }
-
-        /// <summary>
-        /// Adds the specified element to a set.
-        /// </summary>
-        /// <param name="key">The name of variable.</param>
-        public void Add(string key)
-            => Add(new Parameter(key, 0));
 
         /// <summary>
         /// Adds the specified element to a set.
@@ -251,8 +220,7 @@ namespace xFunc.Maths.Expressions.Collections
             if (param.Type == ParameterType.Constant)
                 throw new ArgumentException(Resource.ConstError);
 
-            collection.Remove(param);
-
+            collection.Remove(param.Key);
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, param));
         }
 
@@ -285,24 +253,11 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="param">The element.</param>
         /// <returns><c>true</c> if the object contains the specified element; otherwise, <c>false</c>.</returns>
         public bool Contains(Parameter param)
-            => collection.Contains(param) || constants.Contains(param);
-
-        /// <summary>
-        /// Determines whether an object contains the specified element.
-        /// </summary>
-        /// <param name="param">The element.</param>
-        /// <returns><c>true</c> if the object contains the specified element; otherwise, <c>false</c>.</returns>
-        public bool ContainsInConstants(Parameter param)
-            => constants.Contains(param);
-
-        /// <summary>
-        /// Determines whether an object contains the specified key.
-        /// </summary>
-        /// <param name="key">The name of variable.</param>
-        /// <returns><c>true</c> if the object contains the specified key; otherwise, <c>false</c>.</returns>
-        public bool ContainsKey(string key)
         {
-            return collection.FirstOrDefault(p => p.Key == key) != null || constants.FirstOrDefault(p => p.Key == key) != null;
+            if (param == null)
+                throw new ArgumentNullException(nameof(param));
+
+            return ContainsKey(param.Key);
         }
 
         /// <summary>
@@ -310,23 +265,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="key">The name of variable.</param>
         /// <returns><c>true</c> if the object contains the specified key; otherwise, <c>false</c>.</returns>
-        public bool ContainsKeyInConstants(string key)
-            => constants.FirstOrDefault(p => p.Key == key) != null;
-
-        /// <summary>
-        /// Gets the constants.
-        /// </summary>
-        /// <value>
-        /// The constants.
-        /// </value>
-        public IEnumerable<Parameter> Constants => constants;
-
-        /// <summary>
-        /// Gets the collection of variables.
-        /// </summary>
-        /// <value>
-        /// The collection.
-        /// </value>
-        public IEnumerable<Parameter> Collection => collection;
+        public bool ContainsKey(string key)
+            => collection.ContainsKey(key) || constants.ContainsKey(key);
     }
 }

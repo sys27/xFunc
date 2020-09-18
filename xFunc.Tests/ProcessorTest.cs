@@ -23,21 +23,12 @@ using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Angles;
+using System;
 
 namespace xFunc.Tests
 {
     public class ProcessorTest
     {
-        [Fact]
-        public void CtorTest()
-        {
-            var processor = new Processor();
-
-            Assert.NotNull(processor.Parameters);
-
-            Assert.Equal(NumeralSystem.Decimal, processor.NumeralSystem);
-        }
-
         [Fact]
         public void SolveDoubleTest()
         {
@@ -54,27 +45,6 @@ namespace xFunc.Tests
             var result = processor.Solve<NumberResult>(strExp);
 
             Assert.Equal(2.1, result.Result);
-        }
-
-        [Fact]
-        public void SolveDoubleHexTest()
-        {
-            var simplifier = new Mock<ISimplifier>();
-            var differentiator = new Mock<IDifferentiator>();
-
-            var strExp = "1 + 1";
-
-            simplifier.Setup(s => s.Analyze(It.IsAny<Add>())).Returns<Add>(e => e);
-
-            var processor = new Processor(
-                simplifier.Object,
-                differentiator.Object)
-            {
-                NumeralSystem = NumeralSystem.Hexadecimal
-            };
-            var result = processor.Solve<StringResult>(strExp);
-
-            Assert.Equal("0x2", result.Result);
         }
 
         [Fact]
@@ -161,6 +131,32 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void SolveExpDoNotSimplifyTest()
+        {
+            var simplifier = new Mock<ISimplifier>();
+            var differentiator = new Mock<IDifferentiator>();
+
+            var strExp = "deriv(x)";
+            var diff = Number.One;
+
+            simplifier
+                .Setup(s => s.Analyze(It.IsAny<Number>()))
+                .Returns<Number>(e => e);
+            simplifier
+                .Setup(s => s.Analyze(It.IsAny<Derivative>()))
+                .Returns<Derivative>(e => e);
+
+            differentiator
+                .Setup(d => d.Analyze(It.IsAny<Derivative>(), It.IsAny<DifferentiatorContext>()))
+                .Returns(() => diff);
+
+            var processor = new Processor(simplifier.Object, differentiator.Object);
+            var result = processor.Solve<ExpressionResult>(strExp, false);
+
+            Assert.Equal(Number.One, result.Result);
+        }
+
+        [Fact]
         public void SolveAngleTest()
         {
             var simplifier = new Mock<ISimplifier>();
@@ -223,14 +219,20 @@ namespace xFunc.Tests
 
             var exp = new Add(Variable.X, Number.One);
 
-            var processor = new Processor(
-                simplifier.Object,
-                differentiator.Object);
+            var processor = new Processor(simplifier.Object, differentiator.Object);
             var result = processor.Simplify(exp);
 
             simplifier.Verify(s => s.Analyze(It.IsAny<Add>()), Times.Once());
 
             Assert.Equal(exp, result);
+        }
+
+        [Fact]
+        public void SimplifyNullTest()
+        {
+            var processor = new Processor();
+
+            Assert.Throws<ArgumentNullException>(() => processor.Simplify(null));
         }
 
         [Fact]
@@ -246,15 +248,21 @@ namespace xFunc.Tests
                 .Setup(d => d.Analyze(exp, It.IsAny<DifferentiatorContext>()))
                 .Returns(() => diff);
 
-            var processor = new Processor(
-                simplifier.Object,
-                differentiator.Object);
+            var processor = new Processor(simplifier.Object, differentiator.Object);
             var result = processor.Differentiate(exp);
 
             differentiator
                 .Verify(d => d.Analyze(exp, It.IsAny<DifferentiatorContext>()), Times.Once());
 
             Assert.Equal(diff, result);
+        }
+
+        [Fact]
+        public void DiffNullExpTest()
+        {
+            var processor = new Processor();
+
+            Assert.Throws<ArgumentNullException>(() => processor.Differentiate(null));
         }
 
         [Fact]

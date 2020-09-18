@@ -69,6 +69,13 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         AngleNumber = 0x80,
 
         /// <summary>
+        /// The expression returns a string.
+        /// </summary>
+#pragma warning disable CA1720
+        String = 0x100,
+#pragma warning restore CA1720
+
+        /// <summary>
         /// The expression returns a number or a complex number.
         /// </summary>
         NumberOrComplex = Number | ComplexNumber,

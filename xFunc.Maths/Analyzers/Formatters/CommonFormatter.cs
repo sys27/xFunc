@@ -88,9 +88,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Abs exp)
-        {
-            return ToString(exp, "abs({0})");
-        }
+            => ToString(exp, "abs({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -98,9 +96,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Add exp)
-        {
-            return ToString(exp, "{0} + {1}");
-        }
+            => ToString(exp, "{0} + {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -108,9 +104,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Ceil exp)
-        {
-            return ToString(exp, "ceil({0})");
-        }
+            => ToString(exp, "ceil({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -118,9 +112,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Define exp)
-        {
-            return $"{exp.Key.Analyze(this)} := {exp.Value.Analyze(this)}";
-        }
+            => $"{exp.Key.Analyze(this)} := {exp.Value.Analyze(this)}";
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -128,9 +120,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Del exp)
-        {
-            return ToString(exp, "del({0})");
-        }
+            => ToString(exp, "del({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -138,9 +128,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Derivative exp)
-        {
-            return ToString(exp, "deriv");
-        }
+            => ToString(exp, "deriv");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -148,9 +136,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Div exp)
-        {
-            return ToString(exp, "{0} / {1}");
-        }
+            => ToString(exp, "{0} / {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -158,9 +144,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Exp exp)
-        {
-            return ToString(exp, "exp({0})");
-        }
+            => ToString(exp, "exp({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -168,9 +152,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Fact exp)
-        {
-            return ToString(exp, "{0}!");
-        }
+            => ToString(exp, "{0}!");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -178,9 +160,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Floor exp)
-        {
-            return ToString(exp, "floor({0})");
-        }
+            => ToString(exp, "floor({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -188,9 +168,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Trunc exp)
-        {
-            return ToString(exp, "trunc({0})");
-        }
+            => ToString(exp, "trunc({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -198,9 +176,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Frac exp)
-        {
-            return ToString(exp, "frac({0})");
-        }
+            => ToString(exp, "frac({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -208,9 +184,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(GCD exp)
-        {
-            return ToString(exp, "gcd");
-        }
+            => ToString(exp, "gcd");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -218,9 +192,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Lb exp)
-        {
-            return ToString(exp, "lb({0})");
-        }
+            => ToString(exp, "lb({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -228,9 +200,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(LCM exp)
-        {
-            return ToString(exp, "lcm");
-        }
+            => ToString(exp, "lcm");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -238,9 +208,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Lg exp)
-        {
-            return ToString(exp, "lg({0})");
-        }
+            => ToString(exp, "lg({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -248,9 +216,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Ln exp)
-        {
-            return ToString(exp, "ln({0})");
-        }
+            => ToString(exp, "ln({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -258,9 +224,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Log exp)
-        {
-            return ToString(exp, "log({0}, {1})");
-        }
+            => ToString(exp, "log({0}, {1})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -268,9 +232,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Mod exp)
-        {
-            return ToString(exp, "{0} % {1}");
-        }
+            => ToString(exp, "{0} % {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -278,9 +240,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Mul exp)
-        {
-            return ToString(exp, "{0} * {1}");
-        }
+            => ToString(exp, "{0} * {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -288,9 +248,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Number exp)
-        {
-            return exp.Value.ToString(CultureInfo.InvariantCulture);
-        }
+            => exp.Value.ToString(CultureInfo.InvariantCulture);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -298,9 +256,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Angle exp)
-        {
-            return exp.Value.ToString();
-        }
+            => exp.Value.ToString();
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -308,9 +264,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(ToDegree exp)
-        {
-            return ToString(exp, "todegree({0})");
-        }
+            => ToString(exp, "todegree({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -318,9 +272,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(ToRadian exp)
-        {
-            return ToString(exp, "toradian({0})");
-        }
+            => ToString(exp, "toradian({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -328,9 +280,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(ToGradian exp)
-        {
-            return ToString(exp, "togradian({0})");
-        }
+            => ToString(exp, "togradian({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -338,9 +288,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(ToNumber exp)
-        {
-            return ToString(exp, "tonumber({0})");
-        }
+            => ToString(exp, "tonumber({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -348,9 +296,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Pow exp)
-        {
-            return ToString(exp, "{0} ^ {1}");
-        }
+            => ToString(exp, "{0} ^ {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -358,9 +304,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Root exp)
-        {
-            return ToString(exp, "root({0}, {1})");
-        }
+            => ToString(exp, "root({0}, {1})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -368,9 +312,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Round exp)
-        {
-            return ToString(exp, "round");
-        }
+            => ToString(exp, "round");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -378,9 +320,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Simplify exp)
-        {
-            return ToString(exp, "simplify({0})");
-        }
+            => ToString(exp, "simplify({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -388,9 +328,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Sqrt exp)
-        {
-            return ToString(exp, "sqrt({0})");
-        }
+            => ToString(exp, "sqrt({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -398,9 +336,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Sub exp)
-        {
-            return ToString(exp, "{0} - {1}");
-        }
+            => ToString(exp, "{0} - {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -421,9 +357,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Undefine exp)
-        {
-            return $"undef({exp.Key.Analyze(this)})";
-        }
+            => $"undef({exp.Key.Analyze(this)})";
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -452,10 +386,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual string Analyze(Variable exp)
-        {
-            return exp.Name;
-        }
+        public virtual string Analyze(Variable exp) => exp.Name;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -463,9 +394,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(DelegateExpression exp)
-        {
-            return "{Delegate Expression}";
-        }
+            => "{Delegate Expression}";
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -473,9 +402,31 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Sign exp)
-        {
-            return ToString(exp, "sign({0})");
-        }
+            => ToString(exp, "sign({0})");
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual string Analyze(ToBin exp)
+            => ToString(exp, "tobin({0})");
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual string Analyze(ToOct exp)
+            => ToString(exp, "tooct({0})");
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual string Analyze(ToHex exp)
+            => ToString(exp, "tohex({0})");
 
         #endregion Standard
 
@@ -521,9 +472,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Determinant exp)
-        {
-            return ToString(exp, "det({0})");
-        }
+            => ToString(exp, "det({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -531,9 +480,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Inverse exp)
-        {
-            return ToString(exp, "inverse({0})");
-        }
+            => ToString(exp, "inverse({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -541,9 +488,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Transpose exp)
-        {
-            return ToString(exp, "transpose({0})");
-        }
+            => ToString(exp, "transpose({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -551,9 +496,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(DotProduct exp)
-        {
-            return ToString(exp, "dotProduct({0}, {1})");
-        }
+            => ToString(exp, "dotProduct({0}, {1})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -561,9 +504,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(CrossProduct exp)
-        {
-            return ToString(exp, "crossProduct({0}, {1})");
-        }
+            => ToString(exp, "crossProduct({0}, {1})");
 
         #endregion Matrix
 
@@ -575,9 +516,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(ComplexNumber exp)
-        {
-            return exp.Value.Format();
-        }
+            => exp.Value.Format();
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -585,9 +524,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Conjugate exp)
-        {
-            return ToString(exp, "conjugate({0})");
-        }
+            => ToString(exp, "conjugate({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -595,9 +532,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Im exp)
-        {
-            return ToString(exp, "im({0})");
-        }
+            => ToString(exp, "im({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -605,9 +540,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Phase exp)
-        {
-            return ToString(exp, "phase({0})");
-        }
+            => ToString(exp, "phase({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -615,9 +548,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Re exp)
-        {
-            return ToString(exp, "re({0})");
-        }
+            => ToString(exp, "re({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -625,9 +556,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Reciprocal exp)
-        {
-            return ToString(exp, "reciprocal({0})");
-        }
+            => ToString(exp, "reciprocal({0})");
 
         #endregion Complex Numbers
 
@@ -639,9 +568,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Arccos exp)
-        {
-            return ToString(exp, "arccos({0})");
-        }
+            => ToString(exp, "arccos({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -649,9 +576,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Arccot exp)
-        {
-            return ToString(exp, "arccot({0})");
-        }
+            => ToString(exp, "arccot({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -659,9 +584,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Arccsc exp)
-        {
-            return ToString(exp, "arccsc({0})");
-        }
+            => ToString(exp, "arccsc({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -669,9 +592,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Arcsec exp)
-        {
-            return ToString(exp, "arcsec({0})");
-        }
+            => ToString(exp, "arcsec({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -679,9 +600,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Arcsin exp)
-        {
-            return ToString(exp, "arcsin({0})");
-        }
+            => ToString(exp, "arcsin({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -689,9 +608,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Arctan exp)
-        {
-            return ToString(exp, "arctan({0})");
-        }
+            => ToString(exp, "arctan({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -699,9 +616,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Cos exp)
-        {
-            return ToString(exp, "cos({0})");
-        }
+            => ToString(exp, "cos({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -709,9 +624,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Cot exp)
-        {
-            return ToString(exp, "cot({0})");
-        }
+            => ToString(exp, "cot({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -719,9 +632,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Csc exp)
-        {
-            return ToString(exp, "csc({0})");
-        }
+            => ToString(exp, "csc({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -729,9 +640,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Sec exp)
-        {
-            return ToString(exp, "sec({0})");
-        }
+            => ToString(exp, "sec({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -739,9 +648,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Sin exp)
-        {
-            return ToString(exp, "sin({0})");
-        }
+            => ToString(exp, "sin({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -749,9 +656,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Tan exp)
-        {
-            return ToString(exp, "tan({0})");
-        }
+            => ToString(exp, "tan({0})");
 
         #endregion
 
@@ -763,9 +668,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Arcosh exp)
-        {
-            return ToString(exp, "arcosh({0})");
-        }
+            => ToString(exp, "arcosh({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -773,9 +676,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Arcoth exp)
-        {
-            return ToString(exp, "arcoth({0})");
-        }
+            => ToString(exp, "arcoth({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -783,9 +684,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Arcsch exp)
-        {
-            return ToString(exp, "arcsch({0})");
-        }
+            => ToString(exp, "arcsch({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -793,9 +692,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Arsech exp)
-        {
-            return ToString(exp, "arsech({0})");
-        }
+            => ToString(exp, "arsech({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -803,9 +700,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Arsinh exp)
-        {
-            return ToString(exp, "arsinh({0})");
-        }
+            => ToString(exp, "arsinh({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -813,9 +708,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Artanh exp)
-        {
-            return ToString(exp, "artanh({0})");
-        }
+            => ToString(exp, "artanh({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -823,9 +716,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Cosh exp)
-        {
-            return ToString(exp, "cosh({0})");
-        }
+            => ToString(exp, "cosh({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -833,9 +724,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Coth exp)
-        {
-            return ToString(exp, "coth({0})");
-        }
+            => ToString(exp, "coth({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -843,9 +732,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Csch exp)
-        {
-            return ToString(exp, "csch({0})");
-        }
+            => ToString(exp, "csch({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -853,9 +740,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Sech exp)
-        {
-            return ToString(exp, "sech({0})");
-        }
+            => ToString(exp, "sech({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -863,9 +748,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Sinh exp)
-        {
-            return ToString(exp, "sinh({0})");
-        }
+            => ToString(exp, "sinh({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -873,9 +756,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Tanh exp)
-        {
-            return ToString(exp, "tanh({0})");
-        }
+            => ToString(exp, "tanh({0})");
 
         #endregion Hyperbolic
 
@@ -887,9 +768,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Avg exp)
-        {
-            return ToString(exp, "avg");
-        }
+            => ToString(exp, "avg");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -897,9 +776,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expresion.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Count exp)
-        {
-            return ToString(exp, "count");
-        }
+            => ToString(exp, "count");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -907,9 +784,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Max exp)
-        {
-            return ToString(exp, "max");
-        }
+            => ToString(exp, "max");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -917,9 +792,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Min exp)
-        {
-            return ToString(exp, "min");
-        }
+            => ToString(exp, "min");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -927,9 +800,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Product exp)
-        {
-            return ToString(exp, "product");
-        }
+            => ToString(exp, "product");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -937,9 +808,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Stdev exp)
-        {
-            return ToString(exp, "stdev");
-        }
+            => ToString(exp, "stdev");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -947,9 +816,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Stdevp exp)
-        {
-            return ToString(exp, "stdevp");
-        }
+            => ToString(exp, "stdevp");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -957,9 +824,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Sum exp)
-        {
-            return ToString(exp, "sum");
-        }
+            => ToString(exp, "sum");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -967,9 +832,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Var exp)
-        {
-            return ToString(exp, "var");
-        }
+            => ToString(exp, "var");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -977,9 +840,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Varp exp)
-        {
-            return ToString(exp, "varp");
-        }
+            => ToString(exp, "varp");
 
         #endregion Statistical
 
@@ -991,9 +852,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(And exp)
-        {
-            return ToString(exp, "{0} and {1}");
-        }
+            => ToString(exp, "{0} and {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1001,9 +860,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Bool exp)
-        {
-            return exp.Value.ToString(CultureInfo.InvariantCulture);
-        }
+            => exp.Value.ToString(CultureInfo.InvariantCulture);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1011,9 +868,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Equality exp)
-        {
-            return ToString(exp, "{0} <=> {1}");
-        }
+            => ToString(exp, "{0} <=> {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1021,9 +876,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Implication exp)
-        {
-            return ToString(exp, "{0} => {1}");
-        }
+            => ToString(exp, "{0} => {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1031,9 +884,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(NAnd exp)
-        {
-            return ToString(exp, "{0} nand {1}");
-        }
+            => ToString(exp, "{0} nand {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1041,9 +892,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(NOr exp)
-        {
-            return ToString(exp, "{0} nor {1}");
-        }
+            => ToString(exp, "{0} nor {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1051,9 +900,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Not exp)
-        {
-            return ToString(exp, "not({0})");
-        }
+            => ToString(exp, "not({0})");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1061,9 +908,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Or exp)
-        {
-            return ToString(exp, "{0} or {1}");
-        }
+            => ToString(exp, "{0} or {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1071,9 +916,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(XOr exp)
-        {
-            return ToString(exp, "{0} xor {1}");
-        }
+            => ToString(exp, "{0} xor {1}");
 
         #endregion Logical and Bitwise
 
@@ -1093,9 +936,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(ConditionalAnd exp)
-        {
-            return ToString(exp, "{0} && {1}");
-        }
+            => ToString(exp, "{0} && {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1123,9 +964,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(Equal exp)
-        {
-            return ToString(exp, "{0} == {1}");
-        }
+            => ToString(exp, "{0} == {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1133,9 +972,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(For exp)
-        {
-            return ToString(exp, "for");
-        }
+            => ToString(exp, "for");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1143,9 +980,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(GreaterOrEqual exp)
-        {
-            return ToString(exp, "{0} >= {1}");
-        }
+            => ToString(exp, "{0} >= {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1153,9 +988,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(GreaterThan exp)
-        {
-            return ToString(exp, "{0} > {1}");
-        }
+            => ToString(exp, "{0} > {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1163,9 +996,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(If exp)
-        {
-            return ToString(exp, "if");
-        }
+            => ToString(exp, "if");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1185,9 +1016,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(LessOrEqual exp)
-        {
-            return ToString(exp, "{0} <= {1}");
-        }
+            => ToString(exp, "{0} <= {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1195,9 +1024,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(LessThan exp)
-        {
-            return ToString(exp, "{0} < {1}");
-        }
+            => ToString(exp, "{0} < {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1213,9 +1040,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(NotEqual exp)
-        {
-            return ToString(exp, "{0} != {1}");
-        }
+            => ToString(exp, "{0} != {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1223,9 +1048,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(ConditionalOr exp)
-        {
-            return ToString(exp, "{0} || {1}");
-        }
+            => ToString(exp, "{0} || {1}");
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1241,9 +1064,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual string Analyze(While exp)
-        {
-            return ToString(exp, "while({0}, {1})");
-        }
+            => ToString(exp, "while({0}, {1})");
 
         /// <summary>
         /// Analyzes the specified expression.

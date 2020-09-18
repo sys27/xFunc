@@ -118,9 +118,6 @@
   <data name="AndToolTip" xml:space="preserve">
     <value>Bitwise AND operation. Example: x and y, x &amp; y</value>
   </data>
-  <data name="AnswerBaseGroupHeader" xml:space="preserve">
-    <value>Answer Base</value>
-  </data>
   <data name="AnswerTextBox" xml:space="preserve">
     <value>Answer:</value>
   </data>
@@ -469,17 +466,8 @@
   <data name="SettingsAutoLang" xml:space="preserve">
     <value>Automatic</value>
   </data>
-  <data name="SettingsBin" xml:space="preserve">
-    <value>Binary</value>
-  </data>
   <data name="SettingsCancel" xml:space="preserve">
     <value>Cancel</value>
-  </data>
-  <data name="SettingsDec" xml:space="preserve">
-    <value>Decimal</value>
-  </data>
-  <data name="SettingsHex" xml:space="preserve">
-    <value>Hexadecimal</value>
   </data>
   <data name="SettingsLanguageLabel" xml:space="preserve">
     <value>_Language*:</value>
@@ -493,14 +481,8 @@
   <data name="SettingsMenu" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="SettingsNumber" xml:space="preserve">
-    <value>Default _number base:</value>
-  </data>
-  <data name="SettingsOct" xml:space="preserve">
-    <value>Octal</value>
-  </data>
   <data name="SettingsRemember" xml:space="preserve">
-    <value>_Remember number base</value>
+    <value>_Remember output format</value>
   </data>
   <data name="SettingsReset" xml:space="preserve">
     <value>Reset</value>

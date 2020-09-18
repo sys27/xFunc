@@ -17,7 +17,6 @@ limitations under the License. -->
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:res="clr-namespace:xFunc.Resources"
                     xmlns:ribbon="clr-namespace:Fluent;assembly=Fluent"
-                    xmlns:viewModels="clr-namespace:xFunc.ViewModels"
                     xmlns:views="clr-namespace:xFunc.Views"
                     Foreground="White"
                     Title="xFunc" Width="1024" Height="576" MinWidth="480" MinHeight="270"
@@ -31,11 +30,6 @@ limitations under the License. -->
         <CommandBinding Command="views:MainView.AutoFormatCommand" Executed="AutoButton_Execute" CanExecute="FormatButtons_CanExecute" />
         <CommandBinding Command="views:MainView.NormalFormatCommand" Executed="NormalButton_Execute" CanExecute="FormatButtons_CanExecute" />
         <CommandBinding Command="views:MainView.ExponentialFormatCommand" Executed="ExponentialButton_Execute" CanExecute="FormatButtons_CanExecute" />
-
-        <CommandBinding Command="views:MainView.BinCommand" Executed="BinCommand_Execute" CanExecute="BaseCommands_CanExecute" />
-        <CommandBinding Command="views:MainView.OctCommand" Executed="OctCommand_Execute" CanExecute="BaseCommands_CanExecute" />
-        <CommandBinding Command="views:MainView.DecCommand" Executed="DecCommand_Execute" CanExecute="BaseCommands_CanExecute" />
-        <CommandBinding Command="views:MainView.HexCommand" Executed="HexCommand_Execute" CanExecute="BaseCommands_CanExecute" />
 
         <CommandBinding Command="views:MainView.DeleteExpCommand" Executed="DeleteExp_Execute" CanExecute="DeleteExp_CanExecute" />
         <CommandBinding Command="views:MainView.ClearCommand" Executed="Clear_Execute" CanExecute="Clear_CanExecute" />
@@ -159,36 +153,6 @@ limitations under the License. -->
                         <ribbon:ToggleButton.LargeIcon>
                             <Viewbox>
                                 <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">Exp</TextBlock>
-                            </Viewbox>
-                        </ribbon:ToggleButton.LargeIcon>
-                    </ribbon:ToggleButton>
-                </ribbon:RibbonGroupBox>
-                <ribbon:RibbonGroupBox x:Name="AnswerBaseGroupBox" Header="{x:Static res:Resource.AnswerBaseGroupHeader}">
-                    <ribbon:ToggleButton x:Name="binButton" Header="Binary" SizeDefinition="Large" Command="views:MainView.BinCommand">
-                        <ribbon:ToggleButton.LargeIcon>
-                            <Viewbox>
-                                <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">Bin</TextBlock>
-                            </Viewbox>
-                        </ribbon:ToggleButton.LargeIcon>
-                    </ribbon:ToggleButton>
-                    <ribbon:ToggleButton x:Name="octButton" Header="Octal" SizeDefinition="Large" Command="views:MainView.OctCommand">
-                        <ribbon:ToggleButton.LargeIcon>
-                            <Viewbox>
-                                <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">Oct</TextBlock>
-                            </Viewbox>
-                        </ribbon:ToggleButton.LargeIcon>
-                    </ribbon:ToggleButton>
-                    <ribbon:ToggleButton x:Name="decButton" Header="Decimal" SizeDefinition="Large" Command="views:MainView.DecCommand">
-                        <ribbon:ToggleButton.LargeIcon>
-                            <Viewbox>
-                                <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">Dec</TextBlock>
-                            </Viewbox>
-                        </ribbon:ToggleButton.LargeIcon>
-                    </ribbon:ToggleButton>
-                    <ribbon:ToggleButton x:Name="hexButton" Header="Hexadecimal" SizeDefinition="Large" Command="views:MainView.HexCommand">
-                        <ribbon:ToggleButton.LargeIcon>
-                            <Viewbox>
-                                <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">Hex</TextBlock>
                             </Viewbox>
                         </ribbon:ToggleButton.LargeIcon>
                     </ribbon:ToggleButton>

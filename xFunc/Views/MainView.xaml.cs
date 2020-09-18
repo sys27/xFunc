@@ -52,11 +52,6 @@ namespace xFunc.Views
         public static RoutedCommand NormalFormatCommand = new RoutedCommand();
         public static RoutedCommand ExponentialFormatCommand = new RoutedCommand();
 
-        public static RoutedCommand BinCommand = new RoutedCommand();
-        public static RoutedCommand OctCommand = new RoutedCommand();
-        public static RoutedCommand DecCommand = new RoutedCommand();
-        public static RoutedCommand HexCommand = new RoutedCommand();
-
         public static RoutedCommand DeleteExpCommand = new RoutedCommand();
         public static RoutedCommand ClearCommand = new RoutedCommand();
 
@@ -95,37 +90,7 @@ namespace xFunc.Views
 
         private void mathPresenter_PropertyChanged(object o, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName == nameof(mathPresenter.Base))
-            {
-                switch (mathPresenter.Base)
-                {
-                    case NumeralSystem.Binary:
-                        octButton.IsChecked = false;
-                        decButton.IsChecked = false;
-                        hexButton.IsChecked = false;
-                        binButton.IsChecked = true;
-                        break;
-                    case NumeralSystem.Octal:
-                        binButton.IsChecked = false;
-                        decButton.IsChecked = false;
-                        hexButton.IsChecked = false;
-                        octButton.IsChecked = true;
-                        break;
-                    case NumeralSystem.Decimal:
-                        binButton.IsChecked = false;
-                        octButton.IsChecked = false;
-                        hexButton.IsChecked = false;
-                        decButton.IsChecked = true;
-                        break;
-                    case NumeralSystem.Hexadecimal:
-                        binButton.IsChecked = false;
-                        octButton.IsChecked = false;
-                        decButton.IsChecked = false;
-                        hexButton.IsChecked = true;
-                        break;
-                }
-            }
-            else if (args.PropertyName == nameof(mathPresenter.OutputFormat))
+            if (args.PropertyName == nameof(mathPresenter.OutputFormat))
             {
                 switch (mathPresenter.OutputFormat)
                 {
@@ -181,7 +146,6 @@ namespace xFunc.Views
 
             tabControl.SelectedIndex = Settings.Default.SelectedTabIndex;
 
-            mathPresenter.Base = Settings.Default.NumberBase;
             mathPresenter.OutputFormat = Settings.Default.OutputFormat;
 
             numberToolBar.IsExpanded = Settings.Default.NumbersExpanded;
@@ -235,7 +199,6 @@ namespace xFunc.Views
 
             if (Settings.Default.RememberBaseAndAngle)
             {
-                Settings.Default.NumberBase = mathPresenter.Base;
                 Settings.Default.OutputFormat = mathPresenter.OutputFormat;
             }
 
@@ -393,36 +356,6 @@ namespace xFunc.Views
         }
 
         private void FormatButtons_CanExecute(object o, CanExecuteRoutedEventArgs args)
-        {
-            args.CanExecute = tabControl.SelectedItem == mathTab;
-        }
-
-        private void AngleButtons_CanExecute(object o, CanExecuteRoutedEventArgs args)
-        {
-            args.CanExecute = tabControl.SelectedItem == mathTab;
-        }
-
-        private void BinCommand_Execute(object o, ExecutedRoutedEventArgs args)
-        {
-            mathPresenter.Base = NumeralSystem.Binary;
-        }
-
-        private void OctCommand_Execute(object o, ExecutedRoutedEventArgs args)
-        {
-            mathPresenter.Base = NumeralSystem.Octal;
-        }
-
-        private void DecCommand_Execute(object o, ExecutedRoutedEventArgs args)
-        {
-            mathPresenter.Base = NumeralSystem.Decimal;
-        }
-
-        private void HexCommand_Execute(object o, ExecutedRoutedEventArgs args)
-        {
-            mathPresenter.Base = NumeralSystem.Hexadecimal;
-        }
-
-        private void BaseCommands_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
             args.CanExecute = tabControl.SelectedItem == mathTab;
         }
@@ -602,11 +535,6 @@ namespace xFunc.Views
                 Settings.Default.RememberSizeAndPosition = settingsView.RememberStateAndPosition;
                 Settings.Default.RememberRightToolBar = settingsView.RememberRightToolBar;
                 Settings.Default.RememberBaseAndAngle = settingsView.RememberNumberAndAngle;
-                if (!settingsView.RememberNumberAndAngle)
-                {
-                    Settings.Default.NumberBase = settingsView.Base;
-                    mathPresenter.Base = settingsView.Base;
-                }
                 Settings.Default.MaxCountOfExpressions = settingsView.MaxCountOfExps;
                 Settings.Default.DefaultChartColor = settingsView.ChartColor;
                 Settings.Default.SaveUserFunction = settingsView.SaveUserFunctions;

@@ -241,15 +241,6 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Answer Base.
-        /// </summary>
-        public static string AnswerBaseGroupHeader {
-            get {
-                return ResourceManager.GetString("AnswerBaseGroupHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Answer:.
         /// </summary>
         public static string AnswerTextBox {
@@ -1474,15 +1465,6 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Binary.
-        /// </summary>
-        public static string SettingsBin {
-            get {
-                return ResourceManager.GetString("SettingsBin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string SettingsCancel {
@@ -1492,29 +1474,11 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decimal.
-        /// </summary>
-        public static string SettingsDec {
-            get {
-                return ResourceManager.GetString("SettingsDec", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Default chart color:.
         /// </summary>
         public static string SettingsDefaultChartColor {
             get {
                 return ResourceManager.GetString("SettingsDefaultChartColor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Hexadecimal.
-        /// </summary>
-        public static string SettingsHex {
-            get {
-                return ResourceManager.GetString("SettingsHex", resourceCulture);
             }
         }
         
@@ -1555,25 +1519,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Default _number base:.
-        /// </summary>
-        public static string SettingsNumber {
-            get {
-                return ResourceManager.GetString("SettingsNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Octal.
-        /// </summary>
-        public static string SettingsOct {
-            get {
-                return ResourceManager.GetString("SettingsOct", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Remember number base.
+        ///   Looks up a localized string similar to _Remember output format.
         /// </summary>
         public static string SettingsRemember {
             get {

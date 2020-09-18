@@ -44,7 +44,6 @@ namespace xFunc.Maths
             typeAnalyzer = new TypeAnalyzer();
 
             Parameters = new ExpressionParameters();
-            NumeralSystem = NumeralSystem.Decimal;
         }
 
         /// <summary>
@@ -86,7 +85,6 @@ namespace xFunc.Maths
                                 throw new ArgumentNullException(nameof(typeAnalyzer));
 
             Parameters = parameters;
-            NumeralSystem = NumeralSystem.Decimal;
         }
 
         /// <summary>
@@ -110,10 +108,7 @@ namespace xFunc.Maths
             var result = exp.Execute(Parameters);
             if (result is double number)
             {
-                if (NumeralSystem == NumeralSystem.Decimal)
-                    return new NumberResult(number);
-
-                return new StringResult(MathExtensions.ToNewBase((int)number, NumeralSystem));
+                return new NumberResult(number);
             }
 
             if (result is AngleValue angle)
@@ -235,13 +230,5 @@ namespace xFunc.Maths
         /// The expression parameters object.
         /// </value>
         public ExpressionParameters Parameters { get; }
-
-        /// <summary>
-        /// Gets or sets the numeral system.
-        /// </summary>
-        /// <value>
-        /// The numeral system.
-        /// </value>
-        public NumeralSystem NumeralSystem { get; set; }
     }
 }

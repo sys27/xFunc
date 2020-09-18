@@ -431,6 +431,30 @@ namespace xFunc.Maths.Analyzers
         public virtual TResult Analyze(Sign exp)
             => throw new NotSupportedException();
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(ToBin exp)
+            => throw new NotSupportedException();
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(ToOct exp)
+            => throw new NotSupportedException();
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(ToHex exp)
+            => throw new NotSupportedException();
+
         #endregion Standard
 
         #region Matrix

@@ -32,6 +32,14 @@ namespace xFunc.Maths.Analyzers
     /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
     public interface IAnalyzer<out TResult, TContext>
     {
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
+        TResult Analyze(IExpression exp, TContext context);
+
         #region Standard
 
         /// <summary>

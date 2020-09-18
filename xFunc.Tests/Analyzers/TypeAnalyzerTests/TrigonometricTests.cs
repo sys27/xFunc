@@ -16,6 +16,7 @@
 using System;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Trigonometric;
@@ -52,7 +53,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [InlineData(typeof(Arcsec))]
         [InlineData(typeof(Arcsin))]
         [InlineData(typeof(Arctan))]
-        public void TestAngleNumber(Type type)
+        public void TestReserveNumber(Type type)
         {
             var exp = Create(type, Number.Two);
 
@@ -69,6 +70,20 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestNumber(Type type)
         {
             var exp = Create(type, Number.Two);
+
+            Test(exp, ResultTypes.Number);
+        }
+
+        [Theory]
+        [InlineData(typeof(Cos))]
+        [InlineData(typeof(Cot))]
+        [InlineData(typeof(Csc))]
+        [InlineData(typeof(Sec))]
+        [InlineData(typeof(Sin))]
+        [InlineData(typeof(Tan))]
+        public void TestAngleNumber(Type type)
+        {
+            var exp = Create(type, AngleValue.Degree(10).AsExpression());
 
             Test(exp, ResultTypes.Number);
         }

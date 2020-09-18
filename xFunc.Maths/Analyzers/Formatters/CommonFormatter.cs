@@ -15,6 +15,7 @@
 
 #pragma warning disable CA1062
 
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
 using xFunc.Maths.Expressions;
@@ -79,6 +80,15 @@ namespace xFunc.Maths.Analyzers.Formatters
 
             return sb.ToString();
         }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        [ExcludeFromCodeCoverage]
+        public virtual string Analyze(IExpression exp)
+            => "IExpression";
 
         #region Standard
 

@@ -69,7 +69,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 ResultTypes.Number => ResultTypes.Number,
                 ResultTypes.AngleNumber => ResultTypes.Number,
                 ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
-                _ => ResultTypes.NumberOrComplex.ThrowFor(result),
+                _ => ResultTypes.NumberOrAngleOrComplex.ThrowFor(result),
             };
         }
 
@@ -264,6 +264,31 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             };
         }
 
+        private ResultTypes AngleConversion([NotNull] UnaryExpression exp)
+        {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
+            var result = exp.Argument.Analyze(this);
+
+            return result switch
+            {
+                ResultTypes.Undefined => ResultTypes.AngleNumber,
+                ResultTypes.Number => ResultTypes.AngleNumber,
+                ResultTypes.AngleNumber => ResultTypes.AngleNumber,
+                _ => ResultTypes.NumberOrAngle.ThrowFor(result),
+            };
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        [ExcludeFromCodeCoverage]
+        public virtual ResultTypes Analyze(IExpression exp)
+            => ResultTypes.Undefined;
+
         #region Standard
 
         /// <summary>
@@ -285,7 +310,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 ResultTypes.AngleNumber => ResultTypes.AngleNumber,
                 ResultTypes.ComplexNumber => ResultTypes.Number,
                 ResultTypes.Vector => ResultTypes.Number,
-                _ => throw new ParameterTypeMismatchException(ResultTypes.NumberOrComplex | ResultTypes.Vector, result),
+                _ => ResultTypes.NumberOrAngleOrComplexOrVector.ThrowFor(result),
             };
         }
 
@@ -739,11 +764,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 (_, ResultTypes.ComplexNumber) => ResultTypes.NumberOrComplex.ThrowForLeft(leftResult),
                 (ResultTypes.ComplexNumber, _) => ResultTypes.NumberOrComplex.ThrowForRight(rightResult),
 
-                (_, ResultTypes.Vector) => throw new BinaryParameterTypeMismatchException(ResultTypes.Number | ResultTypes.Matrix | ResultTypes.Vector, leftResult, BinaryParameterType.Left),
-                (ResultTypes.Vector, _) => throw new BinaryParameterTypeMismatchException(ResultTypes.Number | ResultTypes.Matrix | ResultTypes.Vector, rightResult, BinaryParameterType.Right),
+                (_, ResultTypes.Vector) => ResultTypes.NumberOrVectorOrMatrix.ThrowForLeft(leftResult),
+                (ResultTypes.Vector, _) => ResultTypes.NumberOrVectorOrMatrix.ThrowForRight(rightResult),
 
-                (_, ResultTypes.Matrix) => throw new BinaryParameterTypeMismatchException(ResultTypes.Number | ResultTypes.Matrix | ResultTypes.Vector, leftResult, BinaryParameterType.Left),
-                (ResultTypes.Matrix, _) => throw new BinaryParameterTypeMismatchException(ResultTypes.Number | ResultTypes.Matrix | ResultTypes.Vector, rightResult, BinaryParameterType.Right),
+                (_, ResultTypes.Matrix) => ResultTypes.NumberOrVectorOrMatrix.ThrowForLeft(leftResult),
+                (ResultTypes.Matrix, _) => ResultTypes.NumberOrVectorOrMatrix.ThrowForRight(rightResult),
 
                 _ => throw new ParameterTypeMismatchException(),
             };
@@ -769,19 +794,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(ToDegree exp)
-        {
-            if (exp is null)
-                throw ThrowHelpers.ExpNull();
-
-            var result = exp.Argument.Analyze(this);
-
-            return result switch
-            {
-                ResultTypes.Number => ResultTypes.AngleNumber,
-                ResultTypes.AngleNumber => ResultTypes.AngleNumber,
-                _ => ResultTypes.NumberOrAngle.ThrowFor(result),
-            };
-        }
+            => AngleConversion(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -789,19 +802,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(ToRadian exp)
-        {
-            if (exp is null)
-                throw ThrowHelpers.ExpNull();
-
-            var result = exp.Argument.Analyze(this);
-
-            return result switch
-            {
-                ResultTypes.Number => ResultTypes.AngleNumber,
-                ResultTypes.AngleNumber => ResultTypes.AngleNumber,
-                _ => ResultTypes.NumberOrAngle.ThrowFor(result),
-            };
-        }
+            => AngleConversion(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -809,19 +810,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(ToGradian exp)
-        {
-            if (exp is null)
-                throw ThrowHelpers.ExpNull();
-
-            var result = exp.Argument.Analyze(this);
-
-            return result switch
-            {
-                ResultTypes.Number => ResultTypes.AngleNumber,
-                ResultTypes.AngleNumber => ResultTypes.AngleNumber,
-                _ => ResultTypes.NumberOrAngle.ThrowFor(result),
-            };
-        }
+            => AngleConversion(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -837,6 +826,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return result switch
             {
+                ResultTypes.Undefined => ResultTypes.Number,
                 ResultTypes.AngleNumber => ResultTypes.Number,
                 _ => ResultTypes.AngleNumber.ThrowFor(result),
             };

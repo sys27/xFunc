@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -23,394 +24,101 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
 {
     public class LogicalBitwiseTests : TypeAnalyzerBaseTests
     {
-        [Fact]
-        public void TestAndUndefined()
+        [Theory]
+        [InlineData(typeof(And))]
+        [InlineData(typeof(Or))]
+        [InlineData(typeof(XOr))]
+        public void TestLeftUndefined(Type type)
         {
-            var exp = new And(Variable.X, new Variable("y"));
+            var exp = Create(type, Variable.X, Number.One);
 
             Test(exp, ResultTypes.Undefined);
         }
 
-        [Fact]
-        public void TestAndNumber()
+        [Theory]
+        [InlineData(typeof(And))]
+        [InlineData(typeof(Or))]
+        [InlineData(typeof(XOr))]
+        public void TestRightUndefined(Type type)
         {
-            var exp = new And(Number.One, Number.Two);
-
-            Test(exp, ResultTypes.Number);
-        }
-
-        [Fact]
-        public void TestAndNumberComplexException()
-        {
-            var exp = new And(Number.One, new ComplexNumber(1, 1));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestAndComplexNumberException()
-        {
-            var exp = new And(new ComplexNumber(1, 1), Number.Two);
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestAndBoolean()
-        {
-            var exp = new And(Bool.True, Bool.False);
-
-            Test(exp, ResultTypes.Boolean);
-        }
-
-        [Fact]
-        public void TestAndBoolComplexException()
-        {
-            var exp = new And(Bool.True, new ComplexNumber(1, 1));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestAndComplexBoolException()
-        {
-            var exp = new And(new ComplexNumber(1, 1), Bool.False);
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestAndException()
-        {
-            var exp = new And(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestBool()
-        {
-            var exp = Bool.False;
-
-            Test(exp, ResultTypes.Boolean);
-        }
-
-        [Fact]
-        public void TestEqualityUndefined()
-        {
-            var exp = new Equality(Variable.X, new Variable("y"));
-
-            Test(exp, ResultTypes.Boolean);
-        }
-
-        [Fact]
-        public void TestEqualityBoolean()
-        {
-            var exp = new Equality(Bool.True, Bool.False);
-
-            Test(exp, ResultTypes.Boolean);
-        }
-
-        [Fact]
-        public void TestEqualityBoolComplexException()
-        {
-            var exp = new Equality(Bool.True, new ComplexNumber(1, 1));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestEqualityComplexBoolException()
-        {
-            var exp = new Equality(new ComplexNumber(1, 1), Bool.False);
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestEqualityException()
-        {
-            var exp = new Equality(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestImplicationUndefined()
-        {
-            var exp = new Implication(Variable.X, new Variable("y"));
-
-            Test(exp, ResultTypes.Boolean);
-        }
-
-        [Fact]
-        public void TestImplicationBoolean()
-        {
-            var exp = new Implication(Bool.True, Bool.False);
-
-            Test(exp, ResultTypes.Boolean);
-        }
-
-        [Fact]
-        public void TestImplicationBoolComplexException()
-        {
-            var exp = new Implication(Bool.True, new ComplexNumber(1, 1));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestImplicationComplexBoolExcetpion()
-        {
-            var exp = new Implication(new ComplexNumber(1, 1), Bool.False);
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestImplicationException()
-        {
-            var exp = new Implication(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestNAndUndefined()
-        {
-            var exp = new NAnd(Variable.X, new Variable("y"));
-
-            Test(exp, ResultTypes.Boolean);
-        }
-
-        [Fact]
-        public void TestNAndBoolean()
-        {
-            var exp = new NAnd(Bool.True, Bool.False);
-
-            Test(exp, ResultTypes.Boolean);
-        }
-
-        [Fact]
-        public void TestNAndBoolComplexException()
-        {
-            var exp = new NAnd(Bool.True, new ComplexNumber(1, 1));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestNAndComplexBoolException()
-        {
-            var exp = new NAnd(new ComplexNumber(1, 1), Bool.False);
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestNAndException()
-        {
-            var exp = new NAnd(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestNOrUndefined()
-        {
-            var exp = new NOr(Variable.X, new Variable("y"));
-
-            Test(exp, ResultTypes.Boolean);
-        }
-
-        [Fact]
-        public void TestNOrBoolean()
-        {
-            var exp = new NOr(Bool.True, Bool.False);
-
-            Test(exp, ResultTypes.Boolean);
-        }
-
-        [Fact]
-        public void TestNOrBoolComplexException()
-        {
-            var exp = new NOr(Bool.True, new ComplexNumber(1, 1));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestNOrComplexBoolException()
-        {
-            var exp = new NOr(new ComplexNumber(1, 1), Bool.False);
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestNOrException()
-        {
-            var exp = new NOr(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestNotUndefined()
-        {
-            var exp = new Not(Variable.X);
+            var exp = Create(type, Number.One, Variable.X);
 
             Test(exp, ResultTypes.Undefined);
         }
 
-        [Fact]
-        public void TestNotNumber()
+        [Theory]
+        [InlineData(typeof(And))]
+        [InlineData(typeof(Or))]
+        [InlineData(typeof(XOr))]
+        public void TestNumber(Type type)
         {
-            var exp = new Not(Number.One);
+            var exp = Create(type, Number.One, Number.One);
 
             Test(exp, ResultTypes.Number);
         }
 
-        [Fact]
-        public void TestNotBoolean()
+        [Theory]
+        [InlineData(typeof(And))]
+        [InlineData(typeof(Or))]
+        [InlineData(typeof(XOr))]
+        public void TestBool(Type type)
         {
-            var exp = new Not(Bool.True);
+            var exp = Create(type, Bool.True, Bool.True);
 
             Test(exp, ResultTypes.Boolean);
         }
 
-        [Fact]
-        public void TestNotException()
+        [Theory]
+        [InlineData(typeof(And))]
+        [InlineData(typeof(Or))]
+        [InlineData(typeof(XOr))]
+        public void TestComplexAndNumber(Type type)
         {
-            var exp = new Not(new ComplexNumber(1, 2));
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestOrUndefined()
-        {
-            var exp = new Or(Variable.X, new Variable("y"));
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestOrNumber()
-        {
-            var exp = new Or(Number.One, Number.Two);
-
-            Test(exp, ResultTypes.Number);
-        }
-
-        [Fact]
-        public void TestOrNumberComplexException()
-        {
-            var exp = new Or(Number.One, new ComplexNumber(1, 1));
+            var exp = CreateBinary(type, new ComplexNumber(3, 2), Number.One);
 
             TestBinaryException(exp);
         }
 
-        [Fact]
-        public void TestOrComplexNumberException()
+        [Theory]
+        [InlineData(typeof(And))]
+        [InlineData(typeof(Or))]
+        [InlineData(typeof(XOr))]
+        public void TestNumberAndComplex(Type type)
         {
-            var exp = new Or(new ComplexNumber(1, 1), Number.Two);
+            var exp = CreateBinary(type, Number.One, new ComplexNumber(3, 2));
 
             TestBinaryException(exp);
         }
 
-        [Fact]
-        public void TestOrBoolean()
+        [Theory]
+        [InlineData(typeof(And))]
+        [InlineData(typeof(Or))]
+        [InlineData(typeof(XOr))]
+        public void TestComplexAndBool(Type type)
         {
-            var exp = new Or(Bool.True, Bool.False);
-
-            Test(exp, ResultTypes.Boolean);
-        }
-
-        [Fact]
-        public void TestOrBoolComplexException()
-        {
-            var exp = new Or(Bool.True, new ComplexNumber(1, 1));
+            var exp = CreateBinary(type, new ComplexNumber(3, 2), Bool.False);
 
             TestBinaryException(exp);
         }
 
-        [Fact]
-        public void TestOrComplexBoolException()
+        [Theory]
+        [InlineData(typeof(And))]
+        [InlineData(typeof(Or))]
+        [InlineData(typeof(XOr))]
+        public void TestBoolAndComplex(Type type)
         {
-            var exp = new Or(new ComplexNumber(1, 1), Bool.False);
+            var exp = CreateBinary(type, Bool.False, new ComplexNumber(3, 2));
 
             TestBinaryException(exp);
         }
 
-        [Fact]
-        public void TestOrException()
+        [Theory]
+        [InlineData(typeof(And))]
+        [InlineData(typeof(Or))]
+        [InlineData(typeof(XOr))]
+        public void TestParamTypeException(Type type)
         {
-            var exp = new Or(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestXOrUndefined()
-        {
-            var exp = new XOr(Variable.X, new Variable("y"));
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestXOrNumber()
-        {
-            var exp = new XOr(Number.One, Number.Two);
-
-            Test(exp, ResultTypes.Number);
-        }
-
-        [Fact]
-        public void TestXOrNumberComplexException()
-        {
-            var exp = new XOr(Number.One, new ComplexNumber(1, 1));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestXOrComplexNumberException()
-        {
-            var exp = new XOr(new ComplexNumber(1, 1), Number.One);
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestXOrBoolean()
-        {
-            var exp = new XOr(Bool.True, Bool.False);
-
-            Test(exp, ResultTypes.Boolean);
-        }
-
-        [Fact]
-        public void TestXOrBoolComplexNumberException()
-        {
-            var exp = new XOr(Bool.True, new ComplexNumber(1, 1));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestXOrComplexNumberBoolException()
-        {
-            var exp = new XOr(new ComplexNumber(1, 1), Bool.False);
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestXOrException()
-        {
-            var exp = new XOr(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
+            var exp = Create(type, new ComplexNumber(3, 2), new ComplexNumber(3, 2));
 
             TestException(exp);
         }

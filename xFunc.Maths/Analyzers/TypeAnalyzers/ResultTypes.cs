@@ -26,53 +26,53 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <summary>
         /// The expression doesn't return anything.
         /// </summary>
-        None = 0x0,
+        None = 0,
 
         /// <summary>
         /// The expression returns undefined result.
         /// </summary>
-        Undefined = 0x1,
+        Undefined = 1,
 
         /// <summary>
         /// The expression returns a number.
         /// </summary>
-        Number = 0x2,
+        Number = 1 << 1,
 
         /// <summary>
         /// The expression returns a complex number.
         /// </summary>
-        ComplexNumber = 0x4,
+        ComplexNumber = 1 << 2,
 
         /// <summary>
         /// The expression returns a boolean (true or false).
         /// </summary>
-        Boolean = 0x8,
+        Boolean = 1 << 3,
 
         /// <summary>
         /// The expression returns a vector.
         /// </summary>
-        Vector = 0x10,
+        Vector = 1 << 4,
 
         /// <summary>
         /// The expression returns a matrix.
         /// </summary>
-        Matrix = 0x20,
+        Matrix = 1 << 5,
 
         /// <summary>
         /// The expression returns other expression.
         /// </summary>
-        Expression = 0x40,
+        Expression = 1 << 6,
 
         /// <summary>
         /// The expression returns an angle.
         /// </summary>
-        AngleNumber = 0x80,
+        AngleNumber = 1 << 7,
 
         /// <summary>
         /// The expression returns a string.
         /// </summary>
 #pragma warning disable CA1720
-        String = 0x100,
+        String = 1 << 8,
 #pragma warning restore CA1720
 
         /// <summary>
@@ -84,5 +84,20 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// The expression returns a number or a angle number.
         /// </summary>
         NumberOrAngle = Number | AngleNumber,
+
+        /// <summary>
+        /// The expression returns a number or a angle number or a complex number.
+        /// </summary>
+        NumberOrAngleOrComplex = NumberOrAngle | ComplexNumber,
+
+        /// <summary>
+        /// The expression returns a number or a angle number or a complex number or a vector.
+        /// </summary>
+        NumberOrAngleOrComplexOrVector = NumberOrAngleOrComplex | Vector,
+
+        /// <summary>
+        /// The expression returns a number or a vector or a matrix.
+        /// </summary>
+        NumberOrVectorOrMatrix = Number | Vector | Matrix,
     }
 }

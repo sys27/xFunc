@@ -17,7 +17,6 @@ using Xunit;
 
 namespace xFunc.Tests.ParserTests
 {
-    // TODO: remove tests?
     public class NotBalancedParenthesisTests : BaseParserTests
     {
         [Fact]

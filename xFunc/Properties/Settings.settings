@@ -47,9 +47,6 @@
     <Setting Name="Lang" Type="System.String" Scope="User">
       <Value Profile="(Default)">Auto</Value>
     </Setting>
-    <Setting Name="NumberBase" Type="xFunc.Maths.NumeralSystem" Scope="User">
-      <Value Profile="(Default)">Decimal</Value>
-    </Setting>
     <Setting Name="VarWindowTop" Type="System.Double" Scope="User">
       <Value Profile="(Default)">-1</Value>
     </Setting>

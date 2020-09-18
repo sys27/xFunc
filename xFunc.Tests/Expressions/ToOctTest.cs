@@ -13,50 +13,59 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Numerics;
+using System;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
-using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
-using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 
-namespace xFunc.Tests.Expressions.Trigonometric
+namespace xFunc.Tests.Expressions
 {
-    public class ArccotTest
+    public class ToOctTest
     {
         [Fact]
-        public void ExecuteNumberTest()
+        public void ExecutNumberTest()
         {
-            var exp = new Arccot(Number.One);
-            var result = exp.Execute();
-            var expected = AngleValue.Radian(0.7853981633974483);
-            Assert.Equal(expected, result);
+            var exp = new ToOct(Number.Two);
+
+            Assert.Equal("02", exp.Execute());
         }
 
         [Fact]
-        public void ExecuteComplexNumberTest()
+        public void ExecutNumberExceptionTest()
         {
-            var complex = new Complex(3, 2);
-            var exp = new Arccot(new ComplexNumber(complex));
-            var result = (Complex)exp.Execute();
+            var exp = new ToOct(new Number(2.5));
 
-            Assert.Equal(0.23182380450040308, result.Real, 15);
-            Assert.Equal(-0.14694666622552988, result.Imaginary, 15);
+            Assert.Throws<ArgumentException>(() => exp.Execute());
         }
 
         [Fact]
-        public void ExecuteTestException()
+        public void ExecutLongMaxNumberTest()
         {
-            var exp = new Arccot(Bool.False);
+            var exp = new ToOct(new Number(int.MaxValue));
+
+            Assert.Equal("017777777777", exp.Execute());
+        }
+
+        [Fact]
+        public void ExecutNegativeNumberTest()
+        {
+            var exp = new ToOct(new Number(-2));
+
+            Assert.Equal("037777777776", exp.Execute());
+        }
+
+        [Fact]
+        public void ExecutBoolTest()
+        {
+            var exp = new ToOct(Bool.False);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]
-        public void CloneTest()
+        public void CloseTest()
         {
-            var exp = new Arccot(Number.One);
+            var exp = new ToOct(new Number(10));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

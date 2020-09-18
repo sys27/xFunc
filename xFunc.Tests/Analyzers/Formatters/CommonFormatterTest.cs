@@ -1435,6 +1435,30 @@ namespace xFunc.Tests.Analyzers.Formatters
             Assert.Equal("x >>= 10", str);
         }
 
+        [Fact]
+        public void ToBinTest()
+        {
+            var exp = new ToBin(new Number(10));
+
+            Assert.Equal("tobin(10)", exp.ToString());
+        }
+
+        [Fact]
+        public void ToOctTest()
+        {
+            var exp = new ToOct(new Number(10));
+
+            Assert.Equal("tooct(10)", exp.ToString());
+        }
+
+        [Fact]
+        public void ToHexTest()
+        {
+            var exp = new ToHex(new Number(10));
+
+            Assert.Equal("tohex(10)", exp.ToString());
+        }
+
         #endregion
     }
 }

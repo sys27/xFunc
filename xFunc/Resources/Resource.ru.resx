@@ -118,9 +118,6 @@
   <data name="AndToolTip" xml:space="preserve">
     <value>Побитовая операция И. Пример: x and y, x &amp; y</value>
   </data>
-  <data name="AnswerBaseGroupHeader" xml:space="preserve">
-    <value>Система счисления</value>
-  </data>
   <data name="AnswerTextBox" xml:space="preserve">
     <value>Ответ:</value>
   </data>
@@ -469,17 +466,8 @@
   <data name="SettingsAutoLang" xml:space="preserve">
     <value>Автоматически</value>
   </data>
-  <data name="SettingsBin" xml:space="preserve">
-    <value>Двоичная</value>
-  </data>
   <data name="SettingsCancel" xml:space="preserve">
     <value>Отмена</value>
-  </data>
-  <data name="SettingsDec" xml:space="preserve">
-    <value>Десятичная</value>
-  </data>
-  <data name="SettingsHex" xml:space="preserve">
-    <value>Шестнадцатеричная</value>
   </data>
   <data name="SettingsLanguageLabel" xml:space="preserve">
     <value>Язык*:</value>
@@ -493,14 +481,8 @@
   <data name="SettingsMenu" xml:space="preserve">
     <value>Настройки</value>
   </data>
-  <data name="SettingsNumber" xml:space="preserve">
-    <value>Система счисления по умолчанию:</value>
-  </data>
-  <data name="SettingsOct" xml:space="preserve">
-    <value>Восьмеричная</value>
-  </data>
   <data name="SettingsRemember" xml:space="preserve">
-    <value>Запоминать систему счисления</value>
+    <value>Запоминать формат чисел</value>
   </data>
   <data name="SettingsReset" xml:space="preserve">
     <value>Сбросить настройки</value>

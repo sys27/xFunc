@@ -22,11 +22,7 @@ namespace xFunc.Tests.ParserTests
     {
         [Fact]
         public void DefTest()
-        {
-            var expected = new Define(Variable.X, Number.Two);
-
-            ParseTest("def(x, 2)", expected);
-        }
+            => ParseTest("def(x, 2)", new Define(Variable.X, Number.Two));
 
         [Theory]
         [InlineData("def x, 2)")]

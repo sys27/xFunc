@@ -250,22 +250,42 @@ namespace xFunc.Maths
             => Math.Abs(a * b) / GCD(a, b);
 
         /// <summary>
-        /// Converts <paramref name="number"/> to the new numeral system.
+        /// Converts <paramref name="number"/> to the binary number.
         /// </summary>
         /// <param name="number">The number.</param>
-        /// <param name="numeralSystem">The numeral system.</param>
         /// <returns>String that contains the number in the new numeral system.</returns>
-        public static string ToNewBase(int number, NumeralSystem numeralSystem)
+        public static string ToBin(this double number)
         {
-            return numeralSystem switch
-            {
-                NumeralSystem.Decimal => number.ToString(CultureInfo.InvariantCulture),
-                NumeralSystem.Binary => "0b" + Convert.ToString(number, 2),
-                NumeralSystem.Octal => "0" + Convert.ToString(number, 8),
+            if (!number.IsInt())
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(number));
 
-                // NumeralSystem.Hexadecimal
-                _ => "0x" + Convert.ToString(number, 16),
-            };
+            return $"0b{Convert.ToString((int)number, 2)}";
+        }
+
+        /// <summary>
+        /// Converts <paramref name="number"/> to the octal number.
+        /// </summary>
+        /// <param name="number">The number.</param>
+        /// <returns>String that contains the number in the new numeral system.</returns>
+        public static string ToOct(this double number)
+        {
+            if (!number.IsInt())
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(number));
+
+            return $"0{Convert.ToString((int)number, 8)}";
+        }
+
+        /// <summary>
+        /// Converts <paramref name="number"/> to the hexadecimal number.
+        /// </summary>
+        /// <param name="number">The number.</param>
+        /// <returns>String that contains the number in the new numeral system.</returns>
+        public static string ToHex(this double number)
+        {
+            if (!number.IsInt())
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(number));
+
+            return $"0x{Convert.ToString((int)number, 16)}";
         }
 
         /// <summary>

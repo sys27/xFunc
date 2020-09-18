@@ -902,5 +902,17 @@ namespace xFunc.Tests.ParserTests
 
             Assert.NotNull(exp);
         }
+
+        [Fact]
+        public void ToBinTest()
+            => ParseTest("tobin(10)", new ToBin(new Number(10)));
+
+        [Fact]
+        public void ToOctTest()
+            => ParseTest("tooct(10)", new ToOct(new Number(10)));
+
+        [Fact]
+        public void ToHexTest()
+            => ParseTest("tohex(10)", new ToHex(new Number(10)));
     }
 }

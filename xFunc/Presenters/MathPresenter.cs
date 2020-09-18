@@ -106,19 +106,6 @@ namespace xFunc.Presenters
 
         public MathWorkspace Workspace { get; }
 
-        public NumeralSystem Base
-        {
-            get
-            {
-                return processor.NumeralSystem;
-            }
-            set
-            {
-                processor.NumeralSystem = value;
-                OnPropertyChanged(nameof(Base));
-            }
-        }
-
         public OutputFormats OutputFormat
         {
             get

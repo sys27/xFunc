@@ -16,15 +16,10 @@ limitations under the License. -->
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:res="clr-namespace:xFunc.Resources"
-        xmlns:conv="clr-namespace:xFunc.Converters"
         xmlns:views="clr-namespace:xFunc.Views"
         xmlns:fluent="urn:fluent-ribbon"
-        xmlns:maths="clr-namespace:xFunc.Maths;assembly=xFunc.Maths"
-        Title="{x:Static res:Resource.SettingsViewTitle}" Width="520" Height="324"
+        Title="{x:Static res:Resource.SettingsViewTitle}" Width="520" Height="274"
         WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ResizeMode="NoResize">
-    <Window.Resources>
-        <conv:InverseBooleanConverter x:Key="inverseBooleanConverter" />
-    </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="views:SettingsView.OKCommand" Executed="OKCommand_Execute" CanExecute="OKCommand_CanExecute" />
         <CommandBinding Command="views:SettingsView.ResetCommand" Executed="ResetCommand_Execute" />
@@ -50,29 +45,14 @@ limitations under the License. -->
         <CheckBox x:Name="positionCheckBox" Content="{x:Static res:Resource.SettingsWindowPos}" Margin="10,41,10,0" VerticalAlignment="Top" IsChecked="True" />
         <CheckBox x:Name="toolBarCheckBox" Content="{x:Static res:Resource.SettingsRightToolBar}" Margin="10,61,10,0" VerticalAlignment="Top" IsChecked="True" />
 
-        <GroupBox Margin="10,81.098,10,0" VerticalAlignment="Top" Height="60">
-            <GroupBox.Header>
-                <CheckBox x:Name="numAndAngleCheckBox" Content="{x:Static res:Resource.SettingsRemember}" IsChecked="True" />
-            </GroupBox.Header>
-            <GroupBox.Content>
-                <Grid IsEnabled="{Binding Path=IsChecked, ElementName=numAndAngleCheckBox, Converter={StaticResource inverseBooleanConverter}}">
-                    <Label Content="{x:Static res:Resource.SettingsNumber}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,8,0,0" />
-                    <ComboBox x:Name="baseComboBox" HorizontalAlignment="Right" VerticalAlignment="Top" Width="140" SelectedIndex="2" Margin="0,10,0,0" SelectedValuePath="Tag">
-                        <ComboBoxItem Content="{x:Static res:Resource.SettingsBin}" Tag="{x:Static maths:NumeralSystem.Binary}" />
-                        <ComboBoxItem Content="{x:Static res:Resource.SettingsOct}" Tag="{x:Static maths:NumeralSystem.Octal}" />
-                        <ComboBoxItem Content="{x:Static res:Resource.SettingsDec}" Tag="{x:Static maths:NumeralSystem.Decimal}" />
-                        <ComboBoxItem Content="{x:Static res:Resource.SettingsHex}" Tag="{x:Static maths:NumeralSystem.Hexadecimal}" />
-                    </ComboBox>
-                </Grid>
-            </GroupBox.Content>
-        </GroupBox>
+        <CheckBox x:Name="numAndAngleCheckBox" Content="{x:Static res:Resource.SettingsRemember}" IsChecked="True" Margin="10,81.098,10,0" VerticalAlignment="Top" />
 
-        <Label Content="{x:Static res:Resource.SettingsMaxNumber}" HorizontalAlignment="Left" Margin="10,144,0,0" VerticalAlignment="Top" />
-        <TextBox x:Name="maxCountOfExpsTextBox" HorizontalAlignment="Right" Height="23" Margin="0,146,10,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center" TextAlignment="Right" />
+        <Label Content="{x:Static res:Resource.SettingsMaxNumber}" HorizontalAlignment="Left" Margin="10,99,0,0" VerticalAlignment="Top" />
+        <TextBox x:Name="maxCountOfExpsTextBox" HorizontalAlignment="Right" Height="23" Margin="0,101,10,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center" TextAlignment="Right" />
 
-        <Label Content="{x:Static res:Resource.SettingsDefaultChartColor}" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" />
-        <TextBox x:Name="chartColorTextBox" HorizontalAlignment="Right" Height="23" Margin="0,174,47,0" TextWrapping="Wrap" Text="#FFFF0000" VerticalAlignment="Top" Width="103" VerticalContentAlignment="Center" TextAlignment="Right" />
-        <fluent:DropDownButton HorizontalAlignment="Right" VerticalAlignment="Top" SizeDefinition="Small" Margin="0,174,10,0" >
+        <Label Content="{x:Static res:Resource.SettingsDefaultChartColor}" HorizontalAlignment="Left" Margin="10,127,0,0" VerticalAlignment="Top" />
+        <TextBox x:Name="chartColorTextBox" HorizontalAlignment="Right" Height="23" Margin="0,129,47,0" TextWrapping="Wrap" Text="#FFFF0000" VerticalAlignment="Top" Width="103" VerticalContentAlignment="Center" TextAlignment="Right" />
+        <fluent:DropDownButton HorizontalAlignment="Right" VerticalAlignment="Top" SizeDefinition="Small" Margin="0,130,10,0" >
             <fluent:DropDownButton.Icon>
                 <Rectangle VerticalAlignment="Bottom" Height="16" Width="16" HorizontalAlignment="Center">
                     <Rectangle.Fill>
@@ -83,8 +63,8 @@ limitations under the License. -->
             <fluent:ColorGallery x:Name="chartColorGallery" IsAutomaticColorButtonVisible="False" IsNoColorButtonVisible="False" SelectedColor="{Binding Path=Text, ElementName=chartColorTextBox, Mode=TwoWay}" />
         </fluent:DropDownButton>
 
-        <CheckBox x:Name="saveUserFuncCheckBox" Content="{x:Static res:Resource.SettingsSaveUF}" Margin="10,203,10,0" VerticalAlignment="Top" IsChecked="True" />
-        <CheckBox x:Name="saveDumpCheckBox" Content="{x:Static res:Resource.SettingsSaveDump}" Margin="10,223,10,0" VerticalAlignment="Top" IsChecked="False" />
+        <CheckBox x:Name="saveUserFuncCheckBox" Content="{x:Static res:Resource.SettingsSaveUF}" Margin="10,157,10,0" VerticalAlignment="Top" IsChecked="True" />
+        <CheckBox x:Name="saveDumpCheckBox" Content="{x:Static res:Resource.SettingsSaveDump}" Margin="10,177,10,0" VerticalAlignment="Top" IsChecked="False" />
 
         <Grid Grid.Row="1" Background="#FFEFEFEF" Height="39">
             <Button Content="{x:Static res:Resource.SettingsReset}" HorizontalAlignment="Left" Margin="10,10,0,8" Padding="8,0,8,0" MinWidth="75" Command="views:SettingsView.ResetCommand" />

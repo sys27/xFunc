@@ -161,6 +161,9 @@ namespace xFunc.Maths
                 "stdevp" => new Stdevp(arguments),
 
                 "sign" => new Sign(arguments),
+                "tobin" => new ToBin(arguments),
+                "tooct" => new ToOct(arguments),
+                "tohex" => new ToHex(arguments),
 
                 var id => new UserFunction(id, arguments),
             };

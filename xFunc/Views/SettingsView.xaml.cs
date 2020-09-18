@@ -16,7 +16,6 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using xFunc.Maths;
 using xFunc.Properties;
 
 namespace xFunc.Views
@@ -41,10 +40,6 @@ namespace xFunc.Views
             RememberStateAndPosition = Settings.Default.RememberSizeAndPosition;
             RememberRightToolBar = Settings.Default.RememberRightToolBar;
             RememberNumberAndAngle = Settings.Default.RememberBaseAndAngle;
-            if (!RememberNumberAndAngle)
-            {
-                Base = Settings.Default.NumberBase;
-            }
             MaxCountOfExps = Settings.Default.MaxCountOfExpressions;
             ChartColor = Settings.Default.DefaultChartColor;
             SaveUserFunctions = Settings.Default.SaveUserFunction;
@@ -92,12 +87,6 @@ namespace xFunc.Views
         {
             get => this.numAndAngleCheckBox.IsChecked.Value;
             internal set => this.numAndAngleCheckBox.IsChecked = value;
-        }
-
-        public NumeralSystem Base
-        {
-            get => (NumeralSystem)this.baseComboBox.SelectedValue;
-            internal set => this.baseComboBox.SelectedValue = value;
         }
 
         public int MaxCountOfExps

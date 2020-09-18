@@ -41,6 +41,21 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             return result;
         }
 
+        private ResultTypes CheckNumericConversion([NotNull] UnaryExpression exp)
+        {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
+            var result = exp.Argument.Analyze(this);
+
+            return result switch
+            {
+                ResultTypes.Undefined => ResultTypes.String,
+                ResultTypes.Number => ResultTypes.String,
+                _ => ResultTypes.Number.ThrowFor(result),
+            };
+        }
+
         private ResultTypes CheckTrigonometric([NotNull] UnaryExpression exp)
         {
             if (exp is null)
@@ -347,14 +362,16 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Define exp) => CheckArgument(exp, ResultTypes.Undefined);
+        public virtual ResultTypes Analyze(Define exp)
+            => CheckArgument(exp, ResultTypes.String);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Del exp) => CheckArgument(exp, ResultTypes.Vector);
+        public virtual ResultTypes Analyze(Del exp)
+            => CheckArgument(exp, ResultTypes.Vector);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -908,14 +925,16 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Simplify exp) => CheckArgument(exp, ResultTypes.Undefined);
+        public virtual ResultTypes Analyze(Simplify exp)
+            => CheckArgument(exp, ResultTypes.Undefined);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Sqrt exp) => CheckArgument(exp, ResultTypes.Undefined);
+        public virtual ResultTypes Analyze(Sqrt exp)
+            => CheckArgument(exp, ResultTypes.Undefined);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -991,21 +1010,24 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Undefine exp) => CheckArgument(exp, ResultTypes.Undefined);
+        public virtual ResultTypes Analyze(Undefine exp)
+            => CheckArgument(exp, ResultTypes.String);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(UserFunction exp) => CheckArgument(exp, ResultTypes.Undefined);
+        public virtual ResultTypes Analyze(UserFunction exp)
+            => CheckArgument(exp, ResultTypes.Undefined);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Variable exp) => CheckArgument(exp, ResultTypes.Undefined);
+        public virtual ResultTypes Analyze(Variable exp)
+            => CheckArgument(exp, ResultTypes.Undefined);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1035,6 +1057,30 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 _ => ResultTypes.Number.ThrowFor(result),
             };
         }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual ResultTypes Analyze(ToBin exp)
+            => CheckNumericConversion(exp);
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual ResultTypes Analyze(ToOct exp)
+            => CheckNumericConversion(exp);
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual ResultTypes Analyze(ToHex exp)
+            => CheckNumericConversion(exp);
 
         #endregion Standard
 
@@ -1294,84 +1340,96 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Arccos exp) => CheckInverseTrigonometric(exp);
+        public virtual ResultTypes Analyze(Arccos exp)
+            => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Arccot exp) => CheckInverseTrigonometric(exp);
+        public virtual ResultTypes Analyze(Arccot exp)
+            => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Arccsc exp) => CheckInverseTrigonometric(exp);
+        public virtual ResultTypes Analyze(Arccsc exp)
+            => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Arcsec exp) => CheckInverseTrigonometric(exp);
+        public virtual ResultTypes Analyze(Arcsec exp)
+            => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Arcsin exp) => CheckInverseTrigonometric(exp);
+        public virtual ResultTypes Analyze(Arcsin exp)
+            => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Arctan exp) => CheckInverseTrigonometric(exp);
+        public virtual ResultTypes Analyze(Arctan exp)
+            => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Cos exp) => CheckTrigonometric(exp);
+        public virtual ResultTypes Analyze(Cos exp)
+            => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Cot exp) => CheckTrigonometric(exp);
+        public virtual ResultTypes Analyze(Cot exp)
+            => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Csc exp) => CheckTrigonometric(exp);
+        public virtual ResultTypes Analyze(Csc exp)
+            => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Sec exp) => CheckTrigonometric(exp);
+        public virtual ResultTypes Analyze(Sec exp)
+            => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Sin exp) => CheckTrigonometric(exp);
+        public virtual ResultTypes Analyze(Sin exp)
+            => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Tan exp) => CheckTrigonometric(exp);
+        public virtual ResultTypes Analyze(Tan exp)
+            => CheckTrigonometric(exp);
 
         #endregion
 
@@ -1382,84 +1440,96 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Arcosh exp) => CheckInverseTrigonometric(exp);
+        public virtual ResultTypes Analyze(Arcosh exp)
+            => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Arcoth exp) => CheckInverseTrigonometric(exp);
+        public virtual ResultTypes Analyze(Arcoth exp)
+            => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Arcsch exp) => CheckInverseTrigonometric(exp);
+        public virtual ResultTypes Analyze(Arcsch exp)
+            => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Arsech exp) => CheckInverseTrigonometric(exp);
+        public virtual ResultTypes Analyze(Arsech exp)
+            => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Arsinh exp) => CheckInverseTrigonometric(exp);
+        public virtual ResultTypes Analyze(Arsinh exp)
+            => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Artanh exp) => CheckInverseTrigonometric(exp);
+        public virtual ResultTypes Analyze(Artanh exp)
+            => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Cosh exp) => CheckTrigonometric(exp);
+        public virtual ResultTypes Analyze(Cosh exp)
+            => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Coth exp) => CheckTrigonometric(exp);
+        public virtual ResultTypes Analyze(Coth exp)
+            => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Csch exp) => CheckTrigonometric(exp);
+        public virtual ResultTypes Analyze(Csch exp)
+            => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Sech exp) => CheckTrigonometric(exp);
+        public virtual ResultTypes Analyze(Sech exp)
+            => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Sinh exp) => CheckTrigonometric(exp);
+        public virtual ResultTypes Analyze(Sinh exp)
+            => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Tanh exp) => CheckTrigonometric(exp);
+        public virtual ResultTypes Analyze(Tanh exp)
+            => CheckTrigonometric(exp);
 
         #endregion Hyperbolic
 
@@ -1470,70 +1540,80 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Avg exp) => CheckStatistical(exp);
+        public virtual ResultTypes Analyze(Avg exp)
+            => CheckStatistical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expresion.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Count exp) => CheckStatistical(exp);
+        public virtual ResultTypes Analyze(Count exp)
+            => CheckStatistical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Max exp) => CheckStatistical(exp);
+        public virtual ResultTypes Analyze(Max exp)
+            => CheckStatistical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Min exp) => CheckStatistical(exp);
+        public virtual ResultTypes Analyze(Min exp)
+            => CheckStatistical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Product exp) => CheckStatistical(exp);
+        public virtual ResultTypes Analyze(Product exp)
+            => CheckStatistical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Stdev exp) => CheckStatistical(exp);
+        public virtual ResultTypes Analyze(Stdev exp)
+            => CheckStatistical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Stdevp exp) => CheckStatistical(exp);
+        public virtual ResultTypes Analyze(Stdevp exp)
+            => CheckStatistical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Sum exp) => CheckStatistical(exp);
+        public virtual ResultTypes Analyze(Sum exp)
+            => CheckStatistical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Var exp) => CheckStatistical(exp);
+        public virtual ResultTypes Analyze(Var exp)
+            => CheckStatistical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Varp exp) => CheckStatistical(exp);
+        public virtual ResultTypes Analyze(Varp exp)
+            => CheckStatistical(exp);
 
         #endregion Statistical
 
@@ -1544,42 +1624,48 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(And exp) => AnalyzeLogicalAndBitwise(exp);
+        public virtual ResultTypes Analyze(And exp)
+            => AnalyzeLogicalAndBitwise(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Bool exp) => CheckArgument(exp, ResultTypes.Boolean);
+        public virtual ResultTypes Analyze(Bool exp)
+            => CheckArgument(exp, ResultTypes.Boolean);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Equality exp) => AnalyzeLogical(exp);
+        public virtual ResultTypes Analyze(Equality exp)
+            => AnalyzeLogical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Implication exp) => AnalyzeLogical(exp);
+        public virtual ResultTypes Analyze(Implication exp)
+            => AnalyzeLogical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(NAnd exp) => AnalyzeLogical(exp);
+        public virtual ResultTypes Analyze(NAnd exp)
+            => AnalyzeLogical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(NOr exp) => AnalyzeLogical(exp);
+        public virtual ResultTypes Analyze(NOr exp)
+            => AnalyzeLogical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1607,14 +1693,16 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Or exp) => AnalyzeLogicalAndBitwise(exp);
+        public virtual ResultTypes Analyze(Or exp)
+            => AnalyzeLogicalAndBitwise(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(XOr exp) => AnalyzeLogicalAndBitwise(exp);
+        public virtual ResultTypes Analyze(XOr exp)
+            => AnalyzeLogicalAndBitwise(exp);
 
         #endregion Logical and Bitwise
 
@@ -1625,35 +1713,40 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(AddAssign exp) => AnalyzeBinaryAssign(exp);
+        public virtual ResultTypes Analyze(AddAssign exp)
+            => AnalyzeBinaryAssign(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(ConditionalAnd exp) => AnalyzeLogical(exp);
+        public virtual ResultTypes Analyze(ConditionalAnd exp)
+            => AnalyzeLogical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Dec exp) => CheckArgument(exp, ResultTypes.Number);
+        public virtual ResultTypes Analyze(Dec exp)
+            => CheckArgument(exp, ResultTypes.Number);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(DivAssign exp) => AnalyzeBinaryAssign(exp);
+        public virtual ResultTypes Analyze(DivAssign exp)
+            => AnalyzeBinaryAssign(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Equal exp) => AnalyzeEquality(exp);
+        public virtual ResultTypes Analyze(Equal exp)
+            => AnalyzeEquality(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1677,14 +1770,16 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(GreaterOrEqual exp) => AnalyzeForNumber(exp);
+        public virtual ResultTypes Analyze(GreaterOrEqual exp)
+            => AnalyzeForNumber(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(GreaterThan exp) => AnalyzeForNumber(exp);
+        public virtual ResultTypes Analyze(GreaterThan exp)
+            => AnalyzeForNumber(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1712,49 +1807,56 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Inc exp) => CheckArgument(exp, ResultTypes.Number);
+        public virtual ResultTypes Analyze(Inc exp)
+            => CheckArgument(exp, ResultTypes.Number);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(LessOrEqual exp) => AnalyzeForNumber(exp);
+        public virtual ResultTypes Analyze(LessOrEqual exp)
+            => AnalyzeForNumber(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(LessThan exp) => AnalyzeForNumber(exp);
+        public virtual ResultTypes Analyze(LessThan exp)
+            => AnalyzeForNumber(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(MulAssign exp) => AnalyzeBinaryAssign(exp);
+        public virtual ResultTypes Analyze(MulAssign exp)
+            => AnalyzeBinaryAssign(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(NotEqual exp) => AnalyzeEquality(exp);
+        public virtual ResultTypes Analyze(NotEqual exp)
+            => AnalyzeEquality(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(ConditionalOr exp) => AnalyzeLogical(exp);
+        public virtual ResultTypes Analyze(ConditionalOr exp)
+            => AnalyzeLogical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(SubAssign exp) => AnalyzeBinaryAssign(exp);
+        public virtual ResultTypes Analyze(SubAssign exp)
+            => AnalyzeBinaryAssign(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1778,28 +1880,32 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(LeftShift exp) => AnalyzeShift(exp);
+        public virtual ResultTypes Analyze(LeftShift exp)
+            => AnalyzeShift(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(RightShift exp) => AnalyzeShift(exp);
+        public virtual ResultTypes Analyze(RightShift exp)
+            => AnalyzeShift(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(LeftShiftAssign exp) => AnalyzeBinaryAssign(exp);
+        public virtual ResultTypes Analyze(LeftShiftAssign exp)
+            => AnalyzeBinaryAssign(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(RightShiftAssign exp) => AnalyzeBinaryAssign(exp);
+        public virtual ResultTypes Analyze(RightShiftAssign exp)
+            => AnalyzeBinaryAssign(exp);
 
         #endregion Programming
     }

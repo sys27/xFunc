@@ -962,6 +962,30 @@ namespace xFunc.Maths.Analyzers
         public virtual IExpression Analyze(Sign exp)
             => AnalyzeSimple(exp);
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual IExpression Analyze(ToBin exp)
+            => AnalyzeSimple(exp);
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual IExpression Analyze(ToOct exp)
+            => AnalyzeSimple(exp);
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual IExpression Analyze(ToHex exp)
+            => AnalyzeSimple(exp);
+
         #endregion Standard
 
         #region Matrix

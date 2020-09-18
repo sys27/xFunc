@@ -450,9 +450,17 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestLogUndefined()
+        public void TestLogNumberAndUndefined()
         {
             var exp = new Log(Number.Two, Variable.X);
+
+            Test(exp, ResultTypes.Undefined);
+        }
+
+        [Fact]
+        public void TestLogUndefinedAndNumber()
+        {
+            var exp = new Log(Variable.X, Number.Two);
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -492,7 +500,23 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestModUndefined()
         {
+            var exp = new Mod(Variable.X, Variable.X);
+
+            Test(exp, ResultTypes.Number);
+        }
+
+        [Fact]
+        public void TestModUndefinedAndNumber()
+        {
             var exp = new Mod(Variable.X, Number.Two);
+
+            Test(exp, ResultTypes.Number);
+        }
+
+        [Fact]
+        public void TestModNumberAndUndefined()
+        {
+            var exp = new Mod(Number.Two, Variable.X);
 
             Test(exp, ResultTypes.Number);
         }
@@ -506,7 +530,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestModNumberBoolException()
+        public void TestModNumberAndBool()
         {
             var exp = new Mod(new Number(4), Bool.True);
 
@@ -514,7 +538,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestModException()
+        public void TestModBoolAndNumber()
         {
             var exp = new Mod(Bool.False, Number.Two);
 
@@ -522,7 +546,23 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestModNoNumbersException()
+        public void TestModUndefinedAndBool()
+        {
+            var exp = new Mod(Variable.X, Bool.False);
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestModBoolAndUndefined()
+        {
+            var exp = new Mod(Bool.False, Variable.X);
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestModException()
         {
             var exp = new Mod(Bool.False, Bool.False);
 
@@ -533,94 +573,6 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestNumber()
         {
             Test(Number.One, ResultTypes.Number);
-        }
-
-        [Fact]
-        public void TestPowUndefined()
-        {
-            var exp = new Pow(Variable.X, Number.Two);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestPowNumber()
-        {
-            var exp = new Pow(new Number(4), Number.Two);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestPowComplexNumber()
-        {
-            var exp = new Pow(new ComplexNumber(2, 4), new Number(4));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestPowNumberComplexNumber()
-        {
-            var exp = new Pow(new Number(4), new ComplexNumber(2, 4));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestPowException()
-        {
-            var exp = new Pow(Bool.False, Number.Two);
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestPowRightIsInvalidException()
-        {
-            var exp = new Pow(new ComplexNumber(2, 2), Bool.False);
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestRootUndefined()
-        {
-            var exp = new Root(Variable.X, Number.Two);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestRootNumber()
-        {
-            var exp = new Root(new Number(4), Number.Two);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestRootNumberBoolException()
-        {
-            var exp = new Root(Number.Two, Bool.False);
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestRootException()
-        {
-            var exp = new Root(Bool.False, Number.Two);
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestRootInvalidArgsException()
-        {
-            var exp = new Root(Bool.False, Bool.False);
-
-            TestException(exp);
         }
 
         [Fact]
@@ -806,6 +758,12 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestToGradianException()
         {
             TestException(new ToGradian(Bool.True));
+        }
+
+        [Fact]
+        public void TestToNumberUndefined()
+        {
+            Test(new ToNumber(Variable.X), ResultTypes.Number);
         }
 
         [Fact]

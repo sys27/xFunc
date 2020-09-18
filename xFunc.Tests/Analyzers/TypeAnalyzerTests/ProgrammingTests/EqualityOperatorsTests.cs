@@ -29,9 +29,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [Theory]
         [InlineData(typeof(Equal))]
         [InlineData(typeof(NotEqual))]
-        public void TestEqualUndefined(Type type)
+        public void TestUndefined(Type type)
         {
-            var exp = CreateBinary(type, Variable.X, Variable.X);
+            var exp = Create(type, Variable.X, Variable.X);
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -39,9 +39,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [Theory]
         [InlineData(typeof(Equal))]
         [InlineData(typeof(NotEqual))]
-        public void TestEqualNumberUndefined(Type type)
+        public void TestNumberAndUndefined(Type type)
         {
-            var exp = CreateBinary(type, Number.One, Variable.X);
+            var exp = Create(type, Number.One, Variable.X);
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -49,9 +49,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [Theory]
         [InlineData(typeof(Equal))]
         [InlineData(typeof(NotEqual))]
-        public void TestEqualUndefinedNumber(Type type)
+        public void TestUndefinedAndNumber(Type type)
         {
-            var exp = CreateBinary(type, Variable.X, Number.One);
+            var exp = Create(type, Variable.X, Number.One);
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -59,9 +59,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [Theory]
         [InlineData(typeof(Equal))]
         [InlineData(typeof(NotEqual))]
-        public void TestEqualBoolUndefined(Type type)
+        public void TestBoolAndUndefined(Type type)
         {
-            var exp = CreateBinary(type, Bool.True, Variable.X);
+            var exp = Create(type, Bool.True, Variable.X);
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -69,9 +69,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [Theory]
         [InlineData(typeof(Equal))]
         [InlineData(typeof(NotEqual))]
-        public void TestEqualUndefinedBool(Type type)
+        public void TestUndefinedAndBool(Type type)
         {
-            var exp = CreateBinary(type, Variable.X, Bool.True);
+            var exp = Create(type, Variable.X, Bool.True);
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -79,9 +79,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [Theory]
         [InlineData(typeof(Equal))]
         [InlineData(typeof(NotEqual))]
-        public void TestEqualAngleUndefined(Type type)
+        public void TestAngleAndUndefined(Type type)
         {
-            var exp = CreateBinary(type, AngleValue.Degree(1).AsExpression(), Variable.X);
+            var exp = Create(type, AngleValue.Degree(1).AsExpression(), Variable.X);
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -89,9 +89,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [Theory]
         [InlineData(typeof(Equal))]
         [InlineData(typeof(NotEqual))]
-        public void TestEqualUndefinedAngle(Type type)
+        public void TestUndefinedAndAngle(Type type)
         {
-            var exp = CreateBinary(type, Variable.X, AngleValue.Degree(1).AsExpression());
+            var exp = Create(type, Variable.X, AngleValue.Degree(1).AsExpression());
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -99,9 +99,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [Theory]
         [InlineData(typeof(Equal))]
         [InlineData(typeof(NotEqual))]
-        public void TestEqualNumber(Type type)
+        public void TestNumber(Type type)
         {
-            var exp = CreateBinary(type, new Number(20), new Number(10));
+            var exp = Create(type, new Number(20), new Number(10));
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -109,9 +109,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [Theory]
         [InlineData(typeof(Equal))]
         [InlineData(typeof(NotEqual))]
-        public void TestEqualBoolean(Type type)
+        public void TestBoolean(Type type)
         {
-            var exp = CreateBinary(type, Bool.False, Bool.True);
+            var exp = Create(type, Bool.False, Bool.True);
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -119,9 +119,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [Theory]
         [InlineData(typeof(Equal))]
         [InlineData(typeof(NotEqual))]
-        public void TestEqualAngleNumber(Type type)
+        public void TestAngleNumber(Type type)
         {
-            var exp = CreateBinary(type,
+            var exp = Create(type,
                 AngleValue.Degree(10).AsExpression(),
                 AngleValue.Degree(10).AsExpression()
             );
@@ -132,7 +132,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [Theory]
         [InlineData(typeof(Equal))]
         [InlineData(typeof(NotEqual))]
-        public void TestEqualComplexNumberException(Type type)
+        public void TestComplexAndNumber(Type type)
         {
             var exp = CreateBinary(type, new ComplexNumber(1, 2), new Number(20));
 
@@ -142,7 +142,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [Theory]
         [InlineData(typeof(Equal))]
         [InlineData(typeof(NotEqual))]
-        public void TestEqualNumberComplexException(Type type)
+        public void TestNumberAndComplex(Type type)
         {
             var exp = CreateBinary(type, new Number(20), new ComplexNumber(1, 2));
 
@@ -152,7 +152,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [Theory]
         [InlineData(typeof(Equal))]
         [InlineData(typeof(NotEqual))]
-        public void TestEqualComplexBoolException(Type type)
+        public void TestComplexAndBool(Type type)
         {
             var exp = CreateBinary(type, new ComplexNumber(1, 2), Bool.True);
 
@@ -162,7 +162,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [Theory]
         [InlineData(typeof(Equal))]
         [InlineData(typeof(NotEqual))]
-        public void TestEqualBoolComplexException(Type type)
+        public void TestBoolAndComplex(Type type)
         {
             var exp = CreateBinary(type, Bool.False, new ComplexNumber(1, 2));
 
@@ -172,7 +172,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [Theory]
         [InlineData(typeof(Equal))]
         [InlineData(typeof(NotEqual))]
-        public void TestEqualBoolAngleNumber(Type type)
+        public void TestComplexAndAngle(Type type)
         {
             var exp = CreateBinary(type,
                 new ComplexNumber(1, 2),
@@ -185,7 +185,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [Theory]
         [InlineData(typeof(Equal))]
         [InlineData(typeof(NotEqual))]
-        public void TestEqualAngleNumberBool(Type type)
+        public void TestAngleAndComplex(Type type)
         {
             var exp = CreateBinary(type,
                 AngleValue.Degree(10).AsExpression(),
@@ -198,9 +198,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [Theory]
         [InlineData(typeof(Equal))]
         [InlineData(typeof(NotEqual))]
-        public void TestEqualInvalidArgsException(Type type)
+        public void TestInvalidArgsException(Type type)
         {
-            var exp = CreateBinary(type, new ComplexNumber(2, 3), new ComplexNumber(2, 3));
+            var exp = Create(type, new ComplexNumber(2, 3), new ComplexNumber(2, 3));
 
             TestException(exp);
         }

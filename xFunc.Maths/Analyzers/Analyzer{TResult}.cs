@@ -35,6 +35,15 @@ namespace xFunc.Maths.Analyzers
     [ExcludeFromCodeCoverage]
     public abstract class Analyzer<TResult> : IAnalyzer<TResult>
     {
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        /// <exception cref="NotSupportedException">Always.</exception>
+        public virtual TResult Analyze(IExpression exp)
+            => throw new NotSupportedException();
+
         #region Standard
 
         /// <summary>
@@ -44,9 +53,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Abs exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -55,9 +63,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Add exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -66,9 +73,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Ceil exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -77,9 +83,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Define exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -88,9 +93,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Del exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -99,9 +103,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Derivative exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -110,9 +113,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Div exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -121,9 +123,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Exp exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -132,9 +133,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Fact exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -143,9 +143,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Floor exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -153,7 +152,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual TResult Analyze(Trunc exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -161,7 +160,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual TResult Analyze(Frac exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -170,9 +169,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(GCD exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -181,9 +179,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Lb exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -192,9 +189,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(LCM exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -203,9 +199,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Lg exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -214,9 +209,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Ln exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -225,9 +219,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Log exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -236,9 +229,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Mod exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -247,9 +239,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Mul exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -258,9 +249,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Number exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -268,7 +258,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual TResult Analyze(Angle exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -276,7 +266,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual TResult Analyze(ToDegree exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -284,7 +274,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual TResult Analyze(ToRadian exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -292,7 +282,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual TResult Analyze(ToGradian exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -300,7 +290,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual TResult Analyze(ToNumber exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -309,9 +299,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Pow exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -320,9 +309,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Root exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -331,9 +319,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Round exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -342,9 +329,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Simplify exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -353,9 +339,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Sqrt exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -364,9 +349,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Sub exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -375,9 +359,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(UnaryMinus exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -386,9 +369,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Undefine exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -397,9 +379,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(UserFunction exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -408,9 +389,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Variable exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -419,9 +399,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(DelegateExpression exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -429,7 +408,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual TResult Analyze(Sign exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -437,7 +416,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual TResult Analyze(ToBin exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -445,7 +424,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual TResult Analyze(ToOct exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -453,7 +432,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual TResult Analyze(ToHex exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         #endregion Standard
 
@@ -466,9 +445,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Vector exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -477,9 +455,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Matrix exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -488,9 +465,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Determinant exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -499,9 +475,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Inverse exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -510,9 +485,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Transpose exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -520,7 +494,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual TResult Analyze(DotProduct exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -528,7 +502,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual TResult Analyze(CrossProduct exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         #endregion Matrix
 
@@ -541,9 +515,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(ComplexNumber exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -552,9 +525,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Conjugate exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -563,9 +535,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Im exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -574,9 +545,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Phase exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -585,9 +555,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Re exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -596,9 +565,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Reciprocal exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         #endregion Complex Numbers
 
@@ -611,9 +579,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arccos exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -622,9 +589,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arccot exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -633,9 +599,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arccsc exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -644,9 +609,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arcsec exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -655,9 +619,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arcsin exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -666,9 +629,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arctan exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -677,9 +639,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Cos exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -688,9 +649,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Cot exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -699,9 +659,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Csc exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -710,9 +669,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Sec exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -721,9 +679,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Sin exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -732,9 +689,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Tan exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         #endregion
 
@@ -747,9 +703,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arcosh exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -758,9 +713,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arcoth exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -769,9 +723,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arcsch exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -780,9 +733,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arsech exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -791,9 +743,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arsinh exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -802,9 +753,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Artanh exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -813,9 +763,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Cosh exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -824,9 +773,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Coth exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -835,9 +783,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Csch exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -846,9 +793,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Sech exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -857,9 +803,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Sinh exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -868,9 +813,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Tanh exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         #endregion Hyperbolic
 
@@ -883,9 +827,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Avg exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -894,9 +837,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Count exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -905,9 +847,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Max exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -916,9 +857,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Min exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -927,9 +867,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Product exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -938,9 +877,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Stdev exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -949,9 +887,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Stdevp exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -960,9 +897,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Sum exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -971,9 +907,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Var exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -982,9 +917,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Varp exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         #endregion Statistical
 
@@ -997,9 +931,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(And exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1008,9 +941,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Bool exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1019,9 +951,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Equality exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1030,9 +961,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Implication exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1041,9 +971,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(NAnd exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1052,9 +981,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(NOr exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1063,9 +991,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Not exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1074,9 +1001,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Or exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1085,9 +1011,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(XOr exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         #endregion Logical and Bitwise
 
@@ -1100,9 +1025,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(AddAssign exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1111,9 +1035,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(ConditionalAnd exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1122,9 +1045,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Dec exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1133,9 +1055,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(DivAssign exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1144,9 +1065,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Equal exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1155,9 +1075,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(For exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1166,9 +1085,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(GreaterOrEqual exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1177,9 +1095,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(GreaterThan exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1188,9 +1105,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(If exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1199,9 +1115,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Inc exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1210,9 +1125,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(LessOrEqual exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1221,9 +1135,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(LessThan exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1232,9 +1145,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(MulAssign exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1243,9 +1155,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(NotEqual exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1254,9 +1165,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(ConditionalOr exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1265,9 +1175,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(SubAssign exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1276,9 +1185,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         public virtual TResult Analyze(While exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1286,7 +1194,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual TResult Analyze(LeftShift exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1294,7 +1202,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual TResult Analyze(RightShift exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1302,7 +1210,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual TResult Analyze(LeftShiftAssign exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1310,7 +1218,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual TResult Analyze(RightShiftAssign exp)
-            => throw new NotSupportedException();
+            => Analyze(exp as IExpression);
 
         #endregion Programming
     }

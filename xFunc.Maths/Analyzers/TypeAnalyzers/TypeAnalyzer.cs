@@ -280,6 +280,15 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             };
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        [ExcludeFromCodeCoverage]
+        public virtual ResultTypes Analyze(IExpression exp)
+            => ResultTypes.Undefined;
+
         #region Standard
 
         /// <summary>

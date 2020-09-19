@@ -19,10 +19,13 @@ using System.Globalization;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Angles;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
+using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokenization;
 using static xFunc.Maths.Tokenization.TokenKind;
+using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Maths
 {
@@ -72,7 +75,7 @@ namespace xFunc.Maths
             {
                 var exp = Statement(ref tokenReader);
                 var token = tokenReader.GetCurrent();
-                if (exp == null || !tokenReader.IsEnd || !token.IsEmpty())
+                if (exp == null || !tokenReader.IsEnd || token.IsNotEmpty())
                     throw new ParseException(Resource.ErrorWhileParsingTree);
 
                 return exp;
@@ -107,7 +110,7 @@ namespace xFunc.Maths
                 var @operator = tokenReader.GetCurrent(IncrementOperator) ||
                                 tokenReader.GetCurrent(DecrementOperator);
 
-                if (!@operator.IsEmpty())
+                if (@operator.IsNotEmpty())
                 {
                     tokenReader.Commit();
 
@@ -139,7 +142,7 @@ namespace xFunc.Maths
                             tokenReader.GetCurrent(LeftShiftAssignOperator) ||
                             tokenReader.GetCurrent(RightShiftAssignOperator);
 
-            if (!@operator.IsEmpty())
+            if (@operator.IsNotEmpty())
             {
                 var right = Expression(ref tokenReader) ??
                             throw new ParseException(SecondOperand(ref @operator));
@@ -173,14 +176,14 @@ namespace xFunc.Maths
             }
 
             var @operator = tokenReader.GetCurrent(AssignOperator);
-            if (!@operator.IsEmpty())
+            if (@operator.IsNotEmpty())
             {
                 var right = Expression(ref tokenReader) ??
                             throw new ParseException(SecondOperand(ref @operator));
 
                 tokenReader.Commit();
 
-                return CreateAssign(left, right);
+                return new Define(left, right);
             }
 
             tokenReader.Rollback(scope);
@@ -209,7 +212,7 @@ namespace xFunc.Maths
             if (!tokenReader.Check(CloseParenthesisSymbol))
                 throw new ParseException(CloseParenthesis(ref def));
 
-            return CreateAssign(key, value);
+            return new Define(key, value);
         }
 
         private IExpression? Undef(ref TokenReader tokenReader)
@@ -227,7 +230,7 @@ namespace xFunc.Maths
             if (!tokenReader.Check(CloseParenthesisSymbol))
                 throw new ParseException(CloseParenthesis(ref undef));
 
-            return CreateUndef(key);
+            return new Undefine(key);
         }
 
         private IExpression? If(ref TokenReader tokenReader)
@@ -257,9 +260,9 @@ namespace xFunc.Maths
                 throw new ParseException(CloseParenthesis(ref @if));
 
             if (@else != null)
-                return CreateIf(condition, then, @else);
+                return new If(condition, then, @else);
 
-            return CreateIf(condition, then);
+            return new If(condition, then);
         }
 
         private IExpression? For(ref TokenReader tokenReader)
@@ -295,7 +298,7 @@ namespace xFunc.Maths
             if (!tokenReader.Check(CloseParenthesisSymbol))
                 throw new ParseException(CloseParenthesis(ref @for));
 
-            return CreateFor(body, init, condition, iter);
+            return new For(body, init, condition, iter);
         }
 
         private IExpression? While(ref TokenReader tokenReader)
@@ -319,7 +322,7 @@ namespace xFunc.Maths
             if (!tokenReader.Check(CloseParenthesisSymbol))
                 throw new ParseException(CloseParenthesis(ref @while));
 
-            return CreateWhile(body, condition);
+            return new While(body, condition);
         }
 
         private IExpression? FunctionDeclaration(ref TokenReader tokenReader)
@@ -327,7 +330,7 @@ namespace xFunc.Maths
             var scope = tokenReader.CreateScope();
 
             var id = tokenReader.GetCurrent(Id);
-            if (!id.IsEmpty() && tokenReader.Check(OpenParenthesisSymbol))
+            if (id.IsNotEmpty() && tokenReader.Check(OpenParenthesisSymbol))
             {
                 var parameterList = new List<IExpression>();
 
@@ -398,7 +401,7 @@ namespace xFunc.Maths
 
             tokenReader.Commit();
 
-            return CreateIf(condition, then, @else);
+            return new If(condition, then, @else);
         }
 
         private IExpression? ConditionalOperator(ref TokenReader tokenReader)
@@ -562,12 +565,12 @@ namespace xFunc.Maths
                                  Vector(ref tokenReader);
                 if (rightUnary != null)
                 {
-                    if (!@operator.IsEmpty())
-                        number = CreateUnaryMinus(number);
+                    if (@operator.IsNotEmpty())
+                        number = new UnaryMinus(number);
 
                     tokenReader.Commit();
 
-                    return CreateMultiplication(number, rightUnary);
+                    return new Mul(number, rightUnary);
                 }
             }
 
@@ -578,8 +581,7 @@ namespace xFunc.Maths
 
         private IExpression? MulImplicitExponentiation(ref TokenReader tokenReader)
         {
-            var left = Function(ref tokenReader) ??
-                       Variable(ref tokenReader);
+            var left = FunctionOrVariable(ref tokenReader);
             if (left == null)
                 return null;
 
@@ -590,7 +592,7 @@ namespace xFunc.Maths
             var right = Exponentiation(ref tokenReader) ??
                         throw new ParseException(Resource.ExponentParseException);
 
-            return CreateExponentiation(left, right);
+            return new Pow(left, right);
         }
 
         private IExpression? LeftUnary(ref TokenReader tokenReader)
@@ -605,9 +607,9 @@ namespace xFunc.Maths
                 return operand;
 
             if (token.Is(MinusOperator))
-                return CreateUnaryMinus(operand);
+                return new UnaryMinus(operand);
 
-            return CreateNot(operand);
+            return new Not(operand);
         }
 
         private IExpression? Exponentiation(ref TokenReader tokenReader)
@@ -623,7 +625,7 @@ namespace xFunc.Maths
             var right = LeftUnary(ref tokenReader) ??
                         throw new ParseException(Resource.ExponentParseException);
 
-            return CreateExponentiation(left, right);
+            return new Pow(left, right);
         }
 
         private IExpression? RightUnary(ref TokenReader tokenReader)
@@ -634,11 +636,11 @@ namespace xFunc.Maths
             if (number != null)
             {
                 var @operator = tokenReader.GetCurrent(FactorialOperator);
-                if (!@operator.IsEmpty())
+                if (@operator.IsNotEmpty())
                 {
                     tokenReader.Commit();
 
-                    return CreateFactorial(number);
+                    return new Fact(number);
                 }
             }
 
@@ -651,8 +653,7 @@ namespace xFunc.Maths
         {
             return ComplexNumber(ref tokenReader) ??
                    Number(ref tokenReader) ??
-                   Function(ref tokenReader) ??
-                   Variable(ref tokenReader) ??
+                   FunctionOrVariable(ref tokenReader) ??
                    Boolean(ref tokenReader) ??
                    ParenthesesExpression(ref tokenReader) ??
                    Matrix(ref tokenReader) ??
@@ -673,7 +674,7 @@ namespace xFunc.Maths
             return exp;
         }
 
-        private IExpression? Function(ref TokenReader tokenReader)
+        private IExpression? FunctionOrVariable(ref TokenReader tokenReader)
         {
             var function = tokenReader.GetCurrent(Id);
             if (function.IsEmpty())
@@ -720,15 +721,15 @@ namespace xFunc.Maths
                 return null;
 
             if (tokenReader.Check(DegreeSymbol) || tokenReader.Check(DegreeKeyword))
-                return CreateAngleNumber(number, AngleUnit.Degree);
+                return AngleValue.Degree(number.NumberValue).AsExpression();
 
             if (tokenReader.Check(RadianKeyword))
-                return CreateAngleNumber(number, AngleUnit.Radian);
+                return AngleValue.Radian(number.NumberValue).AsExpression();
 
             if (tokenReader.Check(GradianKeyword))
-                return CreateAngleNumber(number, AngleUnit.Gradian);
+                return AngleValue.Gradian(number.NumberValue).AsExpression();
 
-            return CreateNumber(number);
+            return new Number(number.NumberValue);
         }
 
         private IExpression? ComplexNumber(ref TokenReader tokenReader)
@@ -739,7 +740,7 @@ namespace xFunc.Maths
                                 tokenReader.GetCurrent(MinusOperator);
 
             var magnitude = tokenReader.GetCurrent(TokenKind.Number);
-            if (!magnitude.IsEmpty())
+            if (magnitude.IsNotEmpty())
             {
                 var hasAngleSymbol = tokenReader.Check(AngleSymbol);
                 if (hasAngleSymbol)
@@ -810,7 +811,7 @@ namespace xFunc.Maths
             if (!tokenReader.Check(CloseBraceSymbol))
                 throw new ParseException(Resource.VectorCloseBraceParseException);
 
-            return CreateVector(parameterList);
+            return new Vector(parameterList);
         }
 
         private IExpression? Matrix(ref TokenReader tokenReader)
@@ -839,7 +840,7 @@ namespace xFunc.Maths
 
                     tokenReader.Commit();
 
-                    return CreateMatrix(vectors);
+                    return new Matrix(vectors);
                 }
             }
 

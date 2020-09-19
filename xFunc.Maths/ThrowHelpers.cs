@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace xFunc.Maths
 {
@@ -22,6 +23,14 @@ namespace xFunc.Maths
     /// </summary>
     internal static class ThrowHelpers
     {
+        /// <summary>
+        /// Throws an <see name="TokenizeException"/>.
+        /// </summary>
+        /// <param name="symbol">The unsupported symbol.</param>
+        [DoesNotReturn]
+        internal static void NotSupportedSymbol(char symbol)
+            => throw new TokenizeException(symbol);
+
         /// <summary>
         /// Creates an <see name="ArgumentNullException"/>.
         /// </summary>

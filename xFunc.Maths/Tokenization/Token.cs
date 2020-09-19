@@ -93,7 +93,7 @@ namespace xFunc.Maths.Tokenization
         /// <c>true</c> if the specified token is not empty token; otherwise, <c>false</c>.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool operator true(Token token) => !token.IsEmpty();
+        public static bool operator true(Token token) => token.IsNotEmpty();
 
         /// <summary>
         /// Determines whether the specified token is empty.
@@ -150,6 +150,15 @@ namespace xFunc.Maths.Tokenization
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsEmpty() => Is(TokenKind.Empty);
+
+        /// <summary>
+        /// Determines whether the current token is not empty token.
+        /// </summary>
+        /// <returns>
+        /// <c>true</c> if the current token is not empty token; otherwise, <c>false</c>.
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool IsNotEmpty() => !Is(TokenKind.Empty);
 
         /// <summary>
         /// Determines whether the current token is <c>Id</c> token.

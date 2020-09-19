@@ -16,7 +16,6 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
-using System.Runtime.CompilerServices;
 using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Tokenization
@@ -62,7 +61,7 @@ namespace xFunc.Maths.Tokenization
                              CreateSymbol(ref function);
 
                 if (!result)
-                    throw new TokenizeException(string.Format(CultureInfo.InvariantCulture, Resource.NotSupportedSymbol, function[0]));
+                    ThrowHelpers.NotSupportedSymbol(function[0]);
 
                 return true;
             }
@@ -70,10 +69,6 @@ namespace xFunc.Maths.Tokenization
             current = default;
             return false;
         }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private bool Compare(ReadOnlySpan<char> id, string str)
-            => id.Equals(str, StringComparison.OrdinalIgnoreCase);
 
         /// <summary>
         /// Gets the element in the collection at the current position of the enumerator.

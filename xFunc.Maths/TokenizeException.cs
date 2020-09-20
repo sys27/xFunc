@@ -14,7 +14,10 @@
 // limitations under the License.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Runtime.Serialization;
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths
 {
@@ -22,6 +25,7 @@ namespace xFunc.Maths
     /// The exception that is thrown in the process of tokenization.
     /// </summary>
     /// <seealso cref="Exception" />
+    [ExcludeFromCodeCoverage]
     [Serializable]
     public class TokenizeException : Exception
     {
@@ -29,6 +33,15 @@ namespace xFunc.Maths
         /// Initializes a new instance of the <see cref="TokenizeException"/> class.
         /// </summary>
         public TokenizeException()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TokenizeException"/> class.
+        /// </summary>
+        /// <param name="symbol">The unsupported symbol.</param>
+        public TokenizeException(char symbol)
+            : this(string.Format(CultureInfo.InvariantCulture, Resource.NotSupportedSymbol, symbol))
         {
         }
 

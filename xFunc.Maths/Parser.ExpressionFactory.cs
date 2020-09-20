@@ -28,7 +28,6 @@ using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Tokenization;
 using static xFunc.Maths.Tokenization.TokenKind;
-using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Maths
 {
@@ -169,14 +168,6 @@ namespace xFunc.Maths
             };
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private IExpression CreateUndef(IExpression first)
-            => new Undefine(first);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private IExpression CreateAssign(IExpression first, IExpression second)
-            => new Define(first, second);
-
         private IExpression CreateBinaryAssign(
             in Token token,
             Variable first,
@@ -298,18 +289,6 @@ namespace xFunc.Maths
             return new Mod(first, second);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private IExpression CreateNot(IExpression argument)
-            => new Not(argument);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private IExpression CreateExponentiation(IExpression first, IExpression second)
-            => new Pow(first, second);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private IExpression CreateFactorial(IExpression first)
-            => new Fact(first);
-
         private IExpression CreateBoolean(in Token token)
         {
             if (token.Is(TrueKeyword))
@@ -319,14 +298,6 @@ namespace xFunc.Maths
 
             return Bool.False;
         }
-
-        // TODO: positional cache
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private IExpression CreateNumber(in Token numberToken)
-            => new Number(numberToken.NumberValue);
-
-        private IExpression CreateAngleNumber(in Token numberToken, AngleUnit unit)
-            => new AngleValue(numberToken.NumberValue, unit).AsExpression();
 
         private IExpression CreateComplexNumber(
             in Token magnitudeSign,
@@ -351,41 +322,5 @@ namespace xFunc.Maths
 
             return new Variable(token.StringValue);
         }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private Vector CreateVector(IList<IExpression> arguments)
-            => new Vector(arguments);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private Matrix CreateMatrix(IList<Vector> arguments)
-            => new Matrix(arguments);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private IExpression CreateUnaryMinus(IExpression operand)
-            => new UnaryMinus(operand);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private IExpression CreateMultiplication(IExpression left, IExpression right)
-            => new Mul(left, right);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private IExpression CreateIf(IExpression condition, IExpression then)
-            => new If(condition, then);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private IExpression CreateIf(IExpression condition, IExpression then, IExpression @else)
-            => new If(condition, then, @else);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private IExpression CreateFor(
-            IExpression body,
-            IExpression init,
-            IExpression cond,
-            IExpression iter)
-            => new For(body, init, cond, iter);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private IExpression CreateWhile(IExpression body, IExpression condition)
-            => new While(body, condition);
     }
 }

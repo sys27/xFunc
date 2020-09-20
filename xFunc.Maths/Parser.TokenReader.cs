@@ -55,9 +55,7 @@ namespace xFunc.Maths
             }
 
             public void Dispose()
-            {
-                ArrayPool<Token>.Shared.Return(buffer);
-            }
+                => ArrayPool<Token>.Shared.Return(buffer);
 
             private void EnsureEnoughSpace()
             {
@@ -110,15 +108,9 @@ namespace xFunc.Maths
                 readIndex = index;
             }
 
-            private void Flush()
-            {
-                readIndex = writeIndex = -1;
-            }
+            private void Flush() => readIndex = writeIndex = -1;
 
-            private void AdvanceToNextPosition()
-            {
-                readIndex++;
-            }
+            private void AdvanceToNextPosition() => readIndex++;
 
             public Scope CreateScope()
             {
@@ -127,10 +119,7 @@ namespace xFunc.Maths
                 return new Scope(ref this);
             }
 
-            public void Rollback(Scope scope)
-            {
-                scope.Rollback(ref this);
-            }
+            public void Rollback(Scope scope) => scope.Rollback(ref this);
 
             public void Commit()
             {
@@ -157,7 +146,7 @@ namespace xFunc.Maths
                 return Token.Empty;
             }
 
-            public bool Check(TokenKind kind) => !GetCurrent(kind).IsEmpty();
+            public bool Check(TokenKind kind) => GetCurrent(kind).IsNotEmpty();
 
             public bool IsEnd => enumerableEnded;
 

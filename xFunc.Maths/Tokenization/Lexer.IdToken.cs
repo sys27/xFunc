@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Runtime.CompilerServices;
 using static xFunc.Maths.Tokenization.TokenKind;
 
 namespace xFunc.Maths.Tokenization
@@ -84,5 +85,9 @@ namespace xFunc.Maths.Tokenization
 
             return true;
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private bool Compare(ReadOnlySpan<char> id, string str)
+            => id.Equals(str, StringComparison.OrdinalIgnoreCase);
     }
 }

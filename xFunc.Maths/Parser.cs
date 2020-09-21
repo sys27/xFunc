@@ -823,12 +823,10 @@ namespace xFunc.Maths
 
             if (tokenReader.Check(OpenBraceSymbol))
             {
-                var vectors = new List<Vector>();
-
                 var exp = Vector(ref tokenReader);
                 if (exp != null)
                 {
-                    vectors.Add(exp);
+                    var vectors = new List<Vector> { exp };
 
                     while (tokenReader.Check(CommaSymbol))
                     {

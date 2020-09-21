@@ -87,183 +87,9 @@ namespace xFunc.Maths
         }
 
         private IExpression? Statement(ref TokenReader tokenReader)
-        {
-            // TODO: to expressions?
-            return UnaryAssign(ref tokenReader) ??
-                   BinaryAssign(ref tokenReader) ??
-                   Assign(ref tokenReader) ??
-                   Def(ref tokenReader) ??
-                   Undef(ref tokenReader) ??
-                   If(ref tokenReader) ??
-                   For(ref tokenReader) ??
-                   While(ref tokenReader) ??
-                   Expression(ref tokenReader);
-        }
-
-        private IExpression? UnaryAssign(ref TokenReader tokenReader)
-        {
-            var scope = tokenReader.CreateScope();
-
-            var left = Variable(ref tokenReader);
-            if (left != null)
-            {
-                var @operator = tokenReader.GetCurrent(IncrementOperator) ||
-                                tokenReader.GetCurrent(DecrementOperator);
-
-                if (@operator.IsNotEmpty())
-                {
-                    tokenReader.Commit();
-
-                    return CreateUnaryAssign(@operator, left);
-                }
-            }
-
-            tokenReader.Rollback(scope);
-
-            return null;
-        }
-
-        private IExpression? BinaryAssign(ref TokenReader tokenReader)
-        {
-            var scope = tokenReader.CreateScope();
-
-            var left = Variable(ref tokenReader);
-            if (left == null)
-            {
-                tokenReader.Rollback(scope);
-
-                return null;
-            }
-
-            var @operator = tokenReader.GetCurrent(MulAssignOperator) ||
-                            tokenReader.GetCurrent(DivAssignOperator) ||
-                            tokenReader.GetCurrent(AddAssignOperator) ||
-                            tokenReader.GetCurrent(SubAssignOperator) ||
-                            tokenReader.GetCurrent(LeftShiftAssignOperator) ||
-                            tokenReader.GetCurrent(RightShiftAssignOperator);
-
-            if (@operator.IsNotEmpty())
-            {
-                var right = Expression(ref tokenReader) ??
-                            throw new ParseException(SecondOperand(ref @operator));
-
-                tokenReader.Commit();
-
-                return CreateBinaryAssign(@operator, left, right);
-            }
-
-            tokenReader.Rollback(scope);
-
-            return null;
-        }
-
-        private IExpression? AssignmentKey(ref TokenReader tokenReader)
-        {
-            return FunctionDeclaration(ref tokenReader) ??
-                   Variable(ref tokenReader);
-        }
-
-        private IExpression? Assign(ref TokenReader tokenReader)
-        {
-            var scope = tokenReader.CreateScope();
-
-            var left = AssignmentKey(ref tokenReader);
-            if (left == null)
-            {
-                tokenReader.Rollback(scope);
-
-                return null;
-            }
-
-            var @operator = tokenReader.GetCurrent(AssignOperator);
-            if (@operator.IsNotEmpty())
-            {
-                var right = Expression(ref tokenReader) ??
-                            throw new ParseException(SecondOperand(ref @operator));
-
-                tokenReader.Commit();
-
-                return new Define(left, right);
-            }
-
-            tokenReader.Rollback(scope);
-
-            return null;
-        }
-
-        private IExpression? Def(ref TokenReader tokenReader)
-        {
-            var def = tokenReader.GetCurrent(DefineKeyword);
-            if (def.IsEmpty())
-                return null;
-
-            if (!tokenReader.Check(OpenParenthesisSymbol))
-                throw new ParseException(OpenParenthesis(ref def));
-
-            var key = AssignmentKey(ref tokenReader) ??
-                      throw new ParseException(Resource.AssignKeyParseException);
-
-            if (!tokenReader.Check(CommaSymbol))
-                throw new ParseException(CommaMissing(key));
-
-            var value = Expression(ref tokenReader) ??
-                        throw new ParseException(Resource.DefValueParseException);
-
-            if (!tokenReader.Check(CloseParenthesisSymbol))
-                throw new ParseException(CloseParenthesis(ref def));
-
-            return new Define(key, value);
-        }
-
-        private IExpression? Undef(ref TokenReader tokenReader)
-        {
-            var undef = tokenReader.GetCurrent(UndefineKeyword);
-            if (undef.IsEmpty())
-                return null;
-
-            if (!tokenReader.Check(OpenParenthesisSymbol))
-                throw new ParseException(OpenParenthesis(ref undef));
-
-            var key = AssignmentKey(ref tokenReader) ??
-                      throw new ParseException(Resource.AssignKeyParseException);
-
-            if (!tokenReader.Check(CloseParenthesisSymbol))
-                throw new ParseException(CloseParenthesis(ref undef));
-
-            return new Undefine(key);
-        }
-
-        private IExpression? If(ref TokenReader tokenReader)
-        {
-            var @if = tokenReader.GetCurrent(IfKeyword);
-            if (@if.IsEmpty())
-                return null;
-
-            if (!tokenReader.Check(OpenParenthesisSymbol))
-                throw new ParseException(OpenParenthesis(ref @if));
-
-            var condition = ConditionalOperator(ref tokenReader) ??
-                            throw new ParseException(Resource.IfConditionParseException);
-
-            if (!tokenReader.Check(CommaSymbol))
-                throw new ParseException(CommaMissing(condition));
-
-            var then = Expression(ref tokenReader) ??
-                       throw new ParseException(Resource.IfThenParseException);
-
-            IExpression? @else = null;
-            if (tokenReader.Check(CommaSymbol))
-                @else = Expression(ref tokenReader) ??
-                        throw new ParseException(Resource.IfElseParseException);
-
-            if (!tokenReader.Check(CloseParenthesisSymbol))
-                throw new ParseException(CloseParenthesis(ref @if));
-
-            if (@else != null)
-                return new If(condition, then, @else);
-
-            return new If(condition, then);
-        }
+            => For(ref tokenReader) ??
+               While(ref tokenReader) ??
+               Expression(ref tokenReader);
 
         private IExpression? For(ref TokenReader tokenReader)
         {
@@ -280,7 +106,7 @@ namespace xFunc.Maths
             if (!tokenReader.Check(CommaSymbol))
                 throw new ParseException(CommaMissing(body));
 
-            var init = Statement(ref tokenReader) ??
+            var init = Expression(ref tokenReader) ??
                        throw new ParseException(Resource.ForInitParseException);
 
             if (!tokenReader.Check(CommaSymbol))
@@ -292,7 +118,7 @@ namespace xFunc.Maths
             if (!tokenReader.Check(CommaSymbol))
                 throw new ParseException(CommaMissing(condition));
 
-            var iter = Statement(ref tokenReader) ??
+            var iter = Expression(ref tokenReader) ??
                        throw new ParseException(Resource.ForIterParseException);
 
             if (!tokenReader.Check(CloseParenthesisSymbol))
@@ -367,8 +193,175 @@ namespace xFunc.Maths
         }
 
         private IExpression? Expression(ref TokenReader tokenReader)
+            => UnaryAssign(ref tokenReader) ??
+               BinaryAssign(ref tokenReader) ??
+               Assign(ref tokenReader) ??
+               Def(ref tokenReader) ??
+               Undef(ref tokenReader) ??
+               If(ref tokenReader) ??
+               Ternary(ref tokenReader);
+
+        private IExpression? AssignmentKey(ref TokenReader tokenReader)
+            => FunctionDeclaration(ref tokenReader) ??
+               Variable(ref tokenReader);
+
+        private IExpression? Assign(ref TokenReader tokenReader)
         {
-            return Ternary(ref tokenReader);
+            var scope = tokenReader.CreateScope();
+
+            var left = AssignmentKey(ref tokenReader);
+            if (left == null)
+            {
+                tokenReader.Rollback(scope);
+
+                return null;
+            }
+
+            var @operator = tokenReader.GetCurrent(AssignOperator);
+            if (@operator.IsNotEmpty())
+            {
+                var right = Expression(ref tokenReader) ??
+                            throw new ParseException(SecondOperand(ref @operator));
+
+                tokenReader.Commit();
+
+                return new Define(left, right);
+            }
+
+            tokenReader.Rollback(scope);
+
+            return null;
+        }
+
+        private IExpression? Def(ref TokenReader tokenReader)
+        {
+            var def = tokenReader.GetCurrent(DefineKeyword);
+            if (def.IsEmpty())
+                return null;
+
+            if (!tokenReader.Check(OpenParenthesisSymbol))
+                throw new ParseException(OpenParenthesis(ref def));
+
+            var key = AssignmentKey(ref tokenReader) ??
+                      throw new ParseException(Resource.AssignKeyParseException);
+
+            if (!tokenReader.Check(CommaSymbol))
+                throw new ParseException(CommaMissing(key));
+
+            var value = Expression(ref tokenReader) ??
+                        throw new ParseException(Resource.DefValueParseException);
+
+            if (!tokenReader.Check(CloseParenthesisSymbol))
+                throw new ParseException(CloseParenthesis(ref def));
+
+            return new Define(key, value);
+        }
+
+        private IExpression? Undef(ref TokenReader tokenReader)
+        {
+            var undef = tokenReader.GetCurrent(UndefineKeyword);
+            if (undef.IsEmpty())
+                return null;
+
+            if (!tokenReader.Check(OpenParenthesisSymbol))
+                throw new ParseException(OpenParenthesis(ref undef));
+
+            var key = AssignmentKey(ref tokenReader) ??
+                      throw new ParseException(Resource.AssignKeyParseException);
+
+            if (!tokenReader.Check(CloseParenthesisSymbol))
+                throw new ParseException(CloseParenthesis(ref undef));
+
+            return new Undefine(key);
+        }
+
+        private IExpression? UnaryAssign(ref TokenReader tokenReader)
+        {
+            var scope = tokenReader.CreateScope();
+
+            var left = Variable(ref tokenReader);
+            if (left != null)
+            {
+                var @operator = tokenReader.GetCurrent(IncrementOperator) ||
+                                tokenReader.GetCurrent(DecrementOperator);
+
+                if (@operator.IsNotEmpty())
+                {
+                    tokenReader.Commit();
+
+                    return CreateUnaryAssign(@operator, left);
+                }
+            }
+
+            tokenReader.Rollback(scope);
+
+            return null;
+        }
+
+        private IExpression? BinaryAssign(ref TokenReader tokenReader)
+        {
+            var scope = tokenReader.CreateScope();
+
+            var left = Variable(ref tokenReader);
+            if (left == null)
+            {
+                tokenReader.Rollback(scope);
+
+                return null;
+            }
+
+            var @operator = tokenReader.GetCurrent(MulAssignOperator) ||
+                            tokenReader.GetCurrent(DivAssignOperator) ||
+                            tokenReader.GetCurrent(AddAssignOperator) ||
+                            tokenReader.GetCurrent(SubAssignOperator) ||
+                            tokenReader.GetCurrent(LeftShiftAssignOperator) ||
+                            tokenReader.GetCurrent(RightShiftAssignOperator);
+
+            if (@operator.IsNotEmpty())
+            {
+                var right = Expression(ref tokenReader) ??
+                            throw new ParseException(SecondOperand(ref @operator));
+
+                tokenReader.Commit();
+
+                return CreateBinaryAssign(@operator, left, right);
+            }
+
+            tokenReader.Rollback(scope);
+
+            return null;
+        }
+
+        private IExpression? If(ref TokenReader tokenReader)
+        {
+            var @if = tokenReader.GetCurrent(IfKeyword);
+            if (@if.IsEmpty())
+                return null;
+
+            if (!tokenReader.Check(OpenParenthesisSymbol))
+                throw new ParseException(OpenParenthesis(ref @if));
+
+            var condition = ConditionalOperator(ref tokenReader) ??
+                            throw new ParseException(Resource.IfConditionParseException);
+
+            if (!tokenReader.Check(CommaSymbol))
+                throw new ParseException(CommaMissing(condition));
+
+            var then = Expression(ref tokenReader) ??
+                       throw new ParseException(Resource.IfThenParseException);
+
+            IExpression? @else = null;
+            if (tokenReader.Check(CommaSymbol))
+                @else = Expression(ref tokenReader) ??
+                        throw new ParseException(Resource.IfElseParseException);
+
+            if (!tokenReader.Check(CloseParenthesisSymbol))
+                throw new ParseException(CloseParenthesis(ref @if));
+
+            if (@else != null)
+                return new If(condition, then, @else);
+
+            return new If(condition, then);
         }
 
         private IExpression? Ternary(ref TokenReader tokenReader)

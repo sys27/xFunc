@@ -388,7 +388,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Define exp)
-            => CheckArgument(exp, ResultTypes.String);
+            => CheckArgument(exp, ResultTypes.Undefined);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1001,7 +1001,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Undefine exp)
-            => CheckArgument(exp, ResultTypes.String);
+            => CheckArgument(exp, ResultTypes.Undefined);
 
         /// <summary>
         /// Analyzes the specified expression.

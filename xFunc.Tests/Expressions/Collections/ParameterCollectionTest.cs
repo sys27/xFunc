@@ -227,6 +227,15 @@ namespace xFunc.Tests.Expressions.Collections
         }
 
         [Fact]
+        public void EmptyCollectionRemove()
+        {
+            var parameters = new ParameterCollection(false);
+            var param = new Parameter("a", 1);
+
+            Assert.Throws<KeyNotFoundException>(() => parameters.Remove(param));
+        }
+
+        [Fact]
         public void OverrideRemoveTest()
         {
             var parameters = new ParameterCollection(false)

@@ -45,18 +45,6 @@ namespace xFunc.Maths.Resources {
             }
         }
         
-        internal static string AssignFunction {
-            get {
-                return ResourceManager.GetString("AssignFunction", resourceCulture);
-            }
-        }
-        
-        internal static string AssignVariable {
-            get {
-                return ResourceManager.GetString("AssignVariable", resourceCulture);
-            }
-        }
-        
         internal static string ConstError {
             get {
                 return ResourceManager.GetString("ConstError", resourceCulture);
@@ -108,18 +96,6 @@ namespace xFunc.Maths.Resources {
         internal static string ReadOnlyError {
             get {
                 return ResourceManager.GetString("ReadOnlyError", resourceCulture);
-            }
-        }
-        
-        internal static string UndefineFunction {
-            get {
-                return ResourceManager.GetString("UndefineFunction", resourceCulture);
-            }
-        }
-        
-        internal static string UndefineVariable {
-            get {
-                return ResourceManager.GetString("UndefineVariable", resourceCulture);
             }
         }
         

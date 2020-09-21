@@ -96,15 +96,9 @@ namespace xFunc.Maths.Expressions
                 throw new ArgumentNullException(nameof(parameters));
 
             if (key is Variable variable)
-            {
-                parameters.Variables.Remove(variable.Name);
+                return parameters.Variables.Remove(variable.Name);
 
-                return string.Format(CultureInfo.InvariantCulture, Resource.UndefineVariable, key);
-            }
-
-            parameters.Functions.Remove((UserFunction)key);
-
-            return string.Format(CultureInfo.InvariantCulture, Resource.UndefineFunction, key);
+            return parameters.Functions.Remove((UserFunction)key);
         }
 
         /// <summary>

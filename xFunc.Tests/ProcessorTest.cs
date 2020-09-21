@@ -90,16 +90,14 @@ namespace xFunc.Tests
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
-            var strExp = "x := 1";
+            var strExp = "tohex(1)";
 
             simplifier.Setup(s => s.Analyze(It.IsAny<Define>())).Returns<Define>(e => e);
 
-            var processor = new Processor(
-                simplifier.Object,
-                differentiator.Object);
+            var processor = new Processor(simplifier.Object, differentiator.Object);
             var result = processor.Solve<StringResult>(strExp);
 
-            Assert.Equal("The value '1' was assigned to the variable 'x'.", result.Result);
+            Assert.Equal("0x1", result.Result);
         }
 
         [Fact]

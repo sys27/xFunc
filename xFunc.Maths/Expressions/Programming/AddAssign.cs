@@ -52,12 +52,7 @@ namespace xFunc.Maths.Expressions.Programming
             {
                 var rightResult = Value.Execute(parameters);
                 if (rightResult is double rightValue)
-                {
-                    var newValue = value + rightValue;
-                    parameters.Variables[Variable.Name] = newValue;
-
-                    return newValue;
-                }
+                    return parameters.Variables[Variable.Name] = value + rightValue;
 
                 throw new ResultIsNotSupportedException(this, rightResult);
             }

@@ -112,7 +112,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Define(Variable.X, new Number(-2));
 
-            Test(exp, ResultTypes.String);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -655,7 +655,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestUndefine()
         {
-            Test(new Undefine(Variable.X), ResultTypes.String);
+            Test(new Undefine(Variable.X), ResultTypes.Undefined);
         }
 
         [Fact]

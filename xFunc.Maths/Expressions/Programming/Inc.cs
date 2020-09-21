@@ -47,15 +47,12 @@ namespace xFunc.Maths.Expressions.Programming
                 throw new ArgumentNullException(nameof(parameters));
 
             var result = Variable.Execute(parameters);
-            if (result is double value)
+
+            return result switch
             {
-                var newValue = value + 1;
-                parameters.Variables[Variable.Name] = newValue;
-
-                return newValue;
-            }
-
-            throw new ResultIsNotSupportedException(this, result);
+                double value => parameters.Variables[Variable.Name] = ++value,
+                _ => throw new ResultIsNotSupportedException(this, result),
+            };
         }
 
         /// <summary>

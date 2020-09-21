@@ -114,7 +114,7 @@ namespace xFunc.Tests.Expressions
 
             Assert.False(functions.ContainsKey(key1));
             Assert.True(functions.ContainsKey(key2));
-            Assert.Equal("The 'f()' function is removed.", result);
+            Assert.Equal(Number.One, result);
         }
 
         [Fact]
@@ -134,7 +134,7 @@ namespace xFunc.Tests.Expressions
 
             Assert.True(functions.ContainsKey(key1));
             Assert.False(functions.ContainsKey(key2));
-            Assert.Equal("The 'f(x)' function is removed.", result);
+            Assert.Equal(Number.Two, result);
         }
 
         [Fact]

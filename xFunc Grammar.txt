@@ -1,14 +1,12 @@
 // It's just a reference grammar for xFunc (The implementaion is not completely equal to grammar).
 
-statement = unaryAssign 
-          / binaryAssign
-          / assign
-          / def
-          / undef
-          / if
-          / for
+statement = for
           / while
           / exp
+
+if = 'if' '(' conditional ',' exp (',' exp)* ')'
+for = 'for' '(' statement ',' exp ',' conditional ',' exp ')'
+while = 'while' '(' exp ',' conditional ')'
 
 unaryAssign = variable ('++' / '--')
 binaryAssign = variable ('+=' / '-=' / '*=' / '/=' / '<<=' / '>>=') exp
@@ -18,11 +16,13 @@ assign = assignmentKey ':=' exp
 def = ('def' / 'define') '(' assignmentKey ',' exp ')'
 undef = ('undef' / 'undefine') '(' assignmentKey ')'
 
-if = 'if' '(' conditional ',' exp (',' exp)* ')'
-for = 'for' '(' statement ',' exp ',' conditional ',' statement ')'
-while = 'while' '(' exp ',' conditional ')'
-
-exp = ternary 
+exp = unaryAssign 
+    / binaryAssign
+    / assign
+    / def
+    / undef
+    / if
+    / ternary 
 
 ternary = conditional ('?' exp ':' exp)*
 

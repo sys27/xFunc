@@ -211,31 +211,39 @@ namespace xFunc.Maths.Expressions.Collections
         /// Removes the specified element from this object.
         /// </summary>
         /// <param name="param">The element.</param>
+        /// <returns>The value of deleted parameter.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="param"/> is null.</exception>
         /// <exception cref="ParameterIsReadOnlyException">The variable is read only.</exception>
-        public void Remove(Parameter param)
+        public object Remove(Parameter param)
         {
             if (param == null)
                 throw new ArgumentNullException(nameof(param));
             if (param.Type == ParameterType.Constant)
                 throw new ArgumentException(Resource.ConstError);
 
-            collection.Remove(param.Key);
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, param));
+            if (collection.Remove(param.Key, out var value))
+            {
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, param));
+
+                return value.Value;
+            }
+
+            throw new KeyNotFoundException(string.Format(CultureInfo.InvariantCulture, Resource.VariableNotFoundExceptionError, param.Key));
         }
 
         /// <summary>
         /// Removes the specified element from this object.
         /// </summary>
         /// <param name="key">The name of variable.</param>
+        /// <returns>The value of deleted parameter.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="key" /> is null.</exception>
         /// <exception cref="ParameterIsReadOnlyException">The variable is read only.</exception>
-        public void Remove(string key)
+        public object Remove(string key)
         {
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentNullException(nameof(key));
 
-            Remove(GetParameterByKey(key));
+            return Remove(GetParameterByKey(key));
         }
 
         /// <summary>

@@ -103,15 +103,9 @@ namespace xFunc.Maths.Expressions
                 throw new ArgumentNullException(nameof(parameters));
 
             if (key is Variable variable)
-            {
-                parameters.Variables[variable.Name] = value.Execute(parameters);
+                return parameters.Variables[variable.Name] = value.Execute(parameters);
 
-                return string.Format(CultureInfo.InvariantCulture, Resource.AssignVariable, key, value);
-            }
-
-            parameters.Functions[(UserFunction)key] = value;
-
-            return string.Format(CultureInfo.InvariantCulture, Resource.AssignFunction, key, value);
+            return parameters.Functions[(UserFunction)key] = value;
         }
 
         /// <summary>

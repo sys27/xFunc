@@ -97,10 +97,17 @@ namespace xFunc.Maths.Expressions.Collections
         /// Removes the specified key.
         /// </summary>
         /// <param name="key">The key.</param>
-        public new void Remove(UserFunction key)
+        /// <returns>The function associated with <paramref name="key"/>.</returns>
+        public new IExpression Remove(UserFunction key)
         {
-            if (base.Remove(key))
+            if (Remove(key, out var func))
+            {
                 OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, key));
+
+                return func;
+            }
+
+            throw new KeyNotFoundException(string.Format(CultureInfo.InvariantCulture, Resource.FunctionNotFoundExceptionError, key));
         }
 
         /// <summary>

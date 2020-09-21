@@ -39,6 +39,20 @@ namespace xFunc.Tests.Expressions.Programming
         }
 
         [Fact]
+        public void ExecuteAsExpTest()
+        {
+            var exp = new Add(Number.One, new LeftShiftAssign(Variable.X, new Number(10)));
+            var parameters = new ParameterCollection
+            {
+                { "x", 1.0 }
+            };
+            var actual = exp.Execute(parameters);
+
+            Assert.Equal(1024.0, parameters["x"]);
+            Assert.Equal(1025.0, actual);
+        }
+
+        [Fact]
         public void ExecuteNullParamsTest()
         {
             var exp = new LeftShiftAssign(Variable.X, new Number(10));

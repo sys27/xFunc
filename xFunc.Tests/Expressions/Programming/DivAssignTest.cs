@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System;
-using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -35,6 +34,20 @@ namespace xFunc.Tests.Expressions.Programming
 
             Assert.Equal(expected, result);
             Assert.Equal(expected, parameters["x"]);
+        }
+
+        [Fact]
+        public void DivAssignAsExpTest()
+        {
+            var parameters = new ParameterCollection
+            {
+                { "x", 10.0 }
+            };
+            var add = new Add(Number.One, new DivAssign(Variable.X, Number.Two));
+            var result = add.Execute(parameters);
+
+            Assert.Equal(6.0, result);
+            Assert.Equal(5.0, parameters["x"]);
         }
 
         [Fact]

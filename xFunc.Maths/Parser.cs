@@ -158,12 +158,12 @@ namespace xFunc.Maths
             var id = tokenReader.GetCurrent(Id);
             if (id.IsNotEmpty() && tokenReader.Check(OpenParenthesisSymbol))
             {
-                var parameterList = new List<IExpression>();
+                IList<IExpression>? parameterList = null;
 
                 var exp = Variable(ref tokenReader);
                 if (exp != null)
                 {
-                    parameterList.Add(exp);
+                    parameterList = new List<IExpression> { exp };
 
                     while (tokenReader.Check(CommaSymbol))
                     {
@@ -183,6 +183,9 @@ namespace xFunc.Maths
                 {
                     tokenReader.Commit();
 
+                    if (parameterList == null)
+                        parameterList = Array.Empty<IExpression>();
+
                     return CreateFunction(id, parameterList);
                 }
             }
@@ -193,8 +196,7 @@ namespace xFunc.Maths
         }
 
         private IExpression? Expression(ref TokenReader tokenReader)
-            => UnaryAssign(ref tokenReader) ??
-               BinaryAssign(ref tokenReader) ??
+            => BinaryAssign(ref tokenReader) ??
                Assign(ref tokenReader) ??
                Def(ref tokenReader) ??
                Undef(ref tokenReader) ??
@@ -273,29 +275,6 @@ namespace xFunc.Maths
                 throw new ParseException(CloseParenthesis(ref undef));
 
             return new Undefine(key);
-        }
-
-        private IExpression? UnaryAssign(ref TokenReader tokenReader)
-        {
-            var scope = tokenReader.CreateScope();
-
-            var left = Variable(ref tokenReader);
-            if (left != null)
-            {
-                var @operator = tokenReader.GetCurrent(IncrementOperator) ||
-                                tokenReader.GetCurrent(DecrementOperator);
-
-                if (@operator.IsNotEmpty())
-                {
-                    tokenReader.Commit();
-
-                    return CreateUnaryAssign(@operator, left);
-                }
-            }
-
-            tokenReader.Rollback(scope);
-
-            return null;
         }
 
         private IExpression? BinaryAssign(ref TokenReader tokenReader)
@@ -622,6 +601,11 @@ namespace xFunc.Maths
         }
 
         private IExpression? RightUnary(ref TokenReader tokenReader)
+            => Factorial(ref tokenReader) ??
+               UnaryAssign(ref tokenReader) ??
+               Operand(ref tokenReader);
+
+        private IExpression? Factorial(ref TokenReader tokenReader)
         {
             var scope = tokenReader.CreateScope();
 
@@ -639,7 +623,30 @@ namespace xFunc.Maths
 
             tokenReader.Rollback(scope);
 
-            return Operand(ref tokenReader);
+            return null;
+        }
+
+        private IExpression? UnaryAssign(ref TokenReader tokenReader)
+        {
+            var scope = tokenReader.CreateScope();
+
+            var left = Variable(ref tokenReader);
+            if (left != null)
+            {
+                var @operator = tokenReader.GetCurrent(IncrementOperator) ||
+                                tokenReader.GetCurrent(DecrementOperator);
+
+                if (@operator.IsNotEmpty())
+                {
+                    tokenReader.Commit();
+
+                    return CreateUnaryAssign(@operator, left);
+                }
+            }
+
+            tokenReader.Rollback(scope);
+
+            return null;
         }
 
         private IExpression? Operand(ref TokenReader tokenReader)
@@ -764,6 +771,9 @@ namespace xFunc.Maths
         {
             var variable = tokenReader.GetCurrent(Id);
             if (variable.IsEmpty())
+                return null;
+
+            if (tokenReader.Check(OpenParenthesisSymbol))
                 return null;
 
             return CreateVariable(variable);

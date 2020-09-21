@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System;
-using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.Programming;
@@ -33,6 +32,20 @@ namespace xFunc.Tests.Expressions.Programming
 
             Assert.Equal(11.0, result);
             Assert.Equal(11.0, parameters["x"]);
+        }
+
+        [Fact]
+        public void IncAsExpTest()
+        {
+            var parameters = new ParameterCollection
+            {
+                { "x", 10.0 }
+            };
+            var exp = new Add(Number.One, new Inc(Variable.X));
+            var result = exp.Execute(parameters);
+
+            Assert.Equal(11.0, parameters["x"]);
+            Assert.Equal(12.0, result);
         }
 
         [Fact]

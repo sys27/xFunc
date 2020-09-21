@@ -274,6 +274,10 @@ namespace xFunc.Tests.ParserTests
         public void IncTest()
             => ParseTest("x++", new Inc(Variable.X));
 
+        [Fact]
+        public void IncAsExpressionTest()
+            => ParseTest("1 + x++", new Add(Number.One, new Inc(Variable.X)));
+
         [Theory]
         [InlineData("x--")]
         [InlineData("x−−")]
@@ -283,6 +287,10 @@ namespace xFunc.Tests.ParserTests
 
             ParseTest(function, expected);
         }
+
+        [Fact]
+        public void DecAsExpressionTest()
+            => ParseTest("1 + x--", new Add(Number.One, new Dec(Variable.X)));
 
         [Theory]
         [InlineData("true & false")]

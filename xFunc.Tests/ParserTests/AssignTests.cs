@@ -173,5 +173,61 @@ namespace xFunc.Tests.ParserTests
 
             ParseTest("x >>= 10", expected);
         }
+
+        [Fact]
+        public void AssignAsExpTest()
+        {
+            var expected = new Add(Number.One, new Define(Variable.X, Number.Two));
+
+            ParseTest("1 + (x := 2)", expected);
+        }
+
+        [Fact]
+        public void AddAssignAsExpTest()
+        {
+            var expected = new Add(Number.One, new AddAssign(Variable.X, Number.Two));
+
+            ParseTest("1 + (x += 2)", expected);
+        }
+
+        [Fact]
+        public void SubAssignAsExpTest()
+        {
+            var expected = new Add(Number.One, new SubAssign(Variable.X, Number.Two));
+
+            ParseTest("1 + (x -= 2)", expected);
+        }
+
+        [Fact]
+        public void MulAssignAsExpTest()
+        {
+            var expected = new Add(Number.One, new MulAssign(Variable.X, Number.Two));
+
+            ParseTest("1 + (x *= 2)", expected);
+        }
+
+        [Fact]
+        public void DivAssignAsExpTest()
+        {
+            var expected = new Add(Number.One, new DivAssign(Variable.X, Number.Two));
+
+            ParseTest("1 + (x /= 2)", expected);
+        }
+
+        [Fact]
+        public void LeftShiftAssignAsExpTest()
+        {
+            var expected = new Add(Number.One, new LeftShiftAssign(Variable.X, Number.Two));
+
+            ParseTest("1 + (x <<= 2)", expected);
+        }
+
+        [Fact]
+        public void RightShiftAssignAsExpTest()
+        {
+            var expected = new Add(Number.One, new RightShiftAssign(Variable.X, Number.Two));
+
+            ParseTest("1 + (x >>= 2)", expected);
+        }
     }
 }

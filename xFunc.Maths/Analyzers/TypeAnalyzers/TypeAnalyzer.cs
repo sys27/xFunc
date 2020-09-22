@@ -1321,6 +1321,26 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             throw new ParameterTypeMismatchException(ResultTypes.ComplexNumber, result);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual ResultTypes Analyze(ToComplex exp)
+        {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
+            var result = exp.Argument.Analyze(this);
+
+            return result switch
+            {
+                ResultTypes.Undefined => ResultTypes.ComplexNumber,
+                ResultTypes.Number => ResultTypes.ComplexNumber,
+                _ => ResultTypes.Number.ThrowFor(result),
+            };
+        }
+
         #endregion Complex Numbers
 
         #region Trigonometric

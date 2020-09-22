@@ -272,5 +272,13 @@ namespace xFunc.Tests.ParserTests
 
             ParseTest("reciprocal(3-2*i)", expected);
         }
+
+        [Fact]
+        public void ToComplexTest()
+        {
+            var expected = new ToComplex(Number.Two);
+
+            ParseTest("tocomplex(2)", expected);
+        }
     }
 }

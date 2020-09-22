@@ -568,6 +568,14 @@ namespace xFunc.Maths.Analyzers.Formatters
         public virtual string Analyze(Reciprocal exp)
             => ToString(exp, "reciprocal({0})");
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual string Analyze(ToComplex exp)
+            => ToString(exp, "tocomplex({0})");
+
         #endregion Complex Numbers
 
         #region Trigonometric

@@ -32,16 +32,8 @@ namespace xFunc.Maths.Analyzers
     /// </summary>
     /// <seealso cref="IAnalyzer{TResult}" />
     /// <seealso cref="ISimplifier" />
-    public class Simplifier : ISimplifier
+    public class Simplifier : Analyzer<IExpression>, ISimplifier
     {
-        private T AnalyzeSimple<T>([NotNull] T exp) where T : IExpression
-        {
-            if (exp is null)
-                throw ThrowHelpers.ExpNull();
-
-            return exp;
-        }
-
         private T AnalyzeUnary<T>([NotNull] T exp) where T : UnaryExpression
         {
             if (exp is null)
@@ -103,8 +95,13 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(IExpression exp)
-            => AnalyzeSimple(exp);
+        public override IExpression Analyze(IExpression exp)
+        {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
+            return exp;
+        }
 
         #region Standard
 
@@ -115,7 +112,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Abs exp)
+        public override IExpression Analyze(Abs exp)
         {
             exp = AnalyzeUnary(exp);
 
@@ -134,7 +131,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Add exp)
+        public override IExpression Analyze(Add exp)
         {
             exp = AnalyzeBinary(exp);
 
@@ -234,7 +231,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Ceil exp)
+        public override IExpression Analyze(Ceil exp)
             => AnalyzeUnary(exp);
 
         /// <summary>
@@ -244,7 +241,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Define exp)
+        public override IExpression Analyze(Define exp)
         {
             if (exp is null)
                 throw ThrowHelpers.ExpNull();
@@ -261,7 +258,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Del exp)
+        public override IExpression Analyze(Del exp)
             => AnalyzeUnary(exp);
 
         /// <summary>
@@ -271,7 +268,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Derivative exp)
+        public override IExpression Analyze(Derivative exp)
         {
             if (exp is null)
                 throw ThrowHelpers.ExpNull();
@@ -288,7 +285,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Div exp)
+        public override IExpression Analyze(Div exp)
         {
             exp = AnalyzeBinary(exp);
 
@@ -359,7 +356,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Exp exp)
+        public override IExpression Analyze(Exp exp)
         {
             exp = AnalyzeUnary(exp);
 
@@ -377,7 +374,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Fact exp)
+        public override IExpression Analyze(Fact exp)
             => AnalyzeUnary(exp);
 
         /// <summary>
@@ -387,7 +384,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Floor exp)
+        public override IExpression Analyze(Floor exp)
             => AnalyzeUnary(exp);
 
         /// <summary>
@@ -397,7 +394,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Trunc exp)
+        public override IExpression Analyze(Trunc exp)
             => AnalyzeUnary(exp);
 
         /// <summary>
@@ -405,7 +402,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual IExpression Analyze(Frac exp)
+        public override IExpression Analyze(Frac exp)
             => AnalyzeUnary(exp);
 
         /// <summary>
@@ -415,7 +412,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(GCD exp)
+        public override IExpression Analyze(GCD exp)
             => AnalyzeDiffParams(exp);
 
         /// <summary>
@@ -425,7 +422,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Lb exp)
+        public override IExpression Analyze(Lb exp)
         {
             exp = AnalyzeUnary(exp);
 
@@ -443,7 +440,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(LCM exp)
+        public override IExpression Analyze(LCM exp)
             => AnalyzeDiffParams(exp);
 
         /// <summary>
@@ -453,7 +450,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Lg exp)
+        public override IExpression Analyze(Lg exp)
         {
             exp = AnalyzeUnary(exp);
 
@@ -472,7 +469,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Ln exp)
+        public override IExpression Analyze(Ln exp)
         {
             exp = AnalyzeUnary(exp);
 
@@ -490,7 +487,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Log exp)
+        public override IExpression Analyze(Log exp)
         {
             exp = AnalyzeBinary(exp);
 
@@ -508,7 +505,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Mod exp)
+        public override IExpression Analyze(Mod exp)
             => AnalyzeBinary(exp);
 
         /// <summary>
@@ -518,7 +515,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Mul exp)
+        public override IExpression Analyze(Mul exp)
         {
             exp = AnalyzeBinary(exp);
 
@@ -622,26 +619,8 @@ namespace xFunc.Maths.Analyzers
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
-        /// <returns>
-        /// The result of analysis.
-        /// </returns>
-        public virtual IExpression Analyze(Number exp)
-            => AnalyzeSimple(exp);
-
-        /// <summary>
-        /// Analyzes the specified expression.
-        /// </summary>
-        /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual IExpression Analyze(Angle exp)
-            => AnalyzeSimple(exp);
-
-        /// <summary>
-        /// Analyzes the specified expression.
-        /// </summary>
-        /// <param name="exp">The expression.</param>
-        /// <returns>The result of analysis.</returns>
-        public virtual IExpression Analyze(ToDegree exp)
+        public override IExpression Analyze(ToDegree exp)
         {
             exp = AnalyzeUnary(exp);
 
@@ -659,7 +638,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual IExpression Analyze(ToRadian exp)
+        public override IExpression Analyze(ToRadian exp)
         {
             exp = AnalyzeUnary(exp);
 
@@ -677,7 +656,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual IExpression Analyze(ToGradian exp)
+        public override IExpression Analyze(ToGradian exp)
         {
             exp = AnalyzeUnary(exp);
 
@@ -695,7 +674,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual IExpression Analyze(ToNumber exp)
+        public override IExpression Analyze(ToNumber exp)
         {
             exp = AnalyzeUnary(exp);
 
@@ -713,7 +692,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Pow exp)
+        public override IExpression Analyze(Pow exp)
         {
             exp = AnalyzeBinary(exp);
 
@@ -751,7 +730,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Root exp)
+        public override IExpression Analyze(Root exp)
         {
             exp = AnalyzeBinary(exp);
 
@@ -770,7 +749,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Round exp)
+        public override IExpression Analyze(Round exp)
             => AnalyzeDiffParams(exp);
 
         /// <summary>
@@ -780,7 +759,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Simplify exp)
+        public override IExpression Analyze(Simplify exp)
         {
             if (exp is null)
                 throw ThrowHelpers.ExpNull();
@@ -795,7 +774,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Sqrt exp)
+        public override IExpression Analyze(Sqrt exp)
             => AnalyzeUnary(exp);
 
         /// <summary>
@@ -805,7 +784,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Sub exp)
+        public override IExpression Analyze(Sub exp)
         {
             exp = AnalyzeBinary(exp);
 
@@ -903,7 +882,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(UnaryMinus exp)
+        public override IExpression Analyze(UnaryMinus exp)
         {
             exp = AnalyzeUnary(exp);
 
@@ -922,17 +901,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Undefine exp)
-            => AnalyzeSimple(exp);
-
-        /// <summary>
-        /// Analyzes the specified expression.
-        /// </summary>
-        /// <param name="exp">The expression.</param>
-        /// <returns>
-        /// The result of analysis.
-        /// </returns>
-        public virtual IExpression Analyze(UserFunction exp)
+        public override IExpression Analyze(UserFunction exp)
         {
             if (exp is null)
                 throw ThrowHelpers.ExpNull();
@@ -942,58 +911,6 @@ namespace xFunc.Maths.Analyzers
 
             return exp;
         }
-
-        /// <summary>
-        /// Analyzes the specified expression.
-        /// </summary>
-        /// <param name="exp">The expression.</param>
-        /// <returns>
-        /// The result of analysis.
-        /// </returns>
-        public virtual IExpression Analyze(Variable exp)
-            => AnalyzeSimple(exp);
-
-        /// <summary>
-        /// Analyzes the specified expression.
-        /// </summary>
-        /// <param name="exp">The expression.</param>
-        /// <returns>
-        /// The result of analysis.
-        /// </returns>
-        public virtual IExpression Analyze(DelegateExpression exp)
-            => AnalyzeSimple(exp);
-
-        /// <summary>
-        /// Analyzes the specified expression.
-        /// </summary>
-        /// <param name="exp">The expression.</param>
-        /// <returns>The result of analysis.</returns>
-        public virtual IExpression Analyze(Sign exp)
-            => AnalyzeSimple(exp);
-
-        /// <summary>
-        /// Analyzes the specified expression.
-        /// </summary>
-        /// <param name="exp">The expression.</param>
-        /// <returns>The result of analysis.</returns>
-        public virtual IExpression Analyze(ToBin exp)
-            => AnalyzeSimple(exp);
-
-        /// <summary>
-        /// Analyzes the specified expression.
-        /// </summary>
-        /// <param name="exp">The expression.</param>
-        /// <returns>The result of analysis.</returns>
-        public virtual IExpression Analyze(ToOct exp)
-            => AnalyzeSimple(exp);
-
-        /// <summary>
-        /// Analyzes the specified expression.
-        /// </summary>
-        /// <param name="exp">The expression.</param>
-        /// <returns>The result of analysis.</returns>
-        public virtual IExpression Analyze(ToHex exp)
-            => AnalyzeSimple(exp);
 
         #endregion Standard
 
@@ -1006,7 +923,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Vector exp)
+        public override IExpression Analyze(Vector exp)
             => AnalyzeDiffParams(exp);
 
         /// <summary>
@@ -1016,7 +933,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Matrix exp)
+        public override IExpression Analyze(Matrix exp)
         {
             if (exp is null)
                 throw ThrowHelpers.ExpNull();
@@ -1034,7 +951,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Determinant exp)
+        public override IExpression Analyze(Determinant exp)
             => AnalyzeUnary(exp);
 
         /// <summary>
@@ -1044,7 +961,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Inverse exp)
+        public override IExpression Analyze(Inverse exp)
             => AnalyzeUnary(exp);
 
         /// <summary>
@@ -1054,7 +971,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Transpose exp)
+        public override IExpression Analyze(Transpose exp)
             => AnalyzeUnary(exp);
 
         /// <summary>
@@ -1062,7 +979,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual IExpression Analyze(DotProduct exp)
+        public override IExpression Analyze(DotProduct exp)
             => AnalyzeBinary(exp);
 
         /// <summary>
@@ -1070,7 +987,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual IExpression Analyze(CrossProduct exp)
+        public override IExpression Analyze(CrossProduct exp)
             => AnalyzeBinary(exp);
 
         #endregion Matrix
@@ -1084,17 +1001,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(ComplexNumber exp)
-            => AnalyzeSimple(exp);
-
-        /// <summary>
-        /// Analyzes the specified expression.
-        /// </summary>
-        /// <param name="exp">The expression.</param>
-        /// <returns>
-        /// The result of analysis.
-        /// </returns>
-        public virtual IExpression Analyze(Conjugate exp)
+        public override IExpression Analyze(Conjugate exp)
             => AnalyzeUnary(exp);
 
         /// <summary>
@@ -1104,7 +1011,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Im exp)
+        public override IExpression Analyze(Im exp)
             => AnalyzeUnary(exp);
 
         /// <summary>
@@ -1114,7 +1021,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Phase exp)
+        public override IExpression Analyze(Phase exp)
             => AnalyzeUnary(exp);
 
         /// <summary>
@@ -1124,7 +1031,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Re exp)
+        public override IExpression Analyze(Re exp)
             => AnalyzeUnary(exp);
 
         /// <summary>
@@ -1134,7 +1041,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Reciprocal exp)
+        public override IExpression Analyze(Reciprocal exp)
             => AnalyzeUnary(exp);
 
         /// <summary>
@@ -1142,7 +1049,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual IExpression Analyze(ToComplex exp)
+        public override IExpression Analyze(ToComplex exp)
             => AnalyzeUnary(exp);
 
         #endregion Complex Numbers
@@ -1156,7 +1063,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arccos exp)
+        public override IExpression Analyze(Arccos exp)
             => AnalyzeTrigonometric<Cos>(exp);
 
         /// <summary>
@@ -1166,7 +1073,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arccot exp)
+        public override IExpression Analyze(Arccot exp)
             => AnalyzeTrigonometric<Cot>(exp);
 
         /// <summary>
@@ -1176,7 +1083,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arccsc exp)
+        public override IExpression Analyze(Arccsc exp)
             => AnalyzeTrigonometric<Csc>(exp);
 
         /// <summary>
@@ -1186,7 +1093,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arcsec exp)
+        public override IExpression Analyze(Arcsec exp)
             => AnalyzeTrigonometric<Sec>(exp);
 
         /// <summary>
@@ -1196,7 +1103,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arcsin exp)
+        public override IExpression Analyze(Arcsin exp)
             => AnalyzeTrigonometric<Sin>(exp);
 
         /// <summary>
@@ -1206,7 +1113,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arctan exp)
+        public override IExpression Analyze(Arctan exp)
             => AnalyzeTrigonometric<Tan>(exp);
 
         /// <summary>
@@ -1216,7 +1123,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Cos exp)
+        public override IExpression Analyze(Cos exp)
             => AnalyzeTrigonometric<Arccos>(exp);
 
         /// <summary>
@@ -1226,7 +1133,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Cot exp)
+        public override IExpression Analyze(Cot exp)
             => AnalyzeTrigonometric<Arccot>(exp);
 
         /// <summary>
@@ -1236,7 +1143,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Csc exp)
+        public override IExpression Analyze(Csc exp)
             => AnalyzeTrigonometric<Arccsc>(exp);
 
         /// <summary>
@@ -1246,7 +1153,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Sec exp)
+        public override IExpression Analyze(Sec exp)
             => AnalyzeTrigonometric<Arcsec>(exp);
 
         /// <summary>
@@ -1256,7 +1163,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Sin exp)
+        public override IExpression Analyze(Sin exp)
             => AnalyzeTrigonometric<Arcsin>(exp);
 
         /// <summary>
@@ -1266,7 +1173,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Tan exp)
+        public override IExpression Analyze(Tan exp)
             => AnalyzeTrigonometric<Arctan>(exp);
 
         #endregion
@@ -1280,7 +1187,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arcosh exp)
+        public override IExpression Analyze(Arcosh exp)
             => AnalyzeTrigonometric<Cosh>(exp);
 
         /// <summary>
@@ -1290,7 +1197,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arcoth exp)
+        public override IExpression Analyze(Arcoth exp)
             => AnalyzeTrigonometric<Coth>(exp);
 
         /// <summary>
@@ -1300,7 +1207,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arcsch exp)
+        public override IExpression Analyze(Arcsch exp)
             => AnalyzeTrigonometric<Csch>(exp);
 
         /// <summary>
@@ -1310,7 +1217,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arsech exp)
+        public override IExpression Analyze(Arsech exp)
             => AnalyzeTrigonometric<Sech>(exp);
 
         /// <summary>
@@ -1320,7 +1227,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arsinh exp)
+        public override IExpression Analyze(Arsinh exp)
             => AnalyzeTrigonometric<Sinh>(exp);
 
         /// <summary>
@@ -1330,7 +1237,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Artanh exp)
+        public override IExpression Analyze(Artanh exp)
             => AnalyzeTrigonometric<Tanh>(exp);
 
         /// <summary>
@@ -1340,7 +1247,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Cosh exp)
+        public override IExpression Analyze(Cosh exp)
             => AnalyzeTrigonometric<Arcosh>(exp);
 
         /// <summary>
@@ -1350,7 +1257,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Coth exp)
+        public override IExpression Analyze(Coth exp)
             => AnalyzeTrigonometric<Arcoth>(exp);
 
         /// <summary>
@@ -1360,7 +1267,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Csch exp)
+        public override IExpression Analyze(Csch exp)
             => AnalyzeTrigonometric<Arcsch>(exp);
 
         /// <summary>
@@ -1370,7 +1277,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Sech exp)
+        public override IExpression Analyze(Sech exp)
             => AnalyzeTrigonometric<Arsech>(exp);
 
         /// <summary>
@@ -1380,7 +1287,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Sinh exp)
+        public override IExpression Analyze(Sinh exp)
             => AnalyzeTrigonometric<Arsinh>(exp);
 
         /// <summary>
@@ -1390,7 +1297,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Tanh exp)
+        public override IExpression Analyze(Tanh exp)
             => AnalyzeTrigonometric<Artanh>(exp);
 
         #endregion Hyperbolic
@@ -1404,7 +1311,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Avg exp)
+        public override IExpression Analyze(Avg exp)
             => AnalyzeDiffParams(exp);
 
         /// <summary>
@@ -1414,7 +1321,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Count exp)
+        public override IExpression Analyze(Count exp)
             => AnalyzeDiffParams(exp);
 
         /// <summary>
@@ -1424,7 +1331,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Max exp)
+        public override IExpression Analyze(Max exp)
             => AnalyzeDiffParams(exp);
 
         /// <summary>
@@ -1434,7 +1341,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Min exp)
+        public override IExpression Analyze(Min exp)
             => AnalyzeDiffParams(exp);
 
         /// <summary>
@@ -1444,7 +1351,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Product exp)
+        public override IExpression Analyze(Product exp)
             => AnalyzeDiffParams(exp);
 
         /// <summary>
@@ -1454,7 +1361,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Stdev exp)
+        public override IExpression Analyze(Stdev exp)
             => AnalyzeDiffParams(exp);
 
         /// <summary>
@@ -1464,7 +1371,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Stdevp exp)
+        public override IExpression Analyze(Stdevp exp)
             => AnalyzeDiffParams(exp);
 
         /// <summary>
@@ -1474,7 +1381,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Sum exp)
+        public override IExpression Analyze(Sum exp)
             => AnalyzeDiffParams(exp);
 
         /// <summary>
@@ -1484,7 +1391,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Var exp)
+        public override IExpression Analyze(Var exp)
             => AnalyzeDiffParams(exp);
 
         /// <summary>
@@ -1494,7 +1401,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Varp exp)
+        public override IExpression Analyze(Varp exp)
             => AnalyzeDiffParams(exp);
 
         #endregion Statistical
@@ -1508,7 +1415,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(And exp)
+        public override IExpression Analyze(And exp)
             => AnalyzeBinary(exp);
 
         /// <summary>
@@ -1518,17 +1425,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Bool exp)
-            => AnalyzeSimple(exp);
-
-        /// <summary>
-        /// Analyzes the specified expression.
-        /// </summary>
-        /// <param name="exp">The expression.</param>
-        /// <returns>
-        /// The result of analysis.
-        /// </returns>
-        public virtual IExpression Analyze(Equality exp)
+        public override IExpression Analyze(Equality exp)
             => AnalyzeBinary(exp);
 
         /// <summary>
@@ -1538,7 +1435,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Implication exp)
+        public override IExpression Analyze(Implication exp)
             => AnalyzeBinary(exp);
 
         /// <summary>
@@ -1548,7 +1445,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(NAnd exp)
+        public override IExpression Analyze(NAnd exp)
             => AnalyzeBinary(exp);
 
         /// <summary>
@@ -1558,7 +1455,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(NOr exp)
+        public override IExpression Analyze(NOr exp)
             => AnalyzeBinary(exp);
 
         /// <summary>
@@ -1568,7 +1465,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Not exp)
+        public override IExpression Analyze(Not exp)
             => AnalyzeUnary(exp);
 
         /// <summary>
@@ -1578,7 +1475,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Or exp)
+        public override IExpression Analyze(Or exp)
             => AnalyzeBinary(exp);
 
         /// <summary>
@@ -1588,7 +1485,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(XOr exp)
+        public override IExpression Analyze(XOr exp)
             => AnalyzeBinary(exp);
 
         #endregion Logical and Bitwise
@@ -1602,7 +1499,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(AddAssign exp)
+        public override IExpression Analyze(AddAssign exp)
             => AnalyzeVariableBinary(exp);
 
         /// <summary>
@@ -1612,7 +1509,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(ConditionalAnd exp)
+        public override IExpression Analyze(ConditionalAnd exp)
             => AnalyzeBinary(exp);
 
         /// <summary>
@@ -1622,17 +1519,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Dec exp)
-            => AnalyzeSimple(exp);
-
-        /// <summary>
-        /// Analyzes the specified expression.
-        /// </summary>
-        /// <param name="exp">The expression.</param>
-        /// <returns>
-        /// The result of analysis.
-        /// </returns>
-        public virtual IExpression Analyze(DivAssign exp)
+        public override IExpression Analyze(DivAssign exp)
             => AnalyzeVariableBinary(exp);
 
         /// <summary>
@@ -1642,7 +1529,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Equal exp)
+        public override IExpression Analyze(Equal exp)
             => AnalyzeBinary(exp);
 
         /// <summary>
@@ -1652,7 +1539,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(For exp)
+        public override IExpression Analyze(For exp)
             => AnalyzeDiffParams(exp);
 
         /// <summary>
@@ -1662,7 +1549,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(GreaterOrEqual exp)
+        public override IExpression Analyze(GreaterOrEqual exp)
             => AnalyzeBinary(exp);
 
         /// <summary>
@@ -1672,7 +1559,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(GreaterThan exp)
+        public override IExpression Analyze(GreaterThan exp)
             => AnalyzeBinary(exp);
 
         /// <summary>
@@ -1682,7 +1569,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(If exp)
+        public override IExpression Analyze(If exp)
             => AnalyzeDiffParams(exp);
 
         /// <summary>
@@ -1692,17 +1579,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Inc exp)
-            => AnalyzeSimple(exp);
-
-        /// <summary>
-        /// Analyzes the specified expression.
-        /// </summary>
-        /// <param name="exp">The expression.</param>
-        /// <returns>
-        /// The result of analysis.
-        /// </returns>
-        public virtual IExpression Analyze(LessOrEqual exp)
+        public override IExpression Analyze(LessOrEqual exp)
             => AnalyzeBinary(exp);
 
         /// <summary>
@@ -1712,7 +1589,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(LessThan exp)
+        public override IExpression Analyze(LessThan exp)
             => AnalyzeBinary(exp);
 
         /// <summary>
@@ -1722,7 +1599,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(MulAssign exp)
+        public override IExpression Analyze(MulAssign exp)
             => AnalyzeVariableBinary(exp);
 
         /// <summary>
@@ -1732,7 +1609,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(NotEqual exp)
+        public override IExpression Analyze(NotEqual exp)
             => AnalyzeBinary(exp);
 
         /// <summary>
@@ -1742,7 +1619,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(ConditionalOr exp)
+        public override IExpression Analyze(ConditionalOr exp)
             => AnalyzeBinary(exp);
 
         /// <summary>
@@ -1752,7 +1629,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(SubAssign exp)
+        public override IExpression Analyze(SubAssign exp)
             => AnalyzeVariableBinary(exp);
 
         /// <summary>
@@ -1762,7 +1639,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(While exp)
+        public override IExpression Analyze(While exp)
             => AnalyzeBinary(exp);
 
         /// <summary>
@@ -1770,7 +1647,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual IExpression Analyze(LeftShift exp)
+        public override IExpression Analyze(LeftShift exp)
             => AnalyzeBinary(exp);
 
         /// <summary>
@@ -1778,7 +1655,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual IExpression Analyze(RightShift exp)
+        public override IExpression Analyze(RightShift exp)
             => AnalyzeBinary(exp);
 
         /// <summary>
@@ -1786,7 +1663,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual IExpression Analyze(LeftShiftAssign exp)
+        public override IExpression Analyze(LeftShiftAssign exp)
             => AnalyzeVariableBinary(exp);
 
         /// <summary>
@@ -1794,7 +1671,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual IExpression Analyze(RightShiftAssign exp)
+        public override IExpression Analyze(RightShiftAssign exp)
             => AnalyzeVariableBinary(exp);
 
         #endregion Programming

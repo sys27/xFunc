@@ -61,7 +61,7 @@ namespace xFunc.Maths.Expressions
             return result switch
             {
                 double number => Math.Ceiling(number),
-                AngleValue angle => angle.Ceiling(),
+                AngleValue angle => AngleValue.Ceiling(angle),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

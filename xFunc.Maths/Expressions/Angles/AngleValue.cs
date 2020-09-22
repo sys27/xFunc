@@ -105,7 +105,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// </returns>
         public int CompareTo(object? obj)
         {
-            if (ReferenceEquals(null, obj))
+            if (obj is null)
                 return 1;
 
             if (obj is AngleValue other)
@@ -448,6 +448,46 @@ namespace xFunc.Maths.Expressions.Angles
                 _ => Degree(NormalizeInternal(Value, degreeFullCircle)),
             };
         }
+
+        /// <summary>
+        /// Returns the absolute value of a specified angle.
+        /// </summary>
+        /// <param name="angleValue">The angle.</param>
+        /// <returns>The angle, <c>x</c>, that such that 0 ≤ <c>x</c> ≤ <c>MaxValue</c>.</returns>
+        public static AngleValue Abs(AngleValue angleValue)
+            => new AngleValue(Math.Abs(angleValue.Value), angleValue.Unit);
+
+        /// <summary>
+        /// Returns the smallest integral value that is greater than or equal to the specified angle number.
+        /// </summary>
+        /// <param name="angleValue">The angle.</param>
+        /// <returns>The smallest integral value.</returns>
+        public static AngleValue Ceiling(AngleValue angleValue)
+            => new AngleValue(Math.Ceiling(angleValue.Value), angleValue.Unit);
+
+        /// <summary>
+        /// Returns the largest integral value less than or equal to the specified angle number.
+        /// </summary>
+        /// <param name="angleValue">The angle.</param>
+        /// <returns>The largest integral value.</returns>
+        public static AngleValue Floor(AngleValue angleValue)
+            => new AngleValue(Math.Floor(angleValue.Value), angleValue.Unit);
+
+        /// <summary>
+        /// Calculates the integral part of a specified angle number.
+        /// </summary>
+        /// <param name="angleValue">An angle to truncate.</param>
+        /// <returns>The integral part of angle number.</returns>
+        public static AngleValue Truncate(AngleValue angleValue)
+            => new AngleValue(Math.Truncate(angleValue.Value), angleValue.Unit);
+
+        /// <summary>
+        /// Returns the fractional part of the angle number.
+        /// </summary>
+        /// <param name="angleValue">The angle number.</param>
+        /// <returns>The fractional part.</returns>
+        public static AngleValue Frac(AngleValue angleValue)
+            => new AngleValue(MathExtensions.Frac(angleValue.Value), angleValue.Unit);
 
         /// <summary>
         /// Converts <see cref="AngleValue"/> to <see cref="Angle"/>.

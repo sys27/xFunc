@@ -568,6 +568,14 @@ namespace xFunc.Maths.Analyzers
         public virtual TResult Analyze(Reciprocal exp)
             => Analyze(exp as IExpression);
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(ToComplex exp)
+            => Analyze(exp as IExpression);
+
         #endregion Complex Numbers
 
         #region Trigonometric

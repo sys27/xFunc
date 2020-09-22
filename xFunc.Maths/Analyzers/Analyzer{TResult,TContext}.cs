@@ -542,6 +542,15 @@ namespace xFunc.Maths.Analyzers
         public virtual TResult Analyze(Reciprocal exp, TContext context)
             => Analyze(exp as IExpression, context);
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(ToComplex exp, TContext context)
+            => Analyze(exp as IExpression, context);
+
         #endregion Complex Numbers
 
         #region Trigonometric

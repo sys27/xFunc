@@ -16,6 +16,7 @@
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
@@ -149,5 +150,17 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
 
             TestException(exp);
         }
+
+        [Fact]
+        public void ToComplexUndefined()
+            => Test(new ToComplex(Variable.X), ResultTypes.ComplexNumber);
+
+        [Fact]
+        public void ToComplexNubmer()
+            => Test(new ToComplex(Number.One), ResultTypes.ComplexNumber);
+
+        [Fact]
+        public void ToComplexException()
+            => TestException(new ToComplex(Bool.False));
     }
 }

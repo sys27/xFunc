@@ -147,6 +147,7 @@ namespace xFunc.Maths
                 "phase" => new Phase(arguments),
                 "conjugate" => new Conjugate(arguments),
                 "reciprocal" => new Reciprocal(arguments),
+                "tocomplex" => new ToComplex(arguments),
 
                 "sum" => new Sum(arguments),
                 "product" => new Product(arguments),

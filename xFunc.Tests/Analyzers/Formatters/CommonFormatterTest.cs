@@ -612,6 +612,14 @@ namespace xFunc.Tests.Analyzers.Formatters
             Assert.Equal("re(3.1+2.5i)", exp.ToString());
         }
 
+        [Fact]
+        public void ToComplexToStringTest()
+        {
+            var exp = new ToComplex(Number.Two);
+
+            Assert.Equal("tocomplex(2)", exp.ToString());
+        }
+
         #endregion
 
         #region Trigonometric

@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the Licens
 
-using System;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 
@@ -36,27 +35,11 @@ namespace xFunc.Maths.Expressions.Programming
         /// <summary>
         /// Executes this expression.
         /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <param name="value">The value of variable.</param>
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        public override object Execute(ExpressionParameters? parameters)
-        {
-            if (parameters == null)
-                throw new ArgumentNullException(nameof(parameters));
-
-            var result = Variable.Execute(parameters);
-            if (result is double value)
-            {
-                var newValue = value - 1;
-                parameters.Variables[Variable.Name] = newValue;
-
-                return newValue;
-            }
-
-            throw new ResultIsNotSupportedException(this, result);
-        }
+        protected override object Execute(double value) => value - 1;
 
         /// <summary>
         /// Analyzes the current expression.
@@ -84,12 +67,13 @@ namespace xFunc.Maths.Expressions.Programming
             => analyzer.Analyze(this, context);
 
         /// <summary>
-        /// Clones this instance.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
+        /// <param name="variable">The argument of new expression.</param>
         /// <returns>
-        /// Returns the new instance of <see cref="Inc" /> that is a clone of this instance.
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone() =>
-            new Dec((Variable)Variable.Clone());
+        public override IExpression Clone(Variable? variable = null)
+            => new Dec(variable ?? Variable);
     }
 }

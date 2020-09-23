@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using xFunc.Maths.Analyzers;
@@ -31,7 +32,17 @@ namespace xFunc.Maths.Expressions.Statistical
         /// </summary>
         /// <param name="arguments">The arguments.</param>
         /// <exception cref="ArgumentNullException"><paramref name="arguments"/> is null.</exception>
-        public Product(IList<IExpression> arguments)
+        public Product(IEnumerable<IExpression> arguments)
+            : base(arguments)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Product"/> class.
+        /// </summary>
+        /// <param name="arguments">The arguments.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="arguments"/> is null.</exception>
+        public Product(ImmutableArray<IExpression> arguments)
             : base(arguments)
         {
         }
@@ -44,9 +55,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// A result of the execution.
         /// </returns>
         private protected override double ExecuteInternal(double[] numbers)
-        {
-            return numbers.Aggregate(1.0, (acc, result) => acc * result);
-        }
+            => numbers.Aggregate(1.0, (acc, result) => acc * result);
 
         /// <summary>
         /// Analyzes the current expression.
@@ -76,10 +85,11 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone() =>
-            new Product(CloneArguments());
+        public override IExpression Clone(ImmutableArray<IExpression>? arguments = null)
+            => new Product(arguments ?? Arguments);
     }
 }

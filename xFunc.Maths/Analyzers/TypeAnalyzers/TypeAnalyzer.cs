@@ -103,7 +103,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 throw new DifferentParameterTypeMismatchException(ResultTypes.Number | ResultTypes.Vector, result, 0);
             }
 
-            using var enumerator = exp.Arguments.GetEnumerator();
+            var enumerator = exp.Arguments.GetEnumerator();
             for (var i = 0; enumerator.MoveNext(); i++)
             {
                 var item = enumerator.Current.Analyze(this);
@@ -569,7 +569,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             if (exp is null)
                 throw ThrowHelpers.ExpNull();
 
-            using var enumerator = exp.Arguments.GetEnumerator();
+            var enumerator = exp.Arguments.GetEnumerator();
             for (var i = 0; enumerator.MoveNext(); i++)
             {
                 var item = enumerator.Current.Analyze(this);
@@ -609,7 +609,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             if (exp is null)
                 throw ThrowHelpers.ExpNull();
 
-            using var enumerator = exp.Arguments.GetEnumerator();
+            var enumerator = exp.Arguments.GetEnumerator();
             for (var i = 0; enumerator.MoveNext(); i++)
             {
                 var item = enumerator.Current.Analyze(this);
@@ -899,7 +899,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             if (exp is null)
                 throw ThrowHelpers.ExpNull();
 
-            using var enumerator = exp.Arguments.GetEnumerator();
+            var enumerator = exp.Arguments.GetEnumerator();
             for (var i = 0; enumerator.MoveNext(); i++)
             {
                 var item = enumerator.Current.Analyze(this);
@@ -1086,7 +1086,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             if (exp is null)
                 throw ThrowHelpers.ExpNull();
 
-            using var enumerator = exp.Arguments.GetEnumerator();
+            var enumerator = exp.Arguments.GetEnumerator();
             for (var i = 0; enumerator.MoveNext(); i++)
             {
                 var item = enumerator.Current.Analyze(this);

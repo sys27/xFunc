@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using xFunc.Maths.Analyzers;
@@ -31,7 +32,16 @@ namespace xFunc.Maths.Expressions.Statistical
         /// Initializes a new instance of the <see cref="Stdev"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public Stdev(IList<IExpression> arguments)
+        public Stdev(IEnumerable<IExpression> arguments)
+            : base(arguments)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Stdev"/> class.
+        /// </summary>
+        /// <param name="arguments">The arguments.</param>
+        public Stdev(ImmutableArray<IExpression> arguments)
             : base(arguments)
         {
         }
@@ -83,10 +93,11 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone() =>
-            new Stdev(CloneArguments());
+        public override IExpression Clone(ImmutableArray<IExpression>? arguments = null)
+            => new Stdev(arguments ?? Arguments);
     }
 }

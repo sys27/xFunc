@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
@@ -23,7 +22,7 @@ using Xunit.Sdk;
 
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
 {
-    public abstract class TypeAnalyzerBaseTests
+    public abstract class TypeAnalyzerBaseTests : BaseTest
     {
         protected readonly ITypeAnalyzer analyzer;
 
@@ -53,21 +52,6 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             Assert.Throws<DifferentParameterTypeMismatchException>(() => exp.Analyze(analyzer));
         }
-
-        protected IExpression Create(Type type, IExpression argument)
-            => (IExpression)Activator.CreateInstance(type, argument);
-
-        protected IExpression Create(Type type, IExpression left, IExpression right)
-            => (IExpression)Activator.CreateInstance(type, left, right);
-
-        protected IExpression Create(Type type, IList<IExpression> arguments)
-            => (IExpression)Activator.CreateInstance(type, arguments);
-
-        protected BinaryExpression CreateBinary(Type type, IExpression left, IExpression right)
-            => (BinaryExpression)Activator.CreateInstance(type, left, right);
-
-        protected DifferentParametersExpression CreateDiff(Type type, IList<IExpression> arguments)
-            => (DifferentParametersExpression)Activator.CreateInstance(type, arguments);
 
         protected void TestNullExp(Type type)
         {

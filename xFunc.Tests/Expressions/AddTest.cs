@@ -204,6 +204,22 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
+        public void AnalyzeNull()
+        {
+            var exp = new Add(Number.One, Number.One);
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<object>(null));
+        }
+
+        [Fact]
+        public void AnalyzeContextNull()
+        {
+            var exp = new Add(Number.One, Number.One);
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<object, object>(null, null));
+        }
+
+        [Fact]
         public void CloneTest()
         {
             var exp = new Add(Variable.X, Number.Zero);

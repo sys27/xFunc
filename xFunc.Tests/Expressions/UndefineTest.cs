@@ -43,13 +43,13 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void KeyNotSupportedTest()
         {
-            Assert.Throws<NotSupportedException>(() => new Undefine(Variable.X).Key = Number.One);
+            Assert.Throws<NotSupportedException>(() => new Undefine(Number.One));
         }
 
         [Fact]
         public void KeyNullTest()
         {
-            Assert.Throws<ArgumentNullException>(() => new Undefine(Variable.X).Key = null);
+            Assert.Throws<ArgumentNullException>(() => new Undefine(null));
         }
 
         [Fact]
@@ -101,7 +101,7 @@ namespace xFunc.Tests.Expressions
         public void UndefFuncTest()
         {
             var key1 = new UserFunction("f", new IExpression[0]);
-            var key2 = new UserFunction("f", new IExpression[1]);
+            var key2 = new UserFunction("f", new IExpression[] { Variable.X });
 
             var functions = new FunctionCollection
             {

@@ -96,14 +96,5 @@ namespace xFunc.Tests.Expressions.Angles
 
             Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
         }
-
-        [Fact]
-        public void CloneTest()
-        {
-            var exp = AngleValue.Degree(10).AsExpression();
-            var clone = exp.Clone();
-
-            Assert.Equal(exp, clone);
-        }
     }
 }

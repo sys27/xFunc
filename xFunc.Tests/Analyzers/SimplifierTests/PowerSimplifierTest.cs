@@ -26,7 +26,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var pow = new Pow(Variable.X, Number.Zero);
             var expected = Number.One;
 
-            SimpleTest(pow, expected);
+            SimplifyTest(pow, expected);
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var pow = new Pow(Number.Zero, Variable.X);
             var expected = Number.Zero;
 
-            SimpleTest(pow, expected);
+            SimplifyTest(pow, expected);
         }
 
         [Fact]
@@ -44,7 +44,24 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var pow = new Pow(Variable.X, Number.One);
             var expected = Variable.X;
 
-            SimpleTest(pow, expected);
+            SimplifyTest(pow, expected);
+        }
+
+        [Fact]
+        public void PowerArgumentSimplified()
+        {
+            var pow = new Pow(Variable.X, new Add(Number.One, Number.One));
+            var expected = new Pow(Variable.X, Number.Two);
+
+            SimplifyTest(pow, expected);
+        }
+
+        [Fact]
+        public void PowerNotSimplified()
+        {
+            var pow = new Pow(Variable.X, Variable.X);
+
+            SimplifyTest(pow, pow);
         }
 
         [Fact]
@@ -55,7 +72,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
                 new Log(new Number(30), Variable.X));
             var expected = Variable.X;
 
-            SimpleTest(pow, expected);
+            SimplifyTest(pow, expected);
         }
 
         [Fact]
@@ -66,7 +83,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
                 new Lg(Variable.X));
             var expected = Variable.X;
 
-            SimpleTest(pow, expected);
+            SimplifyTest(pow, expected);
         }
 
         [Fact]
@@ -77,7 +94,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
                 new Ln(Variable.X));
             var expected = Variable.X;
 
-            SimpleTest(pow, expected);
+            SimplifyTest(pow, expected);
         }
 
         [Fact]
@@ -88,7 +105,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
                 new Lb(Variable.X));
             var expected = Variable.X;
 
-            SimpleTest(pow, expected);
+            SimplifyTest(pow, expected);
         }
 
         [Fact]
@@ -97,15 +114,24 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var root = new Root(Variable.X, Number.One);
             var expected = Variable.X;
 
-            SimpleTest(root, expected);
+            SimplifyTest(root, expected);
         }
 
         [Fact]
-        public void Root()
+        public void RootArgumentSimplified()
+        {
+            var root = new Root(Variable.X, new Add(Number.One, Number.One));
+            var expected = new Root(Variable.X, Number.Two);
+
+            SimplifyTest(root, expected);
+        }
+
+        [Fact]
+        public void RootNotSimplified()
         {
             var root = new Root(Variable.X, new Number(5));
 
-            SimpleTest(root, root);
+            SimplifyTest(root, root);
         }
 
         [Fact]
@@ -113,7 +139,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         {
             var exp = new Exp(new Number(30));
 
-            SimpleTest(exp, exp);
+            SimplifyTest(exp, exp);
         }
 
         [Fact]
@@ -122,7 +148,16 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var exp = new Exp(new Ln(new Number(30)));
             var expected = new Number(30);
 
-            SimpleTest(exp, expected);
+            SimplifyTest(exp, expected);
+        }
+
+        [Fact]
+        public void ExpArgumentSimplified()
+        {
+            var exp = new Exp(new Add(Number.One, Number.One));
+            var expected = new Exp(Number.Two);
+
+            SimplifyTest(exp, expected);
         }
     }
 }

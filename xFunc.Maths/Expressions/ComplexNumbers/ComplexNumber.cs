@@ -147,14 +147,6 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         }
 
         /// <summary>
-        /// Clones this instance of the <see cref="IExpression" />.
-        /// </summary>
-        /// <returns>
-        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
-        /// </returns>
-        public IExpression Clone() => new ComplexNumber(Value);
-
-        /// <summary>
         /// Gets the value.
         /// </summary>
         /// <value>

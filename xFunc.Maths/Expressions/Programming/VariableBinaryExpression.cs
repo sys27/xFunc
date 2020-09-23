@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System;
-using System.Diagnostics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 
@@ -25,20 +24,15 @@ namespace xFunc.Maths.Expressions.Programming
     /// </summary>
     public abstract class VariableBinaryExpression : IExpression
     {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private Variable variable = default!;
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IExpression value = default!;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="VariableBinaryExpression"/> class.
         /// </summary>
-        /// <param name="left">The left (first) operand.</param>
+        /// <param name="variable">The left (first) operand.</param>
         /// <param name="value">The right (second) operand.</param>
-        protected VariableBinaryExpression(Variable left, IExpression value)
+        protected VariableBinaryExpression(Variable variable, IExpression value)
         {
-            Variable = left;
-            Value = value;
+            Variable = variable ?? throw new ArgumentNullException(nameof(variable));
+            Value = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         /// <summary>
@@ -56,7 +50,7 @@ namespace xFunc.Maths.Expressions.Programming
 
             var exp = (VariableBinaryExpression)obj;
 
-            return variable.Equals(exp.Variable) && value.Equals(exp.Value);
+            return Variable.Equals(exp.Variable) && Value.Equals(exp.Value);
         }
 
         /// <summary>
@@ -92,7 +86,33 @@ namespace xFunc.Maths.Expressions.Programming
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public abstract object Execute(ExpressionParameters? parameters);
+        public object Execute(ExpressionParameters? parameters)
+        {
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
+
+            var variableResult = Variable.Execute(parameters);
+            if (variableResult is double variableValue)
+            {
+                var rightResult = Value.Execute(parameters);
+                if (rightResult is double value)
+                    return parameters.Variables[Variable.Name] = Execute(variableValue, value);
+
+                throw new ResultIsNotSupportedException(this, rightResult);
+            }
+
+            throw new ResultIsNotSupportedException(this, variableResult);
+        }
+
+        /// <summary>
+        /// Executes this expression.
+        /// </summary>
+        /// <param name="variableValue">The value of variable.</param>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// A result of the execution.
+        /// </returns>
+        protected abstract object Execute(double variableValue, double value);
 
         /// <summary>
         /// Analyzes the current expression.
@@ -153,27 +173,21 @@ namespace xFunc.Maths.Expressions.Programming
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
+        /// <param name="variable">The variable argument of new expression.</param>
+        /// <param name="value">The value argument of new expression.</param>
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public abstract IExpression Clone();
+        public abstract IExpression Clone(Variable? variable = null, IExpression? value = null);
 
         /// <summary>
-        /// Gets or sets the variable.
+        /// Gets the variable.
         /// </summary>
-        public Variable Variable
-        {
-            get => variable;
-            set => variable = value ?? throw new ArgumentNullException(nameof(value));
-        }
+        public Variable Variable { get; }
 
         /// <summary>
-        /// Gets or sets the value.
+        /// Gets the value.
         /// </summary>
-        public IExpression Value
-        {
-            get => value;
-            set => this.value = value ?? throw new ArgumentNullException(nameof(value));
-        }
+        public IExpression Value { get; }
     }
 }

@@ -43,7 +43,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.</returns>
         public bool Equals(Angle? other)
         {
-            if (ReferenceEquals(null, other))
+            if (other is null)
                 return false;
 
             if (ReferenceEquals(this, other))
@@ -59,7 +59,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.</returns>
         public override bool Equals(object? obj)
         {
-            if (ReferenceEquals(null, obj))
+            if (obj is null)
                 return false;
 
             if (ReferenceEquals(this, obj))
@@ -146,13 +146,6 @@ namespace xFunc.Maths.Expressions.Angles
 
             return analyzer.Analyze(this, context);
         }
-
-        /// <summary>
-        /// Clones this instance of the <see cref="Angle"/> class.
-        /// </summary>
-        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public IExpression Clone()
-            => new Angle(Value);
 
         /// <summary>
         /// Gets an angle.

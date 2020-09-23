@@ -15,47 +15,35 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Collections.Immutable;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
-using xFunc.Maths.Expressions.Collections;
 
 namespace xFunc.Maths.Expressions
 {
     /// <summary>
-    /// Represents user-defined functions.
+    /// Represents the user-defined function.
     /// </summary>
-    public class UserFunction : IExpression
+    public class UserFunction : DifferentParametersExpression
     {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly IList<IExpression> arguments;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserFunction"/> class.
+        /// </summary>
+        /// <param name="function">The name of function.</param>
+        /// <param name="arguments">Arguments.</param>
+        public UserFunction(string function, IEnumerable<IExpression> arguments)
+            : this(function, arguments.ToImmutableArray())
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserFunction"/> class.
         /// </summary>
         /// <param name="function">The name of function.</param>
         /// <param name="arguments">Arguments.</param>
-        public UserFunction(string function, IList<IExpression> arguments)
-        {
-            Function = function;
-
-            this.arguments = arguments ??
-                             throw new ArgumentNullException(nameof(arguments));
-        }
-
-        /// <summary>
-        /// Gets or sets the <see cref="IExpression"/> at the specified index.
-        /// </summary>
-        /// <value>
-        /// The <see cref="IExpression"/>.
-        /// </value>
-        /// <param name="index">The index.</param>
-        /// <returns>The argument.</returns>
-        public IExpression this[int index]
-        {
-            get => arguments[index];
-            set => arguments[index] = value ?? throw new ArgumentNullException(nameof(value));
-        }
+        public UserFunction(string function, ImmutableArray<IExpression> arguments)
+            : base(arguments)
+            => Function = function;
 
         /// <summary>
         /// Determines whether the specified <see cref="object" /> is equal to this instance.
@@ -63,11 +51,9 @@ namespace xFunc.Maths.Expressions
         /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
         /// <returns><c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object? obj)
-        {
-            return obj is UserFunction exp &&
-                   Function == exp.Function &&
-                   ParametersCount == exp.ParametersCount;
-        }
+            => obj is UserFunction exp &&
+               Function == exp.Function &&
+               ParametersCount == exp.ParametersCount;
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -75,17 +61,8 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
-        public override int GetHashCode() =>
-            HashCode.Combine(Function, ParametersCount);
-
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <param name="formatter">The formatter.</param>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
-        public string ToString(IFormatter formatter) => Analyze(formatter);
+        public override int GetHashCode()
+            => HashCode.Combine(Function, ParametersCount);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
@@ -96,23 +73,14 @@ namespace xFunc.Maths.Expressions
         public override string ToString() => ToString(new CommonFormatter());
 
         /// <summary>
-        /// Executes this expression. Don't use this method if your expression has variables or user-functions.
-        /// </summary>
-        /// <returns>
-        /// A result of the execution.
-        /// </returns>
-        public object Execute() => Execute(null);
-
-        /// <summary>
-        /// Executes the user function.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        /// <exception cref="ArgumentNullException"><paramref name="parameters"/> is null.</exception>
         /// <seealso cref="ExpressionParameters" />
-        public object Execute(ExpressionParameters? parameters)
+        public override object Execute(ExpressionParameters? parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
@@ -121,8 +89,8 @@ namespace xFunc.Maths.Expressions
 
             var newParams = new ExpressionParameters(parameters);
             for (var i = 0; i < ParametersCount; i++)
-                if (func.arguments[i] is Variable arg)
-                    newParams.Variables[arg.Name] = arguments[i].Execute(parameters);
+                if (func.Arguments[i] is Variable arg)
+                    newParams.Variables[arg.Name] = Arguments[i].Execute(parameters);
 
             return parameters.Functions[this].Execute(newParams);
         }
@@ -135,13 +103,8 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            if (analyzer == null)
-                throw new ArgumentNullException(nameof(analyzer));
-
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+            => analyzer.Analyze(this);
 
         /// <summary>
         /// Analyzes the current expression.
@@ -151,34 +114,20 @@ namespace xFunc.Maths.Expressions
         /// <param name="analyzer">The analyzer.</param>
         /// <param name="context">The context.</param>
         /// <returns>The analysis result.</returns>
-        public TResult Analyze<TResult, TContext>(
+        private protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
-        {
-            if (analyzer == null)
-                throw new ArgumentNullException(nameof(analyzer));
-
-            return analyzer.Analyze(this, context);
-        }
+            => analyzer.Analyze(this, context);
 
         /// <summary>
-        /// Clones this instance.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public IExpression Clone()
-        {
-            var args = new IExpression[ParametersCount];
-            for (var i = 0; i < ParametersCount; i++)
-                args[i] = arguments[i].Clone();
-
-            return new UserFunction(Function, args);
-        }
-
-        /// <summary>
-        /// Gets the arguments.
-        /// </summary>
-        /// <value>The arguments.</value>
-        public IEnumerable<IExpression> Arguments => arguments;
+        /// <param name="arguments">The list of arguments.</param>
+        /// <returns>
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
+        /// </returns>
+        public override IExpression Clone(ImmutableArray<IExpression>? arguments = null)
+            => new UserFunction(Function, arguments ?? Arguments);
 
         /// <summary>
         /// Gets the name of function.
@@ -187,11 +136,19 @@ namespace xFunc.Maths.Expressions
         public string Function { get; }
 
         /// <summary>
-        /// Gets the count of parameters.
+        /// Gets the minimum count of parameters.
         /// </summary>
         /// <value>
-        /// The count of parameters.
+        /// The minimum count of parameters.
         /// </value>
-        public int ParametersCount => arguments.Count;
+        public override int? MinParametersCount => null;
+
+        /// <summary>
+        /// Gets the maximum count of parameters. <c>null</c> - Infinity.
+        /// </summary>
+        /// <value>
+        /// The maximum count of parameters.
+        /// </value>
+        public override int? MaxParametersCount => null;
     }
 }

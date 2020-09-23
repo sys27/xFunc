@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System;
-using System.Diagnostics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 
@@ -25,17 +24,12 @@ namespace xFunc.Maths.Expressions.Programming
     /// </summary>
     public abstract class VariableUnaryExpression : IExpression
     {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private Variable variable = default!;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="VariableUnaryExpression"/> class.
         /// </summary>
-        /// <param name="argument">The expression.</param>
-        protected VariableUnaryExpression(Variable argument)
-        {
-            Variable = argument;
-        }
+        /// <param name="variable">The expression.</param>
+        protected VariableUnaryExpression(Variable variable)
+            => Variable = variable ?? throw new ArgumentNullException(nameof(variable));
 
         /// <summary>
         /// Determines whether the specified <see cref="object" /> is equal to this instance.
@@ -50,7 +44,7 @@ namespace xFunc.Maths.Expressions.Programming
             if (obj == null || GetType() != obj.GetType())
                 return false;
 
-            return variable.Equals(((VariableUnaryExpression)obj).Variable);
+            return Variable.Equals(((VariableUnaryExpression)obj).Variable);
         }
 
         /// <summary>
@@ -86,7 +80,26 @@ namespace xFunc.Maths.Expressions.Programming
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public abstract object Execute(ExpressionParameters? parameters);
+        public object Execute(ExpressionParameters? parameters)
+        {
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
+
+            var result = Variable.Execute(parameters);
+            if (result is double value)
+                return parameters.Variables[Variable.Name] = Execute(value);
+
+            throw new ResultIsNotSupportedException(this, result);
+        }
+
+        /// <summary>
+        /// Executes this expression.
+        /// </summary>
+        /// <param name="value">The value of variable.</param>
+        /// <returns>
+        /// A result of the execution.
+        /// </returns>
+        protected abstract object Execute(double value);
 
         /// <summary>
         /// Analyzes the current expression.
@@ -147,19 +160,16 @@ namespace xFunc.Maths.Expressions.Programming
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
+        /// <param name="variable">The argument of new expression.</param>
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public abstract IExpression Clone();
+        public abstract IExpression Clone(Variable? variable = null);
 
         /// <summary>
-        /// Gets or sets the variable.
+        /// Gets the variable.
         /// </summary>
         /// <value>The variable.</value>
-        public Variable Variable
-        {
-            get => variable;
-            set => variable = value ?? throw new ArgumentNullException(nameof(value));
-        }
+        public Variable Variable { get; }
     }
 }

@@ -27,79 +27,63 @@ namespace xFunc.Tests
         [Fact]
         public void ExpCtorTest()
         {
-            var builder = new Builder((IExpression)Number.Two);
+            var exp = new Builder((IExpression)Number.Two).Expression;
 
-            Assert.Equal(builder.Current, Number.Two);
+            Assert.Equal(exp, Number.Two);
         }
 
         [Fact]
         public void NumberCtorTest()
         {
-            var builder = new Builder(2);
+            var exp = new Builder(2).Expression;
 
-            Assert.Equal(builder.Current, Number.Two);
+            Assert.Equal(exp, Number.Two);
         }
 
         [Fact]
         public void VariableCtorTest()
         {
-            var builder = new Builder("x");
+            var exp = new Builder("x").Expression;
 
-            Assert.Equal(builder.Current, Variable.X);
-        }
-
-        [Fact]
-        public void CreateExpCtorTest()
-        {
-            var builder = Builder.Create((IExpression)Number.Two);
-
-            Assert.Equal(builder.Current, Number.Two);
-        }
-
-        [Fact]
-        public void CreateNumberCtorTest()
-        {
-            var builder = Builder.Create(2);
-
-            Assert.Equal(builder.Current, Number.Two);
-        }
-
-        [Fact]
-        public void CreateVariableCtorTest()
-        {
-            var builder = Builder.Create("x");
-
-            Assert.Equal(builder.Current, Variable.X);
+            Assert.Equal(exp, Variable.X);
         }
 
         [Fact]
         public void ExpressionTest()
         {
-            var builder = new Builder(3).Expression(exp => new Sin(exp));
+            var exp = new Builder(3)
+                .Custom(exp => new Sin(exp))
+                .Expression;
 
-            Assert.Equal(builder.Current, new Sin(new Number(3)));
+            Assert.Equal(exp, new Sin(new Number(3)));
         }
 
         [Fact]
         public void ExpressionNullTest()
         {
-            Assert.Throws<ArgumentNullException>(() => new Builder(3).Expression(null));
+            var builder = new Builder(3);
+
+            Assert.Throws<ArgumentNullException>(() => builder.Custom(null));
         }
 
         [Fact]
         public void ExecuteTest()
         {
-            var builder = new Builder(3).Add(2);
+            var exp = new Builder(3)
+                .Add(2)
+                .Expression;
 
-            Assert.Equal(5.0, builder.Execute());
+            Assert.Equal(5.0, exp.Execute());
         }
 
         [Fact]
         public void ExecuteWithParamsTest()
         {
-            var builder = new Builder(3).Add(2);
+            var exp = new Builder(3)
+                .Add(2)
+                .Expression;
 
-            Assert.Equal(5.0, builder.Execute(new ExpressionParameters()));
+            Assert.Equal(5.0, exp.Execute(new ExpressionParameters()));
         }
 
         [Fact]
@@ -115,7 +99,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Add((IExpression)Number.Two);
 
-            Assert.Equal(builder.Current, new Add(new Number(3), Number.Two));
+            Assert.Equal(builder.Expression, new Add(new Number(3), Number.Two));
         }
 
         [Fact]
@@ -123,7 +107,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Add(2);
 
-            Assert.Equal(builder.Current, new Add(new Number(3), Number.Two));
+            Assert.Equal(builder.Expression, new Add(new Number(3), Number.Two));
         }
 
         [Fact]
@@ -131,7 +115,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Add("x");
 
-            Assert.Equal(builder.Current, new Add(new Number(3), Variable.X));
+            Assert.Equal(builder.Expression, new Add(new Number(3), Variable.X));
         }
 
         [Fact]
@@ -139,7 +123,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Sub((IExpression)Number.Two);
 
-            Assert.Equal(builder.Current, new Sub(new Number(3), Number.Two));
+            Assert.Equal(builder.Expression, new Sub(new Number(3), Number.Two));
         }
 
         [Fact]
@@ -147,7 +131,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Sub(2);
 
-            Assert.Equal(builder.Current, new Sub(new Number(3), Number.Two));
+            Assert.Equal(builder.Expression, new Sub(new Number(3), Number.Two));
         }
 
         [Fact]
@@ -155,7 +139,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Sub("x");
 
-            Assert.Equal(builder.Current, new Sub(new Number(3), Variable.X));
+            Assert.Equal(builder.Expression, new Sub(new Number(3), Variable.X));
         }
 
         [Fact]
@@ -163,7 +147,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Mul((IExpression)Number.Two);
 
-            Assert.Equal(builder.Current, new Mul(new Number(3), Number.Two));
+            Assert.Equal(builder.Expression, new Mul(new Number(3), Number.Two));
         }
 
         [Fact]
@@ -171,7 +155,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Mul(2);
 
-            Assert.Equal(builder.Current, new Mul(new Number(3), Number.Two));
+            Assert.Equal(builder.Expression, new Mul(new Number(3), Number.Two));
         }
 
         [Fact]
@@ -179,7 +163,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Mul("x");
 
-            Assert.Equal(builder.Current, new Mul(new Number(3), Variable.X));
+            Assert.Equal(builder.Expression, new Mul(new Number(3), Variable.X));
         }
 
         [Fact]
@@ -187,7 +171,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Div((IExpression)Number.Two);
 
-            Assert.Equal(builder.Current, new Div(new Number(3), Number.Two));
+            Assert.Equal(builder.Expression, new Div(new Number(3), Number.Two));
         }
 
         [Fact]
@@ -195,7 +179,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Div(2);
 
-            Assert.Equal(builder.Current, new Div(new Number(3), Number.Two));
+            Assert.Equal(builder.Expression, new Div(new Number(3), Number.Two));
         }
 
         [Fact]
@@ -203,7 +187,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Div("x");
 
-            Assert.Equal(builder.Current, new Div(new Number(3), Variable.X));
+            Assert.Equal(builder.Expression, new Div(new Number(3), Variable.X));
         }
 
         [Fact]
@@ -211,7 +195,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Pow((IExpression)Number.Two);
 
-            Assert.Equal(builder.Current, new Pow(new Number(3), Number.Two));
+            Assert.Equal(builder.Expression, new Pow(new Number(3), Number.Two));
         }
 
         [Fact]
@@ -219,7 +203,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Pow(2);
 
-            Assert.Equal(builder.Current, new Pow(new Number(3), Number.Two));
+            Assert.Equal(builder.Expression, new Pow(new Number(3), Number.Two));
         }
 
         [Fact]
@@ -227,7 +211,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Pow("x");
 
-            Assert.Equal(builder.Current, new Pow(new Number(3), Variable.X));
+            Assert.Equal(builder.Expression, new Pow(new Number(3), Variable.X));
         }
 
         [Fact]
@@ -235,7 +219,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Sqrt();
 
-            Assert.Equal(builder.Current, new Sqrt(new Number(3)));
+            Assert.Equal(builder.Expression, new Sqrt(new Number(3)));
         }
 
         [Fact]
@@ -243,7 +227,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Root((IExpression)Number.Two);
 
-            Assert.Equal(builder.Current, new Root(new Number(3), Number.Two));
+            Assert.Equal(builder.Expression, new Root(new Number(3), Number.Two));
         }
 
         [Fact]
@@ -251,7 +235,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Root(2);
 
-            Assert.Equal(builder.Current, new Root(new Number(3), Number.Two));
+            Assert.Equal(builder.Expression, new Root(new Number(3), Number.Two));
         }
 
         [Fact]
@@ -259,7 +243,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Root("x");
 
-            Assert.Equal(builder.Current, new Root(new Number(3), Variable.X));
+            Assert.Equal(builder.Expression, new Root(new Number(3), Variable.X));
         }
 
         [Fact]
@@ -267,7 +251,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Abs();
 
-            Assert.Equal(builder.Current, new Abs(new Number(3)));
+            Assert.Equal(builder.Expression, new Abs(new Number(3)));
         }
 
         [Fact]
@@ -275,7 +259,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Log((IExpression)Number.Two);
 
-            Assert.Equal(builder.Current, new Log(Number.Two, new Number(3)));
+            Assert.Equal(builder.Expression, new Log(Number.Two, new Number(3)));
         }
 
         [Fact]
@@ -283,7 +267,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Log(2);
 
-            Assert.Equal(builder.Current, new Log(Number.Two, new Number(3)));
+            Assert.Equal(builder.Expression, new Log(Number.Two, new Number(3)));
         }
 
         [Fact]
@@ -291,7 +275,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Log("x");
 
-            Assert.Equal(builder.Current, new Log(Variable.X, new Number(3)));
+            Assert.Equal(builder.Expression, new Log(Variable.X, new Number(3)));
         }
 
         [Fact]
@@ -299,7 +283,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Ln();
 
-            Assert.Equal(builder.Current, new Ln(new Number(3)));
+            Assert.Equal(builder.Expression, new Ln(new Number(3)));
         }
 
         [Fact]
@@ -307,7 +291,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Lg();
 
-            Assert.Equal(builder.Current, new Lg(new Number(3)));
+            Assert.Equal(builder.Expression, new Lg(new Number(3)));
         }
 
         [Fact]
@@ -315,7 +299,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Lb();
 
-            Assert.Equal(builder.Current, new Lb(new Number(3)));
+            Assert.Equal(builder.Expression, new Lb(new Number(3)));
         }
 
         [Fact]
@@ -323,7 +307,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Exp();
 
-            Assert.Equal(builder.Current, new Exp(new Number(3)));
+            Assert.Equal(builder.Expression, new Exp(new Number(3)));
         }
 
         #endregion Standart
@@ -335,7 +319,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Sin();
 
-            Assert.Equal(builder.Current, new Sin(new Number(3)));
+            Assert.Equal(builder.Expression, new Sin(new Number(3)));
         }
 
         [Fact]
@@ -343,7 +327,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Cos();
 
-            Assert.Equal(builder.Current, new Cos(new Number(3)));
+            Assert.Equal(builder.Expression, new Cos(new Number(3)));
         }
 
         [Fact]
@@ -351,7 +335,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Tan();
 
-            Assert.Equal(builder.Current, new Tan(new Number(3)));
+            Assert.Equal(builder.Expression, new Tan(new Number(3)));
         }
 
         [Fact]
@@ -359,7 +343,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Cot();
 
-            Assert.Equal(builder.Current, new Cot(new Number(3)));
+            Assert.Equal(builder.Expression, new Cot(new Number(3)));
         }
 
         [Fact]
@@ -367,7 +351,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Sec();
 
-            Assert.Equal(builder.Current, new Sec(new Number(3)));
+            Assert.Equal(builder.Expression, new Sec(new Number(3)));
         }
 
         [Fact]
@@ -375,7 +359,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Csc();
 
-            Assert.Equal(builder.Current, new Csc(new Number(3)));
+            Assert.Equal(builder.Expression, new Csc(new Number(3)));
         }
 
         [Fact]
@@ -383,7 +367,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Arcsin();
 
-            Assert.Equal(builder.Current, new Arcsin(new Number(3)));
+            Assert.Equal(builder.Expression, new Arcsin(new Number(3)));
         }
 
         [Fact]
@@ -391,7 +375,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Arccos();
 
-            Assert.Equal(builder.Current, new Arccos(new Number(3)));
+            Assert.Equal(builder.Expression, new Arccos(new Number(3)));
         }
 
         [Fact]
@@ -399,7 +383,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Arctan();
 
-            Assert.Equal(builder.Current, new Arctan(new Number(3)));
+            Assert.Equal(builder.Expression, new Arctan(new Number(3)));
         }
 
         [Fact]
@@ -407,7 +391,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Arccot();
 
-            Assert.Equal(builder.Current, new Arccot(new Number(3)));
+            Assert.Equal(builder.Expression, new Arccot(new Number(3)));
         }
 
         [Fact]
@@ -415,7 +399,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Arcsec();
 
-            Assert.Equal(builder.Current, new Arcsec(new Number(3)));
+            Assert.Equal(builder.Expression, new Arcsec(new Number(3)));
         }
 
         [Fact]
@@ -423,7 +407,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Arccsc();
 
-            Assert.Equal(builder.Current, new Arccsc(new Number(3)));
+            Assert.Equal(builder.Expression, new Arccsc(new Number(3)));
         }
 
         #endregion Trigonometric
@@ -435,7 +419,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Sinh();
 
-            Assert.Equal(builder.Current, new Sinh(new Number(3)));
+            Assert.Equal(builder.Expression, new Sinh(new Number(3)));
         }
 
         [Fact]
@@ -443,7 +427,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Cosh();
 
-            Assert.Equal(builder.Current, new Cosh(new Number(3)));
+            Assert.Equal(builder.Expression, new Cosh(new Number(3)));
         }
 
         [Fact]
@@ -451,7 +435,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Tanh();
 
-            Assert.Equal(builder.Current, new Tanh(new Number(3)));
+            Assert.Equal(builder.Expression, new Tanh(new Number(3)));
         }
 
         [Fact]
@@ -459,7 +443,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Coth();
 
-            Assert.Equal(builder.Current, new Coth(new Number(3)));
+            Assert.Equal(builder.Expression, new Coth(new Number(3)));
         }
 
         [Fact]
@@ -467,7 +451,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Sech();
 
-            Assert.Equal(builder.Current, new Sech(new Number(3)));
+            Assert.Equal(builder.Expression, new Sech(new Number(3)));
         }
 
         [Fact]
@@ -475,7 +459,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Csch();
 
-            Assert.Equal(builder.Current, new Csch(new Number(3)));
+            Assert.Equal(builder.Expression, new Csch(new Number(3)));
         }
 
         [Fact]
@@ -483,7 +467,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Arsinh();
 
-            Assert.Equal(builder.Current, new Arsinh(new Number(3)));
+            Assert.Equal(builder.Expression, new Arsinh(new Number(3)));
         }
 
         [Fact]
@@ -491,7 +475,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Arcosh();
 
-            Assert.Equal(builder.Current, new Arcosh(new Number(3)));
+            Assert.Equal(builder.Expression, new Arcosh(new Number(3)));
         }
 
         [Fact]
@@ -499,7 +483,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Artanh();
 
-            Assert.Equal(builder.Current, new Artanh(new Number(3)));
+            Assert.Equal(builder.Expression, new Artanh(new Number(3)));
         }
 
         [Fact]
@@ -507,7 +491,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Arcoth();
 
-            Assert.Equal(builder.Current, new Arcoth(new Number(3)));
+            Assert.Equal(builder.Expression, new Arcoth(new Number(3)));
         }
 
         [Fact]
@@ -515,7 +499,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Arsech();
 
-            Assert.Equal(builder.Current, new Arsech(new Number(3)));
+            Assert.Equal(builder.Expression, new Arsech(new Number(3)));
         }
 
         [Fact]
@@ -523,7 +507,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Arcsch();
 
-            Assert.Equal(builder.Current, new Arcsch(new Number(3)));
+            Assert.Equal(builder.Expression, new Arcsch(new Number(3)));
         }
 
         #endregion Hyperbolic

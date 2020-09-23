@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions.Statistical
@@ -28,7 +29,16 @@ namespace xFunc.Maths.Expressions.Statistical
         /// Initializes a new instance of the <see cref="StatisticalExpression"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        protected StatisticalExpression(IList<IExpression> arguments)
+        protected StatisticalExpression(IEnumerable<IExpression> arguments)
+            : base(arguments)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StatisticalExpression"/> class.
+        /// </summary>
+        /// <param name="arguments">The arguments.</param>
+        protected StatisticalExpression(ImmutableArray<IExpression> arguments)
             : base(arguments)
         {
         }

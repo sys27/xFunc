@@ -57,14 +57,5 @@ namespace xFunc.Tests.Expressions.Statistical
 
             Assert.Equal(2.94392028877595, result, 14);
         }
-
-        [Fact]
-        public void CloneTest()
-        {
-            var exp = new Stdevp(new[] { Number.One, Number.Two });
-            var clone = exp.Clone();
-
-            Assert.Equal(exp, clone);
-        }
     }
 }

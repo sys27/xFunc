@@ -50,7 +50,7 @@ namespace xFunc.Maths.Analyzers
 
             return new Mul(
                 exp.Argument.Analyze(this, context),
-                new Div(exp.Argument.Clone(), exp.Clone()));
+                new Div(exp.Argument, exp));
         }
 
         /// <summary>
@@ -130,17 +130,17 @@ namespace xFunc.Maths.Analyzers
                 (true, true) =>
                     new Div(
                         new Sub(
-                            new Mul(exp.Left.Analyze(this, context), exp.Right.Clone()),
-                            new Mul(exp.Left.Clone(), exp.Right.Analyze(this, context))),
-                        new Pow(exp.Right.Clone(), Number.Two)),
+                            new Mul(exp.Left.Analyze(this, context), exp.Right),
+                            new Mul(exp.Left, exp.Right.Analyze(this, context))),
+                        new Pow(exp.Right, Number.Two)),
 
                 (true, _) =>
-                    new Div(exp.Left.Analyze(this, context), exp.Right.Clone()),
+                    new Div(exp.Left.Analyze(this, context), exp.Right),
 
                 (_, true) =>
                     new Div(
-                        new UnaryMinus(new Mul(exp.Left.Clone(), exp.Right.Analyze(this, context))),
-                        new Pow(exp.Right.Clone(), Number.Two)),
+                        new UnaryMinus(new Mul(exp.Left, exp.Right.Analyze(this, context))),
+                        new Pow(exp.Right, Number.Two)),
 
                 _ => Number.Zero,
             };
@@ -164,7 +164,7 @@ namespace xFunc.Maths.Analyzers
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
-            return new Mul(exp.Argument.Analyze(this, context), exp.Clone());
+            return new Mul(exp.Argument.Analyze(this, context), exp);
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace xFunc.Maths.Analyzers
             return new Div(
                 exp.Argument.Analyze(this, context),
                 new Mul(
-                    exp.Argument.Clone(),
+                    exp.Argument,
                     new Ln(Number.Two)));
         }
 
@@ -213,7 +213,7 @@ namespace xFunc.Maths.Analyzers
             return new Div(
                 exp.Argument.Analyze(this, context),
                 new Mul(
-                    exp.Argument.Clone(),
+                    exp.Argument,
                     new Ln(new Number(10))));
         }
 
@@ -235,7 +235,7 @@ namespace xFunc.Maths.Analyzers
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
-            return new Div(exp.Argument.Analyze(this, context), exp.Argument.Clone());
+            return new Div(exp.Argument.Analyze(this, context), exp.Argument);
         }
 
         /// <summary>
@@ -256,8 +256,8 @@ namespace xFunc.Maths.Analyzers
             if (Helpers.HasVariable(exp.Left, context.Variable))
             {
                 var div = new Div(
-                    new Ln(exp.Right.Clone()),
-                    new Ln(exp.Left.Clone()));
+                    new Ln(exp.Right),
+                    new Ln(exp.Left));
 
                 return Analyze(div, context);
             }
@@ -267,8 +267,8 @@ namespace xFunc.Maths.Analyzers
                 return new Div(
                     exp.Right.Analyze(this, context),
                     new Mul(
-                        exp.Right.Clone(),
-                        new Ln(exp.Left.Clone())));
+                        exp.Right,
+                        new Ln(exp.Left)));
             }
 
             return Number.Zero;
@@ -296,14 +296,14 @@ namespace xFunc.Maths.Analyzers
             {
                 (true, true) =>
                     new Add(
-                        new Mul(exp.Left.Analyze(this, context), exp.Right.Clone()),
-                        new Mul(exp.Left.Clone(), exp.Right.Analyze(this, context))),
+                        new Mul(exp.Left.Analyze(this, context), exp.Right),
+                        new Mul(exp.Left, exp.Right.Analyze(this, context))),
 
                 (true, _) =>
-                    new Mul(exp.Left.Analyze(this, context), exp.Right.Clone()),
+                    new Mul(exp.Left.Analyze(this, context), exp.Right),
 
                 (_, true) =>
-                    new Mul(exp.Left.Clone(), exp.Right.Analyze(this, context)),
+                    new Mul(exp.Left, exp.Right.Analyze(this, context)),
 
                 _ => Number.Zero,
             };
@@ -365,18 +365,18 @@ namespace xFunc.Maths.Analyzers
                 return new Mul(
                     exp.Left.Analyze(this, context),
                     new Mul(
-                        exp.Right.Clone(),
+                        exp.Right,
                         new Pow(
-                            exp.Left.Clone(),
-                            new Sub(exp.Right.Clone(), Number.One))));
+                            exp.Left,
+                            new Sub(exp.Right, Number.One))));
             }
 
             if (Helpers.HasVariable(exp.Right, context.Variable))
             {
                 return new Mul(
                     new Mul(
-                        new Ln(exp.Left.Clone()),
-                        exp.Clone()),
+                        new Ln(exp.Left),
+                        exp),
                     exp.Right.Analyze(this, context));
             }
 
@@ -402,8 +402,8 @@ namespace xFunc.Maths.Analyzers
                 return Number.Zero;
 
             var pow = new Pow(
-                exp.Left.Clone(),
-                new Div(Number.One, exp.Right.Clone()));
+                exp.Left,
+                new Div(Number.One, exp.Right));
 
             return Analyze(pow, context);
         }
@@ -449,7 +449,7 @@ namespace xFunc.Maths.Analyzers
 
             return new Div(
                 exp.Argument.Analyze(this, context),
-                new Mul(Number.Two, exp.Clone()));
+                new Mul(Number.Two, exp));
         }
 
         /// <summary>
@@ -539,7 +539,7 @@ namespace xFunc.Maths.Analyzers
             if (exp.Equals(context.Variable))
                 return Number.One;
 
-            return exp.Clone();
+            return exp;
         }
 
         #endregion Standard
@@ -570,7 +570,7 @@ namespace xFunc.Maths.Analyzers
                     new Sqrt(
                         new Sub(
                             Number.One,
-                            new Pow(exp.Argument.Clone(), Number.Two)))));
+                            new Pow(exp.Argument, Number.Two)))));
         }
 
         /// <summary>
@@ -596,7 +596,7 @@ namespace xFunc.Maths.Analyzers
                     exp.Argument.Analyze(this, context),
                     new Add(
                         Number.One,
-                        new Pow(exp.Argument.Clone(), Number.Two))));
+                        new Pow(exp.Argument, Number.Two))));
         }
 
         /// <summary>
@@ -621,10 +621,10 @@ namespace xFunc.Maths.Analyzers
                 new Div(
                     exp.Argument.Analyze(this, context),
                     new Mul(
-                        new Abs(exp.Argument.Clone()),
+                        new Abs(exp.Argument),
                         new Sqrt(
                             new Sub(
-                                new Pow(exp.Argument.Clone(), Number.Two),
+                                new Pow(exp.Argument, Number.Two),
                                 Number.One)))));
         }
 
@@ -649,10 +649,10 @@ namespace xFunc.Maths.Analyzers
             return new Div(
                 exp.Argument.Analyze(this, context),
                 new Mul(
-                    new Abs(exp.Argument.Clone()),
+                    new Abs(exp.Argument),
                     new Sqrt(
                         new Sub(
-                            new Pow(exp.Argument.Clone(), Number.Two),
+                            new Pow(exp.Argument, Number.Two),
                             Number.One))));
         }
 
@@ -679,7 +679,7 @@ namespace xFunc.Maths.Analyzers
                 new Sqrt(
                     new Sub(
                         Number.One,
-                        new Pow(exp.Argument.Clone(), Number.Two))));
+                        new Pow(exp.Argument, Number.Two))));
         }
 
         /// <summary>
@@ -704,7 +704,7 @@ namespace xFunc.Maths.Analyzers
                 exp.Argument.Analyze(this, context),
                 new Add(
                     Number.One,
-                    new Pow(exp.Argument.Clone(), Number.Two)));
+                    new Pow(exp.Argument, Number.Two)));
         }
 
         /// <summary>
@@ -727,7 +727,7 @@ namespace xFunc.Maths.Analyzers
 
             return new UnaryMinus(
                 new Mul(
-                    new Sin(exp.Argument.Clone()),
+                    new Sin(exp.Argument),
                     exp.Argument.Analyze(this, context)));
         }
 
@@ -753,7 +753,7 @@ namespace xFunc.Maths.Analyzers
                 new Div(
                     exp.Argument.Analyze(this, context),
                     new Pow(
-                        new Sin(exp.Argument.Clone()),
+                        new Sin(exp.Argument),
                         Number.Two)));
         }
 
@@ -775,8 +775,8 @@ namespace xFunc.Maths.Analyzers
             return new Mul(
                 new UnaryMinus(exp.Argument.Analyze(this, context)),
                 new Mul(
-                    new Cot(exp.Argument.Clone()),
-                    new Csc(exp.Argument.Clone())));
+                    new Cot(exp.Argument),
+                    new Csc(exp.Argument)));
         }
 
         /// <summary>
@@ -800,8 +800,8 @@ namespace xFunc.Maths.Analyzers
             return new Mul(
                 exp.Argument.Analyze(this, context),
                 new Mul(
-                    new Tan(exp.Argument.Clone()),
-                    new Sec(exp.Argument.Clone())));
+                    new Tan(exp.Argument),
+                    new Sec(exp.Argument)));
         }
 
         /// <summary>
@@ -823,7 +823,7 @@ namespace xFunc.Maths.Analyzers
                 return Number.Zero;
 
             return new Mul(
-                new Cos(exp.Argument.Clone()),
+                new Cos(exp.Argument),
                 exp.Argument.Analyze(this, context));
         }
 
@@ -848,7 +848,7 @@ namespace xFunc.Maths.Analyzers
             return new Div(
                 exp.Argument.Analyze(this, context),
                 new Pow(
-                    new Cos(exp.Argument.Clone()),
+                    new Cos(exp.Argument),
                     Number.Two));
         }
 
@@ -878,7 +878,7 @@ namespace xFunc.Maths.Analyzers
                 exp.Argument.Analyze(this, context),
                 new Sqrt(
                     new Sub(
-                        new Pow(exp.Argument.Clone(), Number.Two),
+                        new Pow(exp.Argument, Number.Two),
                         Number.One)));
         }
 
@@ -904,7 +904,7 @@ namespace xFunc.Maths.Analyzers
                 exp.Argument.Analyze(this, context),
                 new Sub(
                     Number.One,
-                    new Pow(exp.Argument.Clone(), Number.Two)));
+                    new Pow(exp.Argument, Number.Two)));
         }
 
         /// <summary>
@@ -929,11 +929,11 @@ namespace xFunc.Maths.Analyzers
                 new Div(
                     exp.Argument.Analyze(this, context),
                     new Mul(
-                        new Abs(exp.Argument.Clone()),
+                        new Abs(exp.Argument),
                         new Sqrt(
                             new Add(
                                 Number.One,
-                                new Pow(exp.Argument.Clone(), Number.Two))))));
+                                new Pow(exp.Argument, Number.Two))))));
         }
 
         /// <summary>
@@ -955,11 +955,11 @@ namespace xFunc.Maths.Analyzers
                 new Div(
                     exp.Argument.Analyze(this, context),
                     new Mul(
-                        exp.Argument.Clone(),
+                        exp.Argument,
                         new Sqrt(
                             new Sub(
                                 Number.One,
-                                new Pow(exp.Argument.Clone(), Number.Two))))));
+                                new Pow(exp.Argument, Number.Two))))));
         }
 
         /// <summary>
@@ -984,7 +984,7 @@ namespace xFunc.Maths.Analyzers
                 exp.Argument.Analyze(this, context),
                 new Sqrt(
                     new Add(
-                        new Pow(exp.Argument.Clone(), Number.Two),
+                        new Pow(exp.Argument, Number.Two),
                         Number.One)));
         }
 
@@ -1010,7 +1010,7 @@ namespace xFunc.Maths.Analyzers
                 exp.Argument.Analyze(this, context),
                 new Sub(
                     Number.One,
-                    new Pow(exp.Argument.Clone(), Number.Two)));
+                    new Pow(exp.Argument, Number.Two)));
         }
 
         /// <summary>
@@ -1033,7 +1033,7 @@ namespace xFunc.Maths.Analyzers
 
             return new Mul(
                 exp.Argument.Analyze(this, context),
-                new Sinh(exp.Argument.Clone()));
+                new Sinh(exp.Argument));
         }
 
         /// <summary>
@@ -1058,7 +1058,7 @@ namespace xFunc.Maths.Analyzers
                 new Div(
                     exp.Argument.Analyze(this, context),
                     new Pow(
-                        new Sinh(exp.Argument.Clone()),
+                        new Sinh(exp.Argument),
                         Number.Two)));
         }
 
@@ -1084,8 +1084,8 @@ namespace xFunc.Maths.Analyzers
                 new Mul(
                     exp.Argument.Analyze(this, context),
                     new Mul(
-                        new Coth(exp.Argument.Clone()),
-                        exp.Clone())));
+                        new Coth(exp.Argument),
+                        exp)));
         }
 
         /// <summary>
@@ -1110,8 +1110,8 @@ namespace xFunc.Maths.Analyzers
                 new Mul(
                     exp.Argument.Analyze(this, context),
                     new Mul(
-                        new Tanh(exp.Argument.Clone()),
-                        exp.Clone())));
+                        new Tanh(exp.Argument),
+                        exp)));
         }
 
         /// <summary>
@@ -1134,7 +1134,7 @@ namespace xFunc.Maths.Analyzers
 
             return new Mul(
                 exp.Argument.Analyze(this, context),
-                new Cosh(exp.Argument.Clone()));
+                new Cosh(exp.Argument));
         }
 
         /// <summary>
@@ -1158,7 +1158,7 @@ namespace xFunc.Maths.Analyzers
             return new Div(
                 exp.Argument.Analyze(this, context),
                 new Pow(
-                    new Cosh(exp.Argument.Clone()),
+                    new Cosh(exp.Argument),
                     Number.Two));
         }
 

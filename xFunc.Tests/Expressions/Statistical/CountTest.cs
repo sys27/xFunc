@@ -48,14 +48,5 @@ namespace xFunc.Tests.Expressions.Statistical
 
             Assert.Equal(3.0, result);
         }
-
-        [Fact]
-        public void CloneTest()
-        {
-            var exp = new Count(new[] { Number.One, Number.Two });
-            var clone = exp.Clone();
-
-            Assert.Equal(exp, clone);
-        }
     }
 }

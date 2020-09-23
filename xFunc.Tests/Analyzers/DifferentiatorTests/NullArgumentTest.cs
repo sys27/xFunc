@@ -25,7 +25,7 @@ using Xunit.Sdk;
 
 namespace xFunc.Tests.Analyzers.DifferentiatorTests
 {
-    public class NullArgumentTest
+    public class NullArgumentTest : BaseTest
     {
         private readonly Differentiator differentiator = new Differentiator();
 
@@ -99,9 +99,6 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [InlineData(typeof(Tanh))]
         public void TestExpressionNullArgument(Type type)
             => TestNullExp(type);
-
-        private IExpression Create(Type type, params IExpression[] arguments)
-            => (IExpression)Activator.CreateInstance(type, arguments);
 
         [Theory]
         [InlineData(typeof(Abs))]

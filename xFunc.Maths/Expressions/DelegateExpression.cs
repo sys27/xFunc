@@ -122,14 +122,5 @@ namespace xFunc.Maths.Expressions
 
             return analyzer.Analyze(this, context);
         }
-
-        /// <summary>
-        /// Clones this instance of the <see cref="IExpression" />.
-        /// </summary>
-        /// <returns>
-        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
-        /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
-        public IExpression Clone() => throw new NotSupportedException();
     }
 }

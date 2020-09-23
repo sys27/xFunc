@@ -15,6 +15,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -34,23 +35,59 @@ namespace xFunc.Maths.Analyzers
     /// <seealso cref="ISimplifier" />
     public class Simplifier : Analyzer<IExpression>, ISimplifier
     {
-        private T AnalyzeUnary<T>([NotNull] T exp) where T : UnaryExpression
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private bool IsChanged(IExpression old, IExpression @new)
+            => old != @new;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private bool IsChanged(UnaryExpression old, IExpression argument)
+            => old.Argument != argument;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private bool IsChanged(BinaryExpression old, IExpression left, IExpression right)
+            => old.Left != left || old.Right != right;
+
+        private IExpression AnalyzeUnaryArgument([NotNull] UnaryExpression exp)
         {
             if (exp is null)
                 throw ThrowHelpers.ExpNull();
 
-            exp.Argument = exp.Argument.Analyze(this);
+            return exp.Argument.Analyze(this);
+        }
+
+        private IExpression AnalyzeUnary([NotNull] UnaryExpression exp)
+        {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
+            var argument = AnalyzeUnaryArgument(exp);
+
+            if (IsChanged(exp, argument))
+                return exp.Clone(argument);
 
             return exp;
         }
 
-        private T AnalyzeBinary<T>([NotNull] T exp) where T : BinaryExpression
+        private (IExpression Left, IExpression Right) AnalyzeBinaryArgument([NotNull] BinaryExpression exp)
         {
             if (exp is null)
                 throw ThrowHelpers.ExpNull();
 
-            exp.Left = exp.Left.Analyze(this);
-            exp.Right = exp.Right.Analyze(this);
+            var left = exp.Left.Analyze(this);
+            var right = exp.Right.Analyze(this);
+
+            return (left, right);
+        }
+
+        private IExpression AnalyzeBinary([NotNull] BinaryExpression exp)
+        {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
+            var (left, right) = AnalyzeBinaryArgument(exp);
+
+            if (IsChanged(exp, left, right))
+                return exp.Clone(left, right);
 
             return exp;
         }
@@ -61,9 +98,12 @@ namespace xFunc.Maths.Analyzers
             if (exp is null)
                 throw ThrowHelpers.ExpNull();
 
-            exp.Argument = exp.Argument.Analyze(this);
-            if (exp.Argument is T trigonometric)
+            var argument = AnalyzeUnaryArgument(exp);
+            if (argument is T trigonometric)
                 return trigonometric.Argument;
+
+            if (IsChanged(exp, argument))
+                return exp.Clone(argument);
 
             return exp;
         }
@@ -73,18 +113,34 @@ namespace xFunc.Maths.Analyzers
             if (exp is null)
                 throw ThrowHelpers.ExpNull();
 
+            var arguments = exp.Arguments;
+            var isExpChanged = false;
+
             for (var i = 0; i < exp.ParametersCount; i++)
-                exp[i] = exp[i].Analyze(this);
+            {
+                var expression = exp[i].Analyze(this);
+                if (IsChanged(exp[i], expression))
+                {
+                    isExpChanged = true;
+                    arguments = arguments.SetItem(i, expression);
+                }
+            }
+
+            if (isExpChanged)
+                return exp.Clone(arguments);
 
             return exp;
         }
 
-        private T AnalyzeVariableBinary<T>([NotNull] T exp) where T : VariableBinaryExpression
+        private IExpression AnalyzeVariableBinary([NotNull] VariableBinaryExpression exp)
         {
             if (exp is null)
                 throw ThrowHelpers.ExpNull();
 
-            exp.Value = exp.Value.Analyze(this);
+            var value = exp.Value.Analyze(this);
+
+            if (IsChanged(exp.Value, value))
+                return exp.Clone(value: value);
 
             return exp;
         }
@@ -114,12 +170,13 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Abs exp)
         {
-            exp = AnalyzeUnary(exp);
+            var argument = AnalyzeUnaryArgument(exp);
 
-            return exp.Argument switch
+            return argument switch
             {
                 UnaryMinus minus => minus.Argument,
                 Abs abs => abs,
+                var arg when IsChanged(exp, arg) => new Abs(arg),
                 _ => exp,
             };
         }
@@ -133,26 +190,31 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Add exp)
         {
-            exp = AnalyzeBinary(exp);
+            var result = AnalyzeBinaryArgument(exp);
 
-            return exp switch
+            return result switch
             {
                 // plus zero
-                (Number(var number), _) when MathExtensions.Equals(number, 0) => exp.Right,
-                (_, Number(var number)) when MathExtensions.Equals(number, 0) => exp.Left,
+                (Number(var number), _) when MathExtensions.Equals(number, 0)
+                    => exp.Right,
+                (_, Number(var number)) when MathExtensions.Equals(number, 0)
+                    => exp.Left,
 
                 // const + const
-                (Number left, Number right) => new Number(left + right),
+                (Number left, Number right)
+                    => new Number(left + right),
 
                 // x + x
                 (Variable left, Variable right) when left.Name == right.Name
                     => new Mul(Number.Two, left),
 
                 // -y + x
-                (UnaryMinus minus, _) => Analyze(new Sub(exp.Right, minus.Argument)),
+                (UnaryMinus minus, var right)
+                    => Analyze(new Sub(right, minus.Argument)),
 
                 // x + (-y)
-                (_, UnaryMinus minus) => Analyze(new Sub(exp.Left, minus.Argument)),
+                (var left, UnaryMinus minus)
+                    => Analyze(new Sub(left, minus.Argument)),
 
                 // 2 + (2 + x)
                 (Number number, Add(Number left, var right))
@@ -220,6 +282,8 @@ namespace xFunc.Maths.Analyzers
                 (Mul(Variable x1, Number a), Mul(Variable x2, Number b)) when x1.Equals(x2)
                     => Analyze(new Mul(new Number(a.Value + b.Value), x1)),
 
+                var (left, right) when IsChanged(exp, left, right) => new Add(left, right),
+
                 _ => exp,
             };
         }
@@ -246,7 +310,9 @@ namespace xFunc.Maths.Analyzers
             if (exp is null)
                 throw ThrowHelpers.ExpNull();
 
-            exp.Value = exp.Value.Analyze(this);
+            var value = exp.Value.Analyze(this);
+            if (IsChanged(exp.Value, value))
+                return new Define(exp.Key, value);
 
             return exp;
         }
@@ -269,14 +335,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Derivative exp)
-        {
-            if (exp is null)
-                throw ThrowHelpers.ExpNull();
-
-            exp.Expression = exp.Expression.Analyze(this);
-
-            return exp;
-        }
+            => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -287,9 +346,9 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Div exp)
         {
-            exp = AnalyzeBinary(exp);
+            var result = AnalyzeBinaryArgument(exp);
 
-            return exp switch
+            return result switch
             {
                 // 0 / 0
                 (Number(var left), Number(var right))
@@ -305,13 +364,16 @@ namespace xFunc.Maths.Analyzers
                     => throw new DivideByZeroException(),
 
                 // x / 1
-                (var left, Number(var number)) when MathExtensions.Equals(number, 1) => left,
+                (var left, Number(var number)) when MathExtensions.Equals(number, 1)
+                    => left,
 
                 // const / const
-                (Number left, Number right) => new Number(left.Value / right.Value),
+                (Number left, Number right)
+                    => new Number(left.Value / right.Value),
 
                 // x / x
-                (Variable left, Variable right) when left.Equals(right) => Number.One,
+                (Variable left, Variable right) when left.Equals(right)
+                    => Number.One,
 
                 // (2 * x) / 2
                 (Mul(Number left, var right), Number number)
@@ -345,6 +407,8 @@ namespace xFunc.Maths.Analyzers
                 (Number number, Div(var left, Number right))
                     => Analyze(new Div(new Number(number.Value * right.Value), left)),
 
+                var (left, right) when IsChanged(exp, left, right) => new Div(left, right),
+
                 _ => exp,
             };
         }
@@ -358,11 +422,13 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Exp exp)
         {
-            exp = AnalyzeUnary(exp);
+            var argument = AnalyzeUnaryArgument(exp);
 
-            // exp(ln(y)) -> y
-            if (exp.Argument is Ln ln)
+            if (argument is Ln ln)
                 return ln.Argument;
+
+            if (IsChanged(exp, argument))
+                return new Exp(argument);
 
             return exp;
         }
@@ -424,11 +490,13 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Lb exp)
         {
-            exp = AnalyzeUnary(exp);
+            var argument = AnalyzeUnaryArgument(exp);
 
-            return exp switch
+            return argument switch
             {
-                (Number(var number)) _ when MathExtensions.Equals(number, 2) => Number.One,
+                // lb(2)
+                Number(var number) when MathExtensions.Equals(number, 2) => Number.One,
+                var arg when IsChanged(exp, arg) => new Lb(arg),
                 _ => exp,
             };
         }
@@ -452,12 +520,13 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Lg exp)
         {
-            exp = AnalyzeUnary(exp);
+            var result = AnalyzeUnaryArgument(exp);
 
-            return exp switch
+            return result switch
             {
                 // lg(10)
-                (Number(var number)) _ when MathExtensions.Equals(number, 10) => Number.One,
+                Number(var number) when MathExtensions.Equals(number, 10) => Number.One,
+                var arg when IsChanged(exp, arg) => new Lg(arg),
                 _ => exp,
             };
         }
@@ -471,13 +540,15 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Ln exp)
         {
-            exp = AnalyzeUnary(exp);
+            var argument = AnalyzeUnaryArgument(exp);
 
-            // ln(e)
-            if (exp.Argument is Variable("e"))
-                return Number.One;
-
-            return exp;
+            return argument switch
+            {
+                // ln(e)
+                Variable("e") => Number.One,
+                var arg when IsChanged(exp, arg) => new Ln(arg),
+                _ => exp,
+            };
         }
 
         /// <summary>
@@ -489,11 +560,13 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Log exp)
         {
-            exp = AnalyzeBinary(exp);
+            var (left, right) = AnalyzeBinaryArgument(exp);
 
-            // log(4x, 4x)
-            if (exp.Left.Equals(exp.Right))
+            if (left.Equals(right))
                 return Number.One;
+
+            if (IsChanged(exp, left, right))
+                return new Log(left, right);
 
             return exp;
         }
@@ -517,17 +590,21 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Mul exp)
         {
-            exp = AnalyzeBinary(exp);
+            var result = AnalyzeBinaryArgument(exp);
 
-            return exp switch
+            return result switch
             {
                 // mul by zero
-                (Number(var number), _) when MathExtensions.Equals(number, 0) => Number.Zero,
-                (_, Number(var number)) when MathExtensions.Equals(number, 0) => Number.Zero,
+                (Number(var number), _) when MathExtensions.Equals(number, 0)
+                    => Number.Zero,
+                (_, Number(var number)) when MathExtensions.Equals(number, 0)
+                    => Number.Zero,
 
                 // mul by 1
-                (Number(var number), var right) when MathExtensions.Equals(number, 1) => right,
-                (var left, Number(var number)) when MathExtensions.Equals(number, 1) => left,
+                (Number(var number), var right) when MathExtensions.Equals(number, 1)
+                    => right,
+                (var left, Number(var number)) when MathExtensions.Equals(number, 1)
+                    => left,
 
                 // mul by -1
                 (Number(var number), var right) when MathExtensions.Equals(number, -1)
@@ -536,10 +613,12 @@ namespace xFunc.Maths.Analyzers
                     => new UnaryMinus(left),
 
                 // const * const
-                (Number left, Number right) => new Number(left.Value * right.Value),
+                (Number left, Number right)
+                    => new Number(left.Value * right.Value),
 
                 // x * -y
-                (var left, UnaryMinus minus) => new UnaryMinus(new Mul(left, minus.Argument)),
+                (var left, UnaryMinus minus)
+                    => new UnaryMinus(new Mul(left, minus.Argument)),
 
                 // x * x
                 (Variable left, Variable right) when left.Equals(right)
@@ -611,6 +690,9 @@ namespace xFunc.Maths.Analyzers
                 (Mul(Variable x1, Number a), Mul(Variable x2, Number b)) when x1.Equals(x2)
                     => Analyze(new Mul(new Number(a.Value * b.Value), new Pow(x1, Number.Two))),
 
+                var (left, right) when IsChanged(exp, left, right)
+                    => new Mul(left, right),
+
                 _ => exp,
             };
         }
@@ -622,13 +704,18 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public override IExpression Analyze(ToDegree exp)
         {
-            exp = AnalyzeUnary(exp);
+            var argument = AnalyzeUnaryArgument(exp);
 
-            return exp.Argument switch
+            return argument switch
             {
                 Number number => AngleValue.Degree(number.Value).AsExpression(),
+
                 Angle({ Unit: AngleUnit.Degree }) number => number,
+
                 Angle(var angle) => angle.ToDegree().AsExpression(),
+
+                var arg when IsChanged(exp, arg) => new ToDegree(arg),
+
                 _ => exp,
             };
         }
@@ -640,13 +727,18 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public override IExpression Analyze(ToRadian exp)
         {
-            exp = AnalyzeUnary(exp);
+            var argument = AnalyzeUnaryArgument(exp);
 
-            return exp.Argument switch
+            return argument switch
             {
                 Number number => AngleValue.Radian(number.Value).AsExpression(),
+
                 Angle({ Unit: AngleUnit.Radian }) number => number,
+
                 Angle(var angle) => angle.ToRadian().AsExpression(),
+
+                var arg when IsChanged(exp, arg) => new ToRadian(arg),
+
                 _ => exp,
             };
         }
@@ -658,13 +750,18 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public override IExpression Analyze(ToGradian exp)
         {
-            exp = AnalyzeUnary(exp);
+            var argument = AnalyzeUnaryArgument(exp);
 
-            return exp.Argument switch
+            return argument switch
             {
                 Number number => AngleValue.Gradian(number.Value).AsExpression(),
+
                 Angle({ Unit: AngleUnit.Gradian }) number => number,
+
                 Angle(var angle) => angle.ToGradian().AsExpression(),
+
+                var arg when IsChanged(exp, arg) => new ToGradian(arg),
+
                 _ => exp,
             };
         }
@@ -676,11 +773,12 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public override IExpression Analyze(ToNumber exp)
         {
-            exp = AnalyzeUnary(exp);
+            var argument = AnalyzeUnaryArgument(exp);
 
-            return exp.Argument switch
+            return argument switch
             {
                 Angle(var angle) => new Number(angle.Value),
+                var arg when IsChanged(exp, arg) => new ToNumber(arg),
                 _ => exp,
             };
         }
@@ -694,30 +792,40 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Pow exp)
         {
-            exp = AnalyzeBinary(exp);
+            var result = AnalyzeBinaryArgument(exp);
 
-            return (exp.Left, exp.Right) switch
+            return result switch
             {
                 // x^0
-                (_, Number(var number)) when MathExtensions.Equals(number, 0) => Number.One,
+                (_, Number(var number)) when MathExtensions.Equals(number, 0)
+                    => Number.One,
 
                 // 0^x
-                (Number(var number), _) when MathExtensions.Equals(number, 0) => Number.Zero,
+                (Number(var number), _) when MathExtensions.Equals(number, 0)
+                    => Number.Zero,
 
                 // x^1
-                (var left, Number(var number)) when MathExtensions.Equals(number, 1) => left,
+                (var left, Number(var number)) when MathExtensions.Equals(number, 1)
+                    => left,
 
                 // x ^ log(x, y) -> y
-                (var left, Log log) when left.Equals(log.Left) => log.Right,
+                (var left, Log log) when left.Equals(log.Left)
+                    => log.Right,
 
                 // e ^ ln(y) -> y
-                (Variable("e"), Ln ln) => ln.Argument,
+                (Variable("e"), Ln ln)
+                    => ln.Argument,
 
                 // 10 ^ lg(y) -> y
-                (Number number, Lg lg) when MathExtensions.Equals(number.Value, 10) => lg.Argument,
+                (Number number, Lg lg) when MathExtensions.Equals(number.Value, 10)
+                    => lg.Argument,
 
                 // 2 ^ lb(y) -> y
-                (Number number, Lb lb) when MathExtensions.Equals(number.Value, 2) => lb.Argument,
+                (Number number, Lb lb) when MathExtensions.Equals(number.Value, 2)
+                    => lb.Argument,
+
+                var (left, right) when IsChanged(exp, left, right)
+                    => new Pow(left, right),
 
                 _ => exp,
             };
@@ -732,12 +840,17 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Root exp)
         {
-            exp = AnalyzeBinary(exp);
+            var result = AnalyzeBinaryArgument(exp);
 
-            return exp switch
+            return result switch
             {
                 // root(x, 1)
-                (var left, Number(var number)) when MathExtensions.Equals(number, 1) => left,
+                (var left, Number(var number)) when MathExtensions.Equals(number, 1)
+                    => left,
+
+                var (left, right) when IsChanged(exp, left, right)
+                    => new Root(left, right),
+
                 _ => exp,
             };
         }
@@ -760,12 +873,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Simplify exp)
-        {
-            if (exp is null)
-                throw ThrowHelpers.ExpNull();
-
-            return exp.Argument.Analyze(this);
-        }
+            => AnalyzeUnaryArgument(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -786,24 +894,27 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Sub exp)
         {
-            exp = AnalyzeBinary(exp);
+            var result = AnalyzeBinaryArgument(exp);
 
-            return exp switch
+            return result switch
             {
                 // plus zero
-                (Number(var number), _) when MathExtensions.Equals(number, 0)
-                    => Analyze(new UnaryMinus(exp.Right)),
-                (_, Number(var number)) when MathExtensions.Equals(number, 0)
-                    => exp.Left,
+                (Number(var number), var right) when MathExtensions.Equals(number, 0)
+                    => Analyze(new UnaryMinus(right)),
+                (var left, Number(var number)) when MathExtensions.Equals(number, 0)
+                    => left,
 
                 // const - const
-                (Number left, Number right) => new Number(left - right),
+                (Number left, Number right)
+                    => new Number(left - right),
 
                 // x + x
-                (Variable left, Variable right) when left.Name == right.Name => Number.Zero,
+                (Variable left, Variable right) when left.Name == right.Name
+                    => Number.Zero,
 
                 // x - -y
-                (_, UnaryMinus minus) => new Add(exp.Left, minus.Argument),
+                (var left, UnaryMinus minus)
+                    => new Add(left, minus.Argument),
 
                 // (2 + x) - 2
                 (Add(Number left, var right), Number number)
@@ -871,6 +982,9 @@ namespace xFunc.Maths.Analyzers
                 (Mul(Variable x1, Number a), Mul(Variable x2, Number b)) when x1.Equals(x2)
                     => Analyze(new Mul(new Number(a.Value - b.Value), x1)),
 
+                var (left, right) when IsChanged(exp, left, right)
+                    => new Sub(left, right),
+
                 _ => exp,
             };
         }
@@ -884,12 +998,13 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(UnaryMinus exp)
         {
-            exp = AnalyzeUnary(exp);
+            var argument = AnalyzeUnaryArgument(exp);
 
-            return exp switch
+            return argument switch
             {
-                (UnaryMinus minus) _ => minus.Argument,
-                (Number number) _ => new Number(-number.Value),
+                UnaryMinus minus => minus.Argument,
+                Number number => new Number(-number.Value),
+                var arg when IsChanged(exp, arg) => new UnaryMinus(arg),
                 _ => exp,
             };
         }
@@ -906,8 +1021,21 @@ namespace xFunc.Maths.Analyzers
             if (exp is null)
                 throw ThrowHelpers.ExpNull();
 
+            var arguments = exp.Arguments;
+            var isExpChanged = false;
+
             for (var i = 0; i < exp.ParametersCount; i++)
-                exp[i] = exp[i].Analyze(this);
+            {
+                var expression = exp[i].Analyze(this);
+                if (IsChanged(exp[i], expression))
+                {
+                    isExpChanged = true;
+                    arguments = arguments.SetItem(i, expression);
+                }
+            }
+
+            if (isExpChanged)
+                return exp.Clone(arguments);
 
             return exp;
         }
@@ -938,8 +1066,21 @@ namespace xFunc.Maths.Analyzers
             if (exp is null)
                 throw ThrowHelpers.ExpNull();
 
+            var arguments = exp.Vectors;
+            var isExpChanged = false;
+
             for (var i = 0; i < exp.Rows; i++)
-                exp[i] = (Vector)exp[i].Analyze(this);
+            {
+                var expression = exp[i].Analyze(this);
+                if (IsChanged(exp[i], expression))
+                {
+                    isExpChanged = true;
+                    arguments = arguments.SetItem(i, (Vector)expression);
+                }
+            }
+
+            if (isExpChanged)
+                return exp.Clone(arguments);
 
             return exp;
         }

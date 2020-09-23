@@ -14,7 +14,7 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 
@@ -33,7 +33,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="cond">The condition section.</param>
         /// <param name="iter">The iterator section.</param>
         public For(IExpression body, IExpression init, IExpression cond, IExpression iter)
-            : this(new[] { body, init, cond, iter })
+            : this(ImmutableArray.Create(body, init, cond, iter))
         {
         }
 
@@ -42,7 +42,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="arguments">The arguments.</param>
         /// <exception cref="ArgumentNullException"><paramref name="arguments"/> is null.</exception>
-        public For(IList<IExpression> arguments)
+        public For(ImmutableArray<IExpression> arguments)
             : base(arguments)
         {
         }
@@ -89,13 +89,14 @@ namespace xFunc.Maths.Expressions.Programming
             => analyzer.Analyze(this, context);
 
         /// <summary>
-        /// Clones this instance of the <see cref="For" />.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
         /// <returns>
-        /// Returns the new instance of <see cref="For" /> that is a clone of this instance.
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone() =>
-            new For(CloneArguments());
+        public override IExpression Clone(ImmutableArray<IExpression>? arguments = null)
+            => new For(arguments ?? Arguments);
 
         /// <summary>
         /// Gets the body of loop.

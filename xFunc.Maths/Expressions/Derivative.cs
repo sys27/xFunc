@@ -14,7 +14,7 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
@@ -34,7 +34,7 @@ namespace xFunc.Maths.Expressions
             IDifferentiator differentiator,
             ISimplifier simplifier,
             IExpression expression)
-            : this(differentiator, simplifier, new[] { expression })
+            : this(differentiator, simplifier, ImmutableArray.Create(expression))
         {
         }
 
@@ -50,7 +50,7 @@ namespace xFunc.Maths.Expressions
             ISimplifier simplifier,
             IExpression expression,
             Variable variable)
-            : this(differentiator, simplifier, new[] { expression, variable })
+            : this(differentiator, simplifier, ImmutableArray.Create(expression, variable))
         {
         }
 
@@ -68,7 +68,7 @@ namespace xFunc.Maths.Expressions
             IExpression expression,
             Variable variable,
             Number point)
-            : this(differentiator, simplifier, new[] { expression, variable, point })
+            : this(differentiator, simplifier, ImmutableArray.Create(expression, variable, point))
         {
         }
 
@@ -82,7 +82,7 @@ namespace xFunc.Maths.Expressions
         internal Derivative(
             IDifferentiator differentiator,
             ISimplifier simplifier,
-            IList<IExpression> args)
+            ImmutableArray<IExpression> args)
             : base(args)
         {
             Differentiator = differentiator ??
@@ -142,23 +142,22 @@ namespace xFunc.Maths.Expressions
             => analyzer.Analyze(this, context);
 
         /// <summary>
-        /// Clones this instance.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-            => new Derivative(Differentiator, Simplifier, CloneArguments());
+        /// <param name="arguments">The list of arguments.</param>
+        /// <returns>
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
+        /// </returns>
+        public override IExpression Clone(ImmutableArray<IExpression>? arguments = null)
+            => new Derivative(Differentiator, Simplifier, arguments ?? Arguments);
 
         /// <summary>
-        /// Gets or sets the expression.
+        /// Gets the expression.
         /// </summary>
         /// <value>
         /// The expression.
         /// </value>
-        public IExpression Expression
-        {
-            get => this[0];
-            set => this[0] = value ?? throw new ArgumentNullException(nameof(value));
-        }
+        public IExpression Expression => this[0];
 
         /// <summary>
         /// Gets the variable.

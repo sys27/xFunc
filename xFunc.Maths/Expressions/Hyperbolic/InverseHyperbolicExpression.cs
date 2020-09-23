@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Numerics;
 using xFunc.Maths.Expressions.Angles;
 
@@ -39,7 +39,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal InverseHyperbolicExpression(IList<IExpression> arguments)
+        internal InverseHyperbolicExpression(ImmutableArray<IExpression> arguments)
             : base(arguments)
         {
         }

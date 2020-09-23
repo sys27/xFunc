@@ -338,5 +338,11 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("TernaryColonParseException", resourceCulture);
             }
         }
+        
+        internal static string VectorEmptyError {
+            get {
+                return ResourceManager.GetString("VectorEmptyError", resourceCulture);
+            }
+        }
     }
 }

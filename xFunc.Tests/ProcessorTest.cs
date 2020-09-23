@@ -37,11 +37,11 @@ namespace xFunc.Tests
 
             var strExp = "1 + 1.1";
 
-            simplifier.Setup(s => s.Analyze(It.IsAny<Add>())).Returns<Add>(e => e);
+            simplifier
+                .Setup(s => s.Analyze(It.IsAny<Add>()))
+                .Returns<Add>(e => e);
 
-            var processor = new Processor(
-                simplifier.Object,
-                differentiator.Object);
+            var processor = new Processor(simplifier.Object, differentiator.Object);
             var result = processor.Solve<NumberResult>(strExp);
 
             Assert.Equal(2.1, result.Result);
@@ -56,11 +56,11 @@ namespace xFunc.Tests
             var strExp = "conjugate(2.3 + 1.4i)";
             var complex = new Complex(2.3, 1.4);
 
-            simplifier.Setup(s => s.Analyze(It.IsAny<Conjugate>())).Returns<Conjugate>(e => e);
+            simplifier
+                .Setup(s => s.Analyze(It.IsAny<Conjugate>()))
+                .Returns<Conjugate>(e => e);
 
-            var processor = new Processor(
-                simplifier.Object,
-                differentiator.Object);
+            var processor = new Processor(simplifier.Object, differentiator.Object);
             var result = processor.Solve<ComplexNumberResult>(strExp);
 
             Assert.Equal(Complex.Conjugate(complex), result.Result);
@@ -74,11 +74,11 @@ namespace xFunc.Tests
 
             var strExp = "true & false";
 
-            simplifier.Setup(s => s.Analyze(It.IsAny<And>())).Returns<And>(e => e);
+            simplifier
+                .Setup(s => s.Analyze(It.IsAny<And>()))
+                .Returns<IExpression>(e => e);
 
-            var processor = new Processor(
-                simplifier.Object,
-                differentiator.Object);
+            var processor = new Processor(simplifier.Object, differentiator.Object);
             var result = processor.Solve<BooleanResult>(strExp);
 
             Assert.False(result.Result);
@@ -92,11 +92,11 @@ namespace xFunc.Tests
 
             var strExp = "x := 1";
 
-            simplifier.Setup(s => s.Analyze(It.IsAny<Define>())).Returns<Define>(e => e);
+            simplifier
+                .Setup(s => s.Analyze(It.IsAny<Define>()))
+                .Returns<IExpression>(e => e);
 
-            var processor = new Processor(
-                simplifier.Object,
-                differentiator.Object);
+            var processor = new Processor(simplifier.Object, differentiator.Object);
             var result = processor.Solve<StringResult>(strExp);
 
             Assert.Equal("The value '1' was assigned to the variable 'x'.", result.Result);
@@ -113,18 +113,16 @@ namespace xFunc.Tests
 
             simplifier
                 .Setup(s => s.Analyze(It.IsAny<Number>()))
-                .Returns<Number>(e => e);
+                .Returns<IExpression>(e => e);
             simplifier
                 .Setup(s => s.Analyze(It.IsAny<Derivative>()))
-                .Returns<Derivative>(e => e);
+                .Returns<IExpression>(e => e);
 
             differentiator
                 .Setup(d => d.Analyze(It.IsAny<Derivative>(), It.IsAny<DifferentiatorContext>()))
                 .Returns(() => diff);
 
-            var processor = new Processor(
-                simplifier.Object,
-                differentiator.Object);
+            var processor = new Processor(simplifier.Object, differentiator.Object);
             var result = processor.Solve<ExpressionResult>(strExp);
 
             Assert.Equal(Number.One, result.Result);
@@ -141,10 +139,10 @@ namespace xFunc.Tests
 
             simplifier
                 .Setup(s => s.Analyze(It.IsAny<Number>()))
-                .Returns<Number>(e => e);
+                .Returns<IExpression>(e => e);
             simplifier
                 .Setup(s => s.Analyze(It.IsAny<Derivative>()))
-                .Returns<Derivative>(e => e);
+                .Returns<IExpression>(e => e);
 
             differentiator
                 .Setup(d => d.Analyze(It.IsAny<Derivative>(), It.IsAny<DifferentiatorContext>()))
@@ -164,11 +162,11 @@ namespace xFunc.Tests
 
             var strExp = "90 degree";
 
-            simplifier.Setup(s => s.Analyze(It.IsAny<Add>())).Returns<Add>(e => e);
+            simplifier
+                .Setup(s => s.Analyze(It.IsAny<Add>()))
+                .Returns<IExpression>(e => e);
 
-            var processor = new Processor(
-                simplifier.Object,
-                differentiator.Object);
+            var processor = new Processor(simplifier.Object, differentiator.Object);
             var result = processor.Solve<AngleNumberResult>(strExp);
             var expected = AngleValue.Degree(90);
 
@@ -183,7 +181,9 @@ namespace xFunc.Tests
 
             var exp = new Add(Variable.X, Number.One);
 
-            simplifier.Setup(s => s.Analyze(It.IsAny<Add>())).Returns<Add>(e => e);
+            simplifier
+                .Setup(s => s.Analyze(It.IsAny<Add>()))
+                .Returns<IExpression>(e => e);
 
             var processor = new Processor(
                 simplifier.Object,
@@ -201,9 +201,7 @@ namespace xFunc.Tests
 
             var exp = new Add(Variable.X, Number.One);
 
-            var processor = new Processor(
-                simplifier.Object,
-                differentiator.Object);
+            var processor = new Processor(simplifier.Object, differentiator.Object);
             var result = processor.Parse("x + 1");
 
             Assert.Equal(exp, result);
@@ -215,7 +213,9 @@ namespace xFunc.Tests
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
-            simplifier.Setup(s => s.Analyze(It.IsAny<Add>())).Returns<Add>(e => e);
+            simplifier
+                .Setup(s => s.Analyze(It.IsAny<Add>()))
+                .Returns<IExpression>(e => e);
 
             var exp = new Add(Variable.X, Number.One);
 

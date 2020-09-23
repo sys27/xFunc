@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Immutable;
 using BenchmarkDotNet.Attributes;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Matrices;
@@ -40,11 +41,11 @@ namespace xFunc.Benchmark.Benchmarks
 
         private Vector CreateVector()
         {
-            var vector = new IExpression[Size];
+            var vector = ImmutableArray.CreateBuilder<IExpression>(Size);
             for (var j = 0; j < Size; j++)
-                vector[j] = new Number(random.Next());
+                vector.Add(new Number(random.Next()));
 
-            return new Vector(vector);
+            return new Vector(vector.ToImmutableArray());
         }
 
         [Benchmark]

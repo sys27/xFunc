@@ -180,7 +180,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubNumberAllTest()
         {
-            var exp = new Sub(Number.One, new UserFunction("f", new IExpression[1]));
+            var exp = new Sub(
+                Number.One,
+                new UserFunction("f", new IExpression[] { Number.One }));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -188,7 +190,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubComplexNumberAllTest()
         {
-            var exp = new Sub(new ComplexNumber(3, 2), new UserFunction("f", new IExpression[1]));
+            var exp = new Sub(
+                new ComplexNumber(3, 2),
+                new UserFunction("f", new IExpression[] { Number.One }));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -225,7 +229,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void SubVectorAllTest()
         {
             var vector = new Vector(new IExpression[] { Number.One });
-            var exp = new Sub(vector, new UserFunction("f", new IExpression[1]));
+            var exp = new Sub(vector, new UserFunction("f", new IExpression[] { Number.One }));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -237,7 +241,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             {
                 new Vector(new IExpression[] { Number.One })
             });
-            var exp = new Sub(matrix, new UserFunction("f", new IExpression[1]));
+            var exp = new Sub(matrix, new UserFunction("f", new IExpression[] { Number.One }));
 
             Test(exp, ResultTypes.Undefined);
         }

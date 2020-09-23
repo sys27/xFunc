@@ -428,33 +428,6 @@ namespace xFunc.Tests.Expressions.Matrices
         }
 
         [Fact]
-        public void SetNullTest()
-        {
-            var matrix = new Matrix(new[]
-            {
-                new Vector(new IExpression[] { new Number(3) }),
-                new Vector(new IExpression[] { new Number(-1) })
-            });
-
-            Assert.Throws<ArgumentNullException>(() => matrix[0] = null);
-        }
-
-        [Fact]
-        public void SetTest()
-        {
-            var vector = new Vector(new IExpression[] { new Number(-2), Number.One });
-            var matrix = new Matrix(new[]
-            {
-                new Vector(new IExpression[] { new Number(3) }),
-                new Vector(new IExpression[] { new Number(-1) })
-            });
-
-            matrix[0] = vector;
-
-            Assert.Equal(vector, matrix[0]);
-        }
-
-        [Fact]
         public void ExecuteTest()
         {
             var matrix = new Matrix(new[]

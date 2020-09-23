@@ -22,7 +22,7 @@ using Xunit.Sdk;
 
 namespace xFunc.Tests.Analyzers.SimplifierTests
 {
-    public abstract class BaseSimplifierTest
+    public abstract class BaseSimplifierTest : BaseTest
     {
         protected readonly ISimplifier simplifier;
 
@@ -31,10 +31,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             simplifier = new Simplifier();
         }
 
-        protected IExpression Create(Type type, IExpression argument)
-            => (IExpression)Activator.CreateInstance(type, argument);
-
-        protected void SimpleTest(IExpression exp, IExpression expected)
+        protected void SimplifyTest(IExpression exp, IExpression expected)
         {
             var simple = exp.Analyze(simplifier);
 

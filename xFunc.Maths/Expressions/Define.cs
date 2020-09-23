@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System;
-using System.Diagnostics;
 using System.Globalization;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
@@ -27,18 +26,23 @@ namespace xFunc.Maths.Expressions
     /// </summary>
     public class Define : IExpression
     {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IExpression key = default!;
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IExpression value = default!;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Define"/> class.
         /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="key"/> or <paramref name="value"/> is null.</exception>
         public Define(IExpression key, IExpression value)
         {
+            if (key is null)
+                throw new ArgumentNullException(nameof(value));
+
+            if (!(key is Variable || key is UserFunction))
+                throw new NotSupportedException();
+
+            if (value is null)
+                throw new ArgumentNullException(nameof(value));
+
             Key = key;
             Value = value;
         }
@@ -59,7 +63,7 @@ namespace xFunc.Maths.Expressions
             if (def == null)
                 return false;
 
-            return key.Equals(def.key) && value.Equals(def.value);
+            return Key.Equals(def.Key) && Value.Equals(def.Value);
         }
 
         /// <summary>
@@ -102,16 +106,16 @@ namespace xFunc.Maths.Expressions
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
 
-            if (key is Variable variable)
+            if (Key is Variable variable)
             {
-                parameters.Variables[variable.Name] = value.Execute(parameters);
+                parameters.Variables[variable.Name] = Value.Execute(parameters);
 
-                return string.Format(CultureInfo.InvariantCulture, Resource.AssignVariable, key, value);
+                return string.Format(CultureInfo.InvariantCulture, Resource.AssignVariable, Key, Value);
             }
 
-            parameters.Functions[(UserFunction)key] = value;
+            parameters.Functions[(UserFunction)Key] = Value;
 
-            return string.Format(CultureInfo.InvariantCulture, Resource.AssignFunction, key, value);
+            return string.Format(CultureInfo.InvariantCulture, Resource.AssignFunction, Key, Value);
         }
 
         /// <summary>
@@ -149,45 +153,24 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Clones this instance of the <see cref="Define"/>.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public IExpression Clone() => new Define(key.Clone(), value.Clone());
+        /// <param name="key">The left argument of new expression.</param>
+        /// <param name="value">The right argument of new expression.</param>
+        /// <returns>
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
+        /// </returns>
+        public IExpression Clone(IExpression? key = null, IExpression? value = null)
+            => new Define(key ?? Key, value ?? Value);
 
         /// <summary>
-        /// Gets or sets the key.
+        /// Gets the key.
         /// </summary>
-        /// <value>The key.</value>
-        /// <exception cref="NotSupportedException"><paramref name="value"/> is not a <see cref="Variable"/> or a <see cref="UserFunction"/>.</exception>
-        public IExpression Key
-        {
-            get
-            {
-                return key;
-            }
-            set
-            {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-
-                if (!(value is Variable || value is UserFunction))
-                    throw new NotSupportedException();
-
-                key = value;
-            }
-        }
+        public IExpression Key { get; }
 
         /// <summary>
-        /// Gets or sets the value.
+        /// Gets the value.
         /// </summary>
-        /// <value>
-        /// The value.
-        /// </value>
-        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
-        public IExpression Value
-        {
-            get => value;
-            set => this.value = value ?? throw new ArgumentNullException(nameof(value));
-        }
+        public IExpression Value { get; }
     }
 }

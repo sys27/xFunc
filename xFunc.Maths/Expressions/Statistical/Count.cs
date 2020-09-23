@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 
@@ -29,7 +30,16 @@ namespace xFunc.Maths.Expressions.Statistical
         /// Initializes a new instance of the <see cref="Count"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public Count(IList<IExpression> arguments)
+        public Count(IEnumerable<IExpression> arguments)
+            : base(arguments)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Count"/> class.
+        /// </summary>
+        /// <param name="arguments">The arguments.</param>
+        public Count(ImmutableArray<IExpression> arguments)
             : base(arguments)
         {
         }
@@ -41,8 +51,8 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        private protected override double ExecuteInternal(double[] numbers) =>
-            numbers.Length;
+        private protected override double ExecuteInternal(double[] numbers)
+            => numbers.Length;
 
         /// <summary>
         /// Analyzes the current expression.
@@ -72,10 +82,11 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone() =>
-            new Count(CloneArguments());
+        public override IExpression Clone(ImmutableArray<IExpression>? arguments = null)
+            => new Count(arguments ?? Arguments);
     }
 }

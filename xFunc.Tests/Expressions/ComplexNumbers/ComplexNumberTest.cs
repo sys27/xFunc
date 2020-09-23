@@ -137,14 +137,5 @@ namespace xFunc.Tests.Expressions.ComplexNumbers
             ComplexNumber exp = null;
             Assert.Throws<ArgumentNullException>(() => (Complex)exp);
         }
-
-        [Fact]
-        public void CloneTest()
-        {
-            var exp = new ComplexNumber(new Complex(2, 2));
-            var clone = exp.Clone();
-
-            Assert.Equal(exp, clone);
-        }
     }
 }

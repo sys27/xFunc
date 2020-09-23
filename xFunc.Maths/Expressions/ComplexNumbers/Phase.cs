@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
@@ -41,7 +41,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Phase(IList<IExpression> arguments)
+        internal Phase(ImmutableArray<IExpression> arguments)
             : base(arguments)
         {
         }
@@ -91,10 +91,13 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
             => analyzer.Analyze(this, context);
 
         /// <summary>
-        /// Clones this instance.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-            => new Phase(Argument.Clone());
+        /// <param name="argument">The argument of new expression.</param>
+        /// <returns>
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
+        /// </returns>
+        public override IExpression Clone(IExpression? argument = null)
+            => new Phase(argument ?? Argument);
     }
 }

@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 
@@ -80,6 +81,42 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         {
             var mul = new Mul(Number.Two, new Number(3));
             var expected = new Number(6);
+
+            SimplifyTest(mul, expected);
+        }
+
+        [Fact(DisplayName = "90 * 2 deg")]
+        public void MulNumberAngle()
+        {
+            var mul = new Mul(
+                new Number(90),
+                AngleValue.Degree(2).AsExpression()
+            );
+            var expected = AngleValue.Degree(180).AsExpression();
+
+            SimplifyTest(mul, expected);
+        }
+
+        [Fact(DisplayName = "90 deg * 2")]
+        public void MulAngleNumber()
+        {
+            var mul = new Mul(
+                AngleValue.Degree(90).AsExpression(),
+                new Number(2)
+            );
+            var expected = AngleValue.Degree(180).AsExpression();
+
+            SimplifyTest(mul, expected);
+        }
+
+        [Fact(DisplayName = "2 rad * 90 deg")]
+        public void MulTwoAngles()
+        {
+            var mul = new Mul(
+                AngleValue.Radian(2).AsExpression(),
+                AngleValue.Degree(90).AsExpression()
+            );
+            var expected = AngleValue.Degree(114.59155902616465 * 90).AsExpression();
 
             SimplifyTest(mul, expected);
         }

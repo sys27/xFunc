@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using xFunc.Maths.Resources;
@@ -49,17 +50,17 @@ namespace xFunc.Maths.Expressions.Matrices
             if (left.ParametersCount != right.ParametersCount)
                 throw new ArgumentException(Resource.MatrixArgException);
 
-            var exps = new IExpression[left.ParametersCount];
+            var exps = ImmutableArray.CreateBuilder<IExpression>(left.ParametersCount);
 
-            for (var i = 0; i < exps.Length; i++)
+            for (var i = 0; i < left.ParametersCount; i++)
             {
                 var leftNumber = (double)left[i].Execute(parameters);
                 var rightNumber = (double)right[i].Execute(parameters);
 
-                exps[i] = new Number(leftNumber + rightNumber);
+                exps.Add(new Number(leftNumber + rightNumber));
             }
 
-            return new Vector(exps);
+            return new Vector(exps.ToImmutableArray());
         }
 
         /// <summary>
@@ -75,17 +76,17 @@ namespace xFunc.Maths.Expressions.Matrices
             if (left.ParametersCount != right.ParametersCount)
                 throw new ArgumentException(Resource.MatrixArgException);
 
-            var exps = new IExpression[left.ParametersCount];
+            var exps = ImmutableArray.CreateBuilder<IExpression>(left.ParametersCount);
 
-            for (var i = 0; i < exps.Length; i++)
+            for (var i = 0; i < left.ParametersCount; i++)
             {
                 var leftNumber = (double)left[i].Execute(parameters);
                 var rightNumber = (double)right[i].Execute(parameters);
 
-                exps[i] = new Number(leftNumber - rightNumber);
+                exps.Add(new Number(leftNumber - rightNumber));
             }
 
-            return new Vector(exps);
+            return new Vector(exps.ToImmutableArray());
         }
 
         /// <summary>
@@ -97,16 +98,15 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The product of matrices.</returns>
         public static Vector Mul(this Vector vector, Number number, ExpressionParameters? parameters)
         {
-            var size = vector.ParametersCount;
-            var numbers = new IExpression[size];
+            var numbers = ImmutableArray.CreateBuilder<IExpression>(vector.ParametersCount);
 
-            for (var index = 0; index < size; index++)
+            foreach (var argument in vector.Arguments)
             {
-                var argNumber = (double)vector[index].Execute(parameters);
-                numbers[index] = new Number(argNumber * number.Value);
+                var argNumber = (double)argument.Execute(parameters);
+                numbers.Add(new Number(argNumber * number.Value));
             }
 
-            return new Vector(numbers);
+            return new Vector(numbers.ToImmutableArray());
         }
 
         /// <summary>
@@ -123,24 +123,24 @@ namespace xFunc.Maths.Expressions.Matrices
                 left.Columns != right.Columns)
                 throw new ArgumentException(Resource.MatrixArgException);
 
-            var vectors = new Vector[left.Rows];
+            var vectors = ImmutableArray.CreateBuilder<Vector>(left.Rows);
 
-            for (var i = 0; i < vectors.Length; i++)
+            for (var i = 0; i < left.Rows; i++)
             {
-                var exps = new IExpression[left.Columns];
+                var exps = ImmutableArray.CreateBuilder<IExpression>(left.Columns);
 
-                for (var j = 0; j < exps.Length; j++)
+                for (var j = 0; j < left.Columns; j++)
                 {
                     var leftNumber = (double)left[i][j].Execute(parameters);
                     var rightNumber = (double)right[i][j].Execute(parameters);
 
-                    exps[j] = new Number(leftNumber + rightNumber);
+                    exps.Add(new Number(leftNumber + rightNumber));
                 }
 
-                vectors[i] = new Vector(exps);
+                vectors.Add(new Vector(exps.ToImmutableArray()));
             }
 
-            return new Matrix(vectors);
+            return new Matrix(vectors.ToImmutableArray());
         }
 
         /// <summary>
@@ -157,24 +157,24 @@ namespace xFunc.Maths.Expressions.Matrices
                 left.Columns != right.Columns)
                 throw new ArgumentException(Resource.MatrixArgException);
 
-            var vectors = new Vector[left.Rows];
+            var vectors = ImmutableArray.CreateBuilder<Vector>(left.Rows);
 
-            for (var i = 0; i < vectors.Length; i++)
+            for (var i = 0; i < left.Rows; i++)
             {
-                var exps = new IExpression[left.Columns];
+                var exps = ImmutableArray.CreateBuilder<IExpression>(left.Columns);
 
-                for (var j = 0; j < exps.Length; j++)
+                for (var j = 0; j < left.Columns; j++)
                 {
                     var leftNumber = (double)left[i][j].Execute(parameters);
                     var rightNumber = (double)right[i][j].Execute(parameters);
 
-                    exps[j] = new Number(leftNumber - rightNumber);
+                    exps.Add(new Number(leftNumber - rightNumber));
                 }
 
-                vectors[i] = new Vector(exps);
+                vectors.Add(new Vector(exps.ToImmutableArray()));
             }
 
-            return new Matrix(vectors);
+            return new Matrix(vectors.ToImmutableArray());
         }
 
         /// <summary>
@@ -186,19 +186,19 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The product of matrix and number.</returns>
         public static Matrix Mul(this Matrix matrix, Number number, ExpressionParameters? parameters)
         {
-            var vectors = new Vector[matrix.Rows];
+            var vectors = ImmutableArray.CreateBuilder<Vector>(matrix.Rows);
 
-            for (var i = 0; i < vectors.Length; i++)
+            for (var i = 0; i < matrix.Rows; i++)
             {
-                var vector = new IExpression[matrix.Columns];
+                var vector = ImmutableArray.CreateBuilder<IExpression>(matrix.Columns);
 
-                for (var j = 0; j < vector.Length; j++)
-                    vector[j] = new Number((double)matrix[i][j].Execute(parameters) * number.Value);
+                for (var j = 0; j < matrix.Columns; j++)
+                    vector.Add(new Number((double)matrix[i][j].Execute(parameters) * number.Value));
 
-                vectors[i] = new Vector(vector);
+                vectors.Add(new Vector(vector.ToImmutableArray()));
             }
 
-            return new Matrix(vectors);
+            return new Matrix(vectors.ToImmutableArray());
         }
 
         /// <summary>
@@ -217,19 +217,24 @@ namespace xFunc.Maths.Expressions.Matrices
                 throw new ArgumentException(Resource.MatrixArgException);
 
             var rows = left.Rows;
-            var vectors = new Vector[rows];
 
             if (rows <= 10)
             {
+                var vectors = ImmutableArray.CreateBuilder<Vector>(rows);
+
                 for (var row = 0; row < rows; row++)
-                    vectors[row] = MulMatrixRow(left, right, parameters, row);
+                    vectors.Add(MulMatrixRow(left, right, parameters, row));
+
+                return new Matrix(vectors.ToImmutableArray());
             }
             else
             {
-                Parallel.For(0, rows, row => vectors[row] = MulMatrixRow(left, right, parameters, row));
-            }
+                var vectors = new Vector[rows];
 
-            return new Matrix(vectors);
+                Parallel.For(0, rows, row => vectors[row] = MulMatrixRow(left, right, parameters, row));
+
+                return new Matrix(vectors.ToImmutableArray());
+            }
         }
 
         private static Vector MulMatrixRow(
@@ -239,7 +244,7 @@ namespace xFunc.Maths.Expressions.Matrices
             int i)
         {
             var columns = right.Columns;
-            var vector = new IExpression[columns];
+            var vector = ImmutableArray.CreateBuilder<IExpression>(columns);
 
             for (var j = 0; j < columns; j++)
             {
@@ -252,10 +257,10 @@ namespace xFunc.Maths.Expressions.Matrices
                     element += leftNumber * rightNumber;
                 }
 
-                vector[j] = new Number(element);
+                vector.Add(new Number(element));
             }
 
-            return new Vector(vector);
+            return new Vector(vector.ToImmutableArray());
         }
 
         /// <summary>
@@ -270,7 +275,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="ArgumentException">The size of matrices is invalid.</exception>
         public static Matrix Mul(this Vector left, Matrix right, ExpressionParameters? parameters)
         {
-            var matrix = new Matrix(new[] { left });
+            var matrix = new Matrix(ImmutableArray.Create(left));
 
             return matrix.Mul(right, parameters);
         }
@@ -287,7 +292,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="ArgumentException">The size of matrices is invalid.</exception>
         public static Matrix Mul(this Matrix left, Vector right, ExpressionParameters? parameters)
         {
-            var matrix = new Matrix(new[] { right });
+            var matrix = new Matrix(ImmutableArray.Create(right));
 
             return left.Mul(matrix, parameters);
         }
@@ -324,12 +329,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The transposed matrix.</returns>
         public static Matrix Transpose(this Vector vector)
         {
-            var vectors = new Vector[vector.ParametersCount];
+            var vectors = ImmutableArray.CreateBuilder<Vector>(vector.ParametersCount);
 
-            for (var i = 0; i < vector.ParametersCount; i++)
-                vectors[i] = new Vector(new[] { vector[i] });
+            foreach (var argument in vector.Arguments)
+                vectors.Add(new Vector(ImmutableArray.Create(argument)));
 
-            return new Matrix(vectors);
+            return new Matrix(vectors.ToImmutableArray());
         }
 
         /// <summary>
@@ -339,19 +344,19 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The transposed matrix.</returns>
         public static IExpression Transpose(this Matrix matrix)
         {
-            var vectors = new Vector[matrix.Columns];
+            var vectors = ImmutableArray.CreateBuilder<Vector>(matrix.Columns);
 
-            for (var i = 0; i < vectors.Length; i++)
+            for (var i = 0; i < matrix.Columns; i++)
             {
-                var vector = new IExpression[matrix.Rows];
+                var vector = ImmutableArray.CreateBuilder<IExpression>(matrix.Rows);
 
-                for (var j = 0; j < vector.Length; j++)
-                    vector[j] = matrix[j][i];
+                for (var j = 0; j < matrix.Rows; j++)
+                    vector.Add(matrix[j][i]);
 
-                vectors[i] = new Vector(vector);
+                vectors.Add(new Vector(vector.ToImmutableArray()));
             }
 
-            return new Matrix(vectors);
+            return new Matrix(vectors.ToImmutableArray());
         }
 
         /// <summary>
@@ -479,19 +484,19 @@ namespace xFunc.Maths.Expressions.Matrices
 
             var size = matrix.Rows;
             var result = InverseInternal(matrix.ToCalculatedArray(parameters));
-            var vectors = new Vector[size];
+            var vectors = ImmutableArray.CreateBuilder<Vector>(size);
 
             for (var i = 0; i < size; i++)
             {
-                var vector = new IExpression[size];
+                var vector = ImmutableArray.CreateBuilder<IExpression>(size);
 
                 for (var j = 0; j < size; j++)
-                    vector[j] = new Number(result[i][j]);
+                    vector.Add(new Number(result[i][j]));
 
-                vectors[i] = new Vector(vector);
+                vectors.Add(new Vector(vector.ToImmutableArray()));
             }
 
-            return new Matrix(vectors);
+            return new Matrix(vectors.ToImmutableArray());
         }
 
         private static double[][] InverseInternal(double[][] matrix)
@@ -544,12 +549,10 @@ namespace xFunc.Maths.Expressions.Matrices
             var vector1 = left.ToCalculatedArray(parameters);
             var vector2 = right.ToCalculatedArray(parameters);
 
-            return new Vector(new IExpression[]
-            {
+            return new Vector(ImmutableArray.Create<IExpression>(
                 new Number(vector1[1] * vector2[2] - vector1[2] * vector2[1]),
                 new Number(vector1[2] * vector2[0] - vector1[0] * vector2[2]),
-                new Number(vector1[0] * vector2[1] - vector1[1] * vector2[0]),
-            });
+                new Number(vector1[0] * vector2[1] - vector1[1] * vector2[0])));
         }
     }
 }

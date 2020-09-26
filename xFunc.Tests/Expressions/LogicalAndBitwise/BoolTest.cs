@@ -146,14 +146,5 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
             Assert.Equal("True", trueExp.ToString());
             Assert.Equal("False", falseExp.ToString());
         }
-
-        [Fact]
-        public void CloneTest()
-        {
-            var exp = Bool.False;
-            var clone = exp.Clone();
-
-            Assert.Equal(exp, clone);
-        }
     }
 }

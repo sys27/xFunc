@@ -14,7 +14,7 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Angles;
@@ -43,7 +43,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Abs(IList<IExpression> arguments)
+        internal Abs(ImmutableArray<IExpression> arguments)
             : base(arguments)
         {
         }
@@ -95,10 +95,13 @@ namespace xFunc.Maths.Expressions
             => analyzer.Analyze(this, context);
 
         /// <summary>
-        /// Clones this instance of the <see cref="Abs"/> class.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone() =>
-            new Abs(Argument.Clone());
+        /// <param name="argument">The argument of new expression.</param>
+        /// <returns>
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
+        /// </returns>
+        public override IExpression Clone(IExpression? argument = null)
+            => new Abs(argument ?? Argument);
     }
 }

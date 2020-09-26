@@ -15,7 +15,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Collections.Immutable;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
@@ -28,28 +28,34 @@ namespace xFunc.Maths.Expressions
     /// </summary>
     public abstract class DifferentParametersExpression : IExpression
     {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly IList<IExpression> arguments;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DifferentParametersExpression" /> class.
+        /// </summary>
+        /// <param name="arguments">The arguments.</param>
+        protected DifferentParametersExpression(IEnumerable<IExpression> arguments)
+            : this(arguments.ToImmutableArray())
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DifferentParametersExpression" /> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        protected DifferentParametersExpression(IList<IExpression> arguments)
+        protected DifferentParametersExpression(ImmutableArray<IExpression> arguments)
         {
             if (arguments == null)
                 throw new ArgumentNullException(nameof(arguments));
 
-            if (arguments.Count < MinParametersCount)
+            if (arguments.Length < MinParametersCount)
                 throw new ArgumentException(Resource.LessParams, nameof(arguments));
 
-            if (arguments.Count > MaxParametersCount)
+            if (arguments.Length > MaxParametersCount)
                 throw new ArgumentException(Resource.MoreParams, nameof(arguments));
 
             if (arguments.Any(exp => exp is null))
                 throw new ArgumentNullException(nameof(arguments));
 
-            this.arguments = arguments;
+            Arguments = arguments;
         }
 
         /// <summary>
@@ -60,11 +66,7 @@ namespace xFunc.Maths.Expressions
         /// </value>
         /// <param name="index">The index.</param>
         /// <returns>The argument.</returns>
-        public IExpression this[int index]
-        {
-            get => arguments[index];
-            set => arguments[index] = value ?? throw new ArgumentNullException(nameof(value));
-        }
+        public IExpression this[int index] => Arguments[index];
 
         /// <summary>
         /// Determines whether the specified <see cref="object" />, is equal to this instance.
@@ -83,10 +85,10 @@ namespace xFunc.Maths.Expressions
 
             var diff = (DifferentParametersExpression)obj;
 
-            if (arguments.Count != diff.arguments.Count)
+            if (Arguments.Length != diff.Arguments.Length)
                 return false;
 
-            return arguments.SequenceEqual(diff.arguments);
+            return Arguments.SequenceEqual(diff.Arguments);
         }
 
         /// <summary>
@@ -183,29 +185,17 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public abstract IExpression Clone();
-
-        /// <summary>
-        /// Closes the arguments.
-        /// </summary>
-        /// <returns>The new array of <see cref="IExpression"/>.</returns>
-        protected IExpression[] CloneArguments()
-        {
-            var args = new IExpression[ParametersCount];
-            for (var i = 0; i < ParametersCount; i++)
-                args[i] = arguments[i].Clone();
-
-            return args;
-        }
+        public abstract IExpression Clone(ImmutableArray<IExpression>? arguments = null);
 
         /// <summary>
         /// Gets the arguments.
         /// </summary>
         /// <value>The arguments.</value>
-        public IEnumerable<IExpression> Arguments => arguments;
+        public ImmutableArray<IExpression> Arguments { get; }
 
         /// <summary>
         /// Gets the count of parameters.
@@ -213,7 +203,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int ParametersCount => arguments.Count;
+        public int ParametersCount => Arguments.Length;
 
         /// <summary>
         /// Gets the minimum count of parameters.

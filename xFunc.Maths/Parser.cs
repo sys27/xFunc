@@ -14,7 +14,7 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Globalization;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
@@ -332,7 +332,7 @@ namespace xFunc.Maths
             var id = tokenReader.GetCurrent(Id);
             if (id.IsNotEmpty() && tokenReader.Check(OpenParenthesisSymbol))
             {
-                var parameterList = new List<IExpression>();
+                var parameterList = ImmutableArray.CreateBuilder<IExpression>(1);
 
                 var exp = Variable(ref tokenReader);
                 if (exp != null)
@@ -357,7 +357,7 @@ namespace xFunc.Maths
                 {
                     tokenReader.Commit();
 
-                    return CreateFunction(id, parameterList);
+                    return CreateFunction(id, parameterList.ToImmutableArray());
                 }
             }
 
@@ -687,12 +687,12 @@ namespace xFunc.Maths
             return CreateFunction(function, parameterList);
         }
 
-        private IList<IExpression>? ParameterList(ref TokenReader tokenReader)
+        private ImmutableArray<IExpression> ParameterList(ref TokenReader tokenReader)
         {
             if (!tokenReader.Check(OpenParenthesisSymbol))
-                return null;
+                return default;
 
-            var parameterList = new List<IExpression>();
+            var parameterList = ImmutableArray.CreateBuilder<IExpression>(1);
 
             var exp = Expression(ref tokenReader);
             if (exp != null)
@@ -711,7 +711,7 @@ namespace xFunc.Maths
             if (!tokenReader.Check(CloseParenthesisSymbol))
                 throw new ParseException(Resource.ParameterListCloseParseException);
 
-            return parameterList;
+            return parameterList.ToImmutableArray();
         }
 
         private IExpression? Number(ref TokenReader tokenReader)
@@ -736,8 +736,8 @@ namespace xFunc.Maths
         {
             var scope = tokenReader.CreateScope();
 
-            var magnitudeSign = tokenReader.GetCurrent(PlusOperator) ||
-                                tokenReader.GetCurrent(MinusOperator);
+            // plus symbol can be ignored
+            tokenReader.GetCurrent(PlusOperator);
 
             var magnitude = tokenReader.GetCurrent(TokenKind.Number);
             if (magnitude.IsNotEmpty())
@@ -758,7 +758,7 @@ namespace xFunc.Maths
 
                     tokenReader.Commit();
 
-                    return CreateComplexNumber(magnitudeSign, magnitude, phaseSign, phase);
+                    return CreateComplexNumber(magnitude, phaseSign, phase);
                 }
             }
 
@@ -792,26 +792,25 @@ namespace xFunc.Maths
             if (!tokenReader.Check(OpenBraceSymbol))
                 return null;
 
-            var parameterList = new List<IExpression>();
-
             var exp = Expression(ref tokenReader);
-            if (exp != null)
+            if (exp == null)
+                throw new ParseException(Resource.VectorEmptyError);
+
+            var parameterList = ImmutableArray.CreateBuilder<IExpression>(1);
+            parameterList.Add(exp);
+
+            while (tokenReader.Check(CommaSymbol))
             {
+                exp = Expression(ref tokenReader) ??
+                      throw new ParseException(Resource.VectorCommaParseException);
+
                 parameterList.Add(exp);
-
-                while (tokenReader.Check(CommaSymbol))
-                {
-                    exp = Expression(ref tokenReader) ??
-                          throw new ParseException(Resource.VectorCommaParseException);
-
-                    parameterList.Add(exp);
-                }
             }
 
             if (!tokenReader.Check(CloseBraceSymbol))
                 throw new ParseException(Resource.VectorCloseBraceParseException);
 
-            return new Vector(parameterList);
+            return new Vector(parameterList.ToImmutableArray());
         }
 
         private IExpression? Matrix(ref TokenReader tokenReader)
@@ -820,11 +819,10 @@ namespace xFunc.Maths
 
             if (tokenReader.Check(OpenBraceSymbol))
             {
-                var vectors = new List<Vector>();
-
                 var exp = Vector(ref tokenReader);
                 if (exp != null)
                 {
+                    var vectors = ImmutableArray.CreateBuilder<Vector>(1);
                     vectors.Add(exp);
 
                     while (tokenReader.Check(CommaSymbol))
@@ -840,7 +838,7 @@ namespace xFunc.Maths
 
                     tokenReader.Commit();
 
-                    return new Matrix(vectors);
+                    return new Matrix(vectors.ToImmutableArray());
                 }
             }
 

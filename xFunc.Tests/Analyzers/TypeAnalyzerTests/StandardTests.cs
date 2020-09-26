@@ -707,6 +707,12 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestToDegreeUndefined()
+        {
+            Test(new ToDegree(Variable.X), ResultTypes.AngleNumber);
+        }
+
+        [Fact]
         public void TestToDegreeNumber()
         {
             Test(new ToDegree(new Number(10)), ResultTypes.AngleNumber);

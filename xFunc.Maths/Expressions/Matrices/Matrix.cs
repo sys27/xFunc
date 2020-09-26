@@ -14,8 +14,7 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+using System.Collections.Immutable;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
@@ -30,20 +29,27 @@ namespace xFunc.Maths.Expressions.Matrices
     {
         private const int MinParametersCount = 1;
 
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly IList<Vector> vectors;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Matrix"/> class.
+        /// </summary>
+        /// <param name="vectors">The vectors.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="vectors"/> is null.</exception>
+        public Matrix(Vector[] vectors)
+            : this(vectors.ToImmutableArray())
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Matrix"/> class.
         /// </summary>
         /// <param name="vectors">The vectors.</param>
         /// <exception cref="ArgumentNullException"><paramref name="vectors"/> is null.</exception>
-        public Matrix(IList<Vector> vectors)
+        public Matrix(ImmutableArray<Vector> vectors)
         {
             if (vectors == null)
                 throw new ArgumentNullException(nameof(vectors));
 
-            if (vectors.Count < MinParametersCount)
+            if (vectors.Length < MinParametersCount)
                 throw new ArgumentException(Resource.LessParams, nameof(vectors));
 
             var size = vectors[0].ParametersCount;
@@ -51,7 +57,7 @@ namespace xFunc.Maths.Expressions.Matrices
                 if (vector.ParametersCount != size)
                     throw new MatrixIsInvalidException();
 
-            this.vectors = vectors;
+            Vectors = vectors;
         }
 
         /// <summary>
@@ -62,11 +68,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </value>
         /// <param name="index">The index.</param>
         /// <returns>The element of matrix.</returns>
-        public Vector this[int index]
-        {
-            get => vectors[index];
-            set => vectors[index] = value ?? throw new ArgumentNullException(nameof(value));
-        }
+        public Vector this[int index] => Vectors[index];
 
         /// <summary>
         /// Determines whether the specified <see cref="object" />, is equal to this instance.
@@ -85,10 +87,10 @@ namespace xFunc.Maths.Expressions.Matrices
 
             var matrix = (Matrix)obj;
 
-            if (vectors.Count != matrix.vectors.Count)
+            if (Vectors.Length != matrix.Vectors.Length)
                 return false;
 
-            return vectors.SequenceEqual(matrix.vectors);
+            return Vectors.SequenceEqual(matrix.Vectors);
         }
 
         /// <summary>
@@ -126,12 +128,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <seealso cref="ExpressionParameters" />
         public object Execute(ExpressionParameters? parameters)
         {
-            var args = new Vector[Rows];
+            var args = ImmutableArray.CreateBuilder<Vector>(Rows);
 
-            for (var i = 0; i < Rows; i++)
-                args[i] = (Vector)vectors[i].Execute(parameters);
+            foreach (var vector in Vectors)
+                args.Add((Vector)vector.Execute(parameters));
 
-            return new Matrix(args);
+            return new Matrix(args.ToImmutableArray());
         }
 
         /// <summary>
@@ -171,18 +173,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
+        /// <param name="vectors">The list of arguments.</param>
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public IExpression Clone()
-        {
-            var args = new Vector[Rows];
-
-            for (var i = 0; i < Rows; i++)
-                args[i] = (Vector)vectors[i].Clone();
-
-            return new Matrix(args);
-        }
+        public IExpression Clone(ImmutableArray<Vector>? vectors = null)
+            => new Matrix(vectors ?? Vectors);
 
         /// <summary>
         /// Calculates current matrix and returns it as an two dimensional array.
@@ -194,7 +190,7 @@ namespace xFunc.Maths.Expressions.Matrices
             var results = new double[Rows][];
 
             for (var i = 0; i < Rows; i++)
-                results[i] = vectors[i].ToCalculatedArray(parameters);
+                results[i] = Vectors[i].ToCalculatedArray(parameters);
 
             return results;
         }
@@ -203,7 +199,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// Gets the vectors.
         /// </summary>
         /// <value>The vectors.</value>
-        public IEnumerable<Vector> Vectors => vectors;
+        public ImmutableArray<Vector> Vectors { get; }
 
         /// <summary>
         /// Gets the count of rows.
@@ -211,7 +207,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The count of rows.
         /// </value>
-        public int Rows => vectors.Count;
+        public int Rows => Vectors.Length;
 
         /// <summary>
         /// Gets the count of columns.
@@ -219,7 +215,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The count of columns.
         /// </value>
-        public int Columns => vectors[0].ParametersCount;
+        public int Columns => Vectors[0].ParametersCount;
 
         /// <summary>
         /// Gets a value indicating whether matrix is square.

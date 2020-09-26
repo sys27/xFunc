@@ -80,10 +80,14 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
             => analyzer.Analyze(this, context);
 
         /// <summary>
-        /// Clones this instance of the <see cref="Or"/>.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-            => new Or(Left.Clone(), Right.Clone());
+        /// <param name="left">The left argument of new expression.</param>
+        /// <param name="right">The right argument of new expression.</param>
+        /// <returns>
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
+        /// </returns>
+        public override IExpression Clone(IExpression? left = null, IExpression? right = null)
+            => new Or(left ?? Left, right ?? Right);
     }
 }

@@ -79,10 +79,13 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
             => analyzer.Analyze(this, context);
 
         /// <summary>
-        /// Clones this instance of the <see cref="Not"/>.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-            => new Not(Argument.Clone());
+        /// <param name="argument">The argument of new expression.</param>
+        /// <returns>
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
+        /// </returns>
+        public override IExpression Clone(IExpression? argument = null)
+            => new Not(argument ?? Argument);
     }
 }

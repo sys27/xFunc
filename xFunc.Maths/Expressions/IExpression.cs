@@ -63,11 +63,5 @@ namespace xFunc.Maths.Expressions
         /// <param name="context">The context.</param>
         /// <returns>The analysis result.</returns>
         TResult Analyze<TResult, TContext>(IAnalyzer<TResult, TContext> analyzer, TContext context);
-
-        /// <summary>
-        /// Clones this instance of the <see cref="IExpression"/>.
-        /// </summary>
-        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        IExpression Clone();
     }
 }

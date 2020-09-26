@@ -14,7 +14,7 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 
@@ -38,7 +38,7 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Fact"/> class.
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
-        internal Fact(IList<IExpression> arguments)
+        internal Fact(ImmutableArray<IExpression> arguments)
             : base(arguments)
         {
         }
@@ -88,12 +88,13 @@ namespace xFunc.Maths.Expressions
             => analyzer.Analyze(this, context);
 
         /// <summary>
-        /// Clones this instance.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
+        /// <param name="argument">The argument of new expression.</param>
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone() =>
-            new Fact(Argument.Clone());
+        public override IExpression Clone(IExpression? argument = null)
+            => new Fact(argument ?? Argument);
     }
 }

@@ -27,7 +27,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var div = new Div(Number.Zero, Variable.X);
             var expected = Number.Zero;
 
-            SimpleTest(div, expected);
+            SimplifyTest(div, expected);
         }
 
         [Fact(DisplayName = "x / 0")]
@@ -35,7 +35,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         {
             var div = new Div(Variable.X, Number.Zero);
 
-            Assert.Throws<DivideByZeroException>(() => SimpleTest(div, null));
+            Assert.Throws<DivideByZeroException>(() => SimplifyTest(div, null));
         }
 
         [Fact(DisplayName = "0 / 0")]
@@ -53,7 +53,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var div = new Div(Variable.X, Number.One);
             var expected = Variable.X;
 
-            SimpleTest(div, expected);
+            SimplifyTest(div, expected);
         }
 
         [Fact(DisplayName = "8 / 2")]
@@ -62,7 +62,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var div = new Div(new Number(8), Number.Two);
             var expected = new Number(4);
 
-            SimpleTest(div, expected);
+            SimplifyTest(div, expected);
         }
 
         [Fact(DisplayName = "(2 * x) / 4")]
@@ -71,7 +71,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var div = new Div(new Mul(Number.Two, Variable.X), new Number(4));
             var expected = new Div(Variable.X, Number.Two);
 
-            SimpleTest(div, expected);
+            SimplifyTest(div, expected);
         }
 
         [Fact(DisplayName = "(x * 2) / 4")]
@@ -80,7 +80,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var div = new Div(new Mul(Variable.X, Number.Two), new Number(4));
             var expected = new Div(Variable.X, Number.Two);
 
-            SimpleTest(div, expected);
+            SimplifyTest(div, expected);
         }
 
         [Fact(DisplayName = "2 / (2 * x)")]
@@ -89,7 +89,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var div = new Div(Number.Two, new Mul(Number.Two, Variable.X));
             var expected = new Div(Number.One, Variable.X);
 
-            SimpleTest(div, expected);
+            SimplifyTest(div, expected);
         }
 
         [Fact(DisplayName = "2 / (2 * x)")]
@@ -98,7 +98,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var div = new Div(Number.Two, new Mul(Variable.X, Number.Two));
             var expected = new Div(Number.One, Variable.X);
 
-            SimpleTest(div, expected);
+            SimplifyTest(div, expected);
         }
 
         [Fact(DisplayName = "(2 / x) / 2")]
@@ -107,7 +107,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var div = new Div(new Div(Number.Two, Variable.X), Number.Two);
             var expected = new Div(Number.One, Variable.X);
 
-            SimpleTest(div, expected);
+            SimplifyTest(div, expected);
         }
 
         [Fact(DisplayName = "(x / 2) / 2")]
@@ -116,7 +116,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var div = new Div(new Div(Variable.X, Number.Two), Number.Two);
             var expected = new Div(Variable.X, new Number(4));
 
-            SimpleTest(div, expected);
+            SimplifyTest(div, expected);
         }
 
         [Fact(DisplayName = "2 / (2 / x)")]
@@ -125,7 +125,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var div = new Div(Number.Two, new Div(Number.Two, Variable.X));
             var expected = Variable.X;
 
-            SimpleTest(div, expected);
+            SimplifyTest(div, expected);
         }
 
         [Fact(DisplayName = "2 / (x / 2)")]
@@ -134,7 +134,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var div = new Div(Number.Two, new Div(Variable.X, Number.Two));
             var expected = new Div(new Number(4), Variable.X);
 
-            SimpleTest(div, expected);
+            SimplifyTest(div, expected);
         }
 
         [Fact(DisplayName = "x / x")]
@@ -143,7 +143,19 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var div = new Div(Variable.X, Variable.X);
             var expected = Number.One;
 
-            SimpleTest(div, expected);
+            SimplifyTest(div, expected);
+        }
+
+        [Fact]
+        public void DivArgumentSimplified()
+        {
+            var exp = new Div(
+                Variable.X,
+                new Ceil(new Add(Number.One, Number.One))
+            );
+            var expected = new Div(Variable.X, new Ceil(Number.Two));
+
+            SimplifyTest(exp, expected);
         }
     }
 }

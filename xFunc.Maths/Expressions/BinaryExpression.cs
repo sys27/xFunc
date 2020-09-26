@@ -14,8 +14,7 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+using System.Collections.Immutable;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 using xFunc.Maths.Resources;
@@ -27,11 +26,6 @@ namespace xFunc.Maths.Expressions
     /// </summary>
     public abstract class BinaryExpression : IExpression
     {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IExpression left = default!;
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IExpression right = default!;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryExpression"/> class.
         /// </summary>
@@ -39,23 +33,23 @@ namespace xFunc.Maths.Expressions
         /// <param name="right">The right (second) operand.</param>
         protected BinaryExpression(IExpression left, IExpression right)
         {
-            Left = left;
-            Right = right;
+            Left = left ?? throw new ArgumentNullException(nameof(left));
+            Right = right ?? throw new ArgumentNullException(nameof(right));
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryExpression"/> class.
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
-        protected BinaryExpression(IList<IExpression> arguments)
+        protected BinaryExpression(ImmutableArray<IExpression> arguments)
         {
             if (arguments == null)
                 throw new ArgumentNullException(nameof(arguments));
 
-            if (arguments.Count < 2)
+            if (arguments.Length < 2)
                 throw new ParseException(Resource.LessParams);
 
-            if (arguments.Count > 2)
+            if (arguments.Length > 2)
                 throw new ParseException(Resource.MoreParams);
 
             Left = arguments[0];
@@ -88,7 +82,7 @@ namespace xFunc.Maths.Expressions
 
             var exp = (BinaryExpression)obj;
 
-            return left.Equals(exp.Left) && right.Equals(exp.Right);
+            return Left.Equals(exp.Left) && Right.Equals(exp.Right);
         }
 
         /// <summary>
@@ -185,27 +179,21 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
+        /// <param name="left">The left argument of new expression.</param>
+        /// <param name="right">The right argument of new expression.</param>
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public abstract IExpression Clone();
+        public abstract IExpression Clone(IExpression? left = null, IExpression? right = null);
 
         /// <summary>
-        /// Gets or sets the left (first) operand.
+        /// Gets the left (first) operand.
         /// </summary>
-        public IExpression Left
-        {
-            get => left;
-            set => left = value ?? throw new ArgumentNullException(nameof(value));
-        }
+        public IExpression Left { get; }
 
         /// <summary>
-        /// Gets or sets the right (second) operand.
+        /// Gets the right (second) operand.
         /// </summary>
-        public IExpression Right
-        {
-            get => right;
-            set => right = value ?? throw new ArgumentNullException(nameof(value));
-        }
+        public IExpression Right { get; }
     }
 }

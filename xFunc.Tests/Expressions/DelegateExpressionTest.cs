@@ -29,7 +29,7 @@ namespace xFunc.Tests.Expressions
             {
                 new Parameter("x", 10)
             };
-            var func = new DelegateExpression(p => (double) p.Variables["x"] + 1);
+            var func = new DelegateExpression(p => (double)p.Variables["x"] + 1);
 
             var result = func.Execute(parameters);
 
@@ -50,7 +50,7 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTest3()
         {
             var uf1 = new UserFunction("func", new[] { Variable.X });
-            var func = new DelegateExpression(p => (double) p.Variables["x"] == 10 ? 0 : 1);
+            var func = new DelegateExpression(p => (double)p.Variables["x"] == 10 ? 0 : 1);
             var funcs = new FunctionCollection
             {
                 { uf1, func }
@@ -112,12 +112,6 @@ namespace xFunc.Tests.Expressions
             var exp2 = new DelegateExpression(p => 2.0);
 
             Assert.False(exp1.Equals(exp2));
-        }
-
-        [Fact]
-        public void CloneTest()
-        {
-            Assert.Throws<NotSupportedException>(() => new DelegateExpression(x => null).Clone());
         }
 
         [Fact]

@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using BenchmarkDotNet.Attributes;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Matrices;
@@ -46,17 +47,17 @@ namespace xFunc.Benchmark.Benchmarks
 
         private Matrix CreateMatrix()
         {
-            var vectors = new Vector[Size.rows];
+            var vectors = ImmutableArray.CreateBuilder<Vector>(Size.rows);
             for (var i = 0; i < Size.rows; i++)
             {
-                var vector = new IExpression[Size.columns];
+                var vector = ImmutableArray.CreateBuilder<IExpression>(Size.columns);
                 for (var j = 0; j < Size.columns; j++)
-                    vector[j] = new Number(random.Next());
+                    vector.Add(new Number(random.Next()));
 
-                vectors[i] = new Vector(vector);
+                vectors.Add(new Vector(vector.ToImmutableArray()));
             }
 
-            return new Matrix(vectors);
+            return new Matrix(vectors.ToImmutableArray());
         }
 
         [Benchmark]

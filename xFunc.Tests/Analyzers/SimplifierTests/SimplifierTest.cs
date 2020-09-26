@@ -19,6 +19,7 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Statistical;
+using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 
 namespace xFunc.Tests.Analyzers.SimplifierTests
@@ -31,7 +32,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var un = new UnaryMinus(new UnaryMinus(Variable.X));
             var expected = Variable.X;
 
-            SimpleTest(un, expected);
+            SimplifyTest(un, expected);
         }
 
         [Fact]
@@ -40,7 +41,28 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var un = new UnaryMinus(Number.One);
             var expected = new Number(-1);
 
-            SimpleTest(un, expected);
+            SimplifyTest(un, expected);
+        }
+
+        [Fact]
+        public void UnaryNumberArgumentSimplified()
+        {
+            var un = new UnaryMinus(
+                new Sin(
+                    new Add(Number.One, Number.One)
+                )
+            );
+            var expected = new UnaryMinus(new Sin(Number.Two));
+
+            SimplifyTest(un, expected);
+        }
+
+        [Fact]
+        public void UnaryNumberNotSimplified()
+        {
+            var un = new UnaryMinus(Variable.X);
+
+            SimplifyTest(un, un);
         }
 
         [Fact]
@@ -49,7 +71,15 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var define = new Define(Variable.X, new Add(Number.Two, Number.Two));
             var expected = new Define(Variable.X, new Number(4));
 
-            SimpleTest(define, expected);
+            SimplifyTest(define, expected);
+        }
+
+        [Fact]
+        public void DefineNotSimplifierTest()
+        {
+            var define = new Define(Variable.X, Number.Two);
+
+            SimplifyTest(define, define);
         }
 
         [Fact]
@@ -58,7 +88,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var simp = new Simplify(simplifier, new Pow(Variable.X, Number.Zero));
             var expected = Number.One;
 
-            SimpleTest(simp, expected);
+            SimplifyTest(simp, expected);
         }
 
         [Fact]
@@ -69,7 +99,17 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var simp = new Derivative(diff, simpl, new Add(Number.Two, new Number(3)));
             var expected = new Derivative(diff, simpl, new Number(5));
 
-            SimpleTest(simp, expected);
+            SimplifyTest(simp, expected);
+        }
+
+        [Fact]
+        public void DerivNotSimplifiedTest()
+        {
+            var differentiator = new Differentiator();
+            var simplifier = new Simplifier();
+            var exp = new Derivative(differentiator, simplifier, Number.Two);
+
+            SimplifyTest(exp, exp);
         }
 
         [Fact]
@@ -78,7 +118,15 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var exp = new UserFunction("f", new IExpression[] { new Mul(Number.Two, Number.Two) });
             var expected = new UserFunction("f", new IExpression[] { new Number(4) });
 
-            SimpleTest(exp, expected);
+            SimplifyTest(exp, expected);
+        }
+
+        [Fact]
+        public void UserFuncNotSimplified()
+        {
+            var exp = new UserFunction("f", new IExpression[] { Number.One });
+
+            SimplifyTest(exp, exp);
         }
 
         [Fact]
@@ -87,7 +135,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var exp = new Count(new IExpression[] { new Add(Number.Two, Number.Two) });
             var expected = new Count(new IExpression[] { new Number(4) });
 
-            SimpleTest(exp, expected);
+            SimplifyTest(exp, expected);
         }
 
         [Fact]
@@ -96,7 +144,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var exp = new Abs(new UnaryMinus(Variable.X));
             var expected = Variable.X;
 
-            SimpleTest(exp, expected);
+            SimplifyTest(exp, expected);
         }
 
         [Fact]
@@ -105,7 +153,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var exp = new Abs(new Abs(Variable.X));
             var expected = new Abs(Variable.X);
 
-            SimpleTest(exp, expected);
+            SimplifyTest(exp, expected);
         }
 
         [Fact]
@@ -114,7 +162,16 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var exp = new Abs(new Abs(new Abs(Variable.X)));
             var expected = new Abs(Variable.X);
 
-            SimpleTest(exp, expected);
+            SimplifyTest(exp, expected);
+        }
+
+        [Fact]
+        public void AbsArgumentSimplifiedTest()
+        {
+            var exp = new Abs(new Add(Number.One, Number.One));
+            var expected = new Abs(Number.Two);
+
+            SimplifyTest(exp, expected);
         }
 
         [Fact]
@@ -135,7 +192,18 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
                 }),
             });
 
-            SimpleTest(exp, expected);
+            SimplifyTest(exp, expected);
+        }
+
+        [Fact]
+        public void MatrixNotSimplifiedTest()
+        {
+            var exp = new Matrix(new[]
+            {
+                new Vector(new IExpression[] { Number.One }),
+            });
+
+            SimplifyTest(exp, exp);
         }
 
         [Fact]
@@ -144,7 +212,58 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var exp = new AddAssign(Variable.X, new Add(Number.One, Number.Two));
             var expected = new AddAssign(Variable.X, new Number(3));
 
-            SimpleTest(exp, expected);
+            SimplifyTest(exp, expected);
+        }
+
+        [Fact]
+        public void AddAssignNotSimplifiedTest()
+        {
+            var exp = new AddAssign(Variable.X, Number.One);
+
+            SimplifyTest(exp, exp);
+        }
+
+        [Fact]
+        public void CeilArgumentSimplifiedTest()
+        {
+            var exp = new Ceil(new Add(Number.One, Number.One));
+            var expected = new Ceil(Number.Two);
+
+            SimplifyTest(exp, expected);
+        }
+
+        [Fact]
+        public void CeilNotSimplifiedTest()
+        {
+            var exp = new Ceil(Number.One);
+
+            SimplifyTest(exp, exp);
+        }
+
+        [Fact]
+        public void ModLeftSimplifiedTest()
+        {
+            var exp = new Mod(new Add(Number.One, Number.One), Number.One);
+            var expected = new Mod(Number.Two, Number.One);
+
+            SimplifyTest(exp, expected);
+        }
+
+        [Fact]
+        public void ModRightSimplifiedTest()
+        {
+            var exp = new Mod(Number.One, new Add(Number.One, Number.One));
+            var expected = new Mod(Number.One, Number.Two);
+
+            SimplifyTest(exp, expected);
+        }
+
+        [Fact]
+        public void ModNotSimplifiedTest()
+        {
+            var exp = new Mod(Number.One, Number.One);
+
+            SimplifyTest(exp, exp);
         }
 
         [Theory]

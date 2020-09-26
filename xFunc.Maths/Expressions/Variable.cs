@@ -70,7 +70,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
         public bool Equals(Variable? other)
         {
-            if (ReferenceEquals(null, other))
+            if (other is null)
                 return false;
 
             if (ReferenceEquals(this, other))
@@ -86,7 +86,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
         public override bool Equals(object? obj)
         {
-            if (ReferenceEquals(null, obj))
+            if (obj is null)
                 return false;
 
             if (ReferenceEquals(this, obj))
@@ -177,12 +177,6 @@ namespace xFunc.Maths.Expressions
 
             return analyzer.Analyze(this, context);
         }
-
-        /// <summary>
-        /// Clones this instance of the <see cref="Variable"/>.
-        /// </summary>
-        /// <returns>Returns the new instance of <see cref="Variable"/> that is a clone of this instance.</returns>
-        public IExpression Clone() => new Variable(Name);
 
         /// <summary>
         /// Gets a name of this variable.

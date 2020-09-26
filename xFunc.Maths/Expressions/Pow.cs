@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 
@@ -39,7 +39,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        internal Pow(IList<IExpression> arguments)
+        internal Pow(ImmutableArray<IExpression> arguments)
             : base(arguments)
         {
         }
@@ -91,10 +91,14 @@ namespace xFunc.Maths.Expressions
             => analyzer.Analyze(this, context);
 
         /// <summary>
-        /// Clones this instance of the <see cref="Pow"/> class.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone() =>
-            new Pow(Left.Clone(), Right.Clone());
+        /// <param name="left">The left argument of new expression.</param>
+        /// <param name="right">The right argument of new expression.</param>
+        /// <returns>
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
+        /// </returns>
+        public override IExpression Clone(IExpression? left = null, IExpression? right = null)
+            => new Pow(left ?? Left, right ?? Right);
     }
 }

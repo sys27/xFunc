@@ -111,7 +111,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </returns>
         public bool Equals(Bool? other)
         {
-            if (ReferenceEquals(null, other))
+            if (other is null)
                 return false;
 
             if (ReferenceEquals(this, other))
@@ -129,7 +129,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </returns>
         public override bool Equals(object? obj)
         {
-            if (ReferenceEquals(null, obj))
+            if (obj is null)
                 return false;
 
             if (ReferenceEquals(this, obj))
@@ -163,14 +163,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public override string ToString() => ToString(new CommonFormatter());
-
-        /// <summary>
-        /// Clones this instance of the <see cref="IExpression" />.
-        /// </summary>
-        /// <returns>
-        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
-        /// </returns>
-        public IExpression Clone() => new Bool(Value);
 
         /// <summary>
         /// Gets the value of this expression.

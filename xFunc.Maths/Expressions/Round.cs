@@ -14,7 +14,7 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Resources;
@@ -31,7 +31,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded.</param>
         public Round(IExpression argument)
-            : this(new[] { argument })
+            : this(ImmutableArray.Create(argument))
         {
         }
 
@@ -41,7 +41,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded.</param>
         /// <param name="digits">The expression that represents the number of fractional digits in the return value.</param>
         public Round(IExpression argument, IExpression digits)
-            : this(new[] { argument, digits })
+            : this(ImmutableArray.Create(argument, digits))
         {
         }
 
@@ -50,7 +50,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
-        internal Round(IList<IExpression> args)
+        internal Round(ImmutableArray<IExpression> args)
             : base(args)
         {
         }
@@ -106,11 +106,12 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-            => new Round(CloneArguments());
+        public override IExpression Clone(ImmutableArray<IExpression>? arguments = null)
+            => new Round(arguments ?? Arguments);
 
         /// <summary>
         /// Gets the expression that represents a double-precision floating-point number to be rounded.

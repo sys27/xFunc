@@ -14,7 +14,7 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using xFunc.Maths.Analyzers;
@@ -56,7 +56,7 @@ namespace xFunc.Maths.Expressions
         internal Del(
             IDifferentiator differentiator,
             ISimplifier simplifier,
-            IList<IExpression> arguments)
+            ImmutableArray<IExpression> arguments)
             : base(arguments)
         {
             this.differentiator = differentiator ??
@@ -76,21 +76,21 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters? parameters)
         {
-            var variables = Helpers.GetAllVariables(Argument).ToList();
-            var vector = new IExpression[variables.Count];
-
             var context = new DifferentiatorContext(parameters);
 
-            for (var i = 0; i < variables.Count; i++)
-            {
-                context.Variable = variables[i];
+            var variables = Helpers.GetAllVariables(Argument).ToList();
+            var vector = ImmutableArray.CreateBuilder<IExpression>(variables.Count);
 
-                vector[i] = Argument
+            foreach (var variable in variables)
+            {
+                context.Variable = variable;
+
+                vector.Add(Argument
                     .Analyze(differentiator, context)
-                    .Analyze(simplifier);
+                    .Analyze(simplifier));
             }
 
-            return new Vector(vector);
+            return new Vector(vector.ToImmutableArray());
         }
 
         /// <summary>
@@ -119,12 +119,13 @@ namespace xFunc.Maths.Expressions
             => analyzer.Analyze(this, context);
 
         /// <summary>
-        /// Clones this instance.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
+        /// <param name="argument">The argument of new expression.</param>
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone() =>
-            new Del(differentiator, simplifier, Argument.Clone());
+        public override IExpression Clone(IExpression? argument = null)
+            => new Del(differentiator, simplifier, argument ?? Argument);
     }
 }

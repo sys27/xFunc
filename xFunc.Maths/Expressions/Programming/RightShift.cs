@@ -79,12 +79,14 @@ namespace xFunc.Maths.Expressions.Programming
             => analyzer.Analyze(this, context);
 
         /// <summary>
-        /// Creates the clone of this instance.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
+        /// <param name="left">The left argument of new expression.</param>
+        /// <param name="right">The right argument of new expression.</param>
         /// <returns>
-        /// Returns the new instance of <see cref="LeftShift" /> that is a clone of this instance.
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-            => new RightShift(Left.Clone(), Right.Clone());
+        public override IExpression Clone(IExpression? left = null, IExpression? right = null)
+            => new RightShift(left ?? Left, right ?? Right);
     }
 }

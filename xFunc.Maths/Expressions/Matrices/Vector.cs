@@ -14,7 +14,7 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 
@@ -30,7 +30,17 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="args">The values of vector.</param>
         /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public Vector(IList<IExpression> args)
+        public Vector(IExpression[] args)
+            : base(args)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Vector"/> class.
+        /// </summary>
+        /// <param name="args">The values of vector.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
+        public Vector(ImmutableArray<IExpression> args)
             : base(args)
         {
         }
@@ -45,25 +55,25 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters? parameters)
         {
-            var args = new IExpression[ParametersCount];
+            var args = ImmutableArray.CreateBuilder<IExpression>(ParametersCount);
 
             for (var i = 0; i < ParametersCount; i++)
             {
                 if (this[i] is Number)
                 {
-                    args[i] = this[i];
+                    args.Add(this[i]);
                 }
                 else
                 {
                     var result = this[i].Execute(parameters);
                     if (result is double doubleResult)
-                        args[i] = new Number(doubleResult);
+                        args.Add(new Number(doubleResult));
                     else
                         throw new ResultIsNotSupportedException(this, result);
                 }
             }
 
-            return new Vector(args);
+            return new Vector(args.ToImmutableArray());
         }
 
         /// <summary>
@@ -94,11 +104,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-            => new Vector(CloneArguments());
+        public override IExpression Clone(ImmutableArray<IExpression>? arguments = null)
+            => new Vector(arguments ?? Arguments);
 
         /// <summary>
         /// Calculates current vector and returns it as an array.

@@ -23,8 +23,10 @@ namespace xFunc.Tests.ParserTests
 {
     public class ComplexNumberTests : BaseParserTests
     {
-        [Fact]
-        public void ComplexNumberTest()
+        [Theory]
+        [InlineData("3+2*i")]
+        [InlineData("+3+2*i")]
+        public void ComplexNumberTest(string exp)
         {
             var expected = new Add(
                 new Number(3),
@@ -34,7 +36,7 @@ namespace xFunc.Tests.ParserTests
                 )
             );
 
-            ParseTest("3+2*i", expected);
+            ParseTest(exp, expected);
         }
 
         [Fact]
@@ -51,8 +53,10 @@ namespace xFunc.Tests.ParserTests
             ParseTest("3-2*i", expected);
         }
 
-        [Fact]
-        public void ComplexNumberNegativeAllPartsTest()
+        [Theory]
+        [InlineData("-3-2*i")]
+        [InlineData("-3-2i")]
+        public void ComplexNumberNegativeAllPartsTest(string exp)
         {
             var expected = new Sub(
                 new UnaryMinus(new Number(3)),
@@ -62,21 +66,7 @@ namespace xFunc.Tests.ParserTests
                 )
             );
 
-            ParseTest("-3-2*i", expected);
-        }
-
-        [Fact]
-        public void ComplexNumberNegativeAllPartsWithoutMulTest()
-        {
-            var expected = new Sub(
-                new UnaryMinus(new Number(3)),
-                new Mul(
-                    Number.Two,
-                    new Variable("i")
-                )
-            );
-
-            ParseTest("-3-2i", expected);
+            ParseTest(exp, expected);
         }
 
         [Fact]
@@ -155,22 +145,26 @@ namespace xFunc.Tests.ParserTests
             ParseTest("x + (3-2*i)", expected);
         }
 
-        [Fact]
-        public void ComplexFromPolarTest()
+        [Theory]
+        [InlineData("10∠0.78539816339744828°")]
+        [InlineData("10∠+0.78539816339744828°")]
+        public void ComplexFromPolarTest(string exp)
         {
             var complex = Complex.FromPolarCoordinates(10, 45 * Math.PI / 180);
             var expected = new ComplexNumber(complex);
 
-            ParseTest("10∠0.78539816339744828°", expected);
+            ParseTest(exp, expected);
         }
 
-        [Fact]
-        public void ComplexFromPolarNegativePhaseTest()
+        [Theory]
+        [InlineData("10∠-7.1°")]
+        [InlineData("+10∠-7.1°")]
+        public void ComplexFromPolarNegativePhaseTest(string exp)
         {
             var complex = Complex.FromPolarCoordinates(10, -7.1);
             var expected = new ComplexNumber(complex);
 
-            ParseTest("10∠-7.1°", expected);
+            ParseTest(exp, expected);
         }
 
         [Fact]

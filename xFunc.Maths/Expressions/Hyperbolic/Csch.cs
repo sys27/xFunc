@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Angles;
@@ -39,7 +39,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Csch(IList<IExpression> arguments)
+        internal Csch(ImmutableArray<IExpression> arguments)
             : base(arguments)
         {
         }
@@ -90,10 +90,13 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             => analyzer.Analyze(this, context);
 
         /// <summary>
-        /// Clones this instance.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
-        /// <returns>The new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone() =>
-            new Csch(Argument.Clone());
+        /// <param name="argument">The argument of new expression.</param>
+        /// <returns>
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
+        /// </returns>
+        public override IExpression Clone(IExpression? argument = null)
+            => new Csch(argument ?? Argument);
     }
 }

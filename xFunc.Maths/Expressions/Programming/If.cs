@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 
@@ -30,7 +30,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="condition">The condition.</param>
         /// <param name="then">The "then" statement.</param>
         public If(IExpression condition, IExpression then)
-            : this(new[] { condition, then })
+            : this(ImmutableArray.Create(condition, then))
         {
         }
 
@@ -41,7 +41,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="then">The "then" statement.</param>
         /// <param name="else">The "else" statement.</param>
         public If(IExpression condition, IExpression then, IExpression @else)
-            : this(new[] { condition, then, @else })
+            : this(ImmutableArray.Create(condition, then, @else))
         {
         }
 
@@ -49,7 +49,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// Initializes a new instance of the <see cref="If"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public If(IList<IExpression> arguments)
+        public If(ImmutableArray<IExpression> arguments)
             : base(arguments)
         {
         }
@@ -102,13 +102,14 @@ namespace xFunc.Maths.Expressions.Programming
             => analyzer.Analyze(this, context);
 
         /// <summary>
-        /// Clones this instance of the <see cref="If" />.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
         /// <returns>
-        /// Returns the new instance of <see cref="If" /> that is a clone of this instance.
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone() =>
-            new If(CloneArguments());
+        public override IExpression Clone(ImmutableArray<IExpression>? arguments = null)
+            => new If(arguments ?? Arguments);
 
         /// <summary>
         /// Gets the condition.

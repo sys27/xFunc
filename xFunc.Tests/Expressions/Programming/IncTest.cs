@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System;
-using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.Programming;

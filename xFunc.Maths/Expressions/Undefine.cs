@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System;
-using System.Diagnostics;
 using System.Globalization;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
@@ -27,14 +26,20 @@ namespace xFunc.Maths.Expressions
     /// </summary>
     public class Undefine : IExpression
     {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IExpression key = default!;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Undefine"/> class.
         /// </summary>
         /// <param name="key">The key.</param>
-        public Undefine(IExpression key) => Key = key;
+        public Undefine(IExpression key)
+        {
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
+
+            if (!(key is Variable || key is UserFunction))
+                throw new NotSupportedException();
+
+            Key = key;
+        }
 
         /// <summary>
         /// Determines whether the specified <see cref="object" />, is equal to this instance.
@@ -52,7 +57,7 @@ namespace xFunc.Maths.Expressions
             if (undef == null)
                 return false;
 
-            return key.Equals(undef.key);
+            return Key.Equals(undef.Key);
         }
 
         /// <summary>
@@ -95,16 +100,16 @@ namespace xFunc.Maths.Expressions
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
 
-            if (key is Variable variable)
+            if (Key is Variable variable)
             {
                 parameters.Variables.Remove(variable.Name);
 
-                return string.Format(CultureInfo.InvariantCulture, Resource.UndefineVariable, key);
+                return string.Format(CultureInfo.InvariantCulture, Resource.UndefineVariable, Key);
             }
 
-            parameters.Functions.Remove((UserFunction)key);
+            parameters.Functions.Remove((UserFunction)Key);
 
-            return string.Format(CultureInfo.InvariantCulture, Resource.UndefineFunction, key);
+            return string.Format(CultureInfo.InvariantCulture, Resource.UndefineFunction, Key);
         }
 
         /// <summary>
@@ -142,32 +147,18 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Clones this instance.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public IExpression Clone() => new Undefine(key.Clone());
+        /// <param name="key">The argument of new expression.</param>
+        /// <returns>
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
+        /// </returns>
+        public IExpression Clone(IExpression? key = null)
+            => new Undefine(key ?? Key);
 
         /// <summary>
-        /// Gets or sets the key.
+        /// Gets the key.
         /// </summary>
-        /// <value>The key.</value>
-        /// <exception cref="NotSupportedException"><paramref name="value"/> is not a <see cref="Variable"/> or a <see cref="UserFunction"/>.</exception>
-        public IExpression Key
-        {
-            get
-            {
-                return key;
-            }
-            set
-            {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-
-                if (!(value is Variable || value is UserFunction))
-                    throw new NotSupportedException();
-
-                key = value;
-            }
-        }
+        public IExpression Key { get; }
     }
 }

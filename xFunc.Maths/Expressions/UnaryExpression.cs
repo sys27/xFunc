@@ -14,8 +14,7 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+using System.Collections.Immutable;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 using xFunc.Maths.Resources;
@@ -27,31 +26,26 @@ namespace xFunc.Maths.Expressions
     /// </summary>
     public abstract class UnaryExpression : IExpression
     {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IExpression argument = default!;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="UnaryExpression"/> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
         protected UnaryExpression(IExpression argument)
-        {
-            Argument = argument;
-        }
+            => Argument = argument ?? throw new ArgumentNullException(nameof(argument));
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UnaryExpression"/> class.
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
-        protected UnaryExpression(IList<IExpression> arguments)
+        protected UnaryExpression(ImmutableArray<IExpression> arguments)
         {
             if (arguments == null)
                 throw new ArgumentNullException(nameof(arguments));
 
-            if (arguments.Count < 1)
+            if (arguments.Length < 1)
                 throw new ParseException(Resource.LessParams);
 
-            if (arguments.Count > 1)
+            if (arguments.Length > 1)
                 throw new ParseException(Resource.MoreParams);
 
             Argument = arguments[0];
@@ -76,7 +70,7 @@ namespace xFunc.Maths.Expressions
             if (obj == null || GetType() != obj.GetType())
                 return false;
 
-            return argument.Equals(((UnaryExpression)obj).Argument);
+            return Argument.Equals(((UnaryExpression)obj).Argument);
         }
 
         /// <summary>
@@ -173,19 +167,15 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
+        /// <param name="argument">The argument of new expression.</param>
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public abstract IExpression Clone();
+        public abstract IExpression Clone(IExpression? argument = null);
 
         /// <summary>
-        /// Gets or sets the expression.
+        /// Gets the expression.
         /// </summary>
-        /// <value>The expression.</value>
-        public IExpression Argument
-        {
-            get => argument;
-            set => argument = value ?? throw new ArgumentNullException(nameof(value));
-        }
+        public IExpression Argument { get; }
     }
 }

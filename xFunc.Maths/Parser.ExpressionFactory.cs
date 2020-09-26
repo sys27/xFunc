@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
@@ -36,7 +36,7 @@ namespace xFunc.Maths
     /// </summary>
     public partial class Parser
     {
-        private IExpression CreateFunction(in Token token, IList<IExpression> arguments)
+        private IExpression CreateFunction(in Token token, ImmutableArray<IExpression> arguments)
         {
             Debug.Assert(token.IsId(), "Token should be Id.");
             Debug.Assert(!string.IsNullOrWhiteSpace(token.StringValue), "Id is empty.");
@@ -301,7 +301,6 @@ namespace xFunc.Maths
         }
 
         private IExpression CreateComplexNumber(
-            in Token magnitudeSign,
             in Token magnitude,
             in Token phaseSign,
             in Token phase)
@@ -309,7 +308,7 @@ namespace xFunc.Maths
             static int GetSign(Token token)
                 => token.Is(MinusOperator) ? -1 : 1;
 
-            var magnitudeNumber = magnitude.NumberValue * GetSign(magnitudeSign);
+            var magnitudeNumber = magnitude.NumberValue;
             var phaseNumber = phase.NumberValue * GetSign(phaseSign);
             var complex = Complex.FromPolarCoordinates(magnitudeNumber, phaseNumber);
 

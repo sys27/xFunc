@@ -174,6 +174,12 @@ namespace xFunc.Tests.ParserTests
             ParseTest("{2, 3, 4}", expected);
         }
 
+        [Theory]
+        [InlineData("{}")]
+        [InlineData("{1, }")]
+        public void VectorErrorTest(string exp)
+            => ParseErrorTest(exp);
+
         [Fact]
         public void MatrixTest()
         {
@@ -185,6 +191,10 @@ namespace xFunc.Tests.ParserTests
 
             ParseTest("{{2, 3}, {4, 7}}", expected);
         }
+
+        [Fact]
+        public void MatrixErrorTest()
+            => ParseErrorTest("{{1, 2}, }");
 
         [Fact]
         public void MatrixWithDiffVectorSizeTest()
@@ -417,6 +427,10 @@ namespace xFunc.Tests.ParserTests
             ParseTest("add(1, 2)", expected);
         }
 
+        [Fact]
+        public void AddMoreParamsTest()
+            => ParseErrorTest("add(1, 2, 3)");
+
         [Theory]
         [InlineData("sub(1, 2)")]
         [InlineData("1 - 2")]
@@ -440,6 +454,33 @@ namespace xFunc.Tests.ParserTests
         }
 
         [Theory]
+        [InlineData("2 |")]
+        [InlineData("2 ->")]
+        [InlineData("2 <->")]
+        [InlineData("2 nand")]
+        [InlineData("2 nor")]
+        [InlineData("2 and")]
+        [InlineData("2 or")]
+        [InlineData("2 xor")]
+        [InlineData("2 eq")]
+        [InlineData("2 impl")]
+        [InlineData("2 ==")]
+        [InlineData("2 !=")]
+        [InlineData("2 <")]
+        [InlineData("2 >")]
+        [InlineData("2 <=")]
+        [InlineData("2 >=")]
+        [InlineData("2 <<")]
+        [InlineData("2 >>")]
+        [InlineData("2 +")]
+        [InlineData("2 -")]
+        [InlineData("2 *")]
+        [InlineData("2 /")]
+        [InlineData("2 %")]
+        public void MissingSecondPartTest(string exp)
+            => ParseErrorTest(exp);
+
+        [Theory]
         [InlineData("div(1, 2)")]
         [InlineData("1 / 2")]
         public void DivFuncTest(string function)
@@ -447,32 +488,6 @@ namespace xFunc.Tests.ParserTests
             var expected = new Div(Number.One, Number.Two);
 
             ParseTest(function, expected);
-        }
-
-        [Theory]
-        [InlineData("pow(1, 2)")]
-        [InlineData("1 ^ 2")]
-        public void PowFuncTest(string function)
-        {
-            var expected = new Pow(Number.One, Number.Two);
-
-            ParseTest(function, expected);
-        }
-
-        [Fact]
-        public void PowRightAssociativityTest()
-        {
-            var expected = new Pow(Number.One, new Pow(Number.Two, new Number(3)));
-
-            ParseTest("1 ^ 2 ^ 3", expected);
-        }
-
-        [Fact]
-        public void PowUnaryMinusTest()
-        {
-            var expected = new UnaryMinus(new Pow(Number.One, Number.Two));
-
-            ParseTest("-1 ^ 2", expected);
         }
 
         [Fact]
@@ -795,47 +810,6 @@ namespace xFunc.Tests.ParserTests
         [Fact]
         public void ParseCosWithoutParam()
             => ParseErrorTest("cos()1");
-
-        [Fact]
-        public void ImplicitMulAndPowerFunction()
-        {
-            var expected = new Mul(
-                Number.Two,
-                new Pow(new Sin(Variable.X), Number.Two)
-            );
-
-            ParseTest("2sin(x) ^ 2", expected);
-        }
-
-        [Fact]
-        public void ImplicitMulAndPowerVariable()
-        {
-            var expected = new Mul(
-                Number.Two,
-                new Pow(Variable.X, Number.Two)
-            );
-
-            ParseTest("2x^2", expected);
-        }
-
-        [Fact]
-        public void ImplicitNegativeNumberMulAndPowerVariable()
-        {
-            var expected = new Mul(
-                new UnaryMinus(Number.Two),
-                new Pow(Variable.X, Number.Two)
-            );
-
-            ParseTest("-2x^2", expected);
-        }
-
-        [Fact]
-        public void PowerWithUnaryMinus()
-        {
-            var expected = new Pow(Number.Two, new UnaryMinus(Number.Two));
-
-            ParseTest("2 ^ -2", expected);
-        }
 
         [Fact]
         public void LeftShiftTest()

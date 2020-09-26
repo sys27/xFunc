@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Statistical;
 using Xunit;
@@ -57,23 +56,6 @@ namespace xFunc.Tests.Expressions.Statistical
             var result = exp.Execute();
 
             Assert.Equal(3.0, result);
-        }
-
-        [Fact]
-        public void NotSupportedException()
-        {
-            var exp = new Max(new[] { Bool.False, Bool.False });
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
-
-        [Fact]
-        public void CloneTest()
-        {
-            var exp = new Max(new[] { Number.One, Number.Two });
-            var clone = exp.Clone();
-
-            Assert.Equal(exp, clone);
         }
     }
 }

@@ -54,7 +54,28 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var outerFunction = Create(outer, innerFunction);
             var expected = Variable.X;
 
-            SimpleTest(outerFunction, expected);
+            SimplifyTest(outerFunction, expected);
+        }
+
+        [Theory]
+        [InlineData(typeof(Arcsin))]
+        [InlineData(typeof(Arccos))]
+        [InlineData(typeof(Arctan))]
+        [InlineData(typeof(Arccot))]
+        [InlineData(typeof(Arcsec))]
+        [InlineData(typeof(Arccsc))]
+        [InlineData(typeof(Sin))]
+        [InlineData(typeof(Cos))]
+        [InlineData(typeof(Tan))]
+        [InlineData(typeof(Cot))]
+        [InlineData(typeof(Sec))]
+        [InlineData(typeof(Csc))]
+        public void SimplifyArgumentTest(Type type)
+        {
+            var exp = Create(type, new Add(Number.One, Number.Two));
+            var expected = Create(type, new Number(3));
+
+            SimplifyTest(exp, expected);
         }
     }
 }

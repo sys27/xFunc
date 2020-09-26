@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Statistical;
 using Xunit;
@@ -45,23 +44,6 @@ namespace xFunc.Tests.Expressions.Statistical
             var sum = new Sum(new[] { new Vector(new[] { Number.One, Number.Two }) });
 
             Assert.Equal(3.0, sum.Execute());
-        }
-
-        [Fact]
-        public void NotSupportedException()
-        {
-            var exp = new Sum(new[] { Bool.False, Bool.False });
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
-
-        [Fact]
-        public void CloneTest()
-        {
-            var exp = new Sum(new[] { Number.One, Number.Two });
-            var clone = exp.Clone();
-
-            Assert.Equal(exp, clone);
         }
     }
 }

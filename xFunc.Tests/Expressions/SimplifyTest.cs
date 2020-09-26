@@ -28,7 +28,9 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTest()
         {
             var mock = new Mock<ISimplifier>();
-            mock.Setup(x => x.Analyze(It.IsAny<Simplify>())).Returns<IExpression>(x => x);
+            mock
+                .Setup(x => x.Analyze(It.IsAny<Simplify>()))
+                .Returns<IExpression>(x => x);
 
             var exp = new Simplify(mock.Object, new Sin(Variable.X));
 

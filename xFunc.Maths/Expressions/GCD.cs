@@ -14,7 +14,7 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 
@@ -30,7 +30,17 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public GCD(IList<IExpression> args)
+        public GCD(IExpression[] args)
+            : base(args)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GCD"/> class.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
+        public GCD(ImmutableArray<IExpression> args)
             : base(args)
         {
         }
@@ -41,7 +51,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="first">The first operand.</param>
         /// <param name="second">The second operand.</param>
         public GCD(IExpression first, IExpression second)
-            : this(new[] { first, second })
+            : this(ImmutableArray.Create(first, second))
         {
         }
 
@@ -96,11 +106,14 @@ namespace xFunc.Maths.Expressions
             => analyzer.Analyze(this, context);
 
         /// <summary>
-        /// Clones this instance of the <see cref="GCD"/>.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="GCD"/> that is a clone of this instance.</returns>
-        public override IExpression Clone() =>
-            new GCD(CloneArguments());
+        /// <param name="arguments">The list of arguments.</param>
+        /// <returns>
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
+        /// </returns>
+        public override IExpression Clone(ImmutableArray<IExpression>? arguments = null)
+            => new GCD(arguments ?? Arguments);
 
         /// <summary>
         /// Gets the minimum count of parameters.

@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -25,6 +26,14 @@ namespace xFunc.Tests.Expressions
 {
     public class UserFunctionTest
     {
+        [Fact]
+        public void NullCtor()
+        {
+            ImmutableArray<IExpression> arguments = default;
+
+            Assert.Throws<ArgumentNullException>(() => new UserFunction("f", arguments));
+        }
+
         [Fact]
         public void ExecuteTest1()
         {
@@ -87,14 +96,6 @@ namespace xFunc.Tests.Expressions
         public void ArgumentsAreNullTest()
         {
             Assert.Throws<ArgumentNullException>(() => new UserFunction("f", null));
-        }
-
-        [Fact]
-        public void SetNullTest()
-        {
-            var exp = new UserFunction("f", new[] { new Number(5) });
-
-            Assert.Throws<ArgumentNullException>(() => exp[0] = null);
         }
 
         [Fact]

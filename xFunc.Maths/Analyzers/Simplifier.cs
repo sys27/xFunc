@@ -203,6 +203,12 @@ namespace xFunc.Maths.Analyzers
                 // const + const
                 (Number left, Number right)
                     => new Number(left + right),
+                (Number left, Angle right)
+                    => (left.Value + right.Value).AsExpression(),
+                (Angle left, Number right)
+                    => (left.Value + right.Value).AsExpression(),
+                (Angle left, Angle right)
+                    => (left.Value + right.Value).AsExpression(),
 
                 // x + x
                 (Variable left, Variable right) when left.Name == right.Name
@@ -370,6 +376,12 @@ namespace xFunc.Maths.Analyzers
                 // const / const
                 (Number left, Number right)
                     => new Number(left.Value / right.Value),
+                (Number left, Angle right)
+                    => (left.Value / right.Value).AsExpression(),
+                (Angle left, Number right)
+                    => (left.Value / right.Value).AsExpression(),
+                (Angle left, Angle right)
+                    => (left.Value / right.Value).AsExpression(),
 
                 // x / x
                 (Variable left, Variable right) when left.Equals(right)
@@ -615,6 +627,12 @@ namespace xFunc.Maths.Analyzers
                 // const * const
                 (Number left, Number right)
                     => new Number(left.Value * right.Value),
+                (Number left, Angle right)
+                    => (left.Value * right.Value).AsExpression(),
+                (Angle left, Number right)
+                    => (left.Value * right.Value).AsExpression(),
+                (Angle left, Angle right)
+                    => (left.Value * right.Value).AsExpression(),
 
                 // x * -y
                 (var left, UnaryMinus minus)
@@ -907,6 +925,12 @@ namespace xFunc.Maths.Analyzers
                 // const - const
                 (Number left, Number right)
                     => new Number(left - right),
+                (Number left, Angle right)
+                    => (left.Value - right.Value).AsExpression(),
+                (Angle left, Number right)
+                    => (left.Value - right.Value).AsExpression(),
+                (Angle left, Angle right)
+                    => (left.Value - right.Value).AsExpression(),
 
                 // x + x
                 (Variable left, Variable right) when left.Name == right.Name

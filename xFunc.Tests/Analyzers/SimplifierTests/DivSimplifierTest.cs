@@ -15,6 +15,7 @@
 
 using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using Xunit;
 
 namespace xFunc.Tests.Analyzers.SimplifierTests
@@ -61,6 +62,42 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         {
             var div = new Div(new Number(8), Number.Two);
             var expected = new Number(4);
+
+            SimplifyTest(div, expected);
+        }
+
+        [Fact(DisplayName = "90 / 2 deg")]
+        public void DivNumberAngle()
+        {
+            var div = new Div(
+                new Number(90),
+                AngleValue.Degree(2).AsExpression()
+            );
+            var expected = AngleValue.Degree(45).AsExpression();
+
+            SimplifyTest(div, expected);
+        }
+
+        [Fact(DisplayName = "90 deg / 2")]
+        public void DivAngleNumber()
+        {
+            var div = new Div(
+                AngleValue.Degree(90).AsExpression(),
+                new Number(2)
+            );
+            var expected = AngleValue.Degree(45).AsExpression();
+
+            SimplifyTest(div, expected);
+        }
+
+        [Fact(DisplayName = "2 rad / 90 deg")]
+        public void DivTwoAngles()
+        {
+            var div = new Div(
+                AngleValue.Radian(2).AsExpression(),
+                AngleValue.Degree(90).AsExpression()
+            );
+            var expected = AngleValue.Degree(114.59155902616465 / 90).AsExpression();
 
             SimplifyTest(div, expected);
         }

@@ -13,7 +13,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using Xunit;
 
 namespace xFunc.Tests.Analyzers.SimplifierTests
@@ -43,6 +45,42 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         {
             var add = new Add(new Number(3), Number.Two);
             var expected = new Number(5);
+
+            SimplifyTest(add, expected);
+        }
+
+        [Fact(DisplayName = "90 + 2 rad")]
+        public void AddNumberAngle()
+        {
+            var add = new Add(
+                new Number(90),
+                AngleValue.Degree(2).AsExpression()
+            );
+            var expected = AngleValue.Degree(92).AsExpression();
+
+            SimplifyTest(add, expected);
+        }
+
+        [Fact(DisplayName = "90 deg + 2")]
+        public void AddAngleNumber()
+        {
+            var add = new Add(
+                AngleValue.Degree(90).AsExpression(),
+                new Number(2)
+            );
+            var expected = AngleValue.Degree(92).AsExpression();
+
+            SimplifyTest(add, expected);
+        }
+
+        [Fact(DisplayName = "90 deg + 2 rad")]
+        public void AddTwoAngles()
+        {
+            var add = new Add(
+                AngleValue.Degree(90).AsExpression(),
+                AngleValue.Radian(2).AsExpression()
+            );
+            var expected = AngleValue.Degree(90 + 114.59155902616465).AsExpression();
 
             SimplifyTest(add, expected);
         }

@@ -200,28 +200,11 @@ namespace xFunc.Maths
             return new Dec(first);
         }
 
-        private IExpression CreateConditionalOperator(
-            in Token token,
-            IExpression first,
-            IExpression second)
-        {
-            if (token.Is(ConditionalAndOperator))
-                return new ConditionalAnd(first, second);
-
-            Debug.Assert(token.Is(ConditionalOrOperator), "Only '&&' and '||' are allowed here.");
-
-            return new ConditionalOr(first, second);
-        }
-
         private IExpression CreateBitwiseOperator(
             in Token token,
             IExpression first,
             IExpression second)
         {
-            if (token.Is(AndOperator) || token.Is(AndKeyword))
-                return new And(first, second);
-            if (token.Is(OrOperator) || token.Is(OrKeyword))
-                return new Or(first, second);
             if (token.Is(ImplicationOperator) || token.Is(ImplKeyword))
                 return new Implication(first, second);
             if (token.Is(TokenKind.EqualityOperator) || token.Is(EqKeyword))
@@ -229,12 +212,10 @@ namespace xFunc.Maths
 
             if (token.Is(NAndKeyword))
                 return new NAnd(first, second);
-            if (token.Is(NOrKeyword))
-                return new NOr(first, second);
 
-            Debug.Assert(token.Is(XOrKeyword), "Incorrect token type.");
+            Debug.Assert(token.Is(NOrKeyword), "Incorrect token type.");
 
-            return new XOr(first, second);
+            return new NOr(first, second);
         }
 
         private IExpression CreateEqualityOperator(
@@ -244,8 +225,17 @@ namespace xFunc.Maths
         {
             if (token.Is(EqualOperator))
                 return new Equal(first, second);
-            if (token.Is(NotEqualOperator))
-                return new NotEqual(first, second);
+
+            Debug.Assert(token.Is(NotEqualOperator), "Incorrect token type.");
+
+            return new NotEqual(first, second);
+        }
+
+        private IExpression CreateRelationalOperator(
+            in Token token,
+            IExpression first,
+            IExpression second)
+        {
             if (token.Is(LessThanOperator))
                 return new LessThan(first, second);
             if (token.Is(LessOrEqualOperator))

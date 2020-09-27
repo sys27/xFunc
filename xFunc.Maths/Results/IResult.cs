@@ -23,9 +23,6 @@ namespace xFunc.Maths.Results
         /// <summary>
         /// Gets the result.
         /// </summary>
-        /// <value>
-        /// The result.
-        /// </value>
         object Result { get; }
     }
 }

@@ -45,47 +45,21 @@ namespace xFunc.Maths.Expressions.Statistical
         {
         }
 
-        /// <summary>
-        /// Executes this expression.
-        /// </summary>
-        /// <param name="numbers">The array of expressions.</param>
-        /// <returns>
-        /// A result of the execution.
-        /// </returns>
+        /// <inheritdoc />
         private protected override double ExecuteInternal(double[] numbers) => numbers.Min();
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <returns>
-        /// The analysis result.
-        /// </returns>
+        /// <inheritdoc />
         private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <param name="context">The context.</param>
-        /// <returns>The analysis result.</returns>
+        /// <inheritdoc />
         [ExcludeFromCodeCoverage]
         private protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);
 
-        /// <summary>
-        /// Clones this instance of the <see cref="IExpression" />.
-        /// </summary>
-        /// <param name="arguments">The list of arguments.</param>
-        /// <returns>
-        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
-        /// </returns>
+        /// <inheritdoc />
         public override IExpression Clone(ImmutableArray<IExpression>? arguments = null)
             => new Min(arguments ?? Arguments);
     }

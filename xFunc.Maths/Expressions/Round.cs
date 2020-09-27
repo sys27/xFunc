@@ -55,14 +55,7 @@ namespace xFunc.Maths.Expressions
         {
         }
 
-        /// <summary>
-        /// Executes this expression.
-        /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
-        /// <returns>
-        /// A result of the execution.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
+        /// <inheritdoc />
         public override object Execute(ExpressionParameters? parameters)
         {
             var result = Argument.Execute(parameters);
@@ -78,71 +71,39 @@ namespace xFunc.Maths.Expressions
             throw new ResultIsNotSupportedException(this, result);
         }
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <returns>
-        /// The analysis result.
-        /// </returns>
+        /// <inheritdoc />
         private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <param name="context">The context.</param>
-        /// <returns>The analysis result.</returns>
+        /// <inheritdoc />
         [ExcludeFromCodeCoverage]
         private protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);
 
-        /// <summary>
-        /// Clones this instance of the <see cref="IExpression" />.
-        /// </summary>
-        /// <param name="arguments">The list of arguments.</param>
-        /// <returns>
-        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
-        /// </returns>
+        /// <inheritdoc />
         public override IExpression Clone(ImmutableArray<IExpression>? arguments = null)
             => new Round(arguments ?? Arguments);
 
         /// <summary>
         /// Gets the expression that represents a double-precision floating-point number to be rounded.
         /// </summary>
-        /// <value>
-        /// The expression that represents a double-precision floating-point number to be rounded.
-        /// </value>
         public IExpression Argument => this[0];
 
         /// <summary>
         /// Gets the expression that represents the number of fractional digits in the return value.
         /// </summary>
-        /// <value>
-        /// The expression that represents the number of fractional digits in the return value.
-        /// </value>
         public IExpression? Digits => ParametersCount == 2 ? this[1] : null;
 
         /// <summary>
         /// Gets the minimum count of parameters.
         /// </summary>
-        /// <value>
-        /// The minimum count of parameters.
-        /// </value>
         public override int? MinParametersCount => 1;
 
         /// <summary>
         /// Gets the maximum count of parameters. <c>null</c> - Infinity.
         /// </summary>
-        /// <value>
-        /// The maximum count of parameters.
-        /// </value>
         public override int? MaxParametersCount => 2;
     }
 }

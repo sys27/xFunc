@@ -30,28 +30,13 @@ namespace xFunc.Maths.Results
         public ExpressionResult(IExpression exp)
             => Result = exp ?? throw new ArgumentNullException(nameof(exp));
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         public override string ToString() => Result.ToString();
 
-        /// <summary>
-        /// Gets the result.
-        /// </summary>
-        /// <value>
-        /// The result.
-        /// </value>
+        /// <inheritdoc cref="IResult.Result" />
         public IExpression Result { get; }
 
-        /// <summary>
-        /// Gets the result.
-        /// </summary>
-        /// <value>
-        /// The result.
-        /// </value>
+        /// <inheritdoc />
         object IResult.Result => Result;
     }
 }

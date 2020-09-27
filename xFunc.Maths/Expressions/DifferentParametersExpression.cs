@@ -68,13 +68,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The argument.</returns>
         public IExpression this[int index] => Arguments[index];
 
-        /// <summary>
-        /// Determines whether the specified <see cref="object" />, is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
+        /// <inheritdoc />
         public override bool Equals(object? obj)
         {
             if (this == obj)
@@ -91,49 +85,19 @@ namespace xFunc.Maths.Expressions
             return Arguments.SequenceEqual(diff.Arguments);
         }
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <param name="formatter">The formatter.</param>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         public string ToString(IFormatter formatter) => Analyze(formatter);
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         public override string ToString() => ToString(new CommonFormatter());
 
-        /// <summary>
-        /// Executes this expression. Don't use this method if your expression has variables or user-functions.
-        /// </summary>
-        /// <returns>
-        /// A result of the execution.
-        /// </returns>
+        /// <inheritdoc />
         public virtual object Execute() => Execute(null);
 
-        /// <summary>
-        /// Executes this expression.
-        /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
-        /// <returns>
-        /// A result of the execution.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
+        /// <inheritdoc />
         public abstract object Execute(ExpressionParameters? parameters);
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <returns>
-        /// The analysis result.
-        /// </returns>
+        /// <inheritdoc />
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
             if (analyzer == null)
@@ -142,14 +106,7 @@ namespace xFunc.Maths.Expressions
             return AnalyzeInternal(analyzer);
         }
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <param name="context">The context.</param>
-        /// <returns>The analysis result.</returns>
+        /// <inheritdoc />
         public TResult Analyze<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
@@ -194,31 +151,21 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Gets the arguments.
         /// </summary>
-        /// <value>The arguments.</value>
         public ImmutableArray<IExpression> Arguments { get; }
 
         /// <summary>
         /// Gets the count of parameters.
         /// </summary>
-        /// <value>
-        /// The count of parameters.
-        /// </value>
         public int ParametersCount => Arguments.Length;
 
         /// <summary>
         /// Gets the minimum count of parameters.
         /// </summary>
-        /// <value>
-        /// The minimum count of parameters.
-        /// </value>
         public abstract int? MinParametersCount { get; }
 
         /// <summary>
         /// Gets the maximum count of parameters. <c>null</c> - Infinity.
         /// </summary>
-        /// <value>
-        /// The maximum count of parameters.
-        /// </value>
         public abstract int? MaxParametersCount { get; }
     }
 }

@@ -63,11 +63,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="variable">The name of variable.</param>
         public void Deconstruct(out string variable) => variable = Name;
 
-        /// <summary>
-        /// Determines whether the specified object is equal to the current object.
-        /// </summary>
-        /// <param name="other">The object to compare with the current object.</param>
-        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
+        /// <inheritdoc />
         public bool Equals(Variable? other)
         {
             if (other is null)
@@ -79,11 +75,7 @@ namespace xFunc.Maths.Expressions
             return Name == other.Name;
         }
 
-        /// <summary>
-        /// Determines whether the specified object is equal to the current object.
-        /// </summary>
-        /// <param name="obj">The object to compare with the current object.</param>
-        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
+        /// <inheritdoc />
         public override bool Equals(object? obj)
         {
             if (obj is null)
@@ -98,44 +90,23 @@ namespace xFunc.Maths.Expressions
             return Equals((Variable)obj);
         }
 
-        /// <summary>
-        /// Returns a hash function for this type.
-        /// </summary>
-        /// <returns>A hash code for the current <see cref="Variable"/>.</returns>
+        /// <inheritdoc />
         public override int GetHashCode()
             => HashCode.Combine(Name);
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <param name="formatter">The formatter.</param>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         public string ToString(IFormatter formatter) =>
             Analyze(formatter);
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         public override string ToString() =>
             ToString(new CommonFormatter());
 
-        /// <summary>
-        /// Do not use this method. It always throws an exception.
-        /// </summary>
-        /// <returns>Never returns.</returns>
+        /// <inheritdoc />
         /// <exception cref="NotSupportedException">Always.</exception>
         public object Execute() => throw new NotSupportedException();
 
-        /// <summary>
-        /// Gets value of this variable from <paramref name="parameters"/>.
-        /// </summary>
-        /// <param name="parameters">Collection of variables.</param>
-        /// <returns>A value of this variable.</returns>
+        /// <inheritdoc />
         public object Execute(ExpressionParameters? parameters)
         {
             if (parameters == null)
@@ -144,14 +115,7 @@ namespace xFunc.Maths.Expressions
             return parameters.Variables[Name];
         }
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <returns>
-        /// The analysis result.
-        /// </returns>
+        /// <inheritdoc />
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
             if (analyzer == null)
@@ -160,14 +124,7 @@ namespace xFunc.Maths.Expressions
             return analyzer.Analyze(this);
         }
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <param name="context">The context.</param>
-        /// <returns>The analysis result.</returns>
+        /// <inheritdoc />
         public TResult Analyze<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)

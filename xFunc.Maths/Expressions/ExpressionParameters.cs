@@ -92,17 +92,11 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Gets the collection of variables' values.
         /// </summary>
-        /// <value>
-        /// The collection of variables' values.
-        /// </value>
         public ParameterCollection Variables { get; }
 
         /// <summary>
         /// Gets the collection of user functions.
         /// </summary>
-        /// <value>
-        /// The collection of user functions.
-        /// </value>
         public FunctionCollection Functions { get; }
     }
 }

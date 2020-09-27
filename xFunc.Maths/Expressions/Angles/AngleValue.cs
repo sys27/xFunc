@@ -58,32 +58,15 @@ namespace xFunc.Maths.Expressions.Angles
         public static AngleValue Gradian(double value)
             => new AngleValue(value, AngleUnit.Gradian);
 
-        /// <summary>
-        /// Determines whether the specified object is equal to the current object.
-        /// </summary>
-        /// <param name="other">The object to compare with the current object.</param>
-        /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.</returns>
+        /// <inheritdoc />
         public bool Equals(AngleValue other)
             => MathExtensions.Equals(Value, other.Value) && Unit == other.Unit;
 
-        /// <summary>
-        /// Determines whether the specified object is equal to the current object.
-        /// </summary>
-        /// <param name="obj">The object to compare with the current object.</param>
-        /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.</returns>
+        /// <inheritdoc />
         public override bool Equals(object? obj)
             => obj is AngleValue other && Equals(other);
 
-        /// <summary>
-        /// Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
-        /// </summary>
-        /// <param name="other">An object to compare with this instance.</param>
-        /// <returns>
-        /// A value that indicates the relative order of the objects being compared. The return value has the following meanings:
-        /// Less than zero - This object is less than the other parameter.
-        /// Zero - This object is equal to other.
-        /// Greater than zero - This object is greater than other.
-        /// </returns>
+        /// <inheritdoc />
         public int CompareTo(AngleValue other)
         {
             var valueComparison = Value.CompareTo(other.Value);
@@ -93,16 +76,7 @@ namespace xFunc.Maths.Expressions.Angles
             return Unit.CompareTo(other.Unit);
         }
 
-        /// <summary>
-        /// Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>
-        /// A value that indicates the relative order of the objects being compared. The return value has the following meanings:
-        /// Less than zero - This object is less than the other parameter.
-        /// Zero - This object is equal to other.
-        /// Greater than zero - This object is greater than other.
-        /// </returns>
+        /// <inheritdoc />
         public int CompareTo(object? obj)
         {
             if (obj is null)
@@ -114,21 +88,11 @@ namespace xFunc.Maths.Expressions.Angles
             throw new ArgumentException($"Object must be of type {nameof(AngleValue)}");
         }
 
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
+        /// <inheritdoc />
         public override int GetHashCode()
             => HashCode.Combine(Value, (int)Unit);
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         public override string ToString() => Unit switch
         {
             AngleUnit.Degree => $"{Value.ToString(CultureInfo.InvariantCulture)} degree",

@@ -116,20 +116,10 @@ namespace xFunc.Maths.Expressions.Collections
             AddConstant(Parameter.CreateConstant("γ", 0.57721566490153286060651)); // Euler–Mascheroni constant
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through a collection.
-        /// </summary>
-        /// <returns>
-        /// An <see cref="IEnumerator" /> object that can be used to iterate through the collection.
-        /// </returns>
+        /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="IEnumerator{T}" /> that can be used to iterate through the collection.
-        /// </returns>
+        /// <inheritdoc />
         public IEnumerator<Parameter> GetEnumerator()
         {
             foreach (var (_, item) in constants)

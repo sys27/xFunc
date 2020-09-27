@@ -44,58 +44,26 @@ namespace xFunc.Maths.Expressions.Trigonometric
         {
         }
 
-        /// <summary>
-        /// Calculates this mathematical expression (using radian).
-        /// </summary>
-        /// <param name="angleValue">The angle.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
+        /// <inheritdoc />
         /// <seealso cref="ExpressionParameters" />
         protected override double ExecuteInternal(AngleValue angleValue)
             => angleValue.Sin();
 
-        /// <summary>
-        /// Calculates the this mathematical expression (complex number).
-        /// </summary>
-        /// <param name="complex">The calculation result of argument.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
+        /// <inheritdoc />
         protected override Complex ExecuteComplex(Complex complex)
             => Complex.Sin(complex);
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <returns>
-        /// The analysis result.
-        /// </returns>
+        /// <inheritdoc />
         private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <param name="context">The context.</param>
-        /// <returns>The analysis result.</returns>
+        /// <inheritdoc />
         private protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);
 
-        /// <summary>
-        /// Clones this instance of the <see cref="IExpression" />.
-        /// </summary>
-        /// <param name="argument">The argument of new expression.</param>
-        /// <returns>
-        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
-        /// </returns>
+        /// <inheritdoc />
         public override IExpression Clone(IExpression? argument = null)
             => new Sin(argument ?? Argument);
     }

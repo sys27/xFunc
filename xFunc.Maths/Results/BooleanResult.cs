@@ -31,31 +31,16 @@ namespace xFunc.Maths.Results
             Result = value;
         }
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         public override string ToString()
             => Result.ToString(CultureInfo.InvariantCulture);
 
-        /// <summary>
-        /// Gets the result.
-        /// </summary>
-        /// <value>
-        /// The result.
-        /// </value>
+        /// <inheritdoc cref="IResult.Result" />
 #pragma warning disable SA1623
         public bool Result { get; }
 #pragma warning restore SA1623
 
-        /// <summary>
-        /// Gets the result.
-        /// </summary>
-        /// <value>
-        /// The result.
-        /// </value>
+        /// <inheritdoc />
         object IResult.Result => Result;
     }
 }

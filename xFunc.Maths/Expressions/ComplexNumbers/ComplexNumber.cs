@@ -62,13 +62,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         public static implicit operator ComplexNumber(Complex number)
             => new ComplexNumber(number);
 
-        /// <summary>
-        /// Determines whether the specified <see cref="object" />, is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
+        /// <inheritdoc />
         public override bool Equals(object? obj)
         {
             if (obj is ComplexNumber num)
@@ -77,49 +71,19 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
             return false;
         }
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <param name="formatter">The formatter.</param>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         public string ToString(IFormatter formatter) => Analyze(formatter);
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         public override string ToString() => ToString(new CommonFormatter());
 
-        /// <summary>
-        /// Executes this expression. Don't use this method if your expression has variables or user-functions.
-        /// </summary>
-        /// <returns>
-        /// A result of the execution.
-        /// </returns>
+        /// <inheritdoc />
         public object Execute() => Value;
 
-        /// <summary>
-        /// Executes this expression.
-        /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
-        /// <returns>
-        /// A result of the execution.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
+        /// <inheritdoc />
         public object Execute(ExpressionParameters? parameters) => Value;
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <returns>
-        /// The analysis result.
-        /// </returns>
+        /// <inheritdoc />
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
             if (analyzer == null)
@@ -128,14 +92,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
             return analyzer.Analyze(this);
         }
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <param name="context">The context.</param>
-        /// <returns>The analysis result.</returns>
+        /// <inheritdoc />
         public TResult Analyze<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
@@ -149,9 +106,6 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <summary>
         /// Gets the value.
         /// </summary>
-        /// <value>
-        /// The value.
-        /// </value>
         public Complex Value { get; }
     }
 }

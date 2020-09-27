@@ -47,39 +47,16 @@ namespace xFunc.Maths.Expressions.Programming
             return Variable.Equals(((VariableUnaryExpression)obj).Variable);
         }
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <param name="formatter">The formatter.</param>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         public string ToString(IFormatter formatter) => Analyze(formatter);
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         public override string ToString() => ToString(new CommonFormatter());
 
-        /// <summary>
-        /// Executes this expression. Don't use this method if your expression has variables or user-functions.
-        /// </summary>
-        /// <returns>
-        /// A result of the execution.
-        /// </returns>
+        /// <inheritdoc />
         public object Execute() => Execute(null);
 
-        /// <summary>
-        /// Executes this expression.
-        /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
-        /// <returns>
-        /// A result of the execution.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
+        /// <inheritdoc />
         public object Execute(ExpressionParameters? parameters)
         {
             if (parameters == null)
@@ -101,14 +78,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         protected abstract object Execute(double value);
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <returns>
-        /// The analysis result.
-        /// </returns>
+        /// <inheritdoc />
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
             if (analyzer == null)
@@ -117,14 +87,7 @@ namespace xFunc.Maths.Expressions.Programming
             return AnalyzeInternal(analyzer);
         }
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <param name="context">The context.</param>
-        /// <returns>The analysis result.</returns>
+        /// <inheritdoc />
         public TResult Analyze<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)

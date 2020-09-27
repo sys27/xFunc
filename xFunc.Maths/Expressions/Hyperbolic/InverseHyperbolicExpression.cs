@@ -64,14 +64,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <seealso cref="ExpressionParameters" />
         protected abstract double ExecuteInternal(double radian);
 
-        /// <summary>
-        /// Executes this expression.
-        /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
-        /// <returns>
-        /// A result of the execution.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
+        /// <inheritdoc />
         public override object Execute(ExpressionParameters? parameters)
         {
             var result = Argument.Execute(parameters);

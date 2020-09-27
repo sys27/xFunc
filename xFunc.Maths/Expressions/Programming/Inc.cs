@@ -32,47 +32,21 @@ namespace xFunc.Maths.Expressions.Programming
         {
         }
 
-        /// <summary>
-        /// Executes this expression.
-        /// </summary>
-        /// <param name="value">The value of variable.</param>
-        /// <returns>
-        /// A result of the execution.
-        /// </returns>
+        /// <inheritdoc />
         protected override object Execute(double value) => value + 1;
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <returns>
-        /// The analysis result.
-        /// </returns>
+        /// <inheritdoc />
         private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <param name="context">The context.</param>
-        /// <returns>The analysis result.</returns>
+        /// <inheritdoc />
         [ExcludeFromCodeCoverage]
         private protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);
 
-        /// <summary>
-        /// Clones this instance of the <see cref="IExpression" />.
-        /// </summary>
-        /// <param name="variable">The argument of new expression.</param>
-        /// <returns>
-        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
-        /// </returns>
+        /// <inheritdoc />
         public override IExpression Clone(Variable? variable = null)
             => new Inc(variable ?? Variable);
     }

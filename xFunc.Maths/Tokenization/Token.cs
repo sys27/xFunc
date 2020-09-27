@@ -67,12 +67,7 @@ namespace xFunc.Maths.Tokenization
             kind = TokenKind.Number;
         }
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         [ExcludeFromCodeCoverage]
         public override string ToString()
         {

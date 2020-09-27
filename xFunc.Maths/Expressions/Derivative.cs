@@ -91,14 +91,7 @@ namespace xFunc.Maths.Expressions
                          throw new ArgumentNullException(nameof(simplifier));
         }
 
-        /// <summary>
-        /// Executes this expression.
-        /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
-        /// <returns>
-        /// A result of the execution.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
+        /// <inheritdoc />
         public override object Execute(ExpressionParameters? parameters)
         {
             var variable = Variable;
@@ -117,94 +110,53 @@ namespace xFunc.Maths.Expressions
             return diff.Analyze(Simplifier);
         }
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <returns>
-        /// The analysis result.
-        /// </returns>
+        /// <inheritdoc />
         private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <param name="context">The context.</param>
-        /// <returns>The analysis result.</returns>
+        /// <inheritdoc />
         private protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);
 
-        /// <summary>
-        /// Clones this instance of the <see cref="IExpression" />.
-        /// </summary>
-        /// <param name="arguments">The list of arguments.</param>
-        /// <returns>
-        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
-        /// </returns>
+        /// <inheritdoc />
         public override IExpression Clone(ImmutableArray<IExpression>? arguments = null)
             => new Derivative(Differentiator, Simplifier, arguments ?? Arguments);
 
         /// <summary>
         /// Gets the expression.
         /// </summary>
-        /// <value>
-        /// The expression.
-        /// </value>
         public IExpression Expression => this[0];
 
         /// <summary>
         /// Gets the variable.
         /// </summary>
-        /// <value>
-        /// The variable.
-        /// </value>
         public Variable Variable => ParametersCount >= 2 ? (Variable)this[1] : Variable.X;
 
         /// <summary>
         /// Gets the derivative point.
         /// </summary>
-        /// <value>
-        /// The derivative point.
-        /// </value>
         public Number? DerivativePoint => ParametersCount >= 3 ? (Number)this[2] : null;
 
         /// <summary>
         /// Gets the simplifier.
         /// </summary>
-        /// <value>
-        /// The simplifier.
-        /// </value>
         public ISimplifier Simplifier { get; }
 
         /// <summary>
         /// Gets the differentiator.
         /// </summary>
-        /// <value>
-        /// The differentiator.
-        /// </value>
         public IDifferentiator Differentiator { get; }
 
         /// <summary>
         /// Gets the minimum count of parameters.
         /// </summary>
-        /// <value>
-        /// The minimum count of parameters.
-        /// </value>
         public override int? MinParametersCount => 1;
 
         /// <summary>
         /// Gets the maximum count of parameters. <c>null</c> - Infinity.
         /// </summary>
-        /// <value>
-        /// The maximum count of parameters.
-        /// </value>
         public override int? MaxParametersCount => 3;
     }
 }

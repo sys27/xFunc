@@ -30,32 +30,13 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <param name="value">The value of this constant.</param>
         private Bool(bool value) => Value = value;
 
-        /// <summary>
-        /// Executes this expression.
-        /// </summary>
-        /// <returns>
-        /// A result of the execution.
-        /// </returns>
+        /// <inheritdoc />
         public object Execute() => Value;
 
-        /// <summary>
-        /// Executes this expression.
-        /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
-        /// <returns>
-        /// A result of the execution.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
+        /// <inheritdoc />
         public object Execute(ExpressionParameters? parameters) => Value;
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <returns>
-        /// The analysis result.
-        /// </returns>
+        /// <inheritdoc />
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
             if (analyzer == null)
@@ -64,14 +45,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
             return analyzer.Analyze(this);
         }
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <param name="context">The context.</param>
-        /// <returns>The analysis result.</returns>
+        /// <inheritdoc />
         public TResult Analyze<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
@@ -102,13 +76,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         public static implicit operator Bool(bool value)
             => new Bool(value);
 
-        /// <summary>
-        /// Determines whether the specified <see cref="Bool" />, is equal to this instance.
-        /// </summary>
-        /// <param name="other">The object to compare with this instance.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified object is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
+        /// <inheritdoc />
         public bool Equals(Bool? other)
         {
             if (other is null)
@@ -120,13 +88,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
             return Value == other.Value;
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="object" />, is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
+        /// <inheritdoc />
         public override bool Equals(object? obj)
         {
             if (obj is null)
@@ -141,35 +103,18 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
             return Equals((Bool)obj);
         }
 
-        /// <summary>
-        /// Returns a hash function for this type.
-        /// </summary>
-        /// <returns>A hash code for the current <see cref="Bool"/>.</returns>
+        /// <inheritdoc />
         public override int GetHashCode() => HashCode.Combine(Value);
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <param name="formatter">The formatter.</param>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         public string ToString(IFormatter formatter) => Analyze(formatter);
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         public override string ToString() => ToString(new CommonFormatter());
 
         /// <summary>
         /// Gets the value of this expression.
         /// </summary>
-        /// <value>
-        /// The value of this expression.
-        /// </value>
 #pragma warning disable SA1623
         public bool Value { get; }
 #pragma warning restore SA1623

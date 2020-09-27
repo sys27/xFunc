@@ -47,13 +47,7 @@ namespace xFunc.Maths.Expressions
             Value = value;
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="object" />, is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
+        /// <inheritdoc />
         public override bool Equals(object? obj)
         {
             if (this == obj)
@@ -66,41 +60,16 @@ namespace xFunc.Maths.Expressions
             return Key.Equals(def.Key) && Value.Equals(def.Value);
         }
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <param name="formatter">The formatter.</param>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         public string ToString(IFormatter formatter) => Analyze(formatter);
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         public override string ToString() => ToString(new CommonFormatter());
 
-        /// <summary>
-        /// Throws <see cref="NotSupportedException"/>.
-        /// </summary>
-        /// <returns>
-        /// The exception.
-        /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
+        /// <inheritdoc />
         public object Execute() => throw new NotSupportedException();
 
-        /// <summary>
-        /// Executes this expression.
-        /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
-        /// <returns>
-        /// The exception.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        /// <exception cref="ArgumentNullException"><paramref name="parameters" /> is null.</exception>
+        /// <inheritdoc />
         public object Execute(ExpressionParameters? parameters)
         {
             if (parameters == null)
@@ -118,14 +87,7 @@ namespace xFunc.Maths.Expressions
             return string.Format(CultureInfo.InvariantCulture, Resource.AssignFunction, Key, Value);
         }
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <returns>
-        /// The analysis result.
-        /// </returns>
+        /// <inheritdoc />
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
             if (analyzer == null)
@@ -134,14 +96,7 @@ namespace xFunc.Maths.Expressions
             return analyzer.Analyze(this);
         }
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <param name="context">The context.</param>
-        /// <returns>The analysis result.</returns>
+        /// <inheritdoc />
         public TResult Analyze<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)

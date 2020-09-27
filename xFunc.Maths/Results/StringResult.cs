@@ -29,28 +29,13 @@ namespace xFunc.Maths.Results
         public StringResult(string str)
             => Result = str ?? throw new ArgumentNullException(nameof(str));
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         public override string ToString() => Result;
 
-        /// <summary>
-        /// Gets the string representation of result.
-        /// </summary>
-        /// <value>
-        /// The string representation of result.
-        /// </value>
+        /// <inheritdoc cref="IResult.Result" />
         public string Result { get; }
 
-        /// <summary>
-        /// Gets the result.
-        /// </summary>
-        /// <value>
-        /// The result.
-        /// </value>
+        /// <inheritdoc />
         object IResult.Result => Result;
     }
 }

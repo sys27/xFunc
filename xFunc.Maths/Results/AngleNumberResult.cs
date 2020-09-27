@@ -28,28 +28,13 @@ namespace xFunc.Maths.Results
         /// <param name="value">The numerical representation of result.</param>
         public AngleNumberResult(AngleValue value) => Result = value;
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         public override string ToString() => Result.ToString();
 
-        /// <summary>
-        /// Gets the numerical representation of result.
-        /// </summary>
-        /// <value>
-        /// The numerical representation of result.
-        /// </value>
+        /// <inheritdoc cref="IResult.Result" />
         public AngleValue Result { get; }
 
-        /// <summary>
-        /// Gets the result.
-        /// </summary>
-        /// <value>
-        /// The result.
-        /// </value>
+        /// <inheritdoc />
         object IResult.Result => Result;
     }
 }

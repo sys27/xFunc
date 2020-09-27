@@ -83,13 +83,7 @@ namespace xFunc.Maths.Expressions.Collections
         public static Parameter CreateConstant(string key, object value)
             => new Parameter(key, value, ParameterType.Constant);
 
-        /// <summary>
-        /// Determines whether the specified <see cref="object" />, is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
+        /// <inheritdoc />
         public override bool Equals(object? obj)
         {
             var param = obj as Parameter;
@@ -99,41 +93,19 @@ namespace xFunc.Maths.Expressions.Collections
             return Equals(param);
         }
 
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
+        /// <inheritdoc />
         public override int GetHashCode()
             => HashCode.Combine(Key);
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         public override string ToString()
             => string.Format(CultureInfo.InvariantCulture, "{0}: {1} ({2})", Key, value, Type);
 
-        /// <summary>
-        /// Compares the current object with another object of the same type.
-        /// </summary>
-        /// <param name="other">An object to compare with this object.</param>
-        /// <returns>A value that indicates the relative order of the objects being compared. The return value has the following meanings:
-        /// Less than zero - This object is less than the other parameter.
-        /// Zero - This object is equal to other.
-        /// Greater than zero - This object is greater than other.
-        /// </returns>
+        /// <inheritdoc />
         public int CompareTo(Parameter? other)
             => string.Compare(Key, other?.Key, StringComparison.Ordinal);
 
-        /// <summary>
-        /// Indicates whether the current object is equal to another object of the same type.
-        /// </summary>
-        /// <param name="other">An object to compare with this object.</param>
-        /// <returns><c>true</c> if the current object is equal to the other parameter; otherwise, <c>false</c>.</returns>
+        /// <inheritdoc />
         public bool Equals(Parameter? other)
         {
             if (other is null)
@@ -217,17 +189,11 @@ namespace xFunc.Maths.Expressions.Collections
         /// <summary>
         /// Gets the name of parameter.
         /// </summary>
-        /// <value>
-        /// The name of parameter.
-        /// </value>
         public string Key { get; }
 
         /// <summary>
         /// Gets or sets the value of parameter.
         /// </summary>
-        /// <value>
-        /// The value of parameter.
-        /// </value>
         public object Value
         {
             get
@@ -265,9 +231,6 @@ namespace xFunc.Maths.Expressions.Collections
         /// <summary>
         /// Gets the type of parameter.
         /// </summary>
-        /// <value>
-        /// The type of parameter.
-        /// </value>
         public ParameterType Type { get; }
     }
 }

@@ -45,41 +45,20 @@ namespace xFunc.Maths.Expressions
             : base(arguments)
             => Function = function;
 
-        /// <summary>
-        /// Determines whether the specified <see cref="object" /> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
-        /// <returns><c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        /// <inheritdoc />
         public override bool Equals(object? obj)
             => obj is UserFunction exp &&
                Function == exp.Function &&
                ParametersCount == exp.ParametersCount;
 
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
+        /// <inheritdoc />
         public override int GetHashCode()
             => HashCode.Combine(Function, ParametersCount);
 
-        /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <inheritdoc />
         public override string ToString() => ToString(new CommonFormatter());
 
-        /// <summary>
-        /// Executes this expression.
-        /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
-        /// <returns>
-        /// A result of the execution.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
+        /// <inheritdoc />
         public override object Execute(ExpressionParameters? parameters)
         {
             if (parameters == null)
@@ -95,60 +74,33 @@ namespace xFunc.Maths.Expressions
             return parameters.Functions[this].Execute(newParams);
         }
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <returns>
-        /// The analysis result.
-        /// </returns>
+        /// <inheritdoc />
         private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <param name="context">The context.</param>
-        /// <returns>The analysis result.</returns>
+        /// <inheritdoc />
         private protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);
 
-        /// <summary>
-        /// Clones this instance of the <see cref="IExpression" />.
-        /// </summary>
-        /// <param name="arguments">The list of arguments.</param>
-        /// <returns>
-        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
-        /// </returns>
+        /// <inheritdoc />
         public override IExpression Clone(ImmutableArray<IExpression>? arguments = null)
             => new UserFunction(Function, arguments ?? Arguments);
 
         /// <summary>
         /// Gets the name of function.
         /// </summary>
-        /// <value>The name of function.</value>
         public string Function { get; }
 
         /// <summary>
         /// Gets the minimum count of parameters.
         /// </summary>
-        /// <value>
-        /// The minimum count of parameters.
-        /// </value>
         public override int? MinParametersCount => null;
 
         /// <summary>
         /// Gets the maximum count of parameters. <c>null</c> - Infinity.
         /// </summary>
-        /// <value>
-        /// The maximum count of parameters.
-        /// </value>
         public override int? MaxParametersCount => null;
     }
 }

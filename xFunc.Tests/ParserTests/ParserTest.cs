@@ -205,82 +205,6 @@ namespace xFunc.Tests.ParserTests
             => ParseErrorTest("sin(x, 3)");
 
         [Fact]
-        public void ConditionalAndTest()
-        {
-            var expected = new ConditionalAnd(
-                new Equal(Variable.X, Number.Zero),
-                new NotEqual(new Variable("y"), Number.Zero)
-            );
-
-            ParseTest("x == 0 && y != 0", expected);
-        }
-
-        [Fact]
-        public void ConditionalOrTest()
-        {
-            var expected = new ConditionalOr(
-                new Equal(Variable.X, Number.Zero),
-                new NotEqual(new Variable("y"), Number.Zero)
-            );
-
-            ParseTest("x == 0 || y != 0", expected);
-        }
-
-        [Theory]
-        [InlineData("x == 0 &&")]
-        [InlineData("x == 0 ||")]
-        public void ConditionalMissingSecondOperand(string function)
-            => ParseErrorTest(function);
-
-        [Fact]
-        public void EqualTest()
-        {
-            var expected = new Equal(Variable.X, Number.Zero);
-
-            ParseTest("x == 0", expected);
-        }
-
-        [Fact]
-        public void NotEqualTest()
-        {
-            var expected = new NotEqual(Variable.X, Number.Zero);
-
-            ParseTest("x != 0", expected);
-        }
-
-        [Fact]
-        public void LessThenTest()
-        {
-            var expected = new LessThan(Variable.X, Number.Zero);
-
-            ParseTest("x < 0", expected);
-        }
-
-        [Fact]
-        public void LessOrEqualTest()
-        {
-            var expected = new LessOrEqual(Variable.X, Number.Zero);
-
-            ParseTest("x <= 0", expected);
-        }
-
-        [Fact]
-        public void GreaterThenTest()
-        {
-            var expected = new GreaterThan(Variable.X, Number.Zero);
-
-            ParseTest("x > 0", expected);
-        }
-
-        [Fact]
-        public void GreaterOrEqualTest()
-        {
-            var expected = new GreaterOrEqual(Variable.X, Number.Zero);
-
-            ParseTest("x >= 0", expected);
-        }
-
-        [Fact]
         public void IncTest()
             => ParseTest("x++", new Inc(Variable.X));
 
@@ -292,27 +216,6 @@ namespace xFunc.Tests.ParserTests
             var expected = new Dec(Variable.X);
 
             ParseTest(function, expected);
-        }
-
-        [Theory]
-        [InlineData("true & false")]
-        [InlineData("true and false")]
-        public void BoolConstTest(string function)
-        {
-            var expected = new And(Bool.True, Bool.False);
-
-            ParseTest(function, expected);
-        }
-
-        [Fact]
-        public void LogicAddPriorityTest()
-        {
-            var expected = new And(
-                new GreaterThan(new Number(3), new Number(4)),
-                new LessThan(Number.One, new Number(3))
-            );
-
-            ParseTest("3 > 4 & 1 < 3", expected);
         }
 
         [Fact]
@@ -503,66 +406,10 @@ namespace xFunc.Tests.ParserTests
         }
 
         [Theory]
-        [InlineData("~2")]
-        [InlineData("not(2)")]
-        public void NotTest(string function)
-            => ParseTest(function, new Not(Number.Two));
-
-        [Theory]
         [InlineData("2~")]
         [InlineData("(2 + 1)~")]
         public void NotAfterNumberTest(string function)
             => ParseErrorTest(function);
-
-        [Theory]
-        [InlineData("1 | 2")]
-        [InlineData("1 or 2")]
-        public void OrTest(string function)
-        {
-            var expected = new Or(Number.One, Number.Two);
-
-            ParseTest(function, expected);
-        }
-
-        [Fact]
-        public void XOrTest()
-        {
-            var expected = new XOr(Number.One, Number.Two);
-
-            ParseTest("1 xor 2", expected);
-        }
-
-        [Fact]
-        public void NOrTest()
-        {
-            var expected = new NOr(Bool.True, Bool.True);
-
-            ParseTest("true nor true", expected);
-        }
-
-        [Fact]
-        public void NAndTest()
-        {
-            var expected = new NAnd(Bool.True, Bool.True);
-
-            ParseTest("true nand true", expected);
-        }
-
-        [Theory]
-        [InlineData("true -> true")]
-        [InlineData("true −> true")]
-        [InlineData("true => true")]
-        [InlineData("true impl true")]
-        public void ImplicationTest(string function)
-            => ParseTest(function, new Implication(Bool.True, Bool.True));
-
-        [Theory]
-        [InlineData("true <-> true")]
-        [InlineData("true <−> true")]
-        [InlineData("true <=> true")]
-        [InlineData("true eq true")]
-        public void EqualityTest(string function)
-            => ParseTest(function, new Equality(Bool.True, Bool.True));
 
         [Fact]
         public void AbsTest()

@@ -24,7 +24,7 @@ namespace xFunc.Maths.Tokenization
     /// </summary>
     internal ref partial struct Lexer
     {
-        private bool CreateIdToken(ref ReadOnlySpan<char> function)
+        private bool CreateIdToken()
         {
             if (!char.IsLetter(function[0]))
                 return false;
@@ -79,15 +79,15 @@ namespace xFunc.Maths.Tokenization
             function = function[endIndex..];
 
             if (kind == Empty)
-                current = new Token(id.ToString().ToLowerInvariant()); // TODO:
+                Current = new Token(id.ToString().ToLowerInvariant()); // TODO:
             else
-                current = new Token(kind);
+                Current = new Token(kind);
 
             return true;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private bool Compare(ReadOnlySpan<char> id, string str)
+        private static bool Compare(ReadOnlySpan<char> id, string str)
             => id.Equals(str, StringComparison.OrdinalIgnoreCase);
     }
 }

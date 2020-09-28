@@ -16,6 +16,7 @@
 using System;
 using System.Collections.Immutable;
 using xFunc.Maths.Analyzers;
+using static xFunc.Maths.ThrowHelpers;
 
 namespace xFunc.Maths.Expressions
 {
@@ -34,7 +35,10 @@ namespace xFunc.Maths.Expressions
         public Simplify(ISimplifier simplifier, IExpression expression)
             : base(expression)
         {
-            this.simplifier = simplifier ?? throw new ArgumentNullException(nameof(simplifier));
+            if (simplifier is null)
+                ArgNull(ExceptionArgument.simplifier);
+
+            this.simplifier = simplifier;
         }
 
         /// <summary>
@@ -46,7 +50,7 @@ namespace xFunc.Maths.Expressions
         internal Simplify(ISimplifier simplifier, ImmutableArray<IExpression> arguments)
             : base(arguments)
         {
-            this.simplifier = simplifier ?? throw new ArgumentNullException(nameof(simplifier));
+            this.simplifier = simplifier;
         }
 
         /// <summary>

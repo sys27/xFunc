@@ -13,12 +13,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Matrices;
+using static xFunc.Maths.ThrowHelpers;
 
 namespace xFunc.Maths.Expressions
 {
@@ -40,10 +40,13 @@ namespace xFunc.Maths.Expressions
         public Del(IDifferentiator differentiator, ISimplifier simplifier, IExpression expression)
             : base(expression)
         {
-            this.differentiator = differentiator ??
-                                  throw new ArgumentNullException(nameof(differentiator));
-            this.simplifier = simplifier ??
-                              throw new ArgumentNullException(nameof(simplifier));
+            if (differentiator is null)
+                ArgNull(ExceptionArgument.differentiator);
+            if (simplifier is null)
+                ArgNull(ExceptionArgument.simplifier);
+
+            this.differentiator = differentiator;
+            this.simplifier = simplifier;
         }
 
         /// <summary>
@@ -59,10 +62,8 @@ namespace xFunc.Maths.Expressions
             ImmutableArray<IExpression> arguments)
             : base(arguments)
         {
-            this.differentiator = differentiator ??
-                                  throw new ArgumentNullException(nameof(differentiator));
-            this.simplifier = simplifier ??
-                              throw new ArgumentNullException(nameof(simplifier));
+            this.differentiator = differentiator;
+            this.simplifier = simplifier;
         }
 
         /// <inheritdoc />

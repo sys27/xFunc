@@ -24,6 +24,7 @@ using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokenization;
+using static xFunc.Maths.ThrowHelpers;
 using static xFunc.Maths.Tokenization.TokenKind;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
@@ -52,10 +53,13 @@ namespace xFunc.Maths
         /// <param name="simplifier">The simplifier.</param>
         public Parser(IDifferentiator differentiator, ISimplifier simplifier)
         {
-            this.differentiator = differentiator ??
-                                  throw new ArgumentNullException(nameof(differentiator));
-            this.simplifier = simplifier ??
-                              throw new ArgumentNullException(nameof(simplifier));
+            if (differentiator is null)
+                ArgNull(ExceptionArgument.differentiator);
+            if (simplifier is null)
+                ArgNull(ExceptionArgument.simplifier);
+
+            this.differentiator = differentiator;
+            this.simplifier = simplifier;
         }
 
         /// <summary>
@@ -143,7 +147,7 @@ namespace xFunc.Maths
             if (@operator.IsNotEmpty())
             {
                 var right = ParseExpression(ref tokenReader) ??
-                            throw new ParseException(SecondOperand(ref @operator));
+                            MissingSecondOperand(@operator.Kind);
 
                 tokenReader.Commit();
 
@@ -175,7 +179,7 @@ namespace xFunc.Maths
             if (@operator.IsNotEmpty())
             {
                 var right = ParseExpression(ref tokenReader) ??
-                            throw new ParseException(SecondOperand(ref @operator));
+                            MissingSecondOperand(@operator.Kind);
 
                 tokenReader.Commit();
 
@@ -194,19 +198,19 @@ namespace xFunc.Maths
                 return null;
 
             if (!tokenReader.Check(OpenParenthesisSymbol))
-                throw new ParseException(OpenParenthesis(ref def));
+                MissingOpenParenthesis(def.Kind);
 
             var key = AssignmentKey(ref tokenReader) ??
                       throw new ParseException(Resource.AssignKeyParseException);
 
             if (!tokenReader.Check(CommaSymbol))
-                throw new ParseException(CommaMissing(key));
+                MissingComma(key);
 
             var value = ParseExpression(ref tokenReader) ??
                         throw new ParseException(Resource.DefValueParseException);
 
             if (!tokenReader.Check(CloseParenthesisSymbol))
-                throw new ParseException(CloseParenthesis(ref def));
+                MissingCloseParenthesis(def.Kind);
 
             return new Define(key, value);
         }
@@ -218,13 +222,13 @@ namespace xFunc.Maths
                 return null;
 
             if (!tokenReader.Check(OpenParenthesisSymbol))
-                throw new ParseException(OpenParenthesis(ref undef));
+                MissingOpenParenthesis(undef.Kind);
 
             var key = AssignmentKey(ref tokenReader) ??
                       throw new ParseException(Resource.AssignKeyParseException);
 
             if (!tokenReader.Check(CloseParenthesisSymbol))
-                throw new ParseException(CloseParenthesis(ref undef));
+                MissingCloseParenthesis(undef.Kind);
 
             return new Undefine(key);
         }
@@ -236,13 +240,13 @@ namespace xFunc.Maths
                 return null;
 
             if (!tokenReader.Check(OpenParenthesisSymbol))
-                throw new ParseException(OpenParenthesis(ref @if));
+                MissingOpenParenthesis(@if.Kind);
 
             var condition = ParseConditionalOrOperator(ref tokenReader) ??
                             throw new ParseException(Resource.IfConditionParseException);
 
             if (!tokenReader.Check(CommaSymbol))
-                throw new ParseException(CommaMissing(condition));
+                MissingComma(condition);
 
             var then = ParseExpression(ref tokenReader) ??
                        throw new ParseException(Resource.IfThenParseException);
@@ -253,7 +257,7 @@ namespace xFunc.Maths
                         throw new ParseException(Resource.IfElseParseException);
 
             if (!tokenReader.Check(CloseParenthesisSymbol))
-                throw new ParseException(CloseParenthesis(ref @if));
+                MissingCloseParenthesis(@if.Kind);
 
             if (@else != null)
                 return new If(condition, then, @else);
@@ -268,31 +272,31 @@ namespace xFunc.Maths
                 return null;
 
             if (!tokenReader.Check(OpenParenthesisSymbol))
-                throw new ParseException(OpenParenthesis(ref @for));
+                MissingOpenParenthesis(@for.Kind);
 
             var body = ParseStatement(ref tokenReader) ??
                        throw new ParseException(Resource.ForBodyParseException);
 
             if (!tokenReader.Check(CommaSymbol))
-                throw new ParseException(CommaMissing(body));
+                MissingComma(body);
 
             var init = ParseStatement(ref tokenReader) ??
                        throw new ParseException(Resource.ForInitParseException);
 
             if (!tokenReader.Check(CommaSymbol))
-                throw new ParseException(CommaMissing(init));
+                MissingComma(init);
 
             var condition = ParseConditionalOrOperator(ref tokenReader) ??
                             throw new ParseException(Resource.ForConditionParseException);
 
             if (!tokenReader.Check(CommaSymbol))
-                throw new ParseException(CommaMissing(condition));
+                MissingComma(condition);
 
             var iter = ParseStatement(ref tokenReader) ??
                        throw new ParseException(Resource.ForIterParseException);
 
             if (!tokenReader.Check(CloseParenthesisSymbol))
-                throw new ParseException(CloseParenthesis(ref @for));
+                MissingCloseParenthesis(@for.Kind);
 
             return new For(body, init, condition, iter);
         }
@@ -304,19 +308,19 @@ namespace xFunc.Maths
                 return null;
 
             if (!tokenReader.Check(OpenParenthesisSymbol))
-                throw new ParseException(OpenParenthesis(ref @while));
+                MissingOpenParenthesis(@while.Kind);
 
             var body = ParseStatement(ref tokenReader) ??
                        throw new ParseException(Resource.WhileBodyParseException);
 
             if (!tokenReader.Check(CommaSymbol))
-                throw new ParseException(CommaMissing(body));
+                MissingComma(body);
 
             var condition = ParseConditionalOrOperator(ref tokenReader) ??
                             throw new ParseException(Resource.WhileConditionParseException);
 
             if (!tokenReader.Check(CloseParenthesisSymbol))
-                throw new ParseException(CloseParenthesis(ref @while));
+                MissingCloseParenthesis(@while.Kind);
 
             return new While(body, condition);
         }
@@ -411,7 +415,7 @@ namespace xFunc.Maths
                     return left;
 
                 var right = ParseConditionalAndOperator(ref tokenReader) ??
-                            throw new ParseException(SecondOperand(ConditionalOrOperator));
+                            MissingSecondOperand(ConditionalOrOperator);
 
                 left = new ConditionalOr(left, right);
             }
@@ -430,7 +434,7 @@ namespace xFunc.Maths
                     return left;
 
                 var right = ParseBitwiseOperator(ref tokenReader) ??
-                            throw new ParseException(SecondOperand(ConditionalAndOperator));
+                            MissingSecondOperand(ConditionalAndOperator);
 
                 left = new ConditionalAnd(left, right);
             }
@@ -455,7 +459,7 @@ namespace xFunc.Maths
                     return left;
 
                 var right = ParseOrOperator(ref tokenReader) ??
-                            throw new ParseException(SecondOperand(ref token));
+                            MissingSecondOperand(token.Kind);
 
                 left = CreateBitwiseOperator(token, left, right);
             }
@@ -476,7 +480,7 @@ namespace xFunc.Maths
                     return left;
 
                 var right = ParseXOrOperator(ref tokenReader) ??
-                            throw new ParseException(SecondOperand(OrOperator));
+                            MissingSecondOperand(OrOperator);
 
                 left = new Or(left, right);
             }
@@ -495,7 +499,7 @@ namespace xFunc.Maths
                     return left;
 
                 var right = ParseAndOperator(ref tokenReader) ??
-                            throw new ParseException(SecondOperand(XOrKeyword));
+                            MissingSecondOperand(XOrKeyword);
 
                 left = new XOr(left, right);
             }
@@ -516,7 +520,7 @@ namespace xFunc.Maths
                     return left;
 
                 var right = ParseEqualityOperator(ref tokenReader) ??
-                            throw new ParseException(SecondOperand(AndOperator));
+                            MissingSecondOperand(AndOperator);
 
                 left = new And(left, right);
             }
@@ -537,7 +541,7 @@ namespace xFunc.Maths
                     return left;
 
                 var right = ParseRelationalOperator(ref tokenReader) ??
-                            throw new ParseException(SecondOperand(ref @operator));
+                            MissingSecondOperand(@operator.Kind);
 
                 left = CreateEqualityOperator(@operator, left, right);
             }
@@ -560,7 +564,7 @@ namespace xFunc.Maths
                     return left;
 
                 var right = ParseShift(ref tokenReader) ??
-                            throw new ParseException(SecondOperand(ref @operator));
+                            MissingSecondOperand(@operator.Kind);
 
                 left = CreateRelationalOperator(@operator, left, right);
             }
@@ -581,7 +585,7 @@ namespace xFunc.Maths
                     return left;
 
                 var right = ParseAddSub(ref tokenReader) ??
-                            throw new ParseException(SecondOperand(ref @operator));
+                            MissingSecondOperand(@operator.Kind);
 
                 left = CreateShift(@operator, left, right);
             }
@@ -602,7 +606,7 @@ namespace xFunc.Maths
                     return left;
 
                 var right = ParseMulDivMod(ref tokenReader) ??
-                            throw new ParseException(SecondOperand(ref @operator));
+                            MissingSecondOperand(@operator.Kind);
 
                 left = CreateAddSub(@operator, left, right);
             }
@@ -625,7 +629,7 @@ namespace xFunc.Maths
                     return left;
 
                 var right = ParseMulImplicit(ref tokenReader) ??
-                            throw new ParseException(SecondOperand(ref token));
+                            MissingSecondOperand(token.Kind);
 
                 left = CreateMulDivMod(token, left, right);
             }
@@ -784,7 +788,7 @@ namespace xFunc.Maths
                 while (tokenReader.Check(CommaSymbol))
                 {
                     exp = ParseExpression(ref tokenReader) ??
-                          throw new ParseException(CommaMissing(exp));
+                          MissingExpression();
 
                     parameterList.Add(exp);
                 }
@@ -928,20 +932,5 @@ namespace xFunc.Maths
 
             return null;
         }
-
-        private static string SecondOperand(TokenKind tokenKind)
-            => string.Format(CultureInfo.InvariantCulture, Resource.SecondOperandParseException, tokenKind);
-
-        private static string SecondOperand(ref Token token)
-            => string.Format(CultureInfo.InvariantCulture, Resource.SecondOperandParseException, token);
-
-        private static string OpenParenthesis(ref Token token)
-            => string.Format(CultureInfo.InvariantCulture, Resource.FunctionOpenParenthesisParseException, token);
-
-        private static string CloseParenthesis(ref Token token)
-            => string.Format(CultureInfo.InvariantCulture, Resource.FunctionCloseParenthesisParseException, token);
-
-        private static string CommaMissing(IExpression previousExpression)
-            => string.Format(CultureInfo.InvariantCulture, Resource.CommaParseException, previousExpression);
     }
 }

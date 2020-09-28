@@ -20,6 +20,7 @@ using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Results;
+using static xFunc.Maths.ThrowHelpers;
 
 namespace xFunc.Maths
 {
@@ -75,14 +76,18 @@ namespace xFunc.Maths
             ITypeAnalyzer typeAnalyzer,
             ExpressionParameters parameters)
         {
+            if (simplifier is null)
+                ArgNull(ExceptionArgument.simplifier);
+            if (differentiator is null)
+                ArgNull(ExceptionArgument.differentiator);
+            if (typeAnalyzer is null)
+                ArgNull(ExceptionArgument.typeAnalyzer);
+
             parser = new Parser();
 
-            this.simplifier = simplifier ??
-                              throw new ArgumentNullException(nameof(simplifier));
-            this.differentiator = differentiator ??
-                                  throw new ArgumentNullException(nameof(differentiator));
-            this.typeAnalyzer = typeAnalyzer ??
-                                throw new ArgumentNullException(nameof(typeAnalyzer));
+            this.simplifier = simplifier;
+            this.differentiator = differentiator;
+            this.typeAnalyzer = typeAnalyzer;
 
             Parameters = parameters;
         }

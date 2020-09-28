@@ -30,6 +30,29 @@ namespace xFunc.Tests
     public class ProcessorTest
     {
         [Fact]
+        public void SimplifierNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Processor(null, null, null, null));
+        }
+
+        [Fact]
+        public void DifferentiatorNull()
+        {
+            var simplifier = new Mock<ISimplifier>().Object;
+
+            Assert.Throws<ArgumentNullException>(() => new Processor(simplifier, null, null, null));
+        }
+
+        [Fact]
+        public void TypeAnalyzerNull()
+        {
+            var simplifier = new Mock<ISimplifier>().Object;
+            var differentiator = new Mock<IDifferentiator>().Object;
+
+            Assert.Throws<ArgumentNullException>(() => new Processor(simplifier, differentiator, null, null));
+        }
+
+        [Fact]
         public void SolveDoubleTest()
         {
             var simplifier = new Mock<ISimplifier>();

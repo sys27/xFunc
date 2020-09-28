@@ -23,6 +23,7 @@ using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
+using static xFunc.Maths.ThrowHelpers;
 
 namespace xFunc.Maths.Analyzers.TypeAnalyzers
 {
@@ -36,7 +37,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         private ResultTypes CheckArgument([NotNull] IExpression exp, ResultTypes result)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             return result;
         }
@@ -44,7 +45,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         private ResultTypes CheckNumericConversion([NotNull] UnaryExpression exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
 
@@ -59,7 +60,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         private ResultTypes CheckTrigonometric([NotNull] UnaryExpression exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
 
@@ -76,7 +77,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         private ResultTypes CheckInverseTrigonometric([NotNull] UnaryExpression exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
 
@@ -92,7 +93,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         private ResultTypes CheckStatistical([NotNull] DifferentParametersExpression exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             if (exp.ParametersCount == 1)
             {
@@ -119,7 +120,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         private ResultTypes AnalyzeForNumber([NotNull] BinaryExpression exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
@@ -148,7 +149,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         private ResultTypes AnalyzeLogical([NotNull] BinaryExpression exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
@@ -170,7 +171,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         private ResultTypes AnalyzeLogicalAndBitwise([NotNull] BinaryExpression exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
@@ -196,7 +197,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         private ResultTypes AnalyzeEquality([NotNull] BinaryExpression exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
@@ -231,7 +232,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         private ResultTypes AnalyzeBinaryAssign([NotNull] VariableBinaryExpression exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var rightResult = exp.Value.Analyze(this);
 
@@ -246,7 +247,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         private ResultTypes AnalyzeShift([NotNull] BinaryExpression exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
@@ -267,7 +268,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         private ResultTypes AngleConversion([NotNull] UnaryExpression exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
 
@@ -291,7 +292,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Abs exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
 
@@ -310,7 +311,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Add exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
@@ -353,7 +354,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Ceil exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
 
@@ -378,7 +379,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Derivative exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             if (exp.ParametersCount == 1)
                 return ResultTypes.Expression;
@@ -396,7 +397,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Div exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
@@ -430,7 +431,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Exp exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
 
@@ -447,7 +448,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Fact exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.Number)
@@ -460,7 +461,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Floor exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
 
@@ -477,7 +478,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Trunc exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
 
@@ -494,7 +495,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Frac exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
 
@@ -511,7 +512,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(GCD exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var enumerator = exp.Arguments.GetEnumerator();
             for (var i = 0; enumerator.MoveNext(); i++)
@@ -530,7 +531,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Lb exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.Number)
@@ -543,7 +544,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(LCM exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var enumerator = exp.Arguments.GetEnumerator();
             for (var i = 0; enumerator.MoveNext(); i++)
@@ -562,7 +563,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Lg exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
 
@@ -579,7 +580,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Ln exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
 
@@ -596,7 +597,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Log exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
@@ -619,7 +620,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Mod exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
@@ -644,7 +645,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Mul exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
@@ -712,7 +713,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(ToNumber exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
 
@@ -728,7 +729,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Pow exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
@@ -752,7 +753,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Root exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
@@ -777,7 +778,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Round exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var enumerator = exp.Arguments.GetEnumerator();
             for (var i = 0; enumerator.MoveNext(); i++)
@@ -802,7 +803,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Sub exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
@@ -845,7 +846,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(UnaryMinus exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
 
@@ -879,7 +880,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Sign exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
 
@@ -912,7 +913,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Vector exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var enumerator = exp.Arguments.GetEnumerator();
             for (var i = 0; enumerator.MoveNext(); i++)
@@ -931,7 +932,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Matrix exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             foreach (var item in exp.Vectors)
             {
@@ -947,7 +948,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Determinant exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.Matrix)
@@ -960,7 +961,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Inverse exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.Matrix)
@@ -973,7 +974,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Transpose exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined ||
@@ -988,7 +989,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(DotProduct exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
@@ -1010,7 +1011,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(CrossProduct exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
@@ -1040,7 +1041,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Conjugate exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.ComplexNumber)
@@ -1053,7 +1054,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Im exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.ComplexNumber)
@@ -1066,7 +1067,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Phase exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.ComplexNumber)
@@ -1079,7 +1080,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Re exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.ComplexNumber)
@@ -1092,7 +1093,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Reciprocal exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.ComplexNumber)
@@ -1105,7 +1106,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(ToComplex exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
 
@@ -1301,7 +1302,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Not exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
 
@@ -1350,7 +1351,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(For exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var result = exp.Condition.Analyze(this);
             if (result == ResultTypes.Undefined || result == ResultTypes.Boolean)
@@ -1371,7 +1372,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(If exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var conditionResult = exp.Condition.Analyze(this);
             if (conditionResult == ResultTypes.Undefined)
@@ -1416,7 +1417,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(While exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var rightResult = exp.Right.Analyze(this);
             if (rightResult == ResultTypes.Undefined || rightResult == ResultTypes.Boolean)

@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using static xFunc.Maths.Tokenization.TokenKind;
 
 namespace xFunc.Maths.Tokenization
@@ -23,7 +22,7 @@ namespace xFunc.Maths.Tokenization
     /// </summary>
     internal ref partial struct Lexer
     {
-        private bool CreateSymbol(ref ReadOnlySpan<char> function)
+        private bool CreateSymbol()
         {
             var symbol = function[0] switch
             {
@@ -39,15 +38,13 @@ namespace xFunc.Maths.Tokenization
                 _ => Empty,
             };
 
-            if (symbol != Empty)
-            {
-                function = function[1..];
+            if (symbol == Empty)
+                return false;
 
-                current = new Token(symbol);
-                return true;
-            }
+            function = function[1..];
 
-            return false;
+            Current = new Token(symbol);
+            return true;
         }
     }
 }

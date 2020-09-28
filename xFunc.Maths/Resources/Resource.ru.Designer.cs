@@ -344,5 +344,11 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("VectorEmptyError", resourceCulture);
             }
         }
+        
+        internal static string MissingExpParseException {
+            get {
+                return ResourceManager.GetString("MissingExpParseException", resourceCulture);
+            }
+        }
     }
 }

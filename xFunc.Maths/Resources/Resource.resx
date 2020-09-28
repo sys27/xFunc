@@ -208,4 +208,7 @@
   <data name="VectorEmptyError" xml:space="preserve">
     <value>The vector should not be empty.</value>
   </data>
+  <data name="MissingExpParseException" xml:space="preserve">
+    <value>Cannot parse an expression after the comma symbol.</value>
+  </data>
 </root>

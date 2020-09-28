@@ -82,12 +82,12 @@ processor.Differentiate("2x + sin(y)", new Variable("x")); // will return "2"
 
 ### Processor
 
-Version | Method |         Mean |    Allocated |
--------:|------- |-------------:|-------------:|
-  3.7.1 |  Parse |     159.7 us |     62.28 KB |
-  4.0.0 |  Parse | **23.51 us** |  **4.27 KB** |
-  3.7.1 |  Solve |     221.1 us |     94.68 KB |
-  4.0.0 |  Solve | **36.58 us** | **10.47 KB** |
+Version | Method |         Mean |   Allocated |
+-------:|------- |-------------:|------------:|
+  3.7.2 |  Parse |     178.9 μs |    62.28 KB |
+  4.0.0 |  Parse | **27.69 μs** | **4.55 KB** |
+  3.7.2 |  Solve |     246.2 μs |    94.68 KB |
+  4.0.0 |  Solve | **43.09 μs** | **10.4 KB** |
 
 [More details](https://github.com/sys27/xFunc/wiki/Performance-Comparison)
 

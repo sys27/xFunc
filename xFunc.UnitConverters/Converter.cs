@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace xFunc.UnitConverters
 {
@@ -22,6 +23,7 @@ namespace xFunc.UnitConverters
     /// The base class for converters.
     /// </summary>
     /// <typeparam name="TUnit">The type that represents units (eg. enum).</typeparam>
+    [ExcludeFromCodeCoverage]
     public abstract class Converter<TUnit> : IConverter
     {
         /// <summary>

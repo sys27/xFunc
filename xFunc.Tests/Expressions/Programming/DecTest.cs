@@ -35,6 +35,17 @@ namespace xFunc.Tests.Expressions.Programming
         }
 
         [Fact]
+        public void DecAsExpExecuteTest()
+        {
+            var parameters = new ParameterCollection { new Parameter("x", 10) };
+            var inc = new Add(Number.One, new Dec(Variable.X));
+            var result = (double)inc.Execute(parameters);
+
+            Assert.Equal(10.0, result);
+            Assert.Equal(9.0, parameters["x"]);
+        }
+
+        [Fact]
         public void DecNullParameters()
         {
             Assert.Throws<ArgumentNullException>(() => new Dec(Variable.X).Execute());

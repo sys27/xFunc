@@ -15,7 +15,6 @@
 
 using System.Collections.Immutable;
 using System.Diagnostics;
-using System.Numerics;
 using System.Runtime.CompilerServices;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Angles;
@@ -190,16 +189,6 @@ namespace xFunc.Maths
             return new RightShiftAssign(first, second);
         }
 
-        private IExpression CreateUnaryAssign(in Token token, Variable first)
-        {
-            if (token.Is(IncrementOperator))
-                return new Inc(first);
-
-            Debug.Assert(token.Is(DecrementOperator), "Only '++' and '--' operators are allowed here.");
-
-            return new Dec(first);
-        }
-
         private IExpression CreateBitwiseOperator(
             in Token token,
             IExpression first,
@@ -207,7 +196,7 @@ namespace xFunc.Maths
         {
             if (token.Is(ImplicationOperator) || token.Is(ImplKeyword))
                 return new Implication(first, second);
-            if (token.Is(TokenKind.EqualityOperator) || token.Is(EqKeyword))
+            if (token.Is(EqualityOperator) || token.Is(EqKeyword))
                 return new Equality(first, second);
 
             if (token.Is(NAndKeyword))
@@ -278,31 +267,6 @@ namespace xFunc.Maths
             Debug.Assert(token.Is(ModuloOperator) || token.Is(ModKeyword), "Only '*', '/', '%', 'mod' are allowed here.");
 
             return new Mod(first, second);
-        }
-
-        private IExpression CreateBoolean(in Token token)
-        {
-            if (token.Is(TrueKeyword))
-                return Bool.True;
-
-            Debug.Assert(token.Is(FalseKeyword), "Only True and False keywords are allowed here.");
-
-            return Bool.False;
-        }
-
-        private IExpression CreateComplexNumber(
-            in Token magnitude,
-            in Token phaseSign,
-            in Token phase)
-        {
-            static int GetSign(Token token)
-                => token.Is(MinusOperator) ? -1 : 1;
-
-            var magnitudeNumber = magnitude.NumberValue;
-            var phaseNumber = phase.NumberValue * GetSign(phaseSign);
-            var complex = Complex.FromPolarCoordinates(magnitudeNumber, phaseNumber);
-
-            return new ComplexNumber(complex);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

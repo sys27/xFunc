@@ -35,6 +35,17 @@ namespace xFunc.Tests.Expressions.Programming
         }
 
         [Fact]
+        public void IncAsExpExecuteTest()
+        {
+            var parameters = new ParameterCollection { new Parameter("x", 10) };
+            var inc = new Add(Number.One, new Inc(Variable.X));
+            var result = (double)inc.Execute(parameters);
+
+            Assert.Equal(12.0, result);
+            Assert.Equal(11.0, parameters["x"]);
+        }
+
+        [Fact]
         public void IncNullParameters()
         {
             Assert.Throws<ArgumentNullException>(() => new Inc(Variable.X).Execute());

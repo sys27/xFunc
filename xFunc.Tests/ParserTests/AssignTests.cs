@@ -173,5 +173,35 @@ namespace xFunc.Tests.ParserTests
 
             ParseTest("x >>= 10", expected);
         }
+
+        [Fact]
+        public void IncTest()
+            => ParseTest("x++", new Inc(Variable.X));
+
+        [Fact]
+        public void IncAsExpression()
+        {
+            var expected = new Add(Number.One, new Inc(Variable.X));
+
+            ParseTest("1 + x++", expected);
+        }
+
+        [Theory]
+        [InlineData("x--")]
+        [InlineData("x−−")]
+        public void DecTest(string function)
+        {
+            var expected = new Dec(Variable.X);
+
+            ParseTest(function, expected);
+        }
+
+        [Fact]
+        public void DecAsExpression()
+        {
+            var expected = new Add(Number.One, new Dec(Variable.X));
+
+            ParseTest("1 + x--", expected);
+        }
     }
 }

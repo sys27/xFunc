@@ -189,20 +189,6 @@ namespace xFunc.Tests.ParserTests
             => ParseErrorTest("sin(x, 3)");
 
         [Fact]
-        public void IncTest()
-            => ParseTest("x++", new Inc(Variable.X));
-
-        [Theory]
-        [InlineData("x--")]
-        [InlineData("x−−")]
-        public void DecTest(string function)
-        {
-            var expected = new Dec(Variable.X);
-
-            ParseTest(function, expected);
-        }
-
-        [Fact]
         public void ModuloTest()
         {
             var expected = new Mod(new Number(7), Number.Two);

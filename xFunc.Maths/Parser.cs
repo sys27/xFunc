@@ -16,9 +16,11 @@
 using System;
 using System.Collections.Immutable;
 using System.Globalization;
+using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Angles;
+using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Programming;
@@ -92,8 +94,7 @@ namespace xFunc.Maths
 
         // TODO: to expressions?
         private IExpression? ParseStatement(ref TokenReader tokenReader)
-            => ParseUnaryAssign(ref tokenReader) ??
-               ParseBinaryAssign(ref tokenReader) ??
+            => ParseBinaryAssign(ref tokenReader) ??
                ParseAssign(ref tokenReader) ??
                ParseDef(ref tokenReader) ??
                ParseUndef(ref tokenReader) ??
@@ -101,29 +102,6 @@ namespace xFunc.Maths
                ParseFor(ref tokenReader) ??
                ParseWhile(ref tokenReader) ??
                ParseExpression(ref tokenReader);
-
-        private IExpression? ParseUnaryAssign(ref TokenReader tokenReader)
-        {
-            var scope = tokenReader.CreateScope();
-
-            var left = ParseVariable(ref tokenReader);
-            if (left != null)
-            {
-                var @operator = tokenReader.GetCurrent(IncrementOperator) ||
-                                tokenReader.GetCurrent(DecrementOperator);
-
-                if (@operator.IsNotEmpty())
-                {
-                    tokenReader.Commit();
-
-                    return CreateUnaryAssign(@operator, left);
-                }
-            }
-
-            tokenReader.Rollback(scope);
-
-            return null;
-        }
 
         private IExpression? ParseBinaryAssign(ref TokenReader tokenReader)
         {
@@ -717,24 +695,48 @@ namespace xFunc.Maths
         }
 
         private IExpression? ParseRightUnary(ref TokenReader tokenReader)
+            => ParseFactorial(ref tokenReader) ??
+               ParseIncDec(ref tokenReader) ??
+               ParseOperand(ref tokenReader);
+
+        private IExpression? ParseFactorial(ref TokenReader tokenReader)
         {
             var scope = tokenReader.CreateScope();
 
             var number = ParseNumber(ref tokenReader);
-            if (number != null)
+            if (number != null && tokenReader.Check(FactorialOperator))
             {
-                var @operator = tokenReader.GetCurrent(FactorialOperator);
-                if (@operator.IsNotEmpty())
-                {
-                    tokenReader.Commit();
+                tokenReader.Commit();
 
-                    return new Fact(number);
-                }
+                return new Fact(number);
             }
 
             tokenReader.Rollback(scope);
 
-            return ParseOperand(ref tokenReader);
+            return null;
+        }
+
+        private IExpression? ParseIncDec(ref TokenReader tokenReader)
+        {
+            var scope = tokenReader.CreateScope();
+
+            var variable = ParseVariable(ref tokenReader);
+            if (variable != null)
+            {
+                tokenReader.Commit();
+
+                if (tokenReader.Check(IncrementOperator))
+                    return new Inc(variable);
+
+                if (tokenReader.Check(DecrementOperator))
+                    return new Dec(variable);
+
+                return variable;
+            }
+
+            tokenReader.Rollback(scope);
+
+            return null;
         }
 
         private IExpression? ParseOperand(ref TokenReader tokenReader)
@@ -844,7 +846,12 @@ namespace xFunc.Maths
 
                     tokenReader.Commit();
 
-                    return CreateComplexNumber(magnitude, phaseSign, phase);
+                    var magnitudeNumber = magnitude.NumberValue;
+                    var sign = phaseSign.Is(MinusOperator) ? -1 : 1;
+                    var phaseNumber = phase.NumberValue * sign;
+                    var complex = Complex.FromPolarCoordinates(magnitudeNumber, phaseNumber);
+
+                    return new ComplexNumber(complex);
                 }
             }
 
@@ -856,7 +863,11 @@ namespace xFunc.Maths
         private Variable? ParseVariable(ref TokenReader tokenReader)
         {
             var variable = tokenReader.GetCurrent(Id);
-            if (variable.IsEmpty())
+
+            // usually we use 'scope' in such cases, but here we can ignore it,
+            // because parsing of variable is always 'scoped'
+            // if it is not true anymore, then use 'scope'
+            if (variable.IsEmpty() || tokenReader.Check(OpenParenthesisSymbol))
                 return null;
 
             return CreateVariable(variable);
@@ -864,13 +875,13 @@ namespace xFunc.Maths
 
         private IExpression? ParseBoolean(ref TokenReader tokenReader)
         {
-            var boolean = tokenReader.GetCurrent(TrueKeyword) ||
-                          tokenReader.GetCurrent(FalseKeyword);
+            if (tokenReader.Check(TrueKeyword))
+                return Bool.True;
 
-            if (boolean.IsEmpty())
-                return null;
+            if (tokenReader.Check(FalseKeyword))
+                return Bool.False;
 
-            return CreateBoolean(boolean);
+            return null;
         }
 
         private Vector? ParseVector(ref TokenReader tokenReader)

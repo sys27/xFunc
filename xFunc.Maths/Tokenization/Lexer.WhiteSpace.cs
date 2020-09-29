@@ -13,8 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-
 namespace xFunc.Maths.Tokenization
 {
     /// <summary>
@@ -22,7 +20,7 @@ namespace xFunc.Maths.Tokenization
     /// </summary>
     internal ref partial struct Lexer
     {
-        private void SkipWhiteSpaces(ref ReadOnlySpan<char> function)
+        private void SkipWhiteSpaces()
         {
             var index = 0;
             while (char.IsWhiteSpace(function[index]))

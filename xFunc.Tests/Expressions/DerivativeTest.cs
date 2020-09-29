@@ -22,8 +22,20 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-    public class DerivTest
+    public class DerivativeTest
     {
+        [Fact]
+        public void DifferentiatorNull()
+            => Assert.Throws<ArgumentNullException>(() => new Derivative(null, null, Variable.X));
+
+        [Fact]
+        public void SimplifierNull()
+        {
+            var differentiator = new Mock<IDifferentiator>().Object;
+
+            Assert.Throws<ArgumentNullException>(() => new Derivative(differentiator, null, Variable.X));
+        }
+
         [Fact]
         public void ExecutePointTest()
         {

@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using static xFunc.Maths.Tokenization.TokenKind;
 
 namespace xFunc.Maths.Tokenization
@@ -23,7 +22,7 @@ namespace xFunc.Maths.Tokenization
     /// </summary>
     internal ref partial struct Lexer
     {
-        private bool CreateOperatorToken(ref ReadOnlySpan<char> function)
+        private bool CreateOperatorToken()
         {
             var first = function[0];
             var second = function.Length >= 2 ? function[1] : default;
@@ -77,15 +76,13 @@ namespace xFunc.Maths.Tokenization
                 _ => (Empty, 0),
             };
 
+            if (kind == Empty)
+                return false;
+
             function = function[size..];
 
-            if (kind != Empty)
-            {
-                current = new Token(kind);
-                return true;
-            }
-
-            return false;
+            Current = new Token(kind);
+            return true;
         }
     }
 }

@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using Moq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Matrices;
@@ -23,6 +24,18 @@ namespace xFunc.Tests.Expressions
 {
     public class DelTest
     {
+        [Fact]
+        public void DifferentiatorNull()
+            => Assert.Throws<ArgumentNullException>(() => new Del(null, null, null));
+
+        [Fact]
+        public void SimplifierNull()
+        {
+            var differentiator = new Mock<IDifferentiator>().Object;
+
+            Assert.Throws<ArgumentNullException>(() => new Del(differentiator, null, null));
+        }
+
         [Fact]
         public void ExecuteTest1()
         {

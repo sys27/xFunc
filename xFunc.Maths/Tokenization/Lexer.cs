@@ -25,7 +25,6 @@ namespace xFunc.Maths.Tokenization
     internal ref partial struct Lexer
     {
         private ReadOnlySpan<char> function;
-        private Token current;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Lexer"/> struct.
@@ -36,7 +35,7 @@ namespace xFunc.Maths.Tokenization
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(function), Resource.NotSpecifiedFunction);
 
-            current = default;
+            Current = default;
             this.function = function.AsSpan();
         }
 
@@ -52,12 +51,12 @@ namespace xFunc.Maths.Tokenization
         {
             while (function.Length > 0)
             {
-                SkipWhiteSpaces(ref function);
+                SkipWhiteSpaces();
 
-                var result = CreateNumberToken(ref function) ||
-                             CreateIdToken(ref function) ||
-                             CreateOperatorToken(ref function) ||
-                             CreateSymbol(ref function);
+                var result = CreateNumberToken() ||
+                             CreateIdToken() ||
+                             CreateOperatorToken() ||
+                             CreateSymbol();
 
                 if (!result)
                     ThrowHelpers.NotSupportedSymbol(function[0]);
@@ -65,16 +64,13 @@ namespace xFunc.Maths.Tokenization
                 return true;
             }
 
-            current = default;
+            Current = default;
             return false;
         }
 
         /// <summary>
         /// Gets the element in the collection at the current position of the enumerator.
         /// </summary>
-        /// <returns>
-        /// The element in the collection at the current position of the enumerator.
-        /// </returns>
-        public Token Current => current;
+        public Token Current { get; private set; }
     }
 }

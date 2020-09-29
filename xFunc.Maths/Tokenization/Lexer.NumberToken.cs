@@ -24,15 +24,13 @@ namespace xFunc.Maths.Tokenization
     /// </summary>
     internal ref partial struct Lexer
     {
-        private bool CreateNumberToken(ref ReadOnlySpan<char> function)
-        {
-            return CreateBinToken(ref function) ||
-                   CreateHexToken(ref function) ||
-                   CreateOctToken(ref function) ||
-                   CreateDecToken(ref function);
-        }
+        private bool CreateNumberToken()
+            => CreateBinToken() ||
+               CreateHexToken() ||
+               CreateOctToken() ||
+               CreateDecToken();
 
-        private bool CreateBinToken(ref ReadOnlySpan<char> function)
+        private bool CreateBinToken()
         {
             const int prefixLength = 2;
 
@@ -45,7 +43,7 @@ namespace xFunc.Maths.Tokenization
                 if (numberEnd > prefixLength)
                 {
                     var numberString = function[prefixLength..numberEnd];
-                    current = new Token(ParseNumbers.ToInt64(numberString, 2));
+                    Current = new Token(ParseNumbers.ToInt64(numberString, 2));
 
                     function = function[numberEnd..];
 
@@ -56,7 +54,7 @@ namespace xFunc.Maths.Tokenization
             return false;
         }
 
-        private bool CreateHexToken(ref ReadOnlySpan<char> function)
+        private bool CreateHexToken()
         {
             const int prefixLength = 2;
 
@@ -69,7 +67,7 @@ namespace xFunc.Maths.Tokenization
                 if (numberEnd > prefixLength)
                 {
                     var numberString = function[prefixLength..numberEnd];
-                    current = new Token(ParseNumbers.ToInt64(numberString, 16));
+                    Current = new Token(ParseNumbers.ToInt64(numberString, 16));
 
                     function = function[numberEnd..];
 
@@ -80,7 +78,7 @@ namespace xFunc.Maths.Tokenization
             return false;
         }
 
-        private bool CreateOctToken(ref ReadOnlySpan<char> function)
+        private bool CreateOctToken()
         {
             const int prefixLength = 1;
 
@@ -93,7 +91,7 @@ namespace xFunc.Maths.Tokenization
                 if (numberEnd > prefixLength)
                 {
                     var numberString = function[prefixLength..numberEnd];
-                    current = new Token(ParseNumbers.ToInt64(numberString, 8));
+                    Current = new Token(ParseNumbers.ToInt64(numberString, 8));
 
                     function = function[numberEnd..];
 
@@ -104,7 +102,7 @@ namespace xFunc.Maths.Tokenization
             return false;
         }
 
-        private bool CreateDecToken(ref ReadOnlySpan<char> function)
+        private bool CreateDecToken()
         {
             var endIndex = 0;
             ReadDigits(function, ref endIndex);
@@ -132,7 +130,7 @@ namespace xFunc.Maths.Tokenization
 
                 var numberString = function[..endIndex];
                 var number = double.Parse(numberString, provider: CultureInfo.InvariantCulture);
-                current = new Token(number);
+                Current = new Token(number);
 
                 function = function[endIndex..];
 

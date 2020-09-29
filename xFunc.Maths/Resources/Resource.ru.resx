@@ -208,4 +208,7 @@
   <data name="VectorEmptyError" xml:space="preserve">
     <value>Вектор не может быть пустым.</value>
   </data>
+  <data name="MissingExpParseException" xml:space="preserve">
+    <value>Выражение не может быть распарсено после символа запятой.</value>
+  </data>
 </root>

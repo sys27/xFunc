@@ -25,6 +25,10 @@ namespace xFunc.Tests.Expressions
     public class SimplifyTest
     {
         [Fact]
+        public void SimplifierNull()
+            => Assert.Throws<ArgumentNullException>(() => new Simplify(null, null));
+
+        [Fact]
         public void ExecuteTest()
         {
             var mock = new Mock<ISimplifier>();

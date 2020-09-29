@@ -24,12 +24,6 @@ namespace xFunc.Maths.Tokenization
     /// </summary>
     internal readonly struct Token
     {
-        private readonly TokenKind kind;
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly string? stringValue;
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly double numberValue;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Token"/> struct.
         /// </summary>
@@ -38,9 +32,9 @@ namespace xFunc.Maths.Tokenization
         {
             Debug.Assert(kind != TokenKind.Id && kind != TokenKind.Number, "Use other ctor for Id/Number tokens.");
 
-            stringValue = default;
-            numberValue = default;
-            this.kind = kind;
+            StringValue = default;
+            NumberValue = default;
+            Kind = kind;
         }
 
         /// <summary>
@@ -51,9 +45,9 @@ namespace xFunc.Maths.Tokenization
         {
             Debug.Assert(!string.IsNullOrEmpty(stringValue), "String should not be empty.");
 
-            this.stringValue = stringValue;
-            numberValue = default;
-            kind = TokenKind.Id;
+            StringValue = stringValue;
+            NumberValue = default;
+            Kind = TokenKind.Id;
         }
 
         /// <summary>
@@ -62,9 +56,9 @@ namespace xFunc.Maths.Tokenization
         /// <param name="numberValue">The number value of token.</param>
         public Token(double numberValue)
         {
-            stringValue = default;
-            this.numberValue = numberValue;
-            kind = TokenKind.Number;
+            StringValue = default;
+            NumberValue = numberValue;
+            Kind = TokenKind.Number;
         }
 
         /// <inheritdoc />
@@ -72,12 +66,12 @@ namespace xFunc.Maths.Tokenization
         public override string ToString()
         {
             if (IsId())
-                return $"String: {stringValue}";
+                return $"String: {StringValue}";
 
             if (IsNumber())
-                return $"Number: {numberValue}";
+                return $"Number: {NumberValue}";
 
-            return $"Kind: {kind}";
+            return $"Kind: {Kind}";
         }
 
         /// <summary>
@@ -135,7 +129,7 @@ namespace xFunc.Maths.Tokenization
         /// <c>true</c> if the current token has specified token kind; otherwise, <c>false</c>.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Is(TokenKind kind) => this.kind == kind;
+        public bool Is(TokenKind kind) => Kind == kind;
 
         /// <summary>
         /// Determines whether the current token is empty token.
@@ -174,14 +168,19 @@ namespace xFunc.Maths.Tokenization
         public bool IsNumber() => Is(TokenKind.Number);
 
         /// <summary>
+        /// Gets a token kind.
+        /// </summary>
+        public TokenKind Kind { get; }
+
+        /// <summary>
         /// Gets a string value.
         /// </summary>
-        public string? StringValue => stringValue;
+        public string? StringValue { get; }
 
         /// <summary>
         /// Gets a number value.
         /// </summary>
-        public double NumberValue => numberValue;
+        public double NumberValue { get; }
 
         /// <summary>
         /// Gets an empty token.

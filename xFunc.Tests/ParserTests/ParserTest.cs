@@ -32,48 +32,32 @@ namespace xFunc.Tests.ParserTests
     {
         [Fact]
         public void DifferentiatorNull()
-        {
-            Assert.Throws<ArgumentNullException>(() => new Parser(null, null));
-        }
+            => Assert.Throws<ArgumentNullException>(() => new Parser(null, null));
 
         [Fact]
         public void SimplifierNull()
-        {
-            Assert.Throws<ArgumentNullException>(() => new Parser(new Differentiator(), null));
-        }
+            => Assert.Throws<ArgumentNullException>(() => new Parser(new Differentiator(), null));
 
         [Theory]
         [InlineData(null)]
         [InlineData("")]
         public void ParseNull(string function)
-        {
-            Assert.Throws<ArgumentNullException>(() => parser.Parse(function));
-        }
+            => Assert.Throws<ArgumentNullException>(() => parser.Parse(function));
 
         [Fact]
         public void NotSupportedSymbol()
-        {
-            Assert.Throws<TokenizeException>(() => parser.Parse("@"));
-        }
+            => Assert.Throws<TokenizeException>(() => parser.Parse("@"));
 
         [Theory]
         [InlineData("\t2 + 2")]
         [InlineData("\n2 + 2")]
         [InlineData("\r2 + 2")]
         public void TabTest(string function)
-        {
-            var expected = new Add(Number.Two, Number.Two);
-
-            ParseTest(function, expected);
-        }
+            => ParseTest(function, new Add(Number.Two, Number.Two));
 
         [Fact]
         public void UseGreekLettersTest()
-        {
-            var expected = new Mul(new Number(4), new Variable("φ"));
-
-            ParseTest("4 * φ", expected);
-        }
+            => ParseTest("4 * φ", new Mul(new Number(4), new Variable("φ")));
 
         [Fact]
         public void ParseRoot()

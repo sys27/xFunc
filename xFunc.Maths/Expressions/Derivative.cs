@@ -16,6 +16,7 @@
 using System;
 using System.Collections.Immutable;
 using xFunc.Maths.Analyzers;
+using static xFunc.Maths.ThrowHelpers;
 
 namespace xFunc.Maths.Expressions
 {
@@ -85,10 +86,13 @@ namespace xFunc.Maths.Expressions
             ImmutableArray<IExpression> args)
             : base(args)
         {
-            Differentiator = differentiator ??
-                             throw new ArgumentNullException(nameof(differentiator));
-            Simplifier = simplifier ??
-                         throw new ArgumentNullException(nameof(simplifier));
+            if (differentiator is null)
+                ArgNull(ExceptionArgument.differentiator);
+            if (simplifier is null)
+                ArgNull(ExceptionArgument.simplifier);
+
+            Differentiator = differentiator;
+            Simplifier = simplifier;
         }
 
         /// <inheritdoc />

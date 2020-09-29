@@ -25,6 +25,7 @@ using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
+using static xFunc.Maths.ThrowHelpers;
 
 namespace xFunc.Maths.Analyzers
 {
@@ -50,7 +51,7 @@ namespace xFunc.Maths.Analyzers
         private IExpression AnalyzeUnaryArgument([NotNull] UnaryExpression exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             return exp.Argument.Analyze(this);
         }
@@ -58,7 +59,7 @@ namespace xFunc.Maths.Analyzers
         private IExpression AnalyzeUnary([NotNull] UnaryExpression exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var argument = AnalyzeUnaryArgument(exp);
 
@@ -71,7 +72,7 @@ namespace xFunc.Maths.Analyzers
         private (IExpression Left, IExpression Right) AnalyzeBinaryArgument([NotNull] BinaryExpression exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var left = exp.Left.Analyze(this);
             var right = exp.Right.Analyze(this);
@@ -82,7 +83,7 @@ namespace xFunc.Maths.Analyzers
         private IExpression AnalyzeBinary([NotNull] BinaryExpression exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var (left, right) = AnalyzeBinaryArgument(exp);
 
@@ -96,7 +97,7 @@ namespace xFunc.Maths.Analyzers
             where T : UnaryExpression
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var argument = AnalyzeUnaryArgument(exp);
             if (argument is T trigonometric)
@@ -111,7 +112,7 @@ namespace xFunc.Maths.Analyzers
         private IExpression AnalyzeDiffParams([NotNull] DifferentParametersExpression exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var arguments = exp.Arguments;
             var isExpChanged = false;
@@ -135,7 +136,7 @@ namespace xFunc.Maths.Analyzers
         private IExpression AnalyzeVariableBinary([NotNull] VariableBinaryExpression exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var value = exp.Value.Analyze(this);
 
@@ -150,7 +151,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(IExpression exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             return exp;
         }
@@ -286,7 +287,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Define exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var value = exp.Value.Analyze(this);
             if (IsChanged(exp.Value, value))
@@ -857,7 +858,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(UserFunction exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var arguments = exp.Arguments;
             var isExpChanged = false;
@@ -890,7 +891,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Matrix exp)
         {
             if (exp is null)
-                throw ThrowHelpers.ExpNull();
+                ArgNull(ExceptionArgument.exp);
 
             var arguments = exp.Vectors;
             var isExpChanged = false;

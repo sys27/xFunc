@@ -19,7 +19,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Matrices
 {
-    public class DotProductTests
+    public class DotProductTests : BaseExpressionTests
     {
         [Fact]
         public void ExecuteTest()
@@ -35,11 +35,7 @@ namespace xFunc.Tests.Expressions.Matrices
 
         [Fact]
         public void ExecuteTypeExceptionTest()
-        {
-            var exp = new DotProduct(Number.One, Number.Two);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new DotProduct(Number.One, Number.Two));
 
         [Fact]
         public void ExecuteLeftTypeExceptionTest()
@@ -48,7 +44,7 @@ namespace xFunc.Tests.Expressions.Matrices
                 Number.One,
                 new Vector(new[] { Number.One, Number.Two, new Number(3) }));
 
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+            TestNotSupported(exp);
         }
 
         [Fact]
@@ -58,7 +54,7 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { Number.One, Number.Two, new Number(3) }),
                 Number.Two);
 
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+            TestNotSupported(exp);
         }
 
         [Fact]

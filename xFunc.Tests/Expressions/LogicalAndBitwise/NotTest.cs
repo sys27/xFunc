@@ -21,7 +21,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.LogicalAndBitwise
 {
-    public class NotTest
+    public class NotTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteTest1()
@@ -49,11 +49,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
 
         [Fact]
         public void ExecuteResultIsNotSupported()
-        {
-            var exp = new Not(new ComplexNumber(1));
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Not(new ComplexNumber(1)));
 
         [Fact]
         public void CloneTest()

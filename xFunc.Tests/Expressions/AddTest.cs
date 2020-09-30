@@ -25,7 +25,7 @@ using Matrix = xFunc.Maths.Expressions.Matrices.Matrix;
 
 namespace xFunc.Tests.Expressions
 {
-    public class AddTest
+    public class AddTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteTestNumber1()
@@ -181,27 +181,15 @@ namespace xFunc.Tests.Expressions
 
         [Fact]
         public void ExecuteTestException()
-        {
-            var exp = new Add(Bool.False, Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Add(Bool.False, Bool.False));
 
         [Fact]
         public void ExecuteComplexNumberAndBool()
-        {
-            var exp = new Add(new ComplexNumber(7, 3), Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Add(new ComplexNumber(7, 3), Bool.False));
 
         [Fact]
         public void ExecuteBoolAndComplexNumber()
-        {
-            var exp = new Add(Bool.False, new ComplexNumber(7, 3));
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Add(Bool.False, new ComplexNumber(7, 3)));
 
         [Fact]
         public void AnalyzeNull()

@@ -13,21 +13,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using xFunc.Maths.Expressions;
 using Xunit;
 
-namespace xFunc.Tests.ParserTests
+namespace xFunc.Tests.Expressions
 {
-    public class NotBalancedParenthesisTests : BaseParserTests
+    public abstract class BaseExpressionTests : BaseTest
     {
-        [Theory]
-        [InlineData("sin(2(")]
-        [InlineData("sin)2)")]
-        [InlineData("sin)2(")]
-        [InlineData("{2,1")]
-        [InlineData("}2,1")]
-        [InlineData("(2")]
-        [InlineData("func(2")]
-        public void NotBalancedTest(string function)
-            => ParseErrorTest(function);
+        protected void TestNotSupported(IExpression exp)
+            => Assert.Throws<ResultIsNotSupportedException>(exp.Execute);
     }
 }

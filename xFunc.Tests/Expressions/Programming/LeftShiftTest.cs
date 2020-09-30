@@ -21,7 +21,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Programming
 {
-    public class LeftShiftTest
+    public class LeftShiftTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteTest()
@@ -51,11 +51,7 @@ namespace xFunc.Tests.Expressions.Programming
 
         [Fact]
         public void ExecuteBoolTest()
-        {
-            var exp = new LeftShift(Bool.False, Bool.True);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new LeftShift(Bool.False, Bool.True));
 
         [Fact]
         public void CloneTest()

@@ -25,11 +25,7 @@ namespace xFunc.Tests.ParserTests
         [InlineData("gcf(12, 16)")]
         [InlineData("hcf(12, 16)")]
         public void GCDTest(string function)
-        {
-            var expected = new GCD(new Number(12), new Number(16));
-
-            ParseTest(function, expected);
-        }
+            => ParseTest(function, new GCD(new Number(12), new Number(16)));
 
         [Fact]
         public void GCDOfThreeTest()
@@ -51,10 +47,6 @@ namespace xFunc.Tests.ParserTests
         [InlineData("lcm(12, 16)")]
         [InlineData("scm(12, 16)")]
         public void LCMTest(string function)
-        {
-            var expected = new LCM(new Number(12), new Number(16));
-
-            ParseTest(function, expected);
-        }
+            => ParseTest(function, new LCM(new Number(12), new Number(16)));
     }
 }

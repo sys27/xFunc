@@ -19,7 +19,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.LogicalAndBitwise
 {
-    public class ImplicationTest
+    public class ImplicationTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteTest1()
@@ -39,11 +39,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
 
         [Fact]
         public void ExecuteResultIsNotSupported()
-        {
-            var exp = new Implication(Number.One, Number.Two);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Implication(Number.One, Number.Two));
 
         [Fact]
         public void CloneTest()

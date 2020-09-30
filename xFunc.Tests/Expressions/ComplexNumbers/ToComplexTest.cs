@@ -21,7 +21,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.ComplexNumbers
 {
-    public class ToComplexTest
+    public class ToComplexTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteTest()
@@ -35,11 +35,7 @@ namespace xFunc.Tests.Expressions.ComplexNumbers
 
         [Fact]
         public void ExecuteBoolTest()
-        {
-            var exp = new ToComplex(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new ToComplex(Bool.False));
 
         [Fact]
         public void CloneTest()

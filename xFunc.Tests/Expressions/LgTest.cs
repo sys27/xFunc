@@ -22,7 +22,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-    public class LgTest
+    public class LgTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteTest1()
@@ -37,17 +37,14 @@ namespace xFunc.Tests.Expressions
         {
             var complex = new Complex(2, 3);
             var exp = new Lg(new ComplexNumber(complex));
+            var expected = Complex.Log10(complex);
 
-            Assert.Equal(Complex.Log10(complex), exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]
         public void ExecuteTestException()
-        {
-            var exp = new Lg(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Lg(Bool.False));
 
         [Fact]
         public void CloneTest()

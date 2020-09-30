@@ -24,10 +24,7 @@ namespace xFunc.Tests.ParserTests
     {
         protected readonly Parser parser;
 
-        protected BaseParserTests()
-        {
-            parser = new Parser();
-        }
+        protected BaseParserTests() => parser = new Parser();
 
         protected void ParseTest(string function, IExpression expected)
         {

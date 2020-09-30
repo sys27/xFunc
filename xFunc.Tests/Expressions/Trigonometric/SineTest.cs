@@ -23,7 +23,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Trigonometric
 {
-    public class SineTest
+    public class SineTest : BaseExpressionTests
     {
         [Theory]
         [InlineData(0.0, 0.0)] // 0
@@ -94,11 +94,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
 
         [Fact]
         public void ExecuteTestException()
-        {
-            var exp = new Sin(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Sin(Bool.False));
 
         [Fact]
         public void CloneTest()

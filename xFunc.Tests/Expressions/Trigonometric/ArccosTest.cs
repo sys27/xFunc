@@ -23,7 +23,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Trigonometric
 {
-    public class ArccosTest
+    public class ArccosTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteNumberTest()
@@ -47,11 +47,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
 
         [Fact]
         public void ExecuteTestException()
-        {
-            var exp = new Arccos(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Arccos(Bool.False));
 
         [Fact]
         public void CloneTest()

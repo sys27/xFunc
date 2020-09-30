@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-    public class RoundTest
+    public class RoundTest : BaseExpressionTests
     {
         [Fact]
         public void CalculateRoundWithoutDigits()
@@ -47,16 +47,12 @@ namespace xFunc.Tests.Expressions
         {
             var exp = new Round(Bool.False, Number.Two);
 
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+            TestNotSupported(exp);
         }
 
         [Fact]
-        public void ExecuteDigitstIsNotNumber()
-        {
-            var exp = new Round(new Number(5.5), Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+        public void ExecuteDigitsIsNotNumber()
+            => TestNotSupported(new Round(new Number(5.5), Bool.False));
 
         [Fact]
         public void ExecuteArgumentIsNotInteger()

@@ -24,6 +24,10 @@ namespace xFunc.Tests.Expressions.Programming
     public class DecTest
     {
         [Fact]
+        public void NullCtorTest()
+            => Assert.Throws<ArgumentNullException>(() => new Dec(null));
+
+        [Fact]
         public void DecCalcTest()
         {
             var parameters = new ParameterCollection { new Parameter("x", 10) };

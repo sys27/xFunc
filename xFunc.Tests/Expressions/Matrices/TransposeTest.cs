@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Matrices
 {
-    public class TransposeTest
+    public class TransposeTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteMatrixTest()
@@ -62,7 +62,7 @@ namespace xFunc.Tests.Expressions.Matrices
         {
             var exp = new Transpose(Bool.True);
 
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+            TestNotSupported(exp);
         }
 
         [Fact]

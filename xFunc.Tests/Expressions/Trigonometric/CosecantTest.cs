@@ -23,7 +23,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Trigonometric
 {
-    public class CosecantTest
+    public class CosecantTest : BaseExpressionTests
     {
         [Theory]
         [InlineData(0.0, double.PositiveInfinity)] // -
@@ -94,11 +94,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
 
         [Fact]
         public void ExecuteTestException()
-        {
-            var exp = new Csc(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Csc(Bool.False));
 
         [Fact]
         public void CloneTest()

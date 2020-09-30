@@ -23,7 +23,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Trigonometric
 {
-    public class SecantTest
+    public class SecantTest : BaseExpressionTests
     {
         [Theory]
         [InlineData(0.0, 1.0)] // 1
@@ -94,11 +94,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
 
         [Fact]
         public void ExecuteTestException()
-        {
-            var exp = new Sec(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Sec(Bool.False));
 
         [Fact]
         public void CloneTest()

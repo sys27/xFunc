@@ -21,7 +21,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-    public class RootTest
+    public class RootTest : BaseExpressionTests
     {
         [Fact]
         public void CalculateRootTest1()
@@ -60,11 +60,7 @@ namespace xFunc.Tests.Expressions
 
         [Fact]
         public void ExecuteExceptionTest()
-        {
-            var exp = new Root(Bool.False, Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Root(Bool.False, Bool.False));
 
         [Fact]
         public void CloneTest()

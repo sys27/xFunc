@@ -23,7 +23,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Hyperbolic
 {
-    public class HyperbolicSineTest
+    public class HyperbolicSineTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteNumberTest()
@@ -74,11 +74,7 @@ namespace xFunc.Tests.Expressions.Hyperbolic
 
         [Fact]
         public void ExecuteTestException()
-        {
-            var exp = new Sinh(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Sinh(Bool.False));
 
         [Fact]
         public void CloneTest()

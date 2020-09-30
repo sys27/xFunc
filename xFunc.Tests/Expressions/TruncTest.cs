@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-    public class TruncTest
+    public class TruncTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteNumberTest()
@@ -44,11 +44,7 @@ namespace xFunc.Tests.Expressions
 
         [Fact]
         public void ExecuteTestException()
-        {
-            var exp = new Trunc(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Trunc(Bool.False));
 
         [Fact]
         public void CloneTest()

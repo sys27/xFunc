@@ -37,11 +37,7 @@ namespace xFunc.Tests.ParserTests
         [InlineData("tanh(2)")]
         [InlineData("th(2)")]
         public void TanhTest(string function)
-        {
-            var expected = new Tanh(Number.Two);
-
-            ParseTest(function, expected);
-        }
+            => ParseTest(function, new Tanh(Number.Two));
 
         [Theory]
         [InlineData("coth(2)")]

@@ -25,7 +25,7 @@ using Matrix = xFunc.Maths.Expressions.Matrices.Matrix;
 
 namespace xFunc.Tests.Expressions
 {
-    public class MulTest
+    public class MulTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteMulNumberByNumberTest()
@@ -301,13 +301,7 @@ namespace xFunc.Tests.Expressions
 
         [Fact]
         public void ExecuteMulBoolByBoolTest()
-        {
-            var bool1 = Bool.True;
-            var bool2 = Bool.True;
-            var exp = new Mul(bool1, bool2);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Mul(Bool.True, Bool.True));
 
         [Fact]
         public void CloneTest()

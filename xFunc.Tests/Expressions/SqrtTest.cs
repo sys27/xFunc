@@ -17,11 +17,12 @@ using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-    public class SqrtTest
+    public class SqrtTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteTest1()
@@ -64,6 +65,10 @@ namespace xFunc.Tests.Expressions
 
             Assert.Equal(Complex.Sqrt(complex), exp.Execute());
         }
+
+        [Fact]
+        public void ExecuteBoolTest()
+            => TestNotSupported(new Sqrt(Bool.False));
 
         [Fact]
         public void CloneTest()

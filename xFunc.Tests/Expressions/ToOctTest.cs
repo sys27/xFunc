@@ -20,10 +20,10 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-    public class ToOctTest
+    public class ToOctTest : BaseExpressionTests
     {
         [Fact]
-        public void ExecutNumberTest()
+        public void ExecuteNumberTest()
         {
             var exp = new ToOct(Number.Two);
 
@@ -31,7 +31,7 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
-        public void ExecutNumberExceptionTest()
+        public void ExecuteNumberExceptionTest()
         {
             var exp = new ToOct(new Number(2.5));
 
@@ -39,7 +39,7 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
-        public void ExecutLongMaxNumberTest()
+        public void ExecuteLongMaxNumberTest()
         {
             var exp = new ToOct(new Number(int.MaxValue));
 
@@ -47,7 +47,7 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
-        public void ExecutNegativeNumberTest()
+        public void ExecuteNegativeNumberTest()
         {
             var exp = new ToOct(new Number(-2));
 
@@ -55,12 +55,8 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
-        public void ExecutBoolTest()
-        {
-            var exp = new ToOct(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+        public void ExecuteBoolTest()
+            => TestNotSupported(new ToOct(Bool.False));
 
         [Fact]
         public void CloseTest()

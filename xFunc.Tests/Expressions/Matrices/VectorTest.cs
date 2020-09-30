@@ -21,7 +21,7 @@ using xFunc.Maths.Expressions.LogicalAndBitwise;
 
 namespace xFunc.Tests.Expressions.Matrices
 {
-    public class VectorTest
+    public class VectorTest : BaseExpressionTests
     {
         [Fact]
         public void NullArgumentsTest()
@@ -46,7 +46,7 @@ namespace xFunc.Tests.Expressions.Matrices
         {
             var exp = new Vector(new IExpression[] { Bool.False });
 
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+            TestNotSupported(exp);
         }
 
         [Fact]

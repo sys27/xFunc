@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Programming
 {
-    public class IfTest
+    public class IfTest : BaseExpressionTests
     {
         [Fact]
         public void CalculateIfElseTest()
@@ -86,12 +86,9 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void ConditionIsNotBoolTest()
         {
-            var exp = new If(
-                Number.One,
-                Number.One,
-                Number.One);
+            var exp = new If(Number.One, Number.One, Number.One);
 
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+            TestNotSupported(exp);
         }
     }
 }

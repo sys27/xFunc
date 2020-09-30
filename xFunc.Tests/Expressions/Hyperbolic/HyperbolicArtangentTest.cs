@@ -23,7 +23,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Hyperbolic
 {
-    public class HyperbolicArtangentTest
+    public class HyperbolicArtangentTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteNumberTest()
@@ -48,11 +48,7 @@ namespace xFunc.Tests.Expressions.Hyperbolic
 
         [Fact]
         public void ExecuteTestException()
-        {
-            var exp = new Artanh(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Artanh(Bool.False));
 
         [Fact]
         public void CloneTest()

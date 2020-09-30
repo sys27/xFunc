@@ -23,7 +23,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Trigonometric
 {
-    public class ArccscTest
+    public class ArccscTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteNumberTest()
@@ -48,11 +48,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
 
         [Fact]
         public void ExecuteTestException()
-        {
-            var exp = new Arccsc(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Arccsc(Bool.False));
 
         [Fact]
         public void CloneTest()

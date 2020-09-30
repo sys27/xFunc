@@ -24,19 +24,11 @@ namespace xFunc.Tests.ParserTests
     {
         [Fact]
         public void EqualTest()
-        {
-            var expected = new Equal(Variable.X, Number.Zero);
-
-            ParseTest("x == 0", expected);
-        }
+            => ParseTest("x == 0", new Equal(Variable.X, Number.Zero));
 
         [Fact]
         public void NotEqualTest()
-        {
-            var expected = new NotEqual(Variable.X, Number.Zero);
-
-            ParseTest("x != 0", expected);
-        }
+            => ParseTest("x != 0", new NotEqual(Variable.X, Number.Zero));
 
         [Fact]
         public void PrecedenceTest()

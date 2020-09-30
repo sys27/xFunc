@@ -23,7 +23,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Trigonometric
 {
-    public class ArctanTest
+    public class ArctanTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteNumberTest()
@@ -48,11 +48,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
 
         [Fact]
         public void ExecuteTestException()
-        {
-            var exp = new Arctan(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Arctan(Bool.False));
 
         [Fact]
         public void CloneTest()

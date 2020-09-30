@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.ComplexNumbers
 {
-    public class ConjugateTest
+    public class ConjugateTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteComplexNumberTest()
@@ -33,11 +33,7 @@ namespace xFunc.Tests.Expressions.ComplexNumbers
 
         [Fact]
         public void ExecuteExceptionTest()
-        {
-            var exp = new Conjugate(Number.Two);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Conjugate(Number.Two));
 
         [Fact]
         public void CloneTest()

@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-    public class CeilTest
+    public class CeilTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteTestNumber()
@@ -44,11 +44,7 @@ namespace xFunc.Tests.Expressions
 
         [Fact]
         public void ExecuteTestException()
-        {
-            var exp = new Ceil(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Ceil(Bool.False));
 
         [Fact]
         public void CloneTest()

@@ -22,7 +22,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Statistical
 {
-    public class StatisticalTests : BaseTest
+    public class StatisticalTests :  BaseExpressionTests
     {
         [Theory]
         [InlineData(typeof(Avg))]
@@ -39,7 +39,7 @@ namespace xFunc.Tests.Expressions.Statistical
         {
             var exp = Create(type, new IExpression[] { Bool.False, Bool.False });
 
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+            TestNotSupported(exp);
         }
 
         [Theory]

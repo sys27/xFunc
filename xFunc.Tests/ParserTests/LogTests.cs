@@ -22,11 +22,7 @@ namespace xFunc.Tests.ParserTests
     {
         [Fact]
         public void ParseLog()
-        {
-            var expected = new Log(new Number(9), new Number(3));
-
-            ParseTest("log(9, 3)", expected);
-        }
+            => ParseTest("log(9, 3)", new Log(new Number(9), new Number(3)));
 
         [Fact]
         public void ParseLogWithOneParam()

@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-    public class FracTest
+    public class FracTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteNumberTest()
@@ -64,11 +64,7 @@ namespace xFunc.Tests.Expressions
 
         [Fact]
         public void ExecuteTestException()
-        {
-            var exp = new Frac(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Frac(Bool.False));
 
         [Fact]
         public void CloneTest()

@@ -21,7 +21,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.LogicalAndBitwise
 {
-    public class XOrTest
+    public class XOrTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteTest1()
@@ -68,7 +68,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         {
             var exp = new XOr(new ComplexNumber(1), new ComplexNumber(2));
 
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+            TestNotSupported(exp);
         }
 
         [Fact]

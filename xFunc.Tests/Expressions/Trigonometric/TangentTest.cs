@@ -23,7 +23,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Trigonometric
 {
-    public class TangentTest
+    public class TangentTest : BaseExpressionTests
     {
         [Theory]
         [InlineData(0.0, 0.0)] // 0
@@ -94,11 +94,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
 
         [Fact]
         public void ExecuteTestException()
-        {
-            var exp = new Tan(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Tan(Bool.False));
 
         [Fact]
         public void CloneTest()

@@ -33,7 +33,6 @@ namespace xFunc.Benchmark
                 .Run(args,
                     ManualConfig.Create(DefaultConfig.Instance)
                         .AddJob(Job.MediumRun
-                            .WithLaunchCount(1)
                             .WithToolchain(CsProjCoreToolchain.NetCoreApp31))
                         .AddDiagnoser(MemoryDiagnoser.Default)
                         .StopOnFirstError());

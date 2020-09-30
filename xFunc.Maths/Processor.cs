@@ -167,6 +167,18 @@ namespace xFunc.Maths
             => (TResult)Solve(function, simplify);
 
         /// <summary>
+        /// Simplifies the <paramref name="function"/>.
+        /// </summary>
+        /// <param name="function">The function.</param>
+        /// <returns>A simplified expression.</returns>
+        public IExpression Simplify(string function)
+        {
+            var expression = Parse(function);
+
+            return expression.Analyze(simplifier);
+        }
+
+        /// <summary>
         /// Simplifies the <paramref name="expression"/>.
         /// </summary>
         /// <param name="expression">A expression to simplify.</param>
@@ -177,6 +189,18 @@ namespace xFunc.Maths
                 throw new ArgumentNullException(nameof(expression));
 
             return expression.Analyze(simplifier);
+        }
+
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="function">The function.</param>
+        /// <returns>Returns the derivative.</returns>
+        public IExpression Differentiate(string function)
+        {
+            var expression = Parse(function);
+
+            return Differentiate(expression, Variable.X);
         }
 
         /// <summary>

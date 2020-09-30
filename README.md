@@ -23,7 +23,7 @@ xFunc is a small-sized and portable application that you can use to create compl
 
 The main class of xFunc library is `Processor`.
 
-### Processor 
+### Processor
 
 It allows you to:
 
@@ -38,8 +38,8 @@ _Note: The `Parse` method won't simplify expression automatically, it will retur
 
 **Solve:**
 
-This method will parse string expression (like `Parse` method) and then calculate it (returns object which implements `IResult` interface). 
- 
+This method will parse string expression (like `Parse` method) and then calculate it (returns object which implements `IResult` interface).
+
 There is two overloads of this method (common and generic). The common returns just `IResult` (you can access result by `Result` property). The generic allows to return specific implementation of `IResult` (eg. `NumberResult`).
 
 ```csharp
@@ -58,7 +58,11 @@ _Note: The `Solve` method automatically simplify expression, to control this beh
 
 ```csharp
 var processor = new Processor();
-processor.Simplify("arcsin(sin(x))"); // will return simplified expression = "x"
+
+processor.Solve<ExpressionResult>("simplify(arcsin(sin(x)))");
+// or
+processor.Simplify("arcsin(sin(x))");
+// will return simplified expression = "x"
 ```
 
 _Detailed [simplification rules](https://github.com/sys27/xFunc/wiki/Simplification-rules)_
@@ -67,7 +71,11 @@ _Detailed [simplification rules](https://github.com/sys27/xFunc/wiki/Simplificat
 
 ```csharp
 var processor = new Processor();
-processor.Differentiate("2x"); // will return "2"
+
+processor.Solve<ExpressionResult>("deriv(2x)");
+// or
+processor.Differentiate("2x");
+// will return "2"
 ```
 
 You can specified variable (default is "x") of differentiation:
@@ -84,10 +92,10 @@ processor.Differentiate("2x + sin(y)", new Variable("x")); // will return "2"
 
 Version | Method |         Mean |   Allocated |
 -------:|------- |-------------:|------------:|
-  3.7.2 |  Parse |     178.9 μs |    62.28 KB |
-  4.0.0 |  Parse | **27.69 μs** | **4.55 KB** |
-  3.7.2 |  Solve |     246.2 μs |    94.68 KB |
-  4.0.0 |  Solve | **43.09 μs** | **10.4 KB** |
+3.7.2 |  Parse |     178.9 μs |    62.28 KB |
+4.0.0 |  Parse | **27.69 μs** | **4.55 KB** |
+3.7.2 |  Solve |     246.2 μs |    94.68 KB |
+4.0.0 |  Solve | **43.09 μs** | **10.4 KB** |
 
 [More details](https://github.com/sys27/xFunc/wiki/Performance-Comparison)
 

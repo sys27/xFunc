@@ -24,6 +24,7 @@ namespace xFunc.Benchmark.Benchmarks
         [Benchmark]
         public IParser ParserCtor()
         {
+            var lexer = new Lexer();
             return new Parser();
         }
     }

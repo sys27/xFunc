@@ -19,7 +19,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-    public class FactTest
+    public class FactTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteTest1()
@@ -55,11 +55,7 @@ namespace xFunc.Tests.Expressions
 
         [Fact]
         public void ExecuteTestException()
-        {
-            var exp = new Fact(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Fact(Bool.False));
 
         [Fact]
         public void CloneTest()

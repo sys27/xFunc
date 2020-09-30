@@ -23,7 +23,7 @@ using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Tests.Expressions
 {
-    public class AbsTest
+    public class AbsTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteTestNumber()
@@ -46,8 +46,9 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTestComplexNumber()
         {
             var exp = new Abs(new ComplexNumber(4, 2));
+            var expected = Complex.Abs(new Complex(4, 2));
 
-            Assert.Equal(Complex.Abs(new Complex(4, 2)), exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]
@@ -62,12 +63,8 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
-        public void ExecuteTEstException()
-        {
-            var exp = new Abs(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+        public void ExecuteTestException()
+            => TestNotSupported(new Abs(Bool.False));
 
         [Fact]
         public void EqualsTest1()

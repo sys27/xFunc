@@ -21,7 +21,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.LogicalAndBitwise
 {
-    public class AndTest
+    public class AndTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteTest1()
@@ -68,7 +68,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         {
             var exp = new And(new ComplexNumber(1), new ComplexNumber(2));
 
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+            TestNotSupported(exp);
         }
 
         [Fact]

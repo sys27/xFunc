@@ -20,13 +20,11 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-    public class LCMTest
+    public class LCMTest : BaseExpressionTests
     {
         [Fact]
         public void NullArgTest()
-        {
-            Assert.Throws<ArgumentNullException>(() => new LCM(null));
-        }
+            => Assert.Throws<ArgumentNullException>(() => new LCM(null));
 
         [Fact]
         public void ExecuteTest1()
@@ -46,11 +44,7 @@ namespace xFunc.Tests.Expressions
 
         [Fact]
         public void ExecuteNotSupportedTest()
-        {
-            var exp = new LCM(new IExpression[] { Bool.False, Bool.True });
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new LCM(new IExpression[] { Bool.False, Bool.True }));
 
         [Fact]
         public void CloneTest()

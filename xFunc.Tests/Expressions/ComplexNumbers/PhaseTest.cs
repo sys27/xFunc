@@ -21,7 +21,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.ComplexNumbers
 {
-    public class PhaseTest
+    public class PhaseTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteTest()
@@ -35,11 +35,7 @@ namespace xFunc.Tests.Expressions.ComplexNumbers
 
         [Fact]
         public void ExecuteExceptionTest()
-        {
-            var exp = new Phase(Number.Two);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Phase(Number.Two));
 
         [Fact]
         public void CloneTest()

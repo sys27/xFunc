@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-    public class GCDTest
+    public class GCDTest : BaseExpressionTests
     {
         [Fact]
         public void CalculateTest1()
@@ -43,14 +43,12 @@ namespace xFunc.Tests.Expressions
         {
             var exp = new GCD(new IExpression[] { Bool.True, new Number(16), new Number(8) });
 
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+            TestNotSupported(exp);
         }
 
         [Fact]
         public void NullArgTest()
-        {
-            Assert.Throws<ArgumentNullException>(() => new GCD(null));
-        }
+            => Assert.Throws<ArgumentNullException>(() => new GCD(null));
 
         [Fact]
         public void CloneTest()

@@ -23,7 +23,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-    public class UnaryMinusTest
+    public class UnaryMinusTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteNumberTest()
@@ -53,11 +53,7 @@ namespace xFunc.Tests.Expressions
 
         [Fact]
         public void NotSupportedException()
-        {
-            var exp = new UnaryMinus(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new UnaryMinus(Bool.False));
 
         [Fact]
         public void CloneTest()

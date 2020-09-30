@@ -42,11 +42,11 @@ namespace xFunc.Tests.ParserTests
         [InlineData(null)]
         [InlineData("")]
         public void ParseNull(string function)
-            => Assert.Throws<ArgumentNullException>(() => parser.Parse(function));
+            => ErrorTest<ArgumentNullException>(function);
 
         [Fact]
         public void NotSupportedSymbol()
-            => Assert.Throws<TokenizeException>(() => parser.Parse("@"));
+            => ErrorTest<TokenizeException>("@");
 
         [Theory]
         [InlineData("\t2 + 2")]

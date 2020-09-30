@@ -23,7 +23,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-    public class DivTest
+    public class DivTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteTest1()
@@ -120,24 +120,16 @@ namespace xFunc.Tests.Expressions
         {
             var exp = new Div(Bool.False, Bool.True);
 
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+            TestNotSupported(exp);
         }
 
         [Fact]
         public void ExecuteComplexNumberBoolTest()
-        {
-            var exp = new Div(new ComplexNumber(2, 4), Bool.True);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Div(new ComplexNumber(2, 4), Bool.True));
 
         [Fact]
         public void ExecuteBoolComplexNumberTest()
-        {
-            var exp = new Div(Bool.True, new ComplexNumber(2, 4));
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Div(Bool.True, new ComplexNumber(2, 4)));
 
         [Fact]
         public void CloneTest()

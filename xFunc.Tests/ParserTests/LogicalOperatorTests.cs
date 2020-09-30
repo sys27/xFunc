@@ -32,11 +32,7 @@ namespace xFunc.Tests.ParserTests
         [InlineData("true & false")]
         [InlineData("true and false")]
         public void BoolConstTest(string function)
-        {
-            var expected = new And(Bool.True, Bool.False);
-
-            ParseTest(function, expected);
-        }
+            => ParseTest(function, new And(Bool.True, Bool.False));
 
         [Fact]
         public void LogicAddPriorityTest()
@@ -53,35 +49,19 @@ namespace xFunc.Tests.ParserTests
         [InlineData("1 | 2")]
         [InlineData("1 or 2")]
         public void OrTest(string function)
-        {
-            var expected = new Or(Number.One, Number.Two);
-
-            ParseTest(function, expected);
-        }
+            => ParseTest(function, new Or(Number.One, Number.Two));
 
         [Fact]
         public void XOrTest()
-        {
-            var expected = new XOr(Number.One, Number.Two);
-
-            ParseTest("1 xor 2", expected);
-        }
+            => ParseTest("1 xor 2", new XOr(Number.One, Number.Two));
 
         [Fact]
         public void NOrTest()
-        {
-            var expected = new NOr(Bool.True, Bool.True);
-
-            ParseTest("true nor true", expected);
-        }
+            => ParseTest("true nor true", new NOr(Bool.True, Bool.True));
 
         [Fact]
         public void NAndTest()
-        {
-            var expected = new NAnd(Bool.True, Bool.True);
-
-            ParseTest("true nand true", expected);
-        }
+            => ParseTest("true nand true", new NAnd(Bool.True, Bool.True));
 
         [Theory]
         [InlineData("true -> true")]

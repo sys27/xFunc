@@ -21,7 +21,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-    public class PowTest
+    public class PowTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteTest1()
@@ -106,11 +106,7 @@ namespace xFunc.Tests.Expressions
 
         [Fact]
         public void ExecuteWrongArgumentTypeTest()
-        {
-            var exp = new Pow(Bool.True, Bool.True);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Pow(Bool.True, Bool.True));
 
         [Fact]
         public void CloneTest()

@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-    public class SignTest
+    public class SignTest : BaseExpressionTests
     {
         [Fact]
         public void PositiveSignTest()
@@ -51,11 +51,7 @@ namespace xFunc.Tests.Expressions
 
         [Fact]
         public void InvalidParameterTest()
-        {
-            var exp = new Sign(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Sign(Bool.False));
 
         [Fact]
         public void CloneTest()

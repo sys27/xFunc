@@ -23,7 +23,7 @@ namespace xFunc.Tests.ParserTests
     {
         [Fact]
         public void NumberFormatTest()
-            => Assert.Throws<TokenizeException>(() => parser.Parse("0."));
+            => ErrorTest<TokenizeException>("0.");
 
         [Theory]
         [InlineData("1.2345E-10", 0.00000000012345)]
@@ -37,28 +37,16 @@ namespace xFunc.Tests.ParserTests
         [InlineData("0b01100110")]
         [InlineData("0B01100110")]
         public void BinTest(string function)
-        {
-            var expected = new Number(0b01100110);
-
-            ParseTest(function, expected);
-        }
+            => ParseTest(function, new Number(0b01100110));
 
         [Theory]
         [InlineData("0XFF00")]
         [InlineData("0xff00")]
         public void HexTest(string function)
-        {
-            var expected = new Number(0xFF00);
-
-            ParseTest(function, expected);
-        }
+            => ParseTest(function, new Number(0xFF00));
 
         [Fact]
         public void OctTest()
-        {
-            var expected = new Number(286);
-
-            ParseTest("0436", expected);
-        }
+            => ParseTest("0436", new Number(286));
     }
 }

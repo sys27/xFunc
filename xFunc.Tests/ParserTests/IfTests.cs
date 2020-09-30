@@ -78,7 +78,7 @@ namespace xFunc.Tests.ParserTests
         [InlineData("true ? 1 :")]
         [InlineData("true ? : -1")]
         [InlineData("true ? 1")]
-        public void TernaryElseMissingTest(string function)
+        public void TernaryMissingTest(string function)
             => ParseErrorTest(function);
 
         [Fact]

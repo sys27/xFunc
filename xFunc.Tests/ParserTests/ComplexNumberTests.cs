@@ -269,10 +269,6 @@ namespace xFunc.Tests.ParserTests
 
         [Fact]
         public void ToComplexTest()
-        {
-            var expected = new ToComplex(Number.Two);
-
-            ParseTest("tocomplex(2)", expected);
-        }
+            => ParseTest("tocomplex(2)", new ToComplex(Number.Two));
     }
 }

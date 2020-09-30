@@ -19,7 +19,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-    public class ModTest
+    public class ModTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteTest1()
@@ -59,11 +59,7 @@ namespace xFunc.Tests.Expressions
 
         [Fact]
         public void ExecuteResultIsNotSupported()
-        {
-            var exp = new Mod(Bool.True, Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Mod(Bool.True, Bool.False));
 
         [Fact]
         public void CloneTest()

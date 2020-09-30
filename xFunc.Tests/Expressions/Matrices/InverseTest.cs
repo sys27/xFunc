@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Matrices
 {
-    public class InverseTest
+    public class InverseTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteMatrixTest()
@@ -65,7 +65,7 @@ namespace xFunc.Tests.Expressions.Matrices
             var vector = new Vector(new[] { new Number(3), new Number(7), Number.Two, new Number(5) });
             var exp = new Inverse(vector);
 
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+            TestNotSupported(exp);
         }
 
         [Fact]

@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-    public class LbTest
+    public class LbTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteTest()
@@ -32,11 +32,7 @@ namespace xFunc.Tests.Expressions
 
         [Fact]
         public void ExecuteTestException()
-        {
-            var exp = new Lb(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Lb(Bool.False));
 
         [Fact]
         public void CloneTest()

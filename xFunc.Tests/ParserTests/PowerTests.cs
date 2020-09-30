@@ -25,11 +25,7 @@ namespace xFunc.Tests.ParserTests
         [InlineData("pow(1, 2)")]
         [InlineData("1 ^ 2")]
         public void PowFuncTest(string function)
-        {
-            var expected = new Pow(Number.One, Number.Two);
-
-            ParseTest(function, expected);
-        }
+            => ParseTest(function, new Pow(Number.One, Number.Two));
 
         [Fact]
         public void PowRightAssociativityTest()

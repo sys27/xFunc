@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-    public class FloorTest
+    public class FloorTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteNumberTest()
@@ -44,11 +44,7 @@ namespace xFunc.Tests.Expressions
 
         [Fact]
         public void ExecuteTestException()
-        {
-            var exp = new Floor(Bool.False);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Floor(Bool.False));
 
         [Fact]
         public void CloneTest()

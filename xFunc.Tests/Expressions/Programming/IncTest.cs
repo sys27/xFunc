@@ -24,6 +24,10 @@ namespace xFunc.Tests.Expressions.Programming
     public class IncTest
     {
         [Fact]
+        public void NullCtorTest()
+            => Assert.Throws<ArgumentNullException>(() => new Inc(null));
+
+        [Fact]
         public void IncCalcTest()
         {
             var parameters = new ParameterCollection { new Parameter("x", 10) };

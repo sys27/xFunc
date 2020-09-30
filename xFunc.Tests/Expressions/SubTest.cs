@@ -25,7 +25,7 @@ using Matrix = xFunc.Maths.Expressions.Matrices.Matrix;
 
 namespace xFunc.Tests.Expressions
 {
-    public class SubTest
+    public class SubTest : BaseExpressionTests
     {
         [Fact]
         public void ExecuteTest1()
@@ -173,11 +173,7 @@ namespace xFunc.Tests.Expressions
 
         [Fact]
         public void ExecuteWrongArgumentTypeTest()
-        {
-            var exp = new Sub(Bool.True, Bool.True);
-
-            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
-        }
+            => TestNotSupported(new Sub(Bool.True, Bool.True));
 
         [Fact]
         public void CloneTest()

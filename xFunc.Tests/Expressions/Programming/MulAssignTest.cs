@@ -37,6 +37,17 @@ namespace xFunc.Tests.Expressions.Programming
         }
 
         [Fact]
+        public void MulAssignAsExpressionTest()
+        {
+            var parameters = new ParameterCollection { new Parameter("x", 10) };
+            var add = new Add(Number.Two, new MulAssign(Variable.X, Number.Two));
+            var result = add.Execute(parameters);
+
+            Assert.Equal(22.0, result);
+            Assert.Equal(20.0, parameters["x"]);
+        }
+
+        [Fact]
         public void MulNullParameters()
         {
             var exp = new MulAssign(Variable.X, Number.One);

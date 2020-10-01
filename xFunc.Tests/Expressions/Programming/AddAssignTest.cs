@@ -37,6 +37,17 @@ namespace xFunc.Tests.Expressions.Programming
         }
 
         [Fact]
+        public void AddAssignAsExpressionTest()
+        {
+            var parameters = new ParameterCollection { new Parameter("x", 10) };
+            var add = new Add(Number.One, new AddAssign(Variable.X, Number.Two));
+            var result = add.Execute(parameters);
+
+            Assert.Equal(13.0, result);
+            Assert.Equal(12.0, parameters["x"]);
+        }
+
+        [Fact]
         public void AddNullParameters()
         {
             var exp = new AddAssign(Variable.X, Number.One);

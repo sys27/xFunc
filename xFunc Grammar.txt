@@ -10,9 +10,6 @@ statement = unaryAssign
           / while
           / exp
 
-unaryAssign = variable ('++' / '--')
-binaryAssign = variable ('+=' / '-=' / '*=' / '/=' / '<<=' / '>>=') exp
-
 assignmentKey = functionDeclaration / variable
 assign = assignmentKey ':=' exp
 def = ('def' / 'define') '(' assignmentKey ',' exp ')'
@@ -22,8 +19,10 @@ if = 'if' '(' conditional ',' exp (',' exp)* ')'
 for = 'for' '(' statement ',' exp ',' conditional ',' statement ')'
 while = 'while' '(' exp ',' conditional ')'
 
-exp = ternary 
+exp = binaryAssign
+    / ternary 
 
+binaryAssign = variable ('+=' / '-=' / '*=' / '/=' / '<<=' / '>>=') exp
 ternary = conditional ('?' exp ':' exp)*
 
 conditional = bitwise (('&&' / '||') bitwise)*
@@ -36,7 +35,12 @@ mulImplicit = mulImplicitLeftUnary / leftUnary
 mulImplicitLeftUnary = '-'* number rightUnary
 leftUnary = ('~' / '-')* exponentiation
 exponentiation = rightUnary ('^' exponentiation)*
-rightUnary = (number '!') / operand
+rightUnary = incDec
+           / factorial
+           / operand
+
+incDec = variable ('++' / '--')
+factorial = (number '!')
 
 operand = complexnumber /
           number /

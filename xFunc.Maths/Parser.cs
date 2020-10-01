@@ -103,40 +103,6 @@ namespace xFunc.Maths
                ParseWhile(ref tokenReader) ??
                ParseExpression(ref tokenReader);
 
-        private IExpression? ParseBinaryAssign(ref TokenReader tokenReader)
-        {
-            var scope = tokenReader.CreateScope();
-
-            var left = ParseVariable(ref tokenReader);
-            if (left == null)
-            {
-                tokenReader.Rollback(scope);
-
-                return null;
-            }
-
-            var @operator = tokenReader.GetCurrent(MulAssignOperator) ||
-                            tokenReader.GetCurrent(DivAssignOperator) ||
-                            tokenReader.GetCurrent(AddAssignOperator) ||
-                            tokenReader.GetCurrent(SubAssignOperator) ||
-                            tokenReader.GetCurrent(LeftShiftAssignOperator) ||
-                            tokenReader.GetCurrent(RightShiftAssignOperator);
-
-            if (@operator.IsNotEmpty())
-            {
-                var right = ParseExpression(ref tokenReader) ??
-                            MissingSecondOperand(@operator.Kind);
-
-                tokenReader.Commit();
-
-                return CreateBinaryAssign(@operator, left, right);
-            }
-
-            tokenReader.Rollback(scope);
-
-            return null;
-        }
-
         private IExpression? AssignmentKey(ref TokenReader tokenReader)
             => ParseFunctionDeclaration(ref tokenReader) ??
                ParseVariable(ref tokenReader);
@@ -345,7 +311,42 @@ namespace xFunc.Maths
         }
 
         private IExpression? ParseExpression(ref TokenReader tokenReader)
-            => Ternary(ref tokenReader);
+            => ParseBinaryAssign(ref tokenReader) ??
+               Ternary(ref tokenReader);
+
+        private IExpression? ParseBinaryAssign(ref TokenReader tokenReader)
+        {
+            var scope = tokenReader.CreateScope();
+
+            var variable = ParseVariable(ref tokenReader);
+            if (variable == null)
+            {
+                tokenReader.Rollback(scope);
+
+                return null;
+            }
+
+            var @operator = tokenReader.GetCurrent(MulAssignOperator) ||
+                            tokenReader.GetCurrent(DivAssignOperator) ||
+                            tokenReader.GetCurrent(AddAssignOperator) ||
+                            tokenReader.GetCurrent(SubAssignOperator) ||
+                            tokenReader.GetCurrent(LeftShiftAssignOperator) ||
+                            tokenReader.GetCurrent(RightShiftAssignOperator);
+
+            if (@operator.IsNotEmpty())
+            {
+                var exp = ParseExpression(ref tokenReader) ??
+                          MissingSecondOperand(@operator.Kind);
+
+                tokenReader.Commit();
+
+                return CreateBinaryAssign(@operator, variable, exp);
+            }
+
+            tokenReader.Rollback(scope);
+
+            return null;
+        }
 
         private IExpression? Ternary(ref TokenReader tokenReader)
         {

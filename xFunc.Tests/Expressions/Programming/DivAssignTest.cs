@@ -37,6 +37,17 @@ namespace xFunc.Tests.Expressions.Programming
         }
 
         [Fact]
+        public void DivAssignAsExpressionTest()
+        {
+            var parameters = new ParameterCollection { new Parameter("x", 10) };
+            var add = new Add(new DivAssign(Variable.X, Number.Two), Number.Two);
+            var result = add.Execute(parameters);
+
+            Assert.Equal(7.0, result);
+            Assert.Equal(5.0, parameters["x"]);
+        }
+
+        [Fact]
         public void DivNullParameters()
         {
             var exp = new DivAssign(Variable.X, Number.One);

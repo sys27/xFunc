@@ -37,6 +37,17 @@ namespace xFunc.Tests.Expressions.Programming
         }
 
         [Fact]
+        public void SubAssignAsExpressionTest()
+        {
+            var parameters = new ParameterCollection { new Parameter("x", 10) };
+            var add = new Add(Number.One, new SubAssign(Variable.X, Number.Two));
+            var result = add.Execute(parameters);
+
+            Assert.Equal(9.0, result);
+            Assert.Equal(8.0, parameters["x"]);
+        }
+
+        [Fact]
         public void SubNullParameters()
         {
             var exp = new SubAssign(Variable.X, Number.One);

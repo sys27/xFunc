@@ -80,30 +80,6 @@ namespace xFunc.Tests.ParserTests
         }
 
         [Fact]
-        public void MulAssign()
-        {
-            var expected = new MulAssign(Variable.X, Number.Two);
-
-            ParseTest("x *= 2", expected);
-        }
-
-        [Fact]
-        public void SubAssign()
-        {
-            var expected = new SubAssign(Variable.X, Number.Two);
-
-            ParseTest("x -= 2", expected);
-        }
-
-        [Fact]
-        public void DivAssign()
-        {
-            var expected = new DivAssign(Variable.X, Number.Two);
-
-            ParseTest("x /= 2", expected);
-        }
-
-        [Fact]
         public void UnaryMinusAddAssignTest()
         {
             var expected = new AddAssign(
@@ -112,6 +88,24 @@ namespace xFunc.Tests.ParserTests
             );
 
             ParseTest("x += -sin(2)", expected);
+        }
+
+        [Fact]
+        public void AddAssignAsExpression()
+        {
+            var expected = new Add(
+                Number.One,
+                new AddAssign(Variable.X, Number.Two));
+
+            ParseTest("1 + (x += 2)", expected);
+        }
+
+        [Fact]
+        public void SubAssign()
+        {
+            var expected = new SubAssign(Variable.X, Number.Two);
+
+            ParseTest("x -= 2", expected);
         }
 
         [Fact]
@@ -126,6 +120,24 @@ namespace xFunc.Tests.ParserTests
         }
 
         [Fact]
+        public void SubAssignAsExpression()
+        {
+            var expected = new Add(
+                Number.One,
+                new SubAssign(Variable.X, Number.Two));
+
+            ParseTest("1 + (x -= 2)", expected);
+        }
+
+        [Fact]
+        public void MulAssign()
+        {
+            var expected = new MulAssign(Variable.X, Number.Two);
+
+            ParseTest("x *= 2", expected);
+        }
+
+        [Fact]
         public void UnaryMinusMulAssignTest()
         {
             var expected = new MulAssign(
@@ -134,6 +146,24 @@ namespace xFunc.Tests.ParserTests
             );
 
             ParseTest("x *= -sin(2)", expected);
+        }
+
+        [Fact]
+        public void MulAssignAsExpression()
+        {
+            var expected = new Add(
+                Number.One,
+                new MulAssign(Variable.X, Number.Two));
+
+            ParseTest("1 + (x *= 2)", expected);
+        }
+
+        [Fact]
+        public void DivAssign()
+        {
+            var expected = new DivAssign(Variable.X, Number.Two);
+
+            ParseTest("x /= 2", expected);
         }
 
         [Fact]
@@ -147,16 +177,15 @@ namespace xFunc.Tests.ParserTests
             ParseTest("x /= -sin(2)", expected);
         }
 
-        [Theory]
-        [InlineData("x :=")]
-        [InlineData("x +=")]
-        [InlineData("x -=")]
-        [InlineData("x −=")]
-        [InlineData("x *=")]
-        [InlineData("x ×=")]
-        [InlineData("x /=")]
-        public void AssignMissingValue(string function)
-            => ParseErrorTest(function);
+        [Fact]
+        public void DivAssignAsExpression()
+        {
+            var expected = new Add(
+                Number.One,
+                new DivAssign(Variable.X, Number.Two));
+
+            ParseTest("1 + (x /= 2)", expected);
+        }
 
         [Fact]
         public void LeftShiftAssignTest()
@@ -167,12 +196,55 @@ namespace xFunc.Tests.ParserTests
         }
 
         [Fact]
+        public void LeftShiftAssignAsExpressionTest()
+        {
+            var expected = new Add(
+                Number.One,
+                new LeftShiftAssign(Variable.X, new Number(10)));
+
+            ParseTest("1 + (x <<= 10)", expected);
+        }
+
+        [Fact]
         public void RightShiftAssignTest()
         {
             var expected = new RightShiftAssign(Variable.X, new Number(10));
 
             ParseTest("x >>= 10", expected);
         }
+
+        [Fact]
+        public void RightShiftAssignAsExpressionTest()
+        {
+            var expected = new Add(
+                Number.One,
+                new RightShiftAssign(Variable.X, new Number(10)));
+
+            ParseTest("1 + (x >>= 10)", expected);
+        }
+
+        [Theory]
+        [InlineData("x :=")]
+        [InlineData("x +=")]
+        [InlineData("x -=")]
+        [InlineData("x −=")]
+        [InlineData("x *=")]
+        [InlineData("x ×=")]
+        [InlineData("x /=")]
+        [InlineData("x <<=")]
+        [InlineData("x >>=")]
+        public void AssignMissingValue(string function)
+            => ParseErrorTest(function);
+
+        [Theory]
+        [InlineData("1 + x += 1")]
+        [InlineData("1 + x -= 1")]
+        [InlineData("1 + x *= 1")]
+        [InlineData("1 + x /= 1")]
+        [InlineData("1 + x <<= 1")]
+        [InlineData("1 + x >>= 1")]
+        public void AssignAsExpressionError(string function)
+            => ParseErrorTest(function);
 
         [Fact]
         public void IncTest()

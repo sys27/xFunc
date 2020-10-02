@@ -108,32 +108,20 @@ namespace xFunc.Maths
                ParseVariable(ref tokenReader);
 
         private IExpression? ParseAssign(ref TokenReader tokenReader)
-        {
-            var scope = tokenReader.CreateScope();
-
-            var left = AssignmentKey(ref tokenReader);
-            if (left == null)
+            => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
             {
-                tokenReader.Rollback(scope);
+                var left = parser.AssignmentKey(ref reader);
+                if (left == null)
+                    return null;
 
-                return null;
-            }
+                if (!reader.Check(AssignOperator))
+                    return null;
 
-            var @operator = tokenReader.GetCurrent(AssignOperator);
-            if (@operator.IsNotEmpty())
-            {
-                var right = ParseExpression(ref tokenReader) ??
-                            MissingSecondOperand(@operator.Kind);
-
-                tokenReader.Commit();
+                var right = parser.ParseExpression(ref reader) ??
+                            MissingSecondOperand(AssignOperator);
 
                 return new Define(left, right);
-            }
-
-            tokenReader.Rollback(scope);
-
-            return null;
-        }
+            });
 
         private IExpression? ParseDef(ref TokenReader tokenReader)
         {
@@ -270,116 +258,82 @@ namespace xFunc.Maths
         }
 
         private IExpression? ParseFunctionDeclaration(ref TokenReader tokenReader)
-        {
-            var scope = tokenReader.CreateScope();
-
-            var id = tokenReader.GetCurrent(Id);
-            if (id.IsNotEmpty() && tokenReader.Check(OpenParenthesisSymbol))
+            => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
             {
+                var id = reader.GetCurrent(Id);
+                if (id.IsEmpty() || !reader.Check(OpenParenthesisSymbol))
+                    return null;
+
                 var parameterList = ImmutableArray.CreateBuilder<IExpression>(1);
 
-                var exp = ParseVariable(ref tokenReader);
+                var exp = parser.ParseVariable(ref reader);
                 if (exp != null)
                 {
                     parameterList.Add(exp);
 
-                    while (tokenReader.Check(CommaSymbol))
+                    while (reader.Check(CommaSymbol))
                     {
-                        exp = ParseVariable(ref tokenReader);
+                        exp = parser.ParseVariable(ref reader);
                         if (exp == null)
-                        {
-                            tokenReader.Rollback(scope);
-
                             return null;
-                        }
 
                         parameterList.Add(exp);
                     }
                 }
 
-                if (tokenReader.Check(CloseParenthesisSymbol))
-                {
-                    tokenReader.Commit();
-
-                    return CreateFunction(id, parameterList.ToImmutableArray());
-                }
-            }
-
-            tokenReader.Rollback(scope);
-
-            return null;
-        }
+                return reader.Check(CloseParenthesisSymbol)
+                    ? parser.CreateFunction(id, parameterList.ToImmutableArray())
+                    : null;
+            });
 
         private IExpression? ParseExpression(ref TokenReader tokenReader)
             => ParseBinaryAssign(ref tokenReader) ??
                Ternary(ref tokenReader);
 
         private IExpression? ParseBinaryAssign(ref TokenReader tokenReader)
-        {
-            var scope = tokenReader.CreateScope();
-
-            var variable = ParseVariable(ref tokenReader);
-            if (variable == null)
+            => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
             {
-                tokenReader.Rollback(scope);
+                var variable = parser.ParseVariable(ref reader);
+                if (variable == null)
+                    return null;
 
-                return null;
-            }
+                var @operator = reader.GetCurrent(MulAssignOperator) ||
+                                reader.GetCurrent(DivAssignOperator) ||
+                                reader.GetCurrent(AddAssignOperator) ||
+                                reader.GetCurrent(SubAssignOperator) ||
+                                reader.GetCurrent(LeftShiftAssignOperator) ||
+                                reader.GetCurrent(RightShiftAssignOperator);
 
-            var @operator = tokenReader.GetCurrent(MulAssignOperator) ||
-                            tokenReader.GetCurrent(DivAssignOperator) ||
-                            tokenReader.GetCurrent(AddAssignOperator) ||
-                            tokenReader.GetCurrent(SubAssignOperator) ||
-                            tokenReader.GetCurrent(LeftShiftAssignOperator) ||
-                            tokenReader.GetCurrent(RightShiftAssignOperator);
+                if (@operator.IsEmpty())
+                    return null;
 
-            if (@operator.IsNotEmpty())
-            {
-                var exp = ParseExpression(ref tokenReader) ??
+                var exp = parser.ParseExpression(ref reader) ??
                           MissingSecondOperand(@operator.Kind);
 
-                tokenReader.Commit();
-
-                return CreateBinaryAssign(@operator, variable, exp);
-            }
-
-            tokenReader.Rollback(scope);
-
-            return null;
-        }
+                return parser.CreateBinaryAssign(@operator, variable, exp);
+            });
 
         private IExpression? Ternary(ref TokenReader tokenReader)
-        {
-            var scope = tokenReader.CreateScope();
-
-            var condition = ParseConditionalOrOperator(ref tokenReader);
-            if (condition == null)
+            => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
             {
-                tokenReader.Rollback(scope);
+                var condition = parser.ParseConditionalOrOperator(ref reader);
+                if (condition == null)
+                    return null;
 
-                return null;
-            }
+                if (!reader.Check(QuestionMarkSymbol))
+                    return condition;
 
-            if (!tokenReader.Check(QuestionMarkSymbol))
-            {
-                tokenReader.Commit();
+                var then = parser.ParseExpression(ref reader) ??
+                           throw new ParseException(Resource.TernaryThenParseException);
 
-                return condition;
-            }
+                if (!reader.Check(ColonSymbol))
+                    throw new ParseException(Resource.TernaryColonParseException);
 
-            var then = ParseExpression(ref tokenReader) ??
-                       throw new ParseException(Resource.TernaryThenParseException);
+                var @else = parser.ParseExpression(ref reader) ??
+                            throw new ParseException(Resource.TernaryElseParseException);
 
-            if (!tokenReader.Check(ColonSymbol))
-                throw new ParseException(Resource.TernaryColonParseException);
-
-            var @else = ParseExpression(ref tokenReader) ??
-                        throw new ParseException(Resource.TernaryElseParseException);
-
-            tokenReader.Commit();
-
-            return new If(condition, then, @else);
-        }
+                return new If(condition, then, @else);
+            });
 
         private IExpression? ParseConditionalOrOperator(ref TokenReader tokenReader)
         {
@@ -619,32 +573,26 @@ namespace xFunc.Maths
                ParseLeftUnary(ref tokenReader);
 
         private IExpression? ParseMulImplicitLeftUnary(ref TokenReader tokenReader)
-        {
-            var scope = tokenReader.CreateScope();
-
-            var @operator = tokenReader.GetCurrent(MinusOperator);
-            var number = ParseNumber(ref tokenReader);
-            if (number != null)
+            => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
             {
-                var rightUnary = ParseMulImplicitExponentiation(ref tokenReader) ??
-                                 ParseParenthesesExpression(ref tokenReader) ??
-                                 ParseMatrix(ref tokenReader) ??
-                                 ParseVector(ref tokenReader);
-                if (rightUnary != null)
-                {
-                    if (@operator.IsNotEmpty())
-                        number = new UnaryMinus(number);
+                var minusOperator = reader.GetCurrent(MinusOperator);
+                var number = parser.ParseNumber(ref reader);
+                if (number == null)
+                    return null;
 
-                    tokenReader.Commit();
+                var rightUnary = parser.ParseMulImplicitExponentiation(ref reader) ??
+                                 parser.ParseParenthesesExpression(ref reader) ??
+                                 parser.ParseMatrix(ref reader) ??
+                                 parser.ParseVector(ref reader);
 
-                    return new Mul(number, rightUnary);
-                }
-            }
+                if (rightUnary == null)
+                    return null;
 
-            tokenReader.Rollback(scope);
+                if (minusOperator.IsNotEmpty())
+                    number = new UnaryMinus(number);
 
-            return null;
-        }
+                return new Mul(number, rightUnary);
+            });
 
         private IExpression? ParseMulImplicitExponentiation(ref TokenReader tokenReader)
         {
@@ -701,44 +649,30 @@ namespace xFunc.Maths
                ParseOperand(ref tokenReader);
 
         private IExpression? ParseFactorial(ref TokenReader tokenReader)
-        {
-            var scope = tokenReader.CreateScope();
-
-            var number = ParseNumber(ref tokenReader);
-            if (number != null && tokenReader.Check(FactorialOperator))
+            => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
             {
-                tokenReader.Commit();
+                var number = parser.ParseNumber(ref reader);
+                if (number != null && reader.Check(FactorialOperator))
+                    return new Fact(number);
 
-                return new Fact(number);
-            }
-
-            tokenReader.Rollback(scope);
-
-            return null;
-        }
+                return null;
+            });
 
         private IExpression? ParseIncDec(ref TokenReader tokenReader)
-        {
-            var scope = tokenReader.CreateScope();
-
-            var variable = ParseVariable(ref tokenReader);
-            if (variable != null)
+            => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
             {
-                tokenReader.Commit();
+                var variable = parser.ParseVariable(ref reader);
+                if (variable == null)
+                    return null;
 
-                if (tokenReader.Check(IncrementOperator))
+                if (reader.Check(IncrementOperator))
                     return new Inc(variable);
 
-                if (tokenReader.Check(DecrementOperator))
+                if (reader.Check(DecrementOperator))
                     return new Dec(variable);
 
                 return variable;
-            }
-
-            tokenReader.Rollback(scope);
-
-            return null;
-        }
+            });
 
         private IExpression? ParseOperand(ref TokenReader tokenReader)
             => ParseComplexNumber(ref tokenReader) ??
@@ -822,44 +756,35 @@ namespace xFunc.Maths
         }
 
         private IExpression? ParseComplexNumber(ref TokenReader tokenReader)
-        {
-            var scope = tokenReader.CreateScope();
-
-            // plus symbol can be ignored
-            tokenReader.GetCurrent(PlusOperator);
-
-            var magnitude = tokenReader.GetCurrent(TokenKind.Number);
-            if (magnitude.IsNotEmpty())
+            => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
             {
-                var hasAngleSymbol = tokenReader.Check(AngleSymbol);
-                if (hasAngleSymbol)
-                {
-                    var phaseSign = tokenReader.GetCurrent(PlusOperator) ||
-                                    tokenReader.GetCurrent(MinusOperator);
+                // plus symbol can be ignored
+                reader.GetCurrent(PlusOperator);
 
-                    var phase = tokenReader.GetCurrent(TokenKind.Number);
-                    if (phase.IsEmpty())
-                        throw new ParseException(Resource.PhaseParseException);
+                var magnitude = reader.GetCurrent(TokenKind.Number);
+                if (magnitude.IsEmpty())
+                    return null;
 
-                    var hasDegreeSymbol = tokenReader.Check(DegreeSymbol);
-                    if (!hasDegreeSymbol)
-                        throw new ParseException(Resource.DegreeComplexNumberParseException);
+                if (!reader.Check(AngleSymbol))
+                    return null;
 
-                    tokenReader.Commit();
+                var phaseSign = reader.GetCurrent(PlusOperator) ||
+                                reader.GetCurrent(MinusOperator);
 
-                    var magnitudeNumber = magnitude.NumberValue;
-                    var sign = phaseSign.Is(MinusOperator) ? -1 : 1;
-                    var phaseNumber = phase.NumberValue * sign;
-                    var complex = Complex.FromPolarCoordinates(magnitudeNumber, phaseNumber);
+                var phase = reader.GetCurrent(TokenKind.Number);
+                if (phase.IsEmpty())
+                    throw new ParseException(Resource.PhaseParseException);
 
-                    return new ComplexNumber(complex);
-                }
-            }
+                if (!reader.Check(DegreeSymbol))
+                    throw new ParseException(Resource.DegreeComplexNumberParseException);
 
-            tokenReader.Rollback(scope);
+                var magnitudeNumber = magnitude.NumberValue;
+                var sign = phaseSign.Is(MinusOperator) ? -1 : 1;
+                var phaseNumber = phase.NumberValue * sign;
+                var complex = Complex.FromPolarCoordinates(magnitudeNumber, phaseNumber);
 
-            return null;
-        }
+                return new ComplexNumber(complex);
+            });
 
         private Variable? ParseVariable(ref TokenReader tokenReader)
         {
@@ -870,6 +795,9 @@ namespace xFunc.Maths
             // if it is not true anymore, then use 'scope'
             if (variable.IsEmpty() || tokenReader.Check(OpenParenthesisSymbol))
                 return null;
+
+            if (variable.StringValue == Variable.X.Name)
+                return Variable.X;
 
             return CreateVariable(variable);
         }
@@ -912,37 +840,30 @@ namespace xFunc.Maths
         }
 
         private IExpression? ParseMatrix(ref TokenReader tokenReader)
-        {
-            var scope = tokenReader.CreateScope();
-
-            if (tokenReader.Check(OpenBraceSymbol))
+            => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
             {
-                var exp = ParseVector(ref tokenReader);
-                if (exp != null)
+                if (!reader.Check(OpenBraceSymbol))
+                    return null;
+
+                var exp = parser.ParseVector(ref reader);
+                if (exp == null)
+                    return null;
+
+                var vectors = ImmutableArray.CreateBuilder<Vector>(1);
+                vectors.Add(exp);
+
+                while (reader.Check(CommaSymbol))
                 {
-                    var vectors = ImmutableArray.CreateBuilder<Vector>(1);
+                    exp = parser.ParseVector(ref reader) ??
+                          throw new ParseException(Resource.MatrixCommaParseException);
+
                     vectors.Add(exp);
-
-                    while (tokenReader.Check(CommaSymbol))
-                    {
-                        exp = ParseVector(ref tokenReader) ??
-                              throw new ParseException(Resource.MatrixCommaParseException);
-
-                        vectors.Add(exp);
-                    }
-
-                    if (!tokenReader.Check(CloseBraceSymbol))
-                        throw new ParseException(Resource.MatrixCloseBraceParseException);
-
-                    tokenReader.Commit();
-
-                    return new Matrix(vectors.ToImmutableArray());
                 }
-            }
 
-            tokenReader.Rollback(scope);
+                if (!reader.Check(CloseBraceSymbol))
+                    throw new ParseException(Resource.MatrixCloseBraceParseException);
 
-            return null;
-        }
+                return new Matrix(vectors.ToImmutableArray());
+            });
     }
 }

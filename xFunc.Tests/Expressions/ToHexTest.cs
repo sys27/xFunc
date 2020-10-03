@@ -22,12 +22,16 @@ namespace xFunc.Tests.Expressions
 {
     public class ToHexTest : BaseExpressionTests
     {
-        [Fact]
-        public void ExecuteNumberTest()
+        [Theory]
+        [InlineData(0x7, "0x07")]
+        [InlineData(0x7FF, "0x07FF")]
+        [InlineData(0x7FFFF, "0x07FFFF")]
+        [InlineData(0x7FFFFFF, "0x07FFFFFF")]
+        public void ExecuteNumberTest(double number, string result)
         {
-            var exp = new ToHex(Number.Two);
+            var exp = new ToHex(new Number(number));
 
-            Assert.Equal("0x2", exp.Execute());
+            Assert.Equal(result, exp.Execute());
         }
 
         [Fact]
@@ -43,7 +47,7 @@ namespace xFunc.Tests.Expressions
         {
             var exp = new ToHex(new Number(int.MaxValue));
 
-            Assert.Equal("0x7fffffff", exp.Execute());
+            Assert.Equal("0x7FFFFFFF", exp.Execute());
         }
 
         [Fact]
@@ -51,7 +55,7 @@ namespace xFunc.Tests.Expressions
         {
             var exp = new ToHex(new Number(-2));
 
-            Assert.Equal("0xfffffffe", exp.Execute());
+            Assert.Equal("0xFFFFFFFE", exp.Execute());
         }
 
         [Fact]

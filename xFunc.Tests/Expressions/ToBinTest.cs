@@ -22,12 +22,16 @@ namespace xFunc.Tests.Expressions
 {
     public class ToBinTest : BaseExpressionTests
     {
-        [Fact]
-        public void ExecuteNumberTest()
+        [Theory]
+        [InlineData(0x7F, "0b01111111")]
+        [InlineData(0x7FFF, "0b0111111111111111")]
+        [InlineData(0x7FFFFF, "0b011111111111111111111111")]
+        [InlineData(0x7FFFFFFF, "0b01111111111111111111111111111111")]
+        public void ExecuteNumberTest(double number, string result)
         {
-            var exp = new ToBin(Number.Two);
+            var exp = new ToBin(new Number(number));
 
-            Assert.Equal("0b10", exp.Execute());
+            Assert.Equal(result, exp.Execute());
         }
 
         [Fact]
@@ -43,7 +47,7 @@ namespace xFunc.Tests.Expressions
         {
             var exp = new ToBin(new Number(int.MaxValue));
 
-            Assert.Equal("0b1111111111111111111111111111111", exp.Execute());
+            Assert.Equal("0b01111111111111111111111111111111", exp.Execute());
         }
 
         [Fact]

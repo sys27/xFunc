@@ -17,6 +17,7 @@ using System;
 using System.Buffers;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using xFunc.Maths.Expressions;
 using xFunc.Maths.Tokenization;
 
 namespace xFunc.Maths
@@ -26,6 +27,8 @@ namespace xFunc.Maths
     /// </summary>
     public partial class Parser
     {
+        private delegate IExpression? ScopedCallback(Parser parser, ref TokenReader tokenReader);
+
         private ref struct TokenReader
         {
             private const int BufferSize = 64;
@@ -99,37 +102,6 @@ namespace xFunc.Maths
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             private void AdvanceToNextPosition() => readIndex++;
 
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            private void IncreaseScope() => scopeCount++;
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            private void DecreaseScope()
-            {
-                scopeCount--;
-
-                Debug.Assert(scopeCount >= 0, "The scope count should be greater than or equal to 0.");
-            }
-
-            private void Rollback(int index)
-            {
-                Debug.Assert(index >= -1 && index <= writeIndex, "The index should be between [-1, writeIndex].");
-
-                DecreaseScope();
-
-                readIndex = index;
-            }
-
-            public Scope CreateScope()
-            {
-                IncreaseScope();
-
-                return new Scope(ref this);
-            }
-
-            public void Rollback(Scope scope) => scope.Rollback(ref this);
-
-            public void Commit() => DecreaseScope();
-
             public Token GetCurrent() => Read();
 
             public Token GetCurrent(TokenKind kind)
@@ -145,20 +117,32 @@ namespace xFunc.Maths
                 return Token.Empty;
             }
 
-            public bool Check(TokenKind kind) => GetCurrent(kind).IsNotEmpty();
+            public bool Check(TokenKind kind)
+            {
+                var token = Read();
+                var result = token.Is(kind);
+                if (result)
+                    AdvanceToNextPosition();
+
+                return result;
+            }
+
+            public IExpression? Scoped(Parser parser, ScopedCallback scopedCallback)
+            {
+                var savedReadIndex = readIndex;
+                scopeCount++;
+
+                var result = scopedCallback(parser, ref this);
+                if (result is null)
+                    readIndex = savedReadIndex;
+
+                scopeCount--;
+                Debug.Assert(scopeCount >= 0, "The scope count should be greater than or equal to 0.");
+
+                return result;
+            }
 
             public bool IsEnd { get; private set; }
-
-            public readonly ref struct Scope
-            {
-                private readonly int position;
-
-                public Scope(ref TokenReader tokenReader)
-                    => position = tokenReader.readIndex;
-
-                public void Rollback(ref TokenReader tokenReader)
-                    => tokenReader.Rollback(position);
-            }
         }
     }
 }

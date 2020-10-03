@@ -249,6 +249,15 @@ namespace xFunc.Maths
         public static double LCM(double a, double b)
             => Math.Abs(a * b) / GCD(a, b);
 
+        private static string PadNumber(string number, int padding)
+        {
+            var padLength = number.Length % padding;
+            if (padLength > 0)
+                padLength = number.Length + (padding - padLength);
+
+            return number.PadLeft(padLength, '0');
+        }
+
         /// <summary>
         /// Converts <paramref name="number"/> to the binary number.
         /// </summary>
@@ -259,7 +268,10 @@ namespace xFunc.Maths
             if (!number.IsInt())
                 throw new ArgumentException(Resource.ValueIsNotInteger, nameof(number));
 
-            return $"0b{Convert.ToString((int)number, 2)}";
+            var result = Convert.ToString((int)number, 2);
+            result = PadNumber(result, 8);
+
+            return $"0b{result}";
         }
 
         /// <summary>
@@ -285,7 +297,10 @@ namespace xFunc.Maths
             if (!number.IsInt())
                 throw new ArgumentException(Resource.ValueIsNotInteger, nameof(number));
 
-            return $"0x{Convert.ToString((int)number, 16)}";
+            var result = Convert.ToString((int)number, 16).ToUpperInvariant();
+            result = PadNumber(result, 2);
+
+            return $"0x{result}";
         }
 
         /// <summary>

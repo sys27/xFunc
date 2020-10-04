@@ -35,11 +35,11 @@ namespace xFunc.Maths.Expressions.Angles
         /// <summary>
         /// Initializes a new instance of the <see cref="AngleValue"/> struct.
         /// </summary>
-        /// <param name="value">The value.</param>
+        /// <param name="angle">The value.</param>
         /// <param name="unit">The unit of number.</param>
-        public AngleValue(NumberValue value, AngleUnit unit)
+        public AngleValue(NumberValue angle, AngleUnit unit)
         {
-            Value = value;
+            Angle = angle;
             Unit = unit;
         }
 
@@ -57,7 +57,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="numberValue">The value.</param>
         /// <returns>The angle.</returns>
         public static AngleValue Degree(NumberValue numberValue)
-            => new AngleValue(numberValue.Value, AngleUnit.Degree);
+            => new AngleValue(numberValue.Number, AngleUnit.Degree);
 
         /// <summary>
         /// Creates the <see cref="AngleValue"/> struct with <c>Radian</c> unit.
@@ -73,7 +73,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="numberValue">The value.</param>
         /// <returns>The angle.</returns>
         public static AngleValue Radian(NumberValue numberValue)
-            => new AngleValue(numberValue.Value, AngleUnit.Radian);
+            => new AngleValue(numberValue.Number, AngleUnit.Radian);
 
         /// <summary>
         /// Creates the <see cref="AngleValue"/> struct with <c>Gradian</c> unit.
@@ -89,11 +89,11 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="numberValue">The value.</param>
         /// <returns>The angle.</returns>
         public static AngleValue Gradian(NumberValue numberValue)
-            => new AngleValue(numberValue.Value, AngleUnit.Gradian);
+            => new AngleValue(numberValue.Number, AngleUnit.Gradian);
 
         /// <inheritdoc />
         public bool Equals(AngleValue other)
-            => MathExtensions.Equals(Value, other.Value) && Unit == other.Unit;
+            => MathExtensions.Equals(Angle, other.Angle) && Unit == other.Unit;
 
         /// <inheritdoc />
         public override bool Equals(object? obj)
@@ -102,7 +102,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <inheritdoc />
         public int CompareTo(AngleValue other)
         {
-            var valueComparison = Value.CompareTo(other.Value);
+            var valueComparison = Angle.CompareTo(other.Angle);
             if (valueComparison != 0)
                 return valueComparison;
 
@@ -123,14 +123,14 @@ namespace xFunc.Maths.Expressions.Angles
 
         /// <inheritdoc />
         public override int GetHashCode()
-            => HashCode.Combine(Value, (int)Unit);
+            => HashCode.Combine(Angle, (int)Unit);
 
         /// <inheritdoc />
         public override string ToString() => Unit switch
         {
-            AngleUnit.Degree => $"{Value.ToString()} degree",
-            AngleUnit.Radian => $"{Value.ToString()} radian",
-            AngleUnit.Gradian => $"{Value.ToString()} gradian",
+            AngleUnit.Degree => $"{Angle.ToString()} degree",
+            AngleUnit.Radian => $"{Angle.ToString()} radian",
+            AngleUnit.Gradian => $"{Angle.ToString()} gradian",
             _ => throw new InvalidOperationException(),
         };
 
@@ -198,33 +198,7 @@ namespace xFunc.Maths.Expressions.Angles
         {
             (left, right) = ToCommonUnits(left, right);
 
-            return new AngleValue(left.Value + right.Value, left.Unit);
-        }
-
-        /// <summary>
-        /// Adds two objects of <see cref="AngleValue"/>.
-        /// </summary>
-        /// <param name="number">The first object to add.</param>
-        /// <param name="right">The second object to add.</param>
-        /// <returns>An object that is the sum of <paramref name="number"/> and <paramref name="right"/>.</returns>
-        public static AngleValue operator +(double number, AngleValue right)
-        {
-            var left = new AngleValue(number, right.Unit);
-
-            return left + right;
-        }
-
-        /// <summary>
-        /// Adds two objects of <see cref="AngleValue"/>.
-        /// </summary>
-        /// <param name="left">The first object to add.</param>
-        /// <param name="number">The second object to add.</param>
-        /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="number"/>.</returns>
-        public static AngleValue operator +(AngleValue left, double number)
-        {
-            var right = new AngleValue(number, left.Unit);
-
-            return left + right;
+            return new AngleValue(left.Angle + right.Angle, left.Unit);
         }
 
         /// <summary>
@@ -237,33 +211,7 @@ namespace xFunc.Maths.Expressions.Angles
         {
             (left, right) = ToCommonUnits(left, right);
 
-            return new AngleValue(left.Value - right.Value, left.Unit);
-        }
-
-        /// <summary>
-        /// Subtracts two objects of <see cref="AngleValue"/>.
-        /// </summary>
-        /// <param name="number">The first object to sub.</param>
-        /// <param name="right">The second object to sub.</param>
-        /// <returns>An object that is the difference of <paramref name="number"/> and <paramref name="right"/>.</returns>
-        public static AngleValue operator -(double number, AngleValue right)
-        {
-            var left = new AngleValue(number, right.Unit);
-
-            return left - right;
-        }
-
-        /// <summary>
-        /// Subtracts two objects of <see cref="AngleValue"/>.
-        /// </summary>
-        /// <param name="left">The first object to sub.</param>
-        /// <param name="number">The second object to sub.</param>
-        /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="number"/>.</returns>
-        public static AngleValue operator -(AngleValue left, double number)
-        {
-            var right = new AngleValue(number, left.Unit);
-
-            return left - right;
+            return new AngleValue(left.Angle - right.Angle, left.Unit);
         }
 
         /// <summary>
@@ -272,7 +220,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="angleValue">The angle.</param>
         /// <returns>The negative of <paramref name="angleValue"/>.</returns>
         public static AngleValue operator -(AngleValue angleValue)
-            => new AngleValue(-angleValue.Value, angleValue.Unit);
+            => new AngleValue(-angleValue.Angle, angleValue.Unit);
 
         /// <summary>
         /// Multiplies two objects of <see cref="AngleValue"/>.
@@ -284,33 +232,7 @@ namespace xFunc.Maths.Expressions.Angles
         {
             (left, right) = ToCommonUnits(left, right);
 
-            return new AngleValue(left.Value * right.Value, left.Unit);
-        }
-
-        /// <summary>
-        /// Multiplies two objects of <see cref="AngleValue"/>.
-        /// </summary>
-        /// <param name="number">The first object to multiply.</param>
-        /// <param name="right">The second object to multiply.</param>
-        /// <returns>An object that is the product of <paramref name="number"/> and <paramref name="right"/>.</returns>
-        public static AngleValue operator *(double number, AngleValue right)
-        {
-            var left = new AngleValue(number, right.Unit);
-
-            return left * right;
-        }
-
-        /// <summary>
-        /// Multiplies two objects of <see cref="AngleValue"/>.
-        /// </summary>
-        /// <param name="left">The first object to multiply.</param>
-        /// <param name="number">The second object to multiply.</param>
-        /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="number"/>.</returns>
-        public static AngleValue operator *(AngleValue left, double number)
-        {
-            var right = new AngleValue(number, left.Unit);
-
-            return left * right;
+            return new AngleValue(left.Angle * right.Angle, left.Unit);
         }
 
         /// <summary>
@@ -323,33 +245,7 @@ namespace xFunc.Maths.Expressions.Angles
         {
             (left, right) = ToCommonUnits(left, right);
 
-            return new AngleValue(left.Value / right.Value, left.Unit);
-        }
-
-        /// <summary>
-        /// Divides two objects of <see cref="AngleValue"/>.
-        /// </summary>
-        /// <param name="number">The first object to divide.</param>
-        /// <param name="right">The second object to divide.</param>
-        /// <returns>An object that is the fraction of <paramref name="number"/> and <paramref name="right"/>.</returns>
-        public static AngleValue operator /(double number, AngleValue right)
-        {
-            var left = new AngleValue(number, right.Unit);
-
-            return left / right;
-        }
-
-        /// <summary>
-        /// Divides two objects of <see cref="AngleValue"/>.
-        /// </summary>
-        /// <param name="left">The first object to divide.</param>
-        /// <param name="number">The second object to divide.</param>
-        /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="number"/>.</returns>
-        public static AngleValue operator /(AngleValue left, double number)
-        {
-            var right = new AngleValue(number, left.Unit);
-
-            return left / right;
+            return new AngleValue(left.Angle / right.Angle, left.Unit);
         }
 
         private static (AngleValue Left, AngleValue Right) ToCommonUnits(AngleValue left, AngleValue right)
@@ -390,8 +286,8 @@ namespace xFunc.Maths.Expressions.Angles
         public AngleValue ToDegree() => Unit switch
         {
             AngleUnit.Degree => this,
-            AngleUnit.Radian => Degree(Value * 180 / Math.PI),
-            AngleUnit.Gradian => Degree(Value * 0.9),
+            AngleUnit.Radian => Degree(Angle * 180 / Math.PI),
+            AngleUnit.Gradian => Degree(Angle * 0.9),
             _ => throw new InvalidOperationException(),
         };
 
@@ -401,9 +297,9 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns>The angle which is converted to radians.</returns>
         public AngleValue ToRadian() => Unit switch
         {
-            AngleUnit.Degree => Radian(Value * Math.PI / 180),
+            AngleUnit.Degree => Radian(Angle * Math.PI / 180),
             AngleUnit.Radian => this,
-            AngleUnit.Gradian => Radian(Value * Math.PI / 200),
+            AngleUnit.Gradian => Radian(Angle * Math.PI / 200),
             _ => throw new InvalidOperationException(),
         };
 
@@ -413,8 +309,8 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns>The angle which is converted to gradians.</returns>
         public AngleValue ToGradian() => Unit switch
         {
-            AngleUnit.Degree => Gradian(Value / 0.9),
-            AngleUnit.Radian => Gradian(Value * 200 / Math.PI),
+            AngleUnit.Degree => Gradian(Angle / 0.9),
+            AngleUnit.Radian => Gradian(Angle * 200 / Math.PI),
             AngleUnit.Gradian => this,
             _ => throw new InvalidOperationException(),
         };
@@ -440,9 +336,9 @@ namespace xFunc.Maths.Expressions.Angles
 
             return Unit switch
             {
-                AngleUnit.Radian => Radian(NormalizeInternal(Value.Value, radianFullCircle)),
-                AngleUnit.Gradian => Gradian(NormalizeInternal(Value.Value, gradianFullCircle)),
-                _ => Degree(NormalizeInternal(Value.Value, degreeFullCircle)),
+                AngleUnit.Radian => Radian(NormalizeInternal(Angle.Number, radianFullCircle)),
+                AngleUnit.Gradian => Gradian(NormalizeInternal(Angle.Number, gradianFullCircle)),
+                _ => Degree(NormalizeInternal(Angle.Number, degreeFullCircle)),
             };
         }
 
@@ -452,7 +348,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="angleValue">The angle.</param>
         /// <returns>The angle, <c>x</c>, that such that 0 ≤ <c>x</c> ≤ <c>MaxValue</c>.</returns>
         public static AngleValue Abs(AngleValue angleValue)
-            => new AngleValue(NumberValue.Abs(angleValue.Value), angleValue.Unit);
+            => new AngleValue(NumberValue.Abs(angleValue.Angle), angleValue.Unit);
 
         /// <summary>
         /// Returns the smallest integral value that is greater than or equal to the specified angle number.
@@ -460,7 +356,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="angleValue">The angle.</param>
         /// <returns>The smallest integral value.</returns>
         public static AngleValue Ceiling(AngleValue angleValue)
-            => new AngleValue(NumberValue.Ceiling(angleValue.Value), angleValue.Unit);
+            => new AngleValue(NumberValue.Ceiling(angleValue.Angle), angleValue.Unit);
 
         /// <summary>
         /// Returns the largest integral value less than or equal to the specified angle number.
@@ -468,7 +364,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="angleValue">The angle.</param>
         /// <returns>The largest integral value.</returns>
         public static AngleValue Floor(AngleValue angleValue)
-            => new AngleValue(NumberValue.Floor(angleValue.Value), angleValue.Unit);
+            => new AngleValue(NumberValue.Floor(angleValue.Angle), angleValue.Unit);
 
         /// <summary>
         /// Calculates the integral part of a specified angle number.
@@ -476,7 +372,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="angleValue">An angle to truncate.</param>
         /// <returns>The integral part of angle number.</returns>
         public static AngleValue Truncate(AngleValue angleValue)
-            => new AngleValue(NumberValue.Truncate(angleValue.Value), angleValue.Unit);
+            => new AngleValue(NumberValue.Truncate(angleValue.Angle), angleValue.Unit);
 
         /// <summary>
         /// Returns the fractional part of the angle number.
@@ -484,7 +380,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="angleValue">The angle number.</param>
         /// <returns>The fractional part.</returns>
         public static AngleValue Frac(AngleValue angleValue)
-            => new AngleValue(NumberValue.Frac(angleValue.Value), angleValue.Unit);
+            => new AngleValue(NumberValue.Frac(angleValue.Angle), angleValue.Unit);
 
         /// <summary>
         /// The 'sin' function.
@@ -493,7 +389,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns>The result of sine function.</returns>
         public static NumberValue Sin(AngleValue angleValue)
         {
-            var value = angleValue.Normalize().Value;
+            var value = angleValue.Normalize().Angle;
 
             // 0
             if (value == 0)
@@ -559,7 +455,7 @@ namespace xFunc.Maths.Expressions.Angles
             if (value == 11 * Math.PI / 6)
                 return -NumberValue.Half;
 
-            return new NumberValue(Math.Sin(angleValue.Value.Value));
+            return new NumberValue(Math.Sin(angleValue.Angle.Number));
         }
 
         /// <summary>
@@ -569,7 +465,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns>The result of cosine function.</returns>
         public static NumberValue Cos(AngleValue angleValue)
         {
-            var value = angleValue.Normalize().Value;
+            var value = angleValue.Normalize().Angle;
 
             // 0
             if (value == 0)
@@ -635,7 +531,7 @@ namespace xFunc.Maths.Expressions.Angles
             if (value == 11 * Math.PI / 6)
                 return NumberValue.Sqrt3By2;
 
-            return new NumberValue(Math.Cos(angleValue.Value.Value));
+            return new NumberValue(Math.Cos(angleValue.Angle.Number));
         }
 
         /// <summary>
@@ -645,7 +541,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns>The result of tangent function.</returns>
         public static NumberValue Tan(AngleValue angleValue)
         {
-            var value = angleValue.Normalize().Value;
+            var value = angleValue.Normalize().Angle;
 
             // 0
             if (value == 0)
@@ -711,7 +607,7 @@ namespace xFunc.Maths.Expressions.Angles
             if (value == 11 * Math.PI / 6)
                 return -NumberValue.Sqrt3By3;
 
-            return new NumberValue(Math.Tan(angleValue.Value.Value));
+            return new NumberValue(Math.Tan(angleValue.Angle.Number));
         }
 
         /// <summary>
@@ -721,7 +617,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns>The result of cotangent function.</returns>
         public static NumberValue Cot(AngleValue angleValue)
         {
-            var value = angleValue.Normalize().Value;
+            var value = angleValue.Normalize().Angle;
 
             // 0
             if (value == 0)
@@ -787,7 +683,7 @@ namespace xFunc.Maths.Expressions.Angles
             if (value == 11 * Math.PI / 6)
                 return -NumberValue.Sqrt3By3;
 
-            return new NumberValue(Math.Cos(angleValue.Value.Value) / Math.Sin(angleValue.Value.Value));
+            return new NumberValue(Math.Cos(angleValue.Angle.Number) / Math.Sin(angleValue.Angle.Number));
         }
 
         /// <summary>
@@ -797,7 +693,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns>The result of secant function.</returns>
         public static NumberValue Sec(AngleValue angleValue)
         {
-            var value = angleValue.Normalize().Value;
+            var value = angleValue.Normalize().Angle;
 
             // 0
             if (value == 0)
@@ -863,7 +759,7 @@ namespace xFunc.Maths.Expressions.Angles
             if (value == 11 * Math.PI / 6)
                 return NumberValue.Sqrt3By3By2;
 
-            return new NumberValue(1 / Math.Cos(angleValue.Value.Value));
+            return new NumberValue(1 / Math.Cos(angleValue.Angle.Number));
         }
 
         /// <summary>
@@ -873,7 +769,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns>The result of cosecant function.</returns>
         public static NumberValue Csc(AngleValue angleValue)
         {
-            var value = angleValue.Normalize().Value;
+            var value = angleValue.Normalize().Angle;
 
             // 0
             if (value == 0)
@@ -939,7 +835,7 @@ namespace xFunc.Maths.Expressions.Angles
             if (value == 11 * Math.PI / 6)
                 return NumberValue.Two;
 
-            return new NumberValue(1 / Math.Sin(angleValue.Value.Value));
+            return new NumberValue(1 / Math.Sin(angleValue.Angle.Number));
         }
 
         /// <summary>
@@ -952,7 +848,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <see cref="double.NaN"/> if <paramref name="number"/> &lt; -1 or <paramref name="number"/> &gt; 1 or <paramref name="number"/> equals <see cref="double.NaN"/>.
         /// </returns>
         public static AngleValue Asin(NumberValue number)
-            => Radian(Math.Asin(number.Value));
+            => Radian(Math.Asin(number.Number));
 
         /// <summary>
         /// Returns the angle whose cosine is the specified number.
@@ -964,7 +860,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <see cref="double.NaN"/> if <paramref name="number"/> &lt; -1 or <paramref name="number"/> &gt; 1 or <paramref name="number"/> equals <see cref="double.NaN"/>.
         /// </returns>
         public static AngleValue Acos(NumberValue number)
-            => Radian(Math.Acos(number.Value));
+            => Radian(Math.Acos(number.Number));
 
         /// <summary>
         /// Returns the angle whose tangent is the specified number.
@@ -978,7 +874,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// or π/2 rounded to double precision (1.5707963267949) if <paramref name="number"/> equals <see cref="double.PositiveInfinity"/>.
         /// </returns>
         public static AngleValue Atan(NumberValue number)
-            => Radian(Math.Atan(number.Value));
+            => Radian(Math.Atan(number.Number));
 
         /// <summary>
         /// Returns the angle whose cotangent is the specified number.
@@ -986,7 +882,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="number">A number representing a cotangent.</param>
         /// <returns>An angle, measured in radians.</returns>
         public static AngleValue Acot(NumberValue number)
-            => Radian(Math.PI / 2 - Math.Atan(number.Value));
+            => Radian(Math.PI / 2 - Math.Atan(number.Number));
 
         /// <summary>
         /// Returns the angle whose secant is the specified number.
@@ -994,7 +890,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="number">A number representing a secant.</param>
         /// <returns>An angle, measured in radians.</returns>
         public static AngleValue Asec(NumberValue number)
-            => Radian(Math.Acos(1 / number.Value));
+            => Radian(Math.Acos(1 / number.Number));
 
         /// <summary>
         /// Returns the angle whose cosecant is the specified number.
@@ -1002,7 +898,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="number">A number representing a hyperbolic cosecant.</param>
         /// <returns>An angle, measured in radians.</returns>
         public static AngleValue Acsc(NumberValue number)
-            => Radian(Math.Asin(1 / number.Value));
+            => Radian(Math.Asin(1 / number.Number));
 
         /// <summary>
         /// Returns the hyperbolic sine of the specified angle.
@@ -1010,7 +906,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="angle">An angle.</param>
         /// <returns>The hyperbolic sine of <paramref name="angle"/>. If <paramref name="angle"/> is equal to <see cref="double.NegativeInfinity"/>, <see cref="double.PositiveInfinity"/>, or <see cref="double.NaN"/>.</returns>
         public static NumberValue Sinh(AngleValue angle)
-            => new NumberValue(Math.Sinh(angle.ToRadian().Value.Value));
+            => new NumberValue(Math.Sinh(angle.ToRadian().Angle.Number));
 
         /// <summary>
         /// Returns the hyperbolic cosine of the specified angle.
@@ -1022,7 +918,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// If <paramref name="angle"/> is equal to <see cref="double.NaN"/>, <see cref="double.NaN"/> is returned.
         /// </returns>
         public static NumberValue Cosh(AngleValue angle)
-            => new NumberValue(Math.Cosh(angle.ToRadian().Value.Value));
+            => new NumberValue(Math.Cosh(angle.ToRadian().Angle.Number));
 
         /// <summary>
         /// Returns the hyperbolic tangent of the specified angle.
@@ -1035,7 +931,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// If <paramref name="angle"/> is equal to <see cref="double.NaN"/>, this method returns <see cref="double.NaN"/>.
         /// </returns>
         public static NumberValue Tanh(AngleValue angle)
-            => new NumberValue(Math.Tanh(angle.ToRadian().Value.Value));
+            => new NumberValue(Math.Tanh(angle.ToRadian().Angle.Number));
 
         /// <summary>
         /// Returns the hyperbolic cotangent of the specified angle.
@@ -1044,7 +940,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns>The hyperbolic cotangent of value.</returns>
         public static NumberValue Coth(AngleValue angle)
         {
-            var d = angle.ToRadian().Value.Value;
+            var d = angle.ToRadian().Angle.Number;
 
             return new NumberValue((Math.Exp(d) + Math.Exp(-d)) / (Math.Exp(d) - Math.Exp(-d)));
         }
@@ -1056,7 +952,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns>The hyperbolic secant of value.</returns>
         public static NumberValue Sech(AngleValue angle)
         {
-            var d = angle.ToRadian().Value.Value;
+            var d = angle.ToRadian().Angle.Number;
 
             return new NumberValue(2 / (Math.Exp(d) + Math.Exp(-d)));
         }
@@ -1068,7 +964,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns>The hyperbolic cosecant of value.</returns>
         public static NumberValue Csch(AngleValue angle)
         {
-            var d = angle.ToRadian().Value.Value;
+            var d = angle.ToRadian().Angle.Number;
 
             return new NumberValue(2 / (Math.Exp(d) - Math.Exp(-d)));
         }
@@ -1083,7 +979,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <see cref="double.NaN"/> if <paramref name="number"/> equals <see cref="double.NaN"/>.
         /// </returns>
         public static AngleValue Asinh(NumberValue number)
-            => Radian(Math.Asinh(number.Value));
+            => Radian(Math.Asinh(number.Number));
 
         /// <summary>
         /// Returns the angle whose hyperbolic cosine is the specified number.
@@ -1095,7 +991,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <see cref="double.NaN"/> if <paramref name="number"/> &lt; 1 or <paramref name="number"/> equals <see cref="double.NaN"/>.
         /// </returns>
         public static AngleValue Acosh(NumberValue number)
-            => Radian(Math.Acosh(number.Value));
+            => Radian(Math.Acosh(number.Number));
 
         /// <summary>
         /// Returns the angle whose hyperbolic tangent is the specified number.
@@ -1107,7 +1003,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <see cref="double.NaN"/> if <paramref name="number"/> &lt; -1 or <paramref name="number"/> &gt; 1 or <paramref name="number"/> equals <see cref="double.NaN"/>.
         /// </returns>
         public static AngleValue Atanh(NumberValue number)
-            => Radian(Math.Atanh(number.Value));
+            => Radian(Math.Atanh(number.Number));
 
         /// <summary>
         /// Returns the angle whose hyperbolic cotangent is the specified number.
@@ -1115,7 +1011,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="number">A number representing a hyperbolic cotangent.</param>
         /// <returns>An angle, measured in radians.</returns>
         public static AngleValue Acoth(NumberValue number)
-            => Radian(Math.Log((number.Value + 1) / (number.Value - 1)) / 2);
+            => Radian(Math.Log((number.Number + 1) / (number.Number - 1)) / 2);
 
         /// <summary>
         /// Returns the angle whose hyperbolic secant is the specified number.
@@ -1124,7 +1020,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns>An angle, measured in radians.</returns>
         public static AngleValue Asech(NumberValue number)
         {
-            var z = 1 / number.Value;
+            var z = 1 / number.Number;
 
             return Radian(Math.Log(z + Math.Sqrt(z + 1) * Math.Sqrt(z - 1)));
         }
@@ -1135,10 +1031,10 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="number">A number representing a hyperbolic cosecant.</param>
         /// <returns>An angle, measured in radians.</returns>
         public static AngleValue Acsch(NumberValue number)
-            => Radian(Math.Log(1 / number.Value + Math.Sqrt(1 / number.Value * number.Value + 1)));
+            => Radian(Math.Log(1 / number.Number + Math.Sqrt(1 / number.Number * number.Number + 1)));
 
         /// <summary>
-        /// Converts <see cref="AngleValue"/> to <see cref="Angle"/>.
+        /// Converts <see cref="AngleValue"/> to <see cref="Angles.Angle"/>.
         /// </summary>
         /// <returns>The angle number.</returns>
         public Angle AsExpression()
@@ -1147,7 +1043,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <summary>
         /// Gets a value.
         /// </summary>
-        public NumberValue Value { get; }
+        public NumberValue Angle { get; }
 
         /// <summary>
         /// Gets a unit.
@@ -1157,6 +1053,6 @@ namespace xFunc.Maths.Expressions.Angles
         /// <summary>
         /// Gets an integer that indicates the sign of a double-precision floating-point number.
         /// </summary>
-        public double Sign => Value.Sign;
+        public double Sign => Angle.Sign;
     }
 }

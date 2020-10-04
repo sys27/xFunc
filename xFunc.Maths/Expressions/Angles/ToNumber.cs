@@ -51,7 +51,7 @@ namespace xFunc.Maths.Expressions.Angles
 
             return result switch
             {
-                AngleValue angleValue => angleValue.Value,
+                AngleValue angleValue => angleValue.Angle,
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

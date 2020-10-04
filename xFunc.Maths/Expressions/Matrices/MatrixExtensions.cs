@@ -103,7 +103,7 @@ namespace xFunc.Maths.Expressions.Matrices
             foreach (var argument in vector.Arguments)
             {
                 var argNumber = (double)argument.Execute(parameters);
-                numbers.Add(new Number(argNumber * number.Value));
+                numbers.Add(new Number(argNumber * number.Number));
             }
 
             return new Vector(numbers.ToImmutableArray());
@@ -193,7 +193,7 @@ namespace xFunc.Maths.Expressions.Matrices
                 var vector = ImmutableArray.CreateBuilder<IExpression>(matrix.Columns);
 
                 for (var j = 0; j < matrix.Columns; j++)
-                    vector.Add(new Number((double)matrix[i][j].Execute(parameters) * number.Value));
+                    vector.Add(new Number((double)matrix[i][j].Execute(parameters) * number.Number));
 
                 vectors.Add(new Vector(vector.ToImmutableArray()));
             }

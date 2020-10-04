@@ -658,7 +658,7 @@ namespace xFunc.Maths.Analyzers
 
             return argument switch
             {
-                Angle(var angle) => new Number(angle.Value),
+                Angle(var angle) => new Number(angle.Angle),
                 var arg when IsChanged(exp, arg) => new ToNumber(arg),
                 _ => exp,
             };

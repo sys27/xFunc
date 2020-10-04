@@ -113,7 +113,7 @@ namespace xFunc.Maths
             var result = exp.Execute(Parameters);
             if (result is NumberValue number)
             {
-                return new NumberResult(number.Value);
+                return new NumberResult(number.Number);
             }
 
             if (result is AngleValue angle)

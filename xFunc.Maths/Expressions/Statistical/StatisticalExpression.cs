@@ -72,7 +72,7 @@ namespace xFunc.Maths.Expressions.Statistical
                 if (!(result is NumberValue number))
                     throw new ResultIsNotSupportedException(this, result);
 
-                calculated[i] = number.Value;
+                calculated[i] = number.Number;
                 i++;
             }
 

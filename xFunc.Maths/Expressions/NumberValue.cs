@@ -107,15 +107,15 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="value">The value.</param>
         public NumberValue(double value)
-            => Value = value;
+            => Number = value;
 
         /// <inheritdoc />
         public bool Equals(NumberValue other)
-            => Math.Abs(Value - other.Value) < Epsilon;
+            => Math.Abs(Number - other.Number) < Epsilon;
 
         /// <inheritdoc />
         public bool Equals(double other)
-            => Math.Abs(Value - other) < Epsilon;
+            => Math.Abs(Number - other) < Epsilon;
 
         /// <inheritdoc />
         public override bool Equals(object? obj)
@@ -123,15 +123,15 @@ namespace xFunc.Maths.Expressions
 
         /// <inheritdoc />
         public override int GetHashCode()
-            => HashCode.Combine(Value);
+            => HashCode.Combine(Number);
 
         /// <inheritdoc />
         public int CompareTo(NumberValue other)
-            => Value.CompareTo(other.Value);
+            => Number.CompareTo(other.Number);
 
         /// <inheritdoc />
         public int CompareTo(double other)
-            => Value.CompareTo(other);
+            => Number.CompareTo(other);
 
         /// <inheritdoc />
         public int CompareTo(object? obj)
@@ -146,7 +146,7 @@ namespace xFunc.Maths.Expressions
 
         /// <inheritdoc />
         public override string ToString()
-            => Value.ToString(CultureInfo.InvariantCulture);
+            => Number.ToString(CultureInfo.InvariantCulture);
 
         /// <summary>
         /// Determines whether two specified instances of <see cref="NumberValue"/> are equal.
@@ -303,7 +303,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The negative of <paramref name="numberValue"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue operator -(NumberValue numberValue)
-            => new NumberValue(-numberValue.Value);
+            => new NumberValue(-numberValue.Number);
 
         /// <summary>
         /// Adds two objects of <see cref="NumberValue"/>.
@@ -313,7 +313,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue operator +(NumberValue left, NumberValue right)
-            => new NumberValue(left.Value + right.Value);
+            => new NumberValue(left.Number + right.Number);
 
         /// <summary>
         /// Adds <see cref="NumberValue"/> and <see cref="double"/>.
@@ -323,7 +323,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue operator +(NumberValue left, double right)
-            => new NumberValue(left.Value + right);
+            => new NumberValue(left.Number + right);
 
         /// <summary>
         /// Adds <see cref="double"/> and <see cref="NumberValue"/>.
@@ -333,7 +333,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue operator +(double left, NumberValue right)
-            => new NumberValue(left + right.Value);
+            => new NumberValue(left + right.Number);
 
         /// <summary>
         /// Adds <see cref="AngleValue"/> and <see cref="NumberValue"/>.
@@ -343,7 +343,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static AngleValue operator +(AngleValue left, NumberValue right)
-            => new AngleValue(left.Value + right.Value, left.Unit);
+            => new AngleValue(left.Angle + right.Number, left.Unit);
 
         /// <summary>
         /// Adds <see cref="NumberValue"/> and <see cref="AngleValue"/>.
@@ -353,7 +353,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static AngleValue operator +(NumberValue left, AngleValue right)
-            => new AngleValue(left.Value + right.Value, right.Unit);
+            => new AngleValue(left.Number + right.Angle, right.Unit);
 
         /// <summary>
         /// Adds <see cref="Complex"/> and <see cref="NumberValue"/>.
@@ -363,7 +363,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Complex operator +(Complex left, NumberValue right)
-            => left + right.Value;
+            => left + right.Number;
 
         /// <summary>
         /// Adds <see cref="NumberValue"/> and <see cref="Complex"/>.
@@ -373,7 +373,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Complex operator +(NumberValue left, Complex right)
-            => left.Value + right;
+            => left.Number + right;
 
         /// <summary>
         /// Subtracts two objects of <see cref="NumberValue"/>.
@@ -383,7 +383,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue operator -(NumberValue left, NumberValue right)
-            => new NumberValue(left.Value - right.Value);
+            => new NumberValue(left.Number - right.Number);
 
         /// <summary>
         /// Subtracts <see cref="NumberValue"/> and <see cref="double"/>.
@@ -393,7 +393,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue operator -(NumberValue left, double right)
-            => new NumberValue(left.Value - right);
+            => new NumberValue(left.Number - right);
 
         /// <summary>
         /// Subtracts <see cref="double"/> and <see cref="NumberValue"/>.
@@ -403,7 +403,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue operator -(double left, NumberValue right)
-            => new NumberValue(left - right.Value);
+            => new NumberValue(left - right.Number);
 
         /// <summary>
         /// Subtracts <see cref="NumberValue"/> and <see cref="AngleValue"/>.
@@ -413,7 +413,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static AngleValue operator -(NumberValue left, AngleValue right)
-            => new AngleValue(left.Value - right.Value, right.Unit);
+            => new AngleValue(left.Number - right.Angle, right.Unit);
 
         /// <summary>
         /// Subtracts <see cref="AngleValue"/> and <see cref="NumberValue"/>.
@@ -423,7 +423,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static AngleValue operator -(AngleValue left, NumberValue right)
-            => new AngleValue(left.Value - right.Value, left.Unit);
+            => new AngleValue(left.Angle - right.Number, left.Unit);
 
         /// <summary>
         /// Subtracts <see cref="NumberValue"/> and <see cref="Complex"/>.
@@ -433,7 +433,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Complex operator -(NumberValue left, Complex right)
-            => left.Value - right;
+            => left.Number - right;
 
         /// <summary>
         /// Subtracts <see cref="Complex"/> and <see cref="NumberValue"/>.
@@ -443,7 +443,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Complex operator -(Complex left, NumberValue right)
-            => left - right.Value;
+            => left - right.Number;
 
         /// <summary>
         /// Multiplies two objects of <see cref="NumberValue"/>.
@@ -453,7 +453,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue operator *(NumberValue left, NumberValue right)
-            => new NumberValue(left.Value * right.Value);
+            => new NumberValue(left.Number * right.Number);
 
         /// <summary>
         /// Multiplies <see cref="NumberValue"/> and <see cref="double"/>.
@@ -463,7 +463,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue operator *(NumberValue left, double right)
-            => new NumberValue(left.Value * right);
+            => new NumberValue(left.Number * right);
 
         /// <summary>
         /// Multiplies <see cref="double"/> and <see cref="NumberValue"/>.
@@ -473,7 +473,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue operator *(double left, NumberValue right)
-            => new NumberValue(left * right.Value);
+            => new NumberValue(left * right.Number);
 
         /// <summary>
         /// Multiplies <see cref="AngleValue"/> and <see cref="NumberValue"/>.
@@ -483,7 +483,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static AngleValue operator *(AngleValue left, NumberValue right)
-            => new AngleValue(left.Value * right.Value, left.Unit);
+            => new AngleValue(left.Angle * right.Number, left.Unit);
 
         /// <summary>
         /// Multiplies <see cref="NumberValue"/> and <see cref="AngleValue"/>.
@@ -493,7 +493,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static AngleValue operator *(NumberValue left, AngleValue right)
-            => new AngleValue(left.Value * right.Value, right.Unit);
+            => new AngleValue(left.Number * right.Angle, right.Unit);
 
         /// <summary>
         /// Multiplies <see cref="Complex"/> and <see cref="NumberValue"/>.
@@ -503,7 +503,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Complex operator *(Complex left, NumberValue right)
-            => left * right.Value;
+            => left * right.Number;
 
         /// <summary>
         /// Multiplies <see cref="NumberValue"/> and <see cref="Complex"/>.
@@ -513,7 +513,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Complex operator *(NumberValue left, Complex right)
-            => left.Value * right;
+            => left.Number * right;
 
         /// <summary>
         /// Divides two objects of <see cref="NumberValue"/>.
@@ -523,7 +523,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue operator /(NumberValue left, NumberValue right)
-            => new NumberValue(left.Value / right.Value);
+            => new NumberValue(left.Number / right.Number);
 
         /// <summary>
         /// Divides <see cref="NumberValue"/> and <see cref="double"/>.
@@ -533,7 +533,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue operator /(NumberValue left, double right)
-            => new NumberValue(left.Value / right);
+            => new NumberValue(left.Number / right);
 
         /// <summary>
         /// Divides <see cref="double"/> and <see cref="NumberValue"/>.
@@ -543,7 +543,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue operator /(double left, NumberValue right)
-            => new NumberValue(left / right.Value);
+            => new NumberValue(left / right.Number);
 
         /// <summary>
         /// Divides <see cref="AngleValue"/> by <see cref="NumberValue"/>.
@@ -553,7 +553,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static AngleValue operator /(AngleValue left, NumberValue right)
-            => new AngleValue(left.Value / right.Value, left.Unit);
+            => new AngleValue(left.Angle / right.Number, left.Unit);
 
         /// <summary>
         /// Divides <see cref="NumberValue"/> by <see cref="AngleValue"/>.
@@ -563,7 +563,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static AngleValue operator /(NumberValue left, AngleValue right)
-            => new AngleValue(left.Value / right.Value, right.Unit);
+            => new AngleValue(left.Number / right.Angle, right.Unit);
 
         /// <summary>
         /// Divides <see cref="Complex"/> by <see cref="NumberValue"/>.
@@ -573,7 +573,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Complex operator /(Complex left, NumberValue right)
-            => left / right.Value;
+            => left / right.Number;
 
         /// <summary>
         /// Divides <see cref="NumberValue"/> by <see cref="Complex"/>.
@@ -583,7 +583,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="right"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Complex operator /(NumberValue left, Complex right)
-            => left.Value / right;
+            => left.Number / right;
 
         /// <summary>
         /// Returns the remainder of a division.
@@ -593,7 +593,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The remainder of a division.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue operator %(NumberValue left, NumberValue right)
-            => new NumberValue(left.Value % right.Value);
+            => new NumberValue(left.Number % right.Number);
 
         /// <summary>
         /// Calculates NOT operation.
@@ -606,7 +606,7 @@ namespace xFunc.Maths.Expressions
             if (!IsInt(number))
                 throw new ArgumentException(Resource.ValueIsNotInteger, nameof(number));
 
-            return new NumberValue(~(int)number.Value);
+            return new NumberValue(~(int)number.Number);
         }
 
         /// <summary>
@@ -624,7 +624,7 @@ namespace xFunc.Maths.Expressions
             if (!IsInt(right))
                 throw new ArgumentException(Resource.ValueIsNotInteger, nameof(right));
 
-            return new NumberValue((int)left.Value & (int)right.Value);
+            return new NumberValue((int)left.Number & (int)right.Number);
         }
 
         /// <summary>
@@ -642,7 +642,7 @@ namespace xFunc.Maths.Expressions
             if (!IsInt(right))
                 throw new ArgumentException(Resource.ValueIsNotInteger, nameof(right));
 
-            return new NumberValue((int)left.Value | (int)right.Value);
+            return new NumberValue((int)left.Number | (int)right.Number);
         }
 
         /// <summary>
@@ -660,7 +660,7 @@ namespace xFunc.Maths.Expressions
             if (!IsInt(right))
                 throw new ArgumentException(Resource.ValueIsNotInteger, nameof(right));
 
-            return new NumberValue((int)left.Value ^ (int)right.Value);
+            return new NumberValue((int)left.Number ^ (int)right.Number);
         }
 
         /// <summary>
@@ -677,7 +677,7 @@ namespace xFunc.Maths.Expressions
             if (!IsInt(right))
                 throw new ArgumentException(Resource.ValueIsNotInteger, nameof(right));
 
-            return new NumberValue((int)left.Value << (int)right.Value);
+            return new NumberValue((int)left.Number << (int)right.Number);
         }
 
         /// <summary>
@@ -694,11 +694,11 @@ namespace xFunc.Maths.Expressions
             if (!IsInt(right))
                 throw new ArgumentException(Resource.ValueIsNotInteger, nameof(right));
 
-            return new NumberValue((int)left.Value >> (int)right.Value);
+            return new NumberValue((int)left.Number >> (int)right.Number);
         }
 
         private static bool IsInt(NumberValue number)
-            => Math.Abs(number.Value % 1) <= Epsilon;
+            => Math.Abs(number.Number % 1) <= Epsilon;
 
         /// <summary>
         /// Returns the absolute value of a double-precision floating-point number.
@@ -707,7 +707,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A double-precision floating-point number, x, such that 0 ≤ x ≤ <see cref="double.MaxValue"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue Abs(NumberValue numberValue)
-            => new NumberValue(Math.Abs(numberValue.Value));
+            => new NumberValue(Math.Abs(numberValue.Number));
 
         /// <summary>
         /// Returns the smallest integral value that is greater than
@@ -717,7 +717,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The smallest integral value that is greater than or equal to <paramref name="numberValue"/>. If <paramref name="numberValue"/> is equal to <see cref="double.NaN"/>, <see cref="double.NegativeInfinity"/>, or <see cref="double.PositiveInfinity"/>, that value is returned. Note that this method returns a Double instead of an integral type.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue Ceiling(NumberValue numberValue)
-            => new NumberValue(Math.Ceiling(numberValue.Value));
+            => new NumberValue(Math.Ceiling(numberValue.Number));
 
         /// <summary>
         /// Returns <c>e</c> raised to the specified power.
@@ -726,7 +726,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The number <c>e</c> raised to the power <paramref name="numberValue"/>. If <paramref name="numberValue"/> equals <see cref="double.NaN"/> or <see cref="double.PositiveInfinity"/>, that value is returned. If <paramref name="numberValue"/> equals <see cref="double.NegativeInfinity"/>, 0 is returned.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue Exp(NumberValue numberValue)
-            => new NumberValue(Math.Exp(numberValue.Value));
+            => new NumberValue(Math.Exp(numberValue.Number));
 
         /// <summary>
         /// Returns a factorial of specified number.
@@ -736,7 +736,7 @@ namespace xFunc.Maths.Expressions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue Factorial(NumberValue numberValue)
         {
-            return new NumberValue(Fact(Math.Round(numberValue.Value)));
+            return new NumberValue(Fact(Math.Round(numberValue.Number)));
 
             static double Fact(double n)
             {
@@ -760,7 +760,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The largest integral value less than or equal to <paramref name="numberValue"/>. If <paramref name="numberValue"/> is equal to <see cref="double.NaN"/>, <see cref="double.NegativeInfinity"/>, or <see cref="double.PositiveInfinity"/>, that value is returned.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue Floor(NumberValue numberValue)
-            => new NumberValue(Math.Floor(numberValue.Value));
+            => new NumberValue(Math.Floor(numberValue.Number));
 
         /// <summary>
         /// Returns the fractional part of the number.
@@ -771,7 +771,7 @@ namespace xFunc.Maths.Expressions
         public static NumberValue Frac(NumberValue numberValue)
         {
             // TODO: use custom operator
-            if (numberValue.Value >= 0)
+            if (numberValue.Number >= 0)
                 return numberValue - Floor(numberValue);
 
             return numberValue - Ceiling(numberValue);
@@ -786,8 +786,8 @@ namespace xFunc.Maths.Expressions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue GCD(NumberValue left, NumberValue right)
         {
-            var a = left.Value;
-            var b = right.Value;
+            var a = left.Number;
+            var b = right.Number;
 
             while (!Equals(b, 0.0))
                 b = a % (a = b);
@@ -812,7 +812,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The binary logarithm.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue Lb(NumberValue numberValue)
-            => new NumberValue(Math.Log(numberValue.Value, 2));
+            => new NumberValue(Math.Log(numberValue.Number, 2));
 
         /// <summary>
         /// Returns the base 10 logarithm of a specified number.
@@ -821,7 +821,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The base 10 logarithm.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue Lg(NumberValue numberValue)
-            => new NumberValue(Math.Log10(numberValue.Value));
+            => new NumberValue(Math.Log10(numberValue.Number));
 
         /// <summary>
         /// Returns the natural (base <c>e</c>) logarithm of a specified number.
@@ -830,7 +830,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The natural (base <c>e</c>) logarithm.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue Ln(NumberValue numberValue)
-            => new NumberValue(Math.Log(numberValue.Value));
+            => new NumberValue(Math.Log(numberValue.Number));
 
         /// <summary>
         /// Returns the logarithm of a specified number in a specified base.
@@ -840,7 +840,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The logarithm.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue Log(NumberValue number, NumberValue @base)
-            => new NumberValue(Math.Log(number.Value, @base.Value));
+            => new NumberValue(Math.Log(number.Number, @base.Number));
 
         /// <summary>
         /// Returns the logarithm of a specified number in a specified base.
@@ -850,7 +850,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The logarithm.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Complex Log(Complex number, NumberValue @base)
-            => Complex.Log(number, @base.Value);
+            => Complex.Log(number, @base.Number);
 
         /// <summary>
         /// Returns a specified number raised to the specified power.
@@ -863,17 +863,17 @@ namespace xFunc.Maths.Expressions
         {
             if (number < 0)
             {
-                if ((BitConverter.DoubleToInt64Bits(power.Value) & 1) == 1)
-                    return new NumberValue(-Math.Pow(-number.Value, power.Value));
+                if ((BitConverter.DoubleToInt64Bits(power.Number) & 1) == 1)
+                    return new NumberValue(-Math.Pow(-number.Number, power.Number));
 
                 if (power > 0 && power < 1)
-                    return Complex.Pow(number.Value, power.Value);
+                    return Complex.Pow(number.Number, power.Number);
 
                 if (power < 0 && power > -1)
-                    return new Complex(0, -Math.Pow(-number.Value, power.Value));
+                    return new Complex(0, -Math.Pow(-number.Number, power.Number));
             }
 
-            return new NumberValue(Math.Pow(number.Value, power.Value));
+            return new NumberValue(Math.Pow(number.Number, power.Number));
         }
 
         /// <summary>
@@ -884,7 +884,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The <paramref name="number"/> raised to the <paramref name="power"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Complex Pow(Complex number, NumberValue power)
-            => Complex.Pow(number, power.Value);
+            => Complex.Pow(number, power.Number);
 
         /// <summary>
         /// Rounds a double-precision floating-point value to a specified number of fractional digits,
@@ -900,7 +900,7 @@ namespace xFunc.Maths.Expressions
             if (!IsInt(digits))
                 throw new InvalidOperationException(Resource.ValueIsNotInteger);
 
-            var rounded = Math.Round(number.Value, (int)digits.Value, MidpointRounding.AwayFromZero);
+            var rounded = Math.Round(number.Number, (int)digits.Number, MidpointRounding.AwayFromZero);
 
             return new NumberValue(rounded);
         }
@@ -914,9 +914,9 @@ namespace xFunc.Maths.Expressions
         public static object Sqrt(NumberValue numberValue)
         {
             if (numberValue < 0)
-                return Complex.Sqrt(numberValue.Value);
+                return Complex.Sqrt(numberValue.Number);
 
-            return new NumberValue(Math.Sqrt(numberValue.Value));
+            return new NumberValue(Math.Sqrt(numberValue.Number));
         }
 
         private static string PadNumber(string number, int padding)
@@ -939,7 +939,7 @@ namespace xFunc.Maths.Expressions
             if (!IsInt(numberValue))
                 throw new ArgumentException(Resource.ValueIsNotInteger, nameof(numberValue));
 
-            var result = Convert.ToString((int)numberValue.Value, 2);
+            var result = Convert.ToString((int)numberValue.Number, 2);
             result = PadNumber(result, 8);
 
             return $"0b{result}";
@@ -956,7 +956,7 @@ namespace xFunc.Maths.Expressions
             if (!IsInt(numberValue))
                 throw new ArgumentException(Resource.ValueIsNotInteger, nameof(numberValue));
 
-            return $"0{Convert.ToString((int)numberValue.Value, 8)}";
+            return $"0{Convert.ToString((int)numberValue.Number, 8)}";
         }
 
         /// <summary>
@@ -970,7 +970,7 @@ namespace xFunc.Maths.Expressions
             if (!IsInt(numberValue))
                 throw new ArgumentException(Resource.ValueIsNotInteger, nameof(numberValue));
 
-            var result = Convert.ToString((int)numberValue.Value, 16).ToUpperInvariant();
+            var result = Convert.ToString((int)numberValue.Number, 16).ToUpperInvariant();
             result = PadNumber(result, 2);
 
             return $"0x{result}";
@@ -983,36 +983,36 @@ namespace xFunc.Maths.Expressions
         /// <returns>The integral part.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue Truncate(NumberValue number)
-            => new NumberValue(Math.Truncate(number.Value));
+            => new NumberValue(Math.Truncate(number.Number));
 
         /// <summary>
         /// Gets a value indicating whether the current value is not a number (NaN).
         /// </summary>
-        public bool IsNaN => double.IsNaN(Value);
+        public bool IsNaN => double.IsNaN(Number);
 
         /// <summary>
         /// Gets a value indicating whether the current number evaluates to infinity.
         /// </summary>
-        public bool IsInfinity => double.IsInfinity(Value);
+        public bool IsInfinity => double.IsInfinity(Number);
 
         /// <summary>
         /// Gets a value indicating whether the current number evaluates to positive infinity.
         /// </summary>
-        public bool IsPositiveInfinity => double.IsPositiveInfinity(Value);
+        public bool IsPositiveInfinity => double.IsPositiveInfinity(Number);
 
         /// <summary>
         /// Gets a value indicating whether the current number evaluates to negative infinity.
         /// </summary>
-        public bool IsNegativeInfinity => double.IsNegativeInfinity(Value);
+        public bool IsNegativeInfinity => double.IsNegativeInfinity(Number);
 
         /// <summary>
         /// Gets a sign of number.
         /// </summary>
-        public double Sign => Math.Sign(Value);
+        public double Sign => Math.Sign(Number);
 
         /// <summary>
         /// Gets a value.
         /// </summary>
-        public double Value { get; }
+        public double Number { get; }
     }
 }

@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Programming
         {
             var exp = new RightShift(new Number(512), new Number(9));
             var actual = exp.Execute();
-            var expected = 1.0;
+            var expected = new NumberValue(1.0);
 
             Assert.Equal(expected, actual);
         }

@@ -27,8 +27,9 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         public void ExecuteTest1()
         {
             var exp = new And(Number.One, new Number(3));
+            var expected = new NumberValue(1.0);
 
-            Assert.Equal(1.0, exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]
@@ -36,7 +37,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         {
             var exp = new And(Bool.True, Bool.False);
 
-            Assert.False((bool) exp.Execute());
+            Assert.False((bool)exp.Execute());
         }
 
         [Fact]
@@ -44,7 +45,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         {
             var exp = new And(Bool.True, Bool.True);
 
-            Assert.True((bool) exp.Execute());
+            Assert.True((bool)exp.Execute());
         }
 
         [Fact]

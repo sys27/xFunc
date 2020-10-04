@@ -90,7 +90,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void UndefVarTest()
         {
-            var parameters = new ParameterCollection { { "a", 1 } };
+            var parameters = new ParameterCollection { { "a", new NumberValue(1) } };
 
             var undef = new Undefine(new Variable("a"));
             undef.Execute(parameters);

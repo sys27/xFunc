@@ -25,32 +25,36 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTest1()
         {
             var fact = new Fact(new Number(4));
+            var expected = new NumberValue(24.0);
 
-            Assert.Equal(24.0, fact.Execute());
+            Assert.Equal(expected, fact.Execute());
         }
 
         [Fact]
         public void ExecuteTest2()
         {
             var fact = new Fact(Number.Zero);
+            var expected = new NumberValue(1.0);
 
-            Assert.Equal(1.0, fact.Execute());
+            Assert.Equal(expected, fact.Execute());
         }
 
         [Fact]
         public void ExecuteTest3()
         {
             var fact = new Fact(Number.One);
+            var expected = new NumberValue(1.0);
 
-            Assert.Equal(1.0, fact.Execute());
+            Assert.Equal(expected, fact.Execute());
         }
 
         [Fact]
         public void ExecuteTest4()
         {
             var fact = new Fact(new Number(-1));
+            var actual = (NumberValue)fact.Execute();
 
-            Assert.Equal(double.NaN, fact.Execute());
+            Assert.True(actual.IsNaN);
         }
 
         [Fact]

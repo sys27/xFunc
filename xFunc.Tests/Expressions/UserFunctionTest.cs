@@ -41,9 +41,12 @@ namespace xFunc.Tests.Expressions
             {
                 { new UserFunction("f", new IExpression[] { Variable.X }), new Ln(Variable.X) }
             };
-
             var func = new UserFunction("f", new IExpression[] { Number.One });
-            Assert.Equal(Math.Log(1), func.Execute(functions));
+
+            var actual = func.Execute(functions);
+            var expected = new NumberValue(Math.Log(1));
+
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
@@ -68,7 +71,7 @@ namespace xFunc.Tests.Expressions
 
             var func = new UserFunction("f", new[] { new Number(4) });
 
-            Assert.Equal(24.0, func.Execute(expParams));
+            Assert.Equal(new NumberValue(24.0), func.Execute(expParams));
         }
 
         [Fact]

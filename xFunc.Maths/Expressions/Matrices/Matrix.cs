@@ -142,9 +142,9 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>The two dimensional array which represents current vector.</returns>
-        internal double[][] ToCalculatedArray(ExpressionParameters? parameters)
+        internal NumberValue[][] ToCalculatedArray(ExpressionParameters? parameters)
         {
-            var results = new double[Rows][];
+            var results = new NumberValue[Rows][];
 
             for (var i = 0; i < Rows; i++)
                 results[i] = Vectors[i].ToCalculatedArray(parameters);

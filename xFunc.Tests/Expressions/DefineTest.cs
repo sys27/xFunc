@@ -38,7 +38,7 @@ namespace xFunc.Tests.Expressions
 
             var answer = exp.Execute(parameters);
 
-            Assert.Equal(1.0, parameters.Variables["x"]);
+            Assert.Equal(new NumberValue(1.0), parameters.Variables["x"]);
             Assert.Equal("The value '1' was assigned to the variable 'x'.", answer);
         }
 
@@ -51,7 +51,7 @@ namespace xFunc.Tests.Expressions
 
             var answer = exp.Execute(expParams);
 
-            Assert.Equal(Math.Sin(1), parameters["x"]);
+            Assert.Equal(new NumberValue(Math.Sin(1)), parameters["x"]);
             Assert.Equal("The value 'sin(1 radian)' was assigned to the variable 'x'.", answer);
         }
 
@@ -63,7 +63,7 @@ namespace xFunc.Tests.Expressions
 
             var answer = exp.Execute(parameters);
 
-            Assert.Equal(36.0, parameters.Variables["x"]);
+            Assert.Equal(new NumberValue(36.0), parameters.Variables["x"]);
             Assert.Equal("The value '4 * (8 + 1)' was assigned to the variable 'x'.", answer);
         }
 
@@ -75,7 +75,7 @@ namespace xFunc.Tests.Expressions
 
             exp.Execute(parameters);
 
-            Assert.Equal(1.0, parameters.Variables["π"]);
+            Assert.Equal(new NumberValue(1.0), parameters.Variables["π"]);
         }
 
         [Fact]

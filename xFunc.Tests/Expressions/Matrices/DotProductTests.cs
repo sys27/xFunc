@@ -29,8 +29,9 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(4), new Number(5), new Number(6) })
             );
             var result = exp.Execute();
+            var expected = new NumberValue(32.0);
 
-            Assert.Equal(32.0, result);
+            Assert.Equal(expected, result);
         }
 
         [Fact]

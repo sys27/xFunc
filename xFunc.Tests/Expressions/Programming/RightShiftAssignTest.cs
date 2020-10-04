@@ -33,7 +33,7 @@ namespace xFunc.Tests.Expressions.Programming
                 new Parameter("x", 512.0)
             };
             var actual = exp.Execute(parameters);
-            var expected = 1.0;
+            var expected = new NumberValue(1.0);
 
             Assert.Equal(expected, actual);
         }
@@ -48,8 +48,8 @@ namespace xFunc.Tests.Expressions.Programming
             };
             var actual = exp.Execute(parameters);
 
-            Assert.Equal(2.0, actual);
-            Assert.Equal(1.0, parameters["x"]);
+            Assert.Equal(new NumberValue(2.0), actual);
+            Assert.Equal(new NumberValue(1.0), parameters["x"]);
         }
 
         [Fact]

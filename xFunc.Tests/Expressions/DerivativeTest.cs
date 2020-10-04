@@ -53,7 +53,7 @@ namespace xFunc.Tests.Expressions
                 Variable.X,
                 Number.Two);
 
-            Assert.Equal(2.0, deriv.Execute());
+            Assert.Equal(new NumberValue(2.0), deriv.Execute());
         }
 
         [Fact]

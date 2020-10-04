@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions
             var exp = new Sign(new Number(5));
             var result = exp.Execute();
 
-            Assert.Equal(1.0, result);
+            Assert.Equal(new NumberValue(1.0), result);
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace xFunc.Tests.Expressions
             var exp = new Sign(AngleValue.Degree(10).AsExpression());
             var result = exp.Execute();
 
-            Assert.Equal(1.0, result);
+            Assert.Equal(new NumberValue(1.0), result);
         }
 
         [Fact]

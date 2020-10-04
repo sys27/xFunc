@@ -59,7 +59,7 @@ namespace xFunc.Maths.Expressions.Matrices
                 else
                 {
                     var result = this[i].Execute(parameters);
-                    if (result is double doubleResult)
+                    if (result is NumberValue doubleResult)
                         args.Add(new Number(doubleResult));
                     else
                         throw new ResultIsNotSupportedException(this, result);
@@ -89,12 +89,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>The array which represents current vector.</returns>
-        internal double[] ToCalculatedArray(ExpressionParameters? parameters)
+        internal NumberValue[] ToCalculatedArray(ExpressionParameters? parameters)
         {
-            var results = new double[ParametersCount];
+            var results = new NumberValue[ParametersCount];
 
             for (var i = 0; i < ParametersCount; i++)
-                results[i] = (double)this[i].Execute(parameters);
+                results[i] = (NumberValue)this[i].Execute(parameters);
 
             return results;
         }

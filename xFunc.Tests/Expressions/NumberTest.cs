@@ -76,7 +76,7 @@ namespace xFunc.Tests.Expressions
         {
             var number = Number.One;
 
-            Assert.Equal(1.0, number.Execute());
+            Assert.Equal(new NumberValue(1.0), number.Execute());
         }
 
         [Fact]

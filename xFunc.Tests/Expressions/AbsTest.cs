@@ -29,8 +29,9 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTestNumber()
         {
             var exp = new Abs(new Number(-1));
+            var expected = new NumberValue(1.0);
 
-            Assert.Equal(1.0, exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]
@@ -58,8 +59,9 @@ namespace xFunc.Tests.Expressions
             {
                 new Number(5), new Number(4), new Number(6), new Number(7)
             }));
+            var expected = new NumberValue(11.2249721603218241567);
 
-            Assert.Equal(11.2249721603218241567, (double)exp.Execute(), 15);
+            Assert.Equal(expected, (NumberValue)exp.Execute());
         }
 
         [Fact]

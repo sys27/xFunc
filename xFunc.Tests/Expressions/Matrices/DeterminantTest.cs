@@ -33,8 +33,9 @@ namespace xFunc.Tests.Expressions.Matrices
             });
 
             var det = new Determinant(matrix);
+            var expected = new NumberValue(204.0);
 
-            Assert.Equal(204.0, det.Execute());
+            Assert.Equal(expected, det.Execute());
         }
 
         [Fact]

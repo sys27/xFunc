@@ -15,6 +15,7 @@
 
 using System;
 using System.Globalization;
+using System.Numerics;
 using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Collections
@@ -31,20 +32,40 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="key">The name of parameter.</param>
         /// <param name="value">The value of parameter.</param>
-        public Parameter(string key, object value)
+        public Parameter(string key, double value)
             : this(key, value, ParameterType.Normal)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Parameter" /> class.
+        /// Initializes a new instance of the <see cref="Parameter"/> class.
         /// </summary>
         /// <param name="key">The name of parameter.</param>
         /// <param name="value">The value of parameter.</param>
-        /// <param name="type">The type of parameter.</param>
-        public Parameter(string key, int value, ParameterType type)
-            : this(key, (object)value, type)
+        public Parameter(string key, Complex value)
+            : this(key, value, ParameterType.Normal)
         {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Parameter"/> class.
+        /// </summary>
+        /// <param name="key">The name of parameter.</param>
+        /// <param name="value">The value of parameter.</param>
+        public Parameter(string key, bool value)
+            : this(key, value, ParameterType.Normal)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Parameter"/> class.
+        /// </summary>
+        /// <param name="key">The name of parameter.</param>
+        /// <param name="value">The value of parameter.</param>
+        public Parameter(string key, object value)
+            : this(key, value, ParameterType.Normal)
+        {
+            // TODO: remove?
         }
 
         /// <summary>
@@ -209,9 +230,15 @@ namespace xFunc.Maths.Expressions.Collections
                     throw new ParameterIsReadOnlyException(Resource.ReadOnlyError, Key);
 
                 if (IsNumber(value))
-                    value = Convert.ToDouble(value, CultureInfo.InvariantCulture);
+                {
+                    var d = Convert.ToDouble(value, CultureInfo.InvariantCulture);
 
-                this.value = value;
+                    this.value = new NumberValue(d);
+                }
+                else
+                {
+                    this.value = value;
+                }
             }
         }
 

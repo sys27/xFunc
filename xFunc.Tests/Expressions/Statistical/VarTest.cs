@@ -26,9 +26,9 @@ namespace xFunc.Tests.Expressions.Statistical
         public void OneNumberTest()
         {
             var exp = new Var(new[] { new Number(4) });
-            var result = exp.Execute();
+            var result = (NumberValue)exp.Execute();
 
-            Assert.Equal(double.NaN, result);
+            Assert.True(result.IsNaN);
         }
 
         [Fact]
@@ -36,8 +36,9 @@ namespace xFunc.Tests.Expressions.Statistical
         {
             var exp = new Var(new[] { new Number(4), new Number(9) });
             var result = exp.Execute();
+            var expected = new NumberValue(12.5);
 
-            Assert.Equal(12.5, result);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
@@ -45,8 +46,9 @@ namespace xFunc.Tests.Expressions.Statistical
         {
             var exp = new Var(new[] { new Number(9), Number.Two, new Number(4) });
             var result = exp.Execute();
+            var expected = new NumberValue(13.0);
 
-            Assert.Equal(13.0, result);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
@@ -54,8 +56,9 @@ namespace xFunc.Tests.Expressions.Statistical
         {
             var exp = new Var(new[] { new Vector(new[] { Number.Two, new Number(4), new Number(9) }) });
             var result = exp.Execute();
+            var expected = new NumberValue(13.0);
 
-            Assert.Equal(13.0, result);
+            Assert.Equal(expected, result);
         }
     }
 }

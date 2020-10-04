@@ -27,8 +27,9 @@ namespace xFunc.Tests.Expressions.Statistical
         {
             var exp = new Max(new[] { Number.Two });
             var result = exp.Execute();
+            var expected = new NumberValue(2.0);
 
-            Assert.Equal(2.0, result);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
@@ -36,8 +37,9 @@ namespace xFunc.Tests.Expressions.Statistical
         {
             var exp = new Max(new[] { Number.Two, new Number(4) });
             var result = exp.Execute();
+            var expected = new NumberValue(4.0);
 
-            Assert.Equal(4.0, result);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
@@ -45,8 +47,9 @@ namespace xFunc.Tests.Expressions.Statistical
         {
             var exp = new Max(new[] { new Number(9), Number.Two, new Number(4) });
             var result = exp.Execute();
+            var expected = new NumberValue(9.0);
 
-            Assert.Equal(9.0, result);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
@@ -54,8 +57,9 @@ namespace xFunc.Tests.Expressions.Statistical
         {
             var exp = new Max(new[] { new Vector(new[] { Number.One, Number.Two, new Number(3) }) });
             var result = exp.Execute();
+            var expected = new NumberValue(3.0);
 
-            Assert.Equal(3.0, result);
+            Assert.Equal(expected, result);
         }
     }
 }

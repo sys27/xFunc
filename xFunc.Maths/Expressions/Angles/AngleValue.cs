@@ -25,16 +25,6 @@ namespace xFunc.Maths.Expressions.Angles
         /// <summary>
         /// Initializes a new instance of the <see cref="AngleValue"/> struct.
         /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="unit">The unit of number.</param>
-        public AngleValue(double value, AngleUnit unit)
-            : this(new NumberValue(value), unit)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AngleValue"/> struct.
-        /// </summary>
         /// <param name="angle">The value.</param>
         /// <param name="unit">The unit of number.</param>
         public AngleValue(NumberValue angle, AngleUnit unit)
@@ -49,7 +39,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="value">The value.</param>
         /// <returns>The angle.</returns>
         public static AngleValue Degree(double value)
-            => new AngleValue(value, AngleUnit.Degree);
+            => new AngleValue(new NumberValue(value), AngleUnit.Degree);
 
         /// <summary>
         /// Creates the <see cref="AngleValue"/> struct with <c>Degree</c> unit.
@@ -57,7 +47,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="numberValue">The value.</param>
         /// <returns>The angle.</returns>
         public static AngleValue Degree(NumberValue numberValue)
-            => new AngleValue(numberValue.Number, AngleUnit.Degree);
+            => new AngleValue(numberValue, AngleUnit.Degree);
 
         /// <summary>
         /// Creates the <see cref="AngleValue"/> struct with <c>Radian</c> unit.
@@ -65,7 +55,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="value">The value.</param>
         /// <returns>The angle.</returns>
         public static AngleValue Radian(double value)
-            => new AngleValue(value, AngleUnit.Radian);
+            => new AngleValue(new NumberValue(value), AngleUnit.Radian);
 
         /// <summary>
         /// Creates the <see cref="AngleValue"/> struct with <c>Radian</c> unit.
@@ -73,7 +63,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="numberValue">The value.</param>
         /// <returns>The angle.</returns>
         public static AngleValue Radian(NumberValue numberValue)
-            => new AngleValue(numberValue.Number, AngleUnit.Radian);
+            => new AngleValue(numberValue, AngleUnit.Radian);
 
         /// <summary>
         /// Creates the <see cref="AngleValue"/> struct with <c>Gradian</c> unit.
@@ -81,7 +71,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="value">The value.</param>
         /// <returns>The angle.</returns>
         public static AngleValue Gradian(double value)
-            => new AngleValue(value, AngleUnit.Gradian);
+            => new AngleValue(new NumberValue(value), AngleUnit.Gradian);
 
         /// <summary>
         /// Creates the <see cref="AngleValue"/> struct with <c>Gradian</c> unit.
@@ -89,11 +79,11 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="numberValue">The value.</param>
         /// <returns>The angle.</returns>
         public static AngleValue Gradian(NumberValue numberValue)
-            => new AngleValue(numberValue.Number, AngleUnit.Gradian);
+            => new AngleValue(numberValue, AngleUnit.Gradian);
 
         /// <inheritdoc />
         public bool Equals(AngleValue other)
-            => MathExtensions.Equals(Angle, other.Angle) && Unit == other.Unit;
+            => Angle == other.Angle && Unit == other.Unit;
 
         /// <inheritdoc />
         public override bool Equals(object? obj)
@@ -336,9 +326,10 @@ namespace xFunc.Maths.Expressions.Angles
 
             return Unit switch
             {
+                AngleUnit.Degree => Degree(NormalizeInternal(Angle.Number, degreeFullCircle)),
                 AngleUnit.Radian => Radian(NormalizeInternal(Angle.Number, radianFullCircle)),
                 AngleUnit.Gradian => Gradian(NormalizeInternal(Angle.Number, gradianFullCircle)),
-                _ => Degree(NormalizeInternal(Angle.Number, degreeFullCircle)),
+                _ => throw new InvalidOperationException(),
             };
         }
 
@@ -389,70 +380,70 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns>The result of sine function.</returns>
         public static NumberValue Sin(AngleValue angleValue)
         {
-            var value = angleValue.Normalize().Angle;
+            var angle = angleValue.Normalize().Angle;
 
             // 0
-            if (value == 0)
+            if (angle == 0)
                 return NumberValue.Zero;
 
             // 30
-            if (value == Math.PI / 6)
+            if (angle == Math.PI / 6)
                 return NumberValue.Half;
 
             // 45
-            if (value == Math.PI / 4)
+            if (angle == Math.PI / 4)
                 return NumberValue.Sqrt2By2;
 
             // 60
-            if (value == Math.PI / 3)
+            if (angle == Math.PI / 3)
                 return NumberValue.Sqrt3By2;
 
             // 90
-            if (value == Math.PI / 2)
+            if (angle == Math.PI / 2)
                 return NumberValue.One;
 
             // 120
-            if (value == 2 * Math.PI / 3)
+            if (angle == 2 * Math.PI / 3)
                 return NumberValue.Sqrt3By2;
 
             // 135
-            if (value == 3 * Math.PI / 4)
+            if (angle == 3 * Math.PI / 4)
                 return NumberValue.Sqrt2By2;
 
             // 150
-            if (value == 5 * Math.PI / 6)
+            if (angle == 5 * Math.PI / 6)
                 return NumberValue.Half;
 
             // 180
-            if (value == Math.PI)
+            if (angle == Math.PI)
                 return NumberValue.Zero;
 
             // 210
-            if (value == 7 * Math.PI / 6)
+            if (angle == 7 * Math.PI / 6)
                 return -NumberValue.Half;
 
             // 225
-            if (value == 5 * Math.PI / 4)
+            if (angle == 5 * Math.PI / 4)
                 return -NumberValue.Sqrt2By2;
 
             // 240
-            if (value == 4 * Math.PI / 3)
+            if (angle == 4 * Math.PI / 3)
                 return -NumberValue.Sqrt3By2;
 
             // 270
-            if (value == 3 * Math.PI / 2)
+            if (angle == 3 * Math.PI / 2)
                 return -NumberValue.One;
 
             // 300
-            if (value == 5 * Math.PI / 3)
+            if (angle == 5 * Math.PI / 3)
                 return -NumberValue.Sqrt3By2;
 
             // 315
-            if (value == 7 * Math.PI / 4)
+            if (angle == 7 * Math.PI / 4)
                 return -NumberValue.Sqrt2By2;
 
             // 330
-            if (value == 11 * Math.PI / 6)
+            if (angle == 11 * Math.PI / 6)
                 return -NumberValue.Half;
 
             return new NumberValue(Math.Sin(angleValue.Angle.Number));
@@ -465,70 +456,70 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns>The result of cosine function.</returns>
         public static NumberValue Cos(AngleValue angleValue)
         {
-            var value = angleValue.Normalize().Angle;
+            var angle = angleValue.Normalize().Angle;
 
             // 0
-            if (value == 0)
+            if (angle == 0)
                 return NumberValue.One;
 
             // 30
-            if (value == Math.PI / 6)
+            if (angle == Math.PI / 6)
                 return NumberValue.Sqrt3By2;
 
             // 45
-            if (value == Math.PI / 4)
+            if (angle == Math.PI / 4)
                 return NumberValue.Sqrt2By2;
 
             // 60
-            if (value == Math.PI / 3)
+            if (angle == Math.PI / 3)
                 return NumberValue.Half;
 
             // 90
-            if (value == Math.PI / 2)
+            if (angle == Math.PI / 2)
                 return NumberValue.Zero;
 
             // 120
-            if (value == 2 * Math.PI / 3)
+            if (angle == 2 * Math.PI / 3)
                 return -NumberValue.Half;
 
             // 135
-            if (value == 3 * Math.PI / 4)
+            if (angle == 3 * Math.PI / 4)
                 return -NumberValue.Sqrt2By2;
 
             // 150
-            if (value == 5 * Math.PI / 6)
+            if (angle == 5 * Math.PI / 6)
                 return -NumberValue.Sqrt3By2;
 
             // 180
-            if (value == Math.PI)
+            if (angle == Math.PI)
                 return -NumberValue.One;
 
             // 210
-            if (value == 7 * Math.PI / 6)
+            if (angle == 7 * Math.PI / 6)
                 return -NumberValue.Sqrt3By2;
 
             // 225
-            if (value == 5 * Math.PI / 4)
+            if (angle == 5 * Math.PI / 4)
                 return -NumberValue.Sqrt2By2;
 
             // 240
-            if (value == 4 * Math.PI / 3)
+            if (angle == 4 * Math.PI / 3)
                 return -NumberValue.Half;
 
             // 270
-            if (value == 3 * Math.PI / 2)
+            if (angle == 3 * Math.PI / 2)
                 return NumberValue.Zero;
 
             // 300
-            if (value == 5 * Math.PI / 3)
+            if (angle == 5 * Math.PI / 3)
                 return NumberValue.Half;
 
             // 315
-            if (value == 7 * Math.PI / 4)
+            if (angle == 7 * Math.PI / 4)
                 return NumberValue.Sqrt2By2;
 
             // 330
-            if (value == 11 * Math.PI / 6)
+            if (angle == 11 * Math.PI / 6)
                 return NumberValue.Sqrt3By2;
 
             return new NumberValue(Math.Cos(angleValue.Angle.Number));
@@ -541,70 +532,70 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns>The result of tangent function.</returns>
         public static NumberValue Tan(AngleValue angleValue)
         {
-            var value = angleValue.Normalize().Angle;
+            var angle = angleValue.Normalize().Angle;
 
             // 0
-            if (value == 0)
+            if (angle == 0)
                 return NumberValue.Zero;
 
             // 30
-            if (value == Math.PI / 6)
+            if (angle == Math.PI / 6)
                 return NumberValue.Sqrt3By3;
 
             // 45
-            if (value == Math.PI / 4)
+            if (angle == Math.PI / 4)
                 return NumberValue.One;
 
             // 60
-            if (value == Math.PI / 3)
+            if (angle == Math.PI / 3)
                 return NumberValue.Sqrt3;
 
             // 90
-            if (value == Math.PI / 2)
+            if (angle == Math.PI / 2)
                 return NumberValue.PositiveInfinity;
 
             // 120
-            if (value == 2 * Math.PI / 3)
+            if (angle == 2 * Math.PI / 3)
                 return -NumberValue.Sqrt3;
 
             // 135
-            if (value == 3 * Math.PI / 4)
+            if (angle == 3 * Math.PI / 4)
                 return -NumberValue.One;
 
             // 150
-            if (value == 5 * Math.PI / 6)
+            if (angle == 5 * Math.PI / 6)
                 return -NumberValue.Sqrt3By3;
 
             // 180
-            if (value == Math.PI)
+            if (angle == Math.PI)
                 return NumberValue.Zero;
 
             // 210
-            if (value == 7 * Math.PI / 6)
+            if (angle == 7 * Math.PI / 6)
                 return NumberValue.Sqrt3By3;
 
             // 225
-            if (value == 5 * Math.PI / 4)
+            if (angle == 5 * Math.PI / 4)
                 return NumberValue.One;
 
             // 240
-            if (value == 4 * Math.PI / 3)
+            if (angle == 4 * Math.PI / 3)
                 return NumberValue.Sqrt3;
 
             // 270
-            if (value == 3 * Math.PI / 2)
+            if (angle == 3 * Math.PI / 2)
                 return NumberValue.PositiveInfinity;
 
             // 300
-            if (value == 5 * Math.PI / 3)
+            if (angle == 5 * Math.PI / 3)
                 return -NumberValue.Sqrt3;
 
             // 315
-            if (value == 7 * Math.PI / 4)
+            if (angle == 7 * Math.PI / 4)
                 return -NumberValue.One;
 
             // 330
-            if (value == 11 * Math.PI / 6)
+            if (angle == 11 * Math.PI / 6)
                 return -NumberValue.Sqrt3By3;
 
             return new NumberValue(Math.Tan(angleValue.Angle.Number));
@@ -617,70 +608,70 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns>The result of cotangent function.</returns>
         public static NumberValue Cot(AngleValue angleValue)
         {
-            var value = angleValue.Normalize().Angle;
+            var angle = angleValue.Normalize().Angle;
 
             // 0
-            if (value == 0)
+            if (angle == 0)
                 return NumberValue.PositiveInfinity;
 
             // 30
-            if (value == Math.PI / 6)
+            if (angle == Math.PI / 6)
                 return NumberValue.Sqrt3;
 
             // 45
-            if (value == Math.PI / 4)
+            if (angle == Math.PI / 4)
                 return NumberValue.One;
 
             // 60
-            if (value == Math.PI / 3)
+            if (angle == Math.PI / 3)
                 return NumberValue.Sqrt3By3;
 
             // 90
-            if (value == Math.PI / 2)
+            if (angle == Math.PI / 2)
                 return NumberValue.Zero;
 
             // 120
-            if (value == 2 * Math.PI / 3)
+            if (angle == 2 * Math.PI / 3)
                 return -NumberValue.Sqrt3By3;
 
             // 135
-            if (value == 3 * Math.PI / 4)
+            if (angle == 3 * Math.PI / 4)
                 return -NumberValue.One;
 
             // 150
-            if (value == 5 * Math.PI / 6)
+            if (angle == 5 * Math.PI / 6)
                 return -NumberValue.Sqrt3;
 
             // 180
-            if (value == Math.PI)
+            if (angle == Math.PI)
                 return NumberValue.PositiveInfinity;
 
             // 210
-            if (value == 7 * Math.PI / 6)
+            if (angle == 7 * Math.PI / 6)
                 return NumberValue.Sqrt3;
 
             // 225
-            if (value == 5 * Math.PI / 4)
+            if (angle == 5 * Math.PI / 4)
                 return NumberValue.One;
 
             // 240
-            if (value == 4 * Math.PI / 3)
+            if (angle == 4 * Math.PI / 3)
                 return NumberValue.Sqrt3By3;
 
             // 270
-            if (value == 3 * Math.PI / 2)
+            if (angle == 3 * Math.PI / 2)
                 return NumberValue.Zero;
 
             // 300
-            if (value == 5 * Math.PI / 3)
+            if (angle == 5 * Math.PI / 3)
                 return -NumberValue.Sqrt3;
 
             // 315
-            if (value == 7 * Math.PI / 4)
+            if (angle == 7 * Math.PI / 4)
                 return -NumberValue.One;
 
             // 330
-            if (value == 11 * Math.PI / 6)
+            if (angle == 11 * Math.PI / 6)
                 return -NumberValue.Sqrt3By3;
 
             return new NumberValue(Math.Cos(angleValue.Angle.Number) / Math.Sin(angleValue.Angle.Number));
@@ -693,70 +684,70 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns>The result of secant function.</returns>
         public static NumberValue Sec(AngleValue angleValue)
         {
-            var value = angleValue.Normalize().Angle;
+            var angle = angleValue.Normalize().Angle;
 
             // 0
-            if (value == 0)
+            if (angle == 0)
                 return NumberValue.One;
 
             // 30
-            if (value == Math.PI / 6)
+            if (angle == Math.PI / 6)
                 return NumberValue.Sqrt3By3By2;
 
             // 45
-            if (value == Math.PI / 4)
+            if (angle == Math.PI / 4)
                 return NumberValue.Sqrt2;
 
             // 60
-            if (value == Math.PI / 3)
+            if (angle == Math.PI / 3)
                 return NumberValue.Two;
 
             // 90
-            if (value == Math.PI / 2)
+            if (angle == Math.PI / 2)
                 return NumberValue.PositiveInfinity;
 
             // 120
-            if (value == 2 * Math.PI / 3)
+            if (angle == 2 * Math.PI / 3)
                 return -NumberValue.Two;
 
             // 135
-            if (value == 3 * Math.PI / 4)
+            if (angle == 3 * Math.PI / 4)
                 return -NumberValue.Sqrt2;
 
             // 150
-            if (value == 5 * Math.PI / 6)
+            if (angle == 5 * Math.PI / 6)
                 return -NumberValue.Sqrt3By3By2;
 
             // 180
-            if (value == Math.PI)
+            if (angle == Math.PI)
                 return -NumberValue.One;
 
             // 210
-            if (value == 7 * Math.PI / 6)
+            if (angle == 7 * Math.PI / 6)
                 return -NumberValue.Sqrt3By3By2;
 
             // 225
-            if (value == 5 * Math.PI / 4)
+            if (angle == 5 * Math.PI / 4)
                 return -NumberValue.Sqrt2;
 
             // 240
-            if (value == 4 * Math.PI / 3)
+            if (angle == 4 * Math.PI / 3)
                 return -NumberValue.Two;
 
             // 270
-            if (value == 3 * Math.PI / 2)
+            if (angle == 3 * Math.PI / 2)
                 return NumberValue.PositiveInfinity;
 
             // 300
-            if (value == 5 * Math.PI / 3)
+            if (angle == 5 * Math.PI / 3)
                 return -NumberValue.Two;
 
             // 315
-            if (value == 7 * Math.PI / 4)
+            if (angle == 7 * Math.PI / 4)
                 return NumberValue.Sqrt2;
 
             // 330
-            if (value == 11 * Math.PI / 6)
+            if (angle == 11 * Math.PI / 6)
                 return NumberValue.Sqrt3By3By2;
 
             return new NumberValue(1 / Math.Cos(angleValue.Angle.Number));
@@ -769,70 +760,70 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns>The result of cosecant function.</returns>
         public static NumberValue Csc(AngleValue angleValue)
         {
-            var value = angleValue.Normalize().Angle;
+            var angle = angleValue.Normalize().Angle;
 
             // 0
-            if (value == 0)
+            if (angle == 0)
                 return NumberValue.PositiveInfinity;
 
             // 30
-            if (value == Math.PI / 6)
+            if (angle == Math.PI / 6)
                 return NumberValue.Two;
 
             // 45
-            if (value == Math.PI / 4)
+            if (angle == Math.PI / 4)
                 return NumberValue.Sqrt2;
 
             // 60
-            if (value == Math.PI / 3)
+            if (angle == Math.PI / 3)
                 return NumberValue.Sqrt3By3By2;
 
             // 90
-            if (value == Math.PI / 2)
+            if (angle == Math.PI / 2)
                 return NumberValue.One;
 
             // 120
-            if (value == 2 * Math.PI / 3)
+            if (angle == 2 * Math.PI / 3)
                 return NumberValue.Sqrt3By3By2;
 
             // 135
-            if (value == 3 * Math.PI / 4)
+            if (angle == 3 * Math.PI / 4)
                 return NumberValue.Sqrt2;
 
             // 150
-            if (value == 5 * Math.PI / 6)
+            if (angle == 5 * Math.PI / 6)
                 return NumberValue.Two;
 
             // 180
-            if (value == Math.PI)
+            if (angle == Math.PI)
                 return NumberValue.PositiveInfinity;
 
             // 210
-            if (value == 7 * Math.PI / 6)
+            if (angle == 7 * Math.PI / 6)
                 return -NumberValue.Two;
 
             // 225
-            if (value == 5 * Math.PI / 4)
+            if (angle == 5 * Math.PI / 4)
                 return -NumberValue.Sqrt2;
 
             // 240
-            if (value == 4 * Math.PI / 3)
+            if (angle == 4 * Math.PI / 3)
                 return -NumberValue.Sqrt3By3By2;
 
             // 270
-            if (value == 3 * Math.PI / 2)
+            if (angle == 3 * Math.PI / 2)
                 return -NumberValue.One;
 
             // 300
-            if (value == 5 * Math.PI / 3)
+            if (angle == 5 * Math.PI / 3)
                 return NumberValue.Sqrt3By3By2;
 
             // 315
-            if (value == 7 * Math.PI / 4)
+            if (angle == 7 * Math.PI / 4)
                 return NumberValue.Sqrt2;
 
             // 330
-            if (value == 11 * Math.PI / 6)
+            if (angle == 11 * Math.PI / 6)
                 return NumberValue.Two;
 
             return new NumberValue(1 / Math.Sin(angleValue.Angle.Number));

@@ -31,8 +31,9 @@ namespace xFunc.Tests.Expressions
         public void ExecuteMulNumberByNumberTest()
         {
             var exp = new Mul(Number.Two, Number.Two);
+            var expected = new NumberValue(4.0);
 
-            Assert.Equal(4.0, exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]
@@ -83,8 +84,9 @@ namespace xFunc.Tests.Expressions
                 new Number(4), new Number(5), new Number(6)
             });
             var exp = new Mul(vector1, vector2);
+            var expected = new NumberValue(32.0);
 
-            Assert.Equal(32.0, exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]

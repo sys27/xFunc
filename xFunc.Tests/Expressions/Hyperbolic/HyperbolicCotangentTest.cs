@@ -29,36 +29,40 @@ namespace xFunc.Tests.Expressions.Hyperbolic
         public void ExecuteNumberTest()
         {
             var exp = new Coth(Number.One);
-            var result = (double)exp.Execute();
+            var result = (NumberValue)exp.Execute();
+            var expected = new NumberValue(57.30159715911299);
 
-            Assert.Equal(57.30159715911299, result, 15);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
         public void ExecuteRadianTest()
         {
             var exp = new Coth(AngleValue.Radian(1).AsExpression());
-            var result = (double)exp.Execute();
+            var result = (NumberValue)exp.Execute();
+            var expected = new NumberValue(1.3130352854993312);
 
-            Assert.Equal(1.3130352854993312, result, 15);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
         public void ExecuteDegreeTest()
         {
             var exp = new Coth(AngleValue.Degree(1).AsExpression());
-            var result = (double)exp.Execute();
+            var result = (NumberValue)exp.Execute();
+            var expected = new NumberValue(57.30159715911299);
 
-            Assert.Equal(57.30159715911299, result, 15);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
         public void ExecuteGradianTest()
         {
             var exp = new Coth(AngleValue.Gradian(1).AsExpression());
-            var result = (double)exp.Execute();
+            var result = (NumberValue)exp.Execute();
+            var expected = new NumberValue(63.66721313838742);
 
-            Assert.Equal(63.66721313838742, result, 15);
+            Assert.Equal(expected, result);
         }
 
         [Fact]

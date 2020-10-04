@@ -312,8 +312,7 @@ namespace xFunc.Maths.Analyzers
             return result switch
             {
                 // 0 / 0
-                (Number(var left), Number(var right))
-                    when MathExtensions.Equals(left, 0) && MathExtensions.Equals(right, 0)
+                (Number(var left), Number(var right)) when left == 0 && right == 0
                     => new Number(double.NaN),
 
                 // 0 / x
@@ -325,7 +324,7 @@ namespace xFunc.Maths.Analyzers
                     => throw new DivideByZeroException(),
 
                 // x / 1
-                (var left, Number(var number)) when MathExtensions.Equals(number, 1)
+                (var left, Number(var number)) when number == 1
                     => left,
 
                 // const / const
@@ -422,7 +421,7 @@ namespace xFunc.Maths.Analyzers
             return argument switch
             {
                 // lb(2)
-                Number(var number) when MathExtensions.Equals(number, 2) => Number.One,
+                Number(var number) when number == 2 => Number.One,
                 var arg when IsChanged(exp, arg) => new Lb(arg),
                 _ => exp,
             };
@@ -440,7 +439,7 @@ namespace xFunc.Maths.Analyzers
             return result switch
             {
                 // lg(10)
-                Number(var number) when MathExtensions.Equals(number, 10) => Number.One,
+                Number(var number) when number == 10 => Number.One,
                 var arg when IsChanged(exp, arg) => new Lg(arg),
                 _ => exp,
             };
@@ -492,15 +491,15 @@ namespace xFunc.Maths.Analyzers
                     => Number.Zero,
 
                 // mul by 1
-                (Number(var number), var right) when MathExtensions.Equals(number, 1)
+                (Number(var number), var right) when number == 1
                     => right,
-                (var left, Number(var number)) when MathExtensions.Equals(number, 1)
+                (var left, Number(var number)) when number == 1
                     => left,
 
                 // mul by -1
-                (Number(var number), var right) when MathExtensions.Equals(number, -1)
+                (Number(var number), var right) when number == -1
                     => new UnaryMinus(right),
-                (var left, Number(var number)) when MathExtensions.Equals(number, -1)
+                (var left, Number(var number)) when number == -1
                     => new UnaryMinus(left),
 
                 // const * const
@@ -680,7 +679,7 @@ namespace xFunc.Maths.Analyzers
                     => Number.Zero,
 
                 // x^1
-                (var left, Number(var number)) when MathExtensions.Equals(number, 1)
+                (var left, Number(var number)) when number == 1
                     => left,
 
                 // x ^ log(x, y) -> y
@@ -692,11 +691,11 @@ namespace xFunc.Maths.Analyzers
                     => ln.Argument,
 
                 // 10 ^ lg(y) -> y
-                (Number number, Lg lg) when MathExtensions.Equals(number.Value, 10)
+                (Number number, Lg lg) when number.Value == 10
                     => lg.Argument,
 
                 // 2 ^ lb(y) -> y
-                (Number number, Lb lb) when MathExtensions.Equals(number.Value, 2)
+                (Number number, Lb lb) when number.Value == 2
                     => lb.Argument,
 
                 var (left, right) when IsChanged(exp, left, right)
@@ -714,7 +713,7 @@ namespace xFunc.Maths.Analyzers
             return result switch
             {
                 // root(x, 1)
-                (var left, Number(var number)) when MathExtensions.Equals(number, 1)
+                (var left, Number(var number)) when number == 1
                     => left,
 
                 var (left, right) when IsChanged(exp, left, right)

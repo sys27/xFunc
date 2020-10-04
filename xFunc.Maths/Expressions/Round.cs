@@ -58,7 +58,7 @@ namespace xFunc.Maths.Expressions
         public override object Execute(ExpressionParameters? parameters)
         {
             var result = Argument.Execute(parameters);
-            var digits = Digits?.Execute(parameters) ?? 0.0;
+            var digits = Digits?.Execute(parameters) ?? new NumberValue(0.0);
 
             return (result, digits) switch
             {

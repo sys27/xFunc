@@ -30,16 +30,18 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTest1()
         {
             var exp = new LCM(new Number(12), new Number(16));
+            var expected = new NumberValue(48.0);
 
-            Assert.Equal(48.0, exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]
         public void ExecuteTest2()
         {
             var exp = new LCM(new IExpression[] { new Number(4), new Number(16), new Number(8) });
+            var expected = new NumberValue(16.0);
 
-            Assert.Equal(16.0, exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]

@@ -27,8 +27,9 @@ namespace xFunc.Tests.Expressions
         public void CalculateRootTest1()
         {
             var exp = new Root(new Number(8), new Number(3));
+            var expected = new NumberValue(Math.Pow(8, 1.0 / 3.0));
 
-            Assert.Equal(Math.Pow(8, 1.0 / 3.0), exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]
@@ -36,7 +37,7 @@ namespace xFunc.Tests.Expressions
         {
             var exp = new Root(new Number(-8), new Number(3));
 
-            Assert.Equal(-2.0, exp.Execute());
+            Assert.Equal(new NumberValue(-2.0), exp.Execute());
         }
 
         [Fact]

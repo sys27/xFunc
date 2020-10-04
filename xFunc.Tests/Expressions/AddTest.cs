@@ -31,16 +31,18 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTestNumber1()
         {
             var exp = new Add(Number.One, Number.Two);
+            var expected = new NumberValue(3.0);
 
-            Assert.Equal(3.0, exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]
         public void ExecuteTestNumber2()
         {
             var exp = new Add(new Number(-3), Number.Two);
+            var expected = new NumberValue(-1.0);
 
-            Assert.Equal(-1.0, exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]

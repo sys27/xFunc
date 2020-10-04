@@ -41,7 +41,7 @@ namespace xFunc.Maths.Expressions.Programming
 
             return (leftResult, rightResult) switch
             {
-                (double left, double right) => left.RightShift(right),
+                (NumberValue left, NumberValue right) => NumberValue.RightShift(left, right),
                 _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };
         }

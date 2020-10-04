@@ -36,14 +36,14 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <inheritdoc />
         public override object Execute(ExpressionParameters? parameters)
         {
-            var left = Left.Execute(parameters);
-            var right = Right.Execute(parameters);
+            var leftResult = Left.Execute(parameters);
+            var rightResult = Right.Execute(parameters);
 
-            return (left, right) switch
+            return (leftResult, rightResult) switch
             {
-                (bool leftBool, bool rightBool) => leftBool | rightBool,
-                (double leftDouble, double rightDouble) => leftDouble.Or(rightDouble),
-                _ => throw new ResultIsNotSupportedException(this, left, right),
+                (bool left, bool right) => left | right,
+                (NumberValue left, NumberValue right) => left | right,
+                _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };
         }
 

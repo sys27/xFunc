@@ -52,7 +52,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
 
             return result switch
             {
-                double number => (Complex)number,
+                NumberValue number => (Complex)number.Value,
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

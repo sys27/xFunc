@@ -531,6 +531,111 @@ namespace xFunc.Maths.Expressions
             => new NumberValue(left.Value % right.Value);
 
         /// <summary>
+        /// Calculates NOT operation.
+        /// </summary>
+        /// <param name="number">The left operand.</param>
+        /// <returns>The result of NOT operation.</returns>
+        /// <exception cref="InvalidOperationException"><paramref name="number"/> is not an integer.</exception>
+        public static NumberValue operator ~(NumberValue number)
+        {
+            if (!IsInt(number))
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(number));
+
+            return new NumberValue(~(int)number.Value);
+        }
+
+        /// <summary>
+        /// Calculates AND operation between two double values.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>The result of AND operation.</returns>
+        /// <exception cref="InvalidOperationException"><paramref name="left"/> or <paramref name="right"/> is not an integer.</exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static NumberValue operator &(NumberValue left, NumberValue right)
+        {
+            if (!IsInt(left))
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(left));
+            if (!IsInt(right))
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(right));
+
+            return new NumberValue((int)left.Value & (int)right.Value);
+        }
+
+        /// <summary>
+        /// Calculates OR operation between two double values.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>The result of OR operation.</returns>
+        /// <exception cref="InvalidOperationException"><paramref name="left"/> or <paramref name="right"/> is not an integer.</exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static NumberValue operator |(NumberValue left, NumberValue right)
+        {
+            if (!IsInt(left))
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(left));
+            if (!IsInt(right))
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(right));
+
+            return new NumberValue((int)left.Value | (int)right.Value);
+        }
+
+        /// <summary>
+        /// Calculates XOR operation between two double values.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>The result of XOR operation.</returns>
+        /// <exception cref="InvalidOperationException"><paramref name="left"/> or <paramref name="right"/> is not an integer.</exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static NumberValue operator ^(NumberValue left, NumberValue right)
+        {
+            if (!IsInt(left))
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(left));
+            if (!IsInt(right))
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(right));
+
+            return new NumberValue((int)left.Value ^ (int)right.Value);
+        }
+
+        /// <summary>
+        /// Shifts <paramref name="left"/> by number of bits from <paramref name="right"/>.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>The result of '&lt;&lt;' operation.</returns>
+        /// <exception cref="InvalidOperationException"><paramref name="left"/> or <paramref name="right"/> is not an integer.</exception>
+        public static NumberValue LeftShift(NumberValue left, NumberValue right)
+        {
+            if (!IsInt(left))
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(left));
+            if (!IsInt(right))
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(right));
+
+            return new NumberValue((int)left.Value << (int)right.Value);
+        }
+
+        /// <summary>
+        /// Shifts <paramref name="left"/> by number of bits from <paramref name="right"/>.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>The result of '&gt;&gt;' operation.</returns>
+        /// <exception cref="InvalidOperationException"><paramref name="left"/> or <paramref name="right"/> is not an integer.</exception>
+        public static NumberValue RightShift(NumberValue left, NumberValue right)
+        {
+            if (!IsInt(left))
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(left));
+            if (!IsInt(right))
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(right));
+
+            return new NumberValue((int)left.Value >> (int)right.Value);
+        }
+
+        private static bool IsInt(NumberValue number)
+            => Math.Abs(number.Value % 1) <= Epsilon;
+
+        /// <summary>
         /// Returns the absolute value of a double-precision floating-point number.
         /// </summary>
         /// <param name="numberValue">A number that is greater than or equal to <see cref="double.MinValue"/>, but less than or equal to <see cref="double.MaxValue"/>.</param>
@@ -727,7 +832,7 @@ namespace xFunc.Maths.Expressions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue Round(NumberValue number, NumberValue digits)
         {
-            if (!digits.Value.IsInt())
+            if (!IsInt(digits))
                 throw new InvalidOperationException(Resource.ValueIsNotInteger);
 
             var rounded = Math.Round(number.Value, (int)digits.Value, MidpointRounding.AwayFromZero);
@@ -766,12 +871,10 @@ namespace xFunc.Maths.Expressions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToBin(NumberValue numberValue)
         {
-            // TODO:
-            var number = numberValue.Value;
-            if (!number.IsInt())
+            if (!IsInt(numberValue))
                 throw new ArgumentException(Resource.ValueIsNotInteger, nameof(numberValue));
 
-            var result = Convert.ToString((int)number, 2);
+            var result = Convert.ToString((int)numberValue.Value, 2);
             result = PadNumber(result, 8);
 
             return $"0b{result}";
@@ -785,11 +888,10 @@ namespace xFunc.Maths.Expressions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToOct(NumberValue numberValue)
         {
-            var number = numberValue.Value;
-            if (!number.IsInt())
+            if (!IsInt(numberValue))
                 throw new ArgumentException(Resource.ValueIsNotInteger, nameof(numberValue));
 
-            return $"0{Convert.ToString((int)number, 8)}";
+            return $"0{Convert.ToString((int)numberValue.Value, 8)}";
         }
 
         /// <summary>
@@ -800,11 +902,10 @@ namespace xFunc.Maths.Expressions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToHex(NumberValue numberValue)
         {
-            var number = numberValue.Value;
-            if (!number.IsInt())
+            if (!IsInt(numberValue))
                 throw new ArgumentException(Resource.ValueIsNotInteger, nameof(numberValue));
 
-            var result = Convert.ToString((int)number, 16).ToUpperInvariant();
+            var result = Convert.ToString((int)numberValue.Value, 16).ToUpperInvariant();
             result = PadNumber(result, 2);
 
             return $"0x{result}";

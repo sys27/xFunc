@@ -34,8 +34,8 @@ namespace xFunc.Maths.Expressions.Programming
         }
 
         /// <inheritdoc />
-        protected override object Execute(double variableValue, double value)
-            => variableValue.RightShift(value);
+        protected override object Execute(NumberValue variableValue, NumberValue value)
+            => NumberValue.RightShift(variableValue, value);
 
         /// <inheritdoc />
         private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)

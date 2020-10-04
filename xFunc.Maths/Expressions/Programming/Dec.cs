@@ -33,7 +33,7 @@ namespace xFunc.Maths.Expressions.Programming
         }
 
         /// <inheritdoc />
-        protected override object Execute(double value) => value - 1;
+        protected override object Execute(NumberValue number) => number - 1;
 
         /// <inheritdoc />
         private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)

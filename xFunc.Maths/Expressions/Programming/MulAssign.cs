@@ -34,7 +34,7 @@ namespace xFunc.Maths.Expressions.Programming
         }
 
         /// <inheritdoc />
-        protected override object Execute(double variableValue, double value)
+        protected override object Execute(NumberValue variableValue, NumberValue value)
             => variableValue * value;
 
         /// <inheritdoc />

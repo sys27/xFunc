@@ -40,8 +40,8 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
 
             return arg switch
             {
-                bool boolArg => !boolArg,
-                double doubleArg => doubleArg.Not(),
+                bool boolean => !boolean,
+                NumberValue number => ~number,
                 _ => throw new ResultIsNotSupportedException(this, arg),
             };
         }

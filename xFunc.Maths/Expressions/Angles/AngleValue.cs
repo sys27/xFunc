@@ -487,6 +487,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <summary>
         /// Gets a value.
         /// </summary>
+        // TODO: NumberValue
         public double Value { get; }
 
         /// <summary>

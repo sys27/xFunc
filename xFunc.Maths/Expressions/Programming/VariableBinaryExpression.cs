@@ -69,11 +69,11 @@ namespace xFunc.Maths.Expressions.Programming
                 throw new ArgumentNullException(nameof(parameters));
 
             var variableResult = Variable.Execute(parameters);
-            if (variableResult is double variableValue)
+            if (variableResult is NumberValue variable)
             {
                 var rightResult = Value.Execute(parameters);
-                if (rightResult is double value)
-                    return parameters.Variables[Variable.Name] = Execute(variableValue, value);
+                if (rightResult is NumberValue number)
+                    return parameters.Variables[Variable.Name] = Execute(variable, number);
 
                 throw new ResultIsNotSupportedException(this, rightResult);
             }
@@ -89,7 +89,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        protected abstract object Execute(double variableValue, double value);
+        protected abstract object Execute(NumberValue variableValue, NumberValue value);
 
         /// <inheritdoc />
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)

@@ -50,7 +50,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         {
             var result = Argument.Execute(parameters);
             if (result is Complex complex)
-                return complex.Imaginary;
+                return new NumberValue(complex.Imaginary);
 
             throw new ResultIsNotSupportedException(this, result);
         }

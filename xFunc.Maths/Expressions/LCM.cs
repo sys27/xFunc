@@ -58,14 +58,14 @@ namespace xFunc.Maths.Expressions
         /// <inheritdoc />
         public override object Execute(ExpressionParameters? parameters)
         {
-            var lcm = 1.0;
+            var lcm = new NumberValue(1.0);
             foreach (var argument in Arguments)
             {
                 var result = argument.Execute(parameters);
 
                 lcm = result switch
                 {
-                    double number => MathExtensions.LCM(lcm, number),
+                    NumberValue number => NumberValue.LCM(lcm, number),
                     _ => throw new ResultIsNotSupportedException(this, result),
                 };
             }

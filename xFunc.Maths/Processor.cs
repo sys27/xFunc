@@ -111,9 +111,9 @@ namespace xFunc.Maths
             exp.Analyze(typeAnalyzer);
 
             var result = exp.Execute(Parameters);
-            if (result is double number)
+            if (result is NumberValue number)
             {
-                return new NumberResult(number);
+                return new NumberResult(number.Value);
             }
 
             if (result is AngleValue angle)

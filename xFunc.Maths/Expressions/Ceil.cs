@@ -14,7 +14,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
@@ -53,7 +52,7 @@ namespace xFunc.Maths.Expressions
 
             return result switch
             {
-                double number => Math.Ceiling(number),
+                NumberValue number => NumberValue.Ceiling(number),
                 AngleValue angle => AngleValue.Ceiling(angle),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };

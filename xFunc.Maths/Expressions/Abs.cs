@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Collections.Immutable;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
@@ -55,7 +54,7 @@ namespace xFunc.Maths.Expressions
 
             return result switch
             {
-                double number => Math.Abs(number),
+                NumberValue number => NumberValue.Abs(number),
                 AngleValue angle => AngleValue.Abs(angle),
                 Complex complex => Complex.Abs(complex),
                 Vector vector => vector.Abs(parameters),

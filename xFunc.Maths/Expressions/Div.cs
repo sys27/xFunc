@@ -53,14 +53,14 @@ namespace xFunc.Maths.Expressions
 
             return (leftResult, rightResult) switch
             {
-                (double left, double right) => left / right,
+                (NumberValue left, NumberValue right) => left / right,
 
-                (double left, AngleValue right) => left / right,
-                (AngleValue left, double right) => left / right,
+                (NumberValue left, AngleValue right) => left / right,
+                (AngleValue left, NumberValue right) => left / right,
                 (AngleValue left, AngleValue right) => left / right,
 
-                (double left, Complex right) => left / right,
-                (Complex left, double right) => left / right,
+                (NumberValue left, Complex right) => left / right,
+                (Complex left, NumberValue right) => left / right,
                 (Complex left, Complex right) => (object)(left / right),
 
                 _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),

@@ -58,14 +58,14 @@ namespace xFunc.Maths.Expressions
         /// <inheritdoc />
         public override object Execute(ExpressionParameters? parameters)
         {
-            var gcd = 0.0;
+            var gcd = new NumberValue(0.0);
             foreach (var argument in Arguments)
             {
                 var result = argument.Execute(parameters);
 
                 gcd = result switch
                 {
-                    double number => MathExtensions.GCD(gcd, number),
+                    NumberValue number => NumberValue.GCD(gcd, number),
                     _ => throw new ResultIsNotSupportedException(this, result),
                 };
             }

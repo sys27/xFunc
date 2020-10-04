@@ -226,29 +226,6 @@ namespace xFunc.Maths
         public static double Acsch(double d)
             => Math.Log(1 / d + Math.Sqrt(1 / d * d + 1));
 
-        /// <summary>
-        /// Computes the polynomial greatest common divisor.
-        /// </summary>
-        /// <param name="a">The first numbers.</param>
-        /// <param name="b">The second numbers.</param>
-        /// <returns>The greatest common divisor.</returns>
-        public static double GCD(double a, double b)
-        {
-            while (!Equals(b, 0.0))
-                b = a % (a = b);
-
-            return a;
-        }
-
-        /// <summary>
-        /// Computes the polynomial greatest common divisor.
-        /// </summary>
-        /// <param name="a">The first numbers.</param>
-        /// <param name="b">The second numbers.</param>
-        /// <returns>The least common multiple.</returns>
-        public static double LCM(double a, double b)
-            => Math.Abs(a * b) / GCD(a, b);
-
         private static string PadNumber(string number, int padding)
         {
             var padLength = number.Length % padding;
@@ -301,24 +278,6 @@ namespace xFunc.Maths
             result = PadNumber(result, 2);
 
             return $"0x{result}";
-        }
-
-        /// <summary>
-        /// Computes the factorial.
-        /// </summary>
-        /// <param name="n">An argument.</param>
-        /// <returns>The factorial.</returns>
-        public static double Fact(double n)
-        {
-            if (n < 0)
-                return double.NaN;
-
-            var result = 1.0;
-
-            for (var i = n; i > 0; i--)
-                result *= i;
-
-            return result;
         }
 
         /// <summary>

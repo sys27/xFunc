@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
@@ -50,7 +49,7 @@ namespace xFunc.Maths.Expressions
 
             return result switch
             {
-                double number => MathExtensions.Fact(Math.Round(number)),
+                NumberValue number => NumberValue.Factorial(number),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

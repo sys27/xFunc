@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Collections.Immutable;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
@@ -51,8 +50,8 @@ namespace xFunc.Maths.Expressions
 
             return result switch
             {
-                double number => Math.Exp(number),
-                Complex complex => (object)Complex.Exp(complex),
+                NumberValue number => NumberValue.Exp(number),
+                Complex complex => (object)Complex.Exp(complex), // TODO:
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

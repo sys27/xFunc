@@ -54,15 +54,15 @@ namespace xFunc.Maths.Expressions
 
             return (leftResult, rightResult) switch
             {
-                (double left, double rightDouble) => left - rightDouble,
+                (NumberValue left, NumberValue right) => left - right,
 
-                (double left, AngleValue right) => left - right,
-                (AngleValue left, double right) => left - right,
+                (NumberValue left, AngleValue right) => left - right,
+                (AngleValue left, NumberValue right) => left - right,
                 (AngleValue left, AngleValue right) => left - right,
 
-                (double left, Complex rightComplex) => left - rightComplex,
-                (Complex left, double rightDouble) => left - rightDouble,
-                (Complex left, Complex rightComplex) => left - rightComplex,
+                (NumberValue left, Complex right) => left - right,
+                (Complex left, NumberValue right) => left - right,
+                (Complex left, Complex right) => left - right,
 
                 (Vector left, Vector right) => left.Sub(right, parameters),
                 (Matrix left, Matrix right) => left.Sub(right, parameters),

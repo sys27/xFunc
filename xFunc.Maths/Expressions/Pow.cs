@@ -52,9 +52,9 @@ namespace xFunc.Maths.Expressions
 
             return (leftResult, rightResult) switch
             {
-                (double leftNumber, double rightNumber) => MathExtensions.Pow(leftNumber, rightNumber),
-                (Complex leftComplex, double rightNumber) => Complex.Pow(leftComplex, rightNumber),
-                (Complex leftComplex, Complex rightComplex) => Complex.Pow(leftComplex, rightComplex),
+                (NumberValue left, NumberValue right) => NumberValue.Pow(left, right),
+                (Complex left, NumberValue right) => NumberValue.Pow(left, right),
+                (Complex left, Complex right) => Complex.Pow(left, right),
                 _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };
         }

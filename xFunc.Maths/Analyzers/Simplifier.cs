@@ -180,14 +180,14 @@ namespace xFunc.Maths.Analyzers
             return result switch
             {
                 // plus zero
-                (Number(var number), _) when MathExtensions.Equals(number, 0)
+                (Number(var number), _) when number == 0
                     => exp.Right,
-                (_, Number(var number)) when MathExtensions.Equals(number, 0)
+                (_, Number(var number)) when number == 0
                     => exp.Left,
 
                 // const + const
                 (Number left, Number right)
-                    => new Number(left + right),
+                    => new Number(left.Value + right.Value),
                 (Number left, Angle right)
                     => (left.Value + right.Value).AsExpression(),
                 (Angle left, Number right)
@@ -317,11 +317,11 @@ namespace xFunc.Maths.Analyzers
                     => new Number(double.NaN),
 
                 // 0 / x
-                (Number(var number), _) when MathExtensions.Equals(number, 0)
+                (Number(var number), _) when number == 0
                     => Number.Zero,
 
                 // x / 0
-                (_, Number(var number)) when MathExtensions.Equals(number, 0)
+                (_, Number(var number)) when number == 0
                     => throw new DivideByZeroException(),
 
                 // x / 1
@@ -486,9 +486,9 @@ namespace xFunc.Maths.Analyzers
             return result switch
             {
                 // mul by zero
-                (Number(var number), _) when MathExtensions.Equals(number, 0)
+                (Number(var number), _) when number == 0
                     => Number.Zero,
-                (_, Number(var number)) when MathExtensions.Equals(number, 0)
+                (_, Number(var number)) when number == 0
                     => Number.Zero,
 
                 // mul by 1
@@ -672,11 +672,11 @@ namespace xFunc.Maths.Analyzers
             return result switch
             {
                 // x^0
-                (_, Number(var number)) when MathExtensions.Equals(number, 0)
+                (_, Number(var number)) when number == 0
                     => Number.One,
 
                 // 0^x
-                (Number(var number), _) when MathExtensions.Equals(number, 0)
+                (Number(var number), _) when number == 0
                     => Number.Zero,
 
                 // x^1
@@ -744,14 +744,14 @@ namespace xFunc.Maths.Analyzers
             return result switch
             {
                 // plus zero
-                (Number(var number), var right) when MathExtensions.Equals(number, 0)
+                (Number(var number), var right) when number == 0
                     => Analyze(new UnaryMinus(right)),
-                (var left, Number(var number)) when MathExtensions.Equals(number, 0)
+                (var left, Number(var number)) when number == 0
                     => left,
 
                 // const - const
                 (Number left, Number right)
-                    => new Number(left - right),
+                    => new Number(left.Value - right.Value),
                 (Number left, Angle right)
                     => (left.Value - right.Value).AsExpression(),
                 (Angle left, Number right)

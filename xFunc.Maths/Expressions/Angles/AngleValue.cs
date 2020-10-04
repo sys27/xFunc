@@ -43,6 +43,14 @@ namespace xFunc.Maths.Expressions.Angles
             => new AngleValue(value, AngleUnit.Degree);
 
         /// <summary>
+        /// Creates the <see cref="AngleValue"/> struct with <c>Degree</c> unit.
+        /// </summary>
+        /// <param name="numberValue">The value.</param>
+        /// <returns>The angle.</returns>
+        public static AngleValue Degree(NumberValue numberValue)
+            => new AngleValue(numberValue.Value, AngleUnit.Degree);
+
+        /// <summary>
         /// Creates the <see cref="AngleValue"/> struct with <c>Radian</c> unit.
         /// </summary>
         /// <param name="value">The value.</param>
@@ -51,12 +59,28 @@ namespace xFunc.Maths.Expressions.Angles
             => new AngleValue(value, AngleUnit.Radian);
 
         /// <summary>
+        /// Creates the <see cref="AngleValue"/> struct with <c>Radian</c> unit.
+        /// </summary>
+        /// <param name="numberValue">The value.</param>
+        /// <returns>The angle.</returns>
+        public static AngleValue Radian(NumberValue numberValue)
+            => new AngleValue(numberValue.Value, AngleUnit.Radian);
+
+        /// <summary>
         /// Creates the <see cref="AngleValue"/> struct with <c>Gradian</c> unit.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The angle.</returns>
         public static AngleValue Gradian(double value)
             => new AngleValue(value, AngleUnit.Gradian);
+
+        /// <summary>
+        /// Creates the <see cref="AngleValue"/> struct with <c>Gradian</c> unit.
+        /// </summary>
+        /// <param name="numberValue">The value.</param>
+        /// <returns>The angle.</returns>
+        public static AngleValue Gradian(NumberValue numberValue)
+            => new AngleValue(numberValue.Value, AngleUnit.Gradian);
 
         /// <inheritdoc />
         public bool Equals(AngleValue other)

@@ -52,7 +52,7 @@ namespace xFunc.Maths.Expressions
 
             return result switch
             {
-                double number => Math.Log10(number),
+                NumberValue number => NumberValue.Lg(number),
                 Complex complex => (object)Complex.Log10(complex),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };

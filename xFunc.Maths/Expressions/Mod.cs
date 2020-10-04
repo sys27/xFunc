@@ -42,7 +42,7 @@ namespace xFunc.Maths.Expressions
 
             return (leftResult, rightResult) switch
             {
-                (double leftNumber, double rightNumber) => leftNumber % rightNumber,
+                (NumberValue left, NumberValue right) => left % right,
                 _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };
         }

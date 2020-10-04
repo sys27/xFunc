@@ -96,7 +96,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <param name="number">The number.</param>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>The product of matrices.</returns>
-        public static Vector Mul(this Vector vector, Number number, ExpressionParameters? parameters)
+        public static Vector Mul(this Vector vector, NumberValue number, ExpressionParameters? parameters)
         {
             var numbers = ImmutableArray.CreateBuilder<IExpression>(vector.ParametersCount);
 
@@ -184,7 +184,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <param name="number">The number.</param>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>The product of matrix and number.</returns>
-        public static Matrix Mul(this Matrix matrix, Number number, ExpressionParameters? parameters)
+        public static Matrix Mul(this Matrix matrix, NumberValue number, ExpressionParameters? parameters)
         {
             var vectors = ImmutableArray.CreateBuilder<Vector>(matrix.Rows);
 

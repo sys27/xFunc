@@ -24,7 +24,12 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the number value.
     /// </summary>
-    public readonly struct NumberValue : IEquatable<NumberValue>, IComparable<NumberValue>, IComparable
+    public readonly struct NumberValue :
+        IEquatable<NumberValue>,
+        IEquatable<double>,
+        IComparable<NumberValue>,
+        IComparable<double>,
+        IComparable
     {
         /// <summary>
         /// The constant which is used to compare two double numbers.
@@ -43,6 +48,10 @@ namespace xFunc.Maths.Expressions
             => Math.Abs(Value - other.Value) < Epsilon;
 
         /// <inheritdoc />
+        public bool Equals(double other)
+            => Math.Abs(Value - other) < Epsilon;
+
+        /// <inheritdoc />
         public override bool Equals(object? obj)
             => obj is NumberValue other && Equals(other);
 
@@ -53,6 +62,10 @@ namespace xFunc.Maths.Expressions
         /// <inheritdoc />
         public int CompareTo(NumberValue other)
             => Value.CompareTo(other.Value);
+
+        /// <inheritdoc />
+        public int CompareTo(double other)
+            => Value.CompareTo(other);
 
         /// <inheritdoc />
         public int CompareTo(object? obj)
@@ -80,6 +93,26 @@ namespace xFunc.Maths.Expressions
             => left.Equals(right);
 
         /// <summary>
+        /// Determines whether two specified instances are equal.
+        /// </summary>
+        /// <param name="left">The first object to compare.</param>
+        /// <param name="right">The second object to compare.</param>
+        /// <returns><c>true</c> if <paramref name="left"/> is equal to <paramref name="right"/>; otherwise, <c>false</c>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(NumberValue left, double right)
+            => left.Equals(right);
+
+        /// <summary>
+        /// Determines whether two specified instances are equal.
+        /// </summary>
+        /// <param name="left">The first object to compare.</param>
+        /// <param name="right">The second object to compare.</param>
+        /// <returns><c>true</c> if <paramref name="left"/> is equal to <paramref name="right"/>; otherwise, <c>false</c>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(double left, NumberValue right)
+            => right.Equals(left);
+
+        /// <summary>
         /// Determines whether two specified instances of <see cref="NumberValue"/> are not equal.
         /// </summary>
         /// <param name="left">The first object to compare.</param>
@@ -90,6 +123,26 @@ namespace xFunc.Maths.Expressions
             => !left.Equals(right);
 
         /// <summary>
+        /// Determines whether two specified instances are not equal.
+        /// </summary>
+        /// <param name="left">The first object to compare.</param>
+        /// <param name="right">The second object to compare.</param>
+        /// <returns><c>true</c> if <paramref name="left"/> is not equal to <paramref name="right"/>; otherwise, <c>false</c>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(NumberValue left, double right)
+            => !left.Equals(right);
+
+        /// <summary>
+        /// Determines whether two specified instances are not equal.
+        /// </summary>
+        /// <param name="left">The first object to compare.</param>
+        /// <param name="right">The second object to compare.</param>
+        /// <returns><c>true</c> if <paramref name="left"/> is not equal to <paramref name="right"/>; otherwise, <c>false</c>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(double left, NumberValue right)
+            => !right.Equals(left);
+
+        /// <summary>
         /// Indicates whether <paramref name="left"/> parameter
         /// is less than the <paramref name="right"/> parameter.
         /// </summary>
@@ -98,6 +151,17 @@ namespace xFunc.Maths.Expressions
         /// <returns><c>true</c> if the <paramref name="left"/> parameter is less than the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator <(NumberValue left, NumberValue right)
+            => left.CompareTo(right) < 0;
+
+        /// <summary>
+        /// Indicates whether <paramref name="left"/> parameter
+        /// is less than the <paramref name="right"/> parameter.
+        /// </summary>
+        /// <param name="left">The first object to compare.</param>
+        /// <param name="right">The second object to compare.</param>
+        /// <returns><c>true</c> if the <paramref name="left"/> parameter is less than the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator <(NumberValue left, double right)
             => left.CompareTo(right) < 0;
 
         /// <summary>
@@ -113,6 +177,17 @@ namespace xFunc.Maths.Expressions
 
         /// <summary>
         /// Indicates whether <paramref name="left"/> parameter
+        /// is greater than the <paramref name="right"/> parameter.
+        /// </summary>
+        /// <param name="left">The first object to compare.</param>
+        /// <param name="right">The second object to compare.</param>
+        /// <returns><c>true</c> if the <paramref name="left"/> parameter is greater than the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator >(NumberValue left, double right)
+            => left.CompareTo(right) > 0;
+
+        /// <summary>
+        /// Indicates whether <paramref name="left"/> parameter
         /// is less than or equal to the <paramref name="right"/> parameter.
         /// </summary>
         /// <param name="left">The first object to compare.</param>
@@ -124,6 +199,17 @@ namespace xFunc.Maths.Expressions
 
         /// <summary>
         /// Indicates whether <paramref name="left"/> parameter
+        /// is less than or equal to the <paramref name="right"/> parameter.
+        /// </summary>
+        /// <param name="left">The first object to compare.</param>
+        /// <param name="right">The second object to compare.</param>
+        /// <returns><c>true</c> if the <paramref name="left"/> parameter is less than or equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator <=(NumberValue left, double right)
+            => left.CompareTo(right) <= 0;
+
+        /// <summary>
+        /// Indicates whether <paramref name="left"/> parameter
         /// is greater than or equal to the <paramref name="right"/> parameter.
         /// </summary>
         /// <param name="left">The first object to compare.</param>
@@ -131,6 +217,17 @@ namespace xFunc.Maths.Expressions
         /// <returns><c>true</c> if the <paramref name="left"/> parameter is greater than or equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator >=(NumberValue left, NumberValue right)
+            => left.CompareTo(right) >= 0;
+
+        /// <summary>
+        /// Indicates whether <paramref name="left"/> parameter
+        /// is greater than or equal to the <paramref name="right"/> parameter.
+        /// </summary>
+        /// <param name="left">The first object to compare.</param>
+        /// <param name="right">The second object to compare.</param>
+        /// <returns><c>true</c> if the <paramref name="left"/> parameter is greater than or equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator >=(NumberValue left, double right)
             => left.CompareTo(right) >= 0;
 
         /// <summary>
@@ -151,6 +248,26 @@ namespace xFunc.Maths.Expressions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue operator +(NumberValue left, NumberValue right)
             => new NumberValue(left.Value + right.Value);
+
+        /// <summary>
+        /// Adds <see cref="NumberValue"/> and <see cref="double"/>.
+        /// </summary>
+        /// <param name="left">The first object to add.</param>
+        /// <param name="right">The second object to add.</param>
+        /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static NumberValue operator +(NumberValue left, double right)
+            => new NumberValue(left.Value + right);
+
+        /// <summary>
+        /// Adds <see cref="double"/> and <see cref="NumberValue"/>.
+        /// </summary>
+        /// <param name="left">The first object to add.</param>
+        /// <param name="right">The second object to add.</param>
+        /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static NumberValue operator +(double left, NumberValue right)
+            => new NumberValue(left + right.Value);
 
         /// <summary>
         /// Adds <see cref="AngleValue"/> and <see cref="NumberValue"/>.
@@ -203,6 +320,66 @@ namespace xFunc.Maths.Expressions
             => new NumberValue(left.Value - right.Value);
 
         /// <summary>
+        /// Subtracts <see cref="NumberValue"/> and <see cref="double"/>.
+        /// </summary>
+        /// <param name="left">The first object to sub.</param>
+        /// <param name="right">The second object to sub.</param>
+        /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static NumberValue operator -(NumberValue left, double right)
+            => new NumberValue(left.Value - right);
+
+        /// <summary>
+        /// Subtracts <see cref="double"/> and <see cref="NumberValue"/>.
+        /// </summary>
+        /// <param name="left">The first object to sub.</param>
+        /// <param name="right">The second object to sub.</param>
+        /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static NumberValue operator -(double left, NumberValue right)
+            => new NumberValue(left - right.Value);
+
+        /// <summary>
+        /// Subtracts <see cref="NumberValue"/> and <see cref="AngleValue"/>.
+        /// </summary>
+        /// <param name="left">The first object to sub.</param>
+        /// <param name="right">The second object to sub.</param>
+        /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static AngleValue operator -(NumberValue left, AngleValue right)
+            => new AngleValue(left.Value - right.Value, right.Unit);
+
+        /// <summary>
+        /// Subtracts <see cref="AngleValue"/> and <see cref="NumberValue"/>.
+        /// </summary>
+        /// <param name="left">The first object to sub.</param>
+        /// <param name="right">The second object to sub.</param>
+        /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static AngleValue operator -(AngleValue left, NumberValue right)
+            => new AngleValue(left.Value - right.Value, left.Unit);
+
+        /// <summary>
+        /// Subtracts <see cref="NumberValue"/> and <see cref="Complex"/>.
+        /// </summary>
+        /// <param name="left">The first object to sub.</param>
+        /// <param name="right">The second object to sub.</param>
+        /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Complex operator -(NumberValue left, Complex right)
+            => left.Value - right;
+
+        /// <summary>
+        /// Subtracts <see cref="Complex"/> and <see cref="NumberValue"/>.
+        /// </summary>
+        /// <param name="left">The first object to sub.</param>
+        /// <param name="right">The second object to sub.</param>
+        /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Complex operator -(Complex left, NumberValue right)
+            => left - right.Value;
+
+        /// <summary>
         /// Multiplies two objects of <see cref="NumberValue"/>.
         /// </summary>
         /// <param name="left">The first object to multiply.</param>
@@ -213,6 +390,66 @@ namespace xFunc.Maths.Expressions
             => new NumberValue(left.Value * right.Value);
 
         /// <summary>
+        /// Multiplies <see cref="NumberValue"/> and <see cref="double"/>.
+        /// </summary>
+        /// <param name="left">The first object to multiply.</param>
+        /// <param name="right">The second object to multiply.</param>
+        /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static NumberValue operator *(NumberValue left, double right)
+            => new NumberValue(left.Value * right);
+
+        /// <summary>
+        /// Multiplies <see cref="double"/> and <see cref="NumberValue"/>.
+        /// </summary>
+        /// <param name="left">The first object to multiply.</param>
+        /// <param name="right">The second object to multiply.</param>
+        /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static NumberValue operator *(double left, NumberValue right)
+            => new NumberValue(left * right.Value);
+
+        /// <summary>
+        /// Multiplies <see cref="AngleValue"/> and <see cref="NumberValue"/>.
+        /// </summary>
+        /// <param name="left">The first object to multiply.</param>
+        /// <param name="right">The second object to multiply.</param>
+        /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static AngleValue operator *(AngleValue left, NumberValue right)
+            => new AngleValue(left.Value * right.Value, left.Unit);
+
+        /// <summary>
+        /// Multiplies <see cref="NumberValue"/> and <see cref="AngleValue"/>.
+        /// </summary>
+        /// <param name="left">The first object to multiply.</param>
+        /// <param name="right">The second object to multiply.</param>
+        /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static AngleValue operator *(NumberValue left, AngleValue right)
+            => new AngleValue(left.Value * right.Value, right.Unit);
+
+        /// <summary>
+        /// Multiplies <see cref="Complex"/> and <see cref="NumberValue"/>.
+        /// </summary>
+        /// <param name="left">The first object to multiply.</param>
+        /// <param name="right">The second object to multiply.</param>
+        /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Complex operator *(Complex left, NumberValue right)
+            => left * right.Value;
+
+        /// <summary>
+        /// Multiplies <see cref="NumberValue"/> and <see cref="Complex"/>.
+        /// </summary>
+        /// <param name="left">The first object to multiply.</param>
+        /// <param name="right">The second object to multiply.</param>
+        /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Complex operator *(NumberValue left, Complex right)
+            => left.Value * right;
+
+        /// <summary>
         /// Divides two objects of <see cref="NumberValue"/>.
         /// </summary>
         /// <param name="left">The first object to divide.</param>
@@ -221,6 +458,26 @@ namespace xFunc.Maths.Expressions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue operator /(NumberValue left, NumberValue right)
             => new NumberValue(left.Value / right.Value);
+
+        /// <summary>
+        /// Divides <see cref="NumberValue"/> and <see cref="double"/>.
+        /// </summary>
+        /// <param name="left">The first object to divide.</param>
+        /// <param name="right">The second object to divide.</param>
+        /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static NumberValue operator /(NumberValue left, double right)
+            => new NumberValue(left.Value / right);
+
+        /// <summary>
+        /// Divides <see cref="double"/> and <see cref="NumberValue"/>.
+        /// </summary>
+        /// <param name="left">The first object to divide.</param>
+        /// <param name="right">The second object to divide.</param>
+        /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static NumberValue operator /(double left, NumberValue right)
+            => new NumberValue(left / right.Value);
 
         /// <summary>
         /// Divides <see cref="AngleValue"/> by <see cref="NumberValue"/>.
@@ -261,6 +518,16 @@ namespace xFunc.Maths.Expressions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Complex operator /(NumberValue left, Complex right)
             => left.Value / right;
+
+        /// <summary>
+        /// Returns the remainder of a division.
+        /// </summary>
+        /// <param name="left">The first object to divide.</param>
+        /// <param name="right">The second object to divide.</param>
+        /// <returns>The remainder of a division.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static NumberValue operator %(NumberValue left, NumberValue right)
+            => new NumberValue(left.Value % right.Value);
 
         /// <summary>
         /// Returns the absolute value of a double-precision floating-point number.
@@ -372,11 +639,103 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Returns the base 2 logarithm of a specified number.
         /// </summary>
-        /// <param name="numberValue">A specified number.</param>
+        /// <param name="numberValue">A number whose logarithm is to be found.</param>
         /// <returns>The binary logarithm.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue Lb(NumberValue numberValue)
             => new NumberValue(Math.Log(numberValue.Value, 2));
+
+        /// <summary>
+        /// Returns the base 10 logarithm of a specified number.
+        /// </summary>
+        /// <param name="numberValue">A number whose logarithm is to be found.</param>
+        /// <returns>The base 10 logarithm.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static NumberValue Lg(NumberValue numberValue)
+            => new NumberValue(Math.Log10(numberValue.Value));
+
+        /// <summary>
+        /// Returns the natural (base <c>e</c>) logarithm of a specified number.
+        /// </summary>
+        /// <param name="numberValue">The number whose logarithm is to be found.</param>
+        /// <returns>The natural (base <c>e</c>) logarithm.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static NumberValue Ln(NumberValue numberValue)
+            => new NumberValue(Math.Log(numberValue.Value));
+
+        /// <summary>
+        /// Returns the logarithm of a specified number in a specified base.
+        /// </summary>
+        /// <param name="number">The number whose logarithm is to be found.</param>
+        /// <param name="base">The base of the logarithm.</param>
+        /// <returns>The logarithm.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static NumberValue Log(NumberValue number, NumberValue @base)
+            => new NumberValue(Math.Log(number.Value, @base.Value));
+
+        /// <summary>
+        /// Returns the logarithm of a specified number in a specified base.
+        /// </summary>
+        /// <param name="number">The number whose logarithm is to be found.</param>
+        /// <param name="base">The base of the logarithm.</param>
+        /// <returns>The logarithm.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Complex Log(Complex number, NumberValue @base)
+            => Complex.Log(number, @base.Value);
+
+        /// <summary>
+        /// Returns a specified number raised to the specified power.
+        /// </summary>
+        /// <param name="number">A double-precision floating-point number to be raised to a power.</param>
+        /// <param name="power">A double-precision floating-point number that specifies a power.</param>
+        /// <returns>The <paramref name="number"/> raised to the <paramref name="power"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static object Pow(NumberValue number, NumberValue power)
+        {
+            if (number < 0)
+            {
+                if ((BitConverter.DoubleToInt64Bits(power.Value) & 1) == 1)
+                    return new NumberValue(-Math.Pow(-number.Value, power.Value));
+
+                if (power > 0 && power < 1)
+                    return Complex.Pow(number.Value, power.Value);
+
+                if (power < 0 && power > -1)
+                    return new Complex(0, -Math.Pow(-number.Value, power.Value));
+            }
+
+            return new NumberValue(Math.Pow(number.Value, power.Value));
+        }
+
+        /// <summary>
+        /// Returns a specified number raised to the specified power.
+        /// </summary>
+        /// <param name="number">A double-precision floating-point number to be raised to a power.</param>
+        /// <param name="power">A double-precision floating-point number that specifies a power.</param>
+        /// <returns>The <paramref name="number"/> raised to the <paramref name="power"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Complex Pow(Complex number, NumberValue power)
+            => Complex.Pow(number, power.Value);
+
+        /// <summary>
+        /// Gets a value indicating whether the current value is not a number (NaN).
+        /// </summary>
+        public bool IsNaN => double.IsNaN(Value);
+
+        /// <summary>
+        /// Gets a value indicating whether the current number evaluates to infinity.
+        /// </summary>
+        public bool IsInfinity => double.IsInfinity(Value);
+
+        /// <summary>
+        /// Gets a value indicating whether the current number evaluates to positive infinity.
+        /// </summary>
+        public bool IsPositiveInfinity => double.IsPositiveInfinity(Value);
+
+        /// <summary>
+        /// Gets a value indicating whether the current number evaluates to negative infinity.
+        /// </summary>
+        public bool IsNegativeInfinity => double.IsNegativeInfinity(Value);
 
         /// <summary>
         /// Gets a value.

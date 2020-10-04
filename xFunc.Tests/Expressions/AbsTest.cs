@@ -70,12 +70,12 @@ namespace xFunc.Tests.Expressions
         public void EqualsTest1()
         {
             Variable x1 = "x";
-            Number num1 = 2;
+            Number num1 = Number.Two;
             var mul1 = new Mul(num1, x1);
             var abs1 = new Abs(mul1);
 
             Variable x2 = "x";
-            Number num2 = 2;
+            Number num2 = Number.Two;
             var mul2 = new Mul(num2, x2);
             var abs2 = new Abs(mul2);
 
@@ -87,12 +87,12 @@ namespace xFunc.Tests.Expressions
         public void EqualsTest2()
         {
             Variable x1 = "x";
-            Number num1 = 2;
+            Number num1 = Number.Two;
             var mul1 = new Mul(num1, x1);
             var abs1 = new Abs(mul1);
 
             Variable x2 = "x";
-            Number num2 = 3;
+            Number num2 = new Number(3);
             var mul2 = new Mul(num2, x2);
             var abs2 = new Abs(mul2);
 

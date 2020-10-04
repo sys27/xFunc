@@ -60,6 +60,7 @@ namespace xFunc.Maths.Expressions
         {
             var result = Argument.Execute(parameters);
             var digits = Digits?.Execute(parameters) ?? 0.0;
+
             if (result is double arg && digits is double digitsDouble)
             {
                 if (!digitsDouble.IsInt())

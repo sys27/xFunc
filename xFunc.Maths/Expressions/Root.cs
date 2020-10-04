@@ -51,7 +51,7 @@ namespace xFunc.Maths.Expressions
 
             return (leftResult, rightResult) switch
             {
-                (double number, double power) => MathExtensions.Pow(number, 1 / power),
+                (NumberValue number, NumberValue power) => NumberValue.Pow(number, 1 / power),
                 _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };
         }

@@ -50,7 +50,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        private protected abstract double ExecuteInternal(double[] numbers);
+        protected abstract double ExecuteInternal(double[] numbers);
 
         /// <inheritdoc />
         public override object Execute(ExpressionParameters? parameters)

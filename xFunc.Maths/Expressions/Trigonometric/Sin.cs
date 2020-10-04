@@ -54,11 +54,11 @@ namespace xFunc.Maths.Expressions.Trigonometric
             => Complex.Sin(complex);
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult, TContext>(
+        protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);

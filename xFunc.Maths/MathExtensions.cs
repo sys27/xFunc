@@ -27,7 +27,7 @@ namespace xFunc.Maths
         /// <summary>
         /// The constant which is used to compare two double numbers.
         /// </summary>
-        public const double Epsilon = 1E-14;
+        private const double Epsilon = 1E-14;
 
         /// <summary>
         /// sqrt(2).

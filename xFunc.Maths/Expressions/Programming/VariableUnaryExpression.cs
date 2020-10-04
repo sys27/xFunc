@@ -106,7 +106,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected abstract TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer);
+        protected abstract TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer);
 
         /// <summary>
         /// Analyzes the current expression.
@@ -116,7 +116,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="analyzer">The analyzer.</param>
         /// <param name="context">The context.</param>
         /// <returns>The analysis result.</returns>
-        private protected abstract TResult AnalyzeInternal<TResult, TContext>(
+        protected abstract TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context);
 

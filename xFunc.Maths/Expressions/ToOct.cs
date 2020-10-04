@@ -50,7 +50,7 @@ namespace xFunc.Maths.Expressions
 
             return result switch
             {
-                double number => number.ToOct(),
+                NumberValue number => NumberValue.ToOct(number),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

@@ -203,60 +203,6 @@ namespace xFunc.Maths
         public static double Acsch(double d)
             => Math.Log(1 / d + Math.Sqrt(1 / d * d + 1));
 
-        private static string PadNumber(string number, int padding)
-        {
-            var padLength = number.Length % padding;
-            if (padLength > 0)
-                padLength = number.Length + (padding - padLength);
-
-            return number.PadLeft(padLength, '0');
-        }
-
-        /// <summary>
-        /// Converts <paramref name="number"/> to the binary number.
-        /// </summary>
-        /// <param name="number">The number.</param>
-        /// <returns>String that contains the number in the new numeral system.</returns>
-        public static string ToBin(this double number)
-        {
-            if (!number.IsInt())
-                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(number));
-
-            var result = Convert.ToString((int)number, 2);
-            result = PadNumber(result, 8);
-
-            return $"0b{result}";
-        }
-
-        /// <summary>
-        /// Converts <paramref name="number"/> to the octal number.
-        /// </summary>
-        /// <param name="number">The number.</param>
-        /// <returns>String that contains the number in the new numeral system.</returns>
-        public static string ToOct(this double number)
-        {
-            if (!number.IsInt())
-                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(number));
-
-            return $"0{Convert.ToString((int)number, 8)}";
-        }
-
-        /// <summary>
-        /// Converts <paramref name="number"/> to the hexadecimal number.
-        /// </summary>
-        /// <param name="number">The number.</param>
-        /// <returns>String that contains the number in the new numeral system.</returns>
-        public static string ToHex(this double number)
-        {
-            if (!number.IsInt())
-                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(number));
-
-            var result = Convert.ToString((int)number, 16).ToUpperInvariant();
-            result = PadNumber(result, 2);
-
-            return $"0x{result}";
-        }
-
         /// <summary>
         /// Formats a complex number.
         /// </summary>

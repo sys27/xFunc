@@ -17,7 +17,6 @@ using System;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
 {
@@ -61,15 +60,11 @@ namespace xFunc.Maths.Expressions
             var result = Argument.Execute(parameters);
             var digits = Digits?.Execute(parameters) ?? 0.0;
 
-            if (result is double arg && digits is double digitsDouble)
+            return (result, digits) switch
             {
-                if (!digitsDouble.IsInt())
-                    throw new InvalidOperationException(Resource.ValueIsNotInteger);
-
-                return Math.Round(arg, (int)digitsDouble, MidpointRounding.AwayFromZero);
-            }
-
-            throw new ResultIsNotSupportedException(this, result);
+                (NumberValue left, NumberValue right) => NumberValue.Round(left, right),
+                _ => throw new ResultIsNotSupportedException(this, result, digits),
+            };
         }
 
         /// <inheritdoc />

@@ -50,7 +50,7 @@ namespace xFunc.Maths.Expressions
 
             return result switch
             {
-                double number => number.ToBin(),
+                NumberValue number => NumberValue.ToBin(number),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

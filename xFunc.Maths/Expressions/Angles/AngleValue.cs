@@ -497,6 +497,6 @@ namespace xFunc.Maths.Expressions.Angles
         /// <summary>
         /// Gets an integer that indicates the sign of a double-precision floating-point number.
         /// </summary>
-        public int Sign => Math.Sign(Value);
+        public double Sign => Math.Sign(Value);
     }
 }

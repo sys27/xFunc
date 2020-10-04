@@ -50,7 +50,7 @@ namespace xFunc.Maths.Expressions
 
             return result switch
             {
-                double number => number.ToHex(),
+                NumberValue number => NumberValue.ToHex(number),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

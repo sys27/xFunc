@@ -18,6 +18,7 @@ using System.Globalization;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using xFunc.Maths.Expressions.Angles;
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
 {
@@ -609,21 +610,19 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Returns the polynomial greatest common divisor.
         /// </summary>
-        /// <param name="a">The first numbers.</param>
-        /// <param name="b">The second numbers.</param>
+        /// <param name="left">The first numbers.</param>
+        /// <param name="right">The second numbers.</param>
         /// <returns>The greatest common divisor.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static NumberValue GCD(NumberValue a, NumberValue b)
+        public static NumberValue GCD(NumberValue left, NumberValue right)
         {
-            return new NumberValue(GCD(a.Value, b.Value));
+            var a = left.Value;
+            var b = right.Value;
 
-            static double GCD(double a, double b)
-            {
-                while (!Equals(b, 0.0))
-                    b = a % (a = b);
+            while (!Equals(b, 0.0))
+                b = a % (a = b);
 
-                return a;
-            }
+            return new NumberValue(a);
         }
 
         /// <summary>
@@ -718,6 +717,109 @@ namespace xFunc.Maths.Expressions
             => Complex.Pow(number, power.Value);
 
         /// <summary>
+        /// Rounds a double-precision floating-point value to a specified number of fractional digits,
+        /// and uses the specified rounding convention for midpoint values.
+        /// </summary>
+        /// <param name="number">A double-precision floating-point number to be rounded.</param>
+        /// <param name="digits">The number of fractional digits in the return value.</param>
+        /// <returns>The number nearest to <paramref name="number"/> that has a number of fractional digits equal to <paramref name="digits"/>. If value has fewer fractional digits than <paramref name="digits"/>, <paramref name="number"/> is returned unchanged.</returns>
+        /// <exception cref="InvalidOperationException">The value is not an integer.</exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static NumberValue Round(NumberValue number, NumberValue digits)
+        {
+            if (!digits.Value.IsInt())
+                throw new InvalidOperationException(Resource.ValueIsNotInteger);
+
+            var rounded = Math.Round(number.Value, (int)digits.Value, MidpointRounding.AwayFromZero);
+
+            return new NumberValue(rounded);
+        }
+
+        /// <summary>
+        /// Returns the square root of a specified number.
+        /// </summary>
+        /// <param name="numberValue">The number whose square root is to be found.</param>
+        /// <returns>The square root.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static object Sqrt(NumberValue numberValue)
+        {
+            if (numberValue < 0)
+                return Complex.Sqrt(numberValue.Value);
+
+            return new NumberValue(Math.Sqrt(numberValue.Value));
+        }
+
+        private static string PadNumber(string number, int padding)
+        {
+            var padLength = number.Length % padding;
+            if (padLength > 0)
+                padLength = number.Length + (padding - padLength);
+
+            return number.PadLeft(padLength, '0');
+        }
+
+        /// <summary>
+        /// Converts <paramref name="numberValue"/> to the binary number.
+        /// </summary>
+        /// <param name="numberValue">The number.</param>
+        /// <returns>String that contains the number in the new numeral system.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToBin(NumberValue numberValue)
+        {
+            // TODO:
+            var number = numberValue.Value;
+            if (!number.IsInt())
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(numberValue));
+
+            var result = Convert.ToString((int)number, 2);
+            result = PadNumber(result, 8);
+
+            return $"0b{result}";
+        }
+
+        /// <summary>
+        /// Converts <paramref name="numberValue"/> to the octal number.
+        /// </summary>
+        /// <param name="numberValue">The number.</param>
+        /// <returns>String that contains the number in the new numeral system.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToOct(NumberValue numberValue)
+        {
+            var number = numberValue.Value;
+            if (!number.IsInt())
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(numberValue));
+
+            return $"0{Convert.ToString((int)number, 8)}";
+        }
+
+        /// <summary>
+        /// Converts <paramref name="numberValue"/> to the hexadecimal number.
+        /// </summary>
+        /// <param name="numberValue">The number.</param>
+        /// <returns>String that contains the number in the new numeral system.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToHex(NumberValue numberValue)
+        {
+            var number = numberValue.Value;
+            if (!number.IsInt())
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(numberValue));
+
+            var result = Convert.ToString((int)number, 16).ToUpperInvariant();
+            result = PadNumber(result, 2);
+
+            return $"0x{result}";
+        }
+
+        /// <summary>
+        /// Calculates the integral part of a specified double-precision floating-point number.
+        /// </summary>
+        /// <param name="number">A number to truncate.</param>
+        /// <returns>The integral part.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static NumberValue Truncate(NumberValue number)
+            => new NumberValue(Math.Truncate(number.Value));
+
+        /// <summary>
         /// Gets a value indicating whether the current value is not a number (NaN).
         /// </summary>
         public bool IsNaN => double.IsNaN(Value);
@@ -736,6 +838,11 @@ namespace xFunc.Maths.Expressions
         /// Gets a value indicating whether the current number evaluates to negative infinity.
         /// </summary>
         public bool IsNegativeInfinity => double.IsNegativeInfinity(Value);
+
+        /// <summary>
+        /// Gets a sign of number.
+        /// </summary>
+        public double Sign => Math.Sign(Value);
 
         /// <summary>
         /// Gets a value.

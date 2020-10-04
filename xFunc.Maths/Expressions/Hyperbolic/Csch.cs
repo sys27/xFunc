@@ -45,12 +45,12 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         }
 
         /// <inheritdoc />
-        protected override Complex ExecuteComplex(Complex complex) =>
-            ComplexExtensions.Csch(complex);
+        protected override NumberValue ExecuteInternal(AngleValue angleValue)
+            => AngleValue.Csch(angleValue);
 
         /// <inheritdoc />
-        protected override double ExecuteInternal(AngleValue angleValue) =>
-            MathExtensions.Csch(angleValue.Value);
+        protected override Complex ExecuteComplex(Complex complex)
+            => ComplexExtensions.Csch(complex);
 
         /// <inheritdoc />
         protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)

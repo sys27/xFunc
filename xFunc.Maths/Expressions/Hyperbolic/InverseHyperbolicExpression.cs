@@ -45,6 +45,16 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         }
 
         /// <summary>
+        /// Calculates this mathematical expression (using radian).
+        /// </summary>
+        /// <param name="radian">The calculation result of argument.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
+        protected abstract AngleValue ExecuteInternal(NumberValue radian);
+
+        /// <summary>
         /// Executes this expression.
         /// </summary>
         /// <param name="complex">The calculation result of argument.</param>
@@ -54,16 +64,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <seealso cref="ExpressionParameters" />
         protected abstract Complex ExecuteComplex(Complex complex);
 
-        /// <summary>
-        /// Calculates this mathematical expression (using radian).
-        /// </summary>
-        /// <param name="radian">The calculation result of argument.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        protected abstract double ExecuteInternal(double radian);
-
         /// <inheritdoc />
         public override object Execute(ExpressionParameters? parameters)
         {
@@ -71,7 +71,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
 
             return result switch
             {
-                double number => AngleValue.Radian(ExecuteInternal(number)),
+                NumberValue number => ExecuteInternal(number),
                 Complex complex => (object)ExecuteComplex(complex),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };

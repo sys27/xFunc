@@ -46,7 +46,8 @@ namespace xFunc.Maths.Expressions.Statistical
         }
 
         /// <inheritdoc />
-        protected override double ExecuteInternal(double[] numbers) => numbers.Max();
+        protected override double ExecuteInternal(double[] numbers)
+            => numbers.Max();
 
         /// <inheritdoc />
         protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)

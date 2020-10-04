@@ -69,14 +69,14 @@ namespace xFunc.Maths.Expressions.Statistical
             foreach (var expression in data)
             {
                 var result = expression.Execute(parameters);
-                if (!(result is double doubleResult))
+                if (!(result is NumberValue number))
                     throw new ResultIsNotSupportedException(this, result);
 
-                calculated[i] = doubleResult;
+                calculated[i] = number.Value;
                 i++;
             }
 
-            return ExecuteInternal(calculated);
+            return new NumberValue(ExecuteInternal(calculated));
         }
 
         /// <summary>

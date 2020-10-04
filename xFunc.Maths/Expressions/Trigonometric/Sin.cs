@@ -46,8 +46,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         /// <inheritdoc />
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteInternal(AngleValue angleValue)
-            => angleValue.Sin();
+        protected override NumberValue ExecuteInternal(AngleValue angleValue)
+            => AngleValue.Sin(angleValue);
 
         /// <inheritdoc />
         protected override Complex ExecuteComplex(Complex complex)

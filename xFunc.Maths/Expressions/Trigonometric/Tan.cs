@@ -46,8 +46,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         /// <inheritdoc />
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteInternal(AngleValue angleValue)
-            => angleValue.Tan();
+        protected override NumberValue ExecuteInternal(AngleValue angleValue)
+            => AngleValue.Tan(angleValue);
 
         /// <inheritdoc />
         protected override Complex ExecuteComplex(Complex complex)

@@ -17,6 +17,7 @@ using System;
 using System.Collections.Immutable;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Expressions.Angles;
 
 namespace xFunc.Maths.Expressions.Trigonometric
 {
@@ -45,12 +46,12 @@ namespace xFunc.Maths.Expressions.Trigonometric
         }
 
         /// <inheritdoc />
-        protected override double ExecuteInternal(double radian) =>
-            Math.Atan(radian);
+        protected override AngleValue ExecuteInternal(NumberValue radian)
+            => AngleValue.Atan(radian);
 
         /// <inheritdoc />
-        protected override Complex ExecuteComplex(Complex complex) =>
-            Complex.Atan(complex);
+        protected override Complex ExecuteComplex(Complex complex)
+            => Complex.Atan(complex);
 
         /// <inheritdoc />
         protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)

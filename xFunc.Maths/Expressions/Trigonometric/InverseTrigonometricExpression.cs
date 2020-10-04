@@ -52,7 +52,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected abstract double ExecuteInternal(double radian);
+        protected abstract AngleValue ExecuteInternal(NumberValue radian);
 
         /// <summary>
         /// Calculates the this mathematical expression (complex number).
@@ -77,7 +77,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
             return result switch
             {
-                double number => AngleValue.Radian(ExecuteInternal(number)),
+                NumberValue number => ExecuteInternal(number),
                 Complex complex => (object)ExecuteComplex(complex),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };

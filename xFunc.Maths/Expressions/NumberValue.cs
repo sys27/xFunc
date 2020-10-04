@@ -33,6 +33,71 @@ namespace xFunc.Maths.Expressions
         IComparable
     {
         /// <summary>
+        /// sqrt(2).
+        /// </summary>
+        public static readonly NumberValue Sqrt2 = new NumberValue(1.4142135623730951);
+
+        /// <summary>
+        /// sqrt(3).
+        /// </summary>
+        public static readonly NumberValue Sqrt3 = new NumberValue(1.7320508075688772);
+
+        /// <summary>
+        /// 0.
+        /// </summary>
+        public static readonly NumberValue Zero = new NumberValue(0.0);
+
+        /// <summary>
+        /// 1.
+        /// </summary>
+        public static readonly NumberValue One = new NumberValue(1.0);
+
+        /// <summary>
+        /// 2.
+        /// </summary>
+        public static readonly NumberValue Two = new NumberValue(2.0);
+
+        /// <summary>
+        /// 1 / 2 = 0.5.
+        /// </summary>
+        public static readonly NumberValue Half = new NumberValue(0.5);
+
+        /// <summary>
+        /// sqrt(2) / 2.
+        /// </summary>
+        public static readonly NumberValue Sqrt2By2 = Sqrt2 / 2.0;
+
+        /// <summary>
+        /// sqrt(3) / 2.
+        /// </summary>
+        public static readonly NumberValue Sqrt3By2 = Sqrt3 / 2.0;
+
+        /// <summary>
+        /// sqrt(3) / 3.
+        /// </summary>
+        public static readonly NumberValue Sqrt3By3 = Sqrt3 / 3.0;
+
+        /// <summary>
+        /// 2 * sqrt(3) / 3.
+        /// </summary>
+        public static readonly NumberValue Sqrt3By3By2 = 2 * Sqrt3By3;
+
+        /// <summary>
+        /// PositiveInfinity.
+        /// </summary>
+        public static readonly NumberValue PositiveInfinity = new NumberValue(double.PositiveInfinity);
+
+        /// <summary>
+        /// NegativeInfinity.
+        /// </summary>
+        public static readonly NumberValue NegativeInfinity = new NumberValue(double.PositiveInfinity);
+
+        /// <summary>
+        /// NaN.
+        /// </summary>
+        public static readonly NumberValue NaN = new NumberValue(double.NaN);
+
+        /// <summary>
         /// The constant which is used to compare two double numbers.
         /// </summary>
         private const double Epsilon = 1E-14;

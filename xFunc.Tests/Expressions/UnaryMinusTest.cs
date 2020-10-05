@@ -30,7 +30,7 @@ namespace xFunc.Tests.Expressions
         {
             var exp = new UnaryMinus(new Number(10));
 
-            Assert.Equal(-10.0, exp.Execute());
+            Assert.Equal(new NumberValue(-10.0), exp.Execute());
         }
 
         [Fact]

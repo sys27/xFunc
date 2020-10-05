@@ -86,7 +86,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <inheritdoc />
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return analyzer.Analyze(this);
@@ -97,7 +97,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return analyzer.Analyze(this, context);

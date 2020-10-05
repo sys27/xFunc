@@ -28,8 +28,9 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTest1()
         {
             var exp = new Sqrt(new Number(4));
+            var expected = new NumberValue(Math.Sqrt(4));
 
-            Assert.Equal(Math.Sqrt(4), exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]

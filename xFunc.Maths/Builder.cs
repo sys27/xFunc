@@ -53,7 +53,7 @@ namespace xFunc.Maths
         /// <returns>The Current instance of builder.</returns>
         public Builder Custom(Func<IExpression, IExpression> customExpression)
         {
-            if (customExpression == null)
+            if (customExpression is null)
                 throw new ArgumentNullException(nameof(customExpression));
 
             Expression = customExpression(Expression);

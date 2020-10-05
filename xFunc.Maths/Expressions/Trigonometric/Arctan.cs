@@ -13,10 +13,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Collections.Immutable;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Expressions.Angles;
 
 namespace xFunc.Maths.Expressions.Trigonometric
 {
@@ -45,19 +45,19 @@ namespace xFunc.Maths.Expressions.Trigonometric
         }
 
         /// <inheritdoc />
-        protected override double ExecuteInternal(double radian) =>
-            Math.Atan(radian);
+        protected override AngleValue ExecuteInternal(NumberValue radian)
+            => AngleValue.Atan(radian);
 
         /// <inheritdoc />
-        protected override Complex ExecuteComplex(Complex complex) =>
-            Complex.Atan(complex);
+        protected override Complex ExecuteComplex(Complex complex)
+            => Complex.Atan(complex);
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult, TContext>(
+        protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);

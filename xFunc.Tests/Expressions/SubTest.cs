@@ -31,8 +31,9 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTest1()
         {
             var exp = new Sub(Number.One, Number.Two);
+            var expected = new NumberValue(-1.0);
 
-            Assert.Equal(-1.0, exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]

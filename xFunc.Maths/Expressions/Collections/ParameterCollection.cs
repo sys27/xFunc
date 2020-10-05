@@ -79,7 +79,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="initConstants">if set to <c>true</c> initialize constants.</param>
         public ParameterCollection(IEnumerable<Parameter>? parameters, bool initConstants)
         {
-            if (parameters == null)
+            if (parameters is null)
                 throw new ArgumentNullException(nameof(parameters));
 
             constants = new Dictionary<string, Parameter>();
@@ -100,20 +100,47 @@ namespace xFunc.Maths.Expressions.Collections
 
         private void InitializeConstants()
         {
-            AddConstant(Parameter.CreateConstant("π", AngleValue.Radian(Math.PI))); // Archimedes' constant
-            AddConstant(Parameter.CreateConstant("pi", AngleValue.Radian(Math.PI))); // Archimedes' constant
-            AddConstant(Parameter.CreateConstant("e", Math.E)); // Euler's number
-            AddConstant(Parameter.CreateConstant("i", Complex.ImaginaryOne)); // Imaginary unit
-            AddConstant(Parameter.CreateConstant("g", 9.80665)); // Gravity on Earth
-            AddConstant(Parameter.CreateConstant("c", 299792458)); // Speed of Light (c0)
-            AddConstant(Parameter.CreateConstant("h", 6.62607004E-34)); // Planck Constant
-            AddConstant(Parameter.CreateConstant("F", 96485.33289)); // Faraday Constant
-            AddConstant(Parameter.CreateConstant("ε", 8.854187817E-12)); // Electric Constant (ε0)
-            AddConstant(Parameter.CreateConstant("µ", 1.2566370614E-6)); // Magnetic constant (µ0)
-            AddConstant(Parameter.CreateConstant("G", 6.64078E-11)); // Gravitational constant
-            AddConstant(Parameter.CreateConstant("α", 2.5029078750958928222839)); // Feigenbaum constant
-            AddConstant(Parameter.CreateConstant("σ", 5.670367E-8)); // Stefan-Boltzmann constant
-            AddConstant(Parameter.CreateConstant("γ", 0.57721566490153286060651)); // Euler–Mascheroni constant
+            // Archimedes' constant
+            AddConstant(Parameter.CreateConstant("π", AngleValue.Radian(Math.PI)));
+
+            // Archimedes' constant
+            AddConstant(Parameter.CreateConstant("pi", AngleValue.Radian(Math.PI)));
+
+            // Euler's number
+            AddConstant(Parameter.CreateConstant("e", Math.E));
+
+            // Imaginary unit
+            AddConstant(Parameter.CreateConstant("i", Complex.ImaginaryOne));
+
+            // Gravity on Earth
+            AddConstant(Parameter.CreateConstant("g", 9.80665));
+
+            // Speed of Light (c0)
+            AddConstant(Parameter.CreateConstant("c", 299792458));
+
+            // Planck Constant
+            AddConstant(Parameter.CreateConstant("h", 6.62607004E-34));
+
+            // Faraday Constant
+            AddConstant(Parameter.CreateConstant("F", 96485.33289));
+
+            // Electric Constant (ε0)
+            AddConstant(Parameter.CreateConstant("ε", 8.854187817E-12));
+
+            // Magnetic constant (µ0)
+            AddConstant(Parameter.CreateConstant("µ", 1.2566370614E-6));
+
+            // Gravitational constant
+            AddConstant(Parameter.CreateConstant("G", 6.64078E-11));
+
+            // Feigenbaum constant
+            AddConstant(Parameter.CreateConstant("α", 2.5029078750958928222839));
+
+            // Stefan-Boltzmann constant
+            AddConstant(Parameter.CreateConstant("σ", 5.670367E-8));
+
+            // Euler–Mascheroni constant
+            AddConstant(Parameter.CreateConstant("γ", 0.57721566490153286060651));
         }
 
         /// <inheritdoc />
@@ -179,7 +206,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <exception cref="ParameterIsReadOnlyException">The variable is read only.</exception>
         public void Add(Parameter param)
         {
-            if (param == null)
+            if (param is null)
                 throw new ArgumentNullException(nameof(param));
             if (param.Type == ParameterType.Constant)
                 throw new ArgumentException(Resource.ConstError);
@@ -205,7 +232,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <exception cref="ParameterIsReadOnlyException">The variable is read only.</exception>
         public void Remove(Parameter param)
         {
-            if (param == null)
+            if (param is null)
                 throw new ArgumentNullException(nameof(param));
             if (param.Type == ParameterType.Constant)
                 throw new ArgumentException(Resource.ConstError);
@@ -244,7 +271,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <returns><c>true</c> if the object contains the specified element; otherwise, <c>false</c>.</returns>
         public bool Contains(Parameter param)
         {
-            if (param == null)
+            if (param is null)
                 throw new ArgumentNullException(nameof(param));
 
             return ContainsKey(param.Key);

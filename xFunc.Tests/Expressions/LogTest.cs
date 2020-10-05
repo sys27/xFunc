@@ -28,8 +28,9 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTest1()
         {
             var exp = new Log(Number.Two, new Number(10));
+            var expected = new NumberValue(Math.Log(10, 2));
 
-            Assert.Equal(Math.Log(10, 2), exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]

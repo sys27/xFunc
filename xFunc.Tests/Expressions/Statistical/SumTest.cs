@@ -26,24 +26,30 @@ namespace xFunc.Tests.Expressions.Statistical
         public void TwoNumbersTest()
         {
             var sum = new Sum(new[] { Number.One, Number.Two });
+            var actual = sum.Execute();
+            var expected = new NumberValue(3.0);
 
-            Assert.Equal(3.0, sum.Execute());
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void OneNumberTest()
         {
             var sum = new Sum(new[] { Number.Two });
+            var actual = sum.Execute();
+            var expected = new NumberValue(2.0);
 
-            Assert.Equal(2.0, sum.Execute());
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void VectorTest()
         {
             var sum = new Sum(new[] { new Vector(new[] { Number.One, Number.Two }) });
+            var actual = sum.Execute();
+            var expected = new NumberValue(3.0);
 
-            Assert.Equal(3.0, sum.Execute());
+            Assert.Equal(expected, actual);
         }
     }
 }

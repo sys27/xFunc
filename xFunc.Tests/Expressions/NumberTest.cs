@@ -76,7 +76,7 @@ namespace xFunc.Tests.Expressions
         {
             var number = Number.One;
 
-            Assert.Equal(1.0, number.Execute());
+            Assert.Equal(new NumberValue(1.0), number.Execute());
         }
 
         [Fact]
@@ -84,7 +84,7 @@ namespace xFunc.Tests.Expressions
         {
             var number = new Number(double.NaN);
 
-            Assert.True(number.IsNaN);
+            Assert.True(number.Value.IsNaN);
         }
 
         [Fact]
@@ -92,7 +92,7 @@ namespace xFunc.Tests.Expressions
         {
             var number = new Number(double.PositiveInfinity);
 
-            Assert.True(number.IsPositiveInfinity);
+            Assert.True(number.Value.IsPositiveInfinity);
         }
 
         [Fact]
@@ -100,7 +100,7 @@ namespace xFunc.Tests.Expressions
         {
             var number = new Number(double.NegativeInfinity);
 
-            Assert.True(number.IsNegativeInfinity);
+            Assert.True(number.Value.IsNegativeInfinity);
         }
 
         [Fact]
@@ -108,15 +108,7 @@ namespace xFunc.Tests.Expressions
         {
             var number = new Number(double.NegativeInfinity);
 
-            Assert.True(number.IsInfinity);
-        }
-
-        [Fact]
-        public void ImplicitNullToNumber()
-        {
-            Number x = null;
-
-            Assert.Throws<ArgumentNullException>(() => (double)x);
+            Assert.True(number.Value.IsInfinity);
         }
 
         [Fact]

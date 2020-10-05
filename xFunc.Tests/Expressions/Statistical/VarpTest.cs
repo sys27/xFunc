@@ -28,34 +28,37 @@ namespace xFunc.Tests.Expressions.Statistical
             var exp = new Varp(new[] { new Number(4) });
             var result = exp.Execute();
 
-            Assert.Equal(0.0, result);
+            Assert.Equal(new NumberValue(0.0), result);
         }
 
         [Fact]
         public void TwoNumberTest()
         {
             var exp = new Varp(new[] { new Number(4), new Number(9) });
-            var result = exp.Execute();
+            var result = (NumberValue)exp.Execute();
+            var expected = new NumberValue(6.25);
 
-            Assert.Equal(6.25, result);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
         public void ThreeNumberTest()
         {
             var exp = new Varp(new[] { new Number(9), Number.Two, new Number(4) });
-            var result = (double) exp.Execute();
+            var result = (NumberValue)exp.Execute();
+            var expected = new NumberValue(8.66666666666667);
 
-            Assert.Equal(8.66666666666667, result, 14);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
         public void VectorTest()
         {
             var exp = new Varp(new[] { new Vector(new[] { Number.Two, new Number(4), new Number(9) }) });
-            var result = (double) exp.Execute();
+            var result = (NumberValue)exp.Execute();
+            var expected = new NumberValue(8.66666666666667);
 
-            Assert.Equal(8.66666666666667, result, 14);
+            Assert.Equal(expected, result);
         }
     }
 }

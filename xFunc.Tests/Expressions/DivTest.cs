@@ -29,8 +29,9 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTest1()
         {
             var exp = new Div(Number.One, Number.Two);
+            var expected = new NumberValue(1.0 / 2.0);
 
-            Assert.Equal(1.0 / 2.0, exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]

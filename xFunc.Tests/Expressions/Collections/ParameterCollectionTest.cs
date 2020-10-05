@@ -17,6 +17,7 @@ using System;
 using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Linq;
+using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Collections;
 using Xunit;
@@ -150,7 +151,7 @@ namespace xFunc.Tests.Expressions.Collections
                 new Parameter("x", 2.3)
             };
 
-            Assert.Equal(2.3, parameters["x"]);
+            Assert.Equal(new NumberValue(2.3), parameters["x"]);
         }
 
         [Fact]
@@ -179,7 +180,7 @@ namespace xFunc.Tests.Expressions.Collections
 
             Assert.True(parameters.ContainsKey("x"));
             Assert.True(parameters.Contains(new Parameter("x", 2.3)));
-            Assert.Equal(2.3, parameters["x"]);
+            Assert.Equal(new NumberValue(2.3), parameters["x"]);
         }
 
         [Fact]
@@ -197,10 +198,10 @@ namespace xFunc.Tests.Expressions.Collections
             {
                 new Parameter("x", 2.3)
             };
-            parameters["x"] = 3.3;
+            parameters["x"] = new NumberValue(3.3);
 
             Assert.True(parameters.ContainsKey("x"));
-            Assert.Equal(3.3, parameters["x"]);
+            Assert.Equal(new NumberValue(3.3), parameters["x"]);
         }
 
         [Fact]
@@ -223,7 +224,7 @@ namespace xFunc.Tests.Expressions.Collections
             };
 
             Assert.True(parameters.ContainsKey("π"));
-            Assert.Equal(4.0, parameters["π"]);
+            Assert.Equal(new NumberValue(4.0), parameters["π"]);
         }
 
         [Fact]

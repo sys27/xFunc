@@ -51,19 +51,19 @@ namespace xFunc.Maths.Expressions.Angles
 
             return result switch
             {
-                double number => AngleValue.Degree(number),
+                NumberValue number => AngleValue.Degree(number),
                 AngleValue angle => angle.ToDegree(),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
         /// <inheritdoc />
         [ExcludeFromCodeCoverage]
-        private protected override TResult AnalyzeInternal<TResult, TContext>(
+        protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);

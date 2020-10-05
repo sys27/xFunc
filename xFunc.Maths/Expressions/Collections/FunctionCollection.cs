@@ -112,7 +112,7 @@ namespace xFunc.Maths.Expressions.Collections
         public UserFunction GetKey(UserFunction function)
         {
             var func = Keys.FirstOrDefault(uf => uf.Equals(function));
-            if (func == null)
+            if (func is null)
                 throw new KeyNotFoundException(string.Format(CultureInfo.InvariantCulture, Resource.FunctionNotFoundExceptionError, function));
 
             return func;

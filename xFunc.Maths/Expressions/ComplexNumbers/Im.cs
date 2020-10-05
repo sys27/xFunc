@@ -49,19 +49,21 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         public override object Execute(ExpressionParameters? parameters)
         {
             var result = Argument.Execute(parameters);
-            if (result is Complex complex)
-                return complex.Imaginary;
 
-            throw new ResultIsNotSupportedException(this, result);
+            return result switch
+            {
+                Complex complex => new NumberValue(complex.Imaginary),
+                _ => throw new ResultIsNotSupportedException(this, result),
+            };
         }
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
         /// <inheritdoc />
         [ExcludeFromCodeCoverage]
-        private protected override TResult AnalyzeInternal<TResult, TContext>(
+        protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);

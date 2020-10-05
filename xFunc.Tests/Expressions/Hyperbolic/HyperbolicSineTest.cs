@@ -29,36 +29,40 @@ namespace xFunc.Tests.Expressions.Hyperbolic
         public void ExecuteNumberTest()
         {
             var exp = new Sinh(Number.One);
-            var result = (double)exp.Execute();
+            var result = (NumberValue)exp.Execute();
+            var expected = new NumberValue(0.01745417862959511);
 
-            Assert.Equal(0.01745417862959511, result, 15);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
         public void ExecuteRadianTest()
         {
             var exp = new Sinh(AngleValue.Radian(1).AsExpression());
-            var result = (double)exp.Execute();
+            var result = (NumberValue)exp.Execute();
+            var expected = new NumberValue(1.1752011936438014);
 
-            Assert.Equal(1.1752011936438014, result, 15);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
         public void ExecuteDegreeTest()
         {
             var exp = new Sinh(AngleValue.Degree(1).AsExpression());
-            var result = (double)exp.Execute();
+            var result = (NumberValue)exp.Execute();
+            var expected = new NumberValue(0.01745417862959511);
 
-            Assert.Equal(0.01745417862959511, result, 15);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
         public void ExecuteGradianTest()
         {
             var exp = new Sinh(AngleValue.Gradian(1).AsExpression());
-            var result = (double)exp.Execute();
+            var result = (NumberValue)exp.Execute();
+            var expected = new NumberValue(0.015708609240015783);
 
-            Assert.Equal(0.015708609240015783, result, 15);
+            Assert.Equal(expected, result);
         }
 
         [Fact]

@@ -27,7 +27,7 @@ namespace xFunc.Tests.Expressions
         {
             var exp = new Frac(new Number(5.5));
             var result = exp.Execute();
-            var expected = 0.5;
+            var expected = new NumberValue(0.5);
 
             Assert.Equal(expected, result);
         }
@@ -37,7 +37,7 @@ namespace xFunc.Tests.Expressions
         {
             var exp = new Frac(new Number(-5.5));
             var result = exp.Execute();
-            var expected = -0.5;
+            var expected = new NumberValue(-0.5);
 
             Assert.Equal(expected, result);
         }

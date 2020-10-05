@@ -26,8 +26,8 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTestNumber()
         {
             var ceil = new Ceil(new Number(5.55555555));
-            var result = ceil.Execute();
-            var expected = 6.0;
+            var result = (NumberValue)ceil.Execute();
+            var expected = new NumberValue(6.0);
 
             Assert.Equal(expected, result);
         }

@@ -60,10 +60,10 @@ namespace xFunc.Maths.Expressions
         /// <inheritdoc />
         public override bool Equals(object? obj)
         {
-            if (this == obj)
+            if (ReferenceEquals(this, obj))
                 return true;
 
-            if (obj == null || GetType() != obj.GetType())
+            if (obj is null || GetType() != obj.GetType())
                 return false;
 
             return Argument.Equals(((UnaryExpression)obj).Argument);
@@ -84,7 +84,7 @@ namespace xFunc.Maths.Expressions
         /// <inheritdoc />
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return AnalyzeInternal(analyzer);
@@ -95,7 +95,7 @@ namespace xFunc.Maths.Expressions
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return AnalyzeInternal(analyzer, context);
@@ -109,7 +109,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected abstract TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer);
+        protected abstract TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer);
 
         /// <summary>
         /// Analyzes the current expression.
@@ -119,7 +119,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="analyzer">The analyzer.</param>
         /// <param name="context">The context.</param>
         /// <returns>The analysis result.</returns>
-        private protected abstract TResult AnalyzeInternal<TResult, TContext>(
+        protected abstract TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context);
 

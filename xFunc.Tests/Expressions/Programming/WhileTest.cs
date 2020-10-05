@@ -34,7 +34,7 @@ namespace xFunc.Tests.Expressions.Programming
             var @while = new While(body, cond);
             @while.Execute(parameters);
 
-            Assert.Equal(10.0, parameters.Variables["x"]);
+            Assert.Equal(new NumberValue(10.0), parameters.Variables["x"]);
         }
 
         [Fact]

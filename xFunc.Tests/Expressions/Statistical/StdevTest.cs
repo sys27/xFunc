@@ -26,36 +26,39 @@ namespace xFunc.Tests.Expressions.Statistical
         public void OneNumberTest()
         {
             var exp = new Stdev(new[] { new Number(4) });
-            var result = (double) exp.Execute();
+            var result = (NumberValue)exp.Execute();
 
-            Assert.Equal(double.NaN, result);
+            Assert.True(result.IsNaN);
         }
 
         [Fact]
         public void TwoNumberTest()
         {
             var exp = new Stdev(new[] { new Number(4), new Number(9) });
-            var result = (double) exp.Execute();
+            var result = (NumberValue)exp.Execute();
+            var expected = new NumberValue(3.53553390593274);
 
-            Assert.Equal(3.53553390593274, result, 14);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
         public void ThreeNumberTest()
         {
             var exp = new Stdev(new[] { new Number(9), Number.Two, new Number(4) });
-            var result = (double) exp.Execute();
+            var result = (NumberValue)exp.Execute();
+            var expected = new NumberValue(3.60555127546399);
 
-            Assert.Equal(3.60555127546399, result, 14);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
         public void VectorTest()
         {
             var exp = new Stdev(new[] { new Vector(new[] { Number.Two, new Number(4), new Number(9) }) });
-            var result = (double) exp.Execute();
+            var result = (NumberValue)exp.Execute();
+            var expected = new NumberValue(3.60555127546399);
 
-            Assert.Equal(3.60555127546399, result, 14);
+            Assert.Equal(expected, result);
         }
     }
 }

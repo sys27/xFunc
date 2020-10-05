@@ -51,17 +51,17 @@ namespace xFunc.Maths.Expressions
 
             return (leftResult, rightResult) switch
             {
-                (double number, double power) => MathExtensions.Pow(number, 1 / power),
+                (NumberValue number, NumberValue power) => NumberValue.Pow(number, 1 / power),
                 _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };
         }
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult, TContext>(
+        protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);

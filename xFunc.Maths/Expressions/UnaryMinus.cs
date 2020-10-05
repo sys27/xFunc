@@ -40,19 +40,19 @@ namespace xFunc.Maths.Expressions
 
             return result switch
             {
-                double number => -number,
+                NumberValue number => -number,
                 AngleValue angle => -angle,
-                Complex complex => (object)Complex.Negate(complex),
+                Complex complex => Complex.Negate(complex),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult, TContext>(
+        protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);

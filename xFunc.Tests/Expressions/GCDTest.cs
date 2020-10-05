@@ -26,16 +26,18 @@ namespace xFunc.Tests.Expressions
         public void CalculateTest1()
         {
             var exp = new GCD(new Number(12), new Number(16));
+            var expected = new NumberValue(4.0);
 
-            Assert.Equal(4.0, exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]
         public void CalculateTest2()
         {
             var exp = new GCD(new IExpression[] { new Number(64), new Number(16), new Number(8) });
+            var expected = new NumberValue(8.0);
 
-            Assert.Equal(8.0, exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]

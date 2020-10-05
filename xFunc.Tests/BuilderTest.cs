@@ -73,7 +73,9 @@ namespace xFunc.Tests
                 .Add(2)
                 .Expression;
 
-            Assert.Equal(5.0, exp.Execute());
+            var expected = new NumberValue(5.0);
+
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]
@@ -83,7 +85,9 @@ namespace xFunc.Tests
                 .Add(2)
                 .Expression;
 
-            Assert.Equal(5.0, exp.Execute(new ExpressionParameters()));
+            var expected = new NumberValue(5.0);
+
+            Assert.Equal(expected, exp.Execute(new ExpressionParameters()));
         }
 
         [Fact]

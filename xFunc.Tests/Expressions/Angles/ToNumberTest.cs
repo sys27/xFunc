@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Angles
         {
             var exp = new ToNumber(AngleValue.Degree(10).AsExpression());
             var actual = exp.Execute();
-            var expected = 10.0;
+            var expected = new NumberValue(10.0);
 
             Assert.Equal(expected, actual);
         }

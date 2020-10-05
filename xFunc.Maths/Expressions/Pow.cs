@@ -52,19 +52,19 @@ namespace xFunc.Maths.Expressions
 
             return (leftResult, rightResult) switch
             {
-                (double leftNumber, double rightNumber) => MathExtensions.Pow(leftNumber, rightNumber),
-                (Complex leftComplex, double rightNumber) => Complex.Pow(leftComplex, rightNumber),
-                (Complex leftComplex, Complex rightComplex) => Complex.Pow(leftComplex, rightComplex),
+                (NumberValue left, NumberValue right) => NumberValue.Pow(left, right),
+                (Complex left, NumberValue right) => NumberValue.Pow(left, right),
+                (Complex left, Complex right) => Complex.Pow(left, right),
                 _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };
         }
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult, TContext>(
+        protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);

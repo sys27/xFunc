@@ -14,13 +14,75 @@
 // limitations under the License.
 
 using System;
+using System.Numerics;
+using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions.Matrices;
 using Xunit;
+using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Tests.Expressions.Collections
 {
     public class ParameterTest
     {
+        [Fact]
+        public void DoubleCtor()
+        {
+            var value = 1.0;
+            var x = new Parameter("x", value);
+            var expected = new NumberValue(value);
+
+            Assert.Equal(expected, x.Value);
+        }
+
+        [Fact]
+        public void NumberCtor()
+        {
+            var value = new NumberValue(1.0);
+            var x = new Parameter("x", value);
+
+            Assert.Equal(value, x.Value);
+        }
+
+        [Fact]
+        public void ComplexCtor()
+        {
+            var value = new Complex(1, 2);
+            var x = new Parameter("x", value);
+
+            Assert.Equal(value, x.Value);
+        }
+
+        [Fact]
+        public void BoolCtor()
+        {
+            var value = true;
+            var x = new Parameter("x", value);
+
+            Assert.Equal(value, x.Value);
+        }
+
+        [Fact]
+        public void VectorCtor()
+        {
+            var value = new Vector(new IExpression[] { Number.One });
+            var x = new Parameter("x", value);
+
+            Assert.Equal(value, x.Value);
+        }
+
+        [Fact]
+        public void MatrixCtor()
+        {
+            var value = new Matrix(new[]
+            {
+                new Vector(new IExpression[] { Number.One })
+            });
+            var x = new Parameter("x", value);
+
+            Assert.Equal(value, x.Value);
+        }
+
         [Fact]
         public void NullEqual()
         {
@@ -175,7 +237,7 @@ namespace xFunc.Tests.Expressions.Collections
         [Fact]
         public void SetNullValueTest()
         {
-            Assert.Throws<ArgumentNullException>(() => new Parameter("x", null));
+            Assert.Throws<ArgumentNullException>(() => new Parameter("x", (Matrix)null));
         }
 
         [Fact]

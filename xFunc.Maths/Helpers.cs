@@ -58,7 +58,7 @@ namespace xFunc.Maths
         /// <returns>A collection of parameters.</returns>
         public static ParameterCollection GetParameters(IExpression expression)
         {
-            if (expression == null)
+            if (expression is null)
                 throw new ArgumentNullException(nameof(expression));
 
             var parameters = new SortedSet<Parameter>();
@@ -78,7 +78,7 @@ namespace xFunc.Maths
         /// <exception cref="ArgumentNullException">The <paramref name="expression"/> variable is null.</exception>
         public static List<IExpression> ConvertExpressionToCollection(IExpression expression)
         {
-            if (expression == null)
+            if (expression is null)
                 throw new ArgumentNullException(nameof(expression));
 
             var collection = new List<IExpression>();
@@ -114,7 +114,7 @@ namespace xFunc.Maths
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null.</exception>
         public static IEnumerable<Variable> GetAllVariables(IExpression expression)
         {
-            if (expression == null)
+            if (expression is null)
                 throw new ArgumentNullException(nameof(expression));
 
             var collection = new HashSet<Variable>();

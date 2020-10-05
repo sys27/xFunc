@@ -37,24 +37,24 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <inheritdoc />
         public override object Execute(ExpressionParameters? parameters)
         {
-            var left = Left.Execute(parameters);
-            var right = Right.Execute(parameters);
+            var leftResult = Left.Execute(parameters);
+            var rightResult = Right.Execute(parameters);
 
-            return (left, right) switch
+            return (leftResult, rightResult) switch
             {
-                (bool leftBool, bool rightBool) => leftBool ^ rightBool,
-                (double leftDouble, double rightDouble) => leftDouble.XOr(rightDouble),
-                _ => throw new ResultIsNotSupportedException(this, left, right),
+                (bool left, bool right) => left ^ right,
+                (NumberValue left, NumberValue right) => left ^ right,
+                _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };
         }
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
         /// <inheritdoc />
         [ExcludeFromCodeCoverage]
-        private protected override TResult AnalyzeInternal<TResult, TContext>(
+        protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);

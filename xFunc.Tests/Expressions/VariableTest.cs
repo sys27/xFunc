@@ -48,11 +48,11 @@ namespace xFunc.Tests.Expressions
         {
             var exp = Variable.X;
             var parameters = new ExpressionParameters();
-            parameters.Variables.Add("x", 1.0);
+            parameters.Variables.Add("x", new NumberValue(1.0));
 
             var result = exp.Execute(parameters);
 
-            Assert.Equal(1.0, result);
+            Assert.Equal(new NumberValue(1.0), result);
         }
 
         [Fact]

@@ -15,7 +15,6 @@
 
 using System;
 using System.Collections.Immutable;
-using System.Linq;
 using System.Threading.Tasks;
 using xFunc.Maths.Resources;
 
@@ -32,9 +31,26 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <param name="vector">The vector.</param>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>Return the absolute value of vector.</returns>
-        public static double Abs(this Vector vector, ExpressionParameters? parameters)
+        public static object Abs(this Vector vector, ExpressionParameters? parameters)
         {
-            return Math.Sqrt(vector.Arguments.Sum(arg => Math.Pow((double)arg.Execute(parameters), 2)));
+            var sum = new NumberValue(0);
+            foreach (var argument in vector.Arguments)
+            {
+                var result = argument.Execute(parameters);
+                if (result is NumberValue number)
+                {
+                    var pow = NumberValue.Pow(number, new NumberValue(2));
+                    if (pow is NumberValue powNumber)
+                    {
+                        sum += powNumber;
+                        continue;
+                    }
+                }
+
+                throw new InvalidOperationException();
+            }
+
+            return NumberValue.Sqrt(sum);
         }
 
         /// <summary>
@@ -54,8 +70,8 @@ namespace xFunc.Maths.Expressions.Matrices
 
             for (var i = 0; i < left.ParametersCount; i++)
             {
-                var leftNumber = (double)left[i].Execute(parameters);
-                var rightNumber = (double)right[i].Execute(parameters);
+                var leftNumber = (NumberValue)left[i].Execute(parameters);
+                var rightNumber = (NumberValue)right[i].Execute(parameters);
 
                 exps.Add(new Number(leftNumber + rightNumber));
             }
@@ -80,8 +96,8 @@ namespace xFunc.Maths.Expressions.Matrices
 
             for (var i = 0; i < left.ParametersCount; i++)
             {
-                var leftNumber = (double)left[i].Execute(parameters);
-                var rightNumber = (double)right[i].Execute(parameters);
+                var leftNumber = (NumberValue)left[i].Execute(parameters);
+                var rightNumber = (NumberValue)right[i].Execute(parameters);
 
                 exps.Add(new Number(leftNumber - rightNumber));
             }
@@ -96,15 +112,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <param name="number">The number.</param>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>The product of matrices.</returns>
-        public static Vector Mul(this Vector vector, Number number, ExpressionParameters? parameters)
+        public static Vector Mul(this Vector vector, NumberValue number, ExpressionParameters? parameters)
         {
             var numbers = ImmutableArray.CreateBuilder<IExpression>(vector.ParametersCount);
 
             foreach (var argument in vector.Arguments)
-            {
-                var argNumber = (double)argument.Execute(parameters);
-                numbers.Add(new Number(argNumber * number.Value));
-            }
+                numbers.Add(new Number((NumberValue)argument.Execute(parameters) * number));
 
             return new Vector(numbers.ToImmutableArray());
         }
@@ -131,8 +144,8 @@ namespace xFunc.Maths.Expressions.Matrices
 
                 for (var j = 0; j < left.Columns; j++)
                 {
-                    var leftNumber = (double)left[i][j].Execute(parameters);
-                    var rightNumber = (double)right[i][j].Execute(parameters);
+                    var leftNumber = (NumberValue)left[i][j].Execute(parameters);
+                    var rightNumber = (NumberValue)right[i][j].Execute(parameters);
 
                     exps.Add(new Number(leftNumber + rightNumber));
                 }
@@ -165,8 +178,8 @@ namespace xFunc.Maths.Expressions.Matrices
 
                 for (var j = 0; j < left.Columns; j++)
                 {
-                    var leftNumber = (double)left[i][j].Execute(parameters);
-                    var rightNumber = (double)right[i][j].Execute(parameters);
+                    var leftNumber = (NumberValue)left[i][j].Execute(parameters);
+                    var rightNumber = (NumberValue)right[i][j].Execute(parameters);
 
                     exps.Add(new Number(leftNumber - rightNumber));
                 }
@@ -184,7 +197,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <param name="number">The number.</param>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>The product of matrix and number.</returns>
-        public static Matrix Mul(this Matrix matrix, Number number, ExpressionParameters? parameters)
+        public static Matrix Mul(this Matrix matrix, NumberValue number, ExpressionParameters? parameters)
         {
             var vectors = ImmutableArray.CreateBuilder<Vector>(matrix.Rows);
 
@@ -193,7 +206,7 @@ namespace xFunc.Maths.Expressions.Matrices
                 var vector = ImmutableArray.CreateBuilder<IExpression>(matrix.Columns);
 
                 for (var j = 0; j < matrix.Columns; j++)
-                    vector.Add(new Number((double)matrix[i][j].Execute(parameters) * number.Value));
+                    vector.Add(new Number((NumberValue)matrix[i][j].Execute(parameters) * number));
 
                 vectors.Add(new Vector(vector.ToImmutableArray()));
             }
@@ -248,11 +261,11 @@ namespace xFunc.Maths.Expressions.Matrices
 
             for (var j = 0; j < columns; j++)
             {
-                var element = 0.0;
+                var element = new NumberValue(0.0);
                 for (var k = 0; k < left.Columns; k++)
                 {
-                    var leftNumber = (double)left[i][k].Execute(parameters);
-                    var rightNumber = (double)right[k][j].Execute(parameters);
+                    var leftNumber = (NumberValue)left[i][k].Execute(parameters);
+                    var rightNumber = (NumberValue)right[k][j].Execute(parameters);
 
                     element += leftNumber * rightNumber;
                 }
@@ -307,7 +320,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// The dot product of vectors.
         /// </returns>
         /// <exception cref="ArgumentException">The size of vectors is invalid.</exception>
-        public static double Mul(this Vector left, Vector right, ExpressionParameters? parameters)
+        public static NumberValue Mul(this Vector left, Vector right, ExpressionParameters? parameters)
         {
             if (left.ParametersCount != right.ParametersCount)
                 throw new ArgumentException(Resource.MatrixArgException);
@@ -315,7 +328,7 @@ namespace xFunc.Maths.Expressions.Matrices
             var vector1 = left.ToCalculatedArray(parameters);
             var vector2 = right.ToCalculatedArray(parameters);
 
-            var product = 0.0;
+            var product = new NumberValue(0.0);
             for (var i = 0; i < vector1.Length; i++)
                 product += vector1[i] * vector2[i];
 
@@ -366,17 +379,17 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>The determinant of matrix.</returns>
         /// <exception cref="ArgumentException">The size of matrices is invalid.</exception>
-        public static double Determinant(this Matrix matrix, ExpressionParameters? parameters)
+        public static NumberValue Determinant(this Matrix matrix, ExpressionParameters? parameters)
         {
             if (!matrix.IsSquare)
                 throw new ArgumentException(Resource.MatrixArgException);
 
             var array = matrix.ToCalculatedArray(parameters);
 
-            return Determinant_(array);
+            return DeterminantInternal(array);
         }
 
-        private static double Determinant_(double[][] matrix)
+        private static NumberValue DeterminantInternal(NumberValue[][] matrix)
         {
             if (matrix.Length == 1)
                 return matrix[0][0];
@@ -385,17 +398,20 @@ namespace xFunc.Maths.Expressions.Matrices
 
             var lu = LUPDecompositionInternal(matrix, out _, out var toggle);
 
-            if (lu == null)
+            if (lu is null)
                 throw new MatrixIsInvalidException();
 
-            double result = toggle;
+            var result = toggle;
             for (var i = 0; i < lu.Length; i++)
                 result *= lu[i][i];
 
             return result;
         }
 
-        private static double[][] LUPDecompositionInternal(double[][] matrix, out int[] permutation, out int toggle)
+        private static NumberValue[][] LUPDecompositionInternal(
+            NumberValue[][] matrix,
+            out int[] permutation,
+            out NumberValue toggle)
         {
             var size = matrix.Length;
 
@@ -403,11 +419,11 @@ namespace xFunc.Maths.Expressions.Matrices
             for (var i = 0; i < size; i++)
                 permutation[i] = i;
 
-            toggle = 1;
+            toggle = new NumberValue(1.0);
 
             for (var j = 0; j < size - 1; j++)
             {
-                var colMax = Math.Abs(matrix[j][j]);
+                var colMax = NumberValue.Abs(matrix[j][j]);
                 var pRow = j;
 
                 for (var i = j + 1; i < size; i++)
@@ -430,7 +446,7 @@ namespace xFunc.Maths.Expressions.Matrices
                     toggle = -toggle;
                 }
 
-                if (matrix[j][j].Equals(0) || Math.Abs(matrix[j][j]) < 1E-14)
+                if (matrix[j][j].Equals(0) || NumberValue.Abs(matrix[j][j]) < 1E-14)
                     throw new MatrixIsInvalidException();
 
                 for (var i = j + 1; i < size; i++)
@@ -444,10 +460,10 @@ namespace xFunc.Maths.Expressions.Matrices
             return matrix;
         }
 
-        private static double[] HelperSolve(double[][] lu, double[] b)
+        private static NumberValue[] HelperSolve(NumberValue[][] lu, NumberValue[] b)
         {
             var n = lu.Length;
-            var x = new double[n];
+            var x = new NumberValue[n];
             b.CopyTo(x, 0);
 
             for (var i = 1; i < n; ++i)
@@ -499,31 +515,31 @@ namespace xFunc.Maths.Expressions.Matrices
             return new Matrix(vectors.ToImmutableArray());
         }
 
-        private static double[][] InverseInternal(double[][] matrix)
+        private static NumberValue[][] InverseInternal(NumberValue[][] matrix)
         {
             var n = matrix.Length;
-            var result = new double[n][];
+            var result = new NumberValue[n][];
 
             for (var i = 0; i < n; i++)
             {
-                result[i] = new double[n];
+                result[i] = new NumberValue[n];
                 for (var j = 0; j < n; j++)
                     result[i][j] = matrix[i][j];
             }
 
             var lu = LUPDecompositionInternal(matrix, out var permutation, out _);
-            if (lu == null)
+            if (lu is null)
                 throw new MatrixIsInvalidException();
 
-            var b = new double[n];
+            var b = new NumberValue[n];
             for (var i = 0; i < n; i++)
             {
                 for (var j = 0; j < n; j++)
                 {
                     if (i == permutation[j])
-                        b[j] = 1.0;
+                        b[j] = new NumberValue(1.0);
                     else
-                        b[j] = 0.0;
+                        b[j] = new NumberValue(0.0);
                 }
 
                 var x = HelperSolve(lu, b);

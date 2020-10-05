@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Collections.Immutable;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
@@ -54,18 +53,18 @@ namespace xFunc.Maths.Expressions
 
             return (leftResult, rightResult) switch
             {
-                (double leftNumber, double rightNumber) => Math.Log(rightNumber, leftNumber),
-                (double leftNumber, Complex complex) => (object)Complex.Log(complex, leftNumber),
+                (NumberValue left, NumberValue right) => NumberValue.Log(right, left),
+                (NumberValue left, Complex complex) => NumberValue.Log(complex, left),
                 _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };
         }
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult, TContext>(
+        protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);

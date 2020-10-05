@@ -16,6 +16,7 @@
 using System.Collections.Immutable;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Expressions.Angles;
 
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
@@ -44,21 +45,19 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         }
 
         /// <inheritdoc />
+        protected override AngleValue ExecuteInternal(NumberValue radian)
+            => AngleValue.Acosh(radian);
+
+        /// <inheritdoc />
         protected override Complex ExecuteComplex(Complex complex)
-        {
-            return ComplexExtensions.Acosh(complex);
-        }
+            => ComplexExtensions.Acosh(complex);
 
         /// <inheritdoc />
-        protected override double ExecuteInternal(double radian) =>
-            MathExtensions.Acosh(radian);
-
-        /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult, TContext>(
+        protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);

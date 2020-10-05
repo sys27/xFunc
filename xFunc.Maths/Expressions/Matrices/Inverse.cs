@@ -47,19 +47,21 @@ namespace xFunc.Maths.Expressions.Matrices
         public override object Execute(ExpressionParameters? parameters)
         {
             var result = Argument.Execute(parameters);
-            if (result is Matrix matrix)
-                return matrix.Inverse(parameters);
 
-            throw new ResultIsNotSupportedException(this, result);
+            return result switch
+            {
+                Matrix matrix => matrix.Inverse(parameters),
+                _ => throw new ResultIsNotSupportedException(this, result),
+            };
         }
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
         /// <inheritdoc />
         [ExcludeFromCodeCoverage]
-        private protected override TResult AnalyzeInternal<TResult, TContext>(
+        protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);

@@ -46,19 +46,19 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         /// <inheritdoc />
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteInternal(AngleValue angleValue)
-            => angleValue.Cos();
+        protected override NumberValue ExecuteInternal(AngleValue angleValue)
+            => AngleValue.Cos(angleValue);
 
         /// <inheritdoc />
         protected override Complex ExecuteComplex(Complex complex)
             => Complex.Cos(complex);
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult, TContext>(
+        protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);

@@ -27,7 +27,7 @@ namespace xFunc.Tests.Expressions
         {
             var floor = new Floor(new Number(5.55555555));
             var result = floor.Execute();
-            var expected = 5.0;
+            var expected = new NumberValue(5.0);
 
             Assert.Equal(expected, result);
         }

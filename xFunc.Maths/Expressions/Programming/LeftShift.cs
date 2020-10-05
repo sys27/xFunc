@@ -41,18 +41,18 @@ namespace xFunc.Maths.Expressions.Programming
 
             return (leftResult, rightResult) switch
             {
-                (double left, double right) => left.LeftShift(right),
+                (NumberValue left, NumberValue right) => NumberValue.LeftShift(left, right),
                 _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };
         }
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
         /// <inheritdoc />
         [ExcludeFromCodeCoverage]
-        private protected override TResult AnalyzeInternal<TResult, TContext>(
+        protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);

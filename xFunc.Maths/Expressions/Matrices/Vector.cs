@@ -59,8 +59,8 @@ namespace xFunc.Maths.Expressions.Matrices
                 else
                 {
                     var result = this[i].Execute(parameters);
-                    if (result is double doubleResult)
-                        args.Add(new Number(doubleResult));
+                    if (result is NumberValue number)
+                        args.Add(new Number(number));
                     else
                         throw new ResultIsNotSupportedException(this, result);
                 }
@@ -70,12 +70,12 @@ namespace xFunc.Maths.Expressions.Matrices
         }
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
         /// <inheritdoc />
         [ExcludeFromCodeCoverage]
-        private protected override TResult AnalyzeInternal<TResult, TContext>(
+        protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);
@@ -89,12 +89,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>The array which represents current vector.</returns>
-        internal double[] ToCalculatedArray(ExpressionParameters? parameters)
+        internal NumberValue[] ToCalculatedArray(ExpressionParameters? parameters)
         {
-            var results = new double[ParametersCount];
+            var results = new NumberValue[ParametersCount];
 
             for (var i = 0; i < ParametersCount; i++)
-                results[i] = (double)this[i].Execute(parameters);
+                results[i] = (NumberValue)this[i].Execute(parameters);
 
             return results;
         }

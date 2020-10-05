@@ -30,11 +30,11 @@ namespace xFunc.Tests.Expressions.Programming
             var cond = new Equal(Variable.X, new Number(10));
             var @if = new If(cond, new Number(20), Number.Zero);
 
-            Assert.Equal(20.0, @if.Execute(parameters));
+            Assert.Equal(new NumberValue(20.0), @if.Execute(parameters));
 
-            parameters["x"] = 0;
+            parameters["x"] = new NumberValue(0.0);
 
-            Assert.Equal(0.0, @if.Execute(parameters));
+            Assert.Equal(new NumberValue(0.0), @if.Execute(parameters));
         }
 
         [Fact]
@@ -45,11 +45,11 @@ namespace xFunc.Tests.Expressions.Programming
             var cond = new Equal(Variable.X, Number.Zero);
             var @if = new If(cond, Number.One, new UnaryMinus(Number.One));
 
-            Assert.Equal(1.0, @if.Execute(parameters));
+            Assert.Equal(new NumberValue(1.0), @if.Execute(parameters));
 
-            parameters["x"] = 10;
+            parameters["x"] = new NumberValue(10);
 
-            Assert.Equal(-1.0, @if.Execute(parameters));
+            Assert.Equal(new NumberValue(-1.0), @if.Execute(parameters));
         }
 
         [Fact]
@@ -60,7 +60,7 @@ namespace xFunc.Tests.Expressions.Programming
             var cond = new Equal(Variable.X, new Number(10));
             var @if = new If(cond, new Number(20));
 
-            Assert.Equal(20.0, @if.Execute(parameters));
+            Assert.Equal(new NumberValue(20.0), @if.Execute(parameters));
         }
 
         [Fact]

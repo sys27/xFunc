@@ -111,9 +111,9 @@ namespace xFunc.Maths
             exp.Analyze(typeAnalyzer);
 
             var result = exp.Execute(Parameters);
-            if (result is double number)
+            if (result is NumberValue number)
             {
-                return new NumberResult(number);
+                return new NumberResult(number.Number);
             }
 
             if (result is AngleValue angle)
@@ -185,7 +185,7 @@ namespace xFunc.Maths
         /// <returns>A simplified expression.</returns>
         public IExpression Simplify(IExpression expression)
         {
-            if (expression == null)
+            if (expression is null)
                 throw new ArgumentNullException(nameof(expression));
 
             return expression.Analyze(simplifier);
@@ -234,7 +234,7 @@ namespace xFunc.Maths
             Variable variable,
             ExpressionParameters parameters)
         {
-            if (expression == null)
+            if (expression is null)
                 throw new ArgumentNullException(nameof(expression));
 
             var context = new DifferentiatorContext(parameters, variable);

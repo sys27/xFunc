@@ -30,7 +30,7 @@ namespace xFunc.Tests.Expressions.Programming
             var parameters = new ParameterCollection { new Parameter("x", 10) };
             var mul = new MulAssign(Variable.X, Number.Two);
             var result = mul.Execute(parameters);
-            var expected = 20.0;
+            var expected = new NumberValue(20.0);
 
             Assert.Equal(expected, result);
             Assert.Equal(expected, parameters["x"]);
@@ -43,8 +43,8 @@ namespace xFunc.Tests.Expressions.Programming
             var add = new Add(Number.Two, new MulAssign(Variable.X, Number.Two));
             var result = add.Execute(parameters);
 
-            Assert.Equal(22.0, result);
-            Assert.Equal(20.0, parameters["x"]);
+            Assert.Equal(new NumberValue(22.0), result);
+            Assert.Equal(new NumberValue(20.0), parameters["x"]);
         }
 
         [Fact]

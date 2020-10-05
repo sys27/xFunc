@@ -43,29 +43,22 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Number"/> class.
         /// </summary>
         /// <param name="number">A number.</param>
-        public Number(double number) => Value = number;
+        public Number(double number)
+            : this(new NumberValue(number))
+        {
+        }
 
         /// <summary>
-        /// Defines an implicit conversion of a <see cref="Number"/> to a double value.
+        /// Initializes a new instance of the <see cref="Number"/> class.
         /// </summary>
-        /// <param name="number">The value to convert to a double.</param>
-        /// <returns>An object that contains the value of the <paramref name="number"/> parameter.</returns>
-        public static implicit operator double(Number? number)
-            => number?.Value ?? throw new ArgumentNullException(nameof(number));
-
-        /// <summary>
-        /// Defines an implicit conversion of double to <see cref="Number"/>.
-        /// </summary>
-        /// <param name="number">The value to convert to <see cref="Number"/>.</param>
-        /// <returns>An object that contains the value of the <paramref name="number"/> parameter.</returns>
-        public static implicit operator Number(double number)
-            => new Number(number);
+        /// <param name="number">A number.</param>
+        public Number(NumberValue number) => Value = number;
 
         /// <summary>
         /// Deconstructs <see cref="Number"/> to <see cref="double"/>.
         /// </summary>
         /// <param name="number">The number.</param>
-        public void Deconstruct(out double number) => number = Value;
+        public void Deconstruct(out NumberValue number) => number = Value;
 
         /// <inheritdoc />
         public bool Equals(Number? other)
@@ -76,7 +69,7 @@ namespace xFunc.Maths.Expressions
             if (ReferenceEquals(this, other))
                 return true;
 
-            return MathExtensions.Equals(Value, other.Value);
+            return Value == other.Value;
         }
 
         /// <inheritdoc />
@@ -118,7 +111,7 @@ namespace xFunc.Maths.Expressions
         /// <inheritdoc />
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return analyzer.Analyze(this);
@@ -129,35 +122,15 @@ namespace xFunc.Maths.Expressions
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return analyzer.Analyze(this, context);
         }
 
         /// <summary>
-        /// Gets a value indicating whether the current value is not a number (NaN).
-        /// </summary>
-        public bool IsNaN => double.IsNaN(Value);
-
-        /// <summary>
-        /// Gets a value indicating whether the current number evaluates to infinity.
-        /// </summary>
-        public bool IsInfinity => double.IsInfinity(Value);
-
-        /// <summary>
-        /// Gets a value indicating whether the current number evaluates to positive infinity.
-        /// </summary>
-        public bool IsPositiveInfinity => double.IsPositiveInfinity(Value);
-
-        /// <summary>
-        /// Gets a value indicating whether the current number evaluates to negative infinity.
-        /// </summary>
-        public bool IsNegativeInfinity => double.IsNegativeInfinity(Value);
-
-        /// <summary>
         /// Gets a number.
         /// </summary>
-        public double Value { get; }
+        public NumberValue Value { get; }
     }
 }

@@ -32,10 +32,11 @@ namespace xFunc.Tests.Expressions.Programming
         {
             var parameters = new ParameterCollection { new Parameter("x", 10) };
             var inc = new Inc(Variable.X);
-            var result = (double)inc.Execute(parameters);
+            var result = (NumberValue)inc.Execute(parameters);
+            var expected = new NumberValue(11.0);
 
-            Assert.Equal(11.0, result);
-            Assert.Equal(11.0, parameters["x"]);
+            Assert.Equal(expected, result);
+            Assert.Equal(expected, parameters["x"]);
         }
 
         [Fact]
@@ -43,10 +44,10 @@ namespace xFunc.Tests.Expressions.Programming
         {
             var parameters = new ParameterCollection { new Parameter("x", 10) };
             var inc = new Add(Number.One, new Inc(Variable.X));
-            var result = (double)inc.Execute(parameters);
+            var result = (NumberValue)inc.Execute(parameters);
 
-            Assert.Equal(12.0, result);
-            Assert.Equal(11.0, parameters["x"]);
+            Assert.Equal(new NumberValue(12.0), result);
+            Assert.Equal(new NumberValue(11.0), parameters["x"]);
         }
 
         [Fact]

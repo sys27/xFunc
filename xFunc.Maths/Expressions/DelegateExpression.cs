@@ -36,10 +36,10 @@ namespace xFunc.Maths.Expressions
         /// <inheritdoc />
         public override bool Equals(object? obj)
         {
-            if (this == obj)
+            if (ReferenceEquals(this, obj))
                 return true;
 
-            if (obj == null || GetType() != obj.GetType())
+            if (obj is null || GetType() != obj.GetType())
                 return false;
 
             return func.Equals(((DelegateExpression)obj).func);
@@ -61,7 +61,7 @@ namespace xFunc.Maths.Expressions
         /// <inheritdoc />
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return analyzer.Analyze(this);
@@ -72,7 +72,7 @@ namespace xFunc.Maths.Expressions
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return analyzer.Analyze(this, context);

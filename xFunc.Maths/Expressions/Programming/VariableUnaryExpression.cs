@@ -38,10 +38,10 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns><c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object? obj)
         {
-            if (this == obj)
+            if (ReferenceEquals(this, obj))
                 return true;
 
-            if (obj == null || GetType() != obj.GetType())
+            if (obj is null || GetType() != obj.GetType())
                 return false;
 
             return Variable.Equals(((VariableUnaryExpression)obj).Variable);
@@ -59,12 +59,12 @@ namespace xFunc.Maths.Expressions.Programming
         /// <inheritdoc />
         public object Execute(ExpressionParameters? parameters)
         {
-            if (parameters == null)
+            if (parameters is null)
                 throw new ArgumentNullException(nameof(parameters));
 
             var result = Variable.Execute(parameters);
-            if (result is double value)
-                return parameters.Variables[Variable.Name] = Execute(value);
+            if (result is NumberValue number)
+                return parameters.Variables[Variable.Name] = Execute(number);
 
             throw new ResultIsNotSupportedException(this, result);
         }
@@ -72,16 +72,16 @@ namespace xFunc.Maths.Expressions.Programming
         /// <summary>
         /// Executes this expression.
         /// </summary>
-        /// <param name="value">The value of variable.</param>
+        /// <param name="number">The number.</param>
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        protected abstract object Execute(double value);
+        protected abstract object Execute(NumberValue number);
 
         /// <inheritdoc />
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return AnalyzeInternal(analyzer);
@@ -92,7 +92,7 @@ namespace xFunc.Maths.Expressions.Programming
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return AnalyzeInternal(analyzer, context);
@@ -106,7 +106,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected abstract TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer);
+        protected abstract TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer);
 
         /// <summary>
         /// Analyzes the current expression.
@@ -116,7 +116,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="analyzer">The analyzer.</param>
         /// <param name="context">The context.</param>
         /// <returns>The analysis result.</returns>
-        private protected abstract TResult AnalyzeInternal<TResult, TContext>(
+        protected abstract TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context);
 

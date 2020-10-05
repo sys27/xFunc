@@ -170,7 +170,7 @@ namespace xFunc.Maths.Analyzers.Formatters
 
         /// <inheritdoc />
         public virtual string Analyze(Number exp)
-            => exp.Value.ToString(CultureInfo.InvariantCulture);
+            => exp.Value.ToString();
 
         /// <inheritdoc />
         public virtual string Analyze(Angle exp)

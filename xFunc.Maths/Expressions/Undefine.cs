@@ -32,7 +32,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="key">The key.</param>
         public Undefine(IExpression key)
         {
-            if (key == null)
+            if (key is null)
                 throw new ArgumentNullException(nameof(key));
 
             if (!(key is Variable || key is UserFunction))
@@ -44,11 +44,11 @@ namespace xFunc.Maths.Expressions
         /// <inheritdoc />
         public override bool Equals(object? obj)
         {
-            if (this == obj)
+            if (ReferenceEquals(this, obj))
                 return true;
 
             var undef = obj as Undefine;
-            if (undef == null)
+            if (undef is null)
                 return false;
 
             return Key.Equals(undef.Key);
@@ -67,7 +67,7 @@ namespace xFunc.Maths.Expressions
         /// <inheritdoc />
         public object Execute(ExpressionParameters? parameters)
         {
-            if (parameters == null)
+            if (parameters is null)
                 throw new ArgumentNullException(nameof(parameters));
 
             if (Key is Variable variable)
@@ -85,7 +85,7 @@ namespace xFunc.Maths.Expressions
         /// <inheritdoc />
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return analyzer.Analyze(this);
@@ -96,7 +96,7 @@ namespace xFunc.Maths.Expressions
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return analyzer.Analyze(this, context);

@@ -30,7 +30,7 @@ namespace xFunc.Tests.Expressions.Programming
             var parameters = new ParameterCollection { new Parameter("x", 10) };
             var div = new DivAssign(Variable.X, Number.Two);
             var result = div.Execute(parameters);
-            var expected = 5.0;
+            var expected = new NumberValue(5.0);
 
             Assert.Equal(expected, result);
             Assert.Equal(expected, parameters["x"]);
@@ -43,8 +43,8 @@ namespace xFunc.Tests.Expressions.Programming
             var add = new Add(new DivAssign(Variable.X, Number.Two), Number.Two);
             var result = add.Execute(parameters);
 
-            Assert.Equal(7.0, result);
-            Assert.Equal(5.0, parameters["x"]);
+            Assert.Equal(new NumberValue(7.0), result);
+            Assert.Equal(new NumberValue(5.0), parameters["x"]);
         }
 
         [Fact]

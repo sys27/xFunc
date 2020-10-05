@@ -42,20 +42,20 @@ namespace xFunc.Maths.Expressions.Programming
 
             return (leftResult, rightResult) switch
             {
-                (double left, double right) => !MathExtensions.Equals(left, right),
                 (bool left, bool right) => left != right,
+                (NumberValue left, NumberValue right) => left != right,
                 (AngleValue left, AngleValue right) => left != right,
                 _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };
         }
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
         /// <inheritdoc />
         [ExcludeFromCodeCoverage]
-        private protected override TResult AnalyzeInternal<TResult, TContext>(
+        protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);

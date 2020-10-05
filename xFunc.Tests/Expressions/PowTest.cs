@@ -27,16 +27,18 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTest1()
         {
             var exp = new Pow(Number.Two, new Number(10));
+            var expected = new NumberValue(1024.0);
 
-            Assert.Equal(1024.0, exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]
         public void NegativeExecuteTest1()
         {
             var exp = new Pow(new Number(-8), new Number(1 / 3.0));
+            var expected = new NumberValue(-2.0);
 
-            Assert.Equal(-2.0, exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]
@@ -63,7 +65,7 @@ namespace xFunc.Tests.Expressions
         {
             var exp = new Pow(new Number(-5), Number.Two);
 
-            Assert.Equal(25.0, exp.Execute());
+            Assert.Equal(new NumberValue(25.0), exp.Execute());
         }
 
         [Fact]

@@ -55,23 +55,23 @@ namespace xFunc.Maths.Expressions
 
             return (leftResult, rightResult) switch
             {
-                (double left, double right) => left * right,
+                (NumberValue left, NumberValue right) => left * right,
 
-                (double left, AngleValue right) => left * right,
-                (AngleValue left, double right) => left * right,
+                (NumberValue left, AngleValue right) => left * right,
+                (AngleValue left, NumberValue right) => left * right,
                 (AngleValue left, AngleValue right) => left * right,
 
-                (double left, Complex right) => left * right,
-                (Complex left, double right) => left * right,
+                (NumberValue left, Complex right) => left * right,
+                (Complex left, NumberValue right) => left * right,
                 (Complex left, Complex right) => left * right,
 
                 (Vector left, Vector right) => left.Mul(right, parameters),
-                (double left, Vector right) => right.Mul(left, parameters),
-                (Vector left, double right) => left.Mul(right, parameters),
+                (NumberValue left, Vector right) => right.Mul(left, parameters),
+                (Vector left, NumberValue right) => left.Mul(right, parameters),
 
                 (Matrix left, Matrix right) => left.Mul(right, parameters),
-                (double left, Matrix right) => right.Mul(left, parameters),
-                (Matrix left, double right) => left.Mul(right, parameters),
+                (NumberValue left, Matrix right) => right.Mul(left, parameters),
+                (Matrix left, NumberValue right) => left.Mul(right, parameters),
 
                 (Matrix left, Vector right) => left.Mul(right, parameters),
                 (Vector left, Matrix right) => left.Mul(right, parameters),
@@ -81,11 +81,11 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult, TContext>(
+        protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);

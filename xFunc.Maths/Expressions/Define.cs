@@ -50,11 +50,11 @@ namespace xFunc.Maths.Expressions
         /// <inheritdoc />
         public override bool Equals(object? obj)
         {
-            if (this == obj)
+            if (ReferenceEquals(this, obj))
                 return true;
 
             var def = obj as Define;
-            if (def == null)
+            if (def is null)
                 return false;
 
             return Key.Equals(def.Key) && Value.Equals(def.Value);
@@ -72,7 +72,7 @@ namespace xFunc.Maths.Expressions
         /// <inheritdoc />
         public object Execute(ExpressionParameters? parameters)
         {
-            if (parameters == null)
+            if (parameters is null)
                 throw new ArgumentNullException(nameof(parameters));
 
             if (Key is Variable variable)
@@ -90,7 +90,7 @@ namespace xFunc.Maths.Expressions
         /// <inheritdoc />
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return analyzer.Analyze(this);
@@ -101,7 +101,7 @@ namespace xFunc.Maths.Expressions
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return analyzer.Analyze(this, context);

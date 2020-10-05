@@ -27,7 +27,7 @@ namespace xFunc.Tests.Expressions
         {
             var round = new Round(new Number(5.555555));
             var result = round.Execute();
-            var expected = 6.0;
+            var expected = new NumberValue(6.0);
 
             Assert.Equal(expected, result);
         }
@@ -37,7 +37,7 @@ namespace xFunc.Tests.Expressions
         {
             var round = new Round(new Number(5.555555), Number.Two);
             var result = round.Execute();
-            var expected = 5.56;
+            var expected = new NumberValue(5.56);
 
             Assert.Equal(expected, result);
         }

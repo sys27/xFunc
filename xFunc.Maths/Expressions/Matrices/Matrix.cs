@@ -73,10 +73,10 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <inheritdoc />
         public override bool Equals(object? obj)
         {
-            if (this == obj)
+            if (ReferenceEquals(this, obj))
                 return true;
 
-            if (obj == null || GetType() != obj.GetType())
+            if (obj is null || GetType() != obj.GetType())
                 return false;
 
             var matrix = (Matrix)obj;
@@ -110,7 +110,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <inheritdoc />
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return analyzer.Analyze(this);
@@ -121,7 +121,7 @@ namespace xFunc.Maths.Expressions.Matrices
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return analyzer.Analyze(this, context);
@@ -142,9 +142,9 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>The two dimensional array which represents current vector.</returns>
-        internal double[][] ToCalculatedArray(ExpressionParameters? parameters)
+        internal NumberValue[][] ToCalculatedArray(ExpressionParameters? parameters)
         {
-            var results = new double[Rows][];
+            var results = new NumberValue[Rows][];
 
             for (var i = 0; i < Rows; i++)
                 results[i] = Vectors[i].ToCalculatedArray(parameters);

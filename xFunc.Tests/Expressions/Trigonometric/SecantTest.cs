@@ -49,36 +49,39 @@ namespace xFunc.Tests.Expressions.Trigonometric
         public void ExecuteNumberTest(double degree, double expected)
         {
             var exp = new Sec(new Number(degree));
-            var result = (double)exp.Execute();
+            var result = (NumberValue)exp.Execute();
 
-            Assert.Equal(expected, result, 15);
+            Assert.Equal(expected, result.Number);
         }
 
         [Fact]
         public void ExecuteDegreeTest()
         {
             var exp = new Sec(AngleValue.Degree(1).AsExpression());
-            var result = (double)exp.Execute();
+            var result = (NumberValue)exp.Execute();
+            var expected = new NumberValue(1.0001523280439077);
 
-            Assert.Equal(1.0001523280439077, result, 15);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
         public void ExecuteRadianTest()
         {
             var exp = new Sec(AngleValue.Radian(1).AsExpression());
-            var result = (double)exp.Execute();
+            var result = (NumberValue)exp.Execute();
+            var expected = new NumberValue(1.8508157176809255);
 
-            Assert.Equal(1.8508157176809255, result, 15);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
         public void ExecuteGradianTest()
         {
             var exp = new Sec(AngleValue.Gradian(1).AsExpression());
-            var actual = (double)exp.Execute();
+            var actual = (NumberValue)exp.Execute();
+            var expected = new NumberValue(1.0001233827397618);
 
-            Assert.Equal(1.0001233827397618, actual, 15);
+            Assert.Equal(expected, actual);
         }
 
         [Fact]

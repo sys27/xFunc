@@ -27,8 +27,9 @@ namespace xFunc.Tests.Expressions.ComplexNumbers
         {
             var complex = new Complex(3.1, 2.5);
             var exp = new Im(new ComplexNumber(complex));
+            var expected = new NumberValue(complex.Imaginary);
 
-            Assert.Equal(complex.Imaginary, exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]

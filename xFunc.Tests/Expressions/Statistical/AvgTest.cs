@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Statistical
             var exp = new Avg(new[] { Number.Two });
             var result = exp.Execute();
 
-            Assert.Equal(2.0, result);
+            Assert.Equal(new NumberValue(2.0), result);
         }
 
         [Fact]
@@ -37,7 +37,7 @@ namespace xFunc.Tests.Expressions.Statistical
             var exp = new Avg(new[] { Number.Two, new Number(4) });
             var result = exp.Execute();
 
-            Assert.Equal(3.0, result);
+            Assert.Equal(new NumberValue(3.0), result);
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace xFunc.Tests.Expressions.Statistical
             var exp = new Avg(new[] { new Number(9), Number.Two, new Number(4) });
             var result = exp.Execute();
 
-            Assert.Equal(5.0, result);
+            Assert.Equal(new NumberValue(5.0), result);
         }
 
         [Fact]
@@ -55,7 +55,7 @@ namespace xFunc.Tests.Expressions.Statistical
             var exp = new Avg(new[] { new Vector(new[] { Number.One, Number.Two, new Number(3) }) });
             var result = exp.Execute();
 
-            Assert.Equal(2.0, result);
+            Assert.Equal(new NumberValue(2.0), result);
         }
     }
 }

@@ -45,7 +45,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             var div = new Div(Number.Zero, Number.Zero);
             var actual = (Number)div.Analyze(simplifier);
 
-            Assert.True(actual.IsNaN);
+            Assert.True(actual.Value.IsNaN);
         }
 
         [Fact(DisplayName = "x / 1")]

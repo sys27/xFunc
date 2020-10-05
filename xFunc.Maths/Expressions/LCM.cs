@@ -58,14 +58,14 @@ namespace xFunc.Maths.Expressions
         /// <inheritdoc />
         public override object Execute(ExpressionParameters? parameters)
         {
-            var lcm = 1.0;
+            var lcm = new NumberValue(1.0);
             foreach (var argument in Arguments)
             {
                 var result = argument.Execute(parameters);
 
                 lcm = result switch
                 {
-                    double number => MathExtensions.LCM(lcm, number),
+                    NumberValue number => NumberValue.LCM(lcm, number),
                     _ => throw new ResultIsNotSupportedException(this, result),
                 };
             }
@@ -74,12 +74,12 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <inheritdoc />
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
             => analyzer.Analyze(this);
 
         /// <inheritdoc />
         [ExcludeFromCodeCoverage]
-        private protected override TResult AnalyzeInternal<TResult, TContext>(
+        protected override TResult AnalyzeInternal<TResult, TContext>(
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
             => analyzer.Analyze(this, context);

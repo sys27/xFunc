@@ -335,7 +335,7 @@ namespace xFunc.Maths.Analyzers
         {
             ValidateArguments(exp, context);
 
-            if (context.Parameters == null)
+            if (context.Parameters is null)
                 throw new InvalidOperationException();
 
             return context.Parameters.Functions[exp].Analyze(this, context);

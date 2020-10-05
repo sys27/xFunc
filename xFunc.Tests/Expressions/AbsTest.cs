@@ -29,8 +29,9 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTestNumber()
         {
             var exp = new Abs(new Number(-1));
+            var expected = new NumberValue(1.0);
 
-            Assert.Equal(1.0, exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]
@@ -58,8 +59,9 @@ namespace xFunc.Tests.Expressions
             {
                 new Number(5), new Number(4), new Number(6), new Number(7)
             }));
+            var expected = new NumberValue(11.2249721603218241567);
 
-            Assert.Equal(11.2249721603218241567, (double)exp.Execute(), 15);
+            Assert.Equal(expected, (NumberValue)exp.Execute());
         }
 
         [Fact]
@@ -70,12 +72,12 @@ namespace xFunc.Tests.Expressions
         public void EqualsTest1()
         {
             Variable x1 = "x";
-            Number num1 = 2;
+            Number num1 = Number.Two;
             var mul1 = new Mul(num1, x1);
             var abs1 = new Abs(mul1);
 
             Variable x2 = "x";
-            Number num2 = 2;
+            Number num2 = Number.Two;
             var mul2 = new Mul(num2, x2);
             var abs2 = new Abs(mul2);
 
@@ -87,12 +89,12 @@ namespace xFunc.Tests.Expressions
         public void EqualsTest2()
         {
             Variable x1 = "x";
-            Number num1 = 2;
+            Number num1 = Number.Two;
             var mul1 = new Mul(num1, x1);
             var abs1 = new Abs(mul1);
 
             Variable x2 = "x";
-            Number num2 = 3;
+            Number num2 = new Number(3);
             var mul2 = new Mul(num2, x2);
             var abs2 = new Abs(mul2);
 

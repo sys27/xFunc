@@ -49,10 +49,12 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         public override object Execute(ExpressionParameters? parameters)
         {
             var result = Argument.Execute(parameters);
-            if (result is Complex complex)
-                return new NumberValue(complex.Real);
 
-            throw new ResultIsNotSupportedException(this, result);
+            return result switch
+            {
+                Complex complex => new NumberValue(complex.Real),
+                _ => throw new ResultIsNotSupportedException(this, result),
+            };
         }
 
         /// <inheritdoc />

@@ -16,7 +16,10 @@
 using System;
 using System.Globalization;
 using System.Numerics;
+using xFunc.Maths.Expressions.Angles;
+using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Resources;
+using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Maths.Expressions.Collections
 {
@@ -28,53 +31,12 @@ namespace xFunc.Maths.Expressions.Collections
         private object value = default!;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Parameter"/> class.
-        /// </summary>
-        /// <param name="key">The name of parameter.</param>
-        /// <param name="value">The value of parameter.</param>
-        public Parameter(string key, double value)
-            : this(key, value, ParameterType.Normal)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Parameter"/> class.
-        /// </summary>
-        /// <param name="key">The name of parameter.</param>
-        /// <param name="value">The value of parameter.</param>
-        public Parameter(string key, Complex value)
-            : this(key, value, ParameterType.Normal)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Parameter"/> class.
-        /// </summary>
-        /// <param name="key">The name of parameter.</param>
-        /// <param name="value">The value of parameter.</param>
-        public Parameter(string key, bool value)
-            : this(key, value, ParameterType.Normal)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Parameter"/> class.
-        /// </summary>
-        /// <param name="key">The name of parameter.</param>
-        /// <param name="value">The value of parameter.</param>
-        public Parameter(string key, object value)
-            : this(key, value, ParameterType.Normal)
-        {
-            // TODO: remove?
-        }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="Parameter" /> class.
         /// </summary>
         /// <param name="key">The name of parameter.</param>
         /// <param name="value">The value of parameter.</param>
         /// <param name="type">The type of parameter.</param>
-        public Parameter(string key, double value, ParameterType type)
+        public Parameter(string key, double value, ParameterType type = ParameterType.Normal)
             : this(key, (object)value, type)
         {
         }
@@ -85,7 +47,73 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="key">The name of parameter.</param>
         /// <param name="value">The value of parameter.</param>
         /// <param name="type">The type of parameter.</param>
-        public Parameter(string key, object value, ParameterType type)
+        public Parameter(string key, NumberValue value, ParameterType type = ParameterType.Normal)
+            : this(key, (object)value, type)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Parameter" /> class.
+        /// </summary>
+        /// <param name="key">The name of parameter.</param>
+        /// <param name="value">The value of parameter.</param>
+        /// <param name="type">The type of parameter.</param>
+        public Parameter(string key, AngleValue value, ParameterType type = ParameterType.Normal)
+            : this(key, (object)value, type)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Parameter" /> class.
+        /// </summary>
+        /// <param name="key">The name of parameter.</param>
+        /// <param name="value">The value of parameter.</param>
+        /// <param name="type">The type of parameter.</param>
+        public Parameter(string key, Complex value, ParameterType type = ParameterType.Normal)
+            : this(key, (object)value, type)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Parameter" /> class.
+        /// </summary>
+        /// <param name="key">The name of parameter.</param>
+        /// <param name="value">The value of parameter.</param>
+        /// <param name="type">The type of parameter.</param>
+        public Parameter(string key, bool value, ParameterType type = ParameterType.Normal)
+            : this(key, (object)value, type)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Parameter" /> class.
+        /// </summary>
+        /// <param name="key">The name of parameter.</param>
+        /// <param name="value">The value of parameter.</param>
+        /// <param name="type">The type of parameter.</param>
+        public Parameter(string key, Vector value, ParameterType type = ParameterType.Normal)
+            : this(key, (object)value, type)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Parameter" /> class.
+        /// </summary>
+        /// <param name="key">The name of parameter.</param>
+        /// <param name="value">The value of parameter.</param>
+        /// <param name="type">The type of parameter.</param>
+        public Parameter(string key, Matrix value, ParameterType type = ParameterType.Normal)
+            : this(key, (object)value, type)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Parameter" /> class.
+        /// </summary>
+        /// <param name="key">The name of parameter.</param>
+        /// <param name="value">The value of parameter.</param>
+        /// <param name="type">The type of parameter.</param>
+        internal Parameter(string key, object value, ParameterType type = ParameterType.Normal)
         {
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentNullException(nameof(key));
@@ -108,7 +136,7 @@ namespace xFunc.Maths.Expressions.Collections
         public override bool Equals(object? obj)
         {
             var param = obj as Parameter;
-            if (param == null)
+            if (param is null)
                 return false;
 
             return Equals(param);
@@ -223,7 +251,7 @@ namespace xFunc.Maths.Expressions.Collections
             }
             set
             {
-                if (value == null)
+                if (value is null)
                     throw new ArgumentNullException(nameof(value));
 
                 if (Type != ParameterType.Normal)

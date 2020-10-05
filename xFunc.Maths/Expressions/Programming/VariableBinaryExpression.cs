@@ -42,10 +42,10 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
         public override bool Equals(object? obj)
         {
-            if (this == obj)
+            if (ReferenceEquals(this, obj))
                 return true;
 
-            if (obj == null || GetType() != obj.GetType())
+            if (obj is null || GetType() != obj.GetType())
                 return false;
 
             var exp = (VariableBinaryExpression)obj;
@@ -65,7 +65,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <inheritdoc />
         public object Execute(ExpressionParameters? parameters)
         {
-            if (parameters == null)
+            if (parameters is null)
                 throw new ArgumentNullException(nameof(parameters));
 
             var variableResult = Variable.Execute(parameters);
@@ -94,7 +94,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <inheritdoc />
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return AnalyzeInternal(analyzer);
@@ -105,7 +105,7 @@ namespace xFunc.Maths.Expressions.Programming
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return AnalyzeInternal(analyzer, context);

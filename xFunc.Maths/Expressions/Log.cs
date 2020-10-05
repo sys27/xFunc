@@ -54,7 +54,7 @@ namespace xFunc.Maths.Expressions
             return (leftResult, rightResult) switch
             {
                 (NumberValue left, NumberValue right) => NumberValue.Log(right, left),
-                (NumberValue left, Complex complex) => (object)NumberValue.Log(complex, left),
+                (NumberValue left, Complex complex) => NumberValue.Log(complex, left),
                 _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };
         }

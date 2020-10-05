@@ -42,7 +42,7 @@ namespace xFunc.Maths.Expressions
             {
                 NumberValue number => -number,
                 AngleValue angle => -angle,
-                Complex complex => (object)Complex.Negate(complex),
+                Complex complex => Complex.Negate(complex),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

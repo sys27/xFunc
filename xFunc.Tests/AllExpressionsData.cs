@@ -29,7 +29,7 @@ namespace xFunc.Tests
         {
             var iExp = typeof(IExpression);
             var asm = Assembly.GetAssembly(iExp);
-            if (asm == null)
+            if (asm is null)
                 throw new InvalidOperationException();
 
             var exclude = new HashSet<Type>

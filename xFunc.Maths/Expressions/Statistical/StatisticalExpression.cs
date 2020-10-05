@@ -65,15 +65,13 @@ namespace xFunc.Maths.Expressions.Statistical
             }
 
             var calculated = new double[size];
-            var i = 0;
-            foreach (var expression in data)
+            for (var i = 0; i < data.Length; i++)
             {
-                var result = expression.Execute(parameters);
+                var result = data[i].Execute(parameters);
                 if (!(result is NumberValue number))
                     throw new ResultIsNotSupportedException(this, result);
 
                 calculated[i] = number.Number;
-                i++;
             }
 
             return new NumberValue(ExecuteInternal(calculated));

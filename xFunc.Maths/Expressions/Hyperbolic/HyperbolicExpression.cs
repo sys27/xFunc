@@ -73,7 +73,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             {
                 NumberValue number => ExecuteInternal(AngleValue.Degree(number)),
                 AngleValue angle => ExecuteInternal(angle),
-                Complex complex => (object)ExecuteComplex(complex),
+                Complex complex => ExecuteComplex(complex),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

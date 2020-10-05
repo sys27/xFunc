@@ -78,7 +78,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
             {
                 NumberValue number => ExecuteInternal(AngleValue.Degree(number).ToRadian()),
                 AngleValue angle => ExecuteInternal(angle.ToRadian()),
-                Complex complex => (object)ExecuteComplex(complex),
+                Complex complex => ExecuteComplex(complex),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

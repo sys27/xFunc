@@ -51,7 +51,7 @@ namespace xFunc.Maths.Expressions
             return result switch
             {
                 NumberValue number => NumberValue.Exp(number),
-                Complex complex => (object)Complex.Exp(complex), // TODO:
+                Complex complex => Complex.Exp(complex),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

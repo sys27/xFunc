@@ -81,7 +81,7 @@ namespace xFunc.Maths
             {
                 var exp = ParseStatement(ref tokenReader);
                 var token = tokenReader.GetCurrent();
-                if (exp == null || !tokenReader.IsEnd || token.IsNotEmpty())
+                if (exp is null || !tokenReader.IsEnd || token.IsNotEmpty())
                     throw new ParseException(Resource.ErrorWhileParsingTree);
 
                 return exp;
@@ -111,7 +111,7 @@ namespace xFunc.Maths
             => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
             {
                 var left = parser.AssignmentKey(ref reader);
-                if (left == null)
+                if (left is null)
                     return null;
 
                 if (!reader.Check(AssignOperator))
@@ -274,7 +274,7 @@ namespace xFunc.Maths
                     while (reader.Check(CommaSymbol))
                     {
                         exp = parser.ParseVariable(ref reader);
-                        if (exp == null)
+                        if (exp is null)
                             return null;
 
                         parameterList.Add(exp);
@@ -294,7 +294,7 @@ namespace xFunc.Maths
             => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
             {
                 var variable = parser.ParseVariable(ref reader);
-                if (variable == null)
+                if (variable is null)
                     return null;
 
                 var @operator = reader.GetCurrent(MulAssignOperator) ||
@@ -317,7 +317,7 @@ namespace xFunc.Maths
             => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
             {
                 var condition = parser.ParseConditionalOrOperator(ref reader);
-                if (condition == null)
+                if (condition is null)
                     return null;
 
                 if (!reader.Check(QuestionMarkSymbol))
@@ -338,7 +338,7 @@ namespace xFunc.Maths
         private IExpression? ParseConditionalOrOperator(ref TokenReader tokenReader)
         {
             var left = ParseConditionalAndOperator(ref tokenReader);
-            if (left == null)
+            if (left is null)
                 return null;
 
             while (true)
@@ -357,7 +357,7 @@ namespace xFunc.Maths
         private IExpression? ParseConditionalAndOperator(ref TokenReader tokenReader)
         {
             var left = ParseBitwiseOperator(ref tokenReader);
-            if (left == null)
+            if (left is null)
                 return null;
 
             while (true)
@@ -376,7 +376,7 @@ namespace xFunc.Maths
         private IExpression? ParseBitwiseOperator(ref TokenReader tokenReader)
         {
             var left = ParseOrOperator(ref tokenReader);
-            if (left == null)
+            if (left is null)
                 return null;
 
             while (true)
@@ -401,7 +401,7 @@ namespace xFunc.Maths
         private IExpression? ParseOrOperator(ref TokenReader tokenReader)
         {
             var left = ParseXOrOperator(ref tokenReader);
-            if (left == null)
+            if (left is null)
                 return null;
 
             while (true)
@@ -422,7 +422,7 @@ namespace xFunc.Maths
         private IExpression? ParseXOrOperator(ref TokenReader tokenReader)
         {
             var left = ParseAndOperator(ref tokenReader);
-            if (left == null)
+            if (left is null)
                 return null;
 
             while (true)
@@ -441,7 +441,7 @@ namespace xFunc.Maths
         private IExpression? ParseAndOperator(ref TokenReader tokenReader)
         {
             var left = ParseEqualityOperator(ref tokenReader);
-            if (left == null)
+            if (left is null)
                 return null;
 
             while (true)
@@ -462,7 +462,7 @@ namespace xFunc.Maths
         private IExpression? ParseEqualityOperator(ref TokenReader tokenReader)
         {
             var left = ParseRelationalOperator(ref tokenReader);
-            if (left == null)
+            if (left is null)
                 return null;
 
             while (true)
@@ -483,7 +483,7 @@ namespace xFunc.Maths
         private IExpression? ParseRelationalOperator(ref TokenReader tokenReader)
         {
             var left = ParseShift(ref tokenReader);
-            if (left == null)
+            if (left is null)
                 return null;
 
             while (true)
@@ -506,7 +506,7 @@ namespace xFunc.Maths
         private IExpression? ParseShift(ref TokenReader tokenReader)
         {
             var left = ParseAddSub(ref tokenReader);
-            if (left == null)
+            if (left is null)
                 return null;
 
             while (true)
@@ -527,7 +527,7 @@ namespace xFunc.Maths
         private IExpression? ParseAddSub(ref TokenReader tokenReader)
         {
             var left = ParseMulDivMod(ref tokenReader);
-            if (left == null)
+            if (left is null)
                 return null;
 
             while (true)
@@ -548,7 +548,7 @@ namespace xFunc.Maths
         private IExpression? ParseMulDivMod(ref TokenReader tokenReader)
         {
             var left = ParseMulImplicit(ref tokenReader);
-            if (left == null)
+            if (left is null)
                 return null;
 
             while (true)
@@ -577,7 +577,7 @@ namespace xFunc.Maths
             {
                 var minusOperator = reader.GetCurrent(MinusOperator);
                 var number = parser.ParseNumber(ref reader);
-                if (number == null)
+                if (number is null)
                     return null;
 
                 var rightUnary = parser.ParseMulImplicitExponentiation(ref reader) ??
@@ -585,7 +585,7 @@ namespace xFunc.Maths
                                  parser.ParseMatrix(ref reader) ??
                                  parser.ParseVector(ref reader);
 
-                if (rightUnary == null)
+                if (rightUnary is null)
                     return null;
 
                 if (minusOperator.IsNotEmpty())
@@ -597,7 +597,7 @@ namespace xFunc.Maths
         private IExpression? ParseMulImplicitExponentiation(ref TokenReader tokenReader)
         {
             var left = ParseFunctionOrVariable(ref tokenReader);
-            if (left == null)
+            if (left is null)
                 return null;
 
             var @operator = tokenReader.GetCurrent(ExponentiationOperator);
@@ -618,7 +618,7 @@ namespace xFunc.Maths
                         tokenReader.GetCurrent(NotKeyword);
 
             var operand = ParseExponentiation(ref tokenReader);
-            if (operand == null || token.IsEmpty() || token.Is(PlusOperator))
+            if (operand is null || token.IsEmpty() || token.Is(PlusOperator))
                 return operand;
 
             if (token.Is(MinusOperator))
@@ -630,7 +630,7 @@ namespace xFunc.Maths
         private IExpression? ParseExponentiation(ref TokenReader tokenReader)
         {
             var left = ParseRightUnary(ref tokenReader);
-            if (left == null)
+            if (left is null)
                 return null;
 
             var @operator = tokenReader.GetCurrent(ExponentiationOperator);
@@ -662,7 +662,7 @@ namespace xFunc.Maths
             => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
             {
                 var variable = parser.ParseVariable(ref reader);
-                if (variable == null)
+                if (variable is null)
                     return null;
 
                 if (reader.Check(IncrementOperator))
@@ -819,7 +819,7 @@ namespace xFunc.Maths
                 return null;
 
             var exp = ParseExpression(ref tokenReader);
-            if (exp == null)
+            if (exp is null)
                 throw new ParseException(Resource.VectorEmptyError);
 
             var parameterList = ImmutableArray.CreateBuilder<IExpression>(1);
@@ -846,7 +846,7 @@ namespace xFunc.Maths
                     return null;
 
                 var exp = parser.ParseVector(ref reader);
-                if (exp == null)
+                if (exp is null)
                     return null;
 
                 var vectors = ImmutableArray.CreateBuilder<Vector>(1);

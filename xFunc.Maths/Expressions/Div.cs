@@ -61,7 +61,7 @@ namespace xFunc.Maths.Expressions
 
                 (NumberValue left, Complex right) => left / right,
                 (Complex left, NumberValue right) => left / right,
-                (Complex left, Complex right) => (object)(left / right),
+                (Complex left, Complex right) => left / right,
 
                 _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };

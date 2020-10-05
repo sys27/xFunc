@@ -52,7 +52,7 @@ namespace xFunc.Maths.Expressions
             return result switch
             {
                 NumberValue number => NumberValue.Sqrt(number),
-                Complex complex => (object)Complex.Sqrt(complex),
+                Complex complex => Complex.Sqrt(complex),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

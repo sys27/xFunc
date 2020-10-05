@@ -15,7 +15,6 @@
 
 using System;
 using System.Collections.Immutable;
-using System.Linq;
 using System.Threading.Tasks;
 using xFunc.Maths.Resources;
 
@@ -399,7 +398,7 @@ namespace xFunc.Maths.Expressions.Matrices
 
             var lu = LUPDecompositionInternal(matrix, out _, out var toggle);
 
-            if (lu == null)
+            if (lu is null)
                 throw new MatrixIsInvalidException();
 
             var result = toggle;
@@ -529,7 +528,7 @@ namespace xFunc.Maths.Expressions.Matrices
             }
 
             var lu = LUPDecompositionInternal(matrix, out var permutation, out _);
-            if (lu == null)
+            if (lu is null)
                 throw new MatrixIsInvalidException();
 
             var b = new NumberValue[n];

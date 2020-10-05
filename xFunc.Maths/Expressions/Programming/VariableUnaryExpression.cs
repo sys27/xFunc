@@ -38,10 +38,10 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns><c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object? obj)
         {
-            if (this == obj)
+            if (ReferenceEquals(this, obj))
                 return true;
 
-            if (obj == null || GetType() != obj.GetType())
+            if (obj is null || GetType() != obj.GetType())
                 return false;
 
             return Variable.Equals(((VariableUnaryExpression)obj).Variable);
@@ -59,7 +59,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <inheritdoc />
         public object Execute(ExpressionParameters? parameters)
         {
-            if (parameters == null)
+            if (parameters is null)
                 throw new ArgumentNullException(nameof(parameters));
 
             var result = Variable.Execute(parameters);
@@ -81,7 +81,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <inheritdoc />
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return AnalyzeInternal(analyzer);
@@ -92,7 +92,7 @@ namespace xFunc.Maths.Expressions.Programming
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return AnalyzeInternal(analyzer, context);

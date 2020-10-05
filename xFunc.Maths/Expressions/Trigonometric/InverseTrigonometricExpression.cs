@@ -78,7 +78,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return result switch
             {
                 NumberValue number => ExecuteInternal(number),
-                Complex complex => (object)ExecuteComplex(complex),
+                Complex complex => ExecuteComplex(complex),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

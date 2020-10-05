@@ -61,7 +61,7 @@ namespace xFunc.Maths.Expressions
         /// <inheritdoc />
         public override object Execute(ExpressionParameters? parameters)
         {
-            if (parameters == null)
+            if (parameters is null)
                 throw new ArgumentNullException(nameof(parameters));
 
             var func = parameters.Functions.GetKey(this);

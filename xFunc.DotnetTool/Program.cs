@@ -53,7 +53,7 @@ namespace xFunc.DotnetTool
                 Console.Write("> ");
 
                 var stringExpression = Console.ReadLine()?.ToLower();
-                if (stringExpression == null ||
+                if (stringExpression is null ||
                     stringExpression == "#quit" ||
                     stringExpression == "#exit")
                 {

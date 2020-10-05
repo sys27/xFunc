@@ -95,12 +95,12 @@ namespace xFunc.Maths.Expressions
             => HashCode.Combine(Name);
 
         /// <inheritdoc />
-        public string ToString(IFormatter formatter) =>
-            Analyze(formatter);
+        public string ToString(IFormatter formatter)
+            => Analyze(formatter);
 
         /// <inheritdoc />
-        public override string ToString() =>
-            ToString(new CommonFormatter());
+        public override string ToString()
+            => ToString(new CommonFormatter());
 
         /// <inheritdoc />
         /// <exception cref="NotSupportedException">Always.</exception>
@@ -109,7 +109,7 @@ namespace xFunc.Maths.Expressions
         /// <inheritdoc />
         public object Execute(ExpressionParameters? parameters)
         {
-            if (parameters == null)
+            if (parameters is null)
                 throw new ArgumentNullException(nameof(parameters));
 
             return parameters.Variables[Name];
@@ -118,7 +118,7 @@ namespace xFunc.Maths.Expressions
         /// <inheritdoc />
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return analyzer.Analyze(this);
@@ -129,7 +129,7 @@ namespace xFunc.Maths.Expressions
             IAnalyzer<TResult, TContext> analyzer,
             TContext context)
         {
-            if (analyzer == null)
+            if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
             return analyzer.Analyze(this, context);

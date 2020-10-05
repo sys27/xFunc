@@ -59,8 +59,8 @@ namespace xFunc.Maths.Expressions.Matrices
                 else
                 {
                     var result = this[i].Execute(parameters);
-                    if (result is NumberValue doubleResult)
-                        args.Add(new Number(doubleResult));
+                    if (result is NumberValue number)
+                        args.Add(new Number(number));
                     else
                         throw new ResultIsNotSupportedException(this, result);
                 }

@@ -55,7 +55,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="parameters">Expression parameters.</param>
         public ExpressionParameters(ExpressionParameters parameters)
         {
-            if (parameters == null)
+            if (parameters is null)
                 throw new ArgumentNullException(nameof(parameters));
 
             Variables = new ParameterCollection(parameters.Variables);

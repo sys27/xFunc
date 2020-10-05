@@ -775,20 +775,16 @@ namespace xFunc.Maths.Expressions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue Factorial(NumberValue numberValue)
         {
-            return new NumberValue(Fact(Math.Round(numberValue.Number)));
+            if (numberValue < 0)
+                return NaN;
 
-            static double Fact(double n)
-            {
-                if (n < 0)
-                    return double.NaN;
+            var n = Math.Round(numberValue.Number);
+            var result = 1.0;
 
-                var result = 1.0;
+            for (var i = n; i > 0; i--)
+                result *= i;
 
-                for (var i = n; i > 0; i--)
-                    result *= i;
-
-                return result;
-            }
+            return new NumberValue(result);
         }
 
         /// <summary>

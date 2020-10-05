@@ -191,7 +191,7 @@ namespace xFunc.Maths
             if (!tokenReader.Check(CloseParenthesisSymbol))
                 MissingCloseParenthesis(@if.Kind);
 
-            if (@else != null)
+            if (@else is not null)
                 return new If(condition, then, @else);
 
             return new If(condition, then);
@@ -267,7 +267,7 @@ namespace xFunc.Maths
                 var parameterList = ImmutableArray.CreateBuilder<IExpression>(1);
 
                 var exp = parser.ParseVariable(ref reader);
-                if (exp != null)
+                if (exp is not null)
                 {
                     parameterList.Add(exp);
 
@@ -652,7 +652,7 @@ namespace xFunc.Maths
             => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
             {
                 var number = parser.ParseNumber(ref reader);
-                if (number != null && reader.Check(FactorialOperator))
+                if (number is not null && reader.Check(FactorialOperator))
                     return new Fact(number);
 
                 return null;
@@ -718,7 +718,7 @@ namespace xFunc.Maths
             var parameterList = ImmutableArray.CreateBuilder<IExpression>(1);
 
             var exp = ParseExpression(ref tokenReader);
-            if (exp != null)
+            if (exp is not null)
             {
                 parameterList.Add(exp);
 

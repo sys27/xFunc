@@ -103,7 +103,7 @@ namespace xFunc.Maths.Expressions
             var diff = Analyze(Differentiator, context);
 
             var point = DerivativePoint;
-            if (point != null)
+            if (point is not null)
             {
                 parameters ??= new ExpressionParameters();
                 parameters.Variables[variable.Name] = point.Value;

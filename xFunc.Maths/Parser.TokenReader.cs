@@ -35,10 +35,10 @@ namespace xFunc.Maths
 
             private Lexer lexer;
 
-            // points to read position (item != null)
+            // points to read position (item is not null)
             private int readIndex;
 
-            // points to last write position (item != null)
+            // points to last write position (item is not null)
             private int writeIndex;
 
             private Token[] buffer;

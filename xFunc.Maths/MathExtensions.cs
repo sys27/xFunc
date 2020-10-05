@@ -16,6 +16,7 @@
 using System;
 using System.Globalization;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace xFunc.Maths
 {
@@ -27,14 +28,14 @@ namespace xFunc.Maths
         /// <summary>
         /// The constant which is used to compare two double numbers.
         /// </summary>
-        private const double Epsilon = 1E-14;
+        internal const double Epsilon = 1E-14;
 
         /// <summary>
         /// Formats a complex number.
         /// </summary>
         /// <param name="complex">The complex number.</param>
         /// <returns>The formatted string.</returns>
-        public static string Format(this Complex complex)
+        internal static string Format(this Complex complex)
         {
             if (Equals(complex.Real, 0))
             {
@@ -61,7 +62,8 @@ namespace xFunc.Maths
         /// <param name="left">The current number.</param>
         /// <param name="right">The number to compare with the current number.</param>
         /// <returns><c>true</c> if the specified number is equal to the current number; otherwise, <c>false</c>.</returns>
-        public static bool Equals(double left, double right)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static bool Equals(double left, double right)
             => Math.Abs(left - right) < Epsilon;
     }
 }

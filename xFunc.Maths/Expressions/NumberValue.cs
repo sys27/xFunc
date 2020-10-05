@@ -98,11 +98,6 @@ namespace xFunc.Maths.Expressions
         public static readonly NumberValue NaN = new NumberValue(double.NaN);
 
         /// <summary>
-        /// The constant which is used to compare two double numbers.
-        /// </summary>
-        private const double Epsilon = 1E-14;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="NumberValue"/> struct.
         /// </summary>
         /// <param name="value">The value.</param>
@@ -111,11 +106,11 @@ namespace xFunc.Maths.Expressions
 
         /// <inheritdoc />
         public bool Equals(NumberValue other)
-            => Math.Abs(Number - other.Number) < Epsilon;
+            => MathExtensions.Equals(Number, other.Number);
 
         /// <inheritdoc />
         public bool Equals(double other)
-            => Math.Abs(Number - other) < Epsilon;
+            => MathExtensions.Equals(Number, other);
 
         /// <inheritdoc />
         public override bool Equals(object? obj)
@@ -232,6 +227,17 @@ namespace xFunc.Maths.Expressions
 
         /// <summary>
         /// Indicates whether <paramref name="left"/> parameter
+        /// is less than the <paramref name="right"/> parameter.
+        /// </summary>
+        /// <param name="left">The first object to compare.</param>
+        /// <param name="right">The second object to compare.</param>
+        /// <returns><c>true</c> if the <paramref name="left"/> parameter is less than the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator <(double left, NumberValue right)
+            => right.CompareTo(left) > 0;
+
+        /// <summary>
+        /// Indicates whether <paramref name="left"/> parameter
         /// is greater than the <paramref name="right"/> parameter.
         /// </summary>
         /// <param name="left">The first object to compare.</param>
@@ -251,6 +257,17 @@ namespace xFunc.Maths.Expressions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator >(NumberValue left, double right)
             => left.CompareTo(right) > 0;
+
+        /// <summary>
+        /// Indicates whether <paramref name="left"/> parameter
+        /// is greater than the <paramref name="right"/> parameter.
+        /// </summary>
+        /// <param name="left">The first object to compare.</param>
+        /// <param name="right">The second object to compare.</param>
+        /// <returns><c>true</c> if the <paramref name="left"/> parameter is greater than the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator >(double left, NumberValue right)
+            => right.CompareTo(left) < 0;
 
         /// <summary>
         /// Indicates whether <paramref name="left"/> parameter
@@ -276,6 +293,17 @@ namespace xFunc.Maths.Expressions
 
         /// <summary>
         /// Indicates whether <paramref name="left"/> parameter
+        /// is less than or equal to the <paramref name="right"/> parameter.
+        /// </summary>
+        /// <param name="left">The first object to compare.</param>
+        /// <param name="right">The second object to compare.</param>
+        /// <returns><c>true</c> if the <paramref name="left"/> parameter is less than or equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator <=(double left, NumberValue right)
+            => right.CompareTo(left) >= 0;
+
+        /// <summary>
+        /// Indicates whether <paramref name="left"/> parameter
         /// is greater than or equal to the <paramref name="right"/> parameter.
         /// </summary>
         /// <param name="left">The first object to compare.</param>
@@ -295,6 +323,17 @@ namespace xFunc.Maths.Expressions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator >=(NumberValue left, double right)
             => left.CompareTo(right) >= 0;
+
+        /// <summary>
+        /// Indicates whether <paramref name="left"/> parameter
+        /// is greater than or equal to the <paramref name="right"/> parameter.
+        /// </summary>
+        /// <param name="left">The first object to compare.</param>
+        /// <param name="right">The second object to compare.</param>
+        /// <returns><c>true</c> if the <paramref name="left"/> parameter is greater than or equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator >=(double left, NumberValue right)
+            => right.CompareTo(left) <= 0;
 
         /// <summary>
         /// Produces the negative of <see cref="NumberValue"/>.
@@ -698,7 +737,7 @@ namespace xFunc.Maths.Expressions
         }
 
         private static bool IsInt(NumberValue number)
-            => Math.Abs(number.Number % 1) <= Epsilon;
+            => Math.Abs(number.Number % 1) <= MathExtensions.Epsilon;
 
         /// <summary>
         /// Returns the absolute value of a double-precision floating-point number.
@@ -770,8 +809,7 @@ namespace xFunc.Maths.Expressions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberValue Frac(NumberValue numberValue)
         {
-            // TODO: use custom operator
-            if (numberValue.Number >= 0)
+            if (numberValue >= 0)
                 return numberValue - Floor(numberValue);
 
             return numberValue - Ceiling(numberValue);
@@ -885,6 +923,20 @@ namespace xFunc.Maths.Expressions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Complex Pow(Complex number, NumberValue power)
             => Complex.Pow(number, power.Number);
+
+        /// <summary>
+        /// Rounds a double-precision floating-point value to a specified number of fractional digits,
+        /// and uses the specified rounding convention for midpoint values.
+        /// </summary>
+        /// <param name="number">A double-precision floating-point number to be rounded.</param>
+        /// <returns>The integer nearest <paramref name="number"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static NumberValue Round(NumberValue number)
+        {
+            var rounded = Math.Round(number.Number, MidpointRounding.AwayFromZero);
+
+            return new NumberValue(rounded);
+        }
 
         /// <summary>
         /// Rounds a double-precision floating-point value to a specified number of fractional digits,

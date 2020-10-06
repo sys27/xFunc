@@ -16,6 +16,7 @@
 using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.Matrices;
 using Xunit;
@@ -39,6 +40,15 @@ namespace xFunc.Tests.Expressions.Collections
         public void NumberCtor()
         {
             var value = new NumberValue(1.0);
+            var x = new Parameter("x", value);
+
+            Assert.Equal(value, x.Value);
+        }
+
+        [Fact]
+        public void AngleValueCtor()
+        {
+            var value = AngleValue.Degree(1.0);
             var x = new Parameter("x", value);
 
             Assert.Equal(value, x.Value);

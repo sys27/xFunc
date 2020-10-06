@@ -247,6 +247,30 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestSubBoolAndMatrixTest()
+        {
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new IExpression[] { Number.One })
+            });
+            var exp = new Sub(Bool.True, matrix);
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestSubMatrixAndBoolTest()
+        {
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new IExpression[] { Number.One })
+            });
+            var exp = new Sub(matrix, Bool.True);
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
         public void SubNumberComplexTest()
         {
             var exp = new Sub(Number.Two, new Sqrt(new Number(-9)));

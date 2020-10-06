@@ -579,7 +579,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
             Assert.Equal(zero, deriv);
         }
 
-        [Fact]
+        [Fact(DisplayName = "x ^ 3")]
         public void PowDerivativeTest1()
         {
             var exp = new Pow(Variable.X, new Number(3));
@@ -592,21 +592,66 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
             Assert.Equal(expected, deriv);
         }
 
-        [Fact]
+        [Fact(DisplayName = "2 ^ (3x)")]
         public void PowDerivativeTest2()
         {
-            // 2 ^ (3x)
             var exp = new Pow(Number.Two, new Mul(new Number(3), Variable.X));
             var deriv = Differentiate(exp);
             var expected = new Mul(
                 new Mul(
-                    new Ln(Number.Two),
-                    new Pow(Number.Two, new Mul(new Number(3), Variable.X))
+                    new Pow(Number.Two, new Mul(new Number(3), Variable.X)),
+                    new Ln(Number.Two)
                 ),
                 new Mul(new Number(3), Number.One)
             );
 
             Assert.Equal(expected, deriv);
+        }
+
+        [Fact(DisplayName = "x ^ x")]
+        public void PowXbyX()
+        {
+            var exp = new Pow(Variable.X, Variable.X);
+            var result = Differentiate(exp);
+            var expected = new Mul(
+                new Pow(Variable.X, Variable.X),
+                new Add(
+                    new Mul(Number.One, new Ln(Variable.X)),
+                    new Mul(Variable.X, new Div(Number.One, Variable.X)))
+            );
+
+            Assert.Equal(expected, result);
+        }
+
+        [Fact(DisplayName = "x ^ 2x")]
+        public void PowXby2X()
+        {
+            var exp = new Pow(Variable.X, new Mul(Number.Two, Variable.X));
+            var result = Differentiate(exp);
+            var expected = new Mul(
+                new Pow(Variable.X, new Mul(Number.Two, Variable.X)),
+                new Add(
+                    new Mul(new Mul(Number.Two, Number.One), new Ln(Variable.X)),
+                    new Mul(new Mul(Number.Two, Variable.X), new Div(Number.One, Variable.X)))
+            );
+
+            Assert.Equal(expected, result);
+        }
+
+        [Fact(DisplayName = "x ^ sin(x)")]
+        public void PowXbySinX()
+        {
+            var exp = new Pow(Variable.X, new Sin(Variable.X));
+            var result = Differentiate(exp);
+            var expected = new Mul(
+                new Pow(Variable.X, new Sin(Variable.X)),
+                new Add(
+                    new Mul(new Mul(new Cos(Variable.X), Number.One), new Ln(Variable.X)),
+                    new Mul(new Sin(Variable.X), new Div(Number.One, Variable.X))
+                )
+            );
+
+            Assert.Equal(expected, result);
         }
 
         [Fact]

@@ -240,27 +240,29 @@ namespace xFunc.Maths.Analyzers
         {
             ValidateArguments(exp, context);
 
-            if (Helpers.HasVariable(exp.Left, context.Variable))
-            {
-                return new Mul(
-                    exp.Left.Analyze(this, context),
-                    new Mul(
-                        exp.Right,
-                        new Pow(
-                            exp.Left,
-                            new Sub(exp.Right, Number.One))));
-            }
+            var hasVariableInLeft = Helpers.HasVariable(exp.Left, context.Variable);
+            var hasVariableInRight = Helpers.HasVariable(exp.Right, context.Variable);
 
-            if (Helpers.HasVariable(exp.Right, context.Variable))
+            return (hasVariableInLeft, hasVariableInRight) switch
             {
-                return new Mul(
+                (true, true) =>
                     new Mul(
-                        new Ln(exp.Left),
-                        exp),
-                    exp.Right.Analyze(this, context));
-            }
-
-            return Number.Zero;
+                        exp,
+                        Analyze(new Mul(exp.Right, new Ln(context.Variable)), context)),
+                (true, _) =>
+                    new Mul(
+                        exp.Left.Analyze(this, context),
+                        new Mul(
+                            exp.Right,
+                            new Pow(
+                                exp.Left,
+                                new Sub(exp.Right, Number.One)))),
+                (_, true) =>
+                    new Mul(
+                        new Mul(exp, new Ln(exp.Left)),
+                        exp.Right.Analyze(this, context)),
+                _ => Number.Zero,
+            };
         }
 
         /// <inheritdoc />

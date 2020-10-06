@@ -25,9 +25,17 @@ jobs:
 
     steps:
     - task: UseDotNet@2
+      displayName: 'Install .NET Core 3.1'
       inputs:
         packageType: 'sdk'
-        version: '3.1.302'
+        version: '3.1.x'
+
+    - task: UseDotNet@2
+      displayName: 'Install .NET 5'
+      inputs:
+        packageType: 'sdk'
+        version: '5.0.x'
+        includePreviewVersions: true
 
     - script: echo '##vso[task.setvariable variable=nupkgVersion]$(defaultPackageVersion)
       condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
@@ -59,6 +67,7 @@ jobs:
         publishTestResults: true
 
     - task: CmdLine@2
+      displayName: 'Generate report'
       inputs:
         script: 'reportgenerator -reports:"$(Build.SourcesDirectory)/coverage/coverage.cobertura.xml" -targetdir:"$(Build.SourcesDirectory)/coverage/" -reporttypes:HtmlInline_AzurePipelines'
         workingDirectory: 'xFunc.Tests'
@@ -72,6 +81,7 @@ jobs:
         failIfCoverageEmpty: true
 
     - task: CmdLine@2
+      displayName: 'Publish to Codecov'
       inputs:
         script: codecov -f "$(Build.SourcesDirectory)/coverage/coverage.cobertura.xml" -t $(CODECOV_TOKEN)'
         failOnStderr: true

@@ -105,6 +105,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestDivNumberAndVarTest()
+        {
+            var exp = new Div(Number.One, Variable.X);
+
+            Test(exp, ResultTypes.Undefined);
+        }
+
+        [Fact]
         public void TestDivThreeVarTest()
         {
             var exp = new Div(new Add(Variable.X, Variable.X), Variable.X);

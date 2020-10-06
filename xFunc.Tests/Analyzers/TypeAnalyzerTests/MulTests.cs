@@ -110,11 +110,44 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestMulVectorNumber()
+        {
+            var mul = new Mul(
+                new Vector(new IExpression[] { Number.One }),
+                Number.Two
+            );
+
+            Test(mul, ResultTypes.Vector);
+        }
+
+        [Fact]
+        public void TestMulVectors()
+        {
+            var mul = new Mul(
+                new Vector(new IExpression[] { Number.One }),
+                new Vector(new IExpression[] { Number.One })
+            );
+
+            Test(mul, ResultTypes.Vector);
+        }
+
+        [Fact]
         public void TestMulNumberMatrixTest()
         {
             var mul = new Mul(
                 Number.One,
                 new Matrix(new[] { new Vector(new IExpression[] { Number.Two }) })
+            );
+
+            Test(mul, ResultTypes.Matrix);
+        }
+
+        [Fact]
+        public void TestMulMatrixAndNumberTest()
+        {
+            var mul = new Mul(
+                new Matrix(new[] { new Vector(new IExpression[] { Number.Two }) }),
+                Number.One
             );
 
             Test(mul, ResultTypes.Matrix);
@@ -132,14 +165,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestMulVectorNumber()
+        public void TestMulMatrixAndVectorTest()
         {
             var mul = new Mul(
-                new Vector(new IExpression[] { Number.One }),
-                Number.Two
+                new Matrix(new[] { new Vector(new IExpression[] { Number.Two }) }),
+                new Vector(new IExpression[] { Number.One })
             );
 
-            Test(mul, ResultTypes.Vector);
+            Test(mul, ResultTypes.Matrix);
         }
 
         [Fact]

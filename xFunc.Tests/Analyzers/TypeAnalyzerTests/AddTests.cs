@@ -224,6 +224,30 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestAddBoolAndMatrixTest()
+        {
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new IExpression[] { Number.One })
+            });
+            var exp = new Add(Bool.True, matrix);
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestAddMatrixAndBoolTest()
+        {
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new IExpression[] { Number.One })
+            });
+            var exp = new Add(matrix, Bool.True);
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
         public void TestAddNumberSqrtComplexTest()
         {
             var exp = new Add(Number.Two, new Sqrt(new Number(-9)));

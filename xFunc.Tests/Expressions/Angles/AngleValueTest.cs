@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Angles;
 using Xunit;
 
@@ -155,6 +156,24 @@ namespace xFunc.Tests.Expressions.Angles
         }
 
         [Fact]
+        public void EqualObjectTest()
+        {
+            var angle1 = AngleValue.Degree(10);
+            var angle2 = AngleValue.Degree(10);
+
+            Assert.True(angle1.Equals(angle2 as object));
+        }
+
+        [Fact]
+        public void NotEqualObjectTest()
+        {
+            var angle1 = AngleValue.Degree(10);
+            var angle2 = AngleValue.Degree(20);
+
+            Assert.False(angle1.Equals(angle2 as object));
+        }
+
+        [Fact]
         public void ToStringDegreeTest()
         {
             var angle = AngleValue.Degree(10);
@@ -266,6 +285,48 @@ namespace xFunc.Tests.Expressions.Angles
             var expected = AngleValue.Gradian(10);
 
             Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(AngleUnit.Gradian, AngleUnit.Gradian, AngleUnit.Gradian)]
+        [InlineData(AngleUnit.Radian, AngleUnit.Gradian, AngleUnit.Radian)]
+        [InlineData(AngleUnit.Gradian, AngleUnit.Radian, AngleUnit.Radian)]
+        [InlineData(AngleUnit.Radian, AngleUnit.Degree, AngleUnit.Degree)]
+        public void CommonUnitsTests(AngleUnit left, AngleUnit right, AngleUnit expected)
+        {
+            var x = new AngleValue(new NumberValue(90), left);
+            var y = new AngleValue(new NumberValue(90), right);
+            var result = x + y;
+
+            Assert.Equal(expected, result.Unit);
+        }
+
+        [Theory]
+        [InlineData(0, AngleUnit.Degree, 0)]
+        [InlineData(0, AngleUnit.Radian, 0)]
+        [InlineData(0, AngleUnit.Gradian, 0)]
+        [InlineData(90, AngleUnit.Degree, 90)]
+        [InlineData(1.5707963267948966, AngleUnit.Radian, 1.5707963267948966)]
+        [InlineData(100, AngleUnit.Gradian, 100)]
+        [InlineData(360, AngleUnit.Degree, 0)]
+        [InlineData(6.283185307179586, AngleUnit.Radian, 0)]
+        [InlineData(400, AngleUnit.Gradian, 0)]
+        [InlineData(1110.0, AngleUnit.Degree, 30)]
+        [InlineData(19.37315469713706, AngleUnit.Radian, 0.5235987755982988)]
+        [InlineData(1233, AngleUnit.Gradian, 33)]
+        [InlineData(1770.0, AngleUnit.Degree, 330)]
+        [InlineData(30.892327760299633, AngleUnit.Radian, 5.759586531581287)]
+        [InlineData(1966, AngleUnit.Gradian, 366)]
+        [InlineData(-390.0, AngleUnit.Degree, 330)]
+        [InlineData(-6.8067840827778845, AngleUnit.Radian, 5.759586531581287)]
+        [InlineData(-434.0, AngleUnit.Gradian, 366)]
+        public void NormalizeTests(double angleValue, AngleUnit unit, double expectedValue)
+        {
+            var angle = new AngleValue(new NumberValue(angleValue), unit);
+            var normalized = angle.Normalize();
+            var expected = new AngleValue(new NumberValue(expectedValue), unit);
+
+            Assert.Equal(expected, normalized);
         }
     }
 }

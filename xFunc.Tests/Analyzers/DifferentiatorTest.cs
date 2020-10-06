@@ -729,6 +729,52 @@ namespace xFunc.Tests.Analyzers
             Assert.Equal(expected, deriv);
         }
 
+        [Fact(DisplayName = "x ^ x")]
+        public void PowXbyX()
+        {
+            var exp = new Pow(Variable.X, Variable.X);
+            var result = Differentiate(exp);
+            var expected = new Mul(
+                new Pow(Variable.X, Variable.X),
+                new Add(
+                    new Mul(new Number(1), new Ln(Variable.X)),
+                    new Mul(Variable.X, new Div(new Number(1), Variable.X)))
+            );
+
+            Assert.Equal(expected, result);
+        }
+
+        [Fact(DisplayName = "x ^ 2x")]
+        public void PowXby2X()
+        {
+            var exp = new Pow(Variable.X, new Mul(new Number(2), Variable.X));
+            var result = Differentiate(exp);
+            var expected = new Mul(
+                new Pow(Variable.X, new Mul(new Number(2), Variable.X)),
+                new Add(
+                    new Mul(new Mul(new Number(2), new Number(1)), new Ln(Variable.X)),
+                    new Mul(new Mul(new Number(2), Variable.X), new Div(new Number(1), Variable.X)))
+            );
+
+            Assert.Equal(expected, result);
+        }
+
+        [Fact(DisplayName = "x ^ sin(x)")]
+        public void PowXbySinX()
+        {
+            var exp = new Pow(Variable.X, new Sin(Variable.X));
+            var result = Differentiate(exp);
+            var expected = new Mul(
+                new Pow(Variable.X, new Sin(Variable.X)),
+                new Add(
+                    new Mul(new Mul(new Cos(Variable.X), new Number(1)), new Ln(Variable.X)),
+                    new Mul(new Sin(Variable.X), new Div(new Number(1), Variable.X))
+                )
+            );
+
+            Assert.Equal(expected, result);
+        }
+
         [Fact]
         public void PowPartialDerivativeTest1()
         {

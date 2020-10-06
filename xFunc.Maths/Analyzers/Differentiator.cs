@@ -302,10 +302,17 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Pow exp)
         {
-            if (!Helpers.HasVariable(exp, Variable))
-                return new Number(0);
+            var hasVariableInLeft = Helpers.HasVariable(exp.Left, Variable);
+            var hasVariableInRight = Helpers.HasVariable(exp.Right, Variable);
 
-            if (Helpers.HasVariable(exp.Left, Variable))
+            if (hasVariableInLeft && hasVariableInRight)
+            {
+                return new Mul(
+                        exp,
+                        Analyze(new Mul(exp.Right, new Ln(Variable))));
+            }
+
+            if (hasVariableInLeft)
             {
                 var sub = new Sub(exp.Right.Clone(), new Number(1));
                 var inv = new Pow(exp.Left.Clone(), sub);
@@ -315,12 +322,16 @@ namespace xFunc.Maths.Analyzers
                 return mul2;
             }
 
-            // if (Helpers.HasVar(exp.Right, variable))
-            var ln = new Ln(exp.Left.Clone());
-            var mul3 = new Mul(ln, exp.Clone());
-            var mul4 = new Mul(mul3, exp.Right.Clone().Analyze(this));
+            if (hasVariableInRight)
+            {
+                var ln = new Ln(exp.Left.Clone());
+                var mul3 = new Mul(ln, exp.Clone());
+                var mul4 = new Mul(mul3, exp.Right.Clone().Analyze(this));
 
-            return mul4;
+                return mul4;
+            }
+
+            return new Number(0);
         }
 
         /// <summary>

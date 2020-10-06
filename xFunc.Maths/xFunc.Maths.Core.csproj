@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>xFunc.Maths</RootNamespace>
     <PackageId>xFunc.Maths</PackageId>
-    <Version>3.7.2</Version>
+    <Version>3.7.3</Version>
     <Product>xFunc.Maths</Product>
     <Authors>Dmytro Kyshchenko</Authors>
     <Company />
@@ -15,8 +15,8 @@
     <PackageIconUrl>http://download-codeplex.sec.s-msft.com/Download?ProjectName=xfunc&amp;amp;DownloadId=639207&amp;amp;Build=20266</PackageIconUrl>
     <PackageTags>Math Expression Expressions Parser MathParser Differentiation Simplification</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
-    <AssemblyVersion>3.7.2</AssemblyVersion>
-    <FileVersion>3.7.2</FileVersion>
+    <AssemblyVersion>3.7.3</AssemblyVersion>
+    <FileVersion>3.7.3</FileVersion>
     <RepositoryUrl>https://github.com/sys27/xFunc</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>

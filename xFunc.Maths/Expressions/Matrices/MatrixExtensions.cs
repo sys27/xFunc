@@ -391,9 +391,11 @@ namespace xFunc.Maths.Expressions.Matrices
 
         private static NumberValue DeterminantInternal(NumberValue[][] matrix)
         {
-            if (matrix.Length == 1)
+            var size = matrix.Length;
+
+            if (size == 1)
                 return matrix[0][0];
-            if (matrix.Length == 2)
+            if (size == 2)
                 return matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1];
 
             var lu = LUPDecompositionInternal(matrix, out _, out var toggle);
@@ -411,7 +413,7 @@ namespace xFunc.Maths.Expressions.Matrices
         private static NumberValue[][] LUPDecompositionInternal(
             NumberValue[][] matrix,
             out int[] permutation,
-            out NumberValue toggle)
+            out NumberValue pivotSign)
         {
             var size = matrix.Length;
 
@@ -419,34 +421,31 @@ namespace xFunc.Maths.Expressions.Matrices
             for (var i = 0; i < size; i++)
                 permutation[i] = i;
 
-            toggle = new NumberValue(1.0);
+            pivotSign = new NumberValue(1.0);
 
             for (var j = 0; j < size - 1; j++)
             {
-                var colMax = NumberValue.Abs(matrix[j][j]);
-                var pRow = j;
+                var pivotValue = NumberValue.Abs(matrix[j][j]);
+                var pivotRow = j;
 
-                for (var i = j + 1; i < size; i++)
+                for (var row = j + 1; row < size; row++)
                 {
-                    if (matrix[i][j] > colMax)
+                    if (matrix[row][j] > pivotValue)
                     {
-                        colMax = matrix[i][j];
-                        pRow = i;
+                        pivotValue = matrix[row][j];
+                        pivotRow = row;
                     }
                 }
 
-                if (pRow != j)
+                if (pivotRow != j)
                 {
-                    var rowPtr = matrix[pRow];
-                    matrix[pRow] = matrix[j];
-                    matrix[j] = rowPtr;
-                    var tmp = permutation[pRow];
-                    permutation[pRow] = permutation[j];
-                    permutation[j] = tmp;
-                    toggle = -toggle;
+                    (matrix[pivotRow], matrix[j]) = (matrix[j], matrix[pivotRow]);
+                    (permutation[pivotRow], permutation[j]) = (permutation[j], permutation[pivotRow]);
+
+                    pivotSign = -pivotSign;
                 }
 
-                if (matrix[j][j].Equals(0) || NumberValue.Abs(matrix[j][j]) < 1E-14)
+                if (matrix[j][j] == 0)
                     throw new MatrixIsInvalidException();
 
                 for (var i = j + 1; i < size; i++)

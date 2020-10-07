@@ -68,6 +68,22 @@ namespace xFunc.Tests.Expressions.Matrices
         }
 
         [Fact]
+        public void ExecuteNegativeTest()
+        {
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new IExpression[] { new Number(1), new Number(-10), new Number(3), }),
+                new Vector(new IExpression[] { new Number(4), new Number(5), new Number(6), }),
+                new Vector(new IExpression[] { new Number(7), new Number(8), new Number(9), }),
+            });
+
+            var det = new Determinant(matrix);
+            var expected = new NumberValue(-72.00000000000004);
+
+            Assert.Equal(expected, det.Execute());
+        }
+
+        [Fact]
         public void ExecuteIsNotSquareTest()
         {
             var matrix = new Matrix(new[]

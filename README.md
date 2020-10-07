@@ -31,7 +31,20 @@ It allows you to:
 
 ```csharp
 var processor = new Processor();
-processor.Parse("2 + 2"); // will return the expression tree
+var exp = processor.Parse("2 + x"); 
+
+// 'exp' will contain the expression tree for later use
+// you can calculate it or process it by analyzers (Differentiator, Simplifier, etc.)
+
+// 'exp' has a parameter
+// we should provide a value for varible 'x'
+var parameters = new ParameterCollection
+{
+    { "x", 10 }
+};
+var result = exp.Execute(parameters);
+
+// result will be equal to 12
 ```
 
 _Note: The `Parse` method won't simplify expression automatically, it will return the complete representation of provided string expression._
@@ -44,12 +57,21 @@ There is two overloads of this method (common and generic). The common returns j
 
 ```csharp
 var processor = new Processor();
+processor.Solve<NumberResult>("2 + 2"); // will return 4.0 (double)
+
+// or
+
 processor.Solve("2 + 2").Result; // will return 4.0 (object)
 ```
 
+If your expression has any parameter, you need to assign a value to it (otherwise xFunc will throw an exception), because `Processor` has a build-in collection of parameters and user functions, you don't need to use `ExpressionParameters` directly:
+
 ```csharp
-var processor = new Processor();
-processor.Solve<NumberResult>("2 + 2"); // will return 4.0 (double)
+processor.Solve("x := 10");
+
+// or explicitly throught Parameters property
+
+processor.Parameters.Variables.Add("x", 10);
 ```
 
 _Note: The `Solve` method automatically simplify expression, to control this behavior you can use `simplify` argument. It's useful for differentiation, because it will eliminate unnecessary expression nodes._

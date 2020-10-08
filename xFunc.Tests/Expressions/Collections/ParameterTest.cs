@@ -162,6 +162,24 @@ namespace xFunc.Tests.Expressions.Collections
         }
 
         [Fact]
+        public void EqualOperatorTest()
+        {
+            var x = new Parameter("x", 1);
+            var y = new Parameter("x", 1);
+
+            Assert.True(x == y);
+        }
+
+        [Fact]
+        public void NotEqualOperatorTest()
+        {
+            var x = new Parameter("x", 1);
+            var y = new Parameter("x", 2);
+
+            Assert.True(x != y);
+        }
+
+        [Fact]
         public void GreaterTest()
         {
             var parameter1 = new Parameter("x", 1);

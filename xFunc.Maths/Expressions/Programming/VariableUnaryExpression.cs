@@ -16,6 +16,7 @@
 using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
+using xFunc.Maths.Expressions.Collections;
 
 namespace xFunc.Maths.Expressions.Programming
 {
@@ -64,7 +65,12 @@ namespace xFunc.Maths.Expressions.Programming
 
             var result = Variable.Execute(parameters);
             if (result is NumberValue number)
-                return parameters.Variables[Variable.Name] = Execute(number);
+            {
+                var parameterValue = new ParameterValue(Execute(number));
+                parameters.Variables[Variable.Name] = parameterValue;
+
+                return parameterValue.Value;
+            }
 
             throw new ResultIsNotSupportedException(this, result);
         }

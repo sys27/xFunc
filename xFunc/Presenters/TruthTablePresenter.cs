@@ -68,7 +68,7 @@ namespace xFunc.Presenters
                 };
 
                 for (int j = 0; j < parametersCount; j++)
-                    row.VarsValues[j] = (bool)Parameters[Parameters.ElementAt(j).Key];
+                    row.VarsValues[j] = (bool)Parameters[Parameters.ElementAt(j).Key].Value;
 
                 for (int j = 0; j < expressionCount - 1; j++)
                     row.Values[j] = (bool)Expressions.ElementAt(j).Execute(Parameters);

@@ -101,46 +101,46 @@ namespace xFunc.Maths.Expressions.Collections
         private void InitializeConstants()
         {
             // Archimedes' constant
-            AddConstant(Parameter.CreateConstant("π", AngleValue.Radian(Math.PI)));
+            AddConstant(Parameter.Constant("π", AngleValue.Radian(Math.PI)));
 
             // Archimedes' constant
-            AddConstant(Parameter.CreateConstant("pi", AngleValue.Radian(Math.PI)));
+            AddConstant(Parameter.Constant("pi", AngleValue.Radian(Math.PI)));
 
             // Euler's number
-            AddConstant(Parameter.CreateConstant("e", Math.E));
+            AddConstant(Parameter.Constant("e", Math.E));
 
             // Imaginary unit
-            AddConstant(Parameter.CreateConstant("i", Complex.ImaginaryOne));
+            AddConstant(Parameter.Constant("i", Complex.ImaginaryOne));
 
             // Gravity on Earth
-            AddConstant(Parameter.CreateConstant("g", 9.80665));
+            AddConstant(Parameter.Constant("g", 9.80665));
 
             // Speed of Light (c0)
-            AddConstant(Parameter.CreateConstant("c", 299792458));
+            AddConstant(Parameter.Constant("c", 299792458));
 
             // Planck Constant
-            AddConstant(Parameter.CreateConstant("h", 6.62607004E-34));
+            AddConstant(Parameter.Constant("h", 6.62607004E-34));
 
             // Faraday Constant
-            AddConstant(Parameter.CreateConstant("F", 96485.33289));
+            AddConstant(Parameter.Constant("F", 96485.33289));
 
             // Electric Constant (ε0)
-            AddConstant(Parameter.CreateConstant("ε", 8.854187817E-12));
+            AddConstant(Parameter.Constant("ε", 8.854187817E-12));
 
             // Magnetic constant (µ0)
-            AddConstant(Parameter.CreateConstant("µ", 1.2566370614E-6));
+            AddConstant(Parameter.Constant("µ", 1.2566370614E-6));
 
             // Gravitational constant
-            AddConstant(Parameter.CreateConstant("G", 6.64078E-11));
+            AddConstant(Parameter.Constant("G", 6.64078E-11));
 
             // Feigenbaum constant
-            AddConstant(Parameter.CreateConstant("α", 2.5029078750958928222839));
+            AddConstant(Parameter.Constant("α", 2.5029078750958928222839));
 
             // Stefan-Boltzmann constant
-            AddConstant(Parameter.CreateConstant("σ", 5.670367E-8));
+            AddConstant(Parameter.Constant("σ", 5.670367E-8));
 
             // Euler–Mascheroni constant
-            AddConstant(Parameter.CreateConstant("γ", 0.57721566490153286060651));
+            AddConstant(Parameter.Constant("γ", 0.57721566490153286060651));
         }
 
         /// <inheritdoc />
@@ -164,12 +164,9 @@ namespace xFunc.Maths.Expressions.Collections
         /// </value>
         /// <param name="key">The name of variable.</param>
         /// <returns>The value of variable.</returns>
-        public object this[string key]
+        public ParameterValue this[string key]
         {
-            get
-            {
-                return GetParameterByKey(key).Value;
-            }
+            get => GetParameterByKey(key).Value;
             set
             {
                 if (!collection.TryGetValue(key, out var param))
@@ -221,7 +218,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="key">The name of variable.</param>
         /// <param name="value">The value of variable.</param>
-        public void Add(string key, object value)
+        public void Add(string key, ParameterValue value)
             => Add(new Parameter(key, value));
 
         /// <summary>

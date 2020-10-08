@@ -29,7 +29,7 @@ namespace xFunc.Tests.Expressions
             {
                 new Parameter("x", 10)
             };
-            var func = new DelegateExpression(p => (NumberValue)p.Variables["x"] + 1);
+            var func = new DelegateExpression(p => (NumberValue)p.Variables["x"].Value + 1);
 
             var result = func.Execute(parameters);
 
@@ -50,7 +50,10 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTest3()
         {
             var uf1 = new UserFunction("func", new[] { Variable.X });
-            var func = new DelegateExpression(p => (NumberValue)p.Variables["x"] == 10 ? new NumberValue(0.0) : new NumberValue(1.0));
+            var func = new DelegateExpression(p =>
+                (NumberValue)p.Variables["x"].Value == 10
+                    ? new NumberValue(0.0)
+                    : new NumberValue(1.0));
             var funcs = new FunctionCollection
             {
                 { uf1, func }

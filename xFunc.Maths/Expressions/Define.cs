@@ -17,6 +17,7 @@ using System;
 using System.Globalization;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
+using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
@@ -77,7 +78,7 @@ namespace xFunc.Maths.Expressions
 
             if (Key is Variable variable)
             {
-                parameters.Variables[variable.Name] = Value.Execute(parameters);
+                parameters.Variables[variable.Name] = new ParameterValue(Value.Execute(parameters));
 
                 return string.Format(CultureInfo.InvariantCulture, Resource.AssignVariable, Key, Value);
             }

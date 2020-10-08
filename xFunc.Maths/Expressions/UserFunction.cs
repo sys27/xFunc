@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
+using xFunc.Maths.Expressions.Collections;
 
 namespace xFunc.Maths.Expressions
 {
@@ -69,7 +70,7 @@ namespace xFunc.Maths.Expressions
             var newParams = new ExpressionParameters(parameters);
             for (var i = 0; i < ParametersCount; i++)
                 if (func.Arguments[i] is Variable arg)
-                    newParams.Variables[arg.Name] = Arguments[i].Execute(parameters);
+                    newParams.Variables[arg.Name] = new ParameterValue(Arguments[i].Execute(parameters));
 
             return parameters.Functions[this].Execute(newParams);
         }

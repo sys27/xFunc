@@ -15,11 +15,7 @@
 
 using System;
 using System.Globalization;
-using System.Numerics;
-using xFunc.Maths.Expressions.Angles;
-using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Resources;
-using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Maths.Expressions.Collections
 {
@@ -28,7 +24,7 @@ namespace xFunc.Maths.Expressions.Collections
     /// </summary>
     public class Parameter : IComparable<Parameter>, IEquatable<Parameter>
     {
-        private object value = default!;
+        private ParameterValue value;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Parameter" /> class.
@@ -36,84 +32,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="key">The name of parameter.</param>
         /// <param name="value">The value of parameter.</param>
         /// <param name="type">The type of parameter.</param>
-        public Parameter(string key, double value, ParameterType type = ParameterType.Normal)
-            : this(key, (object)value, type)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Parameter" /> class.
-        /// </summary>
-        /// <param name="key">The name of parameter.</param>
-        /// <param name="value">The value of parameter.</param>
-        /// <param name="type">The type of parameter.</param>
-        public Parameter(string key, NumberValue value, ParameterType type = ParameterType.Normal)
-            : this(key, (object)value, type)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Parameter" /> class.
-        /// </summary>
-        /// <param name="key">The name of parameter.</param>
-        /// <param name="value">The value of parameter.</param>
-        /// <param name="type">The type of parameter.</param>
-        public Parameter(string key, AngleValue value, ParameterType type = ParameterType.Normal)
-            : this(key, (object)value, type)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Parameter" /> class.
-        /// </summary>
-        /// <param name="key">The name of parameter.</param>
-        /// <param name="value">The value of parameter.</param>
-        /// <param name="type">The type of parameter.</param>
-        public Parameter(string key, Complex value, ParameterType type = ParameterType.Normal)
-            : this(key, (object)value, type)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Parameter" /> class.
-        /// </summary>
-        /// <param name="key">The name of parameter.</param>
-        /// <param name="value">The value of parameter.</param>
-        /// <param name="type">The type of parameter.</param>
-        public Parameter(string key, bool value, ParameterType type = ParameterType.Normal)
-            : this(key, (object)value, type)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Parameter" /> class.
-        /// </summary>
-        /// <param name="key">The name of parameter.</param>
-        /// <param name="value">The value of parameter.</param>
-        /// <param name="type">The type of parameter.</param>
-        public Parameter(string key, Vector value, ParameterType type = ParameterType.Normal)
-            : this(key, (object)value, type)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Parameter" /> class.
-        /// </summary>
-        /// <param name="key">The name of parameter.</param>
-        /// <param name="value">The value of parameter.</param>
-        /// <param name="type">The type of parameter.</param>
-        public Parameter(string key, Matrix value, ParameterType type = ParameterType.Normal)
-            : this(key, (object)value, type)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Parameter" /> class.
-        /// </summary>
-        /// <param name="key">The name of parameter.</param>
-        /// <param name="value">The value of parameter.</param>
-        /// <param name="type">The type of parameter.</param>
-        internal Parameter(string key, object value, ParameterType type = ParameterType.Normal)
+        public Parameter(string key, ParameterValue value, ParameterType type = ParameterType.Normal)
         {
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentNullException(nameof(key));
@@ -129,17 +48,16 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="key">The name of parameter.</param>
         /// <param name="value">The value of parameter.</param>
         /// <returns>A constant.</returns>
-        public static Parameter CreateConstant(string key, object value)
+        public static Parameter Constant(string key, ParameterValue value)
             => new Parameter(key, value, ParameterType.Constant);
 
         /// <inheritdoc />
         public override bool Equals(object? obj)
         {
-            var param = obj as Parameter;
-            if (param is null)
-                return false;
+            if (obj is Parameter param)
+                return Equals(param);
 
-            return Equals(param);
+            return false;
         }
 
         /// <inheritdoc />
@@ -148,7 +66,7 @@ namespace xFunc.Maths.Expressions.Collections
 
         /// <inheritdoc />
         public override string ToString()
-            => string.Format(CultureInfo.InvariantCulture, "{0}: {1} ({2})", Key, value, Type);
+            => string.Format(CultureInfo.InvariantCulture, "{0}: {1} ({2})", Key, value.Value, Type);
 
         /// <inheritdoc />
         public int CompareTo(Parameter? other)
@@ -173,12 +91,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="right">The right parameter.</param>
         /// <returns><c>true</c> if the <paramref name="left"/> parameter is equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
         public static bool operator ==(Parameter? left, Parameter? right)
-        {
-            if (left is null)
-                return right is null;
-
-            return left.Equals(right);
-        }
+            => Equals(left, right);
 
         /// <summary>
         /// Indicates whether <paramref name="left"/> parameter is not equal to the <paramref name="right"/> parameter.
@@ -187,7 +100,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="right">The right parameter.</param>
         /// <returns><c>true</c> if the <paramref name="left"/> parameter is not equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
         public static bool operator !=(Parameter? left, Parameter? right)
-            => !(left == right);
+            => !Equals(left, right);
 
         /// <summary>
         /// Indicates whether <paramref name="left"/> parameter is greater than the <paramref name="right"/> parameter.
@@ -243,45 +156,17 @@ namespace xFunc.Maths.Expressions.Collections
         /// <summary>
         /// Gets or sets the value of parameter.
         /// </summary>
-        public object Value
+        public ParameterValue Value
         {
-            get
-            {
-                return value;
-            }
+            get => value;
             set
             {
-                if (value is null)
-                    throw new ArgumentNullException(nameof(value));
-
                 if (Type != ParameterType.Normal)
                     throw new ParameterIsReadOnlyException(Resource.ReadOnlyError, Key);
 
-                if (IsNumber(value))
-                {
-                    var d = Convert.ToDouble(value, CultureInfo.InvariantCulture);
-
-                    this.value = new NumberValue(d);
-                }
-                else
-                {
-                    this.value = value;
-                }
+                this.value = value;
             }
         }
-
-        private static bool IsNumber(object value) =>
-            value is sbyte ||
-            value is byte ||
-            value is short ||
-            value is ushort ||
-            value is int ||
-            value is uint ||
-            value is long ||
-            value is ulong ||
-            value is float ||
-            value is double ||
-            value is decimal;
 
         /// <summary>
         /// Gets the type of parameter.

@@ -63,7 +63,7 @@ namespace xFunc.Maths.Expressions.Programming
                 if (condition)
                     return Then.Execute(parameters);
 
-                return Else?.Execute(parameters) ?? 0.0;
+                return Else?.Execute(parameters) ?? new NumberValue(0.0);
             }
 
             throw new ResultIsNotSupportedException(this, result);

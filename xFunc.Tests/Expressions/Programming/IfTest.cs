@@ -70,8 +70,9 @@ namespace xFunc.Tests.Expressions.Programming
 
             var cond = new Equal(Variable.X, new Number(10));
             var @if = new If(cond, new Number(20));
+            var expected = new NumberValue(0.0);
 
-            Assert.Equal(0.0, @if.Execute(parameters));
+            Assert.Equal(expected, @if.Execute(parameters));
         }
 
         [Fact]

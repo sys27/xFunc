@@ -98,7 +98,6 @@ namespace xFunc.Maths
                ParseAssign(ref tokenReader) ??
                ParseDef(ref tokenReader) ??
                ParseUndef(ref tokenReader) ??
-               ParseIf(ref tokenReader) ??
                ParseFor(ref tokenReader) ??
                ParseWhile(ref tokenReader) ??
                ParseExpression(ref tokenReader);
@@ -163,38 +162,6 @@ namespace xFunc.Maths
                 MissingCloseParenthesis(undef.Kind);
 
             return new Undefine(key);
-        }
-
-        private IExpression? ParseIf(ref TokenReader tokenReader)
-        {
-            var @if = tokenReader.GetCurrent(IfKeyword);
-            if (@if.IsEmpty())
-                return null;
-
-            if (!tokenReader.Check(OpenParenthesisSymbol))
-                MissingOpenParenthesis(@if.Kind);
-
-            var condition = ParseConditionalOrOperator(ref tokenReader) ??
-                            throw new ParseException(Resource.IfConditionParseException);
-
-            if (!tokenReader.Check(CommaSymbol))
-                MissingComma(condition);
-
-            var then = ParseExpression(ref tokenReader) ??
-                       throw new ParseException(Resource.IfThenParseException);
-
-            IExpression? @else = null;
-            if (tokenReader.Check(CommaSymbol))
-                @else = ParseExpression(ref tokenReader) ??
-                        throw new ParseException(Resource.IfElseParseException);
-
-            if (!tokenReader.Check(CloseParenthesisSymbol))
-                MissingCloseParenthesis(@if.Kind);
-
-            if (@else is not null)
-                return new If(condition, then, @else);
-
-            return new If(condition, then);
         }
 
         private IExpression? ParseFor(ref TokenReader tokenReader)
@@ -288,7 +255,7 @@ namespace xFunc.Maths
 
         private IExpression? ParseExpression(ref TokenReader tokenReader)
             => ParseBinaryAssign(ref tokenReader) ??
-               Ternary(ref tokenReader);
+               ParseTernary(ref tokenReader);
 
         private IExpression? ParseBinaryAssign(ref TokenReader tokenReader)
             => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
@@ -313,7 +280,7 @@ namespace xFunc.Maths
                 return parser.CreateBinaryAssign(@operator, variable, exp);
             });
 
-        private IExpression? Ternary(ref TokenReader tokenReader)
+        private IExpression? ParseTernary(ref TokenReader tokenReader)
             => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
             {
                 var condition = parser.ParseConditionalOrOperator(ref reader);
@@ -677,11 +644,44 @@ namespace xFunc.Maths
         private IExpression? ParseOperand(ref TokenReader tokenReader)
             => ParseComplexNumber(ref tokenReader) ??
                ParseNumber(ref tokenReader) ??
+               ParseIf(ref tokenReader) ??
                ParseFunctionOrVariable(ref tokenReader) ??
                ParseBoolean(ref tokenReader) ??
                ParseParenthesesExpression(ref tokenReader) ??
                ParseMatrix(ref tokenReader) ??
                ParseVector(ref tokenReader);
+
+        private IExpression? ParseIf(ref TokenReader tokenReader)
+        {
+            var @if = tokenReader.GetCurrent(IfKeyword);
+            if (@if.IsEmpty())
+                return null;
+
+            if (!tokenReader.Check(OpenParenthesisSymbol))
+                MissingOpenParenthesis(@if.Kind);
+
+            var condition = ParseConditionalOrOperator(ref tokenReader) ??
+                            throw new ParseException(Resource.IfConditionParseException);
+
+            if (!tokenReader.Check(CommaSymbol))
+                MissingComma(condition);
+
+            var then = ParseExpression(ref tokenReader) ??
+                       throw new ParseException(Resource.IfThenParseException);
+
+            IExpression? @else = null;
+            if (tokenReader.Check(CommaSymbol))
+                @else = ParseExpression(ref tokenReader) ??
+                        throw new ParseException(Resource.IfElseParseException);
+
+            if (!tokenReader.Check(CloseParenthesisSymbol))
+                MissingCloseParenthesis(@if.Kind);
+
+            if (@else is not null)
+                return new If(condition, then, @else);
+
+            return new If(condition, then);
+        }
 
         private IExpression? ParseParenthesesExpression(ref TokenReader tokenReader)
         {

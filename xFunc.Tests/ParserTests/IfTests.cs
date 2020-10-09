@@ -38,6 +38,21 @@ namespace xFunc.Tests.ParserTests
         }
 
         [Fact]
+        public void IfThenElseAsExpressionTest()
+        {
+            var expected = new Add(
+                Number.One,
+                new If(
+                    new Equal(Variable.X, Number.Zero),
+                    Number.Two,
+                    new Number(8)
+                )
+            );
+
+            ParseTest("1 + if(x == 0, 2, 8)", expected);
+        }
+
+        [Fact]
         public void IfThenTest()
         {
             var expected = new If(

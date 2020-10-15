@@ -25,8 +25,8 @@ namespace xFunc.Maths
         /// <summary>
         /// Parses the specified function.
         /// </summary>
-        /// <param name="function">The string that contains the functions and operators.</param>
+        /// <param name="expression">The string that contains the functions and operators.</param>
         /// <returns>The parsed expression.</returns>
-        IExpression Parse(string function);
+        IExpression Parse(string expression);
     }
 }

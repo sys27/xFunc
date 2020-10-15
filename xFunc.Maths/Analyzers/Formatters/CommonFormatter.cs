@@ -13,8 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma warning disable CA1062
-
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
@@ -643,5 +641,3 @@ namespace xFunc.Maths.Analyzers.Formatters
         #endregion Programming
     }
 }
-
-#pragma warning restore CA1062

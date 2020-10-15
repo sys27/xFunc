@@ -67,14 +67,14 @@ namespace xFunc.Maths
         /// <summary>
         /// Parses the specified function.
         /// </summary>
-        /// <param name="function">The string that contains the functions and operators.</param>
+        /// <param name="expression">The string that contains the functions and operators.</param>
         /// <returns>The parsed expression.</returns>
-        public IExpression Parse(string function)
+        public IExpression Parse(string expression)
         {
-            if (string.IsNullOrWhiteSpace(function))
-                throw new ArgumentNullException(nameof(function), Resource.NotSpecifiedFunction);
+            if (string.IsNullOrWhiteSpace(expression))
+                throw new ArgumentNullException(nameof(expression), Resource.NotSpecifiedFunction);
 
-            var lexer = new Lexer(function);
+            var lexer = new Lexer(expression);
             var tokenReader = new TokenReader(ref lexer);
 
             try

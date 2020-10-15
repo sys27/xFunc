@@ -107,7 +107,7 @@ namespace xFunc.Maths
                ParseVariable(ref tokenReader);
 
         private IExpression? ParseAssign(ref TokenReader tokenReader)
-            => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
+            => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
             {
                 var left = parser.AssignmentKey(ref reader);
                 if (left is null)
@@ -225,7 +225,7 @@ namespace xFunc.Maths
         }
 
         private IExpression? ParseFunctionDeclaration(ref TokenReader tokenReader)
-            => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
+            => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
             {
                 var id = reader.GetCurrent(Id);
                 if (id.IsEmpty() || !reader.Check(OpenParenthesisSymbol))
@@ -258,7 +258,7 @@ namespace xFunc.Maths
                ParseTernary(ref tokenReader);
 
         private IExpression? ParseBinaryAssign(ref TokenReader tokenReader)
-            => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
+            => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
             {
                 var variable = parser.ParseVariable(ref reader);
                 if (variable is null)
@@ -281,7 +281,7 @@ namespace xFunc.Maths
             });
 
         private IExpression? ParseTernary(ref TokenReader tokenReader)
-            => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
+            => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
             {
                 var condition = parser.ParseConditionalOrOperator(ref reader);
                 if (condition is null)
@@ -540,7 +540,7 @@ namespace xFunc.Maths
                ParseLeftUnary(ref tokenReader);
 
         private IExpression? ParseMulImplicitLeftUnary(ref TokenReader tokenReader)
-            => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
+            => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
             {
                 var minusOperator = reader.GetCurrent(MinusOperator);
                 var number = parser.ParseNumber(ref reader);
@@ -616,7 +616,7 @@ namespace xFunc.Maths
                ParseOperand(ref tokenReader);
 
         private IExpression? ParseFactorial(ref TokenReader tokenReader)
-            => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
+            => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
             {
                 var number = parser.ParseNumber(ref reader);
                 if (number is not null && reader.Check(FactorialOperator))
@@ -626,7 +626,7 @@ namespace xFunc.Maths
             });
 
         private IExpression? ParseIncDec(ref TokenReader tokenReader)
-            => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
+            => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
             {
                 var variable = parser.ParseVariable(ref reader);
                 if (variable is null)
@@ -756,7 +756,7 @@ namespace xFunc.Maths
         }
 
         private IExpression? ParseComplexNumber(ref TokenReader tokenReader)
-            => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
+            => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
             {
                 // plus symbol can be ignored
                 reader.GetCurrent(PlusOperator);
@@ -840,7 +840,7 @@ namespace xFunc.Maths
         }
 
         private IExpression? ParseMatrix(ref TokenReader tokenReader)
-            => tokenReader.Scoped(this, (Parser parser, ref TokenReader reader) =>
+            => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
             {
                 if (!reader.Check(OpenBraceSymbol))
                     return null;

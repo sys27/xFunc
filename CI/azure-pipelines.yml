@@ -25,12 +25,6 @@ jobs:
 
     steps:
     - task: UseDotNet@2
-      displayName: 'Install .NET Core 3.1'
-      inputs:
-        packageType: 'sdk'
-        version: '3.1.x'
-
-    - task: UseDotNet@2
       displayName: 'Install .NET 5'
       inputs:
         packageType: 'sdk'
@@ -38,7 +32,6 @@ jobs:
         includePreviewVersions: true
 
     - script: dotnet tool install --global dotnet-reportgenerator-globaltool
-    - script: dotnet tool install --global Codecov.Tool
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet restore'
@@ -74,11 +67,10 @@ jobs:
         pathToSources: '$(Build.SourcesDirectory)/coverage/'
         failIfCoverageEmpty: true
 
-    - task: CmdLine@2
+    - bash: bash <(curl -s https://codecov.io/bash) -Z -f "./coverage/coverage.cobertura.xml"
       displayName: 'Publish to Codecov'
-      inputs:
-        script: codecov -f "$(Build.SourcesDirectory)/coverage/coverage.cobertura.xml" -t $(CODECOV_TOKEN)'
-        failOnStderr: true
+      env:
+        CODECOV_TOKEN: $(CODECOV_TOKEN)
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet restore'

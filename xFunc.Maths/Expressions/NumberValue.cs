@@ -104,6 +104,12 @@ namespace xFunc.Maths.Expressions
         public NumberValue(double value)
             => Number = value;
 
+        /// <summary>
+        /// Deconstructs <see cref="NumberValue"/> to <see cref="double"/>.
+        /// </summary>
+        /// <param name="number">The value of current number value.</param>
+        public void Deconstruct(out double number) => number = Number;
+
         /// <inheritdoc />
         public bool Equals(NumberValue other)
             => MathExtensions.Equals(Number, other.Number);

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
-    <LangVersion>preview</LangVersion>
+    <LangVersion>9.0</LangVersion>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>xFunc</ToolCommandName>    
     <PackageId>xFunc.DotnetTool</PackageId>

@@ -29,7 +29,6 @@ jobs:
       inputs:
         packageType: 'sdk'
         version: '5.0.x'
-        includePreviewVersions: true
 
     - script: dotnet tool install --global dotnet-reportgenerator-globaltool
 

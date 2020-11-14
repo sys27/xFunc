@@ -30,17 +30,17 @@ namespace xFunc.Maths.Tokenization
 
             var (kind, size) = (first, second, third) switch
             {
-                ('<', '-', '>') => (EqualityOperator, 3),
-                ('<', '−', '>') => (EqualityOperator, 3),
+                ('<', '-', '>') or
+                ('<', '−', '>') or
                 ('<', '=', '>') => (EqualityOperator, 3),
                 ('<', '<', '=') => (LeftShiftAssignOperator, 3),
                 ('>', '>', '=') => (RightShiftAssignOperator, 3),
 
                 (':', '=', _) => (AssignOperator, 2),
                 ('+', '=', _) => (AddAssignOperator, 2),
-                ('-', '=', _) => (SubAssignOperator, 2),
+                ('-', '=', _) or
                 ('−', '=', _) => (SubAssignOperator, 2),
-                ('*', '=', _) => (MulAssignOperator, 2),
+                ('*', '=', _) or
                 ('×', '=', _) => (MulAssignOperator, 2),
                 ('/', '=', _) => (DivAssignOperator, 2),
                 ('&', '&', _) => (ConditionalAndOperator, 2),
@@ -50,18 +50,18 @@ namespace xFunc.Maths.Tokenization
                 ('<', '=', _) => (LessOrEqualOperator, 2),
                 ('>', '=', _) => (GreaterOrEqualOperator, 2),
                 ('+', '+', _) => (IncrementOperator, 2),
-                ('-', '-', _) => (DecrementOperator, 2),
+                ('-', '-', _) or
                 ('−', '−', _) => (DecrementOperator, 2),
-                ('-', '>', _) => (ImplicationOperator, 2),
-                ('−', '>', _) => (ImplicationOperator, 2),
+                ('-', '>', _) or
+                ('−', '>', _) or
                 ('=', '>', _) => (ImplicationOperator, 2),
                 ('<', '<', _) => (LeftShiftOperator, 2),
                 ('>', '>', _) => (RightShiftOperator, 2),
 
                 ('+', _, _) => (PlusOperator, 1),
-                ('-', _, _) => (MinusOperator, 1),
+                ('-', _, _) or
                 ('−', _, _) => (MinusOperator, 1),
-                ('*', _, _) => (MultiplicationOperator, 1),
+                ('*', _, _) or
                 ('×', _, _) => (MultiplicationOperator, 1),
                 ('/', _, _) => (DivisionOperator, 1),
                 ('^', _, _) => (ExponentiationOperator, 1),

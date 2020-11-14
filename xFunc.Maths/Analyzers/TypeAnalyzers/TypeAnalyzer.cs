@@ -51,8 +51,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return result switch
             {
-                ResultTypes.Undefined => ResultTypes.String,
-                ResultTypes.Number => ResultTypes.String,
+                ResultTypes.Undefined or ResultTypes.Number => ResultTypes.String,
                 _ => ResultTypes.Number.ThrowFor(result),
             };
         }
@@ -67,8 +66,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             return result switch
             {
                 ResultTypes.Undefined => ResultTypes.Undefined,
-                ResultTypes.Number => ResultTypes.Number,
-                ResultTypes.AngleNumber => ResultTypes.Number,
+                ResultTypes.Number or ResultTypes.AngleNumber => ResultTypes.Number,
                 ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
                 _ => ResultTypes.NumberOrAngleOrComplex.ThrowFor(result),
             };
@@ -127,14 +125,14 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return (leftResult, rightResult) switch
             {
-                (ResultTypes.Undefined, ResultTypes.Undefined) => ResultTypes.Boolean,
-                (ResultTypes.Number, ResultTypes.Undefined) => ResultTypes.Boolean,
-                (ResultTypes.Undefined, ResultTypes.Number) => ResultTypes.Boolean,
-                (ResultTypes.AngleNumber, ResultTypes.Undefined) => ResultTypes.Boolean,
-                (ResultTypes.Undefined, ResultTypes.AngleNumber) => ResultTypes.Boolean,
-
-                (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Boolean,
-                (ResultTypes.AngleNumber, ResultTypes.AngleNumber) => ResultTypes.Boolean,
+                (ResultTypes.Undefined, ResultTypes.Undefined) or
+                (ResultTypes.Number, ResultTypes.Undefined) or
+                (ResultTypes.Undefined, ResultTypes.Number) or
+                (ResultTypes.AngleNumber, ResultTypes.Undefined) or
+                (ResultTypes.Undefined, ResultTypes.AngleNumber) or
+                (ResultTypes.Number, ResultTypes.Number) or
+                (ResultTypes.AngleNumber, ResultTypes.AngleNumber)
+                    => ResultTypes.Boolean,
 
                 (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
                 (ResultTypes.Number, _) => ResultTypes.Number.ThrowForRight(rightResult),
@@ -156,10 +154,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return (leftResult, rightResult) switch
             {
-                (ResultTypes.Undefined, ResultTypes.Undefined) => ResultTypes.Boolean,
-                (ResultTypes.Boolean, ResultTypes.Undefined) => ResultTypes.Boolean,
-                (ResultTypes.Undefined, ResultTypes.Boolean) => ResultTypes.Boolean,
-                (ResultTypes.Boolean, ResultTypes.Boolean) => ResultTypes.Boolean,
+                (ResultTypes.Undefined, ResultTypes.Undefined) or
+                (ResultTypes.Boolean, ResultTypes.Undefined) or
+                (ResultTypes.Undefined, ResultTypes.Boolean) or
+                (ResultTypes.Boolean, ResultTypes.Boolean)
+                    => ResultTypes.Boolean,
 
                 (_, ResultTypes.Boolean) => ResultTypes.Boolean.ThrowForLeft(leftResult),
                 (ResultTypes.Boolean, _) => ResultTypes.Boolean.ThrowForRight(rightResult),
@@ -178,8 +177,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return (leftResult, rightResult) switch
             {
-                (ResultTypes.Undefined, _) => ResultTypes.Undefined,
-                (_, ResultTypes.Undefined) => ResultTypes.Undefined,
+                (ResultTypes.Undefined, _) or
+                (_, ResultTypes.Undefined)
+                    => ResultTypes.Undefined,
 
                 (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Number,
                 (ResultTypes.Boolean, ResultTypes.Boolean) => ResultTypes.Boolean,
@@ -204,17 +204,17 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return (leftResult, rightResult) switch
             {
-                (ResultTypes.Undefined, ResultTypes.Undefined) => ResultTypes.Boolean,
-                (ResultTypes.Number, ResultTypes.Undefined) => ResultTypes.Boolean,
-                (ResultTypes.Undefined, ResultTypes.Number) => ResultTypes.Boolean,
-                (ResultTypes.Boolean, ResultTypes.Undefined) => ResultTypes.Boolean,
-                (ResultTypes.Undefined, ResultTypes.Boolean) => ResultTypes.Boolean,
-                (ResultTypes.AngleNumber, ResultTypes.Undefined) => ResultTypes.Boolean,
-                (ResultTypes.Undefined, ResultTypes.AngleNumber) => ResultTypes.Boolean,
-
-                (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Boolean,
-                (ResultTypes.Boolean, ResultTypes.Boolean) => ResultTypes.Boolean,
-                (ResultTypes.AngleNumber, ResultTypes.AngleNumber) => ResultTypes.Boolean,
+                (ResultTypes.Undefined, ResultTypes.Undefined) or
+                (ResultTypes.Number, ResultTypes.Undefined) or
+                (ResultTypes.Undefined, ResultTypes.Number) or
+                (ResultTypes.Boolean, ResultTypes.Undefined) or
+                (ResultTypes.Undefined, ResultTypes.Boolean) or
+                (ResultTypes.AngleNumber, ResultTypes.Undefined) or
+                (ResultTypes.Undefined, ResultTypes.AngleNumber) or
+                (ResultTypes.Number, ResultTypes.Number) or
+                (ResultTypes.Boolean, ResultTypes.Boolean) or
+                (ResultTypes.AngleNumber, ResultTypes.AngleNumber)
+                    => ResultTypes.Boolean,
 
                 (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
                 (ResultTypes.Number, _) => ResultTypes.Number.ThrowForRight(rightResult),
@@ -238,8 +238,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return rightResult switch
             {
-                ResultTypes.Undefined => ResultTypes.Number,
-                ResultTypes.Number => ResultTypes.Number,
+                ResultTypes.Undefined or ResultTypes.Number
+                    => ResultTypes.Number,
+
                 _ => throw new ParameterTypeMismatchException(),
             };
         }
@@ -254,10 +255,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return (leftResult, rightResult) switch
             {
-                (ResultTypes.Undefined, ResultTypes.Undefined) => ResultTypes.Number,
-                (ResultTypes.Undefined, ResultTypes.Number) => ResultTypes.Number,
-                (ResultTypes.Number, ResultTypes.Undefined) => ResultTypes.Number,
-                (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Number,
+                (ResultTypes.Undefined, ResultTypes.Undefined) or
+                (ResultTypes.Undefined, ResultTypes.Number) or
+                (ResultTypes.Number, ResultTypes.Undefined) or
+                (ResultTypes.Number, ResultTypes.Number)
+                    => ResultTypes.Number,
 
                 (ResultTypes.Number, _) => ResultTypes.Number.ThrowForRight(rightResult),
                 (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
@@ -274,9 +276,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return result switch
             {
-                ResultTypes.Undefined => ResultTypes.AngleNumber,
-                ResultTypes.Number => ResultTypes.AngleNumber,
-                ResultTypes.AngleNumber => ResultTypes.AngleNumber,
+                ResultTypes.Undefined or ResultTypes.Number or ResultTypes.AngleNumber
+                    => ResultTypes.AngleNumber,
+
                 _ => ResultTypes.NumberOrAngle.ThrowFor(result),
             };
         }
@@ -299,10 +301,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             return result switch
             {
                 ResultTypes.Undefined => ResultTypes.Undefined,
-                ResultTypes.Number => ResultTypes.Number,
+                ResultTypes.Number or ResultTypes.ComplexNumber or ResultTypes.Vector
+                    => ResultTypes.Number,
                 ResultTypes.AngleNumber => ResultTypes.AngleNumber,
-                ResultTypes.ComplexNumber => ResultTypes.Number,
-                ResultTypes.Vector => ResultTypes.Number,
                 _ => ResultTypes.NumberOrAngleOrComplexOrVector.ThrowFor(result),
             };
         }
@@ -318,18 +319,21 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return (leftResult, rightResult) switch
             {
-                (ResultTypes.Undefined, _) => ResultTypes.Undefined,
-                (_, ResultTypes.Undefined) => ResultTypes.Undefined,
+                (ResultTypes.Undefined, _) or
+                (_, ResultTypes.Undefined)
+                    => ResultTypes.Undefined,
 
                 (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Number,
 
-                (ResultTypes.Number, ResultTypes.AngleNumber) => ResultTypes.AngleNumber,
-                (ResultTypes.AngleNumber, ResultTypes.Number) => ResultTypes.AngleNumber,
-                (ResultTypes.AngleNumber, ResultTypes.AngleNumber) => ResultTypes.AngleNumber,
+                (ResultTypes.Number, ResultTypes.AngleNumber) or
+                (ResultTypes.AngleNumber, ResultTypes.Number) or
+                (ResultTypes.AngleNumber, ResultTypes.AngleNumber)
+                    => ResultTypes.AngleNumber,
 
-                (ResultTypes.Number, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
-                (ResultTypes.ComplexNumber, ResultTypes.Number) => ResultTypes.ComplexNumber,
-                (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
+                (ResultTypes.Number, ResultTypes.ComplexNumber) or
+                (ResultTypes.ComplexNumber, ResultTypes.Number) or
+                (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
+                    => ResultTypes.ComplexNumber,
 
                 (ResultTypes.Vector, ResultTypes.Vector) => ResultTypes.Vector,
                 (ResultTypes.Matrix, ResultTypes.Matrix) => ResultTypes.Matrix,
@@ -404,18 +408,21 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return (leftResult, rightResult) switch
             {
-                (ResultTypes.Undefined, _) => ResultTypes.Undefined,
-                (_, ResultTypes.Undefined) => ResultTypes.Undefined,
+                (ResultTypes.Undefined, _) or
+                (_, ResultTypes.Undefined)
+                    => ResultTypes.Undefined,
 
                 (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Number,
 
-                (ResultTypes.Number, ResultTypes.AngleNumber) => ResultTypes.AngleNumber,
-                (ResultTypes.AngleNumber, ResultTypes.Number) => ResultTypes.AngleNumber,
-                (ResultTypes.AngleNumber, ResultTypes.AngleNumber) => ResultTypes.AngleNumber,
+                (ResultTypes.Number, ResultTypes.AngleNumber) or
+                (ResultTypes.AngleNumber, ResultTypes.Number) or
+                (ResultTypes.AngleNumber, ResultTypes.AngleNumber)
+                    => ResultTypes.AngleNumber,
 
-                (ResultTypes.Number, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
-                (ResultTypes.ComplexNumber, ResultTypes.Number) => ResultTypes.ComplexNumber,
-                (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
+                (ResultTypes.Number, ResultTypes.ComplexNumber) or
+                (ResultTypes.ComplexNumber, ResultTypes.Number) or
+                (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
+                    => ResultTypes.ComplexNumber,
 
                 (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
                 (ResultTypes.Number, _) => ResultTypes.Number.ThrowForRight(rightResult),
@@ -604,8 +611,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return (leftResult, rightResult) switch
             {
-                (ResultTypes.Undefined, _) => ResultTypes.Undefined,
-                (_, ResultTypes.Undefined) => ResultTypes.Undefined,
+                (ResultTypes.Undefined, _) or
+                (_, ResultTypes.Undefined)
+                    => ResultTypes.Undefined,
 
                 (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Number,
                 (ResultTypes.Number, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
@@ -627,10 +635,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return (leftResult, rightResult) switch
             {
-                (ResultTypes.Undefined, ResultTypes.Undefined) => ResultTypes.Number,
-                (ResultTypes.Undefined, ResultTypes.Number) => ResultTypes.Number,
-                (ResultTypes.Number, ResultTypes.Undefined) => ResultTypes.Number,
-                (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Number,
+                (ResultTypes.Undefined, ResultTypes.Undefined) or
+                (ResultTypes.Undefined, ResultTypes.Number) or
+                (ResultTypes.Number, ResultTypes.Undefined) or
+                (ResultTypes.Number, ResultTypes.Number)
+                    => ResultTypes.Number,
 
                 (ResultTypes.Undefined, _) => ResultTypes.Number.ThrowForRight(rightResult),
                 (ResultTypes.Number, _) => ResultTypes.Number.ThrowForRight(rightResult),
@@ -652,28 +661,33 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return (leftResult, rightResult) switch
             {
-                (ResultTypes.Undefined, _) => ResultTypes.Undefined,
-                (_, ResultTypes.Undefined) => ResultTypes.Undefined,
+                (ResultTypes.Undefined, _) or
+                (_, ResultTypes.Undefined)
+                    => ResultTypes.Undefined,
 
                 (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Number,
 
-                (ResultTypes.Number, ResultTypes.AngleNumber) => ResultTypes.AngleNumber,
-                (ResultTypes.AngleNumber, ResultTypes.Number) => ResultTypes.AngleNumber,
-                (ResultTypes.AngleNumber, ResultTypes.AngleNumber) => ResultTypes.AngleNumber,
+                (ResultTypes.Number, ResultTypes.AngleNumber) or
+                (ResultTypes.AngleNumber, ResultTypes.Number) or
+                (ResultTypes.AngleNumber, ResultTypes.AngleNumber)
+                    => ResultTypes.AngleNumber,
 
-                (ResultTypes.Number, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
-                (ResultTypes.ComplexNumber, ResultTypes.Number) => ResultTypes.ComplexNumber,
-                (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
+                (ResultTypes.Number, ResultTypes.ComplexNumber) or
+                (ResultTypes.ComplexNumber, ResultTypes.Number) or
+                (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
+                    => ResultTypes.ComplexNumber,
 
-                (ResultTypes.Vector, ResultTypes.Number) => ResultTypes.Vector,
-                (ResultTypes.Number, ResultTypes.Vector) => ResultTypes.Vector,
-                (ResultTypes.Vector, ResultTypes.Vector) => ResultTypes.Vector,
+                (ResultTypes.Vector, ResultTypes.Number) or
+                (ResultTypes.Number, ResultTypes.Vector) or
+                (ResultTypes.Vector, ResultTypes.Vector)
+                    => ResultTypes.Vector,
 
-                (ResultTypes.Matrix, ResultTypes.Number) => ResultTypes.Matrix,
-                (ResultTypes.Matrix, ResultTypes.Vector) => ResultTypes.Matrix,
-                (ResultTypes.Number, ResultTypes.Matrix) => ResultTypes.Matrix,
-                (ResultTypes.Vector, ResultTypes.Matrix) => ResultTypes.Matrix,
-                (ResultTypes.Matrix, ResultTypes.Matrix) => ResultTypes.Matrix,
+                (ResultTypes.Matrix, ResultTypes.Number) or
+                (ResultTypes.Matrix, ResultTypes.Vector) or
+                (ResultTypes.Number, ResultTypes.Matrix) or
+                (ResultTypes.Vector, ResultTypes.Matrix) or
+                (ResultTypes.Matrix, ResultTypes.Matrix)
+                    => ResultTypes.Matrix,
 
                 (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
                 (ResultTypes.Number, _) => ResultTypes.Number.ThrowForRight(rightResult),
@@ -719,8 +733,8 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return result switch
             {
-                ResultTypes.Undefined => ResultTypes.Number,
-                ResultTypes.AngleNumber => ResultTypes.Number,
+                ResultTypes.Undefined or ResultTypes.AngleNumber
+                    => ResultTypes.Number,
                 _ => ResultTypes.AngleNumber.ThrowFor(result),
             };
         }
@@ -736,14 +750,17 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return (leftResult, rightResult) switch
             {
-                (ResultTypes.ComplexNumber, ResultTypes.Undefined) => ResultTypes.ComplexNumber,
-                (ResultTypes.ComplexNumber, ResultTypes.Number) => ResultTypes.ComplexNumber,
-                (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
+                (ResultTypes.ComplexNumber, ResultTypes.Undefined) or
+                (ResultTypes.ComplexNumber, ResultTypes.Number) or
+                (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
+                    => ResultTypes.ComplexNumber,
 
-                (ResultTypes.Undefined, _) => ResultTypes.Undefined,
-                (_, ResultTypes.Undefined) => ResultTypes.Undefined,
+                (ResultTypes.Undefined, _) or
+                (_, ResultTypes.Undefined)
+                    => ResultTypes.Undefined,
 
-                (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Undefined,
+                (ResultTypes.Number, ResultTypes.Number)
+                    => ResultTypes.Undefined,
 
                 _ => ResultTypes.Number.ThrowForLeft(leftResult),
             };
@@ -760,10 +777,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return (leftResult, rightResult) switch
             {
-                (ResultTypes.Undefined, ResultTypes.Undefined) => ResultTypes.Undefined,
-                (ResultTypes.Undefined, ResultTypes.Number) => ResultTypes.Undefined,
-                (ResultTypes.Number, ResultTypes.Undefined) => ResultTypes.Undefined,
-                (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Undefined,
+                (ResultTypes.Undefined, ResultTypes.Undefined) or
+                (ResultTypes.Undefined, ResultTypes.Number) or
+                (ResultTypes.Number, ResultTypes.Undefined) or
+                (ResultTypes.Number, ResultTypes.Number)
+                    => ResultTypes.Undefined,
 
                 (ResultTypes.Undefined, _) => ResultTypes.Number.ThrowForRight(rightResult),
                 (ResultTypes.Number, _) => ResultTypes.Number.ThrowForRight(rightResult),
@@ -810,18 +828,21 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return (leftResult, rightResult) switch
             {
-                (ResultTypes.Undefined, _) => ResultTypes.Undefined,
-                (_, ResultTypes.Undefined) => ResultTypes.Undefined,
+                (ResultTypes.Undefined, _) or
+                (_, ResultTypes.Undefined)
+                    => ResultTypes.Undefined,
 
                 (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Number,
 
-                (ResultTypes.Number, ResultTypes.AngleNumber) => ResultTypes.AngleNumber,
-                (ResultTypes.AngleNumber, ResultTypes.Number) => ResultTypes.AngleNumber,
-                (ResultTypes.AngleNumber, ResultTypes.AngleNumber) => ResultTypes.AngleNumber,
+                (ResultTypes.Number, ResultTypes.AngleNumber) or
+                (ResultTypes.AngleNumber, ResultTypes.Number) or
+                (ResultTypes.AngleNumber, ResultTypes.AngleNumber)
+                    => ResultTypes.AngleNumber,
 
-                (ResultTypes.Number, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
-                (ResultTypes.ComplexNumber, ResultTypes.Number) => ResultTypes.ComplexNumber,
-                (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
+                (ResultTypes.Number, ResultTypes.ComplexNumber) or
+                (ResultTypes.ComplexNumber, ResultTypes.Number) or
+                (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
+                    => ResultTypes.ComplexNumber,
 
                 (ResultTypes.Vector, ResultTypes.Vector) => ResultTypes.Vector,
                 (ResultTypes.Matrix, ResultTypes.Matrix) => ResultTypes.Matrix,
@@ -996,8 +1017,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return (leftResult, rightResult) switch
             {
-                (ResultTypes.Undefined, _) => ResultTypes.Undefined,
-                (_, ResultTypes.Undefined) => ResultTypes.Undefined,
+                (ResultTypes.Undefined, _) or
+                (_, ResultTypes.Undefined)
+                    => ResultTypes.Undefined,
 
                 (ResultTypes.Vector, ResultTypes.Vector) => ResultTypes.Number,
 
@@ -1018,8 +1040,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return (leftResult, rightResult) switch
             {
-                (ResultTypes.Undefined, _) => ResultTypes.Undefined,
-                (_, ResultTypes.Undefined) => ResultTypes.Undefined,
+                (ResultTypes.Undefined, _) or
+                (_, ResultTypes.Undefined)
+                    => ResultTypes.Undefined,
 
                 (ResultTypes.Vector, ResultTypes.Vector) => ResultTypes.Vector,
 
@@ -1112,8 +1135,8 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return result switch
             {
-                ResultTypes.Undefined => ResultTypes.ComplexNumber,
-                ResultTypes.Number => ResultTypes.ComplexNumber,
+                ResultTypes.Undefined or ResultTypes.Number
+                    => ResultTypes.ComplexNumber,
                 _ => ResultTypes.Number.ThrowFor(result),
             };
         }

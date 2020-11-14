@@ -118,9 +118,9 @@ namespace xFunc.Maths.Expressions.Angles
         /// <inheritdoc />
         public override string ToString() => Unit switch
         {
-            AngleUnit.Degree => $"{Angle.ToString()} degree",
-            AngleUnit.Radian => $"{Angle.ToString()} radian",
-            AngleUnit.Gradian => $"{Angle.ToString()} gradian",
+            AngleUnit.Degree => $"{Angle} degree",
+            AngleUnit.Radian => $"{Angle} radian",
+            AngleUnit.Gradian => $"{Angle} gradian",
             _ => throw new InvalidOperationException(),
         };
 
@@ -250,8 +250,9 @@ namespace xFunc.Maths.Expressions.Angles
             {
                 _ when left == right => left,
 
-                (AngleUnit.Radian, AngleUnit.Gradian) => AngleUnit.Radian,
-                (AngleUnit.Gradian, AngleUnit.Radian) => AngleUnit.Radian,
+                (AngleUnit.Radian, AngleUnit.Gradian) or
+                (AngleUnit.Gradian, AngleUnit.Radian)
+                    => AngleUnit.Radian,
 
                 _ => AngleUnit.Degree,
             };

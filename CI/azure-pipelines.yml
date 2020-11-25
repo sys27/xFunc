@@ -30,8 +30,6 @@ jobs:
         packageType: 'sdk'
         version: '5.0.x'
 
-    - script: dotnet tool install --global dotnet-reportgenerator-globaltool
-
     - task: DotNetCoreCLI@2
       displayName: 'dotnet restore'
       inputs:
@@ -49,15 +47,8 @@ jobs:
       inputs:
         command: test
         projects: '$(solution)'
-        arguments: '--nologo --no-build -c $(buildConfiguration) -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput="$(Build.SourcesDirectory)/coverage/" -p:ExcludeByAttribute=ExcludeFromCodeCoverage -p:ExcludeByAttribute=GeneratedCode -p:Include="[xFunc.*]*" -p:Exclude="[xFunc.Tests*]*" -p:Exclude="[xFunc.*]*Exception" -p:Threshold=90 -p:ThresholdStat=total'
+        arguments: '--nologo --no-build -c $(buildConfiguration) -p:CollectCoverage=true -p:CoverletOutput=$(Build.SourcesDirectory)/coverage/'
         publishTestResults: true
-
-    - task: CmdLine@2
-      displayName: 'Generate report'
-      inputs:
-        script: 'reportgenerator -reports:"$(Build.SourcesDirectory)/coverage/coverage.cobertura.xml" -targetdir:"$(Build.SourcesDirectory)/coverage/" -reporttypes:HtmlInline_AzurePipelines'
-        workingDirectory: 'xFunc.Tests'
-        failOnStderr: true
 
     - task: PublishCodeCoverageResults@1
       inputs:

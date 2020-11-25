@@ -54,34 +54,7 @@
                 "test",
                 "${workspaceFolder}/xFunc.sln",
                 "-c:${input:configurationType}",
-                "-p:CollectCoverage=true",
-                "-p:CoverletOutputFormat=cobertura",
-                "-p:CoverletOutput=\"../coverage/\"",
-                "-p:ExcludeByAttribute=ExcludeFromCodeCoverage",
-                "-p:ExcludeByAttribute=GeneratedCode",
-                "-p:Include=\"[xFunc.*]*\"",
-                "-p:Exclude=\"[xFunc.Tests*]\"",
-                "-p:Exclude=\"[xFunc.*]*Exception\"",
-                "-p:Threshold=90",
-                "-p:ThresholdStat=total"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "Generate Report",
-            "group": "test",
-            "dependsOn": [
-                "Code Coverage"
-            ],
-            "command": "reportgenerator",
-            "type": "process",
-            "options": {
-                "cwd": "${workspaceRoot}/xFunc.Tests/"
-            },
-            "args": [
-                "-reports:\"../coverage/coverage.cobertura.xml\"",
-                "-targetdir:\"../coverage\"",
-                "-reporttypes:HtmlInline_AzurePipelines"
+                "-p:CollectCoverage=true"
             ],
             "problemMatcher": "$msCompile"
         }

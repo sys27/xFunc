@@ -7,7 +7,17 @@
     <RootNamespace>xFunc.Tests</RootNamespace>
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <CoverletOutputFormat>cobertura</CoverletOutputFormat>
+    <CoverletOutput>../coverage/</CoverletOutput>
+    <ExcludeByAttribute>ExcludeFromCodeCoverage,GeneratedCode</ExcludeByAttribute>
+    <Exclude>[xFunc.*]*Exception</Exclude>
+    <Threshold>90</Threshold>
+    <ThresholdStat>total</ThresholdStat>
   </PropertyGroup>
+
+  <Target Name="GenerateHtmlCoverageReport" AfterTargets="GenerateCoverageResultAfterTest" Condition="'$(CollectCoverage)' == 'true'">
+    <ReportGenerator ReportFiles="$(CoverletOutput)/coverage.cobertura.xml" TargetDirectory="$(CoverletOutput)" ReportTypes="HtmlInline_AzurePipelines" />
+  </Target>
 
   <ItemGroup>
     <PackageReference Include="coverlet.msbuild" Version="2.9.0">
@@ -16,6 +26,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
     <PackageReference Include="Moq" Version="4.15.1" />
+    <PackageReference Include="ReportGenerator" Version="4.8.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.analyzers" Version="0.10.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />

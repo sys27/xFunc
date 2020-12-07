@@ -23,14 +23,11 @@ namespace xFunc.ViewModels
 
         private readonly Parameter parameter;
 
-        public VariableViewModel(Parameter parameter)
-        {
-            this.parameter = parameter;
-        }
+        public VariableViewModel(Parameter parameter) => this.parameter = parameter;
 
         public string Variable => parameter.Key;
 
-        public object Value => parameter.Value;
+        public object Value => parameter.Value.Value;
 
         public ParameterType Type => parameter.Type;
 

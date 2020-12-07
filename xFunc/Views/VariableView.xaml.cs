@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;

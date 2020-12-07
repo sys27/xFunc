@@ -18,7 +18,7 @@ limitations under the License. -->
         xmlns:views="clr-namespace:xFunc.Views"
         xmlns:res="clr-namespace:xFunc.Resources"
         xmlns:exps="clr-namespace:xFunc.Maths.Expressions.Collections;assembly=xFunc.Maths"
-        Title="{x:Static res:Resource.VariablesTitle}" Width="220" Height="280"
+        Title="{x:Static res:Resource.VariablesTitle}" Width="240" Height="280"
         ShowInTaskbar="False">
     <Window.CommandBindings>
         <CommandBinding Command="views:VariableView.AddCommand" Executed="AddCommand_Executed" />

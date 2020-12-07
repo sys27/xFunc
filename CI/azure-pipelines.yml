@@ -101,4 +101,9 @@ jobs:
     - task: PublishPipelineArtifact@1
       inputs:
         path: xFunc/bin/Release/netcoreapp3.1
-        artifact: xFunc.UI
+        artifact: xFunc.UI (.NET Core 3.1)
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        path: xFunc/bin/Release/net5.0-windows
+        artifact: xFunc.UI (.NET 5)

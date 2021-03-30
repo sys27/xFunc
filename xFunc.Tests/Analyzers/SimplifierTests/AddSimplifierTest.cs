@@ -21,20 +21,29 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
 {
     public class AddSimplifierTest : BaseSimplifierTest
     {
-        [Fact(DisplayName = "0 + x")]
-        public void AddFirstZero()
+        [Fact(DisplayName = "2 + x")]
+        public void Order1()
         {
-            var add = new Add(Number.Zero, Variable.X);
-            var expected = Variable.X;
+            var add = new Add(Number.Two, Variable.X);
+            var expected = new Add(Variable.X, Number.Two);
 
             SimplifyTest(add, expected);
         }
 
-        [Fact(DisplayName = "x + 0")]
+        [Fact(DisplayName = "0 + 1")]
+        public void AddFirstZero()
+        {
+            var add = new Add(Number.Zero, Number.One);
+            var expected = Number.One;
+
+            SimplifyTest(add, expected);
+        }
+
+        [Fact(DisplayName = "1 + 0")]
         public void AddSecondZero()
         {
-            var add = new Add(Variable.X, Number.Zero);
-            var expected = Variable.X;
+            var add = new Add(Number.One, Number.Zero);
+            var expected = Number.One;
 
             SimplifyTest(add, expected);
         }

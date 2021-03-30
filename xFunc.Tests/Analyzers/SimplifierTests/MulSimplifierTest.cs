@@ -22,56 +22,65 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
 {
     public class MulSimplifierTest : BaseSimplifierTest
     {
-        [Fact(DisplayName = "0 * x")]
+        [Fact(DisplayName = "x * 2")]
+        public void Order1()
+        {
+            var add = new Mul(Variable.X, Number.Two);
+            var expected = new Mul(Number.Two, Variable.X);
+
+            SimplifyTest(add, expected);
+        }
+
+        [Fact(DisplayName = "0 * 10")]
         public void MulByFirstZero()
         {
-            var mul = new Mul(Number.Zero, Variable.X);
+            var mul = new Mul(Number.Zero, new Number(10));
             var expected = Number.Zero;
 
             SimplifyTest(mul, expected);
         }
 
-        [Fact(DisplayName = "x * 0")]
+        [Fact(DisplayName = "10 * 0")]
         public void MulBySecondZero()
         {
-            var mul = new Mul(Variable.X, Number.Zero);
+            var mul = new Mul(new Number(10), Number.Zero);
             var expected = Number.Zero;
 
             SimplifyTest(mul, expected);
         }
 
-        [Fact(DisplayName = "1 * x")]
+        [Fact(DisplayName = "1 * 10")]
         public void MulFirstOne()
         {
-            var mul = new Mul(Number.One, Variable.X);
-            var expected = Variable.X;
+            var mul = new Mul(Number.One, new Number(10));
+            var expected = new Number(10);
 
             SimplifyTest(mul, expected);
         }
 
-        [Fact(DisplayName = "x * 1")]
+        [Fact(DisplayName = "10 * 1")]
         public void MulSecondOne()
         {
-            var mul = new Mul(Variable.X, Number.One);
-            var expected = Variable.X;
+            var mul = new Mul(new Number(10), Number.One);
+            var expected = new Number(10);
 
             SimplifyTest(mul, expected);
         }
 
-        [Fact(DisplayName = "-1x")]
+        [Fact(DisplayName = "-1 * 10")]
         public void MulFirstMinusOne()
         {
-            var mul = new Mul(new Number(-1), Variable.X);
-            var expected = new UnaryMinus(Variable.X);
+            var mul = new Mul(new Number(-1), new Number(10));
+            var expected = new UnaryMinus(new Number(10));
 
             SimplifyTest(mul, expected);
         }
 
-        [Fact(DisplayName = "x * -1")]
+        [Fact(DisplayName = "10 * -1")]
         public void MulSecondMinusOne()
         {
-            var mul = new Mul(Variable.X, new Number(-1));
-            var expected = new UnaryMinus(Variable.X);
+            var mul = new Mul(new Number(10), new Number(-1));
+            var expected = new UnaryMinus(new Number(10));
 
             SimplifyTest(mul, expected);
         }
@@ -354,6 +363,42 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
                 new Ceil(new Add(Number.One, Number.One))
             );
             var expected = new Mul(Variable.X, new Ceil(Number.Two));
+
+            SimplifyTest(exp, expected);
+        }
+
+        [Fact(DisplayName = "x * (1 / x)")]
+        public void MulDiv1()
+        {
+            var exp = new Mul(
+                Variable.X,
+                new Div(Number.One, Variable.X)
+            );
+            var expected = Number.One;
+
+            SimplifyTest(exp, expected);
+        }
+
+        [Fact(DisplayName = "(2 * x) * (1 / x)")]
+        public void MulDiv2()
+        {
+            var exp = new Mul(
+                new Mul(Number.Two, Variable.X),
+                new Div(Number.One, Variable.X)
+            );
+            var expected = Number.Two;
+
+            SimplifyTest(exp, expected);
+        }
+
+        [Fact(DisplayName = "(x * 2) * (1 / x)")]
+        public void MulDiv3()
+        {
+            var exp = new Mul(
+                new Mul(Variable.X, Number.Two),
+                new Div(Number.One, Variable.X)
+            );
+            var expected = Number.Two;
 
             SimplifyTest(exp, expected);
         }

@@ -201,6 +201,17 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             SimplifyTest(exp, expected);
         }
 
+        [Fact(DisplayName = "2 * (x + y) + (x + y)")]
+        public void AddComplexX()
+        {
+            var exp = new Add(
+                new Mul(Number.Two, new Add(Variable.X, new Variable("Y"))),
+                new Add(Variable.X, new Variable("Y")));
+            var expected = new Mul(new Number(3), new Add(Variable.X, new Variable("Y")));
+
+            SimplifyTest(exp, expected);
+        }
+
         [Fact(DisplayName = "x + 2x")]
         public void AddSaveVars3()
         {
@@ -227,6 +238,21 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
                 new Mul(new Number(3), Variable.X)
             );
             var expected = new Mul(new Number(5), Variable.X);
+
+            SimplifyTest(exp, expected);
+        }
+
+        [Fact(DisplayName = "2 * (x + y) + 3 * (x + y)")]
+        public void AddComplexX2()
+        {
+            var exp = new Add(
+                new Mul(Number.Two, new Add(Variable.X, new Variable("y"))),
+                new Mul(new Number(3), new Add(Variable.X, new Variable("y")))
+            );
+            var expected = new Mul(
+                new Number(5),
+                new Add(Variable.X, new Variable("y"))
+            );
 
             SimplifyTest(exp, expected);
         }

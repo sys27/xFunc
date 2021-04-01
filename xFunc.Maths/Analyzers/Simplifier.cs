@@ -242,23 +242,22 @@ namespace xFunc.Maths.Analyzers
                 (Sub(var left, Number right), Number number)
                     => Analyze(new Add(new Number(number.Value - right.Value), left)),
 
-                // TODO: nested complex 'x'
-
                 // ax + x
                 // xa + x
                 // x + bx
                 // x + xb
-                (Mul(Number a, Variable x1), Variable x2) when x1.Equals(x2)
+                (Mul(Number a, var x1), var x2) when x1.Equals(x2)
                     => Analyze(new Mul(new Number(a.Value + 1), x1)),
 
                 // ax + bx
                 // ax + xb
                 // xa + bx
                 // xa + xb
-                (Mul(Number a, Variable x1), Mul(Number b, Variable x2)) when x1.Equals(x2)
+                (Mul(Number a, var x1), Mul(Number b, var x2)) when x1.Equals(x2)
                     => Analyze(new Mul(new Number(a.Value + b.Value), x1)),
 
-                var (left, right) when IsChanged(exp, left, right) => new Add(left, right),
+                var (left, right) when IsChanged(exp, left, right)
+                    => new Add(left, right),
 
                 _ => exp,
             };
@@ -535,20 +534,18 @@ namespace xFunc.Maths.Analyzers
                 (Div(var left, Number right), Number number)
                     => Analyze(new Mul(new Number(number.Value / right.Value), left)),
 
-                // TODO: nested complex 'x'
-
                 // ax * x
                 // xa * x
                 // x * bx
                 // x * xb
-                (Mul(Number a, Variable x1), Variable x2) when x1.Equals(x2)
+                (Mul(Number a, var x1), var x2) when x1.Equals(x2)
                     => Analyze(new Mul(a, new Pow(x1, Number.Two))),
 
                 // ax + bx
                 // ax + xb
                 // xa + bx
                 // xa + xb
-                (Mul(Number a, Variable x1), Mul(Number b, Variable x2)) when x1.Equals(x2)
+                (Mul(Number a, var x1), Mul(Number b, var x2)) when x1.Equals(x2)
                     => Analyze(new Mul(new Number(a.Value * b.Value), new Pow(x1, Number.Two))),
 
                 // x * (1 / x)
@@ -766,23 +763,21 @@ namespace xFunc.Maths.Analyzers
                 (Number number, Sub(var left, Number right))
                     => Analyze(new Sub(new Number(number.Value + right.Value), left)),
 
-                // TODO: nested complex 'x'
-
                 // x - bx
                 // x - xb
-                (Variable x1, Mul(Number b, Variable x2)) when x1.Equals(x2)
+                (var x1, Mul(Number b, var x2)) when x1.Equals(x2)
                     => Analyze(new Mul(new Number(1 - b.Value), x1)),
 
                 // ax - x
                 // xa - x
-                (Mul(Number a, Variable x1), Variable x2) when x1.Equals(x2)
+                (Mul(Number a, var x1), var x2) when x1.Equals(x2)
                     => Analyze(new Mul(new Number(a.Value - 1), x1)),
 
                 // ax - bx
                 // ax - xb
                 // xa - bx
                 // xa - xb
-                (Mul(Number a, Variable x1), Mul(Number b, Variable x2)) when x1.Equals(x2)
+                (Mul(Number a, var x1), Mul(Number b, var x2)) when x1.Equals(x2)
                     => Analyze(new Mul(new Number(a.Value - b.Value), x1)),
 
                 var (left, right) when IsChanged(exp, left, right)

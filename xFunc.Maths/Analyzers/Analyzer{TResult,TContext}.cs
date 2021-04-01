@@ -34,7 +34,7 @@ namespace xFunc.Maths.Analyzers
     /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
     /// <seealso cref="IAnalyzer{TResult,TContext}" />
     [ExcludeFromCodeCoverage]
-    public class Analyzer<TResult, TContext> : IAnalyzer<TResult, TContext>
+    public abstract class Analyzer<TResult, TContext> : IAnalyzer<TResult, TContext>
     {
         /// <inheritdoc />
         /// <exception cref="NotSupportedException">Always.</exception>

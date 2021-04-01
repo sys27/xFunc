@@ -201,11 +201,35 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             SimplifyTest(sub, expected);
         }
 
+        [Fact(DisplayName = "(x + y) - 2 * (x + y)")]
+        public void SubComplexX()
+        {
+            var sub = new Sub(
+                new Add(Variable.X, new Variable("y")),
+                new Mul(Number.Two, new Add(Variable.X, new Variable("y")))
+            );
+            var expected = new UnaryMinus(new Add(Variable.X, new Variable("y")));
+
+            SimplifyTest(sub, expected);
+        }
+
         [Fact(DisplayName = "x - (x * 2)")]
         public void SubSameVars5()
         {
             var sub = new Sub(Variable.X, new Mul(Variable.X, Number.Two));
             var expected = new UnaryMinus(Variable.X);
+
+            SimplifyTest(sub, expected);
+        }
+
+        [Fact(DisplayName = "2 * (x + y) - (x + y)")]
+        public void SubComplexX2()
+        {
+            var sub = new Sub(
+                new Mul(Number.Two, new Add(Variable.X, new Variable("y"))),
+                new Add(Variable.X, new Variable("y"))
+            );
+            var expected = new Add(Variable.X, new Variable("y"));
 
             SimplifyTest(sub, expected);
         }
@@ -236,6 +260,18 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
                 new Mul(Number.Two, Variable.X)
             );
             var expected = Variable.X;
+
+            SimplifyTest(sub, expected);
+        }
+
+        [Fact(DisplayName = "3 * (x + y) - 2 * (x + y)")]
+        public void SubComplexX3()
+        {
+            var sub = new Sub(
+                new Mul(new Number(3), new Add(Variable.X, new Variable("y"))),
+                new Mul(Number.Two, new Add(Variable.X, new Variable("y")))
+            );
+            var expected = new Add(Variable.X, new Variable("y"));
 
             SimplifyTest(sub, expected);
         }

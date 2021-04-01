@@ -220,6 +220,21 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             SimplifyTest(mul, expected);
         }
 
+        [Fact(DisplayName = "2 * (x + y) * (x + y)")]
+        public void MulComplexX()
+        {
+            var mul = new Mul(
+                new Mul(Number.Two, new Add(Variable.X, new Variable("y"))),
+                new Add(Variable.X, new Variable("y"))
+            );
+            var expected = new Mul(
+                Number.Two,
+                new Pow(new Add(Variable.X, new Variable("y")), Number.Two)
+            );
+
+            SimplifyTest(mul, expected);
+        }
+
         [Fact(DisplayName = "2x * 3x")]
         public void MulSameVar3()
         {
@@ -228,6 +243,21 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
                 new Mul(new Number(3), Variable.X)
             );
             var expected = new Mul(new Number(6), new Pow(Variable.X, Number.Two));
+
+            SimplifyTest(mul, expected);
+        }
+
+        [Fact(DisplayName = "2 * (x + y) * 3 * (x + y)")]
+        public void MulComplexX2()
+        {
+            var mul = new Mul(
+                new Mul(Number.Two, new Add(Variable.X, new Variable("y"))),
+                new Mul(new Number(3), new Add(Variable.X, new Variable("y")))
+            );
+            var expected = new Mul(
+                new Number(6),
+                new Pow(new Add(Variable.X, new Variable("y")), Number.Two)
+            );
 
             SimplifyTest(mul, expected);
         }

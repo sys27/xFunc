@@ -16,9 +16,12 @@
 using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
+using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
+using xFunc.Maths.Expressions.Units;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 using Matrix = xFunc.Maths.Expressions.Matrices.Matrix;
@@ -177,6 +180,45 @@ namespace xFunc.Tests.Expressions
             );
             var actual = exp.Execute();
             var expected = AngleValue.Gradian(30);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ExecuteNumberAndPower()
+        {
+            var exp = new Add(
+                Number.One,
+                PowerValue.Watt(1).AsExpression()
+            );
+            var actual = exp.Execute();
+            var expected = PowerValue.Watt(2);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ExecutePowerAndNumber()
+        {
+            var exp = new Add(
+                PowerValue.Watt(1).AsExpression(),
+                Number.One
+            );
+            var actual = exp.Execute();
+            var expected = PowerValue.Watt(2);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ExecutePowerAndPower()
+        {
+            var exp = new Add(
+                PowerValue.Watt(1).AsExpression(),
+                PowerValue.Watt(2).AsExpression()
+            );
+            var actual = exp.Execute();
+            var expected = PowerValue.Watt(3);
 
             Assert.Equal(expected, actual);
         }

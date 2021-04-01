@@ -17,9 +17,9 @@ using System;
 using System.Reflection;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.Trigonometric;
+using xFunc.Maths.Expressions.Units.AngleUnits;
 using Xunit;
 using Xunit.Sdk;
 

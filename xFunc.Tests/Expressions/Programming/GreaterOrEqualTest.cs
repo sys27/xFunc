@@ -14,10 +14,11 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Programming;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.Programming
@@ -30,7 +31,7 @@ namespace xFunc.Tests.Expressions.Programming
             var parameters = new ParameterCollection { new Parameter("x", 463) };
             var greaterOrEqual = new GreaterOrEqual(Variable.X, new Number(10));
 
-            Assert.True((bool) greaterOrEqual.Execute(parameters));
+            Assert.True((bool)greaterOrEqual.Execute(parameters));
         }
 
         [Fact]
@@ -39,7 +40,7 @@ namespace xFunc.Tests.Expressions.Programming
             var parameters = new ParameterCollection { new Parameter("x", 10) };
             var greaterOrEqual = new GreaterOrEqual(Variable.X, new Number(10));
 
-            Assert.True((bool) greaterOrEqual.Execute(parameters));
+            Assert.True((bool)greaterOrEqual.Execute(parameters));
         }
 
         [Fact]
@@ -48,7 +49,7 @@ namespace xFunc.Tests.Expressions.Programming
             var parameters = new ParameterCollection { new Parameter("x", 0) };
             var greaterOrEqual = new GreaterOrEqual(Variable.X, new Number(10));
 
-            Assert.False((bool) greaterOrEqual.Execute(parameters));
+            Assert.False((bool)greaterOrEqual.Execute(parameters));
         }
 
         [Fact]
@@ -57,6 +58,18 @@ namespace xFunc.Tests.Expressions.Programming
             var exp = new GreaterOrEqual(
                 AngleValue.Degree(12).AsExpression(),
                 AngleValue.Degree(10).AsExpression()
+            );
+            var result = (bool)exp.Execute();
+
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void GreaterOrEqualPowerTest()
+        {
+            var exp = new GreaterOrEqual(
+                PowerValue.Watt(12).AsExpression(),
+                PowerValue.Watt(10).AsExpression()
             );
             var result = (bool)exp.Execute();
 

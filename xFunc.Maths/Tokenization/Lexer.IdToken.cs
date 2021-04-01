@@ -75,6 +75,12 @@ namespace xFunc.Maths.Tokenization
                 kind = ImplKeyword;
             else if (Compare(id, "mod"))
                 kind = ModKeyword;
+            else if (Compare(id, "W"))
+                kind = WattKeyword;
+            else if (Compare(id, "kW"))
+                kind = KilowattKeyword;
+            else if (Compare(id, "hp"))
+                kind = HorsepowerKeyword;
 
             function = function[endIndex..];
 

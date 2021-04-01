@@ -17,27 +17,29 @@ using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 
-namespace xFunc.Maths.Expressions.Angles
+namespace xFunc.Maths.Expressions.Units
 {
     /// <summary>
-    /// Represents an angle number.
+    /// Represents an expression that contains unit number.
     /// </summary>
-    public class Angle : IExpression, IEquatable<Angle>
+    /// <typeparam name="T">The type of unit.</typeparam>
+    public abstract class Unit<T> : IExpression, IEquatable<Unit<T>>
+        where T : struct, IEquatable<T>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Angle"/> class.
+        /// Initializes a new instance of the <see cref="Unit{T}"/> class.
         /// </summary>
-        /// <param name="value">An angle.</param>
-        public Angle(AngleValue value) => Value = value;
+        /// <param name="value">A unit number.</param>
+        protected Unit(T value) => Value = value;
 
         /// <summary>
-        /// Deconstructs <see cref="Angle"/> to <see cref="AngleValue"/>.
+        /// Deconstructs <see cref="Unit{T}"/> to <typeparamref name="T"/>.
         /// </summary>
         /// <param name="value">The angle.</param>
-        public void Deconstruct(out AngleValue value) => value = Value;
+        public void Deconstruct(out T value) => value = Value;
 
         /// <inheritdoc />
-        public bool Equals(Angle? other)
+        public bool Equals(Unit<T>? other)
         {
             if (other is null)
                 return false;
@@ -45,7 +47,7 @@ namespace xFunc.Maths.Expressions.Angles
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Value == other.Value;
+            return Value.Equals(other.Value);
         }
 
         /// <inheritdoc />
@@ -57,10 +59,10 @@ namespace xFunc.Maths.Expressions.Angles
             if (ReferenceEquals(this, obj))
                 return true;
 
-            if (typeof(Angle) != obj.GetType())
+            if (this.GetType() != obj.GetType())
                 return false;
 
-            return Equals((Angle)obj);
+            return Equals((Unit<T>)obj);
         }
 
         /// <inheritdoc />
@@ -87,7 +89,7 @@ namespace xFunc.Maths.Expressions.Angles
             if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
-            return analyzer.Analyze(this);
+            return AnalyzeInternal(analyzer);
         }
 
         /// <inheritdoc />
@@ -98,12 +100,34 @@ namespace xFunc.Maths.Expressions.Angles
             if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
-            return analyzer.Analyze(this, context);
+            return AnalyzeInternal(analyzer, context);
         }
 
         /// <summary>
-        /// Gets an angle.
+        /// Analyzes the current expression.
         /// </summary>
-        public AngleValue Value { get; }
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <returns>
+        /// The analysis result.
+        /// </returns>
+        protected abstract TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer);
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The analysis result.</returns>
+        protected abstract TResult AnalyzeInternal<TResult, TContext>(
+            IAnalyzer<TResult, TContext> analyzer,
+            TContext context);
+
+        /// <summary>
+        /// Gets a value.
+        /// </summary>
+        public T Value { get; }
     }
 }

@@ -16,7 +16,9 @@
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Expressions.Angles;
+using xFunc.Maths.Expressions.Units;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 
 namespace xFunc.Maths.Expressions
 {
@@ -54,6 +56,7 @@ namespace xFunc.Maths.Expressions
             {
                 NumberValue number => number.Sign,
                 AngleValue angle => angle.Sign,
+                PowerValue power => power.Sign,
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

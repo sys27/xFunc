@@ -16,9 +16,11 @@
 using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
+using xFunc.Maths.Expressions.Units;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 
 namespace xFunc.Tests.Expressions
@@ -38,6 +40,15 @@ namespace xFunc.Tests.Expressions
         {
             var exp = new UnaryMinus(AngleValue.Degree(10).AsExpression());
             var expected = AngleValue.Degree(-10);
+
+            Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecutePowerNumberTest()
+        {
+            var exp = new UnaryMinus(PowerValue.Watt(10).AsExpression());
+            var expected = PowerValue.Watt(-10);
 
             Assert.Equal(expected, exp.Execute());
         }

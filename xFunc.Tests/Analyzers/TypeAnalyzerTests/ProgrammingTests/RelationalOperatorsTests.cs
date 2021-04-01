@@ -16,9 +16,10 @@
 using System;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Programming;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
@@ -117,6 +118,21 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [InlineData(typeof(GreaterOrEqual))]
         [InlineData(typeof(LessThan))]
         [InlineData(typeof(LessOrEqual))]
+        public void TestPower(Type type)
+        {
+            var exp = CreateBinary(type,
+                PowerValue.Watt(10).AsExpression(),
+                PowerValue.Watt(12).AsExpression()
+            );
+
+            Test(exp, ResultTypes.Boolean);
+        }
+
+        [Theory]
+        [InlineData(typeof(GreaterThan))]
+        [InlineData(typeof(GreaterOrEqual))]
+        [InlineData(typeof(LessThan))]
+        [InlineData(typeof(LessOrEqual))]
         public void TestBoolNumberException(Type type)
         {
             var exp = CreateBinary(type, Bool.True, new Number(10));
@@ -160,6 +176,36 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         {
             var exp = CreateBinary(type,
                 AngleValue.Degree(12).AsExpression(),
+                Bool.True
+            );
+
+            TestBinaryException(exp);
+        }
+
+        [Theory]
+        [InlineData(typeof(GreaterThan))]
+        [InlineData(typeof(GreaterOrEqual))]
+        [InlineData(typeof(LessThan))]
+        [InlineData(typeof(LessOrEqual))]
+        public void TestBoolPower(Type type)
+        {
+            var exp = CreateBinary(type,
+                Bool.True,
+                PowerValue.Watt(12).AsExpression()
+            );
+
+            TestBinaryException(exp);
+        }
+
+        [Theory]
+        [InlineData(typeof(GreaterThan))]
+        [InlineData(typeof(GreaterOrEqual))]
+        [InlineData(typeof(LessThan))]
+        [InlineData(typeof(LessOrEqual))]
+        public void TestPowerBool(Type type)
+        {
+            var exp = CreateBinary(type,
+                PowerValue.Watt(12).AsExpression(),
                 Bool.True
             );
 

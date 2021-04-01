@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using xFunc.Maths.Expressions.Angles;
+using xFunc.Maths.Expressions.Units.AngleUnits;
 
 namespace xFunc.Maths.Results
 {

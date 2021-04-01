@@ -15,20 +15,30 @@
 
 using System;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
+using xFunc.Maths.Expressions.Units.AngleUnits;
 using Xunit;
 
-namespace xFunc.Tests.Expressions.Angles
+namespace xFunc.Tests.Expressions.Units.AngleUnits
 {
-    public class ToNumberTest
+    public class ToGradianTest
     {
+        [Fact]
+        public void ExecuteNumberTest()
+        {
+            var exp = new ToGradian(new Number(10));
+            var actual = exp.Execute();
+            var expected = AngleValue.Gradian(10);
+
+            Assert.Equal(expected, actual);
+        }
+
         [Fact]
         public void ExecuteAngleTest()
         {
-            var exp = new ToNumber(AngleValue.Degree(10).AsExpression());
+            var exp = new ToGradian(AngleValue.Gradian(10).AsExpression());
             var actual = exp.Execute();
-            var expected = new NumberValue(10.0);
+            var expected = AngleValue.Gradian(10);
 
             Assert.Equal(expected, actual);
         }
@@ -36,13 +46,13 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void ExecuteBoolTest()
         {
-            Assert.Throws<ResultIsNotSupportedException>(() => new ToNumber(Bool.False).Execute());
+            Assert.Throws<ResultIsNotSupportedException>(() => new ToGradian(Bool.False).Execute());
         }
 
         [Fact]
         public void NullAnalyzerTest1()
         {
-            var exp = new ToNumber(new Number(10));
+            var exp = new ToGradian(new Number(10));
 
             Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
         }
@@ -50,7 +60,7 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void NullAnalyzerTest2()
         {
-            var exp = new ToNumber(new Number(10));
+            var exp = new ToGradian(new Number(10));
 
             Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
         }
@@ -58,7 +68,7 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void CloneTest()
         {
-            var exp = new ToNumber(AngleValue.Degree(10).AsExpression());
+            var exp = new ToGradian(new Number(10));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

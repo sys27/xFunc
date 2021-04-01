@@ -14,8 +14,10 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
+using xFunc.Maths.Expressions.Units;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 
 namespace xFunc.Tests.Expressions
@@ -38,6 +40,16 @@ namespace xFunc.Tests.Expressions
             var exp = new Trunc(AngleValue.Degree(5.55555555).AsExpression());
             var result = exp.Execute();
             var expected = AngleValue.Degree(5);
+
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void ExecutePowerTest()
+        {
+            var exp = new Trunc(PowerValue.Watt(5.55555555).AsExpression());
+            var result = exp.Execute();
+            var expected = PowerValue.Watt(5);
 
             Assert.Equal(expected, result);
         }

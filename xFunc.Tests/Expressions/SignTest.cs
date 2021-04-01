@@ -14,8 +14,10 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
+using xFunc.Maths.Expressions.Units;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 
 namespace xFunc.Tests.Expressions
@@ -44,6 +46,15 @@ namespace xFunc.Tests.Expressions
         public void AngleSignTest()
         {
             var exp = new Sign(AngleValue.Degree(10).AsExpression());
+            var result = exp.Execute();
+
+            Assert.Equal(new NumberValue(1.0), result);
+        }
+
+        [Fact]
+        public void PowerSignTest()
+        {
+            var exp = new Sign(PowerValue.Watt(10).AsExpression());
             var result = exp.Execute();
 
             Assert.Equal(new NumberValue(1.0), result);

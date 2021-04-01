@@ -16,10 +16,11 @@
 using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.Trigonometric;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 
 namespace xFunc.Tests.Analyzers.DifferentiatorTests
@@ -59,6 +60,14 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void AngleNumberTest()
         {
             var exp = Differentiate(new Angle(AngleValue.Degree(10)));
+
+            Assert.Equal(zero, exp);
+        }
+
+        [Fact]
+        public void PowerNumberTest()
+        {
+            var exp = Differentiate(new Power(PowerValue.Watt(10)));
 
             Assert.Equal(zero, exp);
         }

@@ -14,10 +14,11 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Programming;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.Programming
@@ -135,6 +136,18 @@ namespace xFunc.Tests.Expressions.Programming
             var equal = new NotEqual(
                 AngleValue.Degree(10).AsExpression(),
                 AngleValue.Degree(12).AsExpression()
+            );
+            var result = (bool)equal.Execute();
+
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void PowerNotEqualTest()
+        {
+            var equal = new NotEqual(
+                PowerValue.Watt(10).AsExpression(),
+                PowerValue.Watt(12).AsExpression()
             );
             var result = (bool)equal.Execute();
 

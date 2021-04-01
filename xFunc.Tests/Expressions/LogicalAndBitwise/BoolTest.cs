@@ -114,6 +114,15 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         }
 
         [Fact]
+        public void EqualsObjectTest()
+        {
+            var exp1 = Bool.True;
+            var exp2 = (object)Bool.False;
+
+            Assert.False(exp1.Equals(exp2));
+        }
+
+        [Fact]
         public void ImplicitNullToString()
         {
             Bool x = null;

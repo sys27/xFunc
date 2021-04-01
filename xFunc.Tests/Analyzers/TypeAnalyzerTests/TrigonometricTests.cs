@@ -16,10 +16,10 @@
 using System;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Trigonometric;
+using xFunc.Maths.Expressions.Units.AngleUnits;
 using Xunit;
 
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests

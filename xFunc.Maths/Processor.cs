@@ -18,7 +18,8 @@ using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using xFunc.Maths.Results;
 using static xFunc.Maths.ThrowHelpers;
 
@@ -119,6 +120,11 @@ namespace xFunc.Maths
             if (result is AngleValue angle)
             {
                 return new AngleNumberResult(angle);
+            }
+
+            if (result is PowerValue power)
+            {
+                return new PowerNumberResult(power);
             }
 
             if (result is Complex complex)

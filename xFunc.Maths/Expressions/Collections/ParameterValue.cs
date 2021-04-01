@@ -16,8 +16,9 @@
 using System;
 using System.Diagnostics;
 using System.Numerics;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Matrices;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Maths.Expressions.Collections
@@ -41,6 +42,12 @@ namespace xFunc.Maths.Expressions.Collections
 
         /// <inheritdoc cref="ParameterValue(object)"/>
         public ParameterValue(AngleValue value)
+            : this(value as object)
+        {
+        }
+
+        /// <inheritdoc cref="ParameterValue(object)"/>
+        public ParameterValue(PowerValue value)
             : this(value as object)
         {
         }
@@ -81,6 +88,7 @@ namespace xFunc.Maths.Expressions.Collections
             Debug.Assert(
                 value is NumberValue ||
                 value is AngleValue ||
+                value is PowerValue ||
                 value is Complex ||
                 value is bool ||
                 value is Vector ||
@@ -104,6 +112,10 @@ namespace xFunc.Maths.Expressions.Collections
 
         /// <inheritdoc cref="ParameterValue.op_Implicit(double)"/>
         public static implicit operator ParameterValue(AngleValue value)
+            => new ParameterValue(value);
+
+        /// <inheritdoc cref="ParameterValue.op_Implicit(double)"/>
+        public static implicit operator ParameterValue(PowerValue value)
             => new ParameterValue(value);
 
         /// <inheritdoc cref="ParameterValue.op_Implicit(double)"/>

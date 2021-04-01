@@ -17,7 +17,9 @@ using System;
 using System.Globalization;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using xFunc.Maths.Expressions.Angles;
+using xFunc.Maths.Expressions.Units;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
@@ -401,6 +403,26 @@ namespace xFunc.Maths.Expressions
             => new AngleValue(left.Number + right.Angle, right.Unit);
 
         /// <summary>
+        /// Adds <see cref="PowerValue"/> and <see cref="NumberValue"/>.
+        /// </summary>
+        /// <param name="left">The first object to add.</param>
+        /// <param name="right">The second object to add.</param>
+        /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static PowerValue operator +(PowerValue left, NumberValue right)
+            => new PowerValue(left.Value + right.Number, left.Unit);
+
+        /// <summary>
+        /// Adds <see cref="NumberValue"/> and <see cref="PowerValue"/>.
+        /// </summary>
+        /// <param name="left">The first object to add.</param>
+        /// <param name="right">The second object to add.</param>
+        /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static PowerValue operator +(NumberValue left, PowerValue right)
+            => new PowerValue(left.Number + right.Value, right.Unit);
+
+        /// <summary>
         /// Adds <see cref="Complex"/> and <see cref="NumberValue"/>.
         /// </summary>
         /// <param name="left">The first object to add.</param>
@@ -469,6 +491,26 @@ namespace xFunc.Maths.Expressions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static AngleValue operator -(AngleValue left, NumberValue right)
             => new AngleValue(left.Angle - right.Number, left.Unit);
+
+        /// <summary>
+        /// Subtracts <see cref="NumberValue"/> and <see cref="PowerValue"/>.
+        /// </summary>
+        /// <param name="left">The first object to sub.</param>
+        /// <param name="right">The second object to sub.</param>
+        /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static PowerValue operator -(NumberValue left, PowerValue right)
+            => new PowerValue(left.Number - right.Value, right.Unit);
+
+        /// <summary>
+        /// Subtracts <see cref="PowerValue"/> and <see cref="NumberValue"/>.
+        /// </summary>
+        /// <param name="left">The first object to sub.</param>
+        /// <param name="right">The second object to sub.</param>
+        /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static PowerValue operator -(PowerValue left, NumberValue right)
+            => new PowerValue(left.Value - right.Number, left.Unit);
 
         /// <summary>
         /// Subtracts <see cref="NumberValue"/> and <see cref="Complex"/>.
@@ -541,6 +583,26 @@ namespace xFunc.Maths.Expressions
             => new AngleValue(left.Number * right.Angle, right.Unit);
 
         /// <summary>
+        /// Multiplies <see cref="PowerValue"/> and <see cref="NumberValue"/>.
+        /// </summary>
+        /// <param name="left">The first object to multiply.</param>
+        /// <param name="right">The second object to multiply.</param>
+        /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static PowerValue operator *(PowerValue left, NumberValue right)
+            => new PowerValue(left.Value * right.Number, left.Unit);
+
+        /// <summary>
+        /// Multiplies <see cref="NumberValue"/> and <see cref="PowerValue"/>.
+        /// </summary>
+        /// <param name="left">The first object to multiply.</param>
+        /// <param name="right">The second object to multiply.</param>
+        /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static PowerValue operator *(NumberValue left, PowerValue right)
+            => new PowerValue(left.Number * right.Value, right.Unit);
+
+        /// <summary>
         /// Multiplies <see cref="Complex"/> and <see cref="NumberValue"/>.
         /// </summary>
         /// <param name="left">The first object to multiply.</param>
@@ -609,6 +671,26 @@ namespace xFunc.Maths.Expressions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static AngleValue operator /(NumberValue left, AngleValue right)
             => new AngleValue(left.Number / right.Angle, right.Unit);
+
+        /// <summary>
+        /// Divides <see cref="PowerValue"/> by <see cref="NumberValue"/>.
+        /// </summary>
+        /// <param name="left">The first object to divide.</param>
+        /// <param name="right">The second object to divide.</param>
+        /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static PowerValue operator /(PowerValue left, NumberValue right)
+            => new PowerValue(left.Value / right.Number, left.Unit);
+
+        /// <summary>
+        /// Divides <see cref="NumberValue"/> by <see cref="PowerValue"/>.
+        /// </summary>
+        /// <param name="left">The first object to divide.</param>
+        /// <param name="right">The second object to divide.</param>
+        /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static PowerValue operator /(NumberValue left, PowerValue right)
+            => new PowerValue(left.Number / right.Value, right.Unit);
 
         /// <summary>
         /// Divides <see cref="Complex"/> by <see cref="NumberValue"/>.

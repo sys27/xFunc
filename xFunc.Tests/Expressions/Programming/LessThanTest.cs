@@ -14,10 +14,11 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Programming;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.Programming
@@ -48,6 +49,18 @@ namespace xFunc.Tests.Expressions.Programming
             var exp = new LessThan(
                 AngleValue.Degree(10).AsExpression(),
                 AngleValue.Degree(12).AsExpression()
+            );
+            var result = (bool)exp.Execute();
+
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void LessPowerTest()
+        {
+            var exp = new LessThan(
+                PowerValue.Watt(10).AsExpression(),
+                PowerValue.Watt(12).AsExpression()
             );
             var result = (bool)exp.Execute();
 

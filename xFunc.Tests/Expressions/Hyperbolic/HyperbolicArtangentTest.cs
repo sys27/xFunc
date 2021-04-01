@@ -15,10 +15,10 @@
 
 using System.Numerics;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
+using xFunc.Maths.Expressions.Units.AngleUnits;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.Hyperbolic

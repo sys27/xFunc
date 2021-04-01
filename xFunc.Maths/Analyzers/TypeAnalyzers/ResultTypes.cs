@@ -76,6 +76,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 #pragma warning restore CA1720
 
         /// <summary>
+        /// The expression returns a power number.
+        /// </summary>
+        PowerNumber = 1 << 9,
+
+        /// <summary>
         /// The expression returns a number or a complex number.
         /// </summary>
         NumberOrComplex = Number | ComplexNumber,

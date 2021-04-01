@@ -18,8 +18,8 @@ using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Linq;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions.Units.AngleUnits;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.Collections

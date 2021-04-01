@@ -19,9 +19,10 @@ using Xunit;
 using xFunc.Maths.Results;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Expressions.Angles;
 using System;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 
 namespace xFunc.Tests
 {
@@ -131,6 +132,17 @@ namespace xFunc.Tests
 
             var result = processor.Solve<AngleNumberResult>("90 degree");
             var expected = AngleValue.Degree(90);
+
+            Assert.Equal(expected, result.Result);
+        }
+
+        [Fact]
+        public void SolvePowerTest()
+        {
+            var processor = new Processor();
+
+            var result = processor.Solve<PowerNumberResult>("10 W");
+            var expected = PowerValue.Watt(10);
 
             Assert.Equal(expected, result.Result);
         }

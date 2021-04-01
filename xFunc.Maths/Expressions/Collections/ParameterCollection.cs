@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.Numerics;
-using xFunc.Maths.Expressions.Angles;
+using xFunc.Maths.Expressions.Units.AngleUnits;
 using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Collections

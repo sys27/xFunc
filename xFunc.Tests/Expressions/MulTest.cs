@@ -16,9 +16,11 @@
 using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
+using xFunc.Maths.Expressions.Units;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 using Matrix = xFunc.Maths.Expressions.Matrices.Matrix;
@@ -297,6 +299,45 @@ namespace xFunc.Tests.Expressions
             );
             var actual = exp.Execute();
             var expected = AngleValue.Gradian(200);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void MulNumberAndPower()
+        {
+            var exp = new Mul(
+                Number.Two,
+                PowerValue.Watt(10).AsExpression()
+            );
+            var actual = exp.Execute();
+            var expected = PowerValue.Watt(20);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void MulPowerAndNumber()
+        {
+            var exp = new Mul(
+                PowerValue.Watt(10).AsExpression(),
+                Number.Two
+            );
+            var actual = exp.Execute();
+            var expected = PowerValue.Watt(20);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void MulPowerAndPower()
+        {
+            var exp = new Mul(
+                PowerValue.Watt(2).AsExpression(),
+                PowerValue.Watt(10).AsExpression()
+            );
+            var actual = exp.Execute();
+            var expected = PowerValue.Watt(20);
 
             Assert.Equal(expected, actual);
         }

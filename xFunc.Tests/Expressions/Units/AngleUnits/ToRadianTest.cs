@@ -15,20 +15,20 @@
 
 using System;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
+using xFunc.Maths.Expressions.Units.AngleUnits;
 using Xunit;
 
-namespace xFunc.Tests.Expressions.Angles
+namespace xFunc.Tests.Expressions.Units.AngleUnits
 {
-    public class ToDegreeTest
+    public class ToRadianTest
     {
         [Fact]
         public void ExecuteNumberTest()
         {
-            var exp = new ToDegree(new Number(10));
+            var exp = new ToRadian(new Number(10));
             var actual = exp.Execute();
-            var expected = AngleValue.Degree(10);
+            var expected = AngleValue.Radian(10);
 
             Assert.Equal(expected, actual);
         }
@@ -36,9 +36,9 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void ExecuteAngleTest()
         {
-            var exp = new ToDegree(AngleValue.Degree(10).AsExpression());
+            var exp = new ToRadian(AngleValue.Radian(10).AsExpression());
             var actual = exp.Execute();
-            var expected = AngleValue.Degree(10);
+            var expected = AngleValue.Radian(10);
 
             Assert.Equal(expected, actual);
         }
@@ -46,13 +46,13 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void ExecuteBoolTest()
         {
-            Assert.Throws<ResultIsNotSupportedException>(() => new ToDegree(Bool.False).Execute());
+            Assert.Throws<ResultIsNotSupportedException>(() => new ToRadian(Bool.False).Execute());
         }
 
         [Fact]
         public void NullAnalyzerTest1()
         {
-            var exp = new ToDegree(new Number(10));
+            var exp = new ToRadian(new Number(10));
 
             Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
         }
@@ -60,7 +60,7 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void NullAnalyzerTest2()
         {
-            var exp = new ToDegree(new Number(10));
+            var exp = new ToRadian(new Number(10));
 
             Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
         }
@@ -68,7 +68,7 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void CloneTest()
         {
-            var exp = new ToDegree(new Number(10));
+            var exp = new ToRadian(new Number(10));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

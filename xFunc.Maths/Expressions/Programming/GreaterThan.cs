@@ -15,7 +15,8 @@
 
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Expressions.Angles;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 
 namespace xFunc.Maths.Expressions.Programming
 {
@@ -44,6 +45,7 @@ namespace xFunc.Maths.Expressions.Programming
             {
                 (NumberValue left, NumberValue right) => left > right,
                 (AngleValue left, AngleValue right) => left > right,
+                (PowerValue left, PowerValue right) => left > right,
                 _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };
         }

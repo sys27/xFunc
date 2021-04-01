@@ -16,8 +16,10 @@
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 
-namespace xFunc.Maths.Expressions.Angles
+namespace xFunc.Maths.Expressions.Units
 {
     /// <summary>
     /// Represents the 'tonumber' function.
@@ -52,6 +54,7 @@ namespace xFunc.Maths.Expressions.Angles
             return result switch
             {
                 AngleValue angleValue => angleValue.Angle,
+                PowerValue powerValue => powerValue.Value,
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

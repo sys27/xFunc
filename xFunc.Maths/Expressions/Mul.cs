@@ -16,8 +16,10 @@
 using System.Collections.Immutable;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Matrices;
+using xFunc.Maths.Expressions.Units;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Maths.Expressions
@@ -60,6 +62,10 @@ namespace xFunc.Maths.Expressions
                 (NumberValue left, AngleValue right) => left * right,
                 (AngleValue left, NumberValue right) => left * right,
                 (AngleValue left, AngleValue right) => left * right,
+
+                (NumberValue left, PowerValue right) => left * right,
+                (PowerValue left, NumberValue right) => left * right,
+                (PowerValue left, PowerValue right) => left * right,
 
                 (NumberValue left, Complex right) => left * right,
                 (Complex left, NumberValue right) => left * right,

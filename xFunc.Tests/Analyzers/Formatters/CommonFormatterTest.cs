@@ -16,7 +16,6 @@
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -24,6 +23,9 @@ using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
+using xFunc.Maths.Expressions.Units;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 using Matrices = xFunc.Maths.Expressions.Matrices;
 
@@ -289,6 +291,14 @@ namespace xFunc.Tests.Analyzers.Formatters
             var exp = AngleValue.Degree(10).AsExpression();
 
             Assert.Equal("10 degree", exp.ToString());
+        }
+
+        [Fact]
+        public void PowerNumberTest()
+        {
+            var exp = PowerValue.Watt(10).AsExpression();
+
+            Assert.Equal("10 W", exp.ToString());
         }
 
         [Fact]

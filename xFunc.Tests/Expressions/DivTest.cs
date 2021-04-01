@@ -16,9 +16,11 @@
 using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
+using xFunc.Maths.Expressions.Units;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 
 namespace xFunc.Tests.Expressions
@@ -112,6 +114,45 @@ namespace xFunc.Tests.Expressions
             );
             var actual = exp.Execute();
             var expected = AngleValue.Gradian(2);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void DivNumberAndPower()
+        {
+            var exp = new Div(
+                new Number(10),
+                PowerValue.Watt(2).AsExpression()
+            );
+            var actual = exp.Execute();
+            var expected = PowerValue.Watt(5);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void DivPowerAndNumber()
+        {
+            var exp = new Div(
+                PowerValue.Watt(10).AsExpression(),
+                new Number(2)
+            );
+            var actual = exp.Execute();
+            var expected = PowerValue.Watt(5);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void DivPowerAndPower()
+        {
+            var exp = new Div(
+                PowerValue.Watt(10).AsExpression(),
+                PowerValue.Watt(2).AsExpression()
+            );
+            var actual = exp.Execute();
+            var expected = PowerValue.Watt(5);
 
             Assert.Equal(expected, actual);
         }

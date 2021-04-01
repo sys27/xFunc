@@ -15,7 +15,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -23,6 +22,9 @@ using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
+using xFunc.Maths.Expressions.Units;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using static xFunc.Maths.ThrowHelpers;
 
 namespace xFunc.Maths.Analyzers.TypeAnalyzers
@@ -115,7 +117,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             return ResultTypes.Number;
         }
 
-        private ResultTypes AnalyzeForNumber([NotNull] BinaryExpression exp)
+        private ResultTypes AnalyzeRelational([NotNull] BinaryExpression exp)
         {
             if (exp is null)
                 ArgNull(ExceptionArgument.exp);
@@ -130,8 +132,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 (ResultTypes.Undefined, ResultTypes.Number) or
                 (ResultTypes.AngleNumber, ResultTypes.Undefined) or
                 (ResultTypes.Undefined, ResultTypes.AngleNumber) or
+                (ResultTypes.PowerNumber, ResultTypes.Undefined) or
+                (ResultTypes.Undefined, ResultTypes.PowerNumber) or
                 (ResultTypes.Number, ResultTypes.Number) or
-                (ResultTypes.AngleNumber, ResultTypes.AngleNumber)
+                (ResultTypes.AngleNumber, ResultTypes.AngleNumber) or
+                (ResultTypes.PowerNumber, ResultTypes.PowerNumber)
                     => ResultTypes.Boolean,
 
                 (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
@@ -139,6 +144,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
                 (_, ResultTypes.AngleNumber) => ResultTypes.AngleNumber.ThrowForLeft(leftResult),
                 (ResultTypes.AngleNumber, _) => ResultTypes.AngleNumber.ThrowForRight(rightResult),
+
+                (_, ResultTypes.PowerNumber) => ResultTypes.PowerNumber.ThrowForLeft(leftResult),
+                (ResultTypes.PowerNumber, _) => ResultTypes.PowerNumber.ThrowForRight(rightResult),
 
                 _ => throw new ParameterTypeMismatchException(),
             };
@@ -211,9 +219,12 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 (ResultTypes.Undefined, ResultTypes.Boolean) or
                 (ResultTypes.AngleNumber, ResultTypes.Undefined) or
                 (ResultTypes.Undefined, ResultTypes.AngleNumber) or
+                (ResultTypes.PowerNumber, ResultTypes.Undefined) or
+                (ResultTypes.Undefined, ResultTypes.PowerNumber) or
                 (ResultTypes.Number, ResultTypes.Number) or
                 (ResultTypes.Boolean, ResultTypes.Boolean) or
-                (ResultTypes.AngleNumber, ResultTypes.AngleNumber)
+                (ResultTypes.AngleNumber, ResultTypes.AngleNumber) or
+                (ResultTypes.PowerNumber, ResultTypes.PowerNumber)
                     => ResultTypes.Boolean,
 
                 (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
@@ -224,6 +235,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
                 (_, ResultTypes.AngleNumber) => ResultTypes.AngleNumber.ThrowForLeft(leftResult),
                 (ResultTypes.AngleNumber, _) => ResultTypes.AngleNumber.ThrowForRight(rightResult),
+
+                (_, ResultTypes.PowerNumber) => ResultTypes.PowerNumber.ThrowForLeft(leftResult),
+                (ResultTypes.PowerNumber, _) => ResultTypes.PowerNumber.ThrowForRight(rightResult),
 
                 _ => throw new ParameterTypeMismatchException(),
             };
@@ -304,6 +318,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 ResultTypes.Number or ResultTypes.ComplexNumber or ResultTypes.Vector
                     => ResultTypes.Number,
                 ResultTypes.AngleNumber => ResultTypes.AngleNumber,
+                ResultTypes.PowerNumber => ResultTypes.PowerNumber,
                 _ => ResultTypes.NumberOrAngleOrComplexOrVector.ThrowFor(result),
             };
         }
@@ -329,6 +344,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 (ResultTypes.AngleNumber, ResultTypes.Number) or
                 (ResultTypes.AngleNumber, ResultTypes.AngleNumber)
                     => ResultTypes.AngleNumber,
+
+                (ResultTypes.Number, ResultTypes.PowerNumber) or
+                (ResultTypes.PowerNumber, ResultTypes.Number) or
+                (ResultTypes.PowerNumber, ResultTypes.PowerNumber)
+                    => ResultTypes.PowerNumber,
 
                 (ResultTypes.Number, ResultTypes.ComplexNumber) or
                 (ResultTypes.ComplexNumber, ResultTypes.Number) or
@@ -367,6 +387,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 ResultTypes.Undefined => ResultTypes.Undefined,
                 ResultTypes.Number => ResultTypes.Number,
                 ResultTypes.AngleNumber => ResultTypes.AngleNumber,
+                ResultTypes.PowerNumber => ResultTypes.PowerNumber,
                 _ => ResultTypes.NumberOrAngle.ThrowFor(result),
             };
         }
@@ -418,6 +439,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 (ResultTypes.AngleNumber, ResultTypes.Number) or
                 (ResultTypes.AngleNumber, ResultTypes.AngleNumber)
                     => ResultTypes.AngleNumber,
+
+                (ResultTypes.Number, ResultTypes.PowerNumber) or
+                (ResultTypes.PowerNumber, ResultTypes.Number) or
+                (ResultTypes.PowerNumber, ResultTypes.PowerNumber)
+                    => ResultTypes.PowerNumber,
 
                 (ResultTypes.Number, ResultTypes.ComplexNumber) or
                 (ResultTypes.ComplexNumber, ResultTypes.Number) or
@@ -477,6 +503,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 ResultTypes.Undefined => ResultTypes.Undefined,
                 ResultTypes.Number => ResultTypes.Number,
                 ResultTypes.AngleNumber => ResultTypes.AngleNumber,
+                ResultTypes.PowerNumber => ResultTypes.PowerNumber,
                 _ => ResultTypes.NumberOrAngle.ThrowFor(result),
             };
         }
@@ -494,6 +521,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 ResultTypes.Undefined => ResultTypes.Undefined,
                 ResultTypes.Number => ResultTypes.Number,
                 ResultTypes.AngleNumber => ResultTypes.AngleNumber,
+                ResultTypes.PowerNumber => ResultTypes.PowerNumber,
                 _ => ResultTypes.NumberOrAngle.ThrowFor(result),
             };
         }
@@ -511,6 +539,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 ResultTypes.Undefined => ResultTypes.Undefined,
                 ResultTypes.Number => ResultTypes.Number,
                 ResultTypes.AngleNumber => ResultTypes.AngleNumber,
+                ResultTypes.PowerNumber => ResultTypes.PowerNumber,
                 _ => ResultTypes.NumberOrAngle.ThrowFor(result),
             };
         }
@@ -672,6 +701,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 (ResultTypes.AngleNumber, ResultTypes.AngleNumber)
                     => ResultTypes.AngleNumber,
 
+                (ResultTypes.Number, ResultTypes.PowerNumber) or
+                (ResultTypes.PowerNumber, ResultTypes.Number) or
+                (ResultTypes.PowerNumber, ResultTypes.PowerNumber)
+                    => ResultTypes.PowerNumber,
+
                 (ResultTypes.Number, ResultTypes.ComplexNumber) or
                 (ResultTypes.ComplexNumber, ResultTypes.Number) or
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
@@ -706,10 +740,16 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         }
 
         /// <inheritdoc />
-        public virtual ResultTypes Analyze(Number exp) => CheckArgument(exp, ResultTypes.Number);
+        public virtual ResultTypes Analyze(Number exp)
+            => CheckArgument(exp, ResultTypes.Number);
 
         /// <inheritdoc />
-        public virtual ResultTypes Analyze(Angle exp) => CheckArgument(exp, ResultTypes.AngleNumber);
+        public virtual ResultTypes Analyze(Angle exp)
+            => CheckArgument(exp, ResultTypes.AngleNumber);
+
+        /// <inheritdoc />
+        public virtual ResultTypes Analyze(Power exp)
+            => CheckArgument(exp, ResultTypes.PowerNumber);
 
         /// <inheritdoc />
         public virtual ResultTypes Analyze(ToDegree exp)
@@ -733,7 +773,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return result switch
             {
-                ResultTypes.Undefined or ResultTypes.AngleNumber
+                ResultTypes.Undefined or
+                ResultTypes.AngleNumber or
+                ResultTypes.PowerNumber
                     => ResultTypes.Number,
                 _ => ResultTypes.AngleNumber.ThrowFor(result),
             };
@@ -839,6 +881,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 (ResultTypes.AngleNumber, ResultTypes.AngleNumber)
                     => ResultTypes.AngleNumber,
 
+                (ResultTypes.Number, ResultTypes.PowerNumber) or
+                (ResultTypes.PowerNumber, ResultTypes.Number) or
+                (ResultTypes.PowerNumber, ResultTypes.PowerNumber)
+                    => ResultTypes.PowerNumber,
+
                 (ResultTypes.Number, ResultTypes.ComplexNumber) or
                 (ResultTypes.ComplexNumber, ResultTypes.Number) or
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
@@ -876,6 +923,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 ResultTypes.Undefined => ResultTypes.Undefined,
                 ResultTypes.Number => ResultTypes.Number,
                 ResultTypes.AngleNumber => ResultTypes.AngleNumber,
+                ResultTypes.PowerNumber => ResultTypes.PowerNumber,
                 ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
                 _ => ResultTypes.NumberOrComplex.ThrowFor(result),
             };
@@ -910,6 +958,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 ResultTypes.Undefined => ResultTypes.Undefined,
                 ResultTypes.Number => ResultTypes.Number,
                 ResultTypes.AngleNumber => ResultTypes.AngleNumber,
+                ResultTypes.PowerNumber => ResultTypes.PowerNumber,
                 _ => ResultTypes.Number.ThrowFor(result),
             };
         }
@@ -1385,11 +1434,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
         /// <inheritdoc />
         public virtual ResultTypes Analyze(GreaterOrEqual exp)
-            => AnalyzeForNumber(exp);
+            => AnalyzeRelational(exp);
 
         /// <inheritdoc />
         public virtual ResultTypes Analyze(GreaterThan exp)
-            => AnalyzeForNumber(exp);
+            => AnalyzeRelational(exp);
 
         /// <inheritdoc />
         public virtual ResultTypes Analyze(If exp)
@@ -1414,11 +1463,11 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
         /// <inheritdoc />
         public virtual ResultTypes Analyze(LessOrEqual exp)
-            => AnalyzeForNumber(exp);
+            => AnalyzeRelational(exp);
 
         /// <inheritdoc />
         public virtual ResultTypes Analyze(LessThan exp)
-            => AnalyzeForNumber(exp);
+            => AnalyzeRelational(exp);
 
         /// <inheritdoc />
         public virtual ResultTypes Analyze(MulAssign exp)

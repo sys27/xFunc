@@ -16,9 +16,11 @@
 using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
+using xFunc.Maths.Expressions.Units;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 using Matrix = xFunc.Maths.Expressions.Matrices.Matrix;
@@ -168,6 +170,45 @@ namespace xFunc.Tests.Expressions
             );
             var actual = exp.Execute();
             var expected = AngleValue.Gradian(20);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void SubNumberAndPower()
+        {
+            var exp = new Sub(
+                Number.One,
+                PowerValue.Watt(10).AsExpression()
+            );
+            var actual = exp.Execute();
+            var expected = PowerValue.Watt(-9);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void SubPowerAndNumber()
+        {
+            var exp = new Sub(
+                PowerValue.Watt(10).AsExpression(),
+                Number.One
+            );
+            var actual = exp.Execute();
+            var expected = PowerValue.Watt(9);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void SubPowerAndPower()
+        {
+            var exp = new Sub(
+                PowerValue.Watt(20).AsExpression(),
+                PowerValue.Watt(10).AsExpression()
+            );
+            var actual = exp.Execute();
+            var expected = PowerValue.Watt(10);
 
             Assert.Equal(expected, actual);
         }

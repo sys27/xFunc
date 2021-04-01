@@ -15,8 +15,9 @@
 
 using System;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Trigonometric;
+using xFunc.Maths.Expressions.Units;
+using xFunc.Maths.Expressions.Units.AngleUnits;
 using Xunit;
 
 namespace xFunc.Tests.Analyzers.SimplifierTests

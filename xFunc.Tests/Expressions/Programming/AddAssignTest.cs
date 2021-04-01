@@ -25,6 +25,18 @@ namespace xFunc.Tests.Expressions.Programming
     public class AddAssignTest
     {
         [Fact]
+        public void NullVariableTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new AddAssign(null, null));
+        }
+
+        [Fact]
+        public void NullExpTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new AddAssign(Variable.X, null));
+        }
+
+        [Fact]
         public void AddAssignCalc()
         {
             var parameters = new ParameterCollection { new Parameter("x", 10) };

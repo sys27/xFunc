@@ -15,7 +15,9 @@
 
 using System.Numerics;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Expressions.Angles;
+using xFunc.Maths.Expressions.Units;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 
 namespace xFunc.Maths.Expressions
 {
@@ -42,6 +44,7 @@ namespace xFunc.Maths.Expressions
             {
                 NumberValue number => -number,
                 AngleValue angle => -angle,
+                PowerValue power => -power,
                 Complex complex => Complex.Negate(complex),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };

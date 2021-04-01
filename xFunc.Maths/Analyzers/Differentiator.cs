@@ -16,9 +16,10 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.Trigonometric;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using static xFunc.Maths.ThrowHelpers;
 
 namespace xFunc.Maths.Analyzers
@@ -229,6 +230,14 @@ namespace xFunc.Maths.Analyzers
 
         /// <inheritdoc />
         public override IExpression Analyze(Angle exp, DifferentiatorContext context)
+        {
+            ValidateArguments(exp, context);
+
+            return Number.Zero;
+        }
+
+        /// <inheritdoc />
+        public override IExpression Analyze(Power exp, DifferentiatorContext context)
         {
             ValidateArguments(exp, context);
 

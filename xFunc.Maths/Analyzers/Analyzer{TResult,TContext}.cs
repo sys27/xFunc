@@ -16,7 +16,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -24,6 +23,9 @@ using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
+using xFunc.Maths.Expressions.Units;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 
 namespace xFunc.Maths.Analyzers
 {
@@ -129,6 +131,10 @@ namespace xFunc.Maths.Analyzers
 
         /// <inheritdoc />
         public virtual TResult Analyze(Angle exp, TContext context)
+            => Analyze(exp as IExpression, context);
+
+        /// <inheritdoc />
+        public virtual TResult Analyze(Power exp, TContext context)
             => Analyze(exp as IExpression, context);
 
         /// <inheritdoc />

@@ -15,16 +15,18 @@
 
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
+using xFunc.Maths.Expressions.Units;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
 {
     public class DivTests : TypeAnalyzerBaseTests
     {
- [Fact]
+        [Fact]
         public void TestDivNumberNumberTest()
         {
             var exp = new Div(Number.One, Number.Two);
@@ -159,6 +161,39 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             );
 
             Test(exp, ResultTypes.AngleNumber);
+        }
+
+        [Fact]
+        public void TestDivNumberPower()
+        {
+            var exp = new Div(
+                new Number(10),
+                PowerValue.Watt(10).AsExpression()
+            );
+
+            Test(exp, ResultTypes.PowerNumber);
+        }
+
+        [Fact]
+        public void TestDivPowerNumber()
+        {
+            var exp = new Div(
+                PowerValue.Watt(10).AsExpression(),
+                new Number(10)
+            );
+
+            Test(exp, ResultTypes.PowerNumber);
+        }
+
+        [Fact]
+        public void TestDivPowerPower()
+        {
+            var exp = new Div(
+                PowerValue.Watt(10).AsExpression(),
+                PowerValue.Watt(10).AsExpression()
+            );
+
+            Test(exp, ResultTypes.PowerNumber);
         }
     }
 }

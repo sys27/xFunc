@@ -117,7 +117,7 @@ namespace xFunc.Tests.Expressions
         public void NotEqualsTest()
         {
             var left = Variable.X;
-            var right = new Variable("y");
+            var right = Variable.Y;
 
             Assert.False(left.Equals(right));
         }

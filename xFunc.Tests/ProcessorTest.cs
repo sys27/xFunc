@@ -19,9 +19,10 @@ using Xunit;
 using xFunc.Maths.Results;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Expressions.Angles;
 using System;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 
 namespace xFunc.Tests
 {
@@ -136,6 +137,17 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void SolvePowerTest()
+        {
+            var processor = new Processor();
+
+            var result = processor.Solve<PowerNumberResult>("10 W");
+            var expected = PowerValue.Watt(10);
+
+            Assert.Equal(expected, result.Result);
+        }
+
+        [Fact]
         public void ParseTest()
         {
             var processor = new Processor();
@@ -205,7 +217,7 @@ namespace xFunc.Tests
         {
             var processor = new Processor();
 
-            var y = new Variable("y");
+            var y = Variable.Y;
             var result = processor.Differentiate(new Add(y, Number.One), y);
 
             Assert.Equal(Number.One, result);
@@ -216,7 +228,7 @@ namespace xFunc.Tests
         {
             var processor = new Processor();
 
-            var y = new Variable("y");
+            var y = Variable.Y;
             var result = processor.Differentiate(new Add(y, Number.One), y, new ExpressionParameters());
 
             Assert.Equal(Number.One, result);

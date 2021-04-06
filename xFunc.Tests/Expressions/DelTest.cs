@@ -42,7 +42,7 @@ namespace xFunc.Tests.Expressions
             var exp = new Add(
                 new Add(
                     new Mul(Number.Two, Variable.X),
-                    new Pow(new Variable("y"), Number.Two)
+                    new Pow(Variable.Y, Number.Two)
                 ),
                 new Pow(new Variable("z"), new Number(3))
             );
@@ -51,7 +51,7 @@ namespace xFunc.Tests.Expressions
             var expected = new Vector(new IExpression[]
             {
                 Number.Two,
-                new Mul(Number.Two, new Variable("y")),
+                new Mul(Number.Two, Variable.Y),
                 new Mul(new Number(3), new Pow(new Variable("z"), Number.Two))
             });
 

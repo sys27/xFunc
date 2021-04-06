@@ -29,7 +29,7 @@ namespace xFunc.Tests.ParserTests
             var expected = new If(
                 new ConditionalAnd(
                     new Equal(Variable.X, Number.Zero),
-                    new NotEqual(new Variable("y"), Number.Zero)),
+                    new NotEqual(Variable.Y, Number.Zero)),
                 Number.Two,
                 new Number(8)
             );
@@ -58,7 +58,7 @@ namespace xFunc.Tests.ParserTests
             var expected = new If(
                 new ConditionalAnd(
                     new Equal(Variable.X, Number.Zero),
-                    new NotEqual(new Variable("y"), Number.Zero)
+                    new NotEqual(Variable.Y, Number.Zero)
                 ),
                 Number.Two
             );

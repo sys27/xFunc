@@ -15,10 +15,10 @@
 
 using System;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
+using xFunc.Maths.Expressions.Units.AngleUnits;
 using Xunit;
 
-namespace xFunc.Tests.Expressions.Angles
+namespace xFunc.Tests.Expressions.Units.AngleUnits
 {
     public class AngleValueTest
     {
@@ -198,6 +198,14 @@ namespace xFunc.Tests.Expressions.Angles
         }
 
         [Fact]
+        public void ToStringUnsupported()
+        {
+            var angle = new AngleValue(new NumberValue(10), (AngleUnit)10);
+
+            Assert.Throws<InvalidOperationException>(() => angle.ToString());
+        }
+
+        [Fact]
         public void DegreeToDegreeTest()
         {
             var angle = AngleValue.Degree(10);
@@ -287,6 +295,38 @@ namespace xFunc.Tests.Expressions.Angles
             Assert.Equal(expected, actual);
         }
 
+        [Fact]
+        public void ToUnsupportedUnit()
+        {
+            var angle = AngleValue.Degree(1);
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => angle.To((AngleUnit)10));
+        }
+
+        [Fact]
+        public void FromUnsupportedUnitToWatt()
+        {
+            var angle = new AngleValue(new NumberValue(10), (AngleUnit)10);
+
+            Assert.Throws<InvalidOperationException>(() => angle.ToDegree());
+        }
+
+        [Fact]
+        public void FromUnsupportedUnitToKilowatt()
+        {
+            var angle = new AngleValue(new NumberValue(10), (AngleUnit)10);
+
+            Assert.Throws<InvalidOperationException>(() => angle.ToRadian());
+        }
+
+        [Fact]
+        public void FromUnsupportedUnitToHorsepower()
+        {
+            var angle = new AngleValue(new NumberValue(10), (AngleUnit)10);
+
+            Assert.Throws<InvalidOperationException>(() => angle.ToGradian());
+        }
+
         [Theory]
         [InlineData(AngleUnit.Gradian, AngleUnit.Gradian, AngleUnit.Gradian)]
         [InlineData(AngleUnit.Radian, AngleUnit.Gradian, AngleUnit.Radian)]
@@ -327,6 +367,14 @@ namespace xFunc.Tests.Expressions.Angles
             var expected = new AngleValue(new NumberValue(expectedValue), unit);
 
             Assert.Equal(expected, normalized);
+        }
+
+        [Fact]
+        public void NormalizeUnsupportedUnit()
+        {
+            var angle = new AngleValue(new NumberValue(10), (AngleUnit)10);
+
+            Assert.Throws<InvalidOperationException>(() => angle.Normalize());
         }
     }
 }

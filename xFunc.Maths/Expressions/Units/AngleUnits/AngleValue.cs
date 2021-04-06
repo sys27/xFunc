@@ -15,7 +15,7 @@
 
 using System;
 
-namespace xFunc.Maths.Expressions.Angles
+namespace xFunc.Maths.Expressions.Units.AngleUnits
 {
     /// <summary>
     /// Represents a number with angle measurement unit.
@@ -1026,7 +1026,7 @@ namespace xFunc.Maths.Expressions.Angles
             => Radian(Math.Log(1 / number.Number + Math.Sqrt(1 / number.Number * number.Number + 1)));
 
         /// <summary>
-        /// Converts <see cref="AngleValue"/> to <see cref="Angles.Angle"/>.
+        /// Converts <see cref="AngleValue"/> to <see cref="Angle"/>.
         /// </summary>
         /// <returns>The angle number.</returns>
         public Angle AsExpression()

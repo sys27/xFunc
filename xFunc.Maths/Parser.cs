@@ -19,11 +19,12 @@ using System.Globalization;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Programming;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokenization;
 using static xFunc.Maths.ThrowHelpers;
@@ -743,6 +744,13 @@ namespace xFunc.Maths
             if (number.IsEmpty())
                 return null;
 
+            return ParseAngleUnit(ref tokenReader, ref number) ??
+                   ParsePowerUnit(ref tokenReader, ref number) ??
+                   new Number(number.NumberValue);
+        }
+
+        private IExpression? ParseAngleUnit(ref TokenReader tokenReader, ref Token number)
+        {
             if (tokenReader.Check(DegreeSymbol) || tokenReader.Check(DegreeKeyword))
                 return AngleValue.Degree(number.NumberValue).AsExpression();
 
@@ -752,7 +760,21 @@ namespace xFunc.Maths
             if (tokenReader.Check(GradianKeyword))
                 return AngleValue.Gradian(number.NumberValue).AsExpression();
 
-            return new Number(number.NumberValue);
+            return null;
+        }
+
+        private IExpression? ParsePowerUnit(ref TokenReader tokenReader, ref Token number)
+        {
+            if (tokenReader.Check(WattKeyword))
+                return PowerValue.Watt(number.NumberValue).AsExpression();
+
+            if (tokenReader.Check(KilowattKeyword))
+                return PowerValue.Kilowatt(number.NumberValue).AsExpression();
+
+            if (tokenReader.Check(HorsepowerKeyword))
+                return PowerValue.Horsepower(number.NumberValue).AsExpression();
+
+            return null;
         }
 
         private IExpression? ParseComplexNumber(ref TokenReader tokenReader)

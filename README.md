@@ -104,7 +104,7 @@ You can specified variable (default is "x") of differentiation:
 
 ```csharp
 var processor = new Processor();
-processor.Differentiate("2y", new Variable("y")); // will return "2"
+processor.Differentiate("2y", Variable.Y); // will return "2"
 processor.Differentiate("2x + sin(y)", new Variable("x")); // will return "2"
 ```
 

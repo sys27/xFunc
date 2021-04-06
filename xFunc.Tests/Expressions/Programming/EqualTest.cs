@@ -14,11 +14,12 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Programming;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.Programming
@@ -42,7 +43,7 @@ namespace xFunc.Tests.Expressions.Programming
                 new Parameter("x", 10),
                 new Parameter("y", 10)
             };
-            var equal = new Equal(Variable.X, new Variable("y"));
+            var equal = new Equal(Variable.X, Variable.Y);
             var result = (bool)equal.Execute(parameters);
 
             Assert.True(result);
@@ -65,7 +66,7 @@ namespace xFunc.Tests.Expressions.Programming
                 new Parameter("x", true),
                 new Parameter("y", true)
             };
-            var equal = new Equal(Variable.X, new Variable("y"));
+            var equal = new Equal(Variable.X, Variable.Y);
             var result = (bool)equal.Execute(parameters);
 
             Assert.True(result);
@@ -88,7 +89,7 @@ namespace xFunc.Tests.Expressions.Programming
                 new Parameter("x", true),
                 new Parameter("y", false)
             };
-            var equal = new Equal(Variable.X, new Variable("y"));
+            var equal = new Equal(Variable.X, Variable.Y);
             var result = (bool)equal.Execute(parameters);
 
             Assert.False(result);
@@ -111,7 +112,7 @@ namespace xFunc.Tests.Expressions.Programming
                 new Parameter("x", false),
                 new Parameter("y", false)
             };
-            var equal = new Equal(Variable.X, new Variable("y"));
+            var equal = new Equal(Variable.X, Variable.Y);
             var result = (bool)equal.Execute(parameters);
 
             Assert.True(result);
@@ -123,6 +124,18 @@ namespace xFunc.Tests.Expressions.Programming
             var equal = new Equal(
                 AngleValue.Degree(10).AsExpression(),
                 AngleValue.Degree(10).AsExpression()
+            );
+            var result = (bool)equal.Execute();
+
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void PowerEqualTest()
+        {
+            var equal = new Equal(
+                PowerValue.Watt(10).AsExpression(),
+                PowerValue.Watt(10).AsExpression()
             );
             var result = (bool)equal.Execute();
 

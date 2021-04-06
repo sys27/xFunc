@@ -16,9 +16,10 @@
 using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.Matrices;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
@@ -49,6 +50,15 @@ namespace xFunc.Tests.Expressions.Collections
         public void AngleValueCtor()
         {
             var value = AngleValue.Degree(1.0);
+            var x = new Parameter("x", value);
+
+            Assert.Equal(value, x.Value);
+        }
+
+        [Fact]
+        public void PowerValueCtor()
+        {
+            var value = PowerValue.Watt(1.0);
             var x = new Parameter("x", value);
 
             Assert.Equal(value, x.Value);

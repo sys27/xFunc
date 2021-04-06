@@ -16,7 +16,8 @@
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Expressions.Angles;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 
 namespace xFunc.Maths.Expressions
 {
@@ -53,6 +54,7 @@ namespace xFunc.Maths.Expressions
             {
                 NumberValue number => NumberValue.Frac(number),
                 AngleValue angle => AngleValue.Frac(angle),
+                PowerValue power => PowerValue.Frac(power),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

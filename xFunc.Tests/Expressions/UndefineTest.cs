@@ -82,7 +82,7 @@ namespace xFunc.Tests.Expressions
         public void Equal2Test()
         {
             var exp1 = new Undefine(Variable.X);
-            var exp2 = new Undefine(new Variable("y"));
+            var exp2 = new Undefine(Variable.Y);
 
             Assert.False(exp1.Equals(exp2));
         }

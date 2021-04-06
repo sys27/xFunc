@@ -14,8 +14,8 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Trigonometric;
+using xFunc.Maths.Expressions.Units.AngleUnits;
 using Xunit;
 
 namespace xFunc.Tests.Analyzers.SimplifierTests
@@ -224,12 +224,12 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void MulComplexX()
         {
             var mul = new Mul(
-                new Mul(Number.Two, new Add(Variable.X, new Variable("y"))),
-                new Add(Variable.X, new Variable("y"))
+                new Mul(Number.Two, new Add(Variable.X, Variable.Y)),
+                new Add(Variable.X, Variable.Y)
             );
             var expected = new Mul(
                 Number.Two,
-                new Pow(new Add(Variable.X, new Variable("y")), Number.Two)
+                new Pow(new Add(Variable.X, Variable.Y), Number.Two)
             );
 
             SimplifyTest(mul, expected);
@@ -251,12 +251,12 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void MulComplexX2()
         {
             var mul = new Mul(
-                new Mul(Number.Two, new Add(Variable.X, new Variable("y"))),
-                new Mul(new Number(3), new Add(Variable.X, new Variable("y")))
+                new Mul(Number.Two, new Add(Variable.X, Variable.Y)),
+                new Mul(new Number(3), new Add(Variable.X, Variable.Y))
             );
             var expected = new Mul(
                 new Number(6),
-                new Pow(new Add(Variable.X, new Variable("y")), Number.Two)
+                new Pow(new Add(Variable.X, Variable.Y), Number.Two)
             );
 
             SimplifyTest(mul, expected);

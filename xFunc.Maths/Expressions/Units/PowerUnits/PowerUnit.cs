@@ -13,26 +13,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace xFunc.Maths.Expressions.Angles
+namespace xFunc.Maths.Expressions.Units.PowerUnits
 {
     /// <summary>
-    /// Specifies a measurement of angle.
+    /// Specifies a measurement of power.
     /// </summary>
-    public enum AngleUnit
+    public enum PowerUnit
     {
         /// <summary>
-        /// Degree.
+        /// Watt (W).
         /// </summary>
-        Degree,
+        Watt,
 
         /// <summary>
-        /// Radian.
+        /// Kilowatt (kW).
         /// </summary>
-        Radian,
+        Kilowatt,
 
         /// <summary>
-        /// Gradian.
+        /// Horsepower (hp).
         /// </summary>
-        Gradian,
+        Horsepower,
     }
 }

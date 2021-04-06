@@ -16,10 +16,11 @@
 using System;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Programming;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
@@ -99,6 +100,26 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [Theory]
         [InlineData(typeof(Equal))]
         [InlineData(typeof(NotEqual))]
+        public void TestPowerAndUndefined(Type type)
+        {
+            var exp = Create(type, PowerValue.Watt(1).AsExpression(), Variable.X);
+
+            Test(exp, ResultTypes.Boolean);
+        }
+
+        [Theory]
+        [InlineData(typeof(Equal))]
+        [InlineData(typeof(NotEqual))]
+        public void TestUndefinedAndPower(Type type)
+        {
+            var exp = Create(type, Variable.X, PowerValue.Watt(1).AsExpression());
+
+            Test(exp, ResultTypes.Boolean);
+        }
+
+        [Theory]
+        [InlineData(typeof(Equal))]
+        [InlineData(typeof(NotEqual))]
         public void TestNumber(Type type)
         {
             var exp = Create(type, new Number(20), new Number(10));
@@ -124,6 +145,19 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
             var exp = Create(type,
                 AngleValue.Degree(10).AsExpression(),
                 AngleValue.Degree(10).AsExpression()
+            );
+
+            Test(exp, ResultTypes.Boolean);
+        }
+
+        [Theory]
+        [InlineData(typeof(Equal))]
+        [InlineData(typeof(NotEqual))]
+        public void TestPowerNumber(Type type)
+        {
+            var exp = Create(type,
+                PowerValue.Watt(10).AsExpression(),
+                PowerValue.Watt(10).AsExpression()
             );
 
             Test(exp, ResultTypes.Boolean);
@@ -189,6 +223,32 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         {
             var exp = CreateBinary(type,
                 AngleValue.Degree(10).AsExpression(),
+                new ComplexNumber(1, 2)
+            );
+
+            TestBinaryException(exp);
+        }
+
+        [Theory]
+        [InlineData(typeof(Equal))]
+        [InlineData(typeof(NotEqual))]
+        public void TestComplexAndPower(Type type)
+        {
+            var exp = CreateBinary(type,
+                new ComplexNumber(1, 2),
+                PowerValue.Watt(10).AsExpression()
+            );
+
+            TestBinaryException(exp);
+        }
+
+        [Theory]
+        [InlineData(typeof(Equal))]
+        [InlineData(typeof(NotEqual))]
+        public void TestPowerAndComplex(Type type)
+        {
+            var exp = CreateBinary(type,
+                PowerValue.Watt(10).AsExpression(),
                 new ComplexNumber(1, 2)
             );
 

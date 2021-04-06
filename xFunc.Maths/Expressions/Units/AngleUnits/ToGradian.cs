@@ -17,7 +17,7 @@ using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 
-namespace xFunc.Maths.Expressions.Angles
+namespace xFunc.Maths.Expressions.Units.AngleUnits
 {
     /// <summary>
     /// Represents the 'togradian' function.

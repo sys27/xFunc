@@ -181,6 +181,21 @@ namespace xFunc.Maths.Tokenization
         /// </summary>
         GradianKeyword,
 
+        /// <summary>
+        /// The 'W' token.
+        /// </summary>
+        WattKeyword,
+
+        /// <summary>
+        /// The 'kW' token.
+        /// </summary>
+        KilowattKeyword,
+
+        /// <summary>
+        /// The 'hp' token.
+        /// </summary>
+        HorsepowerKeyword,
+
         #endregion Keywords
 
         #region Operators

@@ -15,7 +15,7 @@
 
 using System.Collections.Immutable;
 using System.Numerics;
-using xFunc.Maths.Expressions.Angles;
+using xFunc.Maths.Expressions.Units.AngleUnits;
 
 namespace xFunc.Maths.Expressions.Hyperbolic
 {

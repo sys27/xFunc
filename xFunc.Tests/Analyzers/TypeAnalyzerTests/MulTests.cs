@@ -15,10 +15,12 @@
 
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
+using xFunc.Maths.Expressions.Units;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
@@ -270,6 +272,39 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             );
 
             Test(exp, ResultTypes.AngleNumber);
+        }
+
+        [Fact]
+        public void TestMulNumberPower()
+        {
+            var exp = new Mul(
+                new Number(10),
+                PowerValue.Watt(10).AsExpression()
+            );
+
+            Test(exp, ResultTypes.PowerNumber);
+        }
+
+        [Fact]
+        public void TestMulPowerNumber()
+        {
+            var exp = new Mul(
+                PowerValue.Watt(10).AsExpression(),
+                new Number(10)
+            );
+
+            Test(exp, ResultTypes.PowerNumber);
+        }
+
+        [Fact]
+        public void TestMulPowerPower()
+        {
+            var exp = new Mul(
+                PowerValue.Watt(10).AsExpression(),
+                PowerValue.Watt(10).AsExpression()
+            );
+
+            Test(exp, ResultTypes.PowerNumber);
         }
     }
 }

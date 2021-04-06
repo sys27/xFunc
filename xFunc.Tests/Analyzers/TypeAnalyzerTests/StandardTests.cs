@@ -17,10 +17,12 @@ using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
+using xFunc.Maths.Expressions.Units;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
@@ -41,6 +43,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new Abs(AngleValue.Degree(1).AsExpression());
 
             Test(exp, ResultTypes.AngleNumber);
+        }
+
+        [Fact]
+        public void TestAbsPowerNumber()
+        {
+            var exp = new Abs(PowerValue.Watt(1).AsExpression());
+
+            Test(exp, ResultTypes.PowerNumber);
         }
 
         [Fact]
@@ -89,6 +99,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new Ceil(AngleValue.Degree(5.5).AsExpression());
 
             Test(exp, ResultTypes.AngleNumber);
+        }
+
+        [Fact]
+        public void TestCeilPower()
+        {
+            var exp = new Ceil(PowerValue.Watt(5.5).AsExpression());
+
+            Test(exp, ResultTypes.PowerNumber);
         }
 
         [Fact]
@@ -236,6 +254,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestFloorPower()
+        {
+            var exp = new Floor(PowerValue.Watt(5.5).AsExpression());
+
+            Test(exp, ResultTypes.PowerNumber);
+        }
+
+        [Fact]
         public void TestFloorException()
         {
             var exp = new Floor(Bool.False);
@@ -268,6 +294,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestTruncPower()
+        {
+            var exp = new Trunc(PowerValue.Watt(5.5).AsExpression());
+
+            Test(exp, ResultTypes.PowerNumber);
+        }
+
+        [Fact]
         public void TestTruncException()
         {
             var exp = new Trunc(Bool.False);
@@ -297,6 +331,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new Frac(AngleValue.Degree(5.5).AsExpression());
 
             Test(exp, ResultTypes.AngleNumber);
+        }
+
+        [Fact]
+        public void TestFracPower()
+        {
+            var exp = new Frac(PowerValue.Watt(5.5).AsExpression());
+
+            Test(exp, ResultTypes.PowerNumber);
         }
 
         [Fact]
@@ -637,6 +679,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestUnaryMinusPower()
+        {
+            var exp = new UnaryMinus(PowerValue.Watt(10).AsExpression());
+
+            Test(exp, ResultTypes.PowerNumber);
+        }
+
+        [Fact]
         public void TestUnaryMinusComplexNumber()
         {
             var exp = new UnaryMinus(new ComplexNumber(10, 10));
@@ -692,6 +742,12 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestSignAngle()
         {
             Test(new Sign(AngleValue.Degree(10).AsExpression()), ResultTypes.AngleNumber);
+        }
+
+        [Fact]
+        public void TestSignPower()
+        {
+            Test(new Sign(PowerValue.Watt(10).AsExpression()), ResultTypes.PowerNumber);
         }
 
         [Fact]
@@ -773,9 +829,15 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestToNumber()
+        public void TestAngleToNumber()
         {
             Test(new ToNumber(AngleValue.Degree(10).AsExpression()), ResultTypes.Number);
+        }
+
+        [Fact]
+        public void TestPowerToNumber()
+        {
+            Test(new ToNumber(PowerValue.Watt(10).AsExpression()), ResultTypes.Number);
         }
 
         [Fact]

@@ -16,8 +16,9 @@
 using System.Collections.Immutable;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Matrices;
+using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.PowerUnits;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Maths.Expressions
@@ -56,6 +57,7 @@ namespace xFunc.Maths.Expressions
             {
                 NumberValue number => NumberValue.Abs(number),
                 AngleValue angle => AngleValue.Abs(angle),
+                PowerValue power => PowerValue.Abs(power),
                 Complex complex => Complex.Abs(complex),
                 Vector vector => vector.Abs(parameters),
                 _ => throw new ResultIsNotSupportedException(this, result),

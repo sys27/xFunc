@@ -17,29 +17,29 @@ using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 
-namespace xFunc.Maths.Expressions.Angles
+namespace xFunc.Maths.Expressions.Units.AngleUnits
 {
     /// <summary>
-    /// Represents the 'todegree' function.
+    /// Represents the 'toradian' function.
     /// </summary>
-    public class ToDegree : UnaryExpression
+    public class ToRadian : UnaryExpression
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ToDegree"/> class.
+        /// Initializes a new instance of the <see cref="ToRadian"/> class.
         /// </summary>
         /// <param name="argument">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        public ToDegree(IExpression argument)
+        public ToRadian(IExpression argument)
             : base(argument)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ToDegree"/> class.
+        /// Initializes a new instance of the <see cref="ToRadian"/> class.
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal ToDegree(ImmutableArray<IExpression> arguments)
+        internal ToRadian(ImmutableArray<IExpression> arguments)
             : base(arguments)
         {
         }
@@ -51,8 +51,8 @@ namespace xFunc.Maths.Expressions.Angles
 
             return result switch
             {
-                NumberValue number => AngleValue.Degree(number),
-                AngleValue angle => angle.ToDegree(),
+                NumberValue number => AngleValue.Radian(number),
+                AngleValue angle => angle.ToRadian(),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }
@@ -70,6 +70,6 @@ namespace xFunc.Maths.Expressions.Angles
 
         /// <inheritdoc />
         public override IExpression Clone(IExpression? argument = null)
-            => new ToDegree(argument ?? Argument);
+            => new ToRadian(argument ?? Argument);
     }
 }

@@ -14,7 +14,7 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Angles;
+using xFunc.Maths.Expressions.Units.AngleUnits;
 using Xunit;
 
 namespace xFunc.Tests.Analyzers.SimplifierTests
@@ -246,12 +246,12 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void AddComplexX2()
         {
             var exp = new Add(
-                new Mul(Number.Two, new Add(Variable.X, new Variable("y"))),
-                new Mul(new Number(3), new Add(Variable.X, new Variable("y")))
+                new Mul(Number.Two, new Add(Variable.X, Variable.Y)),
+                new Mul(new Number(3), new Add(Variable.X, Variable.Y))
             );
             var expected = new Mul(
                 new Number(5),
-                new Add(Variable.X, new Variable("y"))
+                new Add(Variable.X, Variable.Y)
             );
 
             SimplifyTest(exp, expected);

@@ -17,8 +17,6 @@
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Expressions.Collections;
-using xFunc.Maths.Expressions.Units;
 using xFunc.Maths.Expressions.Units.AngleUnits;
 using xFunc.Maths.Expressions.Units.PowerUnits;
 

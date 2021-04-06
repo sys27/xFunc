@@ -15,7 +15,6 @@
 
 using System.Numerics;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Expressions.Units;
 using xFunc.Maths.Expressions.Units.AngleUnits;
 using xFunc.Maths.Expressions.Units.PowerUnits;
 

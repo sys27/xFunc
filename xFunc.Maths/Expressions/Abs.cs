@@ -17,7 +17,6 @@ using System.Collections.Immutable;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Matrices;
-using xFunc.Maths.Expressions.Units;
 using xFunc.Maths.Expressions.Units.AngleUnits;
 using xFunc.Maths.Expressions.Units.PowerUnits;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;

@@ -17,7 +17,6 @@ using System;
 using System.Globalization;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using xFunc.Maths.Expressions.Units;
 using xFunc.Maths.Expressions.Units.AngleUnits;
 using xFunc.Maths.Expressions.Units.PowerUnits;
 using xFunc.Maths.Resources;

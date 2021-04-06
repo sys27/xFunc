@@ -283,7 +283,7 @@ namespace xFunc.Tests.ParserTests
                 new Add(
                     new Add(
                         new Mul(Number.Two, Variable.X),
-                        new Mul(new Number(3), new Variable("y"))
+                        new Mul(new Number(3), Variable.Y)
                     ),
                     new Mul(new Number(4), new Variable("z"))
                 )
@@ -529,7 +529,7 @@ namespace xFunc.Tests.ParserTests
                 Number.Two,
                 new Add(
                     Variable.X,
-                    new Variable("y")
+                    Variable.Y
                 )
             );
 

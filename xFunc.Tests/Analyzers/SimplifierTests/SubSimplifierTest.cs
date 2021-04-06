@@ -205,10 +205,10 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void SubComplexX()
         {
             var sub = new Sub(
-                new Add(Variable.X, new Variable("y")),
-                new Mul(Number.Two, new Add(Variable.X, new Variable("y")))
+                new Add(Variable.X, Variable.Y),
+                new Mul(Number.Two, new Add(Variable.X, Variable.Y))
             );
-            var expected = new UnaryMinus(new Add(Variable.X, new Variable("y")));
+            var expected = new UnaryMinus(new Add(Variable.X, Variable.Y));
 
             SimplifyTest(sub, expected);
         }
@@ -226,10 +226,10 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void SubComplexX2()
         {
             var sub = new Sub(
-                new Mul(Number.Two, new Add(Variable.X, new Variable("y"))),
-                new Add(Variable.X, new Variable("y"))
+                new Mul(Number.Two, new Add(Variable.X, Variable.Y)),
+                new Add(Variable.X, Variable.Y)
             );
-            var expected = new Add(Variable.X, new Variable("y"));
+            var expected = new Add(Variable.X, Variable.Y);
 
             SimplifyTest(sub, expected);
         }
@@ -268,10 +268,10 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void SubComplexX3()
         {
             var sub = new Sub(
-                new Mul(new Number(3), new Add(Variable.X, new Variable("y"))),
-                new Mul(Number.Two, new Add(Variable.X, new Variable("y")))
+                new Mul(new Number(3), new Add(Variable.X, Variable.Y)),
+                new Mul(Number.Two, new Add(Variable.X, Variable.Y))
             );
-            var expected = new Add(Variable.X, new Variable("y"));
+            var expected = new Add(Variable.X, Variable.Y);
 
             SimplifyTest(sub, expected);
         }

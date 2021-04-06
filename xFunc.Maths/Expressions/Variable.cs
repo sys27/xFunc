@@ -30,6 +30,11 @@ namespace xFunc.Maths.Expressions
         public static readonly Variable X = new Variable("x");
 
         /// <summary>
+        /// The 'y' variable.
+        /// </summary>
+        public static readonly Variable Y = new Variable("y");
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Variable"/> class.
         /// </summary>
         /// <param name="name">A name of variable.</param>

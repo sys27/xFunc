@@ -54,7 +54,7 @@ namespace xFunc.Tests.ParserTests
         public void DefineUserFuncTest()
         {
             var expected = new Define(
-                new UserFunction("func", new IExpression[] { Variable.X, new Variable("y") }),
+                new UserFunction("func", new IExpression[] { Variable.X, Variable.Y }),
                 new Sin(Variable.X));
 
             ParseTest("func(x, y) := sin(x)", expected);

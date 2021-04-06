@@ -217,7 +217,7 @@ namespace xFunc.Tests
         {
             var processor = new Processor();
 
-            var y = new Variable("y");
+            var y = Variable.Y;
             var result = processor.Differentiate(new Add(y, Number.One), y);
 
             Assert.Equal(Number.One, result);
@@ -228,7 +228,7 @@ namespace xFunc.Tests
         {
             var processor = new Processor();
 
-            var y = new Variable("y");
+            var y = Variable.Y;
             var result = processor.Differentiate(new Add(y, Number.One), y, new ExpressionParameters());
 
             Assert.Equal(Number.One, result);

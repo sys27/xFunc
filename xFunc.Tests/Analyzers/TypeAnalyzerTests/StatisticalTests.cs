@@ -38,7 +38,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [InlineData(typeof(Varp))]
         public void TestUndefined(Type type)
         {
-            var exp = Create(type, new IExpression[] { Variable.X, new Variable("y") });
+            var exp = Create(type, new IExpression[] { Variable.X, Variable.Y });
 
             Test(exp, ResultTypes.Undefined);
         }

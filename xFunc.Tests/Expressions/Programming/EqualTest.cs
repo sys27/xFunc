@@ -43,7 +43,7 @@ namespace xFunc.Tests.Expressions.Programming
                 new Parameter("x", 10),
                 new Parameter("y", 10)
             };
-            var equal = new Equal(Variable.X, new Variable("y"));
+            var equal = new Equal(Variable.X, Variable.Y);
             var result = (bool)equal.Execute(parameters);
 
             Assert.True(result);
@@ -66,7 +66,7 @@ namespace xFunc.Tests.Expressions.Programming
                 new Parameter("x", true),
                 new Parameter("y", true)
             };
-            var equal = new Equal(Variable.X, new Variable("y"));
+            var equal = new Equal(Variable.X, Variable.Y);
             var result = (bool)equal.Execute(parameters);
 
             Assert.True(result);
@@ -89,7 +89,7 @@ namespace xFunc.Tests.Expressions.Programming
                 new Parameter("x", true),
                 new Parameter("y", false)
             };
-            var equal = new Equal(Variable.X, new Variable("y"));
+            var equal = new Equal(Variable.X, Variable.Y);
             var result = (bool)equal.Execute(parameters);
 
             Assert.False(result);
@@ -112,7 +112,7 @@ namespace xFunc.Tests.Expressions.Programming
                 new Parameter("x", false),
                 new Parameter("y", false)
             };
-            var equal = new Equal(Variable.X, new Variable("y"));
+            var equal = new Equal(Variable.X, Variable.Y);
             var result = (bool)equal.Execute(parameters);
 
             Assert.True(result);

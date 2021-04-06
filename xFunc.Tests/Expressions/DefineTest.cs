@@ -151,7 +151,7 @@ namespace xFunc.Tests.Expressions
         public void EqualsDifferentOnjectsTest()
         {
             var def1 = new Define(Variable.X, Number.One);
-            var def2 = new Define(new Variable("y"), Number.Two);
+            var def2 = new Define(Variable.Y, Number.Two);
 
             Assert.False(def1.Equals(def2));
         }

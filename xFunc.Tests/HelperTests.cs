@@ -56,7 +56,7 @@ namespace xFunc.Tests
         [Fact]
         public void HasVarDiffTest2()
         {
-            var exp = new GCD(new IExpression[] { new Variable("y"), Number.Two, new Number(4) });
+            var exp = new GCD(new IExpression[] { Variable.Y, Number.Two, new Number(4) });
             var expected = Helpers.HasVariable(exp, Variable.X);
 
             Assert.False(expected);

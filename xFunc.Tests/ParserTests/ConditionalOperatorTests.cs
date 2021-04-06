@@ -26,7 +26,7 @@ namespace xFunc.Tests.ParserTests
         {
             var expected = new ConditionalAnd(
                 new Equal(Variable.X, Number.Zero),
-                new NotEqual(new Variable("y"), Number.Zero)
+                new NotEqual(Variable.Y, Number.Zero)
             );
 
             ParseTest("x == 0 && y != 0", expected);
@@ -37,7 +37,7 @@ namespace xFunc.Tests.ParserTests
         {
             var expected = new ConditionalOr(
                 new Equal(Variable.X, Number.Zero),
-                new NotEqual(new Variable("y"), Number.Zero)
+                new NotEqual(Variable.Y, Number.Zero)
             );
 
             ParseTest("x == 0 || y != 0", expected);
@@ -48,7 +48,7 @@ namespace xFunc.Tests.ParserTests
         {
             var expected = new ConditionalOr(
                 Variable.X,
-                new ConditionalAnd(new Variable("y"), new Variable("z"))
+                new ConditionalAnd(Variable.Y, new Variable("z"))
             );
 
             ParseTest("x || y && z", expected);

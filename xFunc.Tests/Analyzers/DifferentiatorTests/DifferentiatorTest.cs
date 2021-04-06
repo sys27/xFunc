@@ -93,13 +93,13 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void AbsPartialDerivativeTest1()
         {
-            var exp = new Abs(new Mul(Variable.X, new Variable("y")));
+            var exp = new Abs(new Mul(Variable.X, Variable.Y));
             var deriv = Differentiate(exp);
             var expected = new Mul(
-                new Mul(Number.One, new Variable("y")),
+                new Mul(Number.One, Variable.Y),
                 new Div(
-                    new Mul(Variable.X, new Variable("y")),
-                    new Abs(new Mul(Variable.X, new Variable("y")))
+                    new Mul(Variable.X, Variable.Y),
+                    new Abs(new Mul(Variable.X, Variable.Y))
                 )
             );
 
@@ -109,13 +109,13 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void AbsPartialDerivativeTest2()
         {
-            var exp = new Abs(new Mul(Variable.X, new Variable("y")));
-            var deriv = Differentiate(exp, new Variable("y"));
+            var exp = new Abs(new Mul(Variable.X, Variable.Y));
+            var deriv = Differentiate(exp, Variable.Y);
             var expected = new Mul(
                 new Mul(Variable.X, Number.One),
                 new Div(
-                    new Mul(Variable.X, new Variable("y")),
-                    new Abs(new Mul(Variable.X, new Variable("y")))
+                    new Mul(Variable.X, Variable.Y),
+                    new Abs(new Mul(Variable.X, Variable.Y))
                 )
             );
 
@@ -125,7 +125,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void AbsPartialDerivativeTest3()
         {
-            var deriv = Differentiate(new Abs(Variable.X), new Variable("y"));
+            var deriv = Differentiate(new Abs(Variable.X), Variable.Y);
 
             Assert.Equal(zero, deriv);
         }
@@ -160,11 +160,11 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void AddPartialDerivativeTest1()
         {
             var exp = new Add(
-                new Add(new Mul(Variable.X, new Variable("y")), Variable.X),
-                new Variable("y")
+                new Add(new Mul(Variable.X, Variable.Y), Variable.X),
+                Variable.Y
             );
             var deriv = Differentiate(exp);
-            var expected = new Add(new Mul(Number.One, new Variable("y")), Number.One);
+            var expected = new Add(new Mul(Number.One, Variable.Y), Number.One);
 
             Assert.Equal(expected, deriv);
         }
@@ -173,10 +173,10 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void AddPartialDerivativeTest2()
         {
             var exp = new Add(
-                new Add(new Mul(Variable.X, new Variable("y")), Variable.X),
-                new Variable("y")
+                new Add(new Mul(Variable.X, Variable.Y), Variable.X),
+                Variable.Y
             );
-            var deriv = Differentiate(exp, new Variable("y"));
+            var deriv = Differentiate(exp, Variable.Y);
             var expected = new Add(new Mul(Variable.X, Number.One), Number.One);
 
             Assert.Equal(expected, deriv);
@@ -186,7 +186,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void AddPartialDerivativeTest3()
         {
             var exp = new Add(Variable.X, Number.One);
-            var deriv = Differentiate(exp, new Variable("y"));
+            var deriv = Differentiate(exp, Variable.Y);
 
             Assert.Equal(zero, deriv);
         }
@@ -226,7 +226,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         {
             // (y + x ^ 2) / x
             var exp = new Div(
-                new Add(new Variable("y"), new Pow(Variable.X, Number.Two)),
+                new Add(Variable.Y, new Pow(Variable.X, Number.Two)),
                 Variable.X
             );
             var deriv = Differentiate(exp);
@@ -242,7 +242,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
                         Variable.X
                     ),
                     new Mul(
-                        new Add(new Variable("y"), new Pow(Variable.X, Number.Two)),
+                        new Add(Variable.Y, new Pow(Variable.X, Number.Two)),
                         Number.One
                     )
                 ),
@@ -255,10 +255,10 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void DivPartialDerivativeTest2()
         {
-            var exp = new Div(new Variable("y"), Variable.X);
+            var exp = new Div(Variable.Y, Variable.X);
             var deriv = Differentiate(exp);
             var expected = new Div(
-                new UnaryMinus(new Mul(new Variable("y"), Number.One)),
+                new UnaryMinus(new Mul(Variable.Y, Number.One)),
                 new Pow(Variable.X, Number.Two)
             );
 
@@ -268,8 +268,8 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void DivPartialDerivativeTest3()
         {
-            var exp = new Div(new Variable("y"), Variable.X);
-            var deriv = Differentiate(exp, new Variable("y"));
+            var exp = new Div(Variable.Y, Variable.X);
+            var deriv = Differentiate(exp, Variable.Y);
             var expected = new Div(Number.One, Variable.X);
 
             Assert.Equal(expected, deriv);
@@ -280,7 +280,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         {
             // (x + 1) / x
             var exp = new Div(new Add(Variable.X, Number.One), Variable.X);
-            var deriv = Differentiate(exp, new Variable("y"));
+            var deriv = Differentiate(exp, Variable.Y);
 
             Assert.Equal(zero, deriv);
         }
@@ -311,11 +311,11 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void ExpPartialDerivativeTest1()
         {
-            var exp = new Exp(new Mul(Variable.X, new Variable("y")));
+            var exp = new Exp(new Mul(Variable.X, Variable.Y));
             var deriv = Differentiate(exp);
             var expected = new Mul(
-                new Mul(Number.One, new Variable("y")),
-                new Exp(new Mul(Variable.X, new Variable("y")))
+                new Mul(Number.One, Variable.Y),
+                new Exp(new Mul(Variable.X, Variable.Y))
             );
 
             Assert.Equal(expected, deriv);
@@ -324,11 +324,11 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void ExpPartialDerivativeTest2()
         {
-            var exp = new Exp(new Mul(Variable.X, new Variable("y")));
-            var deriv = Differentiate(exp, new Variable("y"));
+            var exp = new Exp(new Mul(Variable.X, Variable.Y));
+            var deriv = Differentiate(exp, Variable.Y);
             var expected = new Mul(
                 new Mul(Variable.X, Number.One),
-                new Exp(new Mul(Variable.X, new Variable("y")))
+                new Exp(new Mul(Variable.X, Variable.Y))
             );
 
             Assert.Equal(expected, deriv);
@@ -338,7 +338,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void ExpPartialDerivativeTest3()
         {
             var exp = new Exp(Variable.X);
-            var deriv = Differentiate(exp, new Variable("y"));
+            var deriv = Differentiate(exp, Variable.Y);
 
             Assert.Equal(zero, deriv);
         }
@@ -360,11 +360,11 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void LnPartialDerivativeTest1()
         {
             // ln(xy)
-            var exp = new Ln(new Mul(Variable.X, new Variable("y")));
+            var exp = new Ln(new Mul(Variable.X, Variable.Y));
             var deriv = Differentiate(exp);
             var expected = new Div(
-                new Mul(Number.One, new Variable("y")),
-                new Mul(Variable.X, new Variable("y"))
+                new Mul(Number.One, Variable.Y),
+                new Mul(Variable.X, Variable.Y)
             );
 
             Assert.Equal(expected, deriv);
@@ -374,11 +374,11 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void LnPartialDerivativeTest2()
         {
             // ln(xy)
-            var exp = new Ln(new Mul(Variable.X, new Variable("y")));
-            var deriv = Differentiate(exp, new Variable("y"));
+            var exp = new Ln(new Mul(Variable.X, Variable.Y));
+            var deriv = Differentiate(exp, Variable.Y);
             var expected = new Div(
                 new Mul(Variable.X, Number.One),
-                new Mul(Variable.X, new Variable("y"))
+                new Mul(Variable.X, Variable.Y)
             );
 
             Assert.Equal(expected, deriv);
@@ -387,7 +387,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void LnPartialDerivativeTest3()
         {
-            var exp = new Ln(new Variable("y"));
+            var exp = new Ln(Variable.Y);
             var deriv = Differentiate(exp);
 
             Assert.Equal(zero, deriv);
@@ -410,12 +410,12 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void LgPartialDerivativeTest1()
         {
             // lg(2xy)
-            var exp = new Lg(new Mul(new Mul(Number.Two, Variable.X), new Variable("y")));
+            var exp = new Lg(new Mul(new Mul(Number.Two, Variable.X), Variable.Y));
             var deriv = Differentiate(exp);
             var expected = new Div(
-                new Mul(new Mul(Number.Two, Number.One), new Variable("y")),
+                new Mul(new Mul(Number.Two, Number.One), Variable.Y),
                 new Mul(
-                    new Mul(new Mul(Number.Two, Variable.X), new Variable("y")),
+                    new Mul(new Mul(Number.Two, Variable.X), Variable.Y),
                     new Ln(new Number(10))
                 )
             );
@@ -428,7 +428,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         {
             // lg(2xy)
             var exp = new Lg(Variable.X);
-            var deriv = Differentiate(exp, new Variable("y"));
+            var deriv = Differentiate(exp, Variable.Y);
 
             Assert.Equal(zero, deriv);
         }
@@ -450,12 +450,12 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void LbPartialDerivativeTest1()
         {
             // lb(2xy)
-            var exp = new Lb(new Mul(new Mul(Number.Two, Variable.X), new Variable("y")));
+            var exp = new Lb(new Mul(new Mul(Number.Two, Variable.X), Variable.Y));
             var deriv = Differentiate(exp);
             var expected = new Div(
-                new Mul(new Mul(Number.Two, Number.One), new Variable("y")),
+                new Mul(new Mul(Number.Two, Number.One), Variable.Y),
                 new Mul(
-                    new Mul(new Mul(Number.Two, Variable.X), new Variable("y")),
+                    new Mul(new Mul(Number.Two, Variable.X), Variable.Y),
                     new Ln(Number.Two)
                 )
             );
@@ -468,7 +468,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         {
             // lb(2xy)
             var exp = new Lb(Variable.X);
-            var deriv = Differentiate(exp, new Variable("y"));
+            var deriv = Differentiate(exp, Variable.Y);
 
             Assert.Equal(zero, deriv);
         }
@@ -515,7 +515,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void LogPartialDerivativeTest2()
         {
             var exp = new Log(Number.Two, Variable.X);
-            var deriv = Differentiate(exp, new Variable("y"));
+            var deriv = Differentiate(exp, Variable.Y);
 
             Assert.Equal(zero, deriv);
         }
@@ -536,11 +536,11 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
             // (x + 1) * (y + x)
             var exp = new Mul(
                 new Add(Variable.X, Number.One),
-                new Add(new Variable("y"), Variable.X)
+                new Add(Variable.Y, Variable.X)
             );
             var deriv = Differentiate(exp);
             var expected = new Add(
-                new Mul(Number.One, new Add(new Variable("y"), Variable.X)),
+                new Mul(Number.One, new Add(Variable.Y, Variable.X)),
                 new Mul(new Add(Variable.X, Number.One), Number.One)
             );
 
@@ -552,10 +552,10 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         {
             // (y + 1) * (3 + x)
             var exp = new Mul(
-                new Add(new Variable("y"), Number.One),
+                new Add(Variable.Y, Number.One),
                 new Add(new Number(3), Variable.X)
             );
-            var deriv = Differentiate(exp, new Variable("y"));
+            var deriv = Differentiate(exp, Variable.Y);
             var expected = new Mul(Number.One, new Add(new Number(3), Variable.X));
 
             Assert.Equal(expected, deriv);
@@ -567,9 +567,9 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
             // (x + 1) * (y + x)
             var exp = new Mul(
                 new Add(Variable.X, Number.One),
-                new Add(new Variable("y"), Variable.X)
+                new Add(Variable.Y, Variable.X)
             );
-            var deriv = Differentiate(exp, new Variable("y"));
+            var deriv = Differentiate(exp, Variable.Y);
             var expected = new Mul(new Add(Variable.X, Number.One), Number.One);
 
             Assert.Equal(expected, deriv);
@@ -583,7 +583,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
                 new Add(Variable.X, Number.One),
                 new Add(new Number(3), Variable.X)
             );
-            var deriv = Differentiate(exp, new Variable("y"));
+            var deriv = Differentiate(exp, Variable.Y);
 
             Assert.Equal(zero, deriv);
         }
@@ -667,14 +667,14 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void PowPartialDerivativeTest1()
         {
             // (yx) ^ 3
-            var exp = new Pow(new Mul(new Variable("y"), Variable.X), new Number(3));
+            var exp = new Pow(new Mul(Variable.Y, Variable.X), new Number(3));
             var deriv = Differentiate(exp);
             var expected = new Mul(
-                new Mul(new Variable("y"), Number.One),
+                new Mul(Variable.Y, Number.One),
                 new Mul(
                     new Number(3),
                     new Pow(
-                        new Mul(new Variable("y"), Variable.X),
+                        new Mul(Variable.Y, Variable.X),
                         new Sub(new Number(3), Number.One)
                     )
                 )
@@ -687,14 +687,14 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void PowPartialDerivativeTest2()
         {
             // (yx) ^ 3
-            var exp = new Pow(new Mul(new Variable("y"), Variable.X), new Number(3));
-            var deriv = Differentiate(exp, new Variable("y"));
+            var exp = new Pow(new Mul(Variable.Y, Variable.X), new Number(3));
+            var deriv = Differentiate(exp, Variable.Y);
             var expected = new Mul(
                 new Mul(Number.One, Variable.X),
                 new Mul(
                     new Number(3),
                     new Pow(
-                        new Mul(new Variable("y"), Variable.X),
+                        new Mul(Variable.Y, Variable.X),
                         new Sub(new Number(3), Number.One)
                     )
                 )
@@ -707,7 +707,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void PowPartialDerivativeTest3()
         {
             var exp = new Pow(Variable.X, new Number(3));
-            var deriv = Differentiate(exp, new Variable("y"));
+            var deriv = Differentiate(exp, Variable.Y);
 
             Assert.Equal(zero, deriv);
         }
@@ -734,14 +734,14 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void RootPartialDerivativeTest1()
         {
-            var exp = new Root(new Mul(Variable.X, new Variable("y")), new Number(3));
+            var exp = new Root(new Mul(Variable.X, Variable.Y), new Number(3));
             var deriv = Differentiate(exp);
             var expected = new Mul(
-                new Mul(Number.One, new Variable("y")),
+                new Mul(Number.One, Variable.Y),
                 new Mul(
                     new Div(Number.One, new Number(3)),
                     new Pow(
-                        new Mul(Variable.X, new Variable("y")),
+                        new Mul(Variable.X, Variable.Y),
                         new Sub(new Div(Number.One, new Number(3)), Number.One)
                     )
                 )
@@ -753,7 +753,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void RootPartialDerivativeTest2()
         {
-            var exp = new Root(new Variable("y"), new Number(3));
+            var exp = new Root(Variable.Y, new Number(3));
             var deriv = Differentiate(exp);
 
             Assert.Equal(zero, deriv);
@@ -777,15 +777,15 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         {
             // sqrt(2xy)
             var exp = new Sqrt(
-                new Mul(new Mul(Number.Two, Variable.X), new Variable("y"))
+                new Mul(new Mul(Number.Two, Variable.X), Variable.Y)
             );
             var deriv = Differentiate(exp);
             var expected = new Div(
-                new Mul(new Mul(Number.Two, Number.One), new Variable("y")),
+                new Mul(new Mul(Number.Two, Number.One), Variable.Y),
                 new Mul(
                     Number.Two,
                     new Sqrt(
-                        new Mul(new Mul(Number.Two, Variable.X), new Variable("y"))
+                        new Mul(new Mul(Number.Two, Variable.X), Variable.Y)
                     )
                 )
             );
@@ -796,7 +796,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void SqrtPartialDerivativeTest2()
         {
-            var exp = new Sqrt(new Variable("y"));
+            var exp = new Sqrt(Variable.Y);
             var deriv = Differentiate(exp);
 
             Assert.Equal(zero, deriv);
@@ -819,8 +819,8 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void SubPartialDerivativeTest1()
         {
-            var exp = new Sub(new Mul(Variable.X, new Variable("y")), new Variable("y"));
-            var deriv = Differentiate(exp, new Variable("y"));
+            var exp = new Sub(new Mul(Variable.X, Variable.Y), Variable.Y);
+            var deriv = Differentiate(exp, Variable.Y);
             var expected = new Sub(new Mul(Variable.X, Number.One), Number.One);
 
             Assert.Equal(expected, deriv);
@@ -829,7 +829,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void SubPartialDerivativeTest2()
         {
-            var exp = new Sub(Variable.X, new Variable("y"));
+            var exp = new Sub(Variable.X, Variable.Y);
             var deriv = Differentiate(exp);
 
             Assert.Equal(Number.One, deriv);
@@ -838,8 +838,8 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void SubPartialDerivativeTest3()
         {
-            var exp = new Sub(Variable.X, new Variable("y"));
-            var deriv = Differentiate(exp, new Variable("y"));
+            var exp = new Sub(Variable.X, Variable.Y);
+            var deriv = Differentiate(exp, Variable.Y);
             var expected = new UnaryMinus(Number.One);
 
             Assert.Equal(expected, deriv);
@@ -849,7 +849,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void SubPartialDerivativeTest4()
         {
             var exp = new Sub(Variable.X, Number.One);
-            var deriv = Differentiate(exp, new Variable("y"));
+            var deriv = Differentiate(exp, Variable.Y);
 
             Assert.Equal(zero, deriv);
         }
@@ -876,9 +876,9 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void DiffVarTest()
         {
-            var exp = new Mul(Variable.X, new Variable("y"));
+            var exp = new Mul(Variable.X, Variable.Y);
             var deriv = Differentiate(exp);
-            var expected = new Mul(Number.One, new Variable("y"));
+            var expected = new Mul(Number.One, Variable.Y);
 
             Assert.Equal(expected, deriv);
         }
@@ -886,10 +886,10 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void VarTest()
         {
-            var exp = new Variable("y");
+            var exp = Variable.Y;
             var deriv = Differentiate(exp);
 
-            Assert.Equal(new Variable("y"), deriv);
+            Assert.Equal(Variable.Y, deriv);
         }
 
         #endregion Common
@@ -922,11 +922,11 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void SinPartialDerivativeTest1()
         {
-            var exp = new Sin(new Mul(Variable.X, new Variable("y")));
+            var exp = new Sin(new Mul(Variable.X, Variable.Y));
             var deriv = Differentiate(exp);
             var expected = new Mul(
-                new Cos(new Mul(Variable.X, new Variable("y"))),
-                new Mul(Number.One, new Variable("y"))
+                new Cos(new Mul(Variable.X, Variable.Y)),
+                new Mul(Number.One, Variable.Y)
             );
 
             Assert.Equal(expected, deriv);
@@ -935,10 +935,10 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void SinPartialDerivativeTest2()
         {
-            var exp = new Sin(new Mul(Variable.X, new Variable("y")));
-            var deriv = Differentiate(exp, new Variable("y"));
+            var exp = new Sin(new Mul(Variable.X, Variable.Y));
+            var deriv = Differentiate(exp, Variable.Y);
             var expected = new Mul(
-                new Cos(new Mul(Variable.X, new Variable("y"))),
+                new Cos(new Mul(Variable.X, Variable.Y)),
                 new Mul(Variable.X, Number.One)
             );
 
@@ -948,7 +948,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void SinPartialDerivativeTest3()
         {
-            var exp = new Sin(new Variable("y"));
+            var exp = new Sin(Variable.Y);
             var deriv = Differentiate(exp);
 
             Assert.Equal(zero, deriv);
@@ -982,12 +982,12 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void CosPartialDerivativeTest1()
         {
-            var exp = new Cos(new Mul(Variable.X, new Variable("y")));
+            var exp = new Cos(new Mul(Variable.X, Variable.Y));
             var deriv = Differentiate(exp);
             var expected = new UnaryMinus(
                 new Mul(
-                    new Sin(new Mul(Variable.X, new Variable("y"))),
-                    new Mul(Number.One, new Variable("y"))
+                    new Sin(new Mul(Variable.X, Variable.Y)),
+                    new Mul(Number.One, Variable.Y)
                 )
             );
 
@@ -997,11 +997,11 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void CosPartialDerivativeTest2()
         {
-            var exp = new Cos(new Mul(Variable.X, new Variable("y")));
-            var deriv = Differentiate(exp, new Variable("y"));
+            var exp = new Cos(new Mul(Variable.X, Variable.Y));
+            var deriv = Differentiate(exp, Variable.Y);
             var expected = new UnaryMinus(
                 new Mul(
-                    new Sin(new Mul(Variable.X, new Variable("y"))),
+                    new Sin(new Mul(Variable.X, Variable.Y)),
                     new Mul(Variable.X, Number.One)
                 )
             );
@@ -1013,7 +1013,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void CosPartialDerivativeTest3()
         {
             var exp = new Cos(Variable.X);
-            var deriv = Differentiate(exp, new Variable("y"));
+            var deriv = Differentiate(exp, Variable.Y);
 
             Assert.Equal(zero, deriv);
         }
@@ -1044,11 +1044,11 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void TanPartialDerivativeTest1()
         {
-            var exp = new Tan(new Mul(Variable.X, new Variable("y")));
+            var exp = new Tan(new Mul(Variable.X, Variable.Y));
             var deriv = Differentiate(exp);
             var expected = new Div(
-                new Mul(Number.One, new Variable("y")),
-                new Pow(new Cos(new Mul(Variable.X, new Variable("y"))), Number.Two)
+                new Mul(Number.One, Variable.Y),
+                new Pow(new Cos(new Mul(Variable.X, Variable.Y)), Number.Two)
             );
 
             Assert.Equal(expected, deriv);
@@ -1057,11 +1057,11 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void TanPartialDerivativeTest2()
         {
-            var exp = new Tan(new Mul(Variable.X, new Variable("y")));
-            var deriv = Differentiate(exp, new Variable("y"));
+            var exp = new Tan(new Mul(Variable.X, Variable.Y));
+            var deriv = Differentiate(exp, Variable.Y);
             var expected = new Div(
                 new Mul(Variable.X, Number.One),
-                new Pow(new Cos(new Mul(Variable.X, new Variable("y"))), Number.Two)
+                new Pow(new Cos(new Mul(Variable.X, Variable.Y)), Number.Two)
             );
 
             Assert.Equal(expected, deriv);
@@ -1071,7 +1071,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void TanPartialDerivativeTest3()
         {
             var exp = new Tan(Variable.X);
-            var deriv = Differentiate(exp, new Variable("y"));
+            var deriv = Differentiate(exp, Variable.Y);
 
             Assert.Equal(zero, deriv);
         }
@@ -1106,12 +1106,12 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void CotPartialDerivativeTest1()
         {
-            var exp = new Cot(new Mul(Variable.X, new Variable("y")));
+            var exp = new Cot(new Mul(Variable.X, Variable.Y));
             var deriv = Differentiate(exp);
             var expected = new UnaryMinus(
                 new Div(
-                    new Mul(Number.One, new Variable("y")),
-                    new Pow(new Sin(new Mul(Variable.X, new Variable("y"))), Number.Two)
+                    new Mul(Number.One, Variable.Y),
+                    new Pow(new Sin(new Mul(Variable.X, Variable.Y)), Number.Two)
                 )
             );
 
@@ -1121,12 +1121,12 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void CotPartialDerivativeTest2()
         {
-            var exp = new Cot(new Mul(Variable.X, new Variable("y")));
-            var deriv = Differentiate(exp, new Variable("y"));
+            var exp = new Cot(new Mul(Variable.X, Variable.Y));
+            var deriv = Differentiate(exp, Variable.Y);
             var expected = new UnaryMinus(
                 new Div(
                     new Mul(Variable.X, Number.One),
-                    new Pow(new Sin(new Mul(Variable.X, new Variable("y"))), Number.Two)
+                    new Pow(new Sin(new Mul(Variable.X, Variable.Y)), Number.Two)
                 )
             );
 
@@ -1137,7 +1137,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void CotPartialDerivativeTest3()
         {
             var exp = new Cot(Variable.X);
-            var deriv = Differentiate(exp, new Variable("y"));
+            var deriv = Differentiate(exp, Variable.Y);
 
             Assert.Equal(zero, deriv);
         }
@@ -1217,14 +1217,14 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void ArcsinPartialDerivativeTest1()
         {
-            var exp = new Arcsin(new Mul(Variable.X, new Variable("y")));
+            var exp = new Arcsin(new Mul(Variable.X, Variable.Y));
             var deriv = Differentiate(exp);
             var expected = new Div(
-                new Mul(Number.One, new Variable("y")),
+                new Mul(Number.One, Variable.Y),
                 new Sqrt(
                     new Sub(
                         Number.One,
-                        new Pow(new Mul(Variable.X, new Variable("y")), Number.Two)
+                        new Pow(new Mul(Variable.X, Variable.Y), Number.Two)
                     )
                 )
             );
@@ -1235,14 +1235,14 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void ArcsinPartialDerivativeTest2()
         {
-            var exp = new Arcsin(new Mul(Variable.X, new Variable("y")));
-            var deriv = Differentiate(exp, new Variable("y"));
+            var exp = new Arcsin(new Mul(Variable.X, Variable.Y));
+            var deriv = Differentiate(exp, Variable.Y);
             var expected = new Div(
                 new Mul(Variable.X, Number.One),
                 new Sqrt(
                     new Sub(
                         Number.One,
-                        new Pow(new Mul(Variable.X, new Variable("y")), Number.Two)
+                        new Pow(new Mul(Variable.X, Variable.Y), Number.Two)
                     )
                 )
             );
@@ -1254,7 +1254,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void ArcsinPartialDerivativeTest3()
         {
             var exp = new Arcsin(Variable.X);
-            var deriv = Differentiate(exp, new Variable("y"));
+            var deriv = Differentiate(exp, Variable.Y);
 
             Assert.Equal(zero, deriv);
         }
@@ -1297,15 +1297,15 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void ArccosPartialDerivativeTest1()
         {
-            var exp = new Arccos(new Mul(Variable.X, new Variable("y")));
+            var exp = new Arccos(new Mul(Variable.X, Variable.Y));
             var deriv = Differentiate(exp);
             var expected = new UnaryMinus(
                 new Div(
-                    new Mul(Number.One, new Variable("y")),
+                    new Mul(Number.One, Variable.Y),
                     new Sqrt(
                         new Sub(
                             Number.One,
-                            new Pow(new Mul(Variable.X, new Variable("y")), Number.Two)
+                            new Pow(new Mul(Variable.X, Variable.Y), Number.Two)
                         )
                     )
                 )
@@ -1317,14 +1317,14 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void ArccosPartialDerivativeTest2()
         {
-            var exp = new Arccos(new Mul(Variable.X, new Variable("y")));
-            var deriv = Differentiate(exp, new Variable("y"));
+            var exp = new Arccos(new Mul(Variable.X, Variable.Y));
+            var deriv = Differentiate(exp, Variable.Y);
             var expected = new UnaryMinus(new Div(
                     new Mul(Variable.X, Number.One),
                     new Sqrt(
                         new Sub(
                             Number.One,
-                            new Pow(new Mul(Variable.X, new Variable("y")), Number.Two)
+                            new Pow(new Mul(Variable.X, Variable.Y), Number.Two)
                         )
                     )
                 )
@@ -1337,7 +1337,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void ArccosPartialDerivativeTest3()
         {
             var exp = new Arccos(Variable.X);
-            var deriv = Differentiate(exp, new Variable("y"));
+            var deriv = Differentiate(exp, Variable.Y);
 
             Assert.Equal(zero, deriv);
         }
@@ -1374,13 +1374,13 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void ArctanPartialDerivativeTest1()
         {
-            var exp = new Arctan(new Mul(Variable.X, new Variable("y")));
+            var exp = new Arctan(new Mul(Variable.X, Variable.Y));
             var deriv = Differentiate(exp);
             var expected = new Div(
-                new Mul(Number.One, new Variable("y")),
+                new Mul(Number.One, Variable.Y),
                 new Add(
                     Number.One,
-                    new Pow(new Mul(Variable.X, new Variable("y")), Number.Two)
+                    new Pow(new Mul(Variable.X, Variable.Y), Number.Two)
                 )
             );
 
@@ -1390,13 +1390,13 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void ArctanPartialDerivativeTest2()
         {
-            var exp = new Arctan(new Mul(Variable.X, new Variable("y")));
-            var deriv = Differentiate(exp, new Variable("y"));
+            var exp = new Arctan(new Mul(Variable.X, Variable.Y));
+            var deriv = Differentiate(exp, Variable.Y);
             var expected = new Div(
                 new Mul(Variable.X, Number.One),
                 new Add(
                     Number.One,
-                    new Pow(new Mul(Variable.X, new Variable("y")), Number.Two)
+                    new Pow(new Mul(Variable.X, Variable.Y), Number.Two)
                 )
             );
 
@@ -1407,7 +1407,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void ArctanPartialDerivativeTest3()
         {
             var exp = new Arctan(Variable.X);
-            var deriv = Differentiate(exp, new Variable("y"));
+            var deriv = Differentiate(exp, Variable.Y);
 
             Assert.Equal(zero, deriv);
         }
@@ -1448,13 +1448,13 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void ArccotPartialDerivativeTest1()
         {
-            var exp = new Arccot(new Mul(Variable.X, new Variable("y")));
+            var exp = new Arccot(new Mul(Variable.X, Variable.Y));
             var deriv = Differentiate(exp);
             var expected = new UnaryMinus(new Div(
-                    new Mul(Number.One, new Variable("y")),
+                    new Mul(Number.One, Variable.Y),
                     new Add(
                         Number.One,
-                        new Pow(new Mul(Variable.X, new Variable("y")), Number.Two))
+                        new Pow(new Mul(Variable.X, Variable.Y), Number.Two))
                 )
             );
 
@@ -1464,14 +1464,14 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         [Fact]
         public void ArccotPartialDerivativeTest2()
         {
-            var exp = new Arccot(new Mul(Variable.X, new Variable("y")));
-            var deriv = Differentiate(exp, new Variable("y"));
+            var exp = new Arccot(new Mul(Variable.X, Variable.Y));
+            var deriv = Differentiate(exp, Variable.Y);
             var expected = new UnaryMinus(
                 new Div(
                     new Mul(Variable.X, Number.One),
                     new Add(
                         Number.One,
-                        new Pow(new Mul(Variable.X, new Variable("y")), Number.Two)
+                        new Pow(new Mul(Variable.X, Variable.Y), Number.Two)
                     )
                 )
             );
@@ -1483,7 +1483,7 @@ namespace xFunc.Tests.Analyzers.DifferentiatorTests
         public void ArccotPartialDerivativeTest3()
         {
             var exp = new Arccot(Variable.X);
-            var deriv = Differentiate(exp, new Variable("y"));
+            var deriv = Differentiate(exp, Variable.Y);
 
             Assert.Equal(zero, deriv);
         }

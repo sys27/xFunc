@@ -802,8 +802,8 @@ namespace xFunc.Maths
 
                 var magnitudeNumber = magnitude.NumberValue;
                 var sign = phaseSign.Is(MinusOperator) ? -1 : 1;
-                var phaseNumber = phase.NumberValue * sign;
-                var complex = Complex.FromPolarCoordinates(magnitudeNumber, phaseNumber);
+                var phaseNumber = AngleValue.Degree(phase.NumberValue * sign).ToRadian();
+                var complex = Complex.FromPolarCoordinates(magnitudeNumber, phaseNumber.Angle.Number);
 
                 return new ComplexNumber(complex);
             });

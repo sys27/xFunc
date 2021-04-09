@@ -150,7 +150,7 @@ namespace xFunc.Tests.ParserTests
         [InlineData("10∠+0.78539816339744828°")]
         public void ComplexFromPolarTest(string exp)
         {
-            var complex = Complex.FromPolarCoordinates(10, 45 * Math.PI / 180);
+            var complex = Complex.FromPolarCoordinates(10, 0.78539816339744828 * Math.PI / 180);
             var expected = new ComplexNumber(complex);
 
             ParseTest(exp, expected);
@@ -161,7 +161,7 @@ namespace xFunc.Tests.ParserTests
         [InlineData("+10∠-7.1°")]
         public void ComplexFromPolarNegativePhaseTest(string exp)
         {
-            var complex = Complex.FromPolarCoordinates(10, -7.1);
+            var complex = Complex.FromPolarCoordinates(10, -7.1 * Math.PI / 180);
             var expected = new ComplexNumber(complex);
 
             ParseTest(exp, expected);
@@ -170,7 +170,7 @@ namespace xFunc.Tests.ParserTests
         [Fact]
         public void ComplexFromPolarNegativeMagnitudeTest()
         {
-            var complex = Complex.FromPolarCoordinates(10, 7.1);
+            var complex = Complex.FromPolarCoordinates(10, 7.1 * Math.PI / 180);
             var expected = new UnaryMinus(new ComplexNumber(complex));
 
             ParseTest("-10∠7.1°", expected);

@@ -76,8 +76,8 @@ namespace xFunc.Maths
                 // read from enumerator and write to buffer
                 if (readIndex == writeIndex)
                 {
-                    var result = lexer.MoveNext();
-                    if (!result)
+                    var hasNextItem = lexer.MoveNext();
+                    if (!hasNextItem)
                         IsEnd = true;
 
                     if (scopeCount == 0)

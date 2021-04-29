@@ -643,7 +643,7 @@ namespace xFunc.Maths
             });
 
         private IExpression? ParseOperand(ref TokenReader tokenReader)
-            => ParseComplexNumber(ref tokenReader) ??
+            => ParsePolarComplexNumber(ref tokenReader) ??
                ParseNumber(ref tokenReader) ??
                ParseIf(ref tokenReader) ??
                ParseFunctionOrVariable(ref tokenReader) ??
@@ -777,7 +777,7 @@ namespace xFunc.Maths
             return null;
         }
 
-        private IExpression? ParseComplexNumber(ref TokenReader tokenReader)
+        private IExpression? ParsePolarComplexNumber(ref TokenReader tokenReader)
             => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
             {
                 // plus symbol can be ignored

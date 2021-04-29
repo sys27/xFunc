@@ -49,10 +49,8 @@ namespace xFunc.Maths.Tokenization
         /// </returns>
         public bool MoveNext()
         {
-            while (function.Length > 0)
+            while (HasSymbols())
             {
-                SkipWhiteSpaces();
-
                 var result = CreateNumberToken() ||
                              CreateIdToken() ||
                              CreateOperatorToken() ||
@@ -66,6 +64,18 @@ namespace xFunc.Maths.Tokenization
 
             Current = default;
             return false;
+        }
+
+        private bool HasSymbols()
+        {
+            var index = 0;
+            while (index < function.Length && char.IsWhiteSpace(function[index]))
+                index++;
+
+            if (index > 0)
+                function = function[index..];
+
+            return function.Length > 0;
         }
 
         /// <summary>

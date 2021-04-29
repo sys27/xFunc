@@ -705,5 +705,14 @@ namespace xFunc.Tests.ParserTests
         [Fact]
         public void ToHexTest()
             => ParseTest("tohex(10)", new ToHex(new Number(10)));
+
+        [Fact]
+        public void LeadingSpaces()
+            => ParseTest("  1", Number.One);
+
+        [Fact]
+        public void TrailingSpaces()
+            => ParseTest("1  ", Number.One);
+
     }
 }

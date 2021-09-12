@@ -43,7 +43,7 @@ namespace xFunc.Maths.Tokenization
 
             function = function[1..];
 
-            Current = new Token(symbol);
+            Current = Token.Create(symbol);
             return true;
         }
     }

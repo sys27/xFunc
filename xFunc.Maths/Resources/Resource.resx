@@ -211,4 +211,7 @@
   <data name="MissingExpParseException" xml:space="preserve">
     <value>Cannot parse an expression after the comma symbol.</value>
   </data>
+  <data name="StringTokenizeException" xml:space="preserve">
+    <value>Cannot find the end of string expression.</value>
+  </data>
 </root>

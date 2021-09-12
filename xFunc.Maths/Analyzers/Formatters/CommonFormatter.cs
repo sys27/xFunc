@@ -274,6 +274,10 @@ namespace xFunc.Maths.Analyzers.Formatters
         public virtual string Analyze(ToHex exp)
             => ToString(exp, "tohex({0})");
 
+        /// <inheritdoc />
+        public virtual string Analyze(StringExpression exp)
+            => $"'{exp.Value}'";
+
         #endregion Standard
 
         #region Matrix

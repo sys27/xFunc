@@ -104,9 +104,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         }
 
         /// <inheritdoc />
-        public override int GetHashCode() => HashCode.Combine(Value);
-
-        /// <inheritdoc />
         public string ToString(IFormatter formatter) => Analyze(formatter);
 
         /// <inheritdoc />

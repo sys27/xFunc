@@ -17,29 +17,28 @@ using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 
-namespace xFunc.Maths.Expressions.Units
+namespace xFunc.Maths.Expressions
 {
     /// <summary>
-    /// Represents an expression that contains unit number.
+    /// Represents a string.
     /// </summary>
-    /// <typeparam name="T">The type of unit.</typeparam>
-    public abstract class Unit<T> : IExpression, IEquatable<Unit<T>>
-        where T : struct, IEquatable<T>
+    public class StringExpression : IExpression, IEquatable<StringExpression>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Unit{T}"/> class.
+        /// Initializes a new instance of the <see cref="StringExpression"/> class.
         /// </summary>
-        /// <param name="value">A unit number.</param>
-        protected Unit(T value) => Value = value;
+        /// <param name="value">A string.</param>
+        public StringExpression(string value)
+            => Value = value ?? throw new ArgumentNullException(nameof(value));
 
         /// <summary>
-        /// Deconstructs <see cref="Unit{T}"/> to <typeparamref name="T"/>.
+        /// Deconstructs <see cref="StringExpression"/> to <see cref="double"/>.
         /// </summary>
-        /// <param name="value">The angle.</param>
-        public void Deconstruct(out T value) => value = Value;
+        /// <param name="value">The string.</param>
+        public void Deconstruct(out string value) => value = Value;
 
         /// <inheritdoc />
-        public bool Equals(Unit<T>? other)
+        public bool Equals(StringExpression? other)
         {
             if (other is null)
                 return false;
@@ -47,7 +46,7 @@ namespace xFunc.Maths.Expressions.Units
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Value.Equals(other.Value);
+            return Value == other.Value;
         }
 
         /// <inheritdoc />
@@ -59,10 +58,10 @@ namespace xFunc.Maths.Expressions.Units
             if (ReferenceEquals(this, obj))
                 return true;
 
-            if (this.GetType() != obj.GetType())
+            if (typeof(StringExpression) != obj.GetType())
                 return false;
 
-            return Equals((Unit<T>)obj);
+            return Equals((StringExpression)obj);
         }
 
         /// <inheritdoc />
@@ -85,7 +84,7 @@ namespace xFunc.Maths.Expressions.Units
             if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
-            return AnalyzeInternal(analyzer);
+            return analyzer.Analyze(this);
         }
 
         /// <inheritdoc />
@@ -96,34 +95,12 @@ namespace xFunc.Maths.Expressions.Units
             if (analyzer is null)
                 throw new ArgumentNullException(nameof(analyzer));
 
-            return AnalyzeInternal(analyzer, context);
+            return analyzer.Analyze(this, context);
         }
 
         /// <summary>
-        /// Analyzes the current expression.
+        /// Gets a string.
         /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <returns>
-        /// The analysis result.
-        /// </returns>
-        protected abstract TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer);
-
-        /// <summary>
-        /// Analyzes the current expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
-        /// <param name="context">The context.</param>
-        /// <returns>The analysis result.</returns>
-        protected abstract TResult AnalyzeInternal<TResult, TContext>(
-            IAnalyzer<TResult, TContext> analyzer,
-            TContext context);
-
-        /// <summary>
-        /// Gets a value.
-        /// </summary>
-        public T Value { get; }
+        public string Value { get; }
     }
 }

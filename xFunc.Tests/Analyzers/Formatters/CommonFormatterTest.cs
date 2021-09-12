@@ -493,6 +493,14 @@ namespace xFunc.Tests.Analyzers.Formatters
             Assert.Equal("{Delegate Expression}", exp.ToString());
         }
 
+        [Fact]
+        public void StringExpressionTest()
+        {
+            var exp = new StringExpression("hello");
+
+            Assert.Equal("'hello'", exp.ToString());
+        }
+
         #endregion Common
 
         #region Complex Numbers

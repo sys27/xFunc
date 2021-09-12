@@ -23,7 +23,7 @@ namespace xFunc.Tests.ParserTests
     {
         [Fact]
         public void NumberFormatTest()
-            => ErrorTest<TokenizeException>("0.");
+            => ParseErrorTest<TokenizeException>("0.");
 
         [Theory]
         [InlineData("1.2345E-10", 0.00000000012345)]

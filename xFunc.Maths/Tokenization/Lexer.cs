@@ -54,7 +54,8 @@ namespace xFunc.Maths.Tokenization
                 var result = CreateNumberToken() ||
                              CreateIdToken() ||
                              CreateOperatorToken() ||
-                             CreateSymbol();
+                             CreateSymbol() ||
+                             CreateStringToken();
 
                 if (!result)
                     ThrowHelpers.NotSupportedSymbol(function[0]);

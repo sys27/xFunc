@@ -42,11 +42,11 @@ namespace xFunc.Tests.ParserTests
         [InlineData(null)]
         [InlineData("")]
         public void ParseNull(string function)
-            => ErrorTest<ArgumentNullException>(function);
+            => ParseErrorTest<ArgumentNullException>(function);
 
         [Fact]
         public void NotSupportedSymbol()
-            => ErrorTest<TokenizeException>("@");
+            => ParseErrorTest<TokenizeException>("@");
 
         [Theory]
         [InlineData("\t2 + 2")]
@@ -182,7 +182,7 @@ namespace xFunc.Tests.ParserTests
 
         [Fact]
         public void MatrixWithDiffVectorSizeTest()
-            => ErrorTest<MatrixIsInvalidException>("{{2, 3}, {4, 7, 2}}");
+            => ParseErrorTest<MatrixIsInvalidException>("{{2, 3}, {4, 7, 2}}");
 
         [Fact]
         public void TooMuchParamsTest()
@@ -483,7 +483,7 @@ namespace xFunc.Tests.ParserTests
 
         [Fact]
         public void RoundNotEnoughParameters()
-            => ErrorTest<ArgumentException>("round()");
+            => ParseErrorTest<ArgumentException>("round()");
 
         [Fact]
         public void NotEnoughParamsTest()

@@ -975,6 +975,10 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(ToHex exp)
             => CheckNumericConversion(exp);
 
+        /// <inheritdoc />
+        public virtual ResultTypes Analyze(StringExpression exp)
+            => CheckArgument(exp, ResultTypes.String);
+
         #endregion Standard
 
         #region Matrix

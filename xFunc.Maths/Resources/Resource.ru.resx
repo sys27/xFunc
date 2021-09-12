@@ -211,4 +211,7 @@
   <data name="MissingExpParseException" xml:space="preserve">
     <value>Выражение не может быть распарсено после символа запятой.</value>
   </data>
+  <data name="StringTokenizeException" xml:space="preserve">
+    <value>Конец строки не найден.</value>
+  </data>
 </root>

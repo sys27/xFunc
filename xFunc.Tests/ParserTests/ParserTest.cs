@@ -32,11 +32,15 @@ namespace xFunc.Tests.ParserTests
     {
         [Fact]
         public void DifferentiatorNull()
-            => Assert.Throws<ArgumentNullException>(() => new Parser(null, null));
+            => Assert.Throws<ArgumentNullException>(() => new Parser(null, null, null));
 
         [Fact]
         public void SimplifierNull()
-            => Assert.Throws<ArgumentNullException>(() => new Parser(new Differentiator(), null));
+            => Assert.Throws<ArgumentNullException>(() => new Parser(new Differentiator(), null, null));
+
+        [Fact]
+        public void ConverterNull()
+            => Assert.Throws<ArgumentNullException>(() => new Parser(new Differentiator(), new Simplifier(), null));
 
         [Theory]
         [InlineData(null)]

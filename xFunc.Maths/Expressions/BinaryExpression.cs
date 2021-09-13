@@ -76,9 +76,9 @@ namespace xFunc.Maths.Expressions
             if (obj is null || GetType() != obj.GetType())
                 return false;
 
-            var exp = (BinaryExpression)obj;
+            var (left, right) = (BinaryExpression)obj;
 
-            return Left.Equals(exp.Left) && Right.Equals(exp.Right);
+            return Left.Equals(left) && Right.Equals(right);
         }
 
         /// <inheritdoc />

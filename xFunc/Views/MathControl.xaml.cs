@@ -22,6 +22,7 @@ using xFunc.Maths;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions.Units;
 using xFunc.Presenters;
 using xFunc.Resources;
 using xFunc.ViewModels;
@@ -131,6 +132,14 @@ namespace xFunc.Views
             catch (NotSupportedException)
             {
                 Status = Resource.NotSupportedOperationError;
+            }
+            catch (ValueIsNotSupportedException vinse)
+            {
+                Status = vinse.Message;
+            }
+            catch (UnitIsNotSupportedException uinse)
+            {
+                Status = uinse.Message;
             }
 
             mathExpressionBox.Text = string.Empty;

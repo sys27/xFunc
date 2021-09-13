@@ -278,6 +278,15 @@ namespace xFunc.Maths.Analyzers.Formatters
         public virtual string Analyze(StringExpression exp)
             => $"'{exp.Value}'";
 
+        /// <inheritdoc />
+        public virtual string Analyze(Convert exp)
+        {
+            var value = exp.Value.Analyze(this);
+            var unit = exp.Unit.Analyze(this);
+
+            return $"convert({value}, {unit})";
+        }
+
         #endregion Standard
 
         #region Matrix

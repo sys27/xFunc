@@ -21,6 +21,7 @@ using xFunc.Maths;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions.Units;
 
 namespace xFunc.DotnetTool
 {
@@ -138,6 +139,14 @@ namespace xFunc.DotnetTool
             {
                 PrintError(options, nse);
             }
+            catch (ValueIsNotSupportedException vinse)
+            {
+                PrintError(options, vinse);
+            }
+            catch (UnitIsNotSupportedException uinse)
+            {
+                PrintError(options, uinse);
+            }
         }
 
         private static void PrintError(DebugInfoOptions options, Exception e)
@@ -149,12 +158,10 @@ namespace xFunc.DotnetTool
         }
 
         public static void Main(string[] args)
-        {
-            CommandLine.Parser.Default
+            => CommandLine.Parser.Default
                 .ParseArguments<ParseOptions, SolveOptions, InteractiveOptions>(args)
                 .WithParsed<ParseOptions>(Parse)
                 .WithParsed<SolveOptions>(Solve)
                 .WithParsed<InteractiveOptions>(Interactive);
-        }
     }
 }

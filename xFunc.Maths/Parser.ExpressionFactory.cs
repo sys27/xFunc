@@ -137,6 +137,8 @@ namespace xFunc.Maths
                 "tooct" => new ToOct(arguments),
                 "tohex" => new ToHex(arguments),
 
+                "convert" => new Convert(converter, arguments),
+
                 var id => new UserFunction(id, arguments),
             };
         }

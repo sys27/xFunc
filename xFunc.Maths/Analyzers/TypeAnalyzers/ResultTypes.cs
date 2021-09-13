@@ -104,5 +104,10 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// The expression returns a number or a vector or a matrix.
         /// </summary>
         NumberOrVectorOrMatrix = Number | Vector | Matrix,
+
+        /// <summary>
+        /// The expression returns any type of number.
+        /// </summary>
+        Numbers = Number | AngleNumber | PowerNumber,
     }
 }

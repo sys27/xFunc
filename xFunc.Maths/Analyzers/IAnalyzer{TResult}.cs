@@ -343,6 +343,13 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         TResult Analyze(StringExpression exp);
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        TResult Analyze(Convert exp);
+
         #endregion Standard
 
         #region Matrix

@@ -32,7 +32,7 @@ namespace xFunc.Maths.Analyzers
     /// </summary>
     /// <typeparam name="TResult">The type of the result of analysis.</typeparam>
     /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
-    public interface IAnalyzer<out TResult, TContext>
+    public interface IAnalyzer<out TResult, in TContext>
     {
         /// <summary>
         /// Analyzes the specified expression.
@@ -387,6 +387,14 @@ namespace xFunc.Maths.Analyzers
         /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
         TResult Analyze(StringExpression exp, TContext context);
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
+        TResult Analyze(Convert exp, TContext context);
 
         #endregion Standard
 

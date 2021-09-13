@@ -24,6 +24,7 @@ using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.Converters;
 using xFunc.Maths.Expressions.Units.PowerUnits;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokenization;
@@ -40,12 +41,13 @@ namespace xFunc.Maths
     {
         private readonly IDifferentiator differentiator;
         private readonly ISimplifier simplifier;
+        private readonly IConverter converter;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Parser"/> class with default implementations of <see cref="IDifferentiator"/> and <see cref="ISimplifier" />.
         /// </summary>
         public Parser()
-            : this(new Differentiator(), new Simplifier())
+            : this(new Differentiator(), new Simplifier(), new Converter())
         {
         }
 
@@ -54,15 +56,19 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="differentiator">The differentiator.</param>
         /// <param name="simplifier">The simplifier.</param>
-        public Parser(IDifferentiator differentiator, ISimplifier simplifier)
+        /// <param name="converter">The converter.</param>
+        public Parser(IDifferentiator differentiator, ISimplifier simplifier, IConverter converter)
         {
             if (differentiator is null)
                 ArgNull(ExceptionArgument.differentiator);
             if (simplifier is null)
                 ArgNull(ExceptionArgument.simplifier);
+            if (converter is null)
+                ArgNull(ExceptionArgument.converter);
 
             this.differentiator = differentiator;
             this.simplifier = simplifier;
+            this.converter = converter;
         }
 
         /// <summary>

@@ -81,7 +81,7 @@ namespace xFunc.Maths.Tokenization
 
             function = function[size..];
 
-            Current = new Token(kind);
+            Current = Token.Create(kind);
             return true;
         }
     }

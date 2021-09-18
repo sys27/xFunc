@@ -35,6 +35,11 @@ namespace xFunc.Maths.Tokenization
         /// </summary>
         Number,
 
+        /// <summary>
+        /// String.
+        /// </summary>
+        String,
+
         #region Symbols
 
         /// <summary>

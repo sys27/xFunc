@@ -846,6 +846,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             TestException(new ToNumber(Bool.True));
         }
 
+        [Fact]
+        public void TestStringExpression()
+        {
+            var exp = new StringExpression("hello");
+
+            Test(exp, ResultTypes.String);
+        }
+
         [Theory]
         [ClassData(typeof(AllExpressionsData))]
         public void TestNullException(Type type) => TestNullExp(type);

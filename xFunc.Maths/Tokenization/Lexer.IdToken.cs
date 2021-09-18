@@ -85,9 +85,9 @@ namespace xFunc.Maths.Tokenization
             function = function[endIndex..];
 
             if (kind == Empty)
-                Current = new Token(id.ToString().ToLowerInvariant()); // TODO:
+                Current = Token.Id(id.ToString().ToLowerInvariant()); // TODO:
             else
-                Current = new Token(kind);
+                Current = Token.Create(kind);
 
             return true;
         }

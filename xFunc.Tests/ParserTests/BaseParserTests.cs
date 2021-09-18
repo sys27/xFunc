@@ -36,7 +36,7 @@ namespace xFunc.Tests.ParserTests
         protected void ParseErrorTest(string function)
             => Assert.Throws<ParseException>(() => parser.Parse(function));
 
-        protected void ErrorTest<T>(string function) where T : Exception
+        protected void ParseErrorTest<T>(string function) where T : Exception
             => Assert.Throws<T>(() => parser.Parse(function));
     }
 }

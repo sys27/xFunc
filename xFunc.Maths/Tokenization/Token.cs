@@ -24,48 +24,72 @@ namespace xFunc.Maths.Tokenization
     /// </summary>
     internal readonly struct Token
     {
+        private Token(TokenKind kind, double numberValue, string? stringValue)
+        {
+            Kind = kind;
+            NumberValue = numberValue;
+            StringValue = stringValue;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Token"/> struct.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        /// The token.
+        /// </returns>
+        public static Token Id(string id)
+        {
+            Debug.Assert(!string.IsNullOrEmpty(id), "String should not be empty.");
+
+            return new Token(TokenKind.Id, default, id);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Token"/> struct.
+        /// </summary>
+        /// <param name="stringValue">The string value.</param>
+        /// <returns>
+        /// The token.
+        /// </returns>
+        public static Token String(string stringValue)
+        {
+            Debug.Assert(stringValue != null, "String should not be empty.");
+
+            return new Token(TokenKind.String, default, stringValue);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Token"/> struct.
+        /// </summary>
+        /// <param name="numberValue">The number value.</param>
+        /// <returns>
+        /// The token.
+        /// </returns>
+        public static Token Number(double numberValue)
+        {
+            return new Token(TokenKind.Number, numberValue, default);
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Token"/> struct.
         /// </summary>
         /// <param name="kind">The token kind.</param>
-        public Token(TokenKind kind)
+        /// <returns>
+        /// The token.
+        /// </returns>
+        public static Token Create(TokenKind kind)
         {
             Debug.Assert(kind != TokenKind.Id && kind != TokenKind.Number, "Use other ctor for Id/Number tokens.");
 
-            StringValue = default;
-            NumberValue = default;
-            Kind = kind;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Token"/> struct.
-        /// </summary>
-        /// <param name="stringValue">The string value of token.</param>
-        public Token(string stringValue)
-        {
-            Debug.Assert(!string.IsNullOrEmpty(stringValue), "String should not be empty.");
-
-            StringValue = stringValue;
-            NumberValue = default;
-            Kind = TokenKind.Id;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Token"/> struct.
-        /// </summary>
-        /// <param name="numberValue">The number value of token.</param>
-        public Token(double numberValue)
-        {
-            StringValue = default;
-            NumberValue = numberValue;
-            Kind = TokenKind.Number;
+            return new Token(kind, default, default);
         }
 
         /// <inheritdoc />
         [ExcludeFromCodeCoverage]
         public override string ToString()
         {
-            if (IsId())
+            if (IsId() || Is(TokenKind.String))
                 return $"String: {StringValue}";
 
             if (IsNumber())
@@ -185,6 +209,6 @@ namespace xFunc.Maths.Tokenization
         /// <summary>
         /// Gets an empty token.
         /// </summary>
-        public static Token Empty => new Token(TokenKind.Empty);
+        public static Token Empty => Create(TokenKind.Empty);
     }
 }

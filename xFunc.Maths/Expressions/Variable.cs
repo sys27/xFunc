@@ -96,10 +96,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(Name);
-
-        /// <inheritdoc />
         public string ToString(IFormatter formatter)
             => Analyze(formatter);
 

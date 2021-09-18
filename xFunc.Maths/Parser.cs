@@ -650,7 +650,8 @@ namespace xFunc.Maths
                ParseBoolean(ref tokenReader) ??
                ParseParenthesesExpression(ref tokenReader) ??
                ParseMatrix(ref tokenReader) ??
-               ParseVector(ref tokenReader);
+               ParseVector(ref tokenReader) ??
+               ParseString(ref tokenReader);
 
         private IExpression? ParseIf(ref TokenReader tokenReader)
         {
@@ -887,5 +888,14 @@ namespace xFunc.Maths
 
                 return new Matrix(vectors.ToImmutableArray());
             });
+
+        private IExpression? ParseString(ref TokenReader tokenReader)
+        {
+            var str = tokenReader.GetCurrent(TokenKind.String);
+            if (str.IsEmpty())
+                return null;
+
+            return new StringExpression(str.StringValue!);
+        }
     }
 }

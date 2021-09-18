@@ -213,6 +213,10 @@ namespace xFunc.Maths.Analyzers
         public virtual TResult Analyze(ToHex exp, TContext context)
             => Analyze(exp as IExpression, context);
 
+        /// <inheritdoc />
+        public virtual TResult Analyze(StringExpression exp, TContext context)
+            => Analyze(exp as IExpression, context);
+
         #endregion Standard
 
         #region Matrix

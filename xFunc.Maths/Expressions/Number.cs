@@ -88,10 +88,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(Value);
-
-        /// <inheritdoc />
         public string ToString(IFormatter formatter)
             => Analyze(formatter);
 
@@ -99,10 +95,7 @@ namespace xFunc.Maths.Expressions
         public override string ToString()
             => ToString(new CommonFormatter());
 
-        /// <summary>
-        /// Returns a number. Don't use this method if your expression has variables.
-        /// </summary>
-        /// <returns>A result of the execution.</returns>
+        /// <inheritdoc />
         public object Execute() => Value;
 
         /// <inheritdoc />

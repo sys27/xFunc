@@ -43,7 +43,7 @@ namespace xFunc.Maths.Tokenization
                 if (numberEnd > prefixLength)
                 {
                     var numberString = function[prefixLength..numberEnd];
-                    Current = new Token(ParseNumbers.ToInt64(numberString, 2));
+                    Current = Token.Number(ParseNumbers.ToInt64(numberString, 2));
 
                     function = function[numberEnd..];
 
@@ -67,7 +67,7 @@ namespace xFunc.Maths.Tokenization
                 if (numberEnd > prefixLength)
                 {
                     var numberString = function[prefixLength..numberEnd];
-                    Current = new Token(ParseNumbers.ToInt64(numberString, 16));
+                    Current = Token.Number(ParseNumbers.ToInt64(numberString, 16));
 
                     function = function[numberEnd..];
 
@@ -91,7 +91,7 @@ namespace xFunc.Maths.Tokenization
                 if (numberEnd > prefixLength)
                 {
                     var numberString = function[prefixLength..numberEnd];
-                    Current = new Token(ParseNumbers.ToInt64(numberString, 8));
+                    Current = Token.Number(ParseNumbers.ToInt64(numberString, 8));
 
                     function = function[numberEnd..];
 
@@ -130,7 +130,7 @@ namespace xFunc.Maths.Tokenization
 
                 var numberString = function[..endIndex];
                 var number = double.Parse(numberString, provider: CultureInfo.InvariantCulture);
-                Current = new Token(number);
+                Current = Token.Number(number);
 
                 function = function[endIndex..];
 

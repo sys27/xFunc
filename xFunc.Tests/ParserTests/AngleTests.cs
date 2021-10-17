@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Units;
 using xFunc.Maths.Expressions.Units.AngleUnits;
 using Xunit;

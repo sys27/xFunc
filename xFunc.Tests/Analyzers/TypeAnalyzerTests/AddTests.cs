@@ -18,7 +18,6 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
-using xFunc.Maths.Expressions.Units;
 using xFunc.Maths.Expressions.Units.AngleUnits;
 using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
@@ -345,6 +344,39 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             );
 
             Test(exp, ResultTypes.PowerNumber);
+        }
+
+        [Fact]
+        public void TestAddStringToString()
+        {
+            var exp = new Add(
+                new StringExpression("a"),
+                new StringExpression("b")
+            );
+
+            Test(exp, ResultTypes.String);
+        }
+
+        [Fact]
+        public void TestAddStringToNumber()
+        {
+            var exp = new Add(
+                new StringExpression("a"),
+                Number.One
+            );
+
+            Test(exp, ResultTypes.String);
+        }
+
+        [Fact]
+        public void TestAddNumberToString()
+        {
+            var exp = new Add(
+                Number.One,
+                new StringExpression("a")
+            );
+
+            Test(exp, ResultTypes.String);
         }
     }
 }

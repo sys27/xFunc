@@ -16,10 +16,8 @@
 using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
-using xFunc.Maths.Expressions.Units;
 using xFunc.Maths.Expressions.Units.AngleUnits;
 using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
@@ -219,6 +217,45 @@ namespace xFunc.Tests.Expressions
             );
             var actual = exp.Execute();
             var expected = PowerValue.Watt(3);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ExecuteStringAndString()
+        {
+            var exp = new Add(
+                new StringExpression("a"),
+                new StringExpression("b")
+            );
+            var actual = exp.Execute();
+            var expected = "ab";
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ExecuteStringAndNumber()
+        {
+            var exp = new Add(
+                new StringExpression("a"),
+                Number.One
+            );
+            var actual = exp.Execute();
+            var expected = "a1";
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ExecuteNumberAndString()
+        {
+            var exp = new Add(
+                Number.One,
+                new StringExpression("b")
+            );
+            var actual = exp.Execute();
+            var expected = "1b";
 
             Assert.Equal(expected, actual);
         }

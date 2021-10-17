@@ -36,7 +36,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
     /// <seealso cref="IAnalyzer{ResultType}" />
     public class TypeAnalyzer : ITypeAnalyzer
     {
-        private ResultTypes CheckArgument([NotNull] IExpression exp, ResultTypes result)
+        private ResultTypes CheckArgument([NotNull] IExpression? exp, ResultTypes result)
         {
             if (exp is null)
                 ArgNull(ExceptionArgument.exp);
@@ -44,7 +44,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             return result;
         }
 
-        private ResultTypes CheckNumericConversion([NotNull] UnaryExpression exp)
+        private ResultTypes CheckNumericConversion([NotNull] UnaryExpression? exp)
         {
             if (exp is null)
                 ArgNull(ExceptionArgument.exp);
@@ -58,7 +58,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             };
         }
 
-        private ResultTypes CheckTrigonometric([NotNull] UnaryExpression exp)
+        private ResultTypes CheckTrigonometric([NotNull] UnaryExpression? exp)
         {
             if (exp is null)
                 ArgNull(ExceptionArgument.exp);
@@ -74,7 +74,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             };
         }
 
-        private ResultTypes CheckInverseTrigonometric([NotNull] UnaryExpression exp)
+        private ResultTypes CheckInverseTrigonometric([NotNull] UnaryExpression? exp)
         {
             if (exp is null)
                 ArgNull(ExceptionArgument.exp);
@@ -90,7 +90,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             };
         }
 
-        private ResultTypes CheckStatistical([NotNull] DifferentParametersExpression exp)
+        private ResultTypes CheckStatistical([NotNull] DifferentParametersExpression? exp)
         {
             if (exp is null)
                 ArgNull(ExceptionArgument.exp);
@@ -117,7 +117,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             return ResultTypes.Number;
         }
 
-        private ResultTypes AnalyzeRelational([NotNull] BinaryExpression exp)
+        private ResultTypes AnalyzeRelational([NotNull] BinaryExpression? exp)
         {
             if (exp is null)
                 ArgNull(ExceptionArgument.exp);
@@ -152,7 +152,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             };
         }
 
-        private ResultTypes AnalyzeLogical([NotNull] BinaryExpression exp)
+        private ResultTypes AnalyzeLogical([NotNull] BinaryExpression? exp)
         {
             if (exp is null)
                 ArgNull(ExceptionArgument.exp);
@@ -175,7 +175,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             };
         }
 
-        private ResultTypes AnalyzeLogicalAndBitwise([NotNull] BinaryExpression exp)
+        private ResultTypes AnalyzeLogicalAndBitwise([NotNull] BinaryExpression? exp)
         {
             if (exp is null)
                 ArgNull(ExceptionArgument.exp);
@@ -202,7 +202,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             };
         }
 
-        private ResultTypes AnalyzeEquality([NotNull] BinaryExpression exp)
+        private ResultTypes AnalyzeEquality([NotNull] BinaryExpression? exp)
         {
             if (exp is null)
                 ArgNull(ExceptionArgument.exp);
@@ -243,7 +243,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             };
         }
 
-        private ResultTypes AnalyzeBinaryAssign([NotNull] VariableBinaryExpression exp)
+        private ResultTypes AnalyzeBinaryAssign([NotNull] VariableBinaryExpression? exp)
         {
             if (exp is null)
                 ArgNull(ExceptionArgument.exp);
@@ -259,7 +259,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             };
         }
 
-        private ResultTypes AnalyzeShift([NotNull] BinaryExpression exp)
+        private ResultTypes AnalyzeShift([NotNull] BinaryExpression? exp)
         {
             if (exp is null)
                 ArgNull(ExceptionArgument.exp);
@@ -281,7 +281,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             };
         }
 
-        private ResultTypes AngleConversion([NotNull] UnaryExpression exp)
+        private ResultTypes AngleConversion([NotNull] UnaryExpression? exp)
         {
             if (exp is null)
                 ArgNull(ExceptionArgument.exp);
@@ -993,6 +993,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             return valueResult switch
             {
+                ResultTypes.Undefined or
                 ResultTypes.Number => ResultTypes.Undefined,
                 ResultTypes.AngleNumber => ResultTypes.AngleNumber,
                 ResultTypes.PowerNumber => ResultTypes.PowerNumber,
@@ -1073,9 +1074,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
-            if (result == ResultTypes.Undefined ||
-                result == ResultTypes.Vector ||
-                result == ResultTypes.Matrix)
+            if (result is ResultTypes.Undefined or ResultTypes.Vector or ResultTypes.Matrix)
                 return ResultTypes.Matrix;
 
             throw new ParameterTypeMismatchException(ResultTypes.Vector | ResultTypes.Matrix, result);
@@ -1142,7 +1141,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
-            if (result == ResultTypes.Undefined || result == ResultTypes.ComplexNumber)
+            if (result is ResultTypes.Undefined or ResultTypes.ComplexNumber)
                 return ResultTypes.ComplexNumber;
 
             throw new ParameterTypeMismatchException(ResultTypes.ComplexNumber, result);
@@ -1194,7 +1193,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 ArgNull(ExceptionArgument.exp);
 
             var result = exp.Argument.Analyze(this);
-            if (result == ResultTypes.Undefined || result == ResultTypes.ComplexNumber)
+            if (result is ResultTypes.Undefined or ResultTypes.ComplexNumber)
                 return ResultTypes.ComplexNumber;
 
             throw new ParameterTypeMismatchException(ResultTypes.ComplexNumber, result);
@@ -1331,7 +1330,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
-        /// <param name="exp">The expresion.</param>
+        /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Count exp)
             => CheckStatistical(exp);
@@ -1452,7 +1451,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 ArgNull(ExceptionArgument.exp);
 
             var result = exp.Condition.Analyze(this);
-            if (result == ResultTypes.Undefined || result == ResultTypes.Boolean)
+            if (result is ResultTypes.Undefined or ResultTypes.Boolean)
                 return ResultTypes.Undefined;
 
             throw new ParameterTypeMismatchException();
@@ -1518,7 +1517,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 ArgNull(ExceptionArgument.exp);
 
             var rightResult = exp.Right.Analyze(this);
-            if (rightResult == ResultTypes.Undefined || rightResult == ResultTypes.Boolean)
+            if (rightResult is ResultTypes.Undefined or ResultTypes.Boolean)
                 return ResultTypes.Undefined;
 
             throw new ParameterTypeMismatchException();

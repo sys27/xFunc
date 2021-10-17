@@ -857,6 +857,18 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestConvertVariable()
+        {
+            var exp = new Convert(
+                new Converter(),
+                new Variable("x"),
+                new StringExpression("rad")
+            );
+
+            Test(exp, ResultTypes.Undefined);
+        }
+
+        [Fact]
         public void TestConvert()
         {
             var exp = new Convert(

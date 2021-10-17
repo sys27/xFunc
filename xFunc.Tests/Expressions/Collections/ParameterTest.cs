@@ -104,6 +104,15 @@ namespace xFunc.Tests.Expressions.Collections
         }
 
         [Fact]
+        public void StringCtor()
+        {
+            var str = "hello";
+            var x = new Parameter("x", str);
+
+            Assert.Equal(str, x.Value);
+        }
+
+        [Fact]
         public void NullEqual()
         {
             var parameter = new Parameter("x", 1);

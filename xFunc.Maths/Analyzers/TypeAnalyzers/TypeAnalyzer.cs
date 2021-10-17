@@ -358,6 +358,10 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 (ResultTypes.Vector, ResultTypes.Vector) => ResultTypes.Vector,
                 (ResultTypes.Matrix, ResultTypes.Matrix) => ResultTypes.Matrix,
 
+                (ResultTypes.String, _) or
+                (_, ResultTypes.String)
+                    => ResultTypes.String,
+
                 (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
                 (ResultTypes.Number, _) => ResultTypes.Number.ThrowForRight(rightResult),
 

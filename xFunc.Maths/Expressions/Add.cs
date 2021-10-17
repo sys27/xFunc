@@ -74,6 +74,9 @@ namespace xFunc.Maths.Expressions
                 (Vector left, Vector right) => left.Add(right, parameters),
                 (Matrix left, Matrix right) => left.Add(right, parameters),
 
+                (string left, var right) => left + right,
+                (var left, string right) => left + right,
+
                 _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };
         }

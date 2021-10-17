@@ -23,6 +23,7 @@ using System;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions.Units.AngleUnits;
 using xFunc.Maths.Expressions.Units.PowerUnits;
+using xFunc.Maths.Expressions.Units.Converters;
 
 namespace xFunc.Tests
 {
@@ -30,7 +31,7 @@ namespace xFunc.Tests
     {
         [Fact]
         public void SimplifierNull()
-            => Assert.Throws<ArgumentNullException>(() => new Processor(null, null, null, null));
+            => Assert.Throws<ArgumentNullException>(() => new Processor(null, null, null, null, null));
 
         [Fact]
         public void DifferentiatorNull()
@@ -41,12 +42,22 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void TypeAnalyzerNull()
+        public void ConverterNull()
         {
             var simplifier = new Simplifier();
             var differentiator = new Differentiator();
 
-            Assert.Throws<ArgumentNullException>(() => new Processor(simplifier, differentiator, null, null));
+            Assert.Throws<ArgumentNullException>(() => new Processor(simplifier, differentiator, null, null, null));
+        }
+
+        [Fact]
+        public void TypeAnalyzerNull()
+        {
+            var simplifier = new Simplifier();
+            var differentiator = new Differentiator();
+            var converter = new Converter();
+
+            Assert.Throws<ArgumentNullException>(() => new Processor(simplifier, differentiator, converter, null, null));
         }
 
         [Fact]
@@ -63,10 +74,11 @@ namespace xFunc.Tests
         {
             var simplifier = new Simplifier();
             var differentiator = new Differentiator();
+            var converter = new Converter();
             var typeAnalyzer = new TypeAnalyzer();
             var parameters = new ExpressionParameters();
 
-            var processor = new Processor(simplifier, differentiator, typeAnalyzer, parameters);
+            var processor = new Processor(simplifier, differentiator, converter, typeAnalyzer, parameters);
         }
 
         [Fact]

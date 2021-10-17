@@ -25,6 +25,7 @@ using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Expressions.Units;
 using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.Converters;
 using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
 using Matrices = xFunc.Maths.Expressions.Matrices;
@@ -499,6 +500,18 @@ namespace xFunc.Tests.Analyzers.Formatters
             var exp = new StringExpression("hello");
 
             Assert.Equal("'hello'", exp.ToString());
+        }
+
+        [Fact]
+        public void ConvertTest()
+        {
+            var exp = new Convert(
+                new Converter(),
+                AngleValue.Degree(90).AsExpression(),
+                new StringExpression("rad")
+            );
+
+            Assert.Equal("convert(90 degree, 'rad')", exp.ToString());
         }
 
         #endregion Common

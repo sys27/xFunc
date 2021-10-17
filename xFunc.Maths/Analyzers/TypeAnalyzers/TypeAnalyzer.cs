@@ -983,6 +983,24 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(StringExpression exp)
             => CheckArgument(exp, ResultTypes.String);
 
+        /// <inheritdoc />
+        public virtual ResultTypes Analyze(Convert exp)
+        {
+            if (exp is null)
+                ArgNull(ExceptionArgument.exp);
+
+            var valueResult = exp.Value.Analyze(this);
+
+            return valueResult switch
+            {
+                ResultTypes.Number => ResultTypes.Undefined,
+                ResultTypes.AngleNumber => ResultTypes.AngleNumber,
+                ResultTypes.PowerNumber => ResultTypes.PowerNumber,
+
+                _ => ResultTypes.Numbers.ThrowFor(valueResult),
+            };
+        }
+
         #endregion Standard
 
         #region Matrix

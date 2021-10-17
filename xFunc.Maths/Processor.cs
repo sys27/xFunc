@@ -19,6 +19,7 @@ using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.Converters;
 using xFunc.Maths.Expressions.Units.PowerUnits;
 using xFunc.Maths.Results;
 using static xFunc.Maths.ThrowHelpers;
@@ -33,6 +34,7 @@ namespace xFunc.Maths
         private readonly ITypeAnalyzer typeAnalyzer;
         private readonly IDifferentiator differentiator;
         private readonly ISimplifier simplifier;
+        private readonly IConverter converter;
         private readonly IParser parser;
 
         /// <summary>
@@ -42,7 +44,8 @@ namespace xFunc.Maths
         {
             simplifier = new Simplifier();
             differentiator = new Differentiator();
-            parser = new Parser(differentiator, simplifier);
+            converter = new Converter();
+            parser = new Parser(differentiator, simplifier, converter);
             typeAnalyzer = new TypeAnalyzer();
 
             Parameters = new ExpressionParameters();
@@ -59,6 +62,7 @@ namespace xFunc.Maths
             : this(
                 simplifier,
                 differentiator,
+                new Converter(),
                 new TypeAnalyzer(),
                 new ExpressionParameters())
         {
@@ -69,11 +73,13 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="differentiator">The differentiator.</param>
+        /// <param name="converter">The converter.</param>
         /// <param name="typeAnalyzer">The type analyzer.</param>
         /// <param name="parameters">The collection of parameters.</param>
         public Processor(
             ISimplifier simplifier,
             IDifferentiator differentiator,
+            IConverter converter,
             ITypeAnalyzer typeAnalyzer,
             ExpressionParameters parameters)
         {
@@ -81,6 +87,8 @@ namespace xFunc.Maths
                 ArgNull(ExceptionArgument.simplifier);
             if (differentiator is null)
                 ArgNull(ExceptionArgument.differentiator);
+            if (converter is null)
+                ArgNull(ExceptionArgument.converter);
             if (typeAnalyzer is null)
                 ArgNull(ExceptionArgument.typeAnalyzer);
 
@@ -88,6 +96,7 @@ namespace xFunc.Maths
 
             this.simplifier = simplifier;
             this.differentiator = differentiator;
+            this.converter = converter;
             this.typeAnalyzer = typeAnalyzer;
 
             Parameters = parameters;

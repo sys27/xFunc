@@ -214,4 +214,10 @@
   <data name="StringTokenizeException" xml:space="preserve">
     <value>Конец строки не найден.</value>
   </data>
+  <data name="UnitIsNotSupportedException" xml:space="preserve">
+    <value>Единица измерения '{0}' не поддерживается.</value>
+  </data>
+  <data name="ValueIsNotSupportedException" xml:space="preserve">
+    <value>Значение для конвертирования '{0} ({1})' не поддерживается.</value>
+  </data>
 </root>

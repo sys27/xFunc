@@ -94,6 +94,7 @@ namespace xFunc.Maths
         differentiator,
         simplifier,
         typeAnalyzer,
+        converter,
     }
 #pragma warning restore SA1602
 #pragma warning restore SA1600

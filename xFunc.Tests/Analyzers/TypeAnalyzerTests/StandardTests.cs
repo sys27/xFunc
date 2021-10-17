@@ -22,8 +22,10 @@ using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Units;
 using xFunc.Maths.Expressions.Units.AngleUnits;
+using xFunc.Maths.Expressions.Units.Converters;
 using xFunc.Maths.Expressions.Units.PowerUnits;
 using Xunit;
+using Convert = xFunc.Maths.Expressions.Units.Convert;
 
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
 {
@@ -723,7 +725,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDeletageExpression()
         {
-            Test(new DelegateExpression(x => null), ResultTypes.Undefined);
+            Test(new DelegateExpression(_ => null), ResultTypes.Undefined);
         }
 
         [Fact]
@@ -852,6 +854,54 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new StringExpression("hello");
 
             Test(exp, ResultTypes.String);
+        }
+
+        [Fact]
+        public void TestConvert()
+        {
+            var exp = new Convert(
+                new Converter(),
+                Number.One,
+                new StringExpression("rad")
+            );
+
+            Test(exp, ResultTypes.Undefined);
+        }
+
+        [Fact]
+        public void TestAngleConvert()
+        {
+            var exp = new Convert(
+                new Converter(),
+                AngleValue.Degree(10).AsExpression(),
+                new StringExpression("rad")
+            );
+
+            Test(exp, ResultTypes.AngleNumber);
+        }
+
+        [Fact]
+        public void TestPowerConvert()
+        {
+            var exp = new Convert(
+                new Converter(),
+                PowerValue.Watt(10).AsExpression(),
+                new StringExpression("kW")
+            );
+
+            Test(exp, ResultTypes.PowerNumber);
+        }
+
+        [Fact]
+        public void TestConvertException()
+        {
+            var exp = new Convert(
+                new Converter(),
+                Bool.True,
+                new StringExpression("rad")
+            );
+
+            TestException(exp);
         }
 
         [Theory]

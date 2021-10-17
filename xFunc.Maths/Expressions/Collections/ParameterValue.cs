@@ -76,6 +76,12 @@ namespace xFunc.Maths.Expressions.Collections
         {
         }
 
+        /// <inheritdoc cref="ParameterValue(object)"/>
+        public ParameterValue(string value)
+            : this(value as object)
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterValue" /> struct.
         /// </summary>
@@ -86,13 +92,14 @@ namespace xFunc.Maths.Expressions.Collections
                 throw new ArgumentNullException(nameof(value));
 
             Debug.Assert(
-                value is NumberValue ||
-                value is AngleValue ||
-                value is PowerValue ||
-                value is Complex ||
-                value is bool ||
-                value is Vector ||
-                value is Matrix,
+                value is NumberValue
+                    or AngleValue
+                    or PowerValue
+                    or Complex
+                    or bool
+                    or Vector
+                    or Matrix
+                    or string,
                 "Unsupported parameter value.");
 
             Value = value;
@@ -132,6 +139,10 @@ namespace xFunc.Maths.Expressions.Collections
 
         /// <inheritdoc cref="ParameterValue.op_Implicit(double)"/>
         public static implicit operator ParameterValue(Matrix value)
+            => new ParameterValue(value);
+
+        /// <inheritdoc cref="ParameterValue.op_Implicit(double)"/>
+        public static implicit operator ParameterValue(string value)
             => new ParameterValue(value);
 
         /// <inheritdoc />

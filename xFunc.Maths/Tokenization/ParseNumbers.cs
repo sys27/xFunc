@@ -1,3 +1,5 @@
+#pragma warning disable SA1636
+
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // The MIT License (MIT)
@@ -23,7 +25,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-
 using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -136,3 +137,5 @@ namespace xFunc.Maths.Tokenization
         }
     }
 }
+
+#pragma warning restore SA1636

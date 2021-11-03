@@ -19,7 +19,7 @@
     <FileVersion>4.0.0</FileVersion>
     <RepositoryUrl>https://github.com/sys27/xFunc</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -39,6 +39,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\LICENSE" Link="LICENSE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="..\xFunc.png" Pack="true" PackagePath="" />
   </ItemGroup>
 

@@ -25,7 +25,7 @@ https://github.com/sys27/xFunc/wiki/Breaking-Changes</PackageReleaseNotes>
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <CodeAnalysisRuleSet>..\xFunc.ruleset</CodeAnalysisRuleSet>
@@ -49,10 +49,8 @@ https://github.com/sys27/xFunc/wiki/Breaking-Changes</PackageReleaseNotes>
     <None Include="..\LICENSE" Link="LICENSE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\NOTICE" Link="NOTICE">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="..\xFunc.png" Pack="true" PackagePath="" />
+    <AdditionalFiles Include="..\.stylecop.json" Link=".stylecop.json" />
   </ItemGroup>
 
   <ItemGroup>

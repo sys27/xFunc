@@ -1,61 +1,60 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace xFunc.UnitConverters
+namespace xFunc.UnitConverters;
+
+/// <summary>
+/// Represents the volume units.
+/// </summary>
+public enum VolumeUnits
 {
     /// <summary>
-    /// Represents the volume units.
+    /// Cubic centimeters (cm³).
     /// </summary>
-    public enum VolumeUnits
-    {
-        /// <summary>
-        /// Cubic centimeters (cm³).
-        /// </summary>
-        CubicCentimeters,
+    CubicCentimeters,
 
-        /// <summary>
-        /// Cubic meters (m³).
-        /// </summary>
-        CubicMeters,
+    /// <summary>
+    /// Cubic meters (m³).
+    /// </summary>
+    CubicMeters,
 
-        /// <summary>
-        /// Litres (l).
-        /// </summary>
-        Litres,
+    /// <summary>
+    /// Litres (l).
+    /// </summary>
+    Litres,
 
-        /// <summary>
-        /// Cubic inches (in³).
-        /// </summary>
-        CubicInches,
+    /// <summary>
+    /// Cubic inches (in³).
+    /// </summary>
+    CubicInches,
 
-        /// <summary>
-        /// Pints US (pt).
-        /// </summary>
-        PintsUS,
+    /// <summary>
+    /// Pints US (pt).
+    /// </summary>
+    PintsUS,
 
-        /// <summary>
-        /// Pints UK (pt).
-        /// </summary>
-        PintsUK,
+    /// <summary>
+    /// Pints UK (pt).
+    /// </summary>
+    PintsUK,
 
-        /// <summary>
-        /// Gallons US (gal).
-        /// </summary>
-        GallonsUS,
+    /// <summary>
+    /// Gallons US (gal).
+    /// </summary>
+    GallonsUS,
 
-        /// <summary>
-        /// Gallons uk (gal).
-        /// </summary>
-        GallonsUK,
+    /// <summary>
+    /// Gallons uk (gal).
+    /// </summary>
+    GallonsUK,
 
-        /// <summary>
-        /// Cubic feet (ft³).
-        /// </summary>
-        CubicFeet,
+    /// <summary>
+    /// Cubic feet (ft³).
+    /// </summary>
+    CubicFeet,
 
-        /// <summary>
-        /// Cubic yards.
-        /// </summary>
-        CubicYards
-    }
+    /// <summary>
+    /// Cubic yards.
+    /// </summary>
+    CubicYards
 }

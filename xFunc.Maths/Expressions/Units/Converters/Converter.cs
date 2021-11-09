@@ -1,42 +1,39 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
+namespace xFunc.Maths.Expressions.Units.Converters;
 
-namespace xFunc.Maths.Expressions.Units.Converters
+/// <summary>
+/// The unit converter.
+/// </summary>
+public class Converter : IConverter
 {
+    private readonly IConverter<object>[] converters;
+
     /// <summary>
-    /// The unit converter.
+    /// Initializes a new instance of the <see cref="Converter"/> class.
     /// </summary>
-    public class Converter : IConverter
-    {
-        private readonly IConverter<object>[] converters;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Converter"/> class.
-        /// </summary>
-        public Converter()
-            => converters = new IConverter<object>[]
-            {
-                new AngleConverter(),
-                new PowerConverter(),
-            };
-
-        /// <inheritdoc />
-        public object Convert(object value, string unit)
+    public Converter()
+        => converters = new IConverter<object>[]
         {
-            if (value is null)
-                throw new ArgumentNullException(nameof(value));
-            if (string.IsNullOrWhiteSpace(unit))
-                throw new ArgumentNullException(nameof(unit));
+            new AngleConverter(),
+            new PowerConverter(),
+        };
 
-            unit = unit.ToLower();
+    /// <inheritdoc />
+    public object Convert(object value, string unit)
+    {
+        if (value is null)
+            throw new ArgumentNullException(nameof(value));
+        if (string.IsNullOrWhiteSpace(unit))
+            throw new ArgumentNullException(nameof(unit));
 
-            foreach (var converter in converters)
-                if (converter.CanConvertTo(unit))
-                    return converter.Convert(value, unit);
+        unit = unit.ToLower();
 
-            throw new UnitIsNotSupportedException(unit);
-        }
+        foreach (var converter in converters)
+            if (converter.CanConvertTo(unit))
+                return converter.Convert(value, unit);
+
+        throw new UnitIsNotSupportedException(unit);
     }
 }

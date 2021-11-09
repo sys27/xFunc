@@ -1,45 +1,40 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.LogicalAndBitwise;
-using Xunit;
+namespace xFunc.Tests.Expressions.LogicalAndBitwise;
 
-namespace xFunc.Tests.Expressions.LogicalAndBitwise
+public class EqualityTest
 {
-    public class EqualityTest
+    [Fact]
+    public void ExecuteTest1()
     {
-        [Fact]
-        public void ExecuteTest1()
-        {
-            var eq = new Equality(Bool.True, Bool.True);
+        var eq = new Equality(Bool.True, Bool.True);
 
-            Assert.True((bool) eq.Execute());
-        }
+        Assert.True((bool) eq.Execute());
+    }
 
-        [Fact]
-        public void ExecuteTest2()
-        {
-            var eq = new Equality(Bool.True, Bool.False);
+    [Fact]
+    public void ExecuteTest2()
+    {
+        var eq = new Equality(Bool.True, Bool.False);
 
-            Assert.False((bool) eq.Execute());
-        }
+        Assert.False((bool) eq.Execute());
+    }
 
-        [Fact]
-        public void ExecuteResultIsNotSupported()
-        {
-            var eq = new Equality(Number.One, Number.Two);
+    [Fact]
+    public void ExecuteResultIsNotSupported()
+    {
+        var eq = new Equality(Number.One, Number.Two);
 
-            Assert.Throws<ResultIsNotSupportedException>(() => eq.Execute());
-        }
+        Assert.Throws<ResultIsNotSupportedException>(() => eq.Execute());
+    }
 
-        [Fact]
-        public void CloneTest()
-        {
-            var exp = new Equality(Bool.True, Bool.False);
-            var clone = exp.Clone();
+    [Fact]
+    public void CloneTest()
+    {
+        var exp = new Equality(Bool.True, Bool.False);
+        var clone = exp.Clone();
 
-            Assert.Equal(exp, clone);
-        }
+        Assert.Equal(exp, clone);
     }
 }

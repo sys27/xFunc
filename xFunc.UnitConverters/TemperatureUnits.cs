@@ -1,51 +1,50 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace xFunc.UnitConverters
+namespace xFunc.UnitConverters;
+
+/// <summary>
+/// Represents the temperature units.
+/// </summary>
+public enum TemperatureUnits
 {
     /// <summary>
-    /// Represents the temperature units.
+    /// Celsius (°C).
     /// </summary>
-    public enum TemperatureUnits
-    {
-        /// <summary>
-        /// Celsius (°C).
-        /// </summary>
-        Celsius,
+    Celsius,
 
-        /// <summary>
-        /// Fahrenheit (°F).
-        /// </summary>
-        Fahrenheit,
+    /// <summary>
+    /// Fahrenheit (°F).
+    /// </summary>
+    Fahrenheit,
 
-        /// <summary>
-        /// Kelvin (K).
-        /// </summary>
-        Kelvin,
+    /// <summary>
+    /// Kelvin (K).
+    /// </summary>
+    Kelvin,
 
-        /// <summary>
-        /// Rankine (°R).
-        /// </summary>
-        Rankine,
+    /// <summary>
+    /// Rankine (°R).
+    /// </summary>
+    Rankine,
 
-        /// <summary>
-        /// Delisle (°D).
-        /// </summary>
-        Delisle,
+    /// <summary>
+    /// Delisle (°D).
+    /// </summary>
+    Delisle,
 
-        /// <summary>
-        /// Newton (°N).
-        /// </summary>
-        Newton,
+    /// <summary>
+    /// Newton (°N).
+    /// </summary>
+    Newton,
 
-        /// <summary>
-        /// Réaumur (°Ré).
-        /// </summary>
-        Réaumur,
+    /// <summary>
+    /// Réaumur (°Ré).
+    /// </summary>
+    Réaumur,
 
-        /// <summary>
-        /// Rømer (°Rø).
-        /// </summary>
-        Rømer
-    }
+    /// <summary>
+    /// Rømer (°Rø).
+    /// </summary>
+    Rømer
 }

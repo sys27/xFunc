@@ -1,72 +1,65 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
-using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.ComplexNumbers;
-using xFunc.Maths.Expressions.LogicalAndBitwise;
-using Xunit;
+namespace xFunc.Tests.Expressions.LogicalAndBitwise;
 
-namespace xFunc.Tests.Expressions.LogicalAndBitwise
+public class XOrTest : BaseExpressionTests
 {
-    public class XOrTest : BaseExpressionTests
+    [Fact]
+    public void ExecuteTest1()
     {
-        [Fact]
-        public void ExecuteTest1()
-        {
-            var exp = new XOr(Number.One, Number.Two);
-            var expected = new NumberValue(3.0);
+        var exp = new XOr(Number.One, Number.Two);
+        var expected = new NumberValue(3.0);
 
-            Assert.Equal(expected, exp.Execute());
-        }
+        Assert.Equal(expected, exp.Execute());
+    }
 
-        [Fact]
-        public void ExecuteTest3()
-        {
-            var exp = new XOr(Bool.True, Bool.True);
+    [Fact]
+    public void ExecuteTest3()
+    {
+        var exp = new XOr(Bool.True, Bool.True);
 
-            Assert.False((bool)exp.Execute());
-        }
+        Assert.False((bool)exp.Execute());
+    }
 
-        [Fact]
-        public void ExecuteTest4()
-        {
-            var exp = new XOr(Bool.False, Bool.True);
+    [Fact]
+    public void ExecuteTest4()
+    {
+        var exp = new XOr(Bool.False, Bool.True);
 
-            Assert.True((bool)exp.Execute());
-        }
+        Assert.True((bool)exp.Execute());
+    }
 
-        [Fact]
-        public void ExecuteTestLeftIsNotInt()
-        {
-            var exp = new XOr(new Number(1.5), Number.One);
+    [Fact]
+    public void ExecuteTestLeftIsNotInt()
+    {
+        var exp = new XOr(new Number(1.5), Number.One);
 
-            Assert.Throws<ArgumentException>(() => exp.Execute());
-        }
+        Assert.Throws<ArgumentException>(() => exp.Execute());
+    }
 
-        [Fact]
-        public void ExecuteTestRightIsNotInt()
-        {
-            var exp = new XOr(Number.One, new Number(1.5));
+    [Fact]
+    public void ExecuteTestRightIsNotInt()
+    {
+        var exp = new XOr(Number.One, new Number(1.5));
 
-            Assert.Throws<ArgumentException>(() => exp.Execute());
-        }
+        Assert.Throws<ArgumentException>(() => exp.Execute());
+    }
 
-        [Fact]
-        public void ExecuteResultIsNotSupported()
-        {
-            var exp = new XOr(new ComplexNumber(1), new ComplexNumber(2));
+    [Fact]
+    public void ExecuteResultIsNotSupported()
+    {
+        var exp = new XOr(new ComplexNumber(1), new ComplexNumber(2));
 
-            TestNotSupported(exp);
-        }
+        TestNotSupported(exp);
+    }
 
-        [Fact]
-        public void CloneTest()
-        {
-            var exp = new XOr(Bool.True, Bool.False);
-            var clone = exp.Clone();
+    [Fact]
+    public void CloneTest()
+    {
+        var exp = new XOr(Bool.True, Bool.False);
+        var clone = exp.Clone();
 
-            Assert.Equal(exp, clone);
-        }
+        Assert.Equal(exp, clone);
     }
 }

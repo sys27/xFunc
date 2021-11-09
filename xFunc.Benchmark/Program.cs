@@ -7,23 +7,22 @@ using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Running;
 using BenchmarkDotNet.Toolchains.CsProj;
 
-namespace xFunc.Benchmark
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            if (args is null || args.Length == 0)
-                args = new[] { "--filter", "*" };
+namespace xFunc.Benchmark;
 
-            BenchmarkSwitcher
-                .FromAssembly(typeof(Program).Assembly)
-                .Run(args,
-                    ManualConfig.Create(DefaultConfig.Instance)
-                        .AddJob(Job.MediumRun
-                            .WithToolchain(CsProjCoreToolchain.NetCoreApp50))
-                        .AddDiagnoser(MemoryDiagnoser.Default)
-                        .StopOnFirstError());
-        }
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        if (args is null || args.Length == 0)
+            args = new[] { "--filter", "*" };
+
+        BenchmarkSwitcher
+            .FromAssembly(typeof(Program).Assembly)
+            .Run(args,
+                ManualConfig.Create(DefaultConfig.Instance)
+                    .AddJob(Job.MediumRun
+                        .WithToolchain(CsProjCoreToolchain.NetCoreApp60))
+                    .AddDiagnoser(MemoryDiagnoser.Default)
+                    .StopOnFirstError());
     }
 }

@@ -3,84 +3,79 @@
 
 using System.Collections.Immutable;
 using System.Numerics;
-using xFunc.Maths.Analyzers;
-using xFunc.Maths.Expressions.Matrices;
-using xFunc.Maths.Expressions.Units.AngleUnits;
-using xFunc.Maths.Expressions.Units.PowerUnits;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions;
+
+/// <summary>
+/// Represents an Addition operator.
+/// </summary>
+public class Add : BinaryExpression
 {
     /// <summary>
-    /// Represents an Addition operator.
+    /// Initializes a new instance of the <see cref="Add"/> class.
     /// </summary>
-    public class Add : BinaryExpression
+    /// <param name="left">The left operand.</param>
+    /// <param name="right">The right operand.</param>
+    /// <seealso cref="IExpression"/>
+    public Add(IExpression left, IExpression right)
+        : base(left, right)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Add"/> class.
-        /// </summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand.</param>
-        /// <seealso cref="IExpression"/>
-        public Add(IExpression left, IExpression right)
-            : base(left, right)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Add"/> class.
-        /// </summary>
-        /// <param name="arguments">The list of arguments.</param>
-        /// <seealso cref="IExpression"/>
-        internal Add(ImmutableArray<IExpression> arguments)
-            : base(arguments)
-        {
-        }
-
-        /// <inheritdoc />
-        public override object Execute(ExpressionParameters? parameters)
-        {
-            var leftResult = Left.Execute(parameters);
-            var rightResult = Right.Execute(parameters);
-
-            return (leftResult, rightResult) switch
-            {
-                (NumberValue left, NumberValue right) => left + right,
-
-                (NumberValue left, AngleValue right) => left + right,
-                (AngleValue left, NumberValue right) => left + right,
-                (AngleValue left, AngleValue right) => left + right,
-
-                (NumberValue left, PowerValue right) => left + right,
-                (PowerValue left, NumberValue right) => left + right,
-                (PowerValue left, PowerValue right) => left + right,
-
-                (NumberValue left, Complex right) => left + right,
-                (Complex left, NumberValue right) => left + right,
-                (Complex left, Complex right) => left + right,
-
-                (Vector left, Vector right) => left.Add(right, parameters),
-                (Matrix left, Matrix right) => left.Add(right, parameters),
-
-                (string left, var right) => left + right,
-                (var left, string right) => left + right,
-
-                _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
-            };
-        }
-
-        /// <inheritdoc />
-        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-            => analyzer.Analyze(this);
-
-        /// <inheritdoc />
-        protected override TResult AnalyzeInternal<TResult, TContext>(
-            IAnalyzer<TResult, TContext> analyzer,
-            TContext context)
-            => analyzer.Analyze(this, context);
-
-        /// <inheritdoc />
-        public override IExpression Clone(IExpression? left = null, IExpression? right = null)
-            => new Add(left ?? Left, right ?? Right);
     }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Add"/> class.
+    /// </summary>
+    /// <param name="arguments">The list of arguments.</param>
+    /// <seealso cref="IExpression"/>
+    internal Add(ImmutableArray<IExpression> arguments)
+        : base(arguments)
+    {
+    }
+
+    /// <inheritdoc />
+    public override object Execute(ExpressionParameters? parameters)
+    {
+        var leftResult = Left.Execute(parameters);
+        var rightResult = Right.Execute(parameters);
+
+        return (leftResult, rightResult) switch
+        {
+            (NumberValue left, NumberValue right) => left + right,
+
+            (NumberValue left, AngleValue right) => left + right,
+            (AngleValue left, NumberValue right) => left + right,
+            (AngleValue left, AngleValue right) => left + right,
+
+            (NumberValue left, PowerValue right) => left + right,
+            (PowerValue left, NumberValue right) => left + right,
+            (PowerValue left, PowerValue right) => left + right,
+
+            (NumberValue left, Complex right) => left + right,
+            (Complex left, NumberValue right) => left + right,
+            (Complex left, Complex right) => left + right,
+
+            (Vector left, Vector right) => left.Add(right, parameters),
+            (Matrix left, Matrix right) => left.Add(right, parameters),
+
+            (string left, var right) => left + right,
+            (var left, string right) => left + right,
+
+            _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+        };
+    }
+
+    /// <inheritdoc />
+    protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        => analyzer.Analyze(this);
+
+    /// <inheritdoc />
+    protected override TResult AnalyzeInternal<TResult, TContext>(
+        IAnalyzer<TResult, TContext> analyzer,
+        TContext context)
+        => analyzer.Analyze(this, context);
+
+    /// <inheritdoc />
+    public override IExpression Clone(IExpression? left = null, IExpression? right = null)
+        => new Add(left ?? Left, right ?? Right);
 }

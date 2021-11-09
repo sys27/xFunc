@@ -3,32 +3,31 @@
 
 using System.Globalization;
 
-namespace xFunc.Maths.Results
+namespace xFunc.Maths.Results;
+
+/// <summary>
+/// Represents the boolean result.
+/// </summary>
+public class BooleanResult : IResult
 {
     /// <summary>
-    /// Represents the boolean result.
+    /// Initializes a new instance of the <see cref="BooleanResult"/> class.
     /// </summary>
-    public class BooleanResult : IResult
+    /// <param name="value">The value of result.</param>
+    public BooleanResult(bool value)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BooleanResult"/> class.
-        /// </summary>
-        /// <param name="value">The value of result.</param>
-        public BooleanResult(bool value)
-        {
-            Result = value;
-        }
+        Result = value;
+    }
 
-        /// <inheritdoc />
-        public override string ToString()
-            => Result.ToString(CultureInfo.InvariantCulture);
+    /// <inheritdoc />
+    public override string ToString()
+        => Result.ToString(CultureInfo.InvariantCulture);
 
-        /// <inheritdoc cref="IResult.Result" />
+    /// <inheritdoc cref="IResult.Result" />
 #pragma warning disable SA1623
-        public bool Result { get; }
+    public bool Result { get; }
 #pragma warning restore SA1623
 
-        /// <inheritdoc />
-        object IResult.Result => Result;
-    }
+    /// <inheritdoc />
+    object IResult.Result => Result;
 }

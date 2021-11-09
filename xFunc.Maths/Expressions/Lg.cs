@@ -3,60 +3,58 @@
 
 using System.Collections.Immutable;
 using System.Numerics;
-using xFunc.Maths.Analyzers;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions;
+
+/// <summary>
+/// Represents the Common logarithm function.
+/// </summary>
+public class Lg : UnaryExpression
 {
     /// <summary>
-    /// Represents the Common logarithm function.
+    /// Initializes a new instance of the <see cref="Lg"/> class.
     /// </summary>
-    public class Lg : UnaryExpression
+    /// <param name="expression">The argument of function.</param>
+    /// <seealso cref="IExpression"/>
+    public Lg(IExpression expression)
+        : base(expression)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Lg"/> class.
-        /// </summary>
-        /// <param name="expression">The argument of function.</param>
-        /// <seealso cref="IExpression"/>
-        public Lg(IExpression expression)
-            : base(expression)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Lg"/> class.
-        /// </summary>
-        /// <param name="arguments">The argument of function.</param>
-        /// <seealso cref="IExpression"/>
-        internal Lg(ImmutableArray<IExpression> arguments)
-            : base(arguments)
-        {
-        }
-
-        /// <inheritdoc />
-        public override object Execute(ExpressionParameters? parameters)
-        {
-            var result = Argument.Execute(parameters);
-
-            return result switch
-            {
-                NumberValue number => NumberValue.Lg(number),
-                Complex complex => Complex.Log10(complex),
-                _ => throw new ResultIsNotSupportedException(this, result),
-            };
-        }
-
-        /// <inheritdoc />
-        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-            => analyzer.Analyze(this);
-
-        /// <inheritdoc />
-        protected override TResult AnalyzeInternal<TResult, TContext>(
-            IAnalyzer<TResult, TContext> analyzer,
-            TContext context)
-            => analyzer.Analyze(this, context);
-
-        /// <inheritdoc />
-        public override IExpression Clone(IExpression? argument = null)
-            => new Lg(argument ?? Argument);
     }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Lg"/> class.
+    /// </summary>
+    /// <param name="arguments">The argument of function.</param>
+    /// <seealso cref="IExpression"/>
+    internal Lg(ImmutableArray<IExpression> arguments)
+        : base(arguments)
+    {
+    }
+
+    /// <inheritdoc />
+    public override object Execute(ExpressionParameters? parameters)
+    {
+        var result = Argument.Execute(parameters);
+
+        return result switch
+        {
+            NumberValue number => NumberValue.Lg(number),
+            Complex complex => Complex.Log10(complex),
+            _ => throw new ResultIsNotSupportedException(this, result),
+        };
+    }
+
+    /// <inheritdoc />
+    protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        => analyzer.Analyze(this);
+
+    /// <inheritdoc />
+    protected override TResult AnalyzeInternal<TResult, TContext>(
+        IAnalyzer<TResult, TContext> analyzer,
+        TContext context)
+        => analyzer.Analyze(this, context);
+
+    /// <inheritdoc />
+    public override IExpression Clone(IExpression? argument = null)
+        => new Lg(argument ?? Argument);
 }

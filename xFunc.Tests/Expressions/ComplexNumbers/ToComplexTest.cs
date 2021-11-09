@@ -2,36 +2,31 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Numerics;
-using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.ComplexNumbers;
-using xFunc.Maths.Expressions.LogicalAndBitwise;
-using Xunit;
 
-namespace xFunc.Tests.Expressions.ComplexNumbers
+namespace xFunc.Tests.Expressions.ComplexNumbers;
+
+public class ToComplexTest : BaseExpressionTests
 {
-    public class ToComplexTest : BaseExpressionTests
+    [Fact]
+    public void ExecuteTest()
     {
-        [Fact]
-        public void ExecuteTest()
-        {
-            var exp = new ToComplex(Number.Two);
-            var result = (Complex)exp.Execute();
-            var expected = new Complex(2, 0);
+        var exp = new ToComplex(Number.Two);
+        var result = (Complex)exp.Execute();
+        var expected = new Complex(2, 0);
 
-            Assert.Equal(expected, result);
-        }
+        Assert.Equal(expected, result);
+    }
 
-        [Fact]
-        public void ExecuteBoolTest()
-            => TestNotSupported(new ToComplex(Bool.False));
+    [Fact]
+    public void ExecuteBoolTest()
+        => TestNotSupported(new ToComplex(Bool.False));
 
-        [Fact]
-        public void CloneTest()
-        {
-            var exp = new ToComplex(Number.Two);
-            var clone = exp.Clone();
+    [Fact]
+    public void CloneTest()
+    {
+        var exp = new ToComplex(Number.Two);
+        var clone = exp.Clone();
 
-            Assert.Equal(exp, clone);
-        }
+        Assert.Equal(exp, clone);
     }
 }

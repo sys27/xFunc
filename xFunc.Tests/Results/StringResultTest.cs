@@ -1,42 +1,37 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
-using xFunc.Maths.Results;
-using Xunit;
+namespace xFunc.Tests.Results;
 
-namespace xFunc.Tests.Results
+public class StringResultTest
 {
-    public class StringResultTest
+    [Fact]
+    public void ResultTest()
     {
-        [Fact]
-        public void ResultTest()
-        {
-            var result = new StringResult("hello");
+        var result = new StringResult("hello");
 
-            Assert.Equal("hello", result.Result);
-        }
+        Assert.Equal("hello", result.Result);
+    }
 
-        [Fact]
-        public void IResultTest()
-        {
-            var result = new StringResult("hello") as IResult;
+    [Fact]
+    public void IResultTest()
+    {
+        var result = new StringResult("hello") as IResult;
 
-            Assert.Equal("hello", result.Result);
-        }
+        Assert.Equal("hello", result.Result);
+    }
 
-        [Fact]
-        public void NullTest()
-        {
-            Assert.Throws<ArgumentNullException>(() => new StringResult(null));
-        }
+    [Fact]
+    public void NullTest()
+    {
+        Assert.Throws<ArgumentNullException>(() => new StringResult(null));
+    }
 
-        [Fact]
-        public void ToStringTest()
-        {
-            var result = new StringResult("hello");
+    [Fact]
+    public void ToStringTest()
+    {
+        var result = new StringResult("hello");
 
-            Assert.Equal("hello", result.ToString());
-        }
+        Assert.Equal("hello", result.ToString());
     }
 }

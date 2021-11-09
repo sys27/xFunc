@@ -3,55 +3,52 @@
 
 using System.Collections.Immutable;
 using System.Numerics;
-using xFunc.Maths.Analyzers;
-using xFunc.Maths.Expressions.Units.AngleUnits;
 
-namespace xFunc.Maths.Expressions.Trigonometric
+namespace xFunc.Maths.Expressions.Trigonometric;
+
+/// <summary>
+/// Represents the Arccosecant function.
+/// </summary>
+public class Arccsc : InverseTrigonometricExpression
 {
     /// <summary>
-    /// Represents the Arccosecant function.
+    /// Initializes a new instance of the <see cref="Arccsc"/> class.
     /// </summary>
-    public class Arccsc : InverseTrigonometricExpression
+    /// <param name="expression">The argument of function.</param>
+    public Arccsc(IExpression expression)
+        : base(expression)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Arccsc"/> class.
-        /// </summary>
-        /// <param name="expression">The argument of function.</param>
-        public Arccsc(IExpression expression)
-            : base(expression)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Arccsc"/> class.
-        /// </summary>
-        /// <param name="arguments">The argument of function.</param>
-        /// <seealso cref="IExpression"/>
-        internal Arccsc(ImmutableArray<IExpression> arguments)
-            : base(arguments)
-        {
-        }
-
-        /// <inheritdoc />
-        protected override AngleValue ExecuteInternal(NumberValue radian)
-            => AngleValue.Acsc(radian);
-
-        /// <inheritdoc />
-        protected override Complex ExecuteComplex(Complex complex)
-            => ComplexExtensions.Acsc(complex);
-
-        /// <inheritdoc />
-        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-            => analyzer.Analyze(this);
-
-        /// <inheritdoc />
-        protected override TResult AnalyzeInternal<TResult, TContext>(
-            IAnalyzer<TResult, TContext> analyzer,
-            TContext context)
-            => analyzer.Analyze(this, context);
-
-        /// <inheritdoc />
-        public override IExpression Clone(IExpression? argument = null)
-            => new Arccsc(argument ?? Argument);
     }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Arccsc"/> class.
+    /// </summary>
+    /// <param name="arguments">The argument of function.</param>
+    /// <seealso cref="IExpression"/>
+    internal Arccsc(ImmutableArray<IExpression> arguments)
+        : base(arguments)
+    {
+    }
+
+    /// <inheritdoc />
+    protected override AngleValue ExecuteInternal(NumberValue radian)
+        => AngleValue.Acsc(radian);
+
+    /// <inheritdoc />
+    protected override Complex ExecuteComplex(Complex complex)
+        => ComplexExtensions.Acsc(complex);
+
+    /// <inheritdoc />
+    protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        => analyzer.Analyze(this);
+
+    /// <inheritdoc />
+    protected override TResult AnalyzeInternal<TResult, TContext>(
+        IAnalyzer<TResult, TContext> analyzer,
+        TContext context)
+        => analyzer.Analyze(this, context);
+
+    /// <inheritdoc />
+    public override IExpression Clone(IExpression? argument = null)
+        => new Arccsc(argument ?? Argument);
 }

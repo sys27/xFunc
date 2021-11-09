@@ -3,63 +3,59 @@
 
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
-using xFunc.Maths.Analyzers;
-using xFunc.Maths.Expressions.Units.AngleUnits;
-using xFunc.Maths.Expressions.Units.PowerUnits;
 
-namespace xFunc.Maths.Expressions.Units
+namespace xFunc.Maths.Expressions.Units;
+
+/// <summary>
+/// Represents the 'tonumber' function.
+/// </summary>
+public class ToNumber : UnaryExpression
 {
     /// <summary>
-    /// Represents the 'tonumber' function.
+    /// Initializes a new instance of the <see cref="ToNumber"/> class.
     /// </summary>
-    public class ToNumber : UnaryExpression
+    /// <param name="argument">The argument of function.</param>
+    /// <seealso cref="IExpression"/>
+    public ToNumber(IExpression argument)
+        : base(argument)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ToNumber"/> class.
-        /// </summary>
-        /// <param name="argument">The argument of function.</param>
-        /// <seealso cref="IExpression"/>
-        public ToNumber(IExpression argument)
-            : base(argument)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ToNumber"/> class.
-        /// </summary>
-        /// <param name="arguments">The argument of function.</param>
-        /// <seealso cref="IExpression"/>
-        internal ToNumber(ImmutableArray<IExpression> arguments)
-            : base(arguments)
-        {
-        }
-
-        /// <inheritdoc />
-        public override object Execute(ExpressionParameters? parameters)
-        {
-            var result = Argument.Execute(parameters);
-
-            return result switch
-            {
-                AngleValue angleValue => angleValue.Angle,
-                PowerValue powerValue => powerValue.Value,
-                _ => throw new ResultIsNotSupportedException(this, result),
-            };
-        }
-
-        /// <inheritdoc />
-        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-            => analyzer.Analyze(this);
-
-        /// <inheritdoc />
-        [ExcludeFromCodeCoverage]
-        protected override TResult AnalyzeInternal<TResult, TContext>(
-            IAnalyzer<TResult, TContext> analyzer,
-            TContext context)
-            => analyzer.Analyze(this, context);
-
-        /// <inheritdoc />
-        public override IExpression Clone(IExpression? argument = null)
-            => new ToNumber(argument ?? Argument);
     }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ToNumber"/> class.
+    /// </summary>
+    /// <param name="arguments">The argument of function.</param>
+    /// <seealso cref="IExpression"/>
+    internal ToNumber(ImmutableArray<IExpression> arguments)
+        : base(arguments)
+    {
+    }
+
+    /// <inheritdoc />
+    public override object Execute(ExpressionParameters? parameters)
+    {
+        var result = Argument.Execute(parameters);
+
+        return result switch
+        {
+            AngleValue angleValue => angleValue.Angle,
+            PowerValue powerValue => powerValue.Value,
+            _ => throw new ResultIsNotSupportedException(this, result),
+        };
+    }
+
+    /// <inheritdoc />
+    protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        => analyzer.Analyze(this);
+
+    /// <inheritdoc />
+    [ExcludeFromCodeCoverage]
+    protected override TResult AnalyzeInternal<TResult, TContext>(
+        IAnalyzer<TResult, TContext> analyzer,
+        TContext context)
+        => analyzer.Analyze(this, context);
+
+    /// <inheritdoc />
+    public override IExpression Clone(IExpression? argument = null)
+        => new ToNumber(argument ?? Argument);
 }

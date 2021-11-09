@@ -1,85 +1,79 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using xFunc.Maths.Analyzers.TypeAnalyzers;
-using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.LogicalAndBitwise;
-using Xunit;
+namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
-namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
+public class RootTests : TypeAnalyzerBaseTests
 {
-    public class RootTests : TypeAnalyzerBaseTests
+    [Fact]
+    public void TestRootUndefined()
     {
-        [Fact]
-        public void TestRootUndefined()
-        {
-            var exp = new Root(Variable.X, Variable.X);
+        var exp = new Root(Variable.X, Variable.X);
 
-            Test(exp, ResultTypes.Undefined);
-        }
+        Test(exp, ResultTypes.Undefined);
+    }
 
-        [Fact]
-        public void TestRootUndefinedAndNumber()
-        {
-            var exp = new Root(Variable.X, Number.Two);
+    [Fact]
+    public void TestRootUndefinedAndNumber()
+    {
+        var exp = new Root(Variable.X, Number.Two);
 
-            Test(exp, ResultTypes.Undefined);
-        }
+        Test(exp, ResultTypes.Undefined);
+    }
 
-        [Fact]
-        public void TestRootNumberAndUndefined()
-        {
-            var exp = new Root(Number.Two, Variable.X);
+    [Fact]
+    public void TestRootNumberAndUndefined()
+    {
+        var exp = new Root(Number.Two, Variable.X);
 
-            Test(exp, ResultTypes.Undefined);
-        }
+        Test(exp, ResultTypes.Undefined);
+    }
 
-        [Fact]
-        public void TestRootNumber()
-        {
-            var exp = new Root(new Number(4), Number.Two);
+    [Fact]
+    public void TestRootNumber()
+    {
+        var exp = new Root(new Number(4), Number.Two);
 
-            Test(exp, ResultTypes.Undefined);
-        }
+        Test(exp, ResultTypes.Undefined);
+    }
 
-        [Fact]
-        public void TestRootUndefinedAndBool()
-        {
-            var exp = new Root(Variable.X, Bool.False);
+    [Fact]
+    public void TestRootUndefinedAndBool()
+    {
+        var exp = new Root(Variable.X, Bool.False);
 
-            TestBinaryException(exp);
-        }
+        TestBinaryException(exp);
+    }
 
-        [Fact]
-        public void TestRootBoolAndUndefined()
-        {
-            var exp = new Root(Bool.False, Variable.X);
+    [Fact]
+    public void TestRootBoolAndUndefined()
+    {
+        var exp = new Root(Bool.False, Variable.X);
 
-            TestBinaryException(exp);
-        }
+        TestBinaryException(exp);
+    }
 
-        [Fact]
-        public void TestRootNumberAndBool()
-        {
-            var exp = new Root(Number.Two, Bool.False);
+    [Fact]
+    public void TestRootNumberAndBool()
+    {
+        var exp = new Root(Number.Two, Bool.False);
 
-            TestBinaryException(exp);
-        }
+        TestBinaryException(exp);
+    }
 
-        [Fact]
-        public void TestRootBoolAndNumber()
-        {
-            var exp = new Root(Bool.False, Number.Two);
+    [Fact]
+    public void TestRootBoolAndNumber()
+    {
+        var exp = new Root(Bool.False, Number.Two);
 
-            TestBinaryException(exp);
-        }
+        TestBinaryException(exp);
+    }
 
-        [Fact]
-        public void TestRootInvalidArgsException()
-        {
-            var exp = new Root(Bool.False, Bool.False);
+    [Fact]
+    public void TestRootInvalidArgsException()
+    {
+        var exp = new Root(Bool.False, Bool.False);
 
-            TestException(exp);
-        }
+        TestException(exp);
     }
 }

@@ -1,63 +1,56 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.LogicalAndBitwise;
-using xFunc.Maths.Expressions.Units.AngleUnits;
-using xFunc.Maths.Expressions.Units.PowerUnits;
-using Xunit;
+namespace xFunc.Tests.Expressions;
 
-namespace xFunc.Tests.Expressions
+public class SignTest : BaseExpressionTests
 {
-    public class SignTest : BaseExpressionTests
+    [Fact]
+    public void PositiveSignTest()
     {
-        [Fact]
-        public void PositiveSignTest()
-        {
-            var exp = new Sign(new Number(5));
-            var result = exp.Execute();
+        var exp = new Sign(new Number(5));
+        var result = exp.Execute();
 
-            Assert.Equal(new NumberValue(1.0), result);
-        }
+        Assert.Equal(new NumberValue(1.0), result);
+    }
 
-        [Fact]
-        public void NegativeSignTest()
-        {
-            var exp = new Sign(new Number(-5));
-            var result = exp.Execute();
+    [Fact]
+    public void NegativeSignTest()
+    {
+        var exp = new Sign(new Number(-5));
+        var result = exp.Execute();
 
-            Assert.Equal(-1.0, result);
-        }
+        Assert.Equal(-1.0, result);
+    }
 
-        [Fact]
-        public void AngleSignTest()
-        {
-            var exp = new Sign(AngleValue.Degree(10).AsExpression());
-            var result = exp.Execute();
+    [Fact]
+    public void AngleSignTest()
+    {
+        var exp = new Sign(AngleValue.Degree(10).AsExpression());
+        var result = exp.Execute();
 
-            Assert.Equal(new NumberValue(1.0), result);
-        }
+        Assert.Equal(new NumberValue(1.0), result);
+    }
 
-        [Fact]
-        public void PowerSignTest()
-        {
-            var exp = new Sign(PowerValue.Watt(10).AsExpression());
-            var result = exp.Execute();
+    [Fact]
+    public void PowerSignTest()
+    {
+        var exp = new Sign(PowerValue.Watt(10).AsExpression());
+        var result = exp.Execute();
 
-            Assert.Equal(new NumberValue(1.0), result);
-        }
+        Assert.Equal(new NumberValue(1.0), result);
+    }
 
-        [Fact]
-        public void InvalidParameterTest()
-            => TestNotSupported(new Sign(Bool.False));
+    [Fact]
+    public void InvalidParameterTest()
+        => TestNotSupported(new Sign(Bool.False));
 
-        [Fact]
-        public void CloneTest()
-        {
-            var exp = new Sign(new Number(-5));
-            var clone = exp.Clone();
+    [Fact]
+    public void CloneTest()
+    {
+        var exp = new Sign(new Number(-5));
+        var clone = exp.Clone();
 
-            Assert.Equal(exp, clone);
-        }
+        Assert.Equal(exp, clone);
     }
 }

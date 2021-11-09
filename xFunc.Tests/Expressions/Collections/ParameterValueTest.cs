@@ -1,46 +1,42 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using xFunc.Maths.Expressions.Collections;
-using Xunit;
+namespace xFunc.Tests.Expressions.Collections;
 
-namespace xFunc.Tests.Expressions.Collections
+public class ParameterValueTest
 {
-    public class ParameterValueTest
+    [Fact]
+    public void EqualNullTest()
     {
-        [Fact]
-        public void EqualNullTest()
-        {
-            var value = new ParameterValue(1);
+        var value = new ParameterValue(1);
 
-            Assert.False(value.Equals(null as object));
-        }
+        Assert.False(value.Equals(null as object));
+    }
 
-        [Fact]
-        public void EqualObjectTest()
-        {
-            var x = new ParameterValue(1);
-            var y = new ParameterValue(1) as object;
+    [Fact]
+    public void EqualObjectTest()
+    {
+        var x = new ParameterValue(1);
+        var y = new ParameterValue(1) as object;
 
-            Assert.True(x.Equals(y));
-        }
+        Assert.True(x.Equals(y));
+    }
 
-        [Fact]
-        public void EqualOperatorTest()
-        {
-            var x = new ParameterValue(1);
-            var y = new ParameterValue(1);
+    [Fact]
+    public void EqualOperatorTest()
+    {
+        var x = new ParameterValue(1);
+        var y = new ParameterValue(1);
 
-            Assert.True(x == y);
-        }
+        Assert.True(x == y);
+    }
 
-        [Fact]
-        public void NotEqualOperatorTest()
-        {
-            var x = new ParameterValue(1);
-            var y = new ParameterValue(2);
+    [Fact]
+    public void NotEqualOperatorTest()
+    {
+        var x = new ParameterValue(1);
+        var y = new ParameterValue(2);
 
-            Assert.True(x != y);
-        }
+        Assert.True(x != y);
     }
 }

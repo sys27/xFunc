@@ -3,59 +3,57 @@
 
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
-using xFunc.Maths.Analyzers;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions;
+
+/// <summary>
+/// Represents the 'tobin' function.
+/// </summary>
+public class ToBin : UnaryExpression
 {
     /// <summary>
-    /// Represents the 'tobin' function.
+    /// Initializes a new instance of the <see cref="ToBin"/> class.
     /// </summary>
-    public class ToBin : UnaryExpression
+    /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded down.</param>
+    public ToBin(IExpression argument)
+        : base(argument)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ToBin"/> class.
-        /// </summary>
-        /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded down.</param>
-        public ToBin(IExpression argument)
-            : base(argument)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ToBin"/> class.
-        /// </summary>
-        /// <param name="arguments">The argument of function.</param>
-        /// <seealso cref="IExpression"/>
-        internal ToBin(ImmutableArray<IExpression> arguments)
-            : base(arguments)
-        {
-        }
-
-        /// <inheritdoc />
-        public override object Execute(ExpressionParameters? parameters)
-        {
-            var result = Argument.Execute(parameters);
-
-            return result switch
-            {
-                NumberValue number => NumberValue.ToBin(number),
-                _ => throw new ResultIsNotSupportedException(this, result),
-            };
-        }
-
-        /// <inheritdoc />
-        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-            => analyzer.Analyze(this);
-
-        /// <inheritdoc />
-        [ExcludeFromCodeCoverage]
-        protected override TResult AnalyzeInternal<TResult, TContext>(
-            IAnalyzer<TResult, TContext> analyzer,
-            TContext context)
-            => analyzer.Analyze(this, context);
-
-        /// <inheritdoc />
-        public override IExpression Clone(IExpression? argument = null)
-            => new ToBin(argument ?? Argument);
     }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ToBin"/> class.
+    /// </summary>
+    /// <param name="arguments">The argument of function.</param>
+    /// <seealso cref="IExpression"/>
+    internal ToBin(ImmutableArray<IExpression> arguments)
+        : base(arguments)
+    {
+    }
+
+    /// <inheritdoc />
+    public override object Execute(ExpressionParameters? parameters)
+    {
+        var result = Argument.Execute(parameters);
+
+        return result switch
+        {
+            NumberValue number => NumberValue.ToBin(number),
+            _ => throw new ResultIsNotSupportedException(this, result),
+        };
+    }
+
+    /// <inheritdoc />
+    protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        => analyzer.Analyze(this);
+
+    /// <inheritdoc />
+    [ExcludeFromCodeCoverage]
+    protected override TResult AnalyzeInternal<TResult, TContext>(
+        IAnalyzer<TResult, TContext> analyzer,
+        TContext context)
+        => analyzer.Analyze(this, context);
+
+    /// <inheritdoc />
+    public override IExpression Clone(IExpression? argument = null)
+        => new ToBin(argument ?? Argument);
 }

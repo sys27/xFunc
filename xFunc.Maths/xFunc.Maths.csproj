@@ -35,6 +35,7 @@ https://github.com/sys27/xFunc/wiki/Breaking-Changes</PackageReleaseNotes>
     <AnalysisLevel>latest</AnalysisLevel>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <ImplicitUsings>enable</ImplicitUsings>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   
   <ItemGroup>
@@ -63,7 +64,7 @@ https://github.com/sys27/xFunc/wiki/Breaking-Changes</PackageReleaseNotes>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -75,6 +76,7 @@ https://github.com/sys27/xFunc/wiki/Breaking-Changes</PackageReleaseNotes>
     </None>
     <None Include="..\xFunc.png" Pack="true" PackagePath="" />
     <AdditionalFiles Include="..\.stylecop.json" Link=".stylecop.json" />
+    <None Include="..\README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>

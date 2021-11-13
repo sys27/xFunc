@@ -1,47 +1,40 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
-using xFunc.Maths.Analyzers.TypeAnalyzers;
-using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.LogicalAndBitwise;
-using Xunit;
+namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
-namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
+public class NumericConvertionTests : TypeAnalyzerBaseTests
 {
-    public class NumericConvertionTests : TypeAnalyzerBaseTests
+    [Theory]
+    [InlineData(typeof(ToBin))]
+    [InlineData(typeof(ToOct))]
+    [InlineData(typeof(ToHex))]
+    public void UndefinedTest(Type type)
     {
-        [Theory]
-        [InlineData(typeof(ToBin))]
-        [InlineData(typeof(ToOct))]
-        [InlineData(typeof(ToHex))]
-        public void UndefinedTest(Type type)
-        {
-            var exp = Create(type, Variable.X);
+        var exp = Create(type, Variable.X);
 
-            Test(exp, ResultTypes.String);
-        }
+        Test(exp, ResultTypes.String);
+    }
 
-        [Theory]
-        [InlineData(typeof(ToBin))]
-        [InlineData(typeof(ToOct))]
-        [InlineData(typeof(ToHex))]
-        public void NumberTest(Type type)
-        {
-            var exp = Create(type, new Number(10));
+    [Theory]
+    [InlineData(typeof(ToBin))]
+    [InlineData(typeof(ToOct))]
+    [InlineData(typeof(ToHex))]
+    public void NumberTest(Type type)
+    {
+        var exp = Create(type, new Number(10));
 
-            Test(exp, ResultTypes.String);
-        }
+        Test(exp, ResultTypes.String);
+    }
 
-        [Theory]
-        [InlineData(typeof(ToBin))]
-        [InlineData(typeof(ToOct))]
-        [InlineData(typeof(ToHex))]
-        public void BoolTest(Type type)
-        {
-            var exp = Create(type, Bool.False);
+    [Theory]
+    [InlineData(typeof(ToBin))]
+    [InlineData(typeof(ToOct))]
+    [InlineData(typeof(ToHex))]
+    public void BoolTest(Type type)
+    {
+        var exp = Create(type, Bool.False);
 
-            TestException(exp);
-        }
+        TestException(exp);
     }
 }

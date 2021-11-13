@@ -6,7 +6,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "Build",
-            "program": "${workspaceFolder}/xFunc.Benchmark/bin/Debug/net5.0/xFunc.Benchmark.dll",
+            "program": "${workspaceFolder}/xFunc.Benchmark/bin/Debug/net6.0/xFunc.Benchmark.dll",
             "args": [],
             "cwd": "${workspaceFolder}/xFunc.Benchmark",
             "console": "internalConsole",
@@ -17,7 +17,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "Build",
-            "program": "${workspaceFolder}/xFunc.DotnetTool/bin/Debug/net5.0/xFunc.DotnetTool.dll",
+            "program": "${workspaceFolder}/xFunc.DotnetTool/bin/Debug/net6.0/xFunc.DotnetTool.dll",
             "args": [
                 "interactive"
             ],

@@ -2,42 +2,40 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics.CodeAnalysis;
-using xFunc.Maths.Analyzers;
 
-namespace xFunc.Maths.Expressions.Programming
+namespace xFunc.Maths.Expressions.Programming;
+
+/// <summary>
+/// Represents the "-=" operator.
+/// </summary>
+public class SubAssign : VariableBinaryExpression
 {
     /// <summary>
-    /// Represents the "-=" operator.
+    /// Initializes a new instance of the <see cref="SubAssign"/> class.
     /// </summary>
-    public class SubAssign : VariableBinaryExpression
+    /// <param name="variable">The variable.</param>
+    /// <param name="exp">The expression.</param>
+    public SubAssign(Variable variable, IExpression exp)
+        : base(variable, exp)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SubAssign"/> class.
-        /// </summary>
-        /// <param name="variable">The variable.</param>
-        /// <param name="exp">The expression.</param>
-        public SubAssign(Variable variable, IExpression exp)
-            : base(variable, exp)
-        {
-        }
-
-        /// <inheritdoc />
-        protected override object Execute(NumberValue variableValue, NumberValue value)
-            => variableValue - value;
-
-        /// <inheritdoc />
-        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-            => analyzer.Analyze(this);
-
-        /// <inheritdoc />
-        [ExcludeFromCodeCoverage]
-        protected override TResult AnalyzeInternal<TResult, TContext>(
-            IAnalyzer<TResult, TContext> analyzer,
-            TContext context)
-            => analyzer.Analyze(this, context);
-
-        /// <inheritdoc />
-        public override IExpression Clone(Variable? variable = null, IExpression? value = null)
-            => new SubAssign(variable ?? Variable, value ?? Value);
     }
+
+    /// <inheritdoc />
+    protected override object Execute(NumberValue variableValue, NumberValue value)
+        => variableValue - value;
+
+    /// <inheritdoc />
+    protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        => analyzer.Analyze(this);
+
+    /// <inheritdoc />
+    [ExcludeFromCodeCoverage]
+    protected override TResult AnalyzeInternal<TResult, TContext>(
+        IAnalyzer<TResult, TContext> analyzer,
+        TContext context)
+        => analyzer.Analyze(this, context);
+
+    /// <inheritdoc />
+    public override IExpression Clone(Variable? variable = null, IExpression? value = null)
+        => new SubAssign(variable ?? Variable, value ?? Value);
 }

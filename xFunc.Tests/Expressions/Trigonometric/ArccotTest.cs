@@ -2,48 +2,41 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Numerics;
-using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.ComplexNumbers;
-using xFunc.Maths.Expressions.LogicalAndBitwise;
-using xFunc.Maths.Expressions.Trigonometric;
-using xFunc.Maths.Expressions.Units.AngleUnits;
-using Xunit;
 
-namespace xFunc.Tests.Expressions.Trigonometric
+namespace xFunc.Tests.Expressions.Trigonometric;
+
+public class ArccotTest : BaseExpressionTests
 {
-    public class ArccotTest : BaseExpressionTests
+    [Fact]
+    public void ExecuteNumberTest()
     {
-        [Fact]
-        public void ExecuteNumberTest()
-        {
-            var exp = new Arccot(Number.One);
-            var result = exp.Execute();
-            var expected = AngleValue.Radian(0.7853981633974483);
-            Assert.Equal(expected, result);
-        }
+        var exp = new Arccot(Number.One);
+        var result = exp.Execute();
+        var expected = AngleValue.Radian(0.7853981633974483);
+        Assert.Equal(expected, result);
+    }
 
-        [Fact]
-        public void ExecuteComplexNumberTest()
-        {
-            var complex = new Complex(3, 2);
-            var exp = new Arccot(new ComplexNumber(complex));
-            var result = (Complex)exp.Execute();
+    [Fact]
+    public void ExecuteComplexNumberTest()
+    {
+        var complex = new Complex(3, 2);
+        var exp = new Arccot(new ComplexNumber(complex));
+        var result = (Complex)exp.Execute();
 
-            Assert.Equal(0.23182380450040308, result.Real, 15);
-            Assert.Equal(-0.14694666622552988, result.Imaginary, 15);
-        }
+        Assert.Equal(0.23182380450040308, result.Real, 15);
+        Assert.Equal(-0.14694666622552988, result.Imaginary, 15);
+    }
 
-        [Fact]
-        public void ExecuteTestException()
-            => TestNotSupported(new Arccot(Bool.False));
+    [Fact]
+    public void ExecuteTestException()
+        => TestNotSupported(new Arccot(Bool.False));
 
-        [Fact]
-        public void CloneTest()
-        {
-            var exp = new Arccot(Number.One);
-            var clone = exp.Clone();
+    [Fact]
+    public void CloneTest()
+    {
+        var exp = new Arccot(Number.One);
+        var clone = exp.Clone();
 
-            Assert.Equal(exp, clone);
-        }
+        Assert.Equal(exp, clone);
     }
 }

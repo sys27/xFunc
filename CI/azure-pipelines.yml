@@ -25,10 +25,10 @@ jobs:
 
     steps:
     - task: UseDotNet@2
-      displayName: 'Install .NET 5'
+      displayName: 'Install .NET 6'
       inputs:
         packageType: 'sdk'
-        version: '5.0.x'
+        version: '6.0.x'
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet restore'
@@ -40,7 +40,7 @@ jobs:
       displayName: 'dotnet build'
       inputs:
         projects: '$(solution)'
-        arguments: '-c $(buildConfiguration)'
+        arguments: '--nologo -c $(buildConfiguration)'
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet test'
@@ -105,5 +105,5 @@ jobs:
 
     - task: PublishPipelineArtifact@1
       inputs:
-        path: xFunc/bin/Release/net5.0-windows
-        artifact: xFunc.UI (.NET 5)
+        path: xFunc/bin/Release/net6.0-windows
+        artifact: xFunc.UI (.NET 6)

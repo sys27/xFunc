@@ -1,186 +1,177 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using xFunc.Maths.Analyzers.TypeAnalyzers;
-using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.ComplexNumbers;
-using xFunc.Maths.Expressions.LogicalAndBitwise;
-using xFunc.Maths.Expressions.Units.AngleUnits;
-using xFunc.Maths.Expressions.Units.PowerUnits;
-using Xunit;
+namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
-namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
+public class DivTests : TypeAnalyzerBaseTests
 {
-    public class DivTests : TypeAnalyzerBaseTests
+    [Fact]
+    public void TestDivNumberNumberTest()
     {
-        [Fact]
-        public void TestDivNumberNumberTest()
-        {
-            var exp = new Div(Number.One, Number.Two);
+        var exp = new Div(Number.One, Number.Two);
 
-            Test(exp, ResultTypes.Number);
-        }
+        Test(exp, ResultTypes.Number);
+    }
 
-        [Fact]
-        public void TestDivComplexNumberComplexNumberTest()
-        {
-            var exp = new Div(new ComplexNumber(3, 2), new ComplexNumber(2, 4));
+    [Fact]
+    public void TestDivComplexNumberComplexNumberTest()
+    {
+        var exp = new Div(new ComplexNumber(3, 2), new ComplexNumber(2, 4));
 
-            Test(exp, ResultTypes.ComplexNumber);
-        }
+        Test(exp, ResultTypes.ComplexNumber);
+    }
 
-        [Fact]
-        public void TestDivNumberComplexNumberTest()
-        {
-            var exp = new Div(new Number(3), new ComplexNumber(2, 4));
+    [Fact]
+    public void TestDivNumberComplexNumberTest()
+    {
+        var exp = new Div(new Number(3), new ComplexNumber(2, 4));
 
-            Test(exp, ResultTypes.ComplexNumber);
-        }
+        Test(exp, ResultTypes.ComplexNumber);
+    }
 
-        [Fact]
-        public void TestDivComplexNumberNumberTest()
-        {
-            var exp = new Div(new ComplexNumber(3, 2), Number.Two);
+    [Fact]
+    public void TestDivComplexNumberNumberTest()
+    {
+        var exp = new Div(new ComplexNumber(3, 2), Number.Two);
 
-            Test(exp, ResultTypes.ComplexNumber);
-        }
+        Test(exp, ResultTypes.ComplexNumber);
+    }
 
-        [Fact]
-        public void TestDivComplexNumberBoolException()
-        {
-            var exp = new Div(new ComplexNumber(3, 2), Bool.True);
+    [Fact]
+    public void TestDivComplexNumberBoolException()
+    {
+        var exp = new Div(new ComplexNumber(3, 2), Bool.True);
 
-            TestBinaryException(exp);
-        }
+        TestBinaryException(exp);
+    }
 
-        [Fact]
-        public void TestDivBoolComplexNumberException()
-        {
-            var exp = new Div(Bool.True, new ComplexNumber(3, 2));
+    [Fact]
+    public void TestDivBoolComplexNumberException()
+    {
+        var exp = new Div(Bool.True, new ComplexNumber(3, 2));
 
-            TestBinaryException(exp);
-        }
+        TestBinaryException(exp);
+    }
 
-        [Fact]
-        public void TestDivNumberBoolException()
-        {
-            var exp = new Div(new Number(3), Bool.True);
+    [Fact]
+    public void TestDivNumberBoolException()
+    {
+        var exp = new Div(new Number(3), Bool.True);
 
-            TestBinaryException(exp);
-        }
+        TestBinaryException(exp);
+    }
 
-        [Fact]
-        public void TestDivBoolNumberException()
-        {
-            var exp = new Div(Bool.True, new Number(3));
+    [Fact]
+    public void TestDivBoolNumberException()
+    {
+        var exp = new Div(Bool.True, new Number(3));
 
-            TestBinaryException(exp);
-        }
+        TestBinaryException(exp);
+    }
 
-        [Fact]
-        public void TestDivNumberSqrtComplexTest()
-        {
-            var exp = new Div(new Sqrt(new Number(-16)), Number.Two);
+    [Fact]
+    public void TestDivNumberSqrtComplexTest()
+    {
+        var exp = new Div(new Sqrt(new Number(-16)), Number.Two);
 
-            Test(exp, ResultTypes.Undefined);
-        }
+        Test(exp, ResultTypes.Undefined);
+    }
 
-        [Fact]
-        public void TestDivTwoVarTest()
-        {
-            var exp = new Div(Variable.X, Variable.X);
+    [Fact]
+    public void TestDivTwoVarTest()
+    {
+        var exp = new Div(Variable.X, Variable.X);
 
-            Test(exp, ResultTypes.Undefined);
-        }
+        Test(exp, ResultTypes.Undefined);
+    }
 
-        [Fact]
-        public void TestDivNumberAndVarTest()
-        {
-            var exp = new Div(Number.One, Variable.X);
+    [Fact]
+    public void TestDivNumberAndVarTest()
+    {
+        var exp = new Div(Number.One, Variable.X);
 
-            Test(exp, ResultTypes.Undefined);
-        }
+        Test(exp, ResultTypes.Undefined);
+    }
 
-        [Fact]
-        public void TestDivThreeVarTest()
-        {
-            var exp = new Div(new Add(Variable.X, Variable.X), Variable.X);
+    [Fact]
+    public void TestDivThreeVarTest()
+    {
+        var exp = new Div(new Add(Variable.X, Variable.X), Variable.X);
 
-            Test(exp, ResultTypes.Undefined);
-        }
+        Test(exp, ResultTypes.Undefined);
+    }
 
-        [Fact]
-        public void TestDivException()
-        {
-            var exp = new Div(Bool.False, Bool.False);
+    [Fact]
+    public void TestDivException()
+    {
+        var exp = new Div(Bool.False, Bool.False);
 
-            TestException(exp);
-        }
+        TestException(exp);
+    }
 
-        [Fact]
-        public void TestDivNumberAngle()
-        {
-            var exp = new Div(
-                new Number(10),
-                AngleValue.Radian(10).AsExpression()
-            );
+    [Fact]
+    public void TestDivNumberAngle()
+    {
+        var exp = new Div(
+            new Number(10),
+            AngleValue.Radian(10).AsExpression()
+        );
 
-            Test(exp, ResultTypes.AngleNumber);
-        }
+        Test(exp, ResultTypes.AngleNumber);
+    }
 
-        [Fact]
-        public void TestDivAngleNumber()
-        {
-            var exp = new Div(
-                AngleValue.Degree(10).AsExpression(),
-                new Number(10)
-            );
+    [Fact]
+    public void TestDivAngleNumber()
+    {
+        var exp = new Div(
+            AngleValue.Degree(10).AsExpression(),
+            new Number(10)
+        );
 
-            Test(exp, ResultTypes.AngleNumber);
-        }
+        Test(exp, ResultTypes.AngleNumber);
+    }
 
-        [Fact]
-        public void TestDivAngleAngle()
-        {
-            var exp = new Div(
-                AngleValue.Degree(10).AsExpression(),
-                AngleValue.Radian(10).AsExpression()
-            );
+    [Fact]
+    public void TestDivAngleAngle()
+    {
+        var exp = new Div(
+            AngleValue.Degree(10).AsExpression(),
+            AngleValue.Radian(10).AsExpression()
+        );
 
-            Test(exp, ResultTypes.AngleNumber);
-        }
+        Test(exp, ResultTypes.AngleNumber);
+    }
 
-        [Fact]
-        public void TestDivNumberPower()
-        {
-            var exp = new Div(
-                new Number(10),
-                PowerValue.Watt(10).AsExpression()
-            );
+    [Fact]
+    public void TestDivNumberPower()
+    {
+        var exp = new Div(
+            new Number(10),
+            PowerValue.Watt(10).AsExpression()
+        );
 
-            Test(exp, ResultTypes.PowerNumber);
-        }
+        Test(exp, ResultTypes.PowerNumber);
+    }
 
-        [Fact]
-        public void TestDivPowerNumber()
-        {
-            var exp = new Div(
-                PowerValue.Watt(10).AsExpression(),
-                new Number(10)
-            );
+    [Fact]
+    public void TestDivPowerNumber()
+    {
+        var exp = new Div(
+            PowerValue.Watt(10).AsExpression(),
+            new Number(10)
+        );
 
-            Test(exp, ResultTypes.PowerNumber);
-        }
+        Test(exp, ResultTypes.PowerNumber);
+    }
 
-        [Fact]
-        public void TestDivPowerPower()
-        {
-            var exp = new Div(
-                PowerValue.Watt(10).AsExpression(),
-                PowerValue.Watt(10).AsExpression()
-            );
+    [Fact]
+    public void TestDivPowerPower()
+    {
+        var exp = new Div(
+            PowerValue.Watt(10).AsExpression(),
+            PowerValue.Watt(10).AsExpression()
+        );
 
-            Test(exp, ResultTypes.PowerNumber);
-        }
+        Test(exp, ResultTypes.PowerNumber);
     }
 }

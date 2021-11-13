@@ -3,55 +3,52 @@
 
 using System.Collections.Immutable;
 using System.Numerics;
-using xFunc.Maths.Analyzers;
-using xFunc.Maths.Expressions.Units.AngleUnits;
 
-namespace xFunc.Maths.Expressions.Hyperbolic
+namespace xFunc.Maths.Expressions.Hyperbolic;
+
+/// <summary>
+/// Represents the Artanh function.
+/// </summary>
+public class Artanh : InverseHyperbolicExpression
 {
     /// <summary>
-    /// Represents the Artanh function.
+    /// Initializes a new instance of the <see cref="Artanh"/> class.
     /// </summary>
-    public class Artanh : InverseHyperbolicExpression
+    /// <param name="expression">The argument of function.</param>
+    public Artanh(IExpression expression)
+        : base(expression)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Artanh"/> class.
-        /// </summary>
-        /// <param name="expression">The argument of function.</param>
-        public Artanh(IExpression expression)
-            : base(expression)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Artanh"/> class.
-        /// </summary>
-        /// <param name="arguments">The argument of function.</param>
-        /// <seealso cref="IExpression"/>
-        internal Artanh(ImmutableArray<IExpression> arguments)
-            : base(arguments)
-        {
-        }
-
-        /// <inheritdoc />
-        protected override AngleValue ExecuteInternal(NumberValue radian)
-            => AngleValue.Atanh(radian);
-
-        /// <inheritdoc />
-        protected override Complex ExecuteComplex(Complex complex)
-            => ComplexExtensions.Atanh(complex);
-
-        /// <inheritdoc />
-        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-            => analyzer.Analyze(this);
-
-        /// <inheritdoc />
-        protected override TResult AnalyzeInternal<TResult, TContext>(
-            IAnalyzer<TResult, TContext> analyzer,
-            TContext context)
-            => analyzer.Analyze(this, context);
-
-        /// <inheritdoc />
-        public override IExpression Clone(IExpression? argument = null)
-            => new Artanh(argument ?? Argument);
     }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Artanh"/> class.
+    /// </summary>
+    /// <param name="arguments">The argument of function.</param>
+    /// <seealso cref="IExpression"/>
+    internal Artanh(ImmutableArray<IExpression> arguments)
+        : base(arguments)
+    {
+    }
+
+    /// <inheritdoc />
+    protected override AngleValue ExecuteInternal(NumberValue radian)
+        => AngleValue.Atanh(radian);
+
+    /// <inheritdoc />
+    protected override Complex ExecuteComplex(Complex complex)
+        => ComplexExtensions.Atanh(complex);
+
+    /// <inheritdoc />
+    protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        => analyzer.Analyze(this);
+
+    /// <inheritdoc />
+    protected override TResult AnalyzeInternal<TResult, TContext>(
+        IAnalyzer<TResult, TContext> analyzer,
+        TContext context)
+        => analyzer.Analyze(this, context);
+
+    /// <inheritdoc />
+    public override IExpression Clone(IExpression? argument = null)
+        => new Artanh(argument ?? Argument);
 }

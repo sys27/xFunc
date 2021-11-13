@@ -2,40 +2,38 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics.CodeAnalysis;
-using xFunc.Maths.Analyzers;
 
-namespace xFunc.Maths.Expressions.Programming
+namespace xFunc.Maths.Expressions.Programming;
+
+/// <summary>
+/// Represents the increment operator.
+/// </summary>
+public class Inc : VariableUnaryExpression
 {
     /// <summary>
-    /// Represents the increment operator.
+    /// Initializes a new instance of the <see cref="Inc"/> class.
     /// </summary>
-    public class Inc : VariableUnaryExpression
+    /// <param name="argument">The variable.</param>
+    public Inc(Variable argument)
+        : base(argument)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Inc"/> class.
-        /// </summary>
-        /// <param name="argument">The variable.</param>
-        public Inc(Variable argument)
-            : base(argument)
-        {
-        }
-
-        /// <inheritdoc />
-        protected override object Execute(NumberValue number) => number + 1;
-
-        /// <inheritdoc />
-        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-            => analyzer.Analyze(this);
-
-        /// <inheritdoc />
-        [ExcludeFromCodeCoverage]
-        protected override TResult AnalyzeInternal<TResult, TContext>(
-            IAnalyzer<TResult, TContext> analyzer,
-            TContext context)
-            => analyzer.Analyze(this, context);
-
-        /// <inheritdoc />
-        public override IExpression Clone(Variable? variable = null)
-            => new Inc(variable ?? Variable);
     }
+
+    /// <inheritdoc />
+    protected override object Execute(NumberValue number) => number + 1;
+
+    /// <inheritdoc />
+    protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        => analyzer.Analyze(this);
+
+    /// <inheritdoc />
+    [ExcludeFromCodeCoverage]
+    protected override TResult AnalyzeInternal<TResult, TContext>(
+        IAnalyzer<TResult, TContext> analyzer,
+        TContext context)
+        => analyzer.Analyze(this, context);
+
+    /// <inheritdoc />
+    public override IExpression Clone(Variable? variable = null)
+        => new Inc(variable ?? Variable);
 }

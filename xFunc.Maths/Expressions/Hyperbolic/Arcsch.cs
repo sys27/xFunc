@@ -3,55 +3,52 @@
 
 using System.Collections.Immutable;
 using System.Numerics;
-using xFunc.Maths.Analyzers;
-using xFunc.Maths.Expressions.Units.AngleUnits;
 
-namespace xFunc.Maths.Expressions.Hyperbolic
+namespace xFunc.Maths.Expressions.Hyperbolic;
+
+/// <summary>
+/// Represents the Arcsch function.
+/// </summary>
+public class Arcsch : InverseHyperbolicExpression
 {
     /// <summary>
-    /// Represents the Arcsch function.
+    /// Initializes a new instance of the <see cref="Arcsch"/> class.
     /// </summary>
-    public class Arcsch : InverseHyperbolicExpression
+    /// <param name="expression">The argument of function.</param>
+    public Arcsch(IExpression expression)
+        : base(expression)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Arcsch"/> class.
-        /// </summary>
-        /// <param name="expression">The argument of function.</param>
-        public Arcsch(IExpression expression)
-            : base(expression)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Arcsch"/> class.
-        /// </summary>
-        /// <param name="arguments">The argument of function.</param>
-        /// <seealso cref="IExpression"/>
-        internal Arcsch(ImmutableArray<IExpression> arguments)
-            : base(arguments)
-        {
-        }
-
-        /// <inheritdoc />
-        protected override AngleValue ExecuteInternal(NumberValue radian)
-            => AngleValue.Acsch(radian);
-
-        /// <inheritdoc />
-        protected override Complex ExecuteComplex(Complex complex)
-            => ComplexExtensions.Acsch(complex);
-
-        /// <inheritdoc />
-        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-            => analyzer.Analyze(this);
-
-        /// <inheritdoc />
-        protected override TResult AnalyzeInternal<TResult, TContext>(
-            IAnalyzer<TResult, TContext> analyzer,
-            TContext context)
-            => analyzer.Analyze(this, context);
-
-        /// <inheritdoc />
-        public override IExpression Clone(IExpression? argument = null)
-            => new Arcsch(argument ?? Argument);
     }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Arcsch"/> class.
+    /// </summary>
+    /// <param name="arguments">The argument of function.</param>
+    /// <seealso cref="IExpression"/>
+    internal Arcsch(ImmutableArray<IExpression> arguments)
+        : base(arguments)
+    {
+    }
+
+    /// <inheritdoc />
+    protected override AngleValue ExecuteInternal(NumberValue radian)
+        => AngleValue.Acsch(radian);
+
+    /// <inheritdoc />
+    protected override Complex ExecuteComplex(Complex complex)
+        => ComplexExtensions.Acsch(complex);
+
+    /// <inheritdoc />
+    protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        => analyzer.Analyze(this);
+
+    /// <inheritdoc />
+    protected override TResult AnalyzeInternal<TResult, TContext>(
+        IAnalyzer<TResult, TContext> analyzer,
+        TContext context)
+        => analyzer.Analyze(this, context);
+
+    /// <inheritdoc />
+    public override IExpression Clone(IExpression? argument = null)
+        => new Arcsch(argument ?? Argument);
 }

@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>netcoreapp3.1;net5.0-windows</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;net6.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <AssemblyVersion>4.0.0</AssemblyVersion>
     <FileVersion>4.0.0</FileVersion>
     <InformationalVersion>4.0.0</InformationalVersion>
     <NeutralLanguage>en</NeutralLanguage>
-    <Copyright>Copyright © 2012-2020 Dmytro Kyshchenko</Copyright>
+    <Copyright>Copyright © 2012-2021 Dmytro Kyshchenko</Copyright>
     <Title>xFunc</Title>
     <Product>xFunc</Product>
     <ApplicationIcon>Images\xFunc.ico</ApplicationIcon>
@@ -98,9 +98,6 @@
   <ItemGroup>
     <None Include="..\LICENSE">
       <Link>LICENSE</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="NOTICE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

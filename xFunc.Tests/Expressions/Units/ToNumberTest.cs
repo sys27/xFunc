@@ -1,67 +1,58 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
-using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.LogicalAndBitwise;
-using xFunc.Maths.Expressions.Units;
-using xFunc.Maths.Expressions.Units.AngleUnits;
-using xFunc.Maths.Expressions.Units.PowerUnits;
-using Xunit;
+namespace xFunc.Tests.Expressions.Units;
 
-namespace xFunc.Tests.Expressions.Units
+public class ToNumberTest
 {
-    public class ToNumberTest
+    [Fact]
+    public void ExecuteAngleTest()
     {
-        [Fact]
-        public void ExecuteAngleTest()
-        {
-            var exp = new ToNumber(AngleValue.Degree(10).AsExpression());
-            var actual = exp.Execute();
-            var expected = new NumberValue(10.0);
+        var exp = new ToNumber(AngleValue.Degree(10).AsExpression());
+        var actual = exp.Execute();
+        var expected = new NumberValue(10.0);
 
-            Assert.Equal(expected, actual);
-        }
+        Assert.Equal(expected, actual);
+    }
 
-        [Fact]
-        public void ExecutePowerTest()
-        {
-            var exp = new ToNumber(PowerValue.Watt(10).AsExpression());
-            var actual = exp.Execute();
-            var expected = new NumberValue(10.0);
+    [Fact]
+    public void ExecutePowerTest()
+    {
+        var exp = new ToNumber(PowerValue.Watt(10).AsExpression());
+        var actual = exp.Execute();
+        var expected = new NumberValue(10.0);
 
-            Assert.Equal(expected, actual);
-        }
+        Assert.Equal(expected, actual);
+    }
 
-        [Fact]
-        public void ExecuteBoolTest()
-        {
-            Assert.Throws<ResultIsNotSupportedException>(() => new ToNumber(Bool.False).Execute());
-        }
+    [Fact]
+    public void ExecuteBoolTest()
+    {
+        Assert.Throws<ResultIsNotSupportedException>(() => new ToNumber(Bool.False).Execute());
+    }
 
-        [Fact]
-        public void NullAnalyzerTest1()
-        {
-            var exp = new ToNumber(new Number(10));
+    [Fact]
+    public void NullAnalyzerTest1()
+    {
+        var exp = new ToNumber(new Number(10));
 
-            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
-        }
+        Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
+    }
 
-        [Fact]
-        public void NullAnalyzerTest2()
-        {
-            var exp = new ToNumber(new Number(10));
+    [Fact]
+    public void NullAnalyzerTest2()
+    {
+        var exp = new ToNumber(new Number(10));
 
-            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
-        }
+        Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
+    }
 
-        [Fact]
-        public void CloneTest()
-        {
-            var exp = new ToNumber(AngleValue.Degree(10).AsExpression());
-            var clone = exp.Clone();
+    [Fact]
+    public void CloneTest()
+    {
+        var exp = new ToNumber(AngleValue.Degree(10).AsExpression());
+        var clone = exp.Clone();
 
-            Assert.Equal(exp, clone);
-        }
+        Assert.Equal(exp, clone);
     }
 }

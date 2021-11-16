@@ -98,6 +98,26 @@ public class EqualityOperatorsTests : TypeAnalyzerBaseTests
     [Theory]
     [InlineData(typeof(Equal))]
     [InlineData(typeof(NotEqual))]
+    public void TestTemperatureAndUndefined(Type type)
+    {
+        var exp = Create(type, TemperatureValue.Celsius(1).AsExpression(), Variable.X);
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestUndefinedAndTemperature(Type type)
+    {
+        var exp = Create(type, Variable.X, TemperatureValue.Celsius(1).AsExpression());
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
     public void TestNumber(Type type)
     {
         var exp = Create(type, new Number(20), new Number(10));
@@ -136,6 +156,19 @@ public class EqualityOperatorsTests : TypeAnalyzerBaseTests
         var exp = Create(type,
             PowerValue.Watt(10).AsExpression(),
             PowerValue.Watt(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestTemperatureNumber(Type type)
+    {
+        var exp = Create(type,
+            TemperatureValue.Celsius(10).AsExpression(),
+            TemperatureValue.Celsius(10).AsExpression()
         );
 
         Test(exp, ResultTypes.Boolean);
@@ -227,6 +260,32 @@ public class EqualityOperatorsTests : TypeAnalyzerBaseTests
     {
         var exp = CreateBinary(type,
             PowerValue.Watt(10).AsExpression(),
+            new ComplexNumber(1, 2)
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestComplexAndTemperature(Type type)
+    {
+        var exp = CreateBinary(type,
+            new ComplexNumber(1, 2),
+            TemperatureValue.Celsius(10).AsExpression()
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestTemperatureAndComplex(Type type)
+    {
+        var exp = CreateBinary(type,
+            TemperatureValue.Celsius(10).AsExpression(),
             new ComplexNumber(1, 2)
         );
 

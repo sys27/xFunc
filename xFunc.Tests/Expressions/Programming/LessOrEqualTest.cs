@@ -57,6 +57,18 @@ public class LessOrEqualTest
     }
 
     [Fact]
+    public void LessOrEqualTemperatureTest()
+    {
+        var exp = new LessOrEqual(
+            TemperatureValue.Celsius(10).AsExpression(),
+            TemperatureValue.Celsius(12).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
     public void CalculateInvalidTypeTest()
     {
         var lessOrEqual = new LessOrEqual(Bool.True, Bool.True);

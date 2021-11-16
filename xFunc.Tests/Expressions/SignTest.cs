@@ -20,7 +20,7 @@ public class SignTest : BaseExpressionTests
         var exp = new Sign(new Number(-5));
         var result = exp.Execute();
 
-        Assert.Equal(-1.0, result);
+        Assert.Equal(new NumberValue(-1.0), result);
     }
 
     [Fact]
@@ -36,6 +36,15 @@ public class SignTest : BaseExpressionTests
     public void PowerSignTest()
     {
         var exp = new Sign(PowerValue.Watt(10).AsExpression());
+        var result = exp.Execute();
+
+        Assert.Equal(new NumberValue(1.0), result);
+    }
+
+    [Fact]
+    public void TemperatureSignTest()
+    {
+        var exp = new Sign(TemperatureValue.Celsius(10).AsExpression());
         var result = exp.Execute();
 
         Assert.Equal(new NumberValue(1.0), result);

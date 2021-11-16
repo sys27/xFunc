@@ -40,6 +40,7 @@ public class Trunc : UnaryExpression
             NumberValue number => NumberValue.Truncate(number),
             AngleValue angle => AngleValue.Truncate(angle),
             PowerValue power => PowerValue.Truncate(power),
+            TemperatureValue temperature => TemperatureValue.Truncate(temperature),
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }

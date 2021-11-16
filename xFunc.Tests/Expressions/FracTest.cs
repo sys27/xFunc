@@ -66,6 +66,26 @@ public class FracTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteTemperatureTest()
+    {
+        var exp = new Frac(TemperatureValue.Celsius(5.5).AsExpression());
+        var result = exp.Execute();
+        var expected = TemperatureValue.Celsius(0.5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void ExecuteNegativeTemperatureTest()
+    {
+        var exp = new Frac(TemperatureValue.Celsius(-5.5).AsExpression());
+        var result = exp.Execute();
+        var expected = TemperatureValue.Celsius(-0.5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Frac(Bool.False));
 

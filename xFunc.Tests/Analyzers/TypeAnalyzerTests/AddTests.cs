@@ -326,6 +326,39 @@ public class AddTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestAddNumberTemperature()
+    {
+        var exp = new Add(
+            new Number(10),
+            TemperatureValue.Celsius(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.TemperatureNumber);
+    }
+
+    [Fact]
+    public void TestAddTemperatureNumber()
+    {
+        var exp = new Add(
+            TemperatureValue.Celsius(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.TemperatureNumber);
+    }
+
+    [Fact]
+    public void TestAddTemperatureTemperature()
+    {
+        var exp = new Add(
+            TemperatureValue.Celsius(10).AsExpression(),
+            TemperatureValue.Celsius(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.TemperatureNumber);
+    }
+
+    [Fact]
     public void TestAddStringToString()
     {
         var exp = new Add(

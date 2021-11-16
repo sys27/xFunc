@@ -40,6 +40,7 @@ public class Frac : UnaryExpression
             NumberValue number => NumberValue.Frac(number),
             AngleValue angle => AngleValue.Frac(angle),
             PowerValue power => PowerValue.Frac(power),
+            TemperatureValue temperature => TemperatureValue.Frac(temperature),
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }

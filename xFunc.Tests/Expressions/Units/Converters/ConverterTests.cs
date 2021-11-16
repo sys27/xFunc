@@ -24,6 +24,10 @@ public class ConverterTests
         var power = PowerValue.Watt(10);
 
         yield return new object[] { power, "w", power.ToWatt() };
+
+        var temperature = TemperatureValue.Celsius(10);
+
+        yield return new object[] { temperature, "k", temperature.ToKelvin() };
     }
 
     [Theory]

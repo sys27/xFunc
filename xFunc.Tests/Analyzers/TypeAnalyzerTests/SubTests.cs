@@ -347,4 +347,37 @@ public class SubTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.PowerNumber);
     }
+
+    [Fact]
+    public void TestSubNumberTemperature()
+    {
+        var exp = new Sub(
+            new Number(10),
+            TemperatureValue.Celsius(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.TemperatureNumber);
+    }
+
+    [Fact]
+    public void TestSubTemperatureNumber()
+    {
+        var exp = new Sub(
+            TemperatureValue.Celsius(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.TemperatureNumber);
+    }
+
+    [Fact]
+    public void TestSubTemperatureTemperature()
+    {
+        var exp = new Sub(
+            TemperatureValue.Celsius(10).AsExpression(),
+            TemperatureValue.Celsius(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.TemperatureNumber);
+    }
 }

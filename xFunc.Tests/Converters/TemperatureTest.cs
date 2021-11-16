@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using xFunc.UnitConverters;
+using TemperatureConverter = xFunc.UnitConverters.TemperatureConverter;
 
 namespace xFunc.Tests.Converters;
 

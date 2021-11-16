@@ -113,6 +113,10 @@ public abstract class Analyzer<TResult> : IAnalyzer<TResult>
         => Analyze(exp as IExpression);
 
     /// <inheritdoc />
+    public virtual TResult Analyze(Temperature exp)
+        => Analyze(exp as IExpression);
+
+    /// <inheritdoc />
     public virtual TResult Analyze(ToDegree exp)
         => Analyze(exp as IExpression);
 

@@ -257,9 +257,9 @@ public readonly struct PowerValue : IEquatable<PowerValue>, IComparable<PowerVal
     };
 
     /// <summary>
-    /// Converts the current object to degrees.
+    /// Converts the current object to watt.
     /// </summary>
-    /// <returns>The power value which is converted to degrees.</returns>
+    /// <returns>The power value which is converted to watts.</returns>
     public PowerValue ToWatt() => Unit switch
     {
         PowerUnit.Watt => this,
@@ -269,9 +269,9 @@ public readonly struct PowerValue : IEquatable<PowerValue>, IComparable<PowerVal
     };
 
     /// <summary>
-    /// Converts the current object to radians.
+    /// Converts the current object to kilowatt.
     /// </summary>
-    /// <returns>The power value which is converted to radians.</returns>
+    /// <returns>The power value which is converted to kilowatts.</returns>
     public PowerValue ToKilowatt() => Unit switch
     {
         PowerUnit.Watt => Kilowatt(Value / 1000.0),
@@ -281,9 +281,9 @@ public readonly struct PowerValue : IEquatable<PowerValue>, IComparable<PowerVal
     };
 
     /// <summary>
-    /// Converts the current object to gradians.
+    /// Converts the current object to horsepower.
     /// </summary>
-    /// <returns>The power value which is converted to gradians.</returns>
+    /// <returns>The power value which is converted to horsepowers.</returns>
     public PowerValue ToHorsepower() => Unit switch
     {
         PowerUnit.Watt => Horsepower(Value / 745.69987158227022),
@@ -335,7 +335,7 @@ public readonly struct PowerValue : IEquatable<PowerValue>, IComparable<PowerVal
     /// <summary>
     /// Converts <see cref="PowerValue"/> to <see cref="Power"/>.
     /// </summary>
-    /// <returns>The angle number.</returns>
+    /// <returns>The power number.</returns>
     public Power AsExpression()
         => new Power(this);
 

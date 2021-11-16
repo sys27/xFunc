@@ -277,6 +277,14 @@ public class CommonFormatterTest
     }
 
     [Fact]
+    public void TemperatureNumberTest()
+    {
+        var exp = TemperatureValue.Celsius(10).AsExpression();
+
+        Assert.Equal("10 °C", exp.ToString());
+    }
+
+    [Fact]
     public void ToDegreeTest()
     {
         var exp = new ToDegree(new Number(10));

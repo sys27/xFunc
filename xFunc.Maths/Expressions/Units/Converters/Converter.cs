@@ -18,6 +18,7 @@ public class Converter : IConverter
         {
             new AngleConverter(),
             new PowerConverter(),
+            new TemperatureConverter(),
         };
 
     /// <inheritdoc />

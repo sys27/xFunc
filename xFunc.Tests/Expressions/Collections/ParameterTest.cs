@@ -46,6 +46,15 @@ public class ParameterTest
     }
 
     [Fact]
+    public void TemperatureValueCtor()
+    {
+        var value = TemperatureValue.Celsius(10);
+        var x = new Parameter("x", value);
+
+        Assert.Equal(value, x.Value);
+    }
+
+    [Fact]
     public void ComplexCtor()
     {
         var value = new Complex(1, 2);

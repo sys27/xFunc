@@ -36,13 +36,16 @@ public class Sign : UnaryExpression
     {
         var result = Argument.Execute(parameters);
 
-        return result switch
+        var sign = result switch
         {
             NumberValue number => number.Sign,
             AngleValue angle => angle.Sign,
             PowerValue power => power.Sign,
+            TemperatureValue temperature => temperature.Sign,
             _ => throw new ResultIsNotSupportedException(this, result),
         };
+
+        return new NumberValue(sign);
     }
 
     /// <inheritdoc />

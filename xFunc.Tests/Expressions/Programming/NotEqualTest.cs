@@ -135,6 +135,18 @@ public class NotEqualTest
     }
 
     [Fact]
+    public void TemperatureNotEqualTest()
+    {
+        var equal = new NotEqual(
+            TemperatureValue.Celsius(10).AsExpression(),
+            TemperatureValue.Celsius(12).AsExpression()
+        );
+        var result = (bool)equal.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
     public void CloneTest()
     {
         var exp = new NotEqual(Number.Two, Number.Two);

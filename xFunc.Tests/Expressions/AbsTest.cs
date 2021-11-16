@@ -36,6 +36,15 @@ public class AbsTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteTestTemperatureValue()
+    {
+        var exp = new Abs(TemperatureValue.Celsius(-1).AsExpression());
+        var expected = TemperatureValue.Celsius(1);
+
+        Assert.Equal(expected, exp.Execute());
+    }
+
+    [Fact]
     public void ExecuteTestComplexNumber()
     {
         var exp = new Abs(new ComplexNumber(4, 2));

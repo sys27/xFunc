@@ -36,6 +36,16 @@ public class CeilTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteTestTemperatureNumber()
+    {
+        var ceil = new Ceil(TemperatureValue.Celsius(5.55555555).AsExpression());
+        var result = ceil.Execute();
+        var expected = TemperatureValue.Celsius(6);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Ceil(Bool.False));
 

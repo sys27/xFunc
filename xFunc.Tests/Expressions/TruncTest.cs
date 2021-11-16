@@ -36,6 +36,16 @@ public class TruncTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteTemperatureTest()
+    {
+        var exp = new Trunc(TemperatureValue.Celsius(5.55555555).AsExpression());
+        var result = exp.Execute();
+        var expected = TemperatureValue.Celsius(5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Trunc(Bool.False));
 

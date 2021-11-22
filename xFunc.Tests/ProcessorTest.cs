@@ -138,6 +138,17 @@ public class ProcessorTest
     }
 
     [Fact]
+    public void SolveTemperatureTest()
+    {
+        var processor = new Processor();
+
+        var result = processor.Solve<TemperatureNumberResult>("10 °C");
+        var expected = TemperatureValue.Celsius(10);
+
+        Assert.Equal(expected, result.Result);
+    }
+
+    [Fact]
     public void ParseTest()
     {
         var processor = new Processor();

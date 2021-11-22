@@ -323,6 +323,45 @@ public class MulTest : BaseExpressionTests
     }
 
     [Fact]
+    public void MulNumberAndTemperature()
+    {
+        var exp = new Mul(
+            Number.Two,
+            TemperatureValue.Celsius(10).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = TemperatureValue.Celsius(20);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void MulTemperatureAndNumber()
+    {
+        var exp = new Mul(
+            TemperatureValue.Celsius(10).AsExpression(),
+            Number.Two
+        );
+        var actual = exp.Execute();
+        var expected = TemperatureValue.Celsius(20);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void MulTemperatureAndTemperature()
+    {
+        var exp = new Mul(
+            TemperatureValue.Celsius(2).AsExpression(),
+            TemperatureValue.Celsius(10).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = TemperatureValue.Celsius(20);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteMulBoolByBoolTest()
         => TestNotSupported(new Mul(Bool.True, Bool.True));
 

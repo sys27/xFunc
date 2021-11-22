@@ -48,6 +48,18 @@ public class LessThanTest
     }
 
     [Fact]
+    public void LessTemperatureTest()
+    {
+        var exp = new LessThan(
+            TemperatureValue.Celsius(10).AsExpression(),
+            TemperatureValue.Celsius(12).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
     public void CalculateInvalidTypeTest()
     {
         var lessThen = new LessThan(Bool.True, Bool.True);

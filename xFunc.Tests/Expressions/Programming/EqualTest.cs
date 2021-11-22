@@ -122,6 +122,18 @@ public class EqualTest
     }
 
     [Fact]
+    public void TemperatureEqualTest()
+    {
+        var equal = new Equal(
+            TemperatureValue.Celsius(10).AsExpression(),
+            TemperatureValue.Celsius(10).AsExpression()
+        );
+        var result = (bool)equal.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
     public void CalculateInvalidParametersTest()
     {
         var equal = new Equal(new ComplexNumber(3, 2), new ComplexNumber(3, 2));

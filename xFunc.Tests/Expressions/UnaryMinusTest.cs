@@ -34,6 +34,15 @@ public class UnaryMinusTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteTemperatureNumberTest()
+    {
+        var exp = new UnaryMinus(TemperatureValue.Celsius(10).AsExpression());
+        var expected = TemperatureValue.Celsius(-10);
+
+        Assert.Equal(expected, exp.Execute());
+    }
+
+    [Fact]
     public void ExecuteComplexTest()
     {
         var complex = new Complex(2, 3);

@@ -48,6 +48,18 @@ public class GreaterTest
     }
 
     [Fact]
+    public void GreaterTemperatureTest()
+    {
+        var exp = new GreaterThan(
+            TemperatureValue.Celsius(12).AsExpression(),
+            TemperatureValue.Celsius(10).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
     public void CalculateInvalidTypeTest()
     {
         var greaterThan = new GreaterThan(Bool.True, Bool.True);

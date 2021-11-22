@@ -729,6 +729,7 @@ public partial class Parser : IParser
 
         return ParseAngleUnit(ref tokenReader, ref number) ??
                ParsePowerUnit(ref tokenReader, ref number) ??
+               ParseTemperatureUnit(ref tokenReader, ref number) ??
                new Number(number.NumberValue);
     }
 
@@ -756,6 +757,20 @@ public partial class Parser : IParser
 
         if (tokenReader.Check(HorsepowerKeyword))
             return PowerValue.Horsepower(number.NumberValue).AsExpression();
+
+        return null;
+    }
+
+    private IExpression? ParseTemperatureUnit(ref TokenReader tokenReader, ref Token number)
+    {
+        if (tokenReader.Check(CelsiusKeyword))
+            return TemperatureValue.Celsius(number.NumberValue).AsExpression();
+
+        if (tokenReader.Check(FahrenheitKeyword))
+            return TemperatureValue.Fahrenheit(number.NumberValue).AsExpression();
+
+        if (tokenReader.Check(KelvinKeyword))
+            return TemperatureValue.Kelvin(number.NumberValue).AsExpression();
 
         return null;
     }

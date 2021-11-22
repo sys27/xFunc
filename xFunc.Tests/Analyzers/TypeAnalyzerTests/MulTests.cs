@@ -284,4 +284,37 @@ public class MulTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.PowerNumber);
     }
+
+    [Fact]
+    public void TestMulNumberTemperature()
+    {
+        var exp = new Mul(
+            new Number(10),
+            TemperatureValue.Celsius(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.TemperatureNumber);
+    }
+
+    [Fact]
+    public void TestMulTemperatureNumber()
+    {
+        var exp = new Mul(
+            TemperatureValue.Celsius(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.TemperatureNumber);
+    }
+
+    [Fact]
+    public void TestMulTemperatureTemperature()
+    {
+        var exp = new Mul(
+            TemperatureValue.Celsius(10).AsExpression(),
+            TemperatureValue.Celsius(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.TemperatureNumber);
+    }
 }

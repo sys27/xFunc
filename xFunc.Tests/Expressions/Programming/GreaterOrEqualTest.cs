@@ -57,6 +57,18 @@ public class GreaterOrEqualTest
     }
 
     [Fact]
+    public void GreaterOrEqualTemperatureTest()
+    {
+        var exp = new GreaterOrEqual(
+            TemperatureValue.Celsius(12).AsExpression(),
+            TemperatureValue.Celsius(10).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
     public void CalculateInvalidTypeTest()
     {
         var greaterOrEqual = new GreaterOrEqual(Bool.True, Bool.True);

@@ -111,9 +111,12 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (ResultTypes.Undefined, ResultTypes.AngleNumber) or
                 (ResultTypes.PowerNumber, ResultTypes.Undefined) or
                 (ResultTypes.Undefined, ResultTypes.PowerNumber) or
+                (ResultTypes.TemperatureNumber, ResultTypes.Undefined) or
+                (ResultTypes.Undefined, ResultTypes.TemperatureNumber) or
                 (ResultTypes.Number, ResultTypes.Number) or
                 (ResultTypes.AngleNumber, ResultTypes.AngleNumber) or
-                (ResultTypes.PowerNumber, ResultTypes.PowerNumber)
+                (ResultTypes.PowerNumber, ResultTypes.PowerNumber) or
+                (ResultTypes.TemperatureNumber, ResultTypes.TemperatureNumber)
                 => ResultTypes.Boolean,
 
             (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
@@ -124,6 +127,9 @@ public class TypeAnalyzer : ITypeAnalyzer
 
             (_, ResultTypes.PowerNumber) => ResultTypes.PowerNumber.ThrowForLeft(leftResult),
             (ResultTypes.PowerNumber, _) => ResultTypes.PowerNumber.ThrowForRight(rightResult),
+
+            (_, ResultTypes.TemperatureNumber) => ResultTypes.TemperatureNumber.ThrowForLeft(leftResult),
+            (ResultTypes.TemperatureNumber, _) => ResultTypes.TemperatureNumber.ThrowForRight(rightResult),
 
             _ => throw new ParameterTypeMismatchException(),
         };
@@ -198,10 +204,13 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (ResultTypes.Undefined, ResultTypes.AngleNumber) or
                 (ResultTypes.PowerNumber, ResultTypes.Undefined) or
                 (ResultTypes.Undefined, ResultTypes.PowerNumber) or
+                (ResultTypes.TemperatureNumber, ResultTypes.Undefined) or
+                (ResultTypes.Undefined, ResultTypes.TemperatureNumber) or
                 (ResultTypes.Number, ResultTypes.Number) or
                 (ResultTypes.Boolean, ResultTypes.Boolean) or
                 (ResultTypes.AngleNumber, ResultTypes.AngleNumber) or
-                (ResultTypes.PowerNumber, ResultTypes.PowerNumber)
+                (ResultTypes.PowerNumber, ResultTypes.PowerNumber) or
+                (ResultTypes.TemperatureNumber, ResultTypes.TemperatureNumber)
                 => ResultTypes.Boolean,
 
             (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
@@ -215,6 +224,9 @@ public class TypeAnalyzer : ITypeAnalyzer
 
             (_, ResultTypes.PowerNumber) => ResultTypes.PowerNumber.ThrowForLeft(leftResult),
             (ResultTypes.PowerNumber, _) => ResultTypes.PowerNumber.ThrowForRight(rightResult),
+
+            (_, ResultTypes.TemperatureNumber) => ResultTypes.TemperatureNumber.ThrowForLeft(leftResult),
+            (ResultTypes.TemperatureNumber, _) => ResultTypes.TemperatureNumber.ThrowForRight(rightResult),
 
             _ => throw new ParameterTypeMismatchException(),
         };
@@ -296,7 +308,8 @@ public class TypeAnalyzer : ITypeAnalyzer
                 => ResultTypes.Number,
             ResultTypes.AngleNumber => ResultTypes.AngleNumber,
             ResultTypes.PowerNumber => ResultTypes.PowerNumber,
-            _ => ResultTypes.NumberOrAngleOrComplexOrVector.ThrowFor(result),
+            ResultTypes.TemperatureNumber => ResultTypes.TemperatureNumber,
+            _ => ResultTypes.NumbersOrComplexOrVector.ThrowFor(result),
         };
     }
 
@@ -326,6 +339,11 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (ResultTypes.PowerNumber, ResultTypes.Number) or
                 (ResultTypes.PowerNumber, ResultTypes.PowerNumber)
                 => ResultTypes.PowerNumber,
+
+            (ResultTypes.Number, ResultTypes.TemperatureNumber) or
+                (ResultTypes.TemperatureNumber, ResultTypes.Number) or
+                (ResultTypes.TemperatureNumber, ResultTypes.TemperatureNumber)
+                => ResultTypes.TemperatureNumber,
 
             (ResultTypes.Number, ResultTypes.ComplexNumber) or
                 (ResultTypes.ComplexNumber, ResultTypes.Number) or
@@ -369,7 +387,8 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.Number => ResultTypes.Number,
             ResultTypes.AngleNumber => ResultTypes.AngleNumber,
             ResultTypes.PowerNumber => ResultTypes.PowerNumber,
-            _ => ResultTypes.NumberOrAngle.ThrowFor(result),
+            ResultTypes.TemperatureNumber => ResultTypes.TemperatureNumber,
+            _ => ResultTypes.Numbers.ThrowFor(result),
         };
     }
 
@@ -425,6 +444,11 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (ResultTypes.PowerNumber, ResultTypes.Number) or
                 (ResultTypes.PowerNumber, ResultTypes.PowerNumber)
                 => ResultTypes.PowerNumber,
+
+            (ResultTypes.Number, ResultTypes.TemperatureNumber) or
+                (ResultTypes.TemperatureNumber, ResultTypes.Number) or
+                (ResultTypes.TemperatureNumber, ResultTypes.TemperatureNumber)
+                => ResultTypes.TemperatureNumber,
 
             (ResultTypes.Number, ResultTypes.ComplexNumber) or
                 (ResultTypes.ComplexNumber, ResultTypes.Number) or
@@ -485,6 +509,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.Number => ResultTypes.Number,
             ResultTypes.AngleNumber => ResultTypes.AngleNumber,
             ResultTypes.PowerNumber => ResultTypes.PowerNumber,
+            ResultTypes.TemperatureNumber => ResultTypes.TemperatureNumber,
             _ => ResultTypes.NumberOrAngle.ThrowFor(result),
         };
     }
@@ -503,6 +528,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.Number => ResultTypes.Number,
             ResultTypes.AngleNumber => ResultTypes.AngleNumber,
             ResultTypes.PowerNumber => ResultTypes.PowerNumber,
+            ResultTypes.TemperatureNumber => ResultTypes.TemperatureNumber,
             _ => ResultTypes.NumberOrAngle.ThrowFor(result),
         };
     }
@@ -521,6 +547,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.Number => ResultTypes.Number,
             ResultTypes.AngleNumber => ResultTypes.AngleNumber,
             ResultTypes.PowerNumber => ResultTypes.PowerNumber,
+            ResultTypes.TemperatureNumber => ResultTypes.TemperatureNumber,
             _ => ResultTypes.NumberOrAngle.ThrowFor(result),
         };
     }
@@ -687,6 +714,11 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (ResultTypes.PowerNumber, ResultTypes.PowerNumber)
                 => ResultTypes.PowerNumber,
 
+            (ResultTypes.Number, ResultTypes.TemperatureNumber) or
+                (ResultTypes.TemperatureNumber, ResultTypes.Number) or
+                (ResultTypes.TemperatureNumber, ResultTypes.TemperatureNumber)
+                => ResultTypes.TemperatureNumber,
+
             (ResultTypes.Number, ResultTypes.ComplexNumber) or
                 (ResultTypes.ComplexNumber, ResultTypes.Number) or
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
@@ -731,6 +763,10 @@ public class TypeAnalyzer : ITypeAnalyzer
     /// <inheritdoc />
     public virtual ResultTypes Analyze(Power exp)
         => CheckArgument(exp, ResultTypes.PowerNumber);
+
+    /// <inheritdoc />
+    public virtual ResultTypes Analyze(Temperature exp)
+        => CheckArgument(exp, ResultTypes.TemperatureNumber);
 
     /// <inheritdoc />
     public virtual ResultTypes Analyze(ToDegree exp)
@@ -867,6 +903,11 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (ResultTypes.PowerNumber, ResultTypes.PowerNumber)
                 => ResultTypes.PowerNumber,
 
+            (ResultTypes.Number, ResultTypes.TemperatureNumber) or
+                (ResultTypes.TemperatureNumber, ResultTypes.Number) or
+                (ResultTypes.TemperatureNumber, ResultTypes.TemperatureNumber)
+                => ResultTypes.TemperatureNumber,
+
             (ResultTypes.Number, ResultTypes.ComplexNumber) or
                 (ResultTypes.ComplexNumber, ResultTypes.Number) or
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
@@ -905,6 +946,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.Number => ResultTypes.Number,
             ResultTypes.AngleNumber => ResultTypes.AngleNumber,
             ResultTypes.PowerNumber => ResultTypes.PowerNumber,
+            ResultTypes.TemperatureNumber => ResultTypes.TemperatureNumber,
             ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
             _ => ResultTypes.NumberOrComplex.ThrowFor(result),
         };
@@ -938,9 +980,10 @@ public class TypeAnalyzer : ITypeAnalyzer
         {
             ResultTypes.Undefined => ResultTypes.Undefined,
             ResultTypes.Number => ResultTypes.Number,
-            ResultTypes.AngleNumber => ResultTypes.AngleNumber,
-            ResultTypes.PowerNumber => ResultTypes.PowerNumber,
-            _ => ResultTypes.Number.ThrowFor(result),
+            ResultTypes.AngleNumber => ResultTypes.Number,
+            ResultTypes.PowerNumber => ResultTypes.Number,
+            ResultTypes.TemperatureNumber => ResultTypes.Number,
+            _ => ResultTypes.Numbers.ThrowFor(result),
         };
     }
 
@@ -974,6 +1017,7 @@ public class TypeAnalyzer : ITypeAnalyzer
                 ResultTypes.Number => ResultTypes.Undefined,
             ResultTypes.AngleNumber => ResultTypes.AngleNumber,
             ResultTypes.PowerNumber => ResultTypes.PowerNumber,
+            ResultTypes.TemperatureNumber => ResultTypes.TemperatureNumber,
 
             _ => ResultTypes.Numbers.ThrowFor(valueResult),
         };

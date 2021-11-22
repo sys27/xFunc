@@ -194,6 +194,45 @@ public class SubTest : BaseExpressionTests
     }
 
     [Fact]
+    public void SubNumberAndTemperature()
+    {
+        var exp = new Sub(
+            Number.One,
+            TemperatureValue.Celsius(10).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = TemperatureValue.Celsius(-9);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void SubTemperatureAndNumber()
+    {
+        var exp = new Sub(
+            TemperatureValue.Celsius(10).AsExpression(),
+            Number.One
+        );
+        var actual = exp.Execute();
+        var expected = TemperatureValue.Celsius(9);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void SubTemperatureAndTemperature()
+    {
+        var exp = new Sub(
+            TemperatureValue.Celsius(20).AsExpression(),
+            TemperatureValue.Celsius(10).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = TemperatureValue.Celsius(10);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteWrongArgumentTypeTest()
         => TestNotSupported(new Sub(Bool.True, Bool.True));
 

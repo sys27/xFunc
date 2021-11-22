@@ -32,6 +32,14 @@ public class StandardTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestAbsTemperatureNumber()
+    {
+        var exp = new Abs(TemperatureValue.Celsius(1).AsExpression());
+
+        Test(exp, ResultTypes.TemperatureNumber);
+    }
+
+    [Fact]
     public void TestAbsComplexNumber()
     {
         var exp = new Abs(new ComplexNumber(2, 2));
@@ -85,6 +93,14 @@ public class StandardTests : TypeAnalyzerBaseTests
         var exp = new Ceil(PowerValue.Watt(5.5).AsExpression());
 
         Test(exp, ResultTypes.PowerNumber);
+    }
+
+    [Fact]
+    public void TestCeilTemperature()
+    {
+        var exp = new Ceil(TemperatureValue.Celsius(5.5).AsExpression());
+
+        Test(exp, ResultTypes.TemperatureNumber);
     }
 
     [Fact]
@@ -240,6 +256,14 @@ public class StandardTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestFloorTemperature()
+    {
+        var exp = new Floor(TemperatureValue.Celsius(5.5).AsExpression());
+
+        Test(exp, ResultTypes.TemperatureNumber);
+    }
+
+    [Fact]
     public void TestFloorException()
     {
         var exp = new Floor(Bool.False);
@@ -280,6 +304,14 @@ public class StandardTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestTruncTemperature()
+    {
+        var exp = new Trunc(TemperatureValue.Celsius(5.5).AsExpression());
+
+        Test(exp, ResultTypes.TemperatureNumber);
+    }
+
+    [Fact]
     public void TestTruncException()
     {
         var exp = new Trunc(Bool.False);
@@ -317,6 +349,14 @@ public class StandardTests : TypeAnalyzerBaseTests
         var exp = new Frac(PowerValue.Watt(5.5).AsExpression());
 
         Test(exp, ResultTypes.PowerNumber);
+    }
+
+    [Fact]
+    public void TestFracTemperature()
+    {
+        var exp = new Frac(TemperatureValue.Celsius(5.5).AsExpression());
+
+        Test(exp, ResultTypes.TemperatureNumber);
     }
 
     [Fact]
@@ -665,6 +705,14 @@ public class StandardTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestUnaryMinusTemperature()
+    {
+        var exp = new UnaryMinus(TemperatureValue.Celsius(10).AsExpression());
+
+        Test(exp, ResultTypes.TemperatureNumber);
+    }
+
+    [Fact]
     public void TestUnaryMinusComplexNumber()
     {
         var exp = new UnaryMinus(new ComplexNumber(10, 10));
@@ -719,13 +767,19 @@ public class StandardTests : TypeAnalyzerBaseTests
     [Fact]
     public void TestSignAngle()
     {
-        Test(new Sign(AngleValue.Degree(10).AsExpression()), ResultTypes.AngleNumber);
+        Test(new Sign(AngleValue.Degree(10).AsExpression()), ResultTypes.Number);
     }
 
     [Fact]
     public void TestSignPower()
     {
-        Test(new Sign(PowerValue.Watt(10).AsExpression()), ResultTypes.PowerNumber);
+        Test(new Sign(PowerValue.Watt(10).AsExpression()), ResultTypes.Number);
+    }
+
+    [Fact]
+    public void TestSignTemperature()
+    {
+        Test(new Sign(TemperatureValue.Celsius(10).AsExpression()), ResultTypes.Number);
     }
 
     [Fact]
@@ -878,6 +932,18 @@ public class StandardTests : TypeAnalyzerBaseTests
         );
 
         Test(exp, ResultTypes.PowerNumber);
+    }
+
+    [Fact]
+    public void TestTemperatureConvert()
+    {
+        var exp = new Convert(
+            new Converter(),
+            TemperatureValue.Celsius(10).AsExpression(),
+            new StringExpression("K")
+        );
+
+        Test(exp, ResultTypes.TemperatureNumber);
     }
 
     [Fact]

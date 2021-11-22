@@ -203,6 +203,45 @@ public class AddTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteNumberAndTemperature()
+    {
+        var exp = new Add(
+            Number.One,
+            TemperatureValue.Celsius(1).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = TemperatureValue.Celsius(2);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteTemperatureAndNumber()
+    {
+        var exp = new Add(
+            TemperatureValue.Celsius(1).AsExpression(),
+            Number.One
+        );
+        var actual = exp.Execute();
+        var expected = TemperatureValue.Celsius(2);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteTemperatureAndTemperature()
+    {
+        var exp = new Add(
+            TemperatureValue.Celsius(1).AsExpression(),
+            TemperatureValue.Celsius(2).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = TemperatureValue.Celsius(3);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteStringAndString()
     {
         var exp = new Add(

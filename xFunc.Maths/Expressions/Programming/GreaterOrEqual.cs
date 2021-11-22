@@ -31,6 +31,7 @@ public class GreaterOrEqual : BinaryExpression
             (NumberValue left, NumberValue right) => left >= right,
             (AngleValue left, AngleValue right) => left >= right,
             (PowerValue left, PowerValue right) => left >= right,
+            (TemperatureValue left, TemperatureValue right) => left >= right,
             _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
         };
     }

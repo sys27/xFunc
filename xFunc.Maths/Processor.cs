@@ -116,6 +116,11 @@ public class Processor
             return new PowerNumberResult(power);
         }
 
+        if (result is TemperatureValue temperature)
+        {
+            return new TemperatureNumberResult(temperature);
+        }
+
         if (result is Complex complex)
         {
             return new ComplexNumberResult(complex);

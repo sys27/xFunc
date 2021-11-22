@@ -36,6 +36,16 @@ public class FloorTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteTemperatureTest()
+    {
+        var floor = new Floor(TemperatureValue.Celsius(5.55555555).AsExpression());
+        var result = floor.Execute();
+        var expected = TemperatureValue.Celsius(5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Floor(Bool.False));
 

@@ -174,4 +174,37 @@ public class DivTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.PowerNumber);
     }
+
+    [Fact]
+    public void TestDivNumberTemperature()
+    {
+        var exp = new Div(
+            new Number(10),
+            TemperatureValue.Celsius(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.TemperatureNumber);
+    }
+
+    [Fact]
+    public void TestDivTemperatureNumber()
+    {
+        var exp = new Div(
+            TemperatureValue.Celsius(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.TemperatureNumber);
+    }
+
+    [Fact]
+    public void TestDivTemperatureTemperature()
+    {
+        var exp = new Div(
+            TemperatureValue.Celsius(10).AsExpression(),
+            TemperatureValue.Celsius(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.TemperatureNumber);
+    }
 }

@@ -189,6 +189,21 @@ internal enum TokenKind
     /// </summary>
     HorsepowerKeyword,
 
+    /// <summary>
+    /// The '°C' token.
+    /// </summary>
+    CelsiusKeyword,
+
+    /// <summary>
+    /// The '°F' token.
+    /// </summary>
+    FahrenheitKeyword,
+
+    /// <summary>
+    /// The 'K' token.
+    /// </summary>
+    KelvinKeyword,
+
     #endregion Keywords
 
     #region Operators

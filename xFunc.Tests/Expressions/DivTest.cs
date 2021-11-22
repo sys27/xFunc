@@ -138,6 +138,45 @@ public class DivTest : BaseExpressionTests
     }
 
     [Fact]
+    public void DivNumberAndTemperature()
+    {
+        var exp = new Div(
+            new Number(10),
+            TemperatureValue.Celsius(2).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = TemperatureValue.Celsius(5);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void DivTemperatureAndNumber()
+    {
+        var exp = new Div(
+            TemperatureValue.Celsius(10).AsExpression(),
+            new Number(2)
+        );
+        var actual = exp.Execute();
+        var expected = TemperatureValue.Celsius(5);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void DivTemperatureAndTemperature()
+    {
+        var exp = new Div(
+            TemperatureValue.Celsius(10).AsExpression(),
+            TemperatureValue.Celsius(2).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = TemperatureValue.Celsius(5);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteBoolTest()
     {
         var exp = new Div(Bool.False, Bool.True);

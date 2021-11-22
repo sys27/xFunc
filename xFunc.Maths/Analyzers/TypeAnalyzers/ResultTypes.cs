@@ -67,6 +67,11 @@ public enum ResultTypes
     PowerNumber = 1 << 9,
 
     /// <summary>
+    /// The expression returns a temperature number.
+    /// </summary>
+    TemperatureNumber = 1 << 10,
+
+    /// <summary>
     /// The expression returns a number or a complex number.
     /// </summary>
     NumberOrComplex = Number | ComplexNumber,
@@ -82,17 +87,19 @@ public enum ResultTypes
     NumberOrAngleOrComplex = NumberOrAngle | ComplexNumber,
 
     /// <summary>
-    /// The expression returns a number or a angle number or a complex number or a vector.
-    /// </summary>
-    NumberOrAngleOrComplexOrVector = NumberOrAngleOrComplex | Vector,
-
-    /// <summary>
     /// The expression returns a number or a vector or a matrix.
     /// </summary>
     NumberOrVectorOrMatrix = Number | Vector | Matrix,
 
+    // TODO: remove?
+
     /// <summary>
     /// The expression returns any type of number.
     /// </summary>
-    Numbers = Number | AngleNumber | PowerNumber,
+    Numbers = Number | AngleNumber | PowerNumber | TemperatureNumber,
+
+    /// <summary>
+    /// The expression returns a number or a angle number or a complex number or a vector.
+    /// </summary>
+    NumbersOrComplexOrVector = Numbers | ComplexNumber | Vector,
 }

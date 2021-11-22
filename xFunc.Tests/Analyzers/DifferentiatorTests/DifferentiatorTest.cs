@@ -51,6 +51,14 @@ public class DifferentiatorTest
     }
 
     [Fact]
+    public void TemperatureNumberTest()
+    {
+        var exp = Differentiate(TemperatureValue.Celsius(10).AsExpression());
+
+        Assert.Equal(zero, exp);
+    }
+
+    [Fact]
     public void VariableNullTest()
     {
         Assert.Throws<ArgumentNullException>(() => Differentiate(new Number(10), null));

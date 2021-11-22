@@ -407,6 +407,26 @@ public readonly struct NumberValue :
         => new PowerValue(left.Number + right.Value, right.Unit);
 
     /// <summary>
+    /// Adds <see cref="TemperatureValue"/> and <see cref="NumberValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to add.</param>
+    /// <param name="right">The second object to add.</param>
+    /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TemperatureValue operator +(TemperatureValue left, NumberValue right)
+        => new TemperatureValue(left.Value + right.Number, left.Unit);
+
+    /// <summary>
+    /// Adds <see cref="NumberValue"/> and <see cref="TemperatureValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to add.</param>
+    /// <param name="right">The second object to add.</param>
+    /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TemperatureValue operator +(NumberValue left, TemperatureValue right)
+        => new TemperatureValue(left.Number + right.Value, right.Unit);
+
+    /// <summary>
     /// Adds <see cref="Complex"/> and <see cref="NumberValue"/>.
     /// </summary>
     /// <param name="left">The first object to add.</param>
@@ -495,6 +515,26 @@ public readonly struct NumberValue :
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static PowerValue operator -(PowerValue left, NumberValue right)
         => new PowerValue(left.Value - right.Number, left.Unit);
+
+    /// <summary>
+    /// Subtracts <see cref="NumberValue"/> and <see cref="TemperatureValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to sub.</param>
+    /// <param name="right">The second object to sub.</param>
+    /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TemperatureValue operator -(NumberValue left, TemperatureValue right)
+        => new TemperatureValue(left.Number - right.Value, right.Unit);
+
+    /// <summary>
+    /// Subtracts <see cref="TemperatureValue"/> and <see cref="NumberValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to sub.</param>
+    /// <param name="right">The second object to sub.</param>
+    /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TemperatureValue operator -(TemperatureValue left, NumberValue right)
+        => new TemperatureValue(left.Value - right.Number, left.Unit);
 
     /// <summary>
     /// Subtracts <see cref="NumberValue"/> and <see cref="Complex"/>.
@@ -587,6 +627,26 @@ public readonly struct NumberValue :
         => new PowerValue(left.Number * right.Value, right.Unit);
 
     /// <summary>
+    /// Multiplies <see cref="TemperatureValue"/> and <see cref="NumberValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to multiply.</param>
+    /// <param name="right">The second object to multiply.</param>
+    /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TemperatureValue operator *(TemperatureValue left, NumberValue right)
+        => new TemperatureValue(left.Value * right.Number, left.Unit);
+
+    /// <summary>
+    /// Multiplies <see cref="NumberValue"/> and <see cref="TemperatureValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to multiply.</param>
+    /// <param name="right">The second object to multiply.</param>
+    /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TemperatureValue operator *(NumberValue left, TemperatureValue right)
+        => new TemperatureValue(left.Number * right.Value, right.Unit);
+
+    /// <summary>
     /// Multiplies <see cref="Complex"/> and <see cref="NumberValue"/>.
     /// </summary>
     /// <param name="left">The first object to multiply.</param>
@@ -675,6 +735,26 @@ public readonly struct NumberValue :
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static PowerValue operator /(NumberValue left, PowerValue right)
         => new PowerValue(left.Number / right.Value, right.Unit);
+
+    /// <summary>
+    /// Divides <see cref="TemperatureValue"/> by <see cref="NumberValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to divide.</param>
+    /// <param name="right">The second object to divide.</param>
+    /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TemperatureValue operator /(TemperatureValue left, NumberValue right)
+        => new TemperatureValue(left.Value / right.Number, left.Unit);
+
+    /// <summary>
+    /// Divides <see cref="NumberValue"/> by <see cref="TemperatureValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to divide.</param>
+    /// <param name="right">The second object to divide.</param>
+    /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TemperatureValue operator /(NumberValue left, TemperatureValue right)
+        => new TemperatureValue(left.Number / right.Value, right.Unit);
 
     /// <summary>
     /// Divides <see cref="Complex"/> by <see cref="NumberValue"/>.

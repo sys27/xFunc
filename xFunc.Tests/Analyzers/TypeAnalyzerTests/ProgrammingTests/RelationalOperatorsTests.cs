@@ -112,6 +112,21 @@ public class GreaterOrEqualTests : TypeAnalyzerBaseTests
     [InlineData(typeof(GreaterOrEqual))]
     [InlineData(typeof(LessThan))]
     [InlineData(typeof(LessOrEqual))]
+    public void TestTemperature(Type type)
+    {
+        var exp = CreateBinary(type,
+            TemperatureValue.Celsius(10).AsExpression(),
+            TemperatureValue.Celsius(12).AsExpression()
+        );
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(GreaterThan))]
+    [InlineData(typeof(GreaterOrEqual))]
+    [InlineData(typeof(LessThan))]
+    [InlineData(typeof(LessOrEqual))]
     public void TestBoolNumberException(Type type)
     {
         var exp = CreateBinary(type, Bool.True, new Number(10));
@@ -185,6 +200,36 @@ public class GreaterOrEqualTests : TypeAnalyzerBaseTests
     {
         var exp = CreateBinary(type,
             PowerValue.Watt(12).AsExpression(),
+            Bool.True
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(GreaterThan))]
+    [InlineData(typeof(GreaterOrEqual))]
+    [InlineData(typeof(LessThan))]
+    [InlineData(typeof(LessOrEqual))]
+    public void TestBoolTemperature(Type type)
+    {
+        var exp = CreateBinary(type,
+            Bool.True,
+            TemperatureValue.Celsius(12).AsExpression()
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(GreaterThan))]
+    [InlineData(typeof(GreaterOrEqual))]
+    [InlineData(typeof(LessThan))]
+    [InlineData(typeof(LessOrEqual))]
+    public void TestTemperatureBool(Type type)
+    {
+        var exp = CreateBinary(type,
+            TemperatureValue.Celsius(12).AsExpression(),
             Bool.True
         );
 

@@ -810,6 +810,7 @@ public class TypeAnalyzer : ITypeAnalyzer
         return (leftResult, rightResult) switch
         {
             (ResultTypes.ComplexNumber, ResultTypes.Undefined) or
+                (ResultTypes.Number, ResultTypes.ComplexNumber) or
                 (ResultTypes.ComplexNumber, ResultTypes.Number) or
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
                 => ResultTypes.ComplexNumber,

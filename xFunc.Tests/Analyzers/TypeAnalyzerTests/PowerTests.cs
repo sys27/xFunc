@@ -54,6 +54,14 @@ public class PowerTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestNumberAndComplex()
+    {
+        var exp = new Pow(Number.Two, new ComplexNumber(2, 4));
+
+        Test(exp, ResultTypes.ComplexNumber);
+    }
+
+    [Fact]
     public void TestPowException()
     {
         var exp = new Pow(Bool.False, Bool.False);

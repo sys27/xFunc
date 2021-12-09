@@ -100,6 +100,49 @@ public class ComplexNumberTest
     }
 
     [Fact]
+    public void ComplexExponentialFormTest1()
+    {
+        const int r = 2;
+        const int phi = 3;
+
+        var exp = new Mul(
+            new Number(r),
+            new Exp(
+                new Mul(
+                    new Number(phi),
+                    new ComplexNumber(Complex.ImaginaryOne)
+                )
+            )
+        );
+        var actual = exp.Execute();
+        var expected = Complex.FromPolarCoordinates(r, phi);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ComplexExponentialFormTest2()
+    {
+        const int r = 2;
+        const int phi = 3;
+
+        var exp = new Mul(
+            new Number(r),
+            new Pow(
+                new Number(Math.E),
+                new Mul(
+                    new Number(phi),
+                    new ComplexNumber(Complex.ImaginaryOne)
+                )
+            )
+        );
+        var actual = exp.Execute();
+        var expected = Complex.FromPolarCoordinates(r, phi);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ComplexNumberAnalyzeNull1()
     {
         var exp = new ComplexNumber(3, 2);

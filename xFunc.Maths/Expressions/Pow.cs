@@ -40,6 +40,7 @@ public class Pow : BinaryExpression
         return (leftResult, rightResult) switch
         {
             (NumberValue left, NumberValue right) => NumberValue.Pow(left, right),
+            (NumberValue left, Complex right) => Complex.Pow(left.Number, right),
             (Complex left, NumberValue right) => NumberValue.Pow(left, right),
             (Complex left, Complex right) => Complex.Pow(left, right),
             _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),

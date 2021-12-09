@@ -91,6 +91,17 @@ public class PowTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteNumberAndComplexTest()
+    {
+        const int @base = 2;
+        var complex = new Complex(3, 2);
+        var exp = new Pow(new Number(@base), new ComplexNumber(complex));
+        var expected = Complex.Pow(@base, complex);
+
+        Assert.Equal(expected, exp.Execute());
+    }
+
+    [Fact]
     public void ExecuteWrongArgumentTypeTest()
         => TestNotSupported(new Pow(Bool.True, Bool.True));
 

@@ -101,14 +101,50 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2 rad * 90 deg")]
-    public void MulTwoAngles()
+    [Fact(DisplayName = "10 * 2 W")]
+    public void MulNumberByPower()
     {
         var mul = new Mul(
-            AngleValue.Radian(2).AsExpression(),
-            AngleValue.Degree(90).AsExpression()
+            new Number(10),
+            PowerValue.Watt(2).AsExpression()
         );
-        var expected = AngleValue.Degree(114.59155902616465 * 90).AsExpression();
+        var expected = PowerValue.Watt(20).AsExpression();
+
+        SimplifyTest(mul, expected);
+    }
+
+    [Fact(DisplayName = "2 W * 10")]
+    public void MulPowerByNumber()
+    {
+        var mul = new Mul(
+            PowerValue.Watt(2).AsExpression(),
+            new Number(10)
+        );
+        var expected = PowerValue.Watt(20).AsExpression();
+
+        SimplifyTest(mul, expected);
+    }
+
+    [Fact(DisplayName = "10 * 2 C°")]
+    public void MulNumberByTemperature()
+    {
+        var mul = new Mul(
+            new Number(10),
+            TemperatureValue.Celsius(2).AsExpression()
+        );
+        var expected = TemperatureValue.Celsius(20).AsExpression();
+
+        SimplifyTest(mul, expected);
+    }
+
+    [Fact(DisplayName = "2 C° * 10")]
+    public void MulTemperatureByNumber()
+    {
+        var mul = new Mul(
+            TemperatureValue.Celsius(2).AsExpression(),
+            new Number(10)
+        );
+        var expected = TemperatureValue.Celsius(20).AsExpression();
 
         SimplifyTest(mul, expected);
     }

@@ -110,17 +110,6 @@ public class DivTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
-    public void TestDivNumberAngle()
-    {
-        var exp = new Div(
-            new Number(10),
-            AngleValue.Radian(10).AsExpression()
-        );
-
-        Test(exp, ResultTypes.AngleNumber);
-    }
-
-    [Fact]
     public void TestDivAngleNumber()
     {
         var exp = new Div(
@@ -129,28 +118,6 @@ public class DivTests : TypeAnalyzerBaseTests
         );
 
         Test(exp, ResultTypes.AngleNumber);
-    }
-
-    [Fact]
-    public void TestDivAngleAngle()
-    {
-        var exp = new Div(
-            AngleValue.Degree(10).AsExpression(),
-            AngleValue.Radian(10).AsExpression()
-        );
-
-        Test(exp, ResultTypes.AngleNumber);
-    }
-
-    [Fact]
-    public void TestDivNumberPower()
-    {
-        var exp = new Div(
-            new Number(10),
-            PowerValue.Watt(10).AsExpression()
-        );
-
-        Test(exp, ResultTypes.PowerNumber);
     }
 
     [Fact]
@@ -165,44 +132,11 @@ public class DivTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
-    public void TestDivPowerPower()
-    {
-        var exp = new Div(
-            PowerValue.Watt(10).AsExpression(),
-            PowerValue.Watt(10).AsExpression()
-        );
-
-        Test(exp, ResultTypes.PowerNumber);
-    }
-
-    [Fact]
-    public void TestDivNumberTemperature()
-    {
-        var exp = new Div(
-            new Number(10),
-            TemperatureValue.Celsius(10).AsExpression()
-        );
-
-        Test(exp, ResultTypes.TemperatureNumber);
-    }
-
-    [Fact]
     public void TestDivTemperatureNumber()
     {
         var exp = new Div(
             TemperatureValue.Celsius(10).AsExpression(),
             new Number(10)
-        );
-
-        Test(exp, ResultTypes.TemperatureNumber);
-    }
-
-    [Fact]
-    public void TestDivTemperatureTemperature()
-    {
-        var exp = new Div(
-            TemperatureValue.Celsius(10).AsExpression(),
-            TemperatureValue.Celsius(10).AsExpression()
         );
 
         Test(exp, ResultTypes.TemperatureNumber);

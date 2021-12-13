@@ -258,32 +258,6 @@ public class MulTest : BaseExpressionTests
     }
 
     [Fact]
-    public void MulDegreeAndRadian()
-    {
-        var exp = new Mul(
-            AngleValue.Radian(Math.PI).AsExpression(),
-            AngleValue.Degree(10).AsExpression()
-        );
-        var actual = exp.Execute();
-        var expected = AngleValue.Degree(1800);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void MulGradianAndGradian()
-    {
-        var exp = new Mul(
-            AngleValue.Gradian(10).AsExpression(),
-            AngleValue.Gradian(20).AsExpression()
-        );
-        var actual = exp.Execute();
-        var expected = AngleValue.Gradian(200);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
     public void MulNumberAndPower()
     {
         var exp = new Mul(
@@ -310,19 +284,6 @@ public class MulTest : BaseExpressionTests
     }
 
     [Fact]
-    public void MulPowerAndPower()
-    {
-        var exp = new Mul(
-            PowerValue.Watt(2).AsExpression(),
-            PowerValue.Watt(10).AsExpression()
-        );
-        var actual = exp.Execute();
-        var expected = PowerValue.Watt(20);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
     public void MulNumberAndTemperature()
     {
         var exp = new Mul(
@@ -341,19 +302,6 @@ public class MulTest : BaseExpressionTests
         var exp = new Mul(
             TemperatureValue.Celsius(10).AsExpression(),
             Number.Two
-        );
-        var actual = exp.Execute();
-        var expected = TemperatureValue.Celsius(20);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void MulTemperatureAndTemperature()
-    {
-        var exp = new Mul(
-            TemperatureValue.Celsius(2).AsExpression(),
-            TemperatureValue.Celsius(10).AsExpression()
         );
         var actual = exp.Execute();
         var expected = TemperatureValue.Celsius(20);

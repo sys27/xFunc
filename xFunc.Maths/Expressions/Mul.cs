@@ -44,15 +44,12 @@ public class Mul : BinaryExpression
 
             (NumberValue left, AngleValue right) => left * right,
             (AngleValue left, NumberValue right) => left * right,
-            (AngleValue left, AngleValue right) => left * right,
 
             (NumberValue left, PowerValue right) => left * right,
             (PowerValue left, NumberValue right) => left * right,
-            (PowerValue left, PowerValue right) => left * right,
 
             (NumberValue left, TemperatureValue right) => left * right,
             (TemperatureValue left, NumberValue right) => left * right,
-            (TemperatureValue left, TemperatureValue right) => left * right,
 
             (NumberValue left, Complex right) => left * right,
             (Complex left, NumberValue right) => left * right,

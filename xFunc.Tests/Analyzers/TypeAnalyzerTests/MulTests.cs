@@ -242,17 +242,6 @@ public class MulTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
-    public void TestMulAngleAngle()
-    {
-        var exp = new Mul(
-            AngleValue.Degree(10).AsExpression(),
-            AngleValue.Radian(10).AsExpression()
-        );
-
-        Test(exp, ResultTypes.AngleNumber);
-    }
-
-    [Fact]
     public void TestMulNumberPower()
     {
         var exp = new Mul(
@@ -275,17 +264,6 @@ public class MulTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
-    public void TestMulPowerPower()
-    {
-        var exp = new Mul(
-            PowerValue.Watt(10).AsExpression(),
-            PowerValue.Watt(10).AsExpression()
-        );
-
-        Test(exp, ResultTypes.PowerNumber);
-    }
-
-    [Fact]
     public void TestMulNumberTemperature()
     {
         var exp = new Mul(
@@ -302,17 +280,6 @@ public class MulTests : TypeAnalyzerBaseTests
         var exp = new Mul(
             TemperatureValue.Celsius(10).AsExpression(),
             new Number(10)
-        );
-
-        Test(exp, ResultTypes.TemperatureNumber);
-    }
-
-    [Fact]
-    public void TestMulTemperatureTemperature()
-    {
-        var exp = new Mul(
-            TemperatureValue.Celsius(10).AsExpression(),
-            TemperatureValue.Celsius(10).AsExpression()
         );
 
         Test(exp, ResultTypes.TemperatureNumber);

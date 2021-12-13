@@ -435,19 +435,13 @@ public class TypeAnalyzer : ITypeAnalyzer
 
             (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Number,
 
-            (ResultTypes.Number, ResultTypes.AngleNumber) or
-                (ResultTypes.AngleNumber, ResultTypes.Number) or
-                (ResultTypes.AngleNumber, ResultTypes.AngleNumber)
+            (ResultTypes.AngleNumber, ResultTypes.Number)
                 => ResultTypes.AngleNumber,
 
-            (ResultTypes.Number, ResultTypes.PowerNumber) or
-                (ResultTypes.PowerNumber, ResultTypes.Number) or
-                (ResultTypes.PowerNumber, ResultTypes.PowerNumber)
+            (ResultTypes.PowerNumber, ResultTypes.Number)
                 => ResultTypes.PowerNumber,
 
-            (ResultTypes.Number, ResultTypes.TemperatureNumber) or
-                (ResultTypes.TemperatureNumber, ResultTypes.Number) or
-                (ResultTypes.TemperatureNumber, ResultTypes.TemperatureNumber)
+            (ResultTypes.TemperatureNumber, ResultTypes.Number)
                 => ResultTypes.TemperatureNumber,
 
             (ResultTypes.Number, ResultTypes.ComplexNumber) or
@@ -705,18 +699,15 @@ public class TypeAnalyzer : ITypeAnalyzer
             (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Number,
 
             (ResultTypes.Number, ResultTypes.AngleNumber) or
-                (ResultTypes.AngleNumber, ResultTypes.Number) or
-                (ResultTypes.AngleNumber, ResultTypes.AngleNumber)
+                (ResultTypes.AngleNumber, ResultTypes.Number)
                 => ResultTypes.AngleNumber,
 
             (ResultTypes.Number, ResultTypes.PowerNumber) or
-                (ResultTypes.PowerNumber, ResultTypes.Number) or
-                (ResultTypes.PowerNumber, ResultTypes.PowerNumber)
+                (ResultTypes.PowerNumber, ResultTypes.Number)
                 => ResultTypes.PowerNumber,
 
             (ResultTypes.Number, ResultTypes.TemperatureNumber) or
-                (ResultTypes.TemperatureNumber, ResultTypes.Number) or
-                (ResultTypes.TemperatureNumber, ResultTypes.TemperatureNumber)
+                (ResultTypes.TemperatureNumber, ResultTypes.Number)
                 => ResultTypes.TemperatureNumber,
 
             (ResultTypes.Number, ResultTypes.ComplexNumber) or

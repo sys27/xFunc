@@ -53,60 +53,11 @@ public class DivTest : BaseExpressionTests
     }
 
     [Fact]
-    public void DivNumberAndDegree()
-    {
-        var exp = new Div(new Number(10), AngleValue.Degree(2).AsExpression());
-        var actual = exp.Execute();
-        var expected = AngleValue.Degree(5);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
     public void DivRadianAndNumber()
     {
         var exp = new Div(AngleValue.Radian(10).AsExpression(), Number.Two);
         var actual = exp.Execute();
         var expected = AngleValue.Radian(5);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void DivDegreeAndRadian()
-    {
-        var exp = new Div(
-            AngleValue.Radian(Math.PI).AsExpression(),
-            AngleValue.Degree(10).AsExpression()
-        );
-        var actual = exp.Execute();
-        var expected = AngleValue.Degree(18);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void DivGradianAndGradian()
-    {
-        var exp = new Div(
-            AngleValue.Gradian(20).AsExpression(),
-            AngleValue.Gradian(10).AsExpression()
-        );
-        var actual = exp.Execute();
-        var expected = AngleValue.Gradian(2);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void DivNumberAndPower()
-    {
-        var exp = new Div(
-            new Number(10),
-            PowerValue.Watt(2).AsExpression()
-        );
-        var actual = exp.Execute();
-        var expected = PowerValue.Watt(5);
 
         Assert.Equal(expected, actual);
     }
@@ -125,50 +76,11 @@ public class DivTest : BaseExpressionTests
     }
 
     [Fact]
-    public void DivPowerAndPower()
-    {
-        var exp = new Div(
-            PowerValue.Watt(10).AsExpression(),
-            PowerValue.Watt(2).AsExpression()
-        );
-        var actual = exp.Execute();
-        var expected = PowerValue.Watt(5);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void DivNumberAndTemperature()
-    {
-        var exp = new Div(
-            new Number(10),
-            TemperatureValue.Celsius(2).AsExpression()
-        );
-        var actual = exp.Execute();
-        var expected = TemperatureValue.Celsius(5);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
     public void DivTemperatureAndNumber()
     {
         var exp = new Div(
             TemperatureValue.Celsius(10).AsExpression(),
             new Number(2)
-        );
-        var actual = exp.Execute();
-        var expected = TemperatureValue.Celsius(5);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void DivTemperatureAndTemperature()
-    {
-        var exp = new Div(
-            TemperatureValue.Celsius(10).AsExpression(),
-            TemperatureValue.Celsius(2).AsExpression()
         );
         var actual = exp.Execute();
         var expected = TemperatureValue.Celsius(5);

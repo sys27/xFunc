@@ -68,6 +68,78 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
+    [Fact(DisplayName = "20 - 10 W")]
+    public void SubPowerFromNumber()
+    {
+        var sub = new Sub(
+            new Number(20),
+            PowerValue.Watt(10).AsExpression()
+        );
+        var expected = PowerValue.Watt(10).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
+    [Fact(DisplayName = "20 W - 10")]
+    public void SubNumberFromPower()
+    {
+        var sub = new Sub(
+            PowerValue.Watt(20).AsExpression(),
+            new Number(10)
+        );
+        var expected = PowerValue.Watt(10).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
+    [Fact(DisplayName = "20 kW - 10 W")]
+    public void SubPowerFromPower()
+    {
+        var sub = new Sub(
+            PowerValue.Kilowatt(20).AsExpression(),
+            PowerValue.Watt(10).AsExpression()
+        );
+        var expected = PowerValue.Watt(19990).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
+    [Fact(DisplayName = "20 - 10 C°")]
+    public void SubTemperatureFromNumber()
+    {
+        var sub = new Sub(
+            new Number(20),
+            TemperatureValue.Celsius(10).AsExpression()
+        );
+        var expected = TemperatureValue.Celsius(10).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
+    [Fact(DisplayName = "20 C° - 10")]
+    public void SubNumberFromTemperature()
+    {
+        var sub = new Sub(
+            TemperatureValue.Celsius(20).AsExpression(),
+            new Number(10)
+        );
+        var expected = TemperatureValue.Celsius(10).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
+    [Fact(DisplayName = "20 K - 10 C°")]
+    public void SubTemperatureFromTemperature()
+    {
+        var sub = new Sub(
+            TemperatureValue.Kelvin(20).AsExpression(),
+            TemperatureValue.Celsius(10).AsExpression()
+        );
+        var expected = TemperatureValue.Celsius(-253.15 - 10).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
     [Fact(DisplayName = "2 - -x")]
     public void SubSecondUnaryMinus()
     {

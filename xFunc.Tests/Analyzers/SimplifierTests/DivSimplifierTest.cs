@@ -49,18 +49,6 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "90 / 2 deg")]
-    public void DivNumberAngle()
-    {
-        var div = new Div(
-            new Number(90),
-            AngleValue.Degree(2).AsExpression()
-        );
-        var expected = AngleValue.Degree(45).AsExpression();
-
-        SimplifyTest(div, expected);
-    }
-
     [Fact(DisplayName = "90 deg / 2")]
     public void DivAngleNumber()
     {
@@ -73,14 +61,26 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "2 rad / 90 deg")]
-    public void DivTwoAngles()
+    [Fact(DisplayName = "90 W / 2")]
+    public void DivPowerByNumber()
     {
         var div = new Div(
-            AngleValue.Radian(2).AsExpression(),
-            AngleValue.Degree(90).AsExpression()
+            PowerValue.Watt(90).AsExpression(),
+            new Number(2)
         );
-        var expected = AngleValue.Degree(114.59155902616465 / 90).AsExpression();
+        var expected = PowerValue.Watt(45).AsExpression();
+
+        SimplifyTest(div, expected);
+    }
+
+    [Fact(DisplayName = "90 C° / 2")]
+    public void DivTemperatureByNumber()
+    {
+        var div = new Div(
+            TemperatureValue.Celsius(90).AsExpression(),
+            new Number(2)
+        );
+        var expected = TemperatureValue.Celsius(45).AsExpression();
 
         SimplifyTest(div, expected);
     }

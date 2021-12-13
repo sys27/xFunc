@@ -178,11 +178,26 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
             // const + const
             (Number left, Number right)
                 => new Number(left.Value + right.Value),
+
             (Number left, Angle right)
                 => (left.Value + right.Value).AsExpression(),
             (Angle left, Number right)
                 => (left.Value + right.Value).AsExpression(),
             (Angle left, Angle right)
+                => (left.Value + right.Value).AsExpression(),
+
+            (Number left, Power right)
+                => (left.Value + right.Value).AsExpression(),
+            (Power left, Number right)
+                => (left.Value + right.Value).AsExpression(),
+            (Power left, Power right)
+                => (left.Value + right.Value).AsExpression(),
+
+            (Number left, Temperature right)
+                => (left.Value + right.Value).AsExpression(),
+            (Temperature left, Number right)
+                => (left.Value + right.Value).AsExpression(),
+            (Temperature left, Temperature right)
                 => (left.Value + right.Value).AsExpression(),
 
             // x + x
@@ -292,11 +307,12 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
             // const / const
             (Number left, Number right)
                 => new Number(left.Value / right.Value),
-            (Number left, Angle right)
-                => (left.Value / right.Value).AsExpression(),
+
             (Angle left, Number right)
                 => (left.Value / right.Value).AsExpression(),
-            (Angle left, Angle right)
+            (Power left, Number right)
+                => (left.Value / right.Value).AsExpression(),
+            (Temperature left, Number right)
                 => (left.Value / right.Value).AsExpression(),
 
             // x / x
@@ -474,11 +490,20 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
             // const * const
             (Number left, Number right)
                 => new Number(left.Value * right.Value),
+
             (Number left, Angle right)
                 => (left.Value * right.Value).AsExpression(),
             (Angle left, Number right)
                 => (left.Value * right.Value).AsExpression(),
-            (Angle left, Angle right)
+
+            (Number left, Power right)
+                => (left.Value * right.Value).AsExpression(),
+            (Power left, Number right)
+                => (left.Value * right.Value).AsExpression(),
+
+            (Number left, Temperature right)
+                => (left.Value * right.Value).AsExpression(),
+            (Temperature left, Number right)
                 => (left.Value * right.Value).AsExpression(),
 
             // x * -y
@@ -700,11 +725,26 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
             // const - const
             (Number left, Number right)
                 => new Number(left.Value - right.Value),
+
             (Number left, Angle right)
                 => (left.Value - right.Value).AsExpression(),
             (Angle left, Number right)
                 => (left.Value - right.Value).AsExpression(),
             (Angle left, Angle right)
+                => (left.Value - right.Value).AsExpression(),
+
+            (Number left, Power right)
+                => (left.Value - right.Value).AsExpression(),
+            (Power left, Number right)
+                => (left.Value - right.Value).AsExpression(),
+            (Power left, Power right)
+                => (left.Value - right.Value).AsExpression(),
+
+            (Number left, Temperature right)
+                => (left.Value - right.Value).AsExpression(),
+            (Temperature left, Number right)
+                => (left.Value - right.Value).AsExpression(),
+            (Temperature left, Temperature right)
                 => (left.Value - right.Value).AsExpression(),
 
             // x + x

@@ -77,6 +77,78 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
+    [Fact(DisplayName = "10 + 10 W")]
+    public void AddNumberAndPower()
+    {
+        var add = new Add(
+            new Number(10),
+            PowerValue.Watt(10).AsExpression()
+        );
+        var expected = PowerValue.Watt(20).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
+    [Fact(DisplayName = "10 W + 10")]
+    public void AddPowerAndNumber()
+    {
+        var add = new Add(
+            PowerValue.Watt(10).AsExpression(),
+            new Number(10)
+        );
+        var expected = PowerValue.Watt(20).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
+    [Fact(DisplayName = "10 W + 10 kW")]
+    public void AddTwoPowers()
+    {
+        var add = new Add(
+            PowerValue.Watt(10).AsExpression(),
+            PowerValue.Kilowatt(10).AsExpression()
+        );
+        var expected = PowerValue.Watt(10010).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
+    [Fact(DisplayName = "10 + 10 C°")]
+    public void AddNumberAndTemperature()
+    {
+        var add = new Add(
+            new Number(10),
+            TemperatureValue.Celsius(10).AsExpression()
+        );
+        var expected = TemperatureValue.Celsius(20).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
+    [Fact(DisplayName = "10 C° + 10")]
+    public void AddTemperatureAndNumber()
+    {
+        var add = new Add(
+            TemperatureValue.Celsius(10).AsExpression(),
+            new Number(10)
+        );
+        var expected = TemperatureValue.Celsius(20).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
+    [Fact(DisplayName = "10 C° + 10 K")]
+    public void AddTwoTemperatures()
+    {
+        var add = new Add(
+            TemperatureValue.Celsius(10).AsExpression(),
+            TemperatureValue.Kelvin(10).AsExpression()
+        );
+        var expected = TemperatureValue.Celsius(10 - 263.15).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
     [Fact(DisplayName = "-x + 2")]
     public void AddFirstUnaryMinus()
     {

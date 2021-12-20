@@ -42,6 +42,7 @@ public class Sign : UnaryExpression
             AngleValue angle => angle.Sign,
             PowerValue power => power.Sign,
             TemperatureValue temperature => temperature.Sign,
+            MassValue mass => mass.Sign,
             _ => throw new ResultIsNotSupportedException(this, result),
         };
 

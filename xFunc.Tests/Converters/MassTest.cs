@@ -1,7 +1,8 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using xFunc.UnitConverters;
+using MassConverter = xFunc.UnitConverters.MassConverter;
+using MassUnits = xFunc.UnitConverters.MassUnits;
 
 namespace xFunc.Tests.Converters;
 

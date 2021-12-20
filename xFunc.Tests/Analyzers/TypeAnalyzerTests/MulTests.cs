@@ -284,4 +284,26 @@ public class MulTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.TemperatureNumber);
     }
+
+    [Fact]
+    public void TestMulNumberAndMass()
+    {
+        var exp = new Mul(
+            new Number(10),
+            MassValue.Gram(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.MassNumber);
+    }
+
+    [Fact]
+    public void TestMulMassAndNumber()
+    {
+        var exp = new Mul(
+            MassValue.Gram(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.MassNumber);
+    }
 }

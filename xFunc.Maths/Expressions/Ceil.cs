@@ -41,6 +41,7 @@ public class Ceil : UnaryExpression
             AngleValue angle => AngleValue.Ceiling(angle),
             PowerValue power => PowerValue.Ceiling(power),
             TemperatureValue temperature => TemperatureValue.Ceiling(temperature),
+            MassValue mass => MassValue.Ceiling(mass),
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }

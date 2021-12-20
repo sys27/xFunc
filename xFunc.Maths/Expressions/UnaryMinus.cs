@@ -30,6 +30,7 @@ public class UnaryMinus : UnaryExpression
             AngleValue angle => -angle,
             PowerValue power => -power,
             TemperatureValue temperature => -temperature,
+            MassValue mass => -mass,
             Complex complex => Complex.Negate(complex),
             _ => throw new ResultIsNotSupportedException(this, result),
         };

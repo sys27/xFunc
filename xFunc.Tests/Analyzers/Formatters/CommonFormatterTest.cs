@@ -285,6 +285,14 @@ public class CommonFormatterTest
     }
 
     [Fact]
+    public void MassNumberTest()
+    {
+        var exp = MassValue.Gram(10).AsExpression();
+
+        Assert.Equal("10 g", exp.ToString());
+    }
+
+    [Fact]
     public void ToDegreeTest()
     {
         var exp = new ToDegree(new Number(10));

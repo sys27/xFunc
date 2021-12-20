@@ -242,6 +242,45 @@ public class AddTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteNumberAndMass()
+    {
+        var exp = new Add(
+            Number.One,
+            MassValue.Gram(1).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = MassValue.Gram(2);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteMassAndNumber()
+    {
+        var exp = new Add(
+            MassValue.Gram(1).AsExpression(),
+            Number.One
+        );
+        var actual = exp.Execute();
+        var expected = MassValue.Gram(2);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteMassAndMass()
+    {
+        var exp = new Add(
+            MassValue.Gram(1).AsExpression(),
+            MassValue.Gram(2).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = MassValue.Gram(3);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteStringAndString()
     {
         var exp = new Add(

@@ -380,4 +380,37 @@ public class SubTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.TemperatureNumber);
     }
+
+    [Fact]
+    public void TestSubNumberAndMass()
+    {
+        var exp = new Sub(
+            new Number(10),
+            MassValue.Gram(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.MassNumber);
+    }
+
+    [Fact]
+    public void TestSubMassAndNumber()
+    {
+        var exp = new Sub(
+            MassValue.Gram(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.MassNumber);
+    }
+
+    [Fact]
+    public void TestSubMassAndMass()
+    {
+        var exp = new Sub(
+            MassValue.Gram(10).AsExpression(),
+            MassValue.Gram(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.MassNumber);
+    }
 }

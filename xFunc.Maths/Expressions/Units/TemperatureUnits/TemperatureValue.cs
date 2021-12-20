@@ -201,32 +201,6 @@ public readonly struct TemperatureValue :
     public static TemperatureValue operator -(TemperatureValue value)
         => new TemperatureValue(-value.Value, value.Unit);
 
-    /// <summary>
-    /// Multiplies two objects of <see cref="TemperatureValue"/>.
-    /// </summary>
-    /// <param name="left">The first object to multiply.</param>
-    /// <param name="right">The second object to multiply.</param>
-    /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
-    public static TemperatureValue operator *(TemperatureValue left, TemperatureValue right)
-    {
-        (left, right) = ToCommonUnits(left, right);
-
-        return new TemperatureValue(left.Value * right.Value, left.Unit);
-    }
-
-    /// <summary>
-    /// Divides two objects of <see cref="TemperatureValue"/>.
-    /// </summary>
-    /// <param name="left">The first object to divide.</param>
-    /// <param name="right">The second object to divide.</param>
-    /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="right"/>.</returns>
-    public static TemperatureValue operator /(TemperatureValue left, TemperatureValue right)
-    {
-        (left, right) = ToCommonUnits(left, right);
-
-        return new TemperatureValue(left.Value / right.Value, left.Unit);
-    }
-
     private static (TemperatureValue Left, TemperatureValue Right) ToCommonUnits(TemperatureValue left, TemperatureValue right)
     {
         var commonUnit = GetCommonUnit(left.Unit, right.Unit);
@@ -256,7 +230,7 @@ public readonly struct TemperatureValue :
         TemperatureUnit.Celsius => ToCelsius(),
         TemperatureUnit.Fahrenheit => ToFahrenheit(),
         TemperatureUnit.Kelvin => ToKelvin(),
-        _ => throw new ArgumentOutOfRangeException(nameof(unit)),
+        _ => throw new ArgumentOutOfRangeException(nameof(unit), unit, null),
     };
 
     /// <summary>
@@ -334,6 +308,16 @@ public readonly struct TemperatureValue :
     /// <returns>The fractional part.</returns>
     public static TemperatureValue Frac(TemperatureValue value)
         => new TemperatureValue(NumberValue.Frac(value.Value), value.Unit);
+
+    /// <summary>
+    /// Rounds a double-precision floating-point value to a specified number of fractional digits,
+    /// and uses the specified rounding convention for midpoint values.
+    /// </summary>
+    /// <param name="temperatureValue">The temperature number.</param>
+    /// <param name="digits">The number of fractional digits in the return value.</param>
+    /// <returns>The number nearest to <paramref name="temperatureValue"/> that has a number of fractional digits equal to <paramref name="digits"/>. If value has fewer fractional digits than <paramref name="digits"/>, <paramref name="temperatureValue"/> is returned unchanged.</returns>
+    public static TemperatureValue Round(TemperatureValue temperatureValue, NumberValue digits)
+        => new TemperatureValue(NumberValue.Round(temperatureValue.Value, digits), temperatureValue.Unit);
 
     /// <summary>
     /// Converts <see cref="TemperatureValue"/> to <see cref="Temperature"/>.

@@ -235,6 +235,14 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     }
 
     /// <inheritdoc />
+    public override IExpression Analyze(Mass exp, DifferentiatorContext context)
+    {
+        ValidateArguments(exp, context);
+
+        return Number.Zero;
+    }
+
+    /// <inheritdoc />
     public override IExpression Analyze(Pow exp, DifferentiatorContext context)
     {
         ValidateArguments(exp, context);

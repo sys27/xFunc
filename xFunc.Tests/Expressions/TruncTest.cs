@@ -46,6 +46,16 @@ public class TruncTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteMassTest()
+    {
+        var exp = new Trunc(MassValue.Gram(5.55555555).AsExpression());
+        var result = exp.Execute();
+        var expected = MassValue.Gram(5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Trunc(Bool.False));
 

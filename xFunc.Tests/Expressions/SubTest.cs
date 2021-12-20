@@ -233,6 +233,45 @@ public class SubTest : BaseExpressionTests
     }
 
     [Fact]
+    public void SubNumberAndMass()
+    {
+        var exp = new Sub(
+            Number.One,
+            MassValue.Gram(10).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = MassValue.Gram(-9);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void SubMassAndNumber()
+    {
+        var exp = new Sub(
+            MassValue.Gram(10).AsExpression(),
+            Number.One
+        );
+        var actual = exp.Execute();
+        var expected = MassValue.Gram(9);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void SubMassAndMass()
+    {
+        var exp = new Sub(
+            MassValue.Gram(20).AsExpression(),
+            MassValue.Gram(10).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = MassValue.Gram(10);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteWrongArgumentTypeTest()
         => TestNotSupported(new Sub(Bool.True, Bool.True));
 

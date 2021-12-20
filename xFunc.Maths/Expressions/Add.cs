@@ -55,6 +55,10 @@ public class Add : BinaryExpression
             (TemperatureValue left, NumberValue right) => left + right,
             (TemperatureValue left, TemperatureValue right) => left + right,
 
+            (NumberValue left, MassValue right) => left + right,
+            (MassValue left, NumberValue right) => left + right,
+            (MassValue left, MassValue right) => left + right,
+
             (NumberValue left, Complex right) => left + right,
             (Complex left, NumberValue right) => left + right,
             (Complex left, Complex right) => left + right,

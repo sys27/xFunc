@@ -149,6 +149,17 @@ public class ProcessorTest
     }
 
     [Fact]
+    public void SolveMassTest()
+    {
+        var processor = new Processor();
+
+        var result = processor.Solve<MassNumberResult>("10 g");
+        var expected = MassValue.Gram(10);
+
+        Assert.Equal(expected, result.Result);
+    }
+
+    [Fact]
     public void ParseTest()
     {
         var processor = new Processor();

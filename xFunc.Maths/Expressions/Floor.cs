@@ -41,6 +41,7 @@ public class Floor : UnaryExpression
             AngleValue angle => AngleValue.Floor(angle),
             PowerValue power => PowerValue.Floor(power),
             TemperatureValue temperature => TemperatureValue.Floor(temperature),
+            MassValue mass => MassValue.Floor(mass),
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }

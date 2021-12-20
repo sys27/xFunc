@@ -41,6 +41,7 @@ public class Trunc : UnaryExpression
             AngleValue angle => AngleValue.Truncate(angle),
             PowerValue power => PowerValue.Truncate(power),
             TemperatureValue temperature => TemperatureValue.Truncate(temperature),
+            MassValue mass => MassValue.Truncate(mass),
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }

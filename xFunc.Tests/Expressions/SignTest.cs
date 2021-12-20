@@ -51,6 +51,15 @@ public class SignTest : BaseExpressionTests
     }
 
     [Fact]
+    public void MassSignTest()
+    {
+        var exp = new Sign(MassValue.Gram(10).AsExpression());
+        var result = exp.Execute();
+
+        Assert.Equal(new NumberValue(1.0), result);
+    }
+
+    [Fact]
     public void InvalidParameterTest()
         => TestNotSupported(new Sign(Bool.False));
 

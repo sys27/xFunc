@@ -149,6 +149,30 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
+    [Fact(DisplayName = "10 * 2 g")]
+    public void MulNumberByMass()
+    {
+        var mul = new Mul(
+            new Number(10),
+            MassValue.Gram(2).AsExpression()
+        );
+        var expected = MassValue.Gram(20).AsExpression();
+
+        SimplifyTest(mul, expected);
+    }
+
+    [Fact(DisplayName = "2 g * 10")]
+    public void MulMassByNumber()
+    {
+        var mul = new Mul(
+            MassValue.Gram(2).AsExpression(),
+            new Number(10)
+        );
+        var expected = MassValue.Gram(20).AsExpression();
+
+        SimplifyTest(mul, expected);
+    }
+
     [Fact(DisplayName = "2 * (2 * x)")]
     public void MulDiffNumMul_NumMulVar_()
     {

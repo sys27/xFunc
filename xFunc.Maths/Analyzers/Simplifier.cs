@@ -200,6 +200,13 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
             (Temperature left, Temperature right)
                 => (left.Value + right.Value).AsExpression(),
 
+            (Number left, Mass right)
+                => (left.Value + right.Value).AsExpression(),
+            (Mass left, Number right)
+                => (left.Value + right.Value).AsExpression(),
+            (Mass left, Mass right)
+                => (left.Value + right.Value).AsExpression(),
+
             // x + x
             (Variable left, Variable right) when left.Name == right.Name
                 => new Mul(Number.Two, left),
@@ -313,6 +320,8 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
             (Power left, Number right)
                 => (left.Value / right.Value).AsExpression(),
             (Temperature left, Number right)
+                => (left.Value / right.Value).AsExpression(),
+            (Mass left, Number right)
                 => (left.Value / right.Value).AsExpression(),
 
             // x / x
@@ -504,6 +513,11 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
             (Number left, Temperature right)
                 => (left.Value * right.Value).AsExpression(),
             (Temperature left, Number right)
+                => (left.Value * right.Value).AsExpression(),
+
+            (Number left, Mass right)
+                => (left.Value * right.Value).AsExpression(),
+            (Mass left, Number right)
                 => (left.Value * right.Value).AsExpression(),
 
             // x * -y
@@ -745,6 +759,13 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
             (Temperature left, Number right)
                 => (left.Value - right.Value).AsExpression(),
             (Temperature left, Temperature right)
+                => (left.Value - right.Value).AsExpression(),
+
+            (Number left, Mass right)
+                => (left.Value - right.Value).AsExpression(),
+            (Mass left, Number right)
+                => (left.Value - right.Value).AsExpression(),
+            (Mass left, Mass right)
                 => (left.Value - right.Value).AsExpression(),
 
             // x + x

@@ -72,6 +72,11 @@ public enum ResultTypes
     TemperatureNumber = 1 << 10,
 
     /// <summary>
+    /// The expression returns a mass number.
+    /// </summary>
+    MassNumber = 1 << 11,
+
+    /// <summary>
     /// The expression returns a number or a complex number.
     /// </summary>
     NumberOrComplex = Number | ComplexNumber,
@@ -96,7 +101,7 @@ public enum ResultTypes
     /// <summary>
     /// The expression returns any type of number.
     /// </summary>
-    Numbers = Number | AngleNumber | PowerNumber | TemperatureNumber,
+    Numbers = Number | AngleNumber | PowerNumber | TemperatureNumber | MassNumber,
 
     /// <summary>
     /// The expression returns a number or a angle number or a complex number or a vector.

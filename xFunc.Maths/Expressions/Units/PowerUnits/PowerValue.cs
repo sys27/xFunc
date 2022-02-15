@@ -198,32 +198,6 @@ public readonly struct PowerValue : IEquatable<PowerValue>, IComparable<PowerVal
     public static PowerValue operator -(PowerValue value)
         => new PowerValue(-value.Value, value.Unit);
 
-    /// <summary>
-    /// Multiplies two objects of <see cref="PowerValue"/>.
-    /// </summary>
-    /// <param name="left">The first object to multiply.</param>
-    /// <param name="right">The second object to multiply.</param>
-    /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
-    public static PowerValue operator *(PowerValue left, PowerValue right)
-    {
-        (left, right) = ToCommonUnits(left, right);
-
-        return new PowerValue(left.Value * right.Value, left.Unit);
-    }
-
-    /// <summary>
-    /// Divides two objects of <see cref="PowerValue"/>.
-    /// </summary>
-    /// <param name="left">The first object to divide.</param>
-    /// <param name="right">The second object to divide.</param>
-    /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="right"/>.</returns>
-    public static PowerValue operator /(PowerValue left, PowerValue right)
-    {
-        (left, right) = ToCommonUnits(left, right);
-
-        return new PowerValue(left.Value / right.Value, left.Unit);
-    }
-
     private static (PowerValue Left, PowerValue Right) ToCommonUnits(PowerValue left, PowerValue right)
     {
         var commonUnit = GetCommonUnit(left.Unit, right.Unit);
@@ -253,7 +227,7 @@ public readonly struct PowerValue : IEquatable<PowerValue>, IComparable<PowerVal
         PowerUnit.Watt => ToWatt(),
         PowerUnit.Kilowatt => ToKilowatt(),
         PowerUnit.Horsepower => ToHorsepower(),
-        _ => throw new ArgumentOutOfRangeException(nameof(unit)),
+        _ => throw new ArgumentOutOfRangeException(nameof(unit), unit, null),
     };
 
     /// <summary>
@@ -331,6 +305,16 @@ public readonly struct PowerValue : IEquatable<PowerValue>, IComparable<PowerVal
     /// <returns>The fractional part.</returns>
     public static PowerValue Frac(PowerValue value)
         => new PowerValue(NumberValue.Frac(value.Value), value.Unit);
+
+    /// <summary>
+    /// Rounds a double-precision floating-point value to a specified number of fractional digits,
+    /// and uses the specified rounding convention for midpoint values.
+    /// </summary>
+    /// <param name="powerValue">The power number.</param>
+    /// <param name="digits">The number of fractional digits in the return value.</param>
+    /// <returns>The number nearest to <paramref name="powerValue"/> that has a number of fractional digits equal to <paramref name="digits"/>. If value has fewer fractional digits than <paramref name="digits"/>, <paramref name="powerValue"/> is returned unchanged.</returns>
+    public static PowerValue Round(PowerValue powerValue, NumberValue digits)
+        => new PowerValue(NumberValue.Round(powerValue.Value, digits), powerValue.Unit);
 
     /// <summary>
     /// Converts <see cref="PowerValue"/> to <see cref="Power"/>.

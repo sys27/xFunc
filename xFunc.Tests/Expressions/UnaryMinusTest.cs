@@ -43,6 +43,15 @@ public class UnaryMinusTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteMassNumberTest()
+    {
+        var exp = new UnaryMinus(MassValue.Gram(10).AsExpression());
+        var expected = MassValue.Gram(-10);
+
+        Assert.Equal(expected, exp.Execute());
+    }
+
+    [Fact]
     public void ExecuteComplexTest()
     {
         var complex = new Complex(2, 3);

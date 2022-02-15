@@ -310,6 +310,32 @@ public class MulTest : BaseExpressionTests
     }
 
     [Fact]
+    public void MulNumberAndMass()
+    {
+        var exp = new Mul(
+            Number.Two,
+            MassValue.Gram(10).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = MassValue.Gram(20);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void MulMassAndNumber()
+    {
+        var exp = new Mul(
+            MassValue.Gram(10).AsExpression(),
+            Number.Two
+        );
+        var actual = exp.Execute();
+        var expected = MassValue.Gram(20);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteMulBoolByBoolTest()
         => TestNotSupported(new Mul(Bool.True, Bool.True));
 

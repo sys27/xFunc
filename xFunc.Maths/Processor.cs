@@ -121,6 +121,11 @@ public class Processor
             return new TemperatureNumberResult(temperature);
         }
 
+        if (result is MassValue mass)
+        {
+            return new MassNumberResult(mass);
+        }
+
         if (result is Complex complex)
         {
             return new ComplexNumberResult(complex);

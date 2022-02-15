@@ -55,6 +55,15 @@ public class ParameterTest
     }
 
     [Fact]
+    public void MassValueCtor()
+    {
+        var value = MassValue.Gram(10);
+        var x = new Parameter("x", value);
+
+        Assert.Equal(value, x.Value);
+    }
+
+    [Fact]
     public void ComplexCtor()
     {
         var value = new Complex(1, 2);

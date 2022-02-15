@@ -40,6 +40,14 @@ public class StandardTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestAbsMassNumber()
+    {
+        var exp = new Abs(MassValue.Gram(1).AsExpression());
+
+        Test(exp, ResultTypes.MassNumber);
+    }
+
+    [Fact]
     public void TestAbsComplexNumber()
     {
         var exp = new Abs(new ComplexNumber(2, 2));
@@ -101,6 +109,14 @@ public class StandardTests : TypeAnalyzerBaseTests
         var exp = new Ceil(TemperatureValue.Celsius(5.5).AsExpression());
 
         Test(exp, ResultTypes.TemperatureNumber);
+    }
+
+    [Fact]
+    public void TestCeilMass()
+    {
+        var exp = new Ceil(MassValue.Gram(5.5).AsExpression());
+
+        Test(exp, ResultTypes.MassNumber);
     }
 
     [Fact]
@@ -264,6 +280,14 @@ public class StandardTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestFloorMass()
+    {
+        var exp = new Floor(MassValue.Gram(5.5).AsExpression());
+
+        Test(exp, ResultTypes.MassNumber);
+    }
+
+    [Fact]
     public void TestFloorException()
     {
         var exp = new Floor(Bool.False);
@@ -312,6 +336,14 @@ public class StandardTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestTruncMass()
+    {
+        var exp = new Trunc(MassValue.Gram(5.5).AsExpression());
+
+        Test(exp, ResultTypes.MassNumber);
+    }
+
+    [Fact]
     public void TestTruncException()
     {
         var exp = new Trunc(Bool.False);
@@ -357,6 +389,14 @@ public class StandardTests : TypeAnalyzerBaseTests
         var exp = new Frac(TemperatureValue.Celsius(5.5).AsExpression());
 
         Test(exp, ResultTypes.TemperatureNumber);
+    }
+
+    [Fact]
+    public void TestFracMass()
+    {
+        var exp = new Frac(MassValue.Gram(5.5).AsExpression());
+
+        Test(exp, ResultTypes.MassNumber);
     }
 
     [Fact]
@@ -636,30 +676,6 @@ public class StandardTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
-    public void TestRoundVariable()
-    {
-        var exp = new Round(new Number(10), Variable.X);
-
-        Test(exp, ResultTypes.Number);
-    }
-
-    [Fact]
-    public void TestRoundNumber()
-    {
-        var exp = new Round(new Number(10), new Number(10));
-
-        Test(exp, ResultTypes.Number);
-    }
-
-    [Fact]
-    public void TestRoundException()
-    {
-        var exp = new Round(new ComplexNumber(10), new Number(10));
-
-        TestDiffParamException(exp);
-    }
-
-    [Fact]
     public void TestSimplify()
     {
         var simp = new Simplifier();
@@ -710,6 +726,14 @@ public class StandardTests : TypeAnalyzerBaseTests
         var exp = new UnaryMinus(TemperatureValue.Celsius(10).AsExpression());
 
         Test(exp, ResultTypes.TemperatureNumber);
+    }
+
+    [Fact]
+    public void TestUnaryMinusMass()
+    {
+        var exp = new UnaryMinus(MassValue.Gram(10).AsExpression());
+
+        Test(exp, ResultTypes.MassNumber);
     }
 
     [Fact]
@@ -780,6 +804,12 @@ public class StandardTests : TypeAnalyzerBaseTests
     public void TestSignTemperature()
     {
         Test(new Sign(TemperatureValue.Celsius(10).AsExpression()), ResultTypes.Number);
+    }
+
+    [Fact]
+    public void TestSignMass()
+    {
+        Test(new Sign(MassValue.Gram(10).AsExpression()), ResultTypes.Number);
     }
 
     [Fact]
@@ -944,6 +974,18 @@ public class StandardTests : TypeAnalyzerBaseTests
         );
 
         Test(exp, ResultTypes.TemperatureNumber);
+    }
+
+    [Fact]
+    public void TestMassConvert()
+    {
+        var exp = new Convert(
+            new Converter(),
+            MassValue.Kilogram(10).AsExpression(),
+            new StringExpression("g")
+        );
+
+        Test(exp, ResultTypes.MassNumber);
     }
 
     [Fact]

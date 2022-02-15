@@ -51,6 +51,9 @@ public class Mul : BinaryExpression
             (NumberValue left, TemperatureValue right) => left * right,
             (TemperatureValue left, NumberValue right) => left * right,
 
+            (NumberValue left, MassValue right) => left * right,
+            (MassValue left, NumberValue right) => left * right,
+
             (NumberValue left, Complex right) => left * right,
             (Complex left, NumberValue right) => left * right,
             (Complex left, Complex right) => left * right,

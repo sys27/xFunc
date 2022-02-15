@@ -723,10 +723,15 @@ public partial class Parser : IParser
 
     private IExpression? ParseNumber(ref TokenReader tokenReader)
     {
+        var mass = ParseMassUnit(ref tokenReader);
+        if (mass is not null)
+            return mass;
+
         var number = tokenReader.GetCurrent(TokenKind.Number);
         if (number.IsEmpty())
             return null;
 
+        // TODO: !
         return ParseAngleUnit(ref tokenReader, ref number) ??
                ParsePowerUnit(ref tokenReader, ref number) ??
                ParseTemperatureUnit(ref tokenReader, ref number) ??
@@ -774,6 +779,28 @@ public partial class Parser : IParser
 
         return null;
     }
+
+    private IExpression? ParseMassUnit(ref TokenReader tokenReader)
+        => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
+        {
+            // TODO:
+            var number = reader.GetCurrent(TokenKind.Number);
+            if (number.IsEmpty())
+                return null;
+
+            var id = reader.GetCurrent(Id);
+
+            return id.StringValue switch
+            {
+                "mg" => MassValue.Milligram(number.NumberValue).AsExpression(),
+                "g" => MassValue.Gram(number.NumberValue).AsExpression(),
+                "kg" => MassValue.Kilogram(number.NumberValue).AsExpression(),
+                "t" => MassValue.Tonne(number.NumberValue).AsExpression(),
+                "oz" => MassValue.Ounce(number.NumberValue).AsExpression(),
+                "lb" => MassValue.Pound(number.NumberValue).AsExpression(),
+                _ => null,
+            };
+        });
 
     private IExpression? ParsePolarComplexNumber(ref TokenReader tokenReader)
         => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>

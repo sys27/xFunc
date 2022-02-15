@@ -26,6 +26,46 @@ public class RoundTest : BaseExpressionTests
     }
 
     [Fact]
+    public void RoundAngleWithDigits()
+    {
+        var round = new Round(AngleValue.Degree(5.555555).AsExpression(), Number.Two);
+        var result = round.Execute();
+        var expected = AngleValue.Degree(5.56);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void RoundPowerWithDigits()
+    {
+        var round = new Round(PowerValue.Watt(5.555555).AsExpression(), Number.Two);
+        var result = round.Execute();
+        var expected = PowerValue.Watt(5.56);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void RoundTemperatureWithDigits()
+    {
+        var round = new Round(TemperatureValue.Celsius(5.555555).AsExpression(), Number.Two);
+        var result = round.Execute();
+        var expected = TemperatureValue.Celsius(5.56);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void RoundMassWithDigits()
+    {
+        var round = new Round(MassValue.Gram(5.555555).AsExpression(), Number.Two);
+        var result = round.Execute();
+        var expected = MassValue.Gram(5.56);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteArgumentIsNotNumber()
     {
         var exp = new Round(Bool.False, Number.Two);

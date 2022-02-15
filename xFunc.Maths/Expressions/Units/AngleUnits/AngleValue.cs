@@ -198,32 +198,6 @@ public readonly struct AngleValue : IEquatable<AngleValue>, IComparable<AngleVal
     public static AngleValue operator -(AngleValue angleValue)
         => new AngleValue(-angleValue.Angle, angleValue.Unit);
 
-    /// <summary>
-    /// Multiplies two objects of <see cref="AngleValue"/>.
-    /// </summary>
-    /// <param name="left">The first object to multiply.</param>
-    /// <param name="right">The second object to multiply.</param>
-    /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
-    public static AngleValue operator *(AngleValue left, AngleValue right)
-    {
-        (left, right) = ToCommonUnits(left, right);
-
-        return new AngleValue(left.Angle * right.Angle, left.Unit);
-    }
-
-    /// <summary>
-    /// Divides two objects of <see cref="AngleValue"/>.
-    /// </summary>
-    /// <param name="left">The first object to divide.</param>
-    /// <param name="right">The second object to divide.</param>
-    /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="right"/>.</returns>
-    public static AngleValue operator /(AngleValue left, AngleValue right)
-    {
-        (left, right) = ToCommonUnits(left, right);
-
-        return new AngleValue(left.Angle / right.Angle, left.Unit);
-    }
-
     private static (AngleValue Left, AngleValue Right) ToCommonUnits(AngleValue left, AngleValue right)
     {
         var commonUnit = GetCommonUnit(left.Unit, right.Unit);
@@ -253,7 +227,7 @@ public readonly struct AngleValue : IEquatable<AngleValue>, IComparable<AngleVal
         AngleUnit.Degree => ToDegree(),
         AngleUnit.Radian => ToRadian(),
         AngleUnit.Gradian => ToGradian(),
-        _ => throw new ArgumentOutOfRangeException(nameof(unit)),
+        _ => throw new ArgumentOutOfRangeException(nameof(unit), unit, null),
     };
 
     /// <summary>
@@ -359,6 +333,16 @@ public readonly struct AngleValue : IEquatable<AngleValue>, IComparable<AngleVal
     /// <returns>The fractional part.</returns>
     public static AngleValue Frac(AngleValue angleValue)
         => new AngleValue(NumberValue.Frac(angleValue.Angle), angleValue.Unit);
+
+    /// <summary>
+    /// Rounds a double-precision floating-point value to a specified number of fractional digits,
+    /// and uses the specified rounding convention for midpoint values.
+    /// </summary>
+    /// <param name="angleValue">The angle number.</param>
+    /// <param name="digits">The number of fractional digits in the return value.</param>
+    /// <returns>The number nearest to <paramref name="angleValue"/> that has a number of fractional digits equal to <paramref name="digits"/>. If value has fewer fractional digits than <paramref name="digits"/>, <paramref name="angleValue"/> is returned unchanged.</returns>
+    public static AngleValue Round(AngleValue angleValue, NumberValue digits)
+        => new AngleValue(NumberValue.Round(angleValue.Angle, digits), angleValue.Unit);
 
     /// <summary>
     /// The 'sin' function.

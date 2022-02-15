@@ -49,6 +49,10 @@ public class Round : DifferentParametersExpression
         return (result, digits) switch
         {
             (NumberValue left, NumberValue right) => NumberValue.Round(left, right),
+            (AngleValue left, NumberValue right) => AngleValue.Round(left, right),
+            (PowerValue left, NumberValue right) => PowerValue.Round(left, right),
+            (TemperatureValue left, NumberValue right) => TemperatureValue.Round(left, right),
+            (MassValue left, NumberValue right) => MassValue.Round(left, right),
             _ => throw new ResultIsNotSupportedException(this, result, digits),
         };
     }

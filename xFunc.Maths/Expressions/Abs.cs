@@ -43,6 +43,7 @@ public class Abs : UnaryExpression
             AngleValue angle => AngleValue.Abs(angle),
             PowerValue power => PowerValue.Abs(power),
             TemperatureValue temperature => TemperatureValue.Abs(temperature),
+            MassValue mass => MassValue.Abs(mass),
             Complex complex => Complex.Abs(complex),
             Vector vector => vector.Abs(parameters),
             _ => throw new ResultIsNotSupportedException(this, result),

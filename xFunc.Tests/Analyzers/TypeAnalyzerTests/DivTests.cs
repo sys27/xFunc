@@ -141,4 +141,15 @@ public class DivTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.TemperatureNumber);
     }
+
+    [Fact]
+    public void TestDivMassNumber()
+    {
+        var exp = new Div(
+            MassValue.Gram(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.MassNumber);
+    }
 }

@@ -359,6 +359,39 @@ public class AddTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestAddNumberAndMass()
+    {
+        var exp = new Add(
+            new Number(10),
+            MassValue.Gram(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.MassNumber);
+    }
+
+    [Fact]
+    public void TestAddMassAndNumber()
+    {
+        var exp = new Add(
+            MassValue.Gram(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.MassNumber);
+    }
+
+    [Fact]
+    public void TestAddMassAndMass()
+    {
+        var exp = new Add(
+            MassValue.Gram(10).AsExpression(),
+            MassValue.Gram(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.MassNumber);
+    }
+
+    [Fact]
     public void TestAddStringToString()
     {
         var exp = new Add(

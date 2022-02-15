@@ -86,6 +86,26 @@ public class FracTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteMassTest()
+    {
+        var exp = new Frac(MassValue.Gram(5.5).AsExpression());
+        var result = exp.Execute();
+        var expected = MassValue.Gram(0.5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void ExecuteNegativeMassTest()
+    {
+        var exp = new Frac(MassValue.Gram(-5.5).AsExpression());
+        var result = exp.Execute();
+        var expected = MassValue.Gram(-0.5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Frac(Bool.False));
 

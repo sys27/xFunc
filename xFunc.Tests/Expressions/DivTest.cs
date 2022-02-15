@@ -89,6 +89,19 @@ public class DivTest : BaseExpressionTests
     }
 
     [Fact]
+    public void DivMassAndNumber()
+    {
+        var exp = new Div(
+            MassValue.Gram(10).AsExpression(),
+            new Number(2)
+        );
+        var actual = exp.Execute();
+        var expected = MassValue.Gram(5);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteBoolTest()
     {
         var exp = new Div(Bool.False, Bool.True);

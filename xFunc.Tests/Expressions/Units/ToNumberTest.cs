@@ -26,6 +26,26 @@ public class ToNumberTest
     }
 
     [Fact]
+    public void ExecuteTemperatureTest()
+    {
+        var exp = new ToNumber(TemperatureValue.Celsius(10).AsExpression());
+        var actual = exp.Execute();
+        var expected = new NumberValue(10.0);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteMassTest()
+    {
+        var exp = new ToNumber(MassValue.Gram(10).AsExpression());
+        var actual = exp.Execute();
+        var expected = new NumberValue(10.0);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteBoolTest()
     {
         Assert.Throws<ResultIsNotSupportedException>(() => new ToNumber(Bool.False).Execute());

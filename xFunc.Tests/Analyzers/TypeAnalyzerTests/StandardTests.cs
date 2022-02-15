@@ -903,6 +903,18 @@ public class StandardTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestTemperatureToNumber()
+    {
+        Test(new ToNumber(TemperatureValue.Celsius(10).AsExpression()), ResultTypes.Number);
+    }
+
+    [Fact]
+    public void TestMassToNumber()
+    {
+        Test(new ToNumber(MassValue.Gram(10).AsExpression()), ResultTypes.Number);
+    }
+
+    [Fact]
     public void TestToNumberException()
     {
         TestException(new ToNumber(Bool.True));

@@ -804,7 +804,9 @@ public class TypeAnalyzer : ITypeAnalyzer
         {
             ResultTypes.Undefined or
                 ResultTypes.AngleNumber or
-                ResultTypes.PowerNumber
+                ResultTypes.PowerNumber or
+                ResultTypes.TemperatureNumber or
+                ResultTypes.MassNumber
                 => ResultTypes.Number,
             _ => ResultTypes.AngleNumber.ThrowFor(result),
         };

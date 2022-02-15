@@ -85,6 +85,18 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
+    [Fact(DisplayName = "90 g / 2")]
+    public void DivMassByNumber()
+    {
+        var div = new Div(
+            MassValue.Gram(90).AsExpression(),
+            new Number(2)
+        );
+        var expected = MassValue.Gram(45).AsExpression();
+
+        SimplifyTest(div, expected);
+    }
+
     [Fact(DisplayName = "(2 * x) / 4")]
     public void DivDiff_NumMulVar_DivNum()
     {

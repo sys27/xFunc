@@ -140,6 +140,42 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
+    [Fact(DisplayName = "20 - 10 g")]
+    public void SubMassFromNumber()
+    {
+        var sub = new Sub(
+            new Number(20),
+            MassValue.Gram(10).AsExpression()
+        );
+        var expected = MassValue.Gram(10).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
+    [Fact(DisplayName = "20 g - 10")]
+    public void SubNumberFromMass()
+    {
+        var sub = new Sub(
+            MassValue.Gram(20).AsExpression(),
+            new Number(10)
+        );
+        var expected = MassValue.Gram(10).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
+    [Fact(DisplayName = "20 kg - 10 g")]
+    public void SubMassFromMass()
+    {
+        var sub = new Sub(
+            MassValue.Kilogram(20).AsExpression(),
+            MassValue.Gram(10).AsExpression()
+        );
+        var expected = MassValue.Kilogram(19.990).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
     [Fact(DisplayName = "2 - -x")]
     public void SubSecondUnaryMinus()
     {

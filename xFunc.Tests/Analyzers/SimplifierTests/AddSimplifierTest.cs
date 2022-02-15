@@ -149,6 +149,42 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
+    [Fact(DisplayName = "10 + 10 g")]
+    public void AddNumberAndMass()
+    {
+        var add = new Add(
+            new Number(10),
+            MassValue.Gram(10).AsExpression()
+        );
+        var expected = MassValue.Gram(20).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
+    [Fact(DisplayName = "10 g + 10")]
+    public void AddMassAndNumber()
+    {
+        var add = new Add(
+            MassValue.Gram(10).AsExpression(),
+            new Number(10)
+        );
+        var expected = MassValue.Gram(20).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
+    [Fact(DisplayName = "10 g + 10 kg")]
+    public void AddTwoMasses()
+    {
+        var add = new Add(
+            MassValue.Kilogram(10).AsExpression(),
+            MassValue.Gram(10).AsExpression()
+        );
+        var expected = MassValue.Gram(10010).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
     [Fact(DisplayName = "-x + 2")]
     public void AddFirstUnaryMinus()
     {

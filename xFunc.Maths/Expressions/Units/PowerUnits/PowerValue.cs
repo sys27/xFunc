@@ -1,6 +1,8 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace xFunc.Maths.Expressions.Units.PowerUnits;
 
 /// <summary>
@@ -69,7 +71,12 @@ public readonly struct PowerValue : IEquatable<PowerValue>, IComparable<PowerVal
 
     /// <inheritdoc />
     public bool Equals(PowerValue other)
-        => Value == other.Value && Unit == other.Unit;
+    {
+        var inBase = ToBase();
+        var otherInBase = other.ToBase();
+
+        return inBase.Value.Equals(otherInBase.Value);
+    }
 
     /// <inheritdoc />
     public override bool Equals(object? obj)
@@ -78,37 +85,29 @@ public readonly struct PowerValue : IEquatable<PowerValue>, IComparable<PowerVal
     /// <inheritdoc />
     public int CompareTo(PowerValue other)
     {
-        var valueComparison = Value.CompareTo(other.Value);
-        if (valueComparison != 0)
-            return valueComparison;
+        var inBase = ToBase();
+        var otherInBase = other.ToBase();
 
-        return Unit.CompareTo(other.Unit);
+        return inBase.Value.CompareTo(otherInBase.Value);
     }
 
     /// <inheritdoc />
-    public int CompareTo(object? obj)
-    {
-        if (obj is null)
-            return 1;
-
-        if (obj is PowerValue other)
-            return CompareTo(other);
-
-        throw new ArgumentException($"Object must be of type {nameof(PowerValue)}");
-    }
+    public int CompareTo(object obj)
+        => obj switch
+        {
+            null => 1,
+            PowerValue other => CompareTo(other),
+            _ => throw new ArgumentException($"Object must be of type {nameof(PowerValue)}"),
+        };
 
     /// <inheritdoc />
+    [ExcludeFromCodeCoverage]
     public override int GetHashCode()
-        => HashCode.Combine(Value, (int)Unit);
+        => HashCode.Combine(Value, Unit);
 
     /// <inheritdoc />
-    public override string ToString() => Unit switch
-    {
-        PowerUnit.Watt => $"{Value} W",
-        PowerUnit.Kilowatt => $"{Value} kW",
-        PowerUnit.Horsepower => $"{Value} hp",
-        _ => throw new InvalidOperationException(),
-    };
+    public override string ToString()
+        => $"{Value} {Unit}";
 
     /// <summary>
     /// Determines whether two specified instances of <see cref="PowerValue"/> are equal.
@@ -172,7 +171,7 @@ public readonly struct PowerValue : IEquatable<PowerValue>, IComparable<PowerVal
     /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
     public static PowerValue operator +(PowerValue left, PowerValue right)
     {
-        (left, right) = ToCommonUnits(left, right);
+        right = right.To(left.Unit);
 
         return new PowerValue(left.Value + right.Value, left.Unit);
     }
@@ -185,7 +184,7 @@ public readonly struct PowerValue : IEquatable<PowerValue>, IComparable<PowerVal
     /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
     public static PowerValue operator -(PowerValue left, PowerValue right)
     {
-        (left, right) = ToCommonUnits(left, right);
+        right = right.To(left.Unit);
 
         return new PowerValue(left.Value - right.Value, left.Unit);
     }
@@ -198,73 +197,42 @@ public readonly struct PowerValue : IEquatable<PowerValue>, IComparable<PowerVal
     public static PowerValue operator -(PowerValue value)
         => new PowerValue(-value.Value, value.Unit);
 
-    private static (PowerValue Left, PowerValue Right) ToCommonUnits(PowerValue left, PowerValue right)
-    {
-        var commonUnit = GetCommonUnit(left.Unit, right.Unit);
-
-        return (left.To(commonUnit), right.To(commonUnit));
-    }
-
-    private static PowerUnit GetCommonUnit(PowerUnit left, PowerUnit right)
-        => (left, right) switch
-        {
-            _ when left == right => left,
-
-            (PowerUnit.Kilowatt, PowerUnit.Horsepower) or
-                (PowerUnit.Horsepower, PowerUnit.Kilowatt)
-                => PowerUnit.Kilowatt,
-
-            _ => PowerUnit.Watt,
-        };
+    private PowerValue ToBase()
+        => new PowerValue(Value * Unit.Factor, PowerUnit.Watt);
 
     /// <summary>
-    /// Converts the current object to the specified <paramref name="unit"/>.
+    /// Convert to the <paramref name="newUnit"/> unit.
     /// </summary>
-    /// <param name="unit">The unit to convert to.</param>
-    /// <returns>The power value which is converted to the specified <paramref name="unit"/>.</returns>
-    public PowerValue To(PowerUnit unit) => unit switch
+    /// <param name="newUnit">The new unit.</param>
+    /// <returns>The value in the new unit.</returns>
+    public PowerValue To(PowerUnit newUnit)
     {
-        PowerUnit.Watt => ToWatt(),
-        PowerUnit.Kilowatt => ToKilowatt(),
-        PowerUnit.Horsepower => ToHorsepower(),
-        _ => throw new ArgumentOutOfRangeException(nameof(unit), unit, null),
-    };
+        var inBase = Value * Unit.Factor;
+        var converted = inBase / newUnit.Factor;
+
+        return new PowerValue(converted, newUnit);
+    }
 
     /// <summary>
     /// Converts the current object to watt.
     /// </summary>
     /// <returns>The power value which is converted to watts.</returns>
-    public PowerValue ToWatt() => Unit switch
-    {
-        PowerUnit.Watt => this,
-        PowerUnit.Kilowatt => Watt(Value * 1000.0),
-        PowerUnit.Horsepower => Watt(Value * 745.69987158227022),
-        _ => throw new InvalidOperationException(),
-    };
+    public PowerValue ToWatt()
+        => To(PowerUnit.Watt);
 
     /// <summary>
     /// Converts the current object to kilowatt.
     /// </summary>
     /// <returns>The power value which is converted to kilowatts.</returns>
-    public PowerValue ToKilowatt() => Unit switch
-    {
-        PowerUnit.Watt => Kilowatt(Value / 1000.0),
-        PowerUnit.Kilowatt => this,
-        PowerUnit.Horsepower => Kilowatt(Value * 745.69987158227022 / 1000),
-        _ => throw new InvalidOperationException(),
-    };
+    public PowerValue ToKilowatt()
+        => To(PowerUnit.Kilowatt);
 
     /// <summary>
     /// Converts the current object to horsepower.
     /// </summary>
     /// <returns>The power value which is converted to horsepowers.</returns>
-    public PowerValue ToHorsepower() => Unit switch
-    {
-        PowerUnit.Watt => Horsepower(Value / 745.69987158227022),
-        PowerUnit.Kilowatt => Horsepower(Value / 745.69987158227022 * 1000),
-        PowerUnit.Horsepower => this,
-        _ => throw new InvalidOperationException(),
-    };
+    public PowerValue ToHorsepower()
+        => To(PowerUnit.Horsepower);
 
     /// <summary>
     /// Returns the absolute value of a specified power value.

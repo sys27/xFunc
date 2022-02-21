@@ -526,7 +526,7 @@ public partial class Parser : IParser
         => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
         {
             var minusOperator = reader.GetCurrent(MinusOperator);
-            var number = parser.ParseNumber(ref reader);
+            var number = parser.ParseNumberAndUnit(ref reader);
             if (number is null)
                 return null;
 
@@ -601,7 +601,7 @@ public partial class Parser : IParser
     private IExpression? ParseFactorial(ref TokenReader tokenReader)
         => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
         {
-            var number = parser.ParseNumber(ref reader);
+            var number = parser.ParseNumberAndUnit(ref reader);
             if (number is not null && reader.Check(FactorialOperator))
                 return new Fact(number);
 
@@ -626,7 +626,7 @@ public partial class Parser : IParser
 
     private IExpression? ParseOperand(ref TokenReader tokenReader)
         => ParsePolarComplexNumber(ref tokenReader) ??
-           ParseNumber(ref tokenReader) ??
+           ParseNumberAndUnit(ref tokenReader) ??
            ParseIf(ref tokenReader) ??
            ParseFunctionOrVariable(ref tokenReader) ??
            ParseBoolean(ref tokenReader) ??
@@ -688,7 +688,7 @@ public partial class Parser : IParser
             return null;
 
         var parameterList = ParseParameterList(ref tokenReader);
-        if (parameterList == null)
+        if (parameterList.IsDefaultOrEmpty)
             return CreateVariable(function);
 
         return CreateFunction(function, parameterList);
@@ -721,74 +721,103 @@ public partial class Parser : IParser
         return parameterList.ToImmutableArray();
     }
 
-    private IExpression? ParseNumber(ref TokenReader tokenReader)
+    private IExpression? ParseNumberAndUnit(ref TokenReader tokenReader)
     {
-        var mass = ParseMassUnit(ref tokenReader);
-        if (mass is not null)
-            return mass;
+        var unit = ParseTemperatureUnit(ref tokenReader) ??
+                   ParseAngleUnit(ref tokenReader) ??
+                   ParsePowerUnit(ref tokenReader) ??
+                   ParseMassUnit(ref tokenReader);
+        if (unit is not null)
+            return unit;
 
         var number = tokenReader.GetCurrent(TokenKind.Number);
-        if (number.IsEmpty())
-            return null;
-
-        // TODO: !
-        return ParseAngleUnit(ref tokenReader, ref number) ??
-               ParsePowerUnit(ref tokenReader, ref number) ??
-               ParseTemperatureUnit(ref tokenReader, ref number) ??
-               new Number(number.NumberValue);
-    }
-
-    private IExpression? ParseAngleUnit(ref TokenReader tokenReader, ref Token number)
-    {
-        if (tokenReader.Check(DegreeSymbol) || tokenReader.Check(DegreeKeyword))
-            return AngleValue.Degree(number.NumberValue).AsExpression();
-
-        if (tokenReader.Check(RadianKeyword))
-            return AngleValue.Radian(number.NumberValue).AsExpression();
-
-        if (tokenReader.Check(GradianKeyword))
-            return AngleValue.Gradian(number.NumberValue).AsExpression();
+        if (number.IsNotEmpty())
+            return new Number(number.NumberValue);
 
         return null;
     }
 
-    private IExpression? ParsePowerUnit(ref TokenReader tokenReader, ref Token number)
-    {
-        if (tokenReader.Check(WattKeyword))
-            return PowerValue.Watt(number.NumberValue).AsExpression();
-
-        if (tokenReader.Check(KilowattKeyword))
-            return PowerValue.Kilowatt(number.NumberValue).AsExpression();
-
-        if (tokenReader.Check(HorsepowerKeyword))
-            return PowerValue.Horsepower(number.NumberValue).AsExpression();
-
-        return null;
-    }
-
-    private IExpression? ParseTemperatureUnit(ref TokenReader tokenReader, ref Token number)
-    {
-        if (tokenReader.Check(CelsiusKeyword))
-            return TemperatureValue.Celsius(number.NumberValue).AsExpression();
-
-        if (tokenReader.Check(FahrenheitKeyword))
-            return TemperatureValue.Fahrenheit(number.NumberValue).AsExpression();
-
-        if (tokenReader.Check(KelvinKeyword))
-            return TemperatureValue.Kelvin(number.NumberValue).AsExpression();
-
-        return null;
-    }
-
-    private IExpression? ParseMassUnit(ref TokenReader tokenReader)
+    private IExpression? ParseAngleUnit(ref TokenReader tokenReader)
         => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
         {
-            // TODO:
+            var number = reader.GetCurrent(TokenKind.Number);
+            if (number.IsEmpty())
+                return null;
+
+            if (reader.Check(DegreeSymbol))
+                return AngleValue.Degree(number.NumberValue).AsExpression();
+
+            var id = reader.GetCurrent(Id);
+            if (id.IsEmpty())
+                return null;
+
+            return id.StringValue switch
+            {
+                "deg" or "degree" or "degrees" => AngleValue.Degree(number.NumberValue).AsExpression(),
+                "rad" or "radian" or "radians" => AngleValue.Radian(number.NumberValue).AsExpression(),
+                "grad" or "gradian" or "gradians" => AngleValue.Gradian(number.NumberValue).AsExpression(),
+                _ => null,
+            };
+        });
+
+    private IExpression? ParsePowerUnit(ref TokenReader tokenReader)
+        => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
+        {
             var number = reader.GetCurrent(TokenKind.Number);
             if (number.IsEmpty())
                 return null;
 
             var id = reader.GetCurrent(Id);
+            if (id.IsEmpty())
+                return null;
+
+            return id.StringValue switch
+            {
+                "w" => PowerValue.Watt(number.NumberValue).AsExpression(),
+                "kw" => PowerValue.Kilowatt(number.NumberValue).AsExpression(),
+                "hp" => PowerValue.Horsepower(number.NumberValue).AsExpression(),
+                _ => null,
+            };
+        });
+
+    private IExpression? ParseTemperatureUnit(ref TokenReader tokenReader)
+        => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
+        {
+            var number = reader.GetCurrent(TokenKind.Number);
+            if (number.IsEmpty())
+                return null;
+
+            if (reader.Check(DegreeSymbol))
+            {
+                var id = reader.GetCurrent(Id);
+                if (id.IsNotEmpty())
+                {
+                    if (id.StringValue == "c")
+                        return TemperatureValue.Celsius(number.NumberValue).AsExpression();
+                    if (id.StringValue == "f")
+                        return TemperatureValue.Fahrenheit(number.NumberValue).AsExpression();
+                }
+            }
+            else
+            {
+                var id = reader.GetCurrent(Id);
+                if (id.IsNotEmpty() && id.StringValue == "k")
+                    return TemperatureValue.Kelvin(number.NumberValue).AsExpression();
+            }
+
+            return null;
+        });
+
+    private IExpression? ParseMassUnit(ref TokenReader tokenReader)
+        => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
+        {
+            var number = reader.GetCurrent(TokenKind.Number);
+            if (number.IsEmpty())
+                return null;
+
+            var id = reader.GetCurrent(Id);
+            if (id.IsEmpty())
+                return null;
 
             return id.StringValue switch
             {
@@ -803,7 +832,7 @@ public partial class Parser : IParser
         });
 
     private IExpression? ParsePolarComplexNumber(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
+        => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
         {
             // plus symbol can be ignored
             reader.GetCurrent(PlusOperator);

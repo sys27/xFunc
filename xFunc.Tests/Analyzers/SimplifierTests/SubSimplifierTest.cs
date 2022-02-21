@@ -135,7 +135,7 @@ public class SubSimplifierTest : BaseSimplifierTest
             TemperatureValue.Kelvin(20).AsExpression(),
             TemperatureValue.Celsius(10).AsExpression()
         );
-        var expected = TemperatureValue.Celsius(-253.15 - 10).AsExpression();
+        var expected = TemperatureValue.Kelvin(20 - 283.15).AsExpression();
 
         SimplifyTest(sub, expected);
     }

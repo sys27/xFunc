@@ -159,51 +159,6 @@ internal enum TokenKind
     /// </summary>
     ModKeyword,
 
-    /// <summary>
-    /// The 'deg' token.
-    /// </summary>
-    DegreeKeyword,
-
-    /// <summary>
-    /// The 'rad' token.
-    /// </summary>
-    RadianKeyword,
-
-    /// <summary>
-    /// The 'grad' token.
-    /// </summary>
-    GradianKeyword,
-
-    /// <summary>
-    /// The 'W' token.
-    /// </summary>
-    WattKeyword,
-
-    /// <summary>
-    /// The 'kW' token.
-    /// </summary>
-    KilowattKeyword,
-
-    /// <summary>
-    /// The 'hp' token.
-    /// </summary>
-    HorsepowerKeyword,
-
-    /// <summary>
-    /// The '°C' token.
-    /// </summary>
-    CelsiusKeyword,
-
-    /// <summary>
-    /// The '°F' token.
-    /// </summary>
-    FahrenheitKeyword,
-
-    /// <summary>
-    /// The 'K' token.
-    /// </summary>
-    KelvinKeyword,
-
     #endregion Keywords
 
     #region Operators

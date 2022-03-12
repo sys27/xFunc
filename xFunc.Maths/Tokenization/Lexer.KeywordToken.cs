@@ -27,12 +27,6 @@ internal ref partial struct Lexer
             kind = TrueKeyword;
         else if (Compare(keyword, "false"))
             kind = FalseKeyword;
-        else if (Compare(keyword, "degrees") || Compare(keyword, "degree") || Compare(keyword, "deg"))
-            kind = DegreeKeyword;
-        else if (Compare(keyword, "radians") || Compare(keyword, "radian") || Compare(keyword, "rad"))
-            kind = RadianKeyword;
-        else if (Compare(keyword, "gradians") || Compare(keyword, "gradian") || Compare(keyword, "grad"))
-            kind = GradianKeyword;
         else if (Compare(keyword, "def") || Compare(keyword, "define"))
             kind = DefineKeyword;
         else if (Compare(keyword, "undef") || Compare(keyword, "undefine"))
@@ -61,18 +55,6 @@ internal ref partial struct Lexer
             kind = ImplKeyword;
         else if (Compare(keyword, "mod"))
             kind = ModKeyword;
-        else if (Compare(keyword, "W"))
-            kind = WattKeyword;
-        else if (Compare(keyword, "kW"))
-            kind = KilowattKeyword;
-        else if (Compare(keyword, "hp"))
-            kind = HorsepowerKeyword;
-        else if (Compare(keyword, "°C"))
-            kind = CelsiusKeyword;
-        else if (Compare(keyword, "°F"))
-            kind = FahrenheitKeyword;
-        else if (Compare(keyword, "K"))
-            kind = KelvinKeyword;
 
         if (kind == Empty)
             return false;

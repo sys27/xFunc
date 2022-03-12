@@ -69,7 +69,11 @@ public readonly struct AngleValue : IEquatable<AngleValue>, IComparable<AngleVal
 
     /// <inheritdoc />
     public bool Equals(AngleValue other)
-        => Angle == other.Angle && Unit == other.Unit;
+    {
+        var (left, right) = ToCommonUnits(this, other);
+
+        return left.Angle.Equals(right.Angle);
+    }
 
     /// <inheritdoc />
     public override bool Equals(object? obj)
@@ -78,11 +82,9 @@ public readonly struct AngleValue : IEquatable<AngleValue>, IComparable<AngleVal
     /// <inheritdoc />
     public int CompareTo(AngleValue other)
     {
-        var valueComparison = Angle.CompareTo(other.Angle);
-        if (valueComparison != 0)
-            return valueComparison;
+        var (left, right) = ToCommonUnits(this, other);
 
-        return Unit.CompareTo(other.Unit);
+        return left.Angle.CompareTo(right.Angle);
     }
 
     /// <inheritdoc />

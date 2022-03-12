@@ -1,6 +1,8 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace xFunc.Maths.Expressions.Units.TemperatureUnits;
 
 /// <summary>
@@ -72,7 +74,12 @@ public readonly struct TemperatureValue :
 
     /// <inheritdoc />
     public bool Equals(TemperatureValue other)
-        => Value == other.Value && Unit == other.Unit;
+    {
+        var inBase = ToBase();
+        var otherInBase = other.ToBase();
+
+        return inBase.Value.Equals(otherInBase.Value);
+    }
 
     /// <inheritdoc />
     public override bool Equals(object? obj)
@@ -81,37 +88,29 @@ public readonly struct TemperatureValue :
     /// <inheritdoc />
     public int CompareTo(TemperatureValue other)
     {
-        var valueComparison = Value.CompareTo(other.Value);
-        if (valueComparison != 0)
-            return valueComparison;
+        var inBase = ToBase();
+        var otherInBase = other.ToBase();
 
-        return Unit.CompareTo(other.Unit);
+        return inBase.Value.CompareTo(otherInBase.Value);
     }
 
     /// <inheritdoc />
     public int CompareTo(object? obj)
-    {
-        if (obj is null)
-            return 1;
-
-        if (obj is TemperatureValue other)
-            return CompareTo(other);
-
-        throw new ArgumentException($"Object must be of type {nameof(TemperatureValue)}");
-    }
+        => obj switch
+        {
+            null => 1,
+            TemperatureValue other => CompareTo(other),
+            _ => throw new ArgumentException($"Object must be of type {nameof(TemperatureValue)}"),
+        };
 
     /// <inheritdoc />
+    [ExcludeFromCodeCoverage]
     public override int GetHashCode()
-        => HashCode.Combine(Value, (int)Unit);
+        => HashCode.Combine(Value, Unit);
 
     /// <inheritdoc />
-    public override string ToString() => Unit switch
-    {
-        TemperatureUnit.Celsius => $"{Value} °C",
-        TemperatureUnit.Fahrenheit => $"{Value} °F",
-        TemperatureUnit.Kelvin => $"{Value} K",
-        _ => throw new InvalidOperationException(),
-    };
+    public override string ToString()
+        => $"{Value} {Unit.UnitName}";
 
     /// <summary>
     /// Determines whether two specified instances of <see cref="TemperatureValue"/> are equal.
@@ -175,7 +174,7 @@ public readonly struct TemperatureValue :
     /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
     public static TemperatureValue operator +(TemperatureValue left, TemperatureValue right)
     {
-        (left, right) = ToCommonUnits(left, right);
+        right = right.To(left.Unit);
 
         return new TemperatureValue(left.Value + right.Value, left.Unit);
     }
@@ -188,7 +187,7 @@ public readonly struct TemperatureValue :
     /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
     public static TemperatureValue operator -(TemperatureValue left, TemperatureValue right)
     {
-        (left, right) = ToCommonUnits(left, right);
+        right = right.To(left.Unit);
 
         return new TemperatureValue(left.Value - right.Value, left.Unit);
     }
@@ -201,73 +200,42 @@ public readonly struct TemperatureValue :
     public static TemperatureValue operator -(TemperatureValue value)
         => new TemperatureValue(-value.Value, value.Unit);
 
-    private static (TemperatureValue Left, TemperatureValue Right) ToCommonUnits(TemperatureValue left, TemperatureValue right)
-    {
-        var commonUnit = GetCommonUnit(left.Unit, right.Unit);
-
-        return (left.To(commonUnit), right.To(commonUnit));
-    }
-
-    private static TemperatureUnit GetCommonUnit(TemperatureUnit left, TemperatureUnit right)
-        => (left, right) switch
-        {
-            _ when left == right => left,
-
-            (TemperatureUnit.Fahrenheit, TemperatureUnit.Kelvin) or
-                (TemperatureUnit.Kelvin, TemperatureUnit.Fahrenheit)
-                => TemperatureUnit.Fahrenheit,
-
-            _ => TemperatureUnit.Celsius,
-        };
+    private TemperatureValue ToBase()
+        => new TemperatureValue(new NumberValue(Unit.ToBase(Value.Number)), TemperatureUnit.Celsius);
 
     /// <summary>
-    /// Converts the current object to the specified <paramref name="unit"/>.
+    /// Convert to the <paramref name="newUnit"/> unit.
     /// </summary>
-    /// <param name="unit">The unit to convert to.</param>
-    /// <returns>The power value which is converted to the specified <paramref name="unit"/>.</returns>
-    public TemperatureValue To(TemperatureUnit unit) => unit switch
+    /// <param name="newUnit">The new unit.</param>
+    /// <returns>The value in the new unit.</returns>
+    public TemperatureValue To(TemperatureUnit newUnit)
     {
-        TemperatureUnit.Celsius => ToCelsius(),
-        TemperatureUnit.Fahrenheit => ToFahrenheit(),
-        TemperatureUnit.Kelvin => ToKelvin(),
-        _ => throw new ArgumentOutOfRangeException(nameof(unit), unit, null),
-    };
+        var inBase = Unit.ToBase(Value.Number);
+        var converted = newUnit.FromBase(inBase);
+
+        return new TemperatureValue(new NumberValue(converted), newUnit);
+    }
 
     /// <summary>
     /// Converts the current object to celsius.
     /// </summary>
     /// <returns>The power value which is converted to celsius.</returns>
-    public TemperatureValue ToCelsius() => Unit switch
-    {
-        TemperatureUnit.Celsius => this,
-        TemperatureUnit.Fahrenheit => Celsius((Value - 32) * 5.0 / 9.0),
-        TemperatureUnit.Kelvin => Celsius(Value - 273.15),
-        _ => throw new InvalidOperationException(),
-    };
+    public TemperatureValue ToCelsius()
+        => To(TemperatureUnit.Celsius);
 
     /// <summary>
     /// Converts the current object to fahrenheit.
     /// </summary>
     /// <returns>The power value which is converted to fahrenheit.</returns>
-    public TemperatureValue ToFahrenheit() => Unit switch
-    {
-        TemperatureUnit.Celsius => Fahrenheit(Value * 9.0 / 5.0 + 32),
-        TemperatureUnit.Fahrenheit => this,
-        TemperatureUnit.Kelvin => Fahrenheit((Value - 273.15) * 9.0 / 5.0 + 32),
-        _ => throw new InvalidOperationException(),
-    };
+    public TemperatureValue ToFahrenheit()
+        => To(TemperatureUnit.Fahrenheit);
 
     /// <summary>
     /// Converts the current object to kelvin.
     /// </summary>
     /// <returns>The power value which is converted to kelvin.</returns>
-    public TemperatureValue ToKelvin() => Unit switch
-    {
-        TemperatureUnit.Celsius => Kelvin(Value + 273.15),
-        TemperatureUnit.Fahrenheit => Kelvin((Value - 32) * 5.0 / 9.0 + 273.15),
-        TemperatureUnit.Kelvin => this,
-        _ => throw new InvalidOperationException(),
-    };
+    public TemperatureValue ToKelvin()
+        => To(TemperatureUnit.Kelvin);
 
     /// <summary>
     /// Returns the absolute value of a specified temperature value.

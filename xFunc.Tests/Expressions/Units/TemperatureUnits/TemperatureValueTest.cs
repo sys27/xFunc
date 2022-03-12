@@ -157,6 +157,28 @@ public class TemperatureValueTest
     }
 
     [Fact]
+    public void AddOperatorTest()
+    {
+        var temperature1 = TemperatureValue.Celsius(10);
+        var temperature2 = TemperatureValue.Kelvin(10);
+        var expected = TemperatureValue.Celsius(10 - 263.15);
+        var actual = temperature1 + temperature2;
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void SubOperatorTest()
+    {
+        var temperature1 = TemperatureValue.Celsius(10);
+        var temperature2 = TemperatureValue.Kelvin(10);
+        var expected = TemperatureValue.Celsius(10 + 263.15);
+        var actual = temperature1 - temperature2;
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ToStringCelsiusTest()
     {
         var temperature = TemperatureValue.Celsius(10);
@@ -180,152 +202,28 @@ public class TemperatureValueTest
         Assert.Equal("10 K", temperature.ToString());
     }
 
-    [Fact]
-    public void ToStringUnsupported()
+    public static IEnumerable<object[]> GetConversionTestCases()
     {
-        var temperature = new TemperatureValue(new NumberValue(10), (TemperatureUnit)10);
+        yield return new object[] { 10.0, TemperatureUnit.Celsius, TemperatureUnit.Celsius, 10.0 };
+        yield return new object[] { 10.0, TemperatureUnit.Celsius, TemperatureUnit.Fahrenheit, 50.0 };
+        yield return new object[] { 10.0, TemperatureUnit.Celsius, TemperatureUnit.Kelvin, 283.15 };
 
-        Assert.Throws<InvalidOperationException>(() => temperature.ToString());
-    }
+        yield return new object[] { 10.0, TemperatureUnit.Fahrenheit, TemperatureUnit.Fahrenheit, 10.0 };
+        yield return new object[] { 10.0, TemperatureUnit.Fahrenheit, TemperatureUnit.Celsius, -12.222222 };
+        yield return new object[] { 10.0, TemperatureUnit.Fahrenheit, TemperatureUnit.Kelvin, 260.927778 };
 
-    [Fact]
-    public void CelsiusToCelsiusTest()
-    {
-        var temperature = TemperatureValue.Celsius(10);
-        var actual = temperature.To(TemperatureUnit.Celsius);
-        var expected = TemperatureValue.Celsius(10);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void CelsiusToFahrenheitTest()
-    {
-        var temperature = TemperatureValue.Celsius(10);
-        var actual = temperature.To(TemperatureUnit.Fahrenheit);
-        var expected = TemperatureValue.Fahrenheit(50);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void CelsiusToKelvinTest()
-    {
-        var temperature = TemperatureValue.Celsius(10);
-        var actual = temperature.To(TemperatureUnit.Kelvin);
-        var expected = TemperatureValue.Kelvin(283.15);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void FahrenheitToCelsiusTest()
-    {
-        var temperature = TemperatureValue.Fahrenheit(10);
-        var actual = temperature.To(TemperatureUnit.Celsius);
-        var expected = TemperatureValue.Celsius(-12.222222222222221);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void FahrenheitToFahrenheitTest()
-    {
-        var temperature = TemperatureValue.Fahrenheit(10);
-        var actual = temperature.To(TemperatureUnit.Fahrenheit);
-        var expected = TemperatureValue.Fahrenheit(10);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void FahrenheitToKelvinTest()
-    {
-        var temperature = TemperatureValue.Fahrenheit(10);
-        var actual = temperature.To(TemperatureUnit.Kelvin);
-        var expected = TemperatureValue.Kelvin(260.92777777777775);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void KelvinToCelsiusTest()
-    {
-        var temperature = TemperatureValue.Kelvin(10);
-        var actual = temperature.To(TemperatureUnit.Celsius);
-        var expected = TemperatureValue.Celsius(-263.15);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void KelvinToFahrenheitTest()
-    {
-        var temperature = TemperatureValue.Kelvin(10);
-        var actual = temperature.To(TemperatureUnit.Fahrenheit);
-        var expected = TemperatureValue.Fahrenheit(-441.66999999999996);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void KelvinToKelvinTest()
-    {
-        var temperature = TemperatureValue.Kelvin(10);
-        var actual = temperature.To(TemperatureUnit.Kelvin);
-        var expected = TemperatureValue.Kelvin(10);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void ToUnsupportedUnit()
-    {
-        var temperature = TemperatureValue.Celsius(1);
-
-        Assert.Throws<ArgumentOutOfRangeException>(() => temperature.To((TemperatureUnit)10));
-    }
-
-    [Fact]
-    public void FromUnsupportedUnitToCelsius()
-    {
-        var temperature = new TemperatureValue(new NumberValue(10), (TemperatureUnit)10);
-
-        Assert.Throws<InvalidOperationException>(() => temperature.ToCelsius());
-    }
-
-    [Fact]
-    public void FromUnsupportedUnitToFahrenheit()
-    {
-        var temperature = new TemperatureValue(new NumberValue(10), (TemperatureUnit)10);
-
-        Assert.Throws<InvalidOperationException>(() => temperature.ToFahrenheit());
-    }
-
-    [Fact]
-    public void FromUnsupportedUnitToKelvin()
-    {
-        var temperature = new TemperatureValue(new NumberValue(10), (TemperatureUnit)10);
-
-        Assert.Throws<InvalidOperationException>(() => temperature.ToKelvin());
+        yield return new object[] { 10.0, TemperatureUnit.Kelvin, TemperatureUnit.Kelvin, 10.0 };
+        yield return new object[] { 10.0, TemperatureUnit.Kelvin, TemperatureUnit.Celsius, -263.15 };
+        yield return new object[] { 10.0, TemperatureUnit.Kelvin, TemperatureUnit.Fahrenheit, -441.66999999999996 };
     }
 
     [Theory]
-    [InlineData(TemperatureUnit.Celsius, TemperatureUnit.Celsius, TemperatureUnit.Celsius)]
-    [InlineData(TemperatureUnit.Fahrenheit, TemperatureUnit.Fahrenheit, TemperatureUnit.Fahrenheit)]
-    [InlineData(TemperatureUnit.Kelvin, TemperatureUnit.Kelvin, TemperatureUnit.Kelvin)]
-    [InlineData(TemperatureUnit.Celsius, TemperatureUnit.Fahrenheit, TemperatureUnit.Celsius)]
-    [InlineData(TemperatureUnit.Fahrenheit, TemperatureUnit.Celsius, TemperatureUnit.Celsius)]
-    [InlineData(TemperatureUnit.Celsius, TemperatureUnit.Kelvin, TemperatureUnit.Celsius)]
-    [InlineData(TemperatureUnit.Kelvin, TemperatureUnit.Celsius, TemperatureUnit.Celsius)]
-    [InlineData(TemperatureUnit.Fahrenheit, TemperatureUnit.Kelvin, TemperatureUnit.Fahrenheit)]
-    [InlineData(TemperatureUnit.Kelvin, TemperatureUnit.Fahrenheit, TemperatureUnit.Fahrenheit)]
-    public void CommonUnitsTests(TemperatureUnit left, TemperatureUnit right, TemperatureUnit expected)
+    [MemberData(nameof(GetConversionTestCases))]
+    public void ConversionTests(double value, TemperatureUnit unit, TemperatureUnit to, double expected)
     {
-        var x = new TemperatureValue(new NumberValue(90), left);
-        var y = new TemperatureValue(new NumberValue(90), right);
-        var result = x + y;
+        var temperatureValue = new TemperatureValue(new NumberValue(value), unit);
+        var converted = temperatureValue.To(to);
 
-        Assert.Equal(expected, result.Unit);
+        Assert.Equal(expected, converted.Value.Number, 6);
     }
 }

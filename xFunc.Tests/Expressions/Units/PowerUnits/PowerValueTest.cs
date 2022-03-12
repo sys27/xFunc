@@ -180,152 +180,26 @@ public class PowerValueTest
         Assert.Equal("10 hp", power.ToString());
     }
 
-    [Fact]
-    public void ToStringUnsupported()
+    public static IEnumerable<object[]> GetConversionTestCases()
     {
-        var power = new PowerValue(new NumberValue(10), (PowerUnit)10);
-
-        Assert.Throws<InvalidOperationException>(() => power.ToString());
-    }
-
-    [Fact]
-    public void WattToWattTest()
-    {
-        var power = PowerValue.Watt(10);
-        var actual = power.To(PowerUnit.Watt);
-        var expected = PowerValue.Watt(10);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void WattToKilowattTest()
-    {
-        var power = PowerValue.Watt(10);
-        var actual = power.To(PowerUnit.Kilowatt);
-        var expected = PowerValue.Kilowatt(10.0 / 1000);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void WattToHorsepowerTest()
-    {
-        var power = PowerValue.Watt(10);
-        var actual = power.To(PowerUnit.Horsepower);
-        var expected = PowerValue.Horsepower(10 / 745.69987158227022);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void KilowattToWattTest()
-    {
-        var power = PowerValue.Kilowatt(10);
-        var actual = power.To(PowerUnit.Watt);
-        var expected = PowerValue.Watt(10.0 * 1000.0);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void KilowattToKilowattTest()
-    {
-        var power = PowerValue.Kilowatt(10);
-        var actual = power.To(PowerUnit.Kilowatt);
-        var expected = PowerValue.Kilowatt(10);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void KilowattToHorsepowerTest()
-    {
-        var power = PowerValue.Kilowatt(10);
-        var actual = power.To(PowerUnit.Horsepower);
-        var expected = PowerValue.Horsepower(10 * 1000 / 745.69987158227022);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void HorsepowerToWattTest()
-    {
-        var power = PowerValue.Horsepower(10);
-        var actual = power.To(PowerUnit.Watt);
-        var expected = PowerValue.Watt(10 * 745.69987158227022);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void HorsepowerToKilowattTest()
-    {
-        var power = PowerValue.Horsepower(10);
-        var actual = power.To(PowerUnit.Kilowatt);
-        var expected = PowerValue.Kilowatt(10 * 745.69987158227022 / 1000);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void HorsepowerToHorsepowerTest()
-    {
-        var power = PowerValue.Horsepower(10);
-        var actual = power.To(PowerUnit.Horsepower);
-        var expected = PowerValue.Horsepower(10);
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void ToUnsupportedUnit()
-    {
-        var power = PowerValue.Watt(1);
-
-        Assert.Throws<ArgumentOutOfRangeException>(() => power.To((PowerUnit)10));
-    }
-
-    [Fact]
-    public void FromUnsupportedUnitToWatt()
-    {
-        var power = new PowerValue(new NumberValue(10), (PowerUnit)10);
-
-        Assert.Throws<InvalidOperationException>(() => power.ToWatt());
-    }
-
-    [Fact]
-    public void FromUnsupportedUnitToKilowatt()
-    {
-        var power = new PowerValue(new NumberValue(10), (PowerUnit)10);
-
-        Assert.Throws<InvalidOperationException>(() => power.ToKilowatt());
-    }
-
-    [Fact]
-    public void FromUnsupportedUnitToHorsepower()
-    {
-        var power = new PowerValue(new NumberValue(10), (PowerUnit)10);
-
-        Assert.Throws<InvalidOperationException>(() => power.ToHorsepower());
+        yield return new object[] { 10.0, PowerUnit.Watt, PowerUnit.Watt, 10.0 };
+        yield return new object[] { 10.0, PowerUnit.Watt, PowerUnit.Kilowatt, 10.0 / 1000 };
+        yield return new object[] { 10.0, PowerUnit.Watt, PowerUnit.Horsepower, 10.0 / 745.69987158227022 };
+        yield return new object[] { 10.0, PowerUnit.Kilowatt, PowerUnit.Kilowatt, 10.0 };
+        yield return new object[] { 10.0, PowerUnit.Kilowatt, PowerUnit.Watt, 10.0 * 1000 };
+        yield return new object[] { 10.0, PowerUnit.Kilowatt, PowerUnit.Horsepower, 10.0 * 1000 / 745.69987158227022 };
+        yield return new object[] { 10.0, PowerUnit.Horsepower, PowerUnit.Horsepower, 10.0 };
+        yield return new object[] { 10.0, PowerUnit.Horsepower, PowerUnit.Watt, 10.0 * 745.69987158227022 };
+        yield return new object[] { 10.0, PowerUnit.Horsepower, PowerUnit.Kilowatt, 10.0 * 745.69987158227022 / 1000 };
     }
 
     [Theory]
-    [InlineData(PowerUnit.Watt, PowerUnit.Watt, PowerUnit.Watt)]
-    [InlineData(PowerUnit.Kilowatt, PowerUnit.Kilowatt, PowerUnit.Kilowatt)]
-    [InlineData(PowerUnit.Horsepower, PowerUnit.Horsepower, PowerUnit.Horsepower)]
-    [InlineData(PowerUnit.Watt, PowerUnit.Kilowatt, PowerUnit.Watt)]
-    [InlineData(PowerUnit.Kilowatt, PowerUnit.Watt, PowerUnit.Watt)]
-    [InlineData(PowerUnit.Watt, PowerUnit.Horsepower, PowerUnit.Watt)]
-    [InlineData(PowerUnit.Horsepower, PowerUnit.Watt, PowerUnit.Watt)]
-    [InlineData(PowerUnit.Kilowatt, PowerUnit.Horsepower, PowerUnit.Kilowatt)]
-    [InlineData(PowerUnit.Horsepower, PowerUnit.Kilowatt, PowerUnit.Kilowatt)]
-    public void CommonUnitsTests(PowerUnit left, PowerUnit right, PowerUnit expected)
+    [MemberData(nameof(GetConversionTestCases))]
+    public void ConversionTests(double value, PowerUnit unit, PowerUnit to, double expected)
     {
-        var x = new PowerValue(new NumberValue(90), left);
-        var y = new PowerValue(new NumberValue(90), right);
-        var result = x + y;
+        var temperatureValue = new PowerValue(new NumberValue(value), unit);
+        var converted = temperatureValue.To(to);
 
-        Assert.Equal(expected, result.Unit);
+        Assert.Equal(expected, converted.Value.Number, 6);
     }
 }

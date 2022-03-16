@@ -77,6 +77,11 @@ public enum ResultTypes
     MassNumber = 1 << 11,
 
     /// <summary>
+    /// The expression returns a length number.
+    /// </summary>
+    LengthNumber = 1 << 12,
+
+    /// <summary>
     /// The expression returns a number or a complex number.
     /// </summary>
     NumberOrComplex = Number | ComplexNumber,
@@ -101,7 +106,7 @@ public enum ResultTypes
     /// <summary>
     /// The expression returns any type of number.
     /// </summary>
-    Numbers = Number | AngleNumber | PowerNumber | TemperatureNumber | MassNumber,
+    Numbers = Number | AngleNumber | PowerNumber | TemperatureNumber | MassNumber | LengthNumber,
 
     /// <summary>
     /// The expression returns a number or a angle number or a complex number or a vector.

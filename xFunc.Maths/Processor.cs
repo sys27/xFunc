@@ -126,6 +126,11 @@ public class Processor
             return new MassNumberResult(mass);
         }
 
+        if (result is LengthValue length)
+        {
+            return new LengthNumberResult(length);
+        }
+
         if (result is Complex complex)
         {
             return new ComplexNumberResult(complex);

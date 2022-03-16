@@ -55,4 +55,11 @@ public class TemperatureUnitTests
 
         Assert.True(left != right);
     }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData(" ")]
+    public void FromNameEmptyString(string name)
+        => Assert.Throws<ArgumentNullException>(() => TemperatureUnit.FromName(name, out _));
 }

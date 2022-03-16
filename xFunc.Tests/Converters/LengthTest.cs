@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using xFunc.UnitConverters;
+using LengthConverter = xFunc.UnitConverters.LengthConverter;
 
 namespace xFunc.Tests.Converters;
 

@@ -55,6 +55,16 @@ public class CeilTest : BaseExpressionTests
         Assert.Equal(expected, result);
     }
 
+    [Fact]
+    public void ExecuteTestLengthNumber()
+    {
+        var ceil = new Ceil(LengthValue.Meter(5.55555555).AsExpression());
+        var result = ceil.Execute();
+        var expected = LengthValue.Meter(6);
+
+        Assert.Equal(expected, result);
+    }
+
 
     [Fact]
     public void ExecuteTestException()

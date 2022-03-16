@@ -102,6 +102,19 @@ public class DivTest : BaseExpressionTests
     }
 
     [Fact]
+    public void DivLengthAndNumber()
+    {
+        var exp = new Div(
+            LengthValue.Meter(10).AsExpression(),
+            new Number(2)
+        );
+        var actual = exp.Execute();
+        var expected = LengthValue.Meter(5);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteBoolTest()
     {
         var exp = new Div(Bool.False, Bool.True);

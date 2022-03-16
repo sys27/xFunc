@@ -60,6 +60,15 @@ public class SignTest : BaseExpressionTests
     }
 
     [Fact]
+    public void LengthSignTest()
+    {
+        var exp = new Sign(LengthValue.Meter(10).AsExpression());
+        var result = exp.Execute();
+
+        Assert.Equal(new NumberValue(1.0), result);
+    }
+
+    [Fact]
     public void InvalidParameterTest()
         => TestNotSupported(new Sign(Bool.False));
 

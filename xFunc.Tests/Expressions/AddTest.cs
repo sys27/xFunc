@@ -281,6 +281,45 @@ public class AddTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteNumberAndLength()
+    {
+        var exp = new Add(
+            Number.One,
+            LengthValue.Meter(1).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = LengthValue.Meter(2);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteLengthAndNumber()
+    {
+        var exp = new Add(
+            LengthValue.Meter(1).AsExpression(),
+            Number.One
+        );
+        var actual = exp.Execute();
+        var expected = LengthValue.Meter(2);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteLengthAndLength()
+    {
+        var exp = new Add(
+            LengthValue.Meter(1).AsExpression(),
+            LengthValue.Meter(2).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = LengthValue.Meter(3);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteStringAndString()
     {
         var exp = new Add(

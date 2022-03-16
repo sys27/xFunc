@@ -52,6 +52,15 @@ public class UnaryMinusTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteLengthNumberTest()
+    {
+        var exp = new UnaryMinus(LengthValue.Meter(10).AsExpression());
+        var expected = LengthValue.Meter(-10);
+
+        Assert.Equal(expected, exp.Execute());
+    }
+
+    [Fact]
     public void ExecuteComplexTest()
     {
         var complex = new Complex(2, 3);

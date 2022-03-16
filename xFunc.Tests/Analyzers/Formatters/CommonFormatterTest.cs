@@ -293,6 +293,14 @@ public class CommonFormatterTest
     }
 
     [Fact]
+    public void LengthNumberTest()
+    {
+        var exp = LengthValue.Meter(10).AsExpression();
+
+        Assert.Equal("10 m", exp.ToString());
+    }
+
+    [Fact]
     public void ToDegreeTest()
     {
         var exp = new ToDegree(new Number(10));

@@ -8,11 +8,6 @@ namespace xFunc.Maths.Expressions.Units.Converters;
 /// </summary>
 public class TemperatureConverter : IConverter<TemperatureValue>, IConverter<object>
 {
-    private readonly HashSet<string> units = new HashSet<string>
-    {
-        "°c", "°f", "k",
-    };
-
     /// <inheritdoc />
     public TemperatureValue Convert(object value, string unit)
     {
@@ -21,18 +16,14 @@ public class TemperatureConverter : IConverter<TemperatureValue>, IConverter<obj
         if (string.IsNullOrWhiteSpace(unit))
             throw new ArgumentNullException(nameof(unit));
 
-        return (value, unit) switch
+        if (!TemperatureUnit.FromName(unit, out var temperatureUnit))
+            throw new UnitIsNotSupportedException(unit);
+
+        return value switch
         {
-            (TemperatureValue temperatureValue, "°c") => temperatureValue.ToCelsius(),
-            (TemperatureValue temperatureValue, "°f") => temperatureValue.ToFahrenheit(),
-            (TemperatureValue temperatureValue, "k") => temperatureValue.ToKelvin(),
-
-            (NumberValue numberValue, "°c") => TemperatureValue.Celsius(numberValue),
-            (NumberValue numberValue, "°f") => TemperatureValue.Fahrenheit(numberValue),
-            (NumberValue numberValue, "k") => TemperatureValue.Kelvin(numberValue),
-
-            _ when CanConvertTo(unit) => throw new ValueIsNotSupportedException(value),
-            _ => throw new UnitIsNotSupportedException(unit),
+            TemperatureValue temperatureValue => temperatureValue.To(temperatureUnit),
+            NumberValue numberValue => new TemperatureValue(numberValue, temperatureUnit),
+            _ => throw new ValueIsNotSupportedException(value),
         };
     }
 
@@ -42,5 +33,5 @@ public class TemperatureConverter : IConverter<TemperatureValue>, IConverter<obj
 
     /// <inheritdoc cref="IConverter{TValue}.CanConvertTo" />
     public bool CanConvertTo(string unit)
-        => units.Contains(unit.ToLower());
+        => TemperatureUnit.Names.Contains(unit.ToLower());
 }

@@ -48,6 +48,14 @@ public class StandardTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestAbsLengthNumber()
+    {
+        var exp = new Abs(LengthValue.Meter(1).AsExpression());
+
+        Test(exp, ResultTypes.LengthNumber);
+    }
+
+    [Fact]
     public void TestAbsComplexNumber()
     {
         var exp = new Abs(new ComplexNumber(2, 2));
@@ -117,6 +125,14 @@ public class StandardTests : TypeAnalyzerBaseTests
         var exp = new Ceil(MassValue.Gram(5.5).AsExpression());
 
         Test(exp, ResultTypes.MassNumber);
+    }
+
+    [Fact]
+    public void TestCeilLength()
+    {
+        var exp = new Ceil(LengthValue.Meter(5.5).AsExpression());
+
+        Test(exp, ResultTypes.LengthNumber);
     }
 
     [Fact]
@@ -288,6 +304,14 @@ public class StandardTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestFloorLength()
+    {
+        var exp = new Floor(LengthValue.Meter(5.5).AsExpression());
+
+        Test(exp, ResultTypes.LengthNumber);
+    }
+
+    [Fact]
     public void TestFloorException()
     {
         var exp = new Floor(Bool.False);
@@ -344,6 +368,14 @@ public class StandardTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestTruncLength()
+    {
+        var exp = new Trunc(LengthValue.Meter(5.5).AsExpression());
+
+        Test(exp, ResultTypes.LengthNumber);
+    }
+
+    [Fact]
     public void TestTruncException()
     {
         var exp = new Trunc(Bool.False);
@@ -397,6 +429,14 @@ public class StandardTests : TypeAnalyzerBaseTests
         var exp = new Frac(MassValue.Gram(5.5).AsExpression());
 
         Test(exp, ResultTypes.MassNumber);
+    }
+
+    [Fact]
+    public void TestFracLength()
+    {
+        var exp = new Frac(LengthValue.Meter(5.5).AsExpression());
+
+        Test(exp, ResultTypes.LengthNumber);
     }
 
     [Fact]
@@ -737,6 +777,14 @@ public class StandardTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestUnaryMinusLength()
+    {
+        var exp = new UnaryMinus(LengthValue.Meter(10).AsExpression());
+
+        Test(exp, ResultTypes.LengthNumber);
+    }
+
+    [Fact]
     public void TestUnaryMinusComplexNumber()
     {
         var exp = new UnaryMinus(new ComplexNumber(10, 10));
@@ -915,6 +963,12 @@ public class StandardTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestLengthToNumber()
+    {
+        Test(new ToNumber(LengthValue.Meter(10).AsExpression()), ResultTypes.Number);
+    }
+
+    [Fact]
     public void TestToNumberException()
     {
         TestException(new ToNumber(Bool.True));
@@ -998,6 +1052,18 @@ public class StandardTests : TypeAnalyzerBaseTests
         );
 
         Test(exp, ResultTypes.MassNumber);
+    }
+
+    [Fact]
+    public void TestLengthConvert()
+    {
+        var exp = new Convert(
+            new Converter(),
+            LengthValue.Meter(10).AsExpression(),
+            new StringExpression("m")
+        );
+
+        Test(exp, ResultTypes.LengthNumber);
     }
 
     [Fact]

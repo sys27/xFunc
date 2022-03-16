@@ -226,6 +226,14 @@ public interface IAnalyzer<out TResult, in TContext>
     /// <param name="exp">The expression.</param>
     /// <param name="context">The context.</param>
     /// <returns>The result of analysis.</returns>
+    TResult Analyze(Length exp, TContext context);
+
+    /// <summary>
+    /// Analyzes the specified expression.
+    /// </summary>
+    /// <param name="exp">The expression.</param>
+    /// <param name="context">The context.</param>
+    /// <returns>The result of analysis.</returns>
     TResult Analyze(ToDegree exp, TContext context);
 
     /// <summary>

@@ -8,11 +8,6 @@ namespace xFunc.Maths.Expressions.Units.Converters;
 /// </summary>
 public class MassConverter : IConverter<MassValue>, IConverter<object>
 {
-    private readonly HashSet<string> units = new HashSet<string>
-    {
-        "mg", "g", "kg", "t", "oz", "lb",
-    };
-
     /// <inheritdoc />
     public MassValue Convert(object value, string unit)
     {
@@ -21,24 +16,14 @@ public class MassConverter : IConverter<MassValue>, IConverter<object>
         if (string.IsNullOrWhiteSpace(unit))
             throw new ArgumentNullException(nameof(unit));
 
-        return (value, unit) switch
+        if (!MassUnit.FromName(unit, out var massUnit))
+            throw new UnitIsNotSupportedException(unit);
+
+        return value switch
         {
-            (MassValue massValue, "mg") => massValue.ToMilligram(),
-            (MassValue massValue, "g") => massValue.ToGram(),
-            (MassValue massValue, "kg") => massValue.ToKilogram(),
-            (MassValue massValue, "t") => massValue.ToTonne(),
-            (MassValue massValue, "oz") => massValue.ToOunce(),
-            (MassValue massValue, "lb") => massValue.ToPound(),
-
-            (NumberValue numberValue, "mg") => MassValue.Milligram(numberValue),
-            (NumberValue numberValue, "g") => MassValue.Gram(numberValue),
-            (NumberValue numberValue, "kg") => MassValue.Kilogram(numberValue),
-            (NumberValue numberValue, "t") => MassValue.Tonne(numberValue),
-            (NumberValue numberValue, "oz") => MassValue.Ounce(numberValue),
-            (NumberValue numberValue, "lb") => MassValue.Pound(numberValue),
-
-            _ when CanConvertTo(unit) => throw new ValueIsNotSupportedException(value),
-            _ => throw new UnitIsNotSupportedException(unit),
+            MassValue massValue => massValue.To(massUnit),
+            NumberValue numberValue => new MassValue(numberValue, massUnit),
+            _ => throw new ValueIsNotSupportedException(value),
         };
     }
 
@@ -48,5 +33,5 @@ public class MassConverter : IConverter<MassValue>, IConverter<object>
 
     /// <inheritdoc cref="IConverter{TValue}.CanConvertTo" />
     public bool CanConvertTo(string unit)
-        => units.Contains(unit.ToLower());
+        => MassUnit.Names.Contains(unit.ToLower());
 }

@@ -173,6 +173,30 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
+    [Fact(DisplayName = "10 * 2 m")]
+    public void MulNumberByLength()
+    {
+        var mul = new Mul(
+            new Number(10),
+            LengthValue.Meter(2).AsExpression()
+        );
+        var expected = LengthValue.Meter(20).AsExpression();
+
+        SimplifyTest(mul, expected);
+    }
+
+    [Fact(DisplayName = "2 m * 10")]
+    public void MulLengthByNumber()
+    {
+        var mul = new Mul(
+            LengthValue.Meter(2).AsExpression(),
+            new Number(10)
+        );
+        var expected = LengthValue.Meter(20).AsExpression();
+
+        SimplifyTest(mul, expected);
+    }
+
     [Fact(DisplayName = "2 * (2 * x)")]
     public void MulDiffNumMul_NumMulVar_()
     {

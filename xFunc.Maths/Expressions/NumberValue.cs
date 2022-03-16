@@ -449,6 +449,26 @@ public readonly struct NumberValue :
         => new MassValue(left.Number + right.Value, right.Unit);
 
     /// <summary>
+    /// Adds <see cref="LengthValue"/> and <see cref="NumberValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to add.</param>
+    /// <param name="right">The second object to add.</param>
+    /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static LengthValue operator +(LengthValue left, NumberValue right)
+        => new LengthValue(left.Value + right.Number, left.Unit);
+
+    /// <summary>
+    /// Adds <see cref="NumberValue"/> and <see cref="LengthValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to add.</param>
+    /// <param name="right">The second object to add.</param>
+    /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static LengthValue operator +(NumberValue left, LengthValue right)
+        => new LengthValue(left.Number + right.Value, right.Unit);
+
+    /// <summary>
     /// Adds <see cref="Complex"/> and <see cref="NumberValue"/>.
     /// </summary>
     /// <param name="left">The first object to add.</param>
@@ -577,6 +597,26 @@ public readonly struct NumberValue :
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static MassValue operator -(MassValue left, NumberValue right)
         => new MassValue(left.Value - right.Number, left.Unit);
+
+    /// <summary>
+    /// Subtracts <see cref="NumberValue"/> and <see cref="LengthValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to sub.</param>
+    /// <param name="right">The second object to sub.</param>
+    /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static LengthValue operator -(NumberValue left, LengthValue right)
+        => new LengthValue(left.Number - right.Value, right.Unit);
+
+    /// <summary>
+    /// Subtracts <see cref="LengthValue"/> and <see cref="NumberValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to sub.</param>
+    /// <param name="right">The second object to sub.</param>
+    /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static LengthValue operator -(LengthValue left, NumberValue right)
+        => new LengthValue(left.Value - right.Number, left.Unit);
 
     /// <summary>
     /// Subtracts <see cref="NumberValue"/> and <see cref="Complex"/>.
@@ -709,6 +749,26 @@ public readonly struct NumberValue :
         => new MassValue(left.Number * right.Value, right.Unit);
 
     /// <summary>
+    /// Multiplies <see cref="LengthValue"/> and <see cref="NumberValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to multiply.</param>
+    /// <param name="right">The second object to multiply.</param>
+    /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static LengthValue operator *(LengthValue left, NumberValue right)
+        => new LengthValue(left.Value * right.Number, left.Unit);
+
+    /// <summary>
+    /// Multiplies <see cref="NumberValue"/> and <see cref="LengthValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to multiply.</param>
+    /// <param name="right">The second object to multiply.</param>
+    /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static LengthValue operator *(NumberValue left, LengthValue right)
+        => new LengthValue(left.Number * right.Value, right.Unit);
+
+    /// <summary>
     /// Multiplies <see cref="Complex"/> and <see cref="NumberValue"/>.
     /// </summary>
     /// <param name="left">The first object to multiply.</param>
@@ -797,6 +857,16 @@ public readonly struct NumberValue :
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static MassValue operator /(MassValue left, NumberValue right)
         => new MassValue(left.Value / right.Number, left.Unit);
+
+    /// <summary>
+    /// Divides <see cref="LengthValue"/> by <see cref="NumberValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to divide.</param>
+    /// <param name="right">The second object to divide.</param>
+    /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static LengthValue operator /(LengthValue left, NumberValue right)
+        => new LengthValue(left.Value / right.Number, left.Unit);
 
     /// <summary>
     /// Divides <see cref="Complex"/> by <see cref="NumberValue"/>.

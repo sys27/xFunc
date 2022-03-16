@@ -413,4 +413,37 @@ public class SubTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.MassNumber);
     }
+
+    [Fact]
+    public void TestSubNumberAndLength()
+    {
+        var exp = new Sub(
+            new Number(10),
+            LengthValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.LengthNumber);
+    }
+
+    [Fact]
+    public void TestSubLengthAndNumber()
+    {
+        var exp = new Sub(
+            LengthValue.Meter(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.LengthNumber);
+    }
+
+    [Fact]
+    public void TestSubLengthAndLength()
+    {
+        var exp = new Sub(
+            LengthValue.Meter(10).AsExpression(),
+            LengthValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.LengthNumber);
+    }
 }

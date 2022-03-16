@@ -160,6 +160,17 @@ public class ProcessorTest
     }
 
     [Fact]
+    public void SolveLengthTest()
+    {
+        var processor = new Processor();
+
+        var result = processor.Solve<LengthNumberResult>("10 m");
+        var expected = LengthValue.Meter(10);
+
+        Assert.Equal(expected, result.Result);
+    }
+
+    [Fact]
     public void ParseTest()
     {
         var processor = new Processor();

@@ -42,6 +42,7 @@ public class ToNumber : UnaryExpression
             PowerValue powerValue => powerValue.Value,
             TemperatureValue temperatureValue => temperatureValue.Value,
             MassValue massValue => massValue.Value,
+            LengthValue lengthValue => lengthValue.Value,
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }

@@ -272,6 +272,45 @@ public class SubTest : BaseExpressionTests
     }
 
     [Fact]
+    public void SubNumberAndLength()
+    {
+        var exp = new Sub(
+            Number.One,
+            LengthValue.Meter(10).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = LengthValue.Meter(-9);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void SubLengthAndNumber()
+    {
+        var exp = new Sub(
+            LengthValue.Meter(10).AsExpression(),
+            Number.One
+        );
+        var actual = exp.Execute();
+        var expected = LengthValue.Meter(9);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void SubLengthAndLength()
+    {
+        var exp = new Sub(
+            LengthValue.Meter(20).AsExpression(),
+            LengthValue.Meter(10).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = LengthValue.Meter(10);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteWrongArgumentTypeTest()
         => TestNotSupported(new Sub(Bool.True, Bool.True));
 

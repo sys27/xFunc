@@ -176,6 +176,42 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
+    [Fact(DisplayName = "20 - 10 m")]
+    public void SubLengthFromNumber()
+    {
+        var sub = new Sub(
+            new Number(20),
+            LengthValue.Meter(10).AsExpression()
+        );
+        var expected = LengthValue.Meter(10).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
+    [Fact(DisplayName = "20 m - 10")]
+    public void SubNumberFromLength()
+    {
+        var sub = new Sub(
+            LengthValue.Meter(20).AsExpression(),
+            new Number(10)
+        );
+        var expected = LengthValue.Meter(10).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
+    [Fact(DisplayName = "20 km - 10 m")]
+    public void SubLengthFromLength()
+    {
+        var sub = new Sub(
+            LengthValue.Kilometer(20).AsExpression(),
+            LengthValue.Meter(10).AsExpression()
+        );
+        var expected = LengthValue.Kilometer(19.990).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
     [Fact(DisplayName = "2 - -x")]
     public void SubSecondUnaryMinus()
     {

@@ -53,6 +53,7 @@ public class Round : DifferentParametersExpression
             (PowerValue left, NumberValue right) => PowerValue.Round(left, right),
             (TemperatureValue left, NumberValue right) => TemperatureValue.Round(left, right),
             (MassValue left, NumberValue right) => MassValue.Round(left, right),
+            (LengthValue left, NumberValue right) => LengthValue.Round(left, right),
             _ => throw new ResultIsNotSupportedException(this, result, digits),
         };
     }

@@ -31,6 +31,7 @@ public class UnaryMinus : UnaryExpression
             PowerValue power => -power,
             TemperatureValue temperature => -temperature,
             MassValue mass => -mass,
+            LengthValue length => -length,
             Complex complex => Complex.Negate(complex),
             _ => throw new ResultIsNotSupportedException(this, result),
         };

@@ -392,6 +392,39 @@ public class AddTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestAddNumberAndLength()
+    {
+        var exp = new Add(
+            new Number(10),
+            LengthValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.LengthNumber);
+    }
+
+    [Fact]
+    public void TestAddLengthAndNumber()
+    {
+        var exp = new Add(
+            LengthValue.Meter(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.LengthNumber);
+    }
+
+    [Fact]
+    public void TestAddLengthAndLength()
+    {
+        var exp = new Add(
+            LengthValue.Meter(10).AsExpression(),
+            LengthValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.LengthNumber);
+    }
+
+    [Fact]
     public void TestAddStringToString()
     {
         var exp = new Add(

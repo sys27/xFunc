@@ -1,15 +1,15 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace xFunc.Tests.Expressions.Units.MassUnits;
+namespace xFunc.Tests.Expressions.Units.LengthUnits;
 
-public class MassUnitTest
+public class LengthUnitTest
 {
     [Fact]
     public void EqualsTest()
     {
-        var a = MassUnit.Kilogram;
-        var b = MassUnit.Kilogram;
+        var a = LengthUnit.Meter;
+        var b = LengthUnit.Meter;
 
         Assert.True(a.Equals(b));
     }
@@ -17,8 +17,8 @@ public class MassUnitTest
     [Fact]
     public void NotEqualsTest()
     {
-        var a = MassUnit.Kilogram;
-        var b = MassUnit.Gram;
+        var a = LengthUnit.Meter;
+        var b = LengthUnit.Millimeter;
 
         Assert.False(a.Equals(b));
     }
@@ -26,8 +26,8 @@ public class MassUnitTest
     [Fact]
     public void ObjectEqualsTest()
     {
-        var a = MassUnit.Kilogram;
-        var b = MassUnit.Kilogram as object;
+        var a = LengthUnit.Meter;
+        var b = LengthUnit.Meter as object;
 
         Assert.True(a.Equals(b));
     }
@@ -35,7 +35,7 @@ public class MassUnitTest
     [Fact]
     public void ObjectEqualsWithDifferentTypesTest()
     {
-        var a = MassUnit.Kilogram;
+        var a = LengthUnit.Meter;
         var b = 1 as object;
 
         Assert.False(a.Equals(b));
@@ -44,8 +44,8 @@ public class MassUnitTest
     [Fact]
     public void EqualsOperatorTest()
     {
-        var a = MassUnit.Kilogram;
-        var b = MassUnit.Kilogram;
+        var a = LengthUnit.Meter;
+        var b = LengthUnit.Meter;
 
         Assert.True(a == b);
     }
@@ -53,8 +53,8 @@ public class MassUnitTest
     [Fact]
     public void NotEqualsOperatorTest()
     {
-        var a = MassUnit.Kilogram;
-        var b = MassUnit.Gram;
+        var a = LengthUnit.Meter;
+        var b = LengthUnit.Millimeter;
 
         Assert.True(a != b);
     }
@@ -62,9 +62,9 @@ public class MassUnitTest
     [Fact]
     public void ToStringTest()
     {
-        var a = MassUnit.Kilogram;
+        var a = LengthUnit.Meter;
 
-        Assert.Equal("kg", a.ToString());
+        Assert.Equal("m", a.ToString());
     }
 
     [Theory]
@@ -72,5 +72,5 @@ public class MassUnitTest
     [InlineData("")]
     [InlineData(" ")]
     public void FromNameEmptyString(string name)
-        => Assert.Throws<ArgumentNullException>(() => MassUnit.FromName(name, out _));
+        => Assert.Throws<ArgumentNullException>(() => LengthUnit.FromName(name, out _));
 }

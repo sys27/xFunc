@@ -54,6 +54,14 @@ public class RoundTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestRoundLengthNumber()
+    {
+        var exp = new Round(LengthValue.Meter(10).AsExpression(), new Number(10));
+
+        Test(exp, ResultTypes.LengthNumber);
+    }
+
+    [Fact]
     public void TestRoundWithUnsupportedPrecisionException()
     {
         var exp = new Round(new Number(10), new ComplexNumber(10));

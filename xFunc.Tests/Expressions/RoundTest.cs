@@ -76,6 +76,16 @@ public class RoundTest : BaseExpressionTests
     }
 
     [Fact]
+    public void RoundTimeWithDigits()
+    {
+        var round = new Round(TimeValue.Second(5.555555).AsExpression(), Number.Two);
+        var result = round.Execute();
+        var expected = TimeValue.Second(5.56);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteArgumentIsNotNumber()
     {
         var exp = new Round(Bool.False, Number.Two);

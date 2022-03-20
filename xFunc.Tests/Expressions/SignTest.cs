@@ -69,6 +69,15 @@ public class SignTest : BaseExpressionTests
     }
 
     [Fact]
+    public void TimeSignTest()
+    {
+        var exp = new Sign(TimeValue.Second(10).AsExpression());
+        var result = exp.Execute();
+
+        Assert.Equal(new NumberValue(1.0), result);
+    }
+
+    [Fact]
     public void InvalidParameterTest()
         => TestNotSupported(new Sign(Bool.False));
 

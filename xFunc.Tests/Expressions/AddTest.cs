@@ -320,6 +320,45 @@ public class AddTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteNumberAndTime()
+    {
+        var exp = new Add(
+            Number.One,
+            TimeValue.Second(1).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = TimeValue.Second(2);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteTimeAndNumber()
+    {
+        var exp = new Add(
+            TimeValue.Second(1).AsExpression(),
+            Number.One
+        );
+        var actual = exp.Execute();
+        var expected = TimeValue.Second(2);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteTimeAndTime()
+    {
+        var exp = new Add(
+            TimeValue.Second(1).AsExpression(),
+            TimeValue.Second(2).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = TimeValue.Second(3);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteStringAndString()
     {
         var exp = new Add(

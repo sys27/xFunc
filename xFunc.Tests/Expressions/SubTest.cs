@@ -311,6 +311,45 @@ public class SubTest : BaseExpressionTests
     }
 
     [Fact]
+    public void SubNumberAndTime()
+    {
+        var exp = new Sub(
+            Number.One,
+            TimeValue.Second(10).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = TimeValue.Second(-9);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void SubTimeAndNumber()
+    {
+        var exp = new Sub(
+            TimeValue.Second(10).AsExpression(),
+            Number.One
+        );
+        var actual = exp.Execute();
+        var expected = TimeValue.Second(9);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void SubTimeAndTime()
+    {
+        var exp = new Sub(
+            TimeValue.Second(20).AsExpression(),
+            TimeValue.Second(10).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = TimeValue.Second(10);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteWrongArgumentTypeTest()
         => TestNotSupported(new Sub(Bool.True, Bool.True));
 

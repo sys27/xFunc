@@ -57,6 +57,9 @@ public class Mul : BinaryExpression
             (NumberValue left, LengthValue right) => left * right,
             (LengthValue left, NumberValue right) => left * right,
 
+            (NumberValue left, TimeValue right) => left * right,
+            (TimeValue left, NumberValue right) => left * right,
+
             (NumberValue left, Complex right) => left * right,
             (Complex left, NumberValue right) => left * right,
             (Complex left, Complex right) => left * right,

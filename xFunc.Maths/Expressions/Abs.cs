@@ -45,6 +45,7 @@ public class Abs : UnaryExpression
             TemperatureValue temperature => TemperatureValue.Abs(temperature),
             MassValue mass => MassValue.Abs(mass),
             LengthValue length => LengthValue.Abs(length),
+            TimeValue time => TimeValue.Abs(time),
             Complex complex => Complex.Abs(complex),
             Vector vector => vector.Abs(parameters),
             _ => throw new ResultIsNotSupportedException(this, result),

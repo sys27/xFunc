@@ -75,6 +75,14 @@ public class DifferentiatorTest
     }
 
     [Fact]
+    public void TimeNumberTest()
+    {
+        var exp = Differentiate(TimeValue.Second(10).AsExpression());
+
+        Assert.Equal(zero, exp);
+    }
+
+    [Fact]
     public void VariableNullTest()
     {
         Assert.Throws<ArgumentNullException>(() => Differentiate(new Number(10), null));

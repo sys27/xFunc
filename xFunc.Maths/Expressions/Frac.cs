@@ -43,6 +43,7 @@ public class Frac : UnaryExpression
             TemperatureValue temperature => TemperatureValue.Frac(temperature),
             MassValue mass => MassValue.Frac(mass),
             LengthValue length => LengthValue.Frac(length),
+            TimeValue time => TimeValue.Frac(time),
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }

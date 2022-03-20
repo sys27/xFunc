@@ -61,6 +61,15 @@ public class UnaryMinusTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteTimeNumberTest()
+    {
+        var exp = new UnaryMinus(TimeValue.Second(10).AsExpression());
+        var expected = TimeValue.Second(-10);
+
+        Assert.Equal(expected, exp.Execute());
+    }
+
+    [Fact]
     public void ExecuteComplexTest()
     {
         var complex = new Complex(2, 3);

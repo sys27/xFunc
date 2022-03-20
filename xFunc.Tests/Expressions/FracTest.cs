@@ -126,6 +126,26 @@ public class FracTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteTimeTest()
+    {
+        var exp = new Frac(TimeValue.Second(5.5).AsExpression());
+        var result = exp.Execute();
+        var expected = TimeValue.Second(0.5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void ExecuteNegativeTimeTest()
+    {
+        var exp = new Frac(TimeValue.Second(-5.5).AsExpression());
+        var result = exp.Execute();
+        var expected = TimeValue.Second(-0.5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Frac(Bool.False));
 

@@ -62,6 +62,14 @@ public class RoundTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestRoundTimeNumber()
+    {
+        var exp = new Round(TimeValue.Second(10).AsExpression(), new Number(10));
+
+        Test(exp, ResultTypes.TimeNumber);
+    }
+
+    [Fact]
     public void TestRoundWithUnsupportedPrecisionException()
     {
         var exp = new Round(new Number(10), new ComplexNumber(10));

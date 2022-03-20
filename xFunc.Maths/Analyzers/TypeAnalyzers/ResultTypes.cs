@@ -82,6 +82,11 @@ public enum ResultTypes
     LengthNumber = 1 << 12,
 
     /// <summary>
+    /// The expression returns a time number.
+    /// </summary>
+    TimeNumber = 1 << 13,
+
+    /// <summary>
     /// The expression returns a number or a complex number.
     /// </summary>
     NumberOrComplex = Number | ComplexNumber,
@@ -101,12 +106,10 @@ public enum ResultTypes
     /// </summary>
     NumberOrVectorOrMatrix = Number | Vector | Matrix,
 
-    // TODO: remove?
-
     /// <summary>
     /// The expression returns any type of number.
     /// </summary>
-    Numbers = Number | AngleNumber | PowerNumber | TemperatureNumber | MassNumber | LengthNumber,
+    Numbers = Number | AngleNumber | PowerNumber | TemperatureNumber | MassNumber | LengthNumber | TimeNumber,
 
     /// <summary>
     /// The expression returns a number or a angle number or a complex number or a vector.

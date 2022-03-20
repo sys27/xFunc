@@ -197,6 +197,30 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
+    [Fact(DisplayName = "10 * 2 s")]
+    public void MulNumberByTime()
+    {
+        var mul = new Mul(
+            new Number(10),
+            TimeValue.Second(2).AsExpression()
+        );
+        var expected = TimeValue.Second(20).AsExpression();
+
+        SimplifyTest(mul, expected);
+    }
+
+    [Fact(DisplayName = "2 s * 10")]
+    public void MulTimeByNumber()
+    {
+        var mul = new Mul(
+            TimeValue.Second(2).AsExpression(),
+            new Number(10)
+        );
+        var expected = TimeValue.Second(20).AsExpression();
+
+        SimplifyTest(mul, expected);
+    }
+
     [Fact(DisplayName = "2 * (2 * x)")]
     public void MulDiffNumMul_NumMulVar_()
     {

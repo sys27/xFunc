@@ -214,6 +214,13 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
             (Length left, Length right)
                 => (left.Value + right.Value).AsExpression(),
 
+            (Number left, Time right)
+                => (left.Value + right.Value).AsExpression(),
+            (Time left, Number right)
+                => (left.Value + right.Value).AsExpression(),
+            (Time left, Time right)
+                => (left.Value + right.Value).AsExpression(),
+
             // x + x
             (Variable left, Variable right) when left.Name == right.Name
                 => new Mul(Number.Two, left),
@@ -331,6 +338,8 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
             (Mass left, Number right)
                 => (left.Value / right.Value).AsExpression(),
             (Length left, Number right)
+                => (left.Value / right.Value).AsExpression(),
+            (Time left, Number right)
                 => (left.Value / right.Value).AsExpression(),
 
             // x / x
@@ -534,6 +543,11 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
             (Length left, Number right)
                 => (left.Value * right.Value).AsExpression(),
 
+            (Number left, Time right)
+                => (left.Value * right.Value).AsExpression(),
+            (Time left, Number right)
+                => (left.Value * right.Value).AsExpression(),
+
             // x * -y
             (var left, UnaryMinus minus)
                 => new UnaryMinus(new Mul(left, minus.Argument)),
@@ -664,6 +678,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
             Temperature(var temperature) => new Number(temperature.Value),
             Mass(var mass) => new Number(mass.Value),
             Length(var length) => new Number(length.Value),
+            Time(var time) => new Number(time.Value),
             var arg when IsChanged(exp, arg) => new ToNumber(arg),
             _ => exp,
         };
@@ -791,6 +806,13 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
             (Length left, Number right)
                 => (left.Value - right.Value).AsExpression(),
             (Length left, Length right)
+                => (left.Value - right.Value).AsExpression(),
+
+            (Number left, Time right)
+                => (left.Value - right.Value).AsExpression(),
+            (Time left, Number right)
+                => (left.Value - right.Value).AsExpression(),
+            (Time left, Time right)
                 => (left.Value - right.Value).AsExpression(),
 
             // x + x

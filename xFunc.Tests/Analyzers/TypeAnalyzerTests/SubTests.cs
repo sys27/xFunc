@@ -446,4 +446,37 @@ public class SubTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.LengthNumber);
     }
+
+    [Fact]
+    public void TestSubNumberAndTime()
+    {
+        var exp = new Sub(
+            new Number(10),
+            TimeValue.Second(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.TimeNumber);
+    }
+
+    [Fact]
+    public void TestSubTimeAndNumber()
+    {
+        var exp = new Sub(
+            TimeValue.Second(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.TimeNumber);
+    }
+
+    [Fact]
+    public void TestSubTimeAndTime()
+    {
+        var exp = new Sub(
+            TimeValue.Second(10).AsExpression(),
+            TimeValue.Second(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.TimeNumber);
+    }
 }

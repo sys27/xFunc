@@ -66,6 +66,16 @@ public class TruncTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteTimeTest()
+    {
+        var exp = new Trunc(TimeValue.Second(5.55555555).AsExpression());
+        var result = exp.Execute();
+        var expected = TimeValue.Second(5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Trunc(Bool.False));
 

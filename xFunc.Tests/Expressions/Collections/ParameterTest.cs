@@ -64,6 +64,15 @@ public class ParameterTest
     }
 
     [Fact]
+    public void LengthValueCtor()
+    {
+        var value = LengthValue.Meter(10);
+        var x = new Parameter("x", value);
+
+        Assert.Equal(value, x.Value);
+    }
+
+    [Fact]
     public void ComplexCtor()
     {
         var value = new Complex(1, 2);

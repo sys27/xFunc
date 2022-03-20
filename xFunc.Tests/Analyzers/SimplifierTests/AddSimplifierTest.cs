@@ -185,6 +185,42 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
+    [Fact(DisplayName = "10 + 10 m")]
+    public void AddNumberAndLength()
+    {
+        var add = new Add(
+            new Number(10),
+            LengthValue.Meter(10).AsExpression()
+        );
+        var expected = LengthValue.Meter(20).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
+    [Fact(DisplayName = "10 m + 10")]
+    public void AddLengthAndNumber()
+    {
+        var add = new Add(
+            LengthValue.Meter(10).AsExpression(),
+            new Number(10)
+        );
+        var expected = LengthValue.Meter(20).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
+    [Fact(DisplayName = "10 km + 10 m")]
+    public void AddTwoLengths()
+    {
+        var add = new Add(
+            LengthValue.Kilometer(10).AsExpression(),
+            LengthValue.Meter(10).AsExpression()
+        );
+        var expected = LengthValue.Kilometer(10.01).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
     [Fact(DisplayName = "-x + 2")]
     public void AddFirstUnaryMinus()
     {

@@ -75,4 +75,41 @@ public readonly struct PowerUnit : IEquatable<PowerUnit>
     /// Gets a short name of the unit.
     /// </summary>
     public string UnitName { get; }
+
+    private static readonly Lazy<IDictionary<string, PowerUnit>> AllUnits
+        = new Lazy<IDictionary<string, PowerUnit>>(GetUnits);
+
+    private static IDictionary<string, PowerUnit> GetUnits()
+        => new Dictionary<string, PowerUnit>(StringComparer.InvariantCultureIgnoreCase)
+        {
+            { Watt.UnitName, Watt },
+            { Kilowatt.UnitName, Kilowatt },
+            { Horsepower.UnitName, Horsepower },
+        };
+
+    /// <summary>
+    /// Gets all available unit names.
+    /// </summary>
+    public static IEnumerable<string> Names => AllUnits.Value.Keys;
+
+    /// <summary>
+    /// Gets all available units.
+    /// </summary>
+    [ExcludeFromCodeCoverage]
+    public static IEnumerable<PowerUnit> Units => AllUnits.Value.Values;
+
+    /// <summary>
+    /// Gets a unit by name.
+    /// </summary>
+    /// <param name="name">The name of unit.</param>
+    /// <param name="unit">When this method returns, the value associated with the specified name, if the unit is found; otherwise, the default value for the type of the value parameter. This parameter is passed uninitialized.</param>
+    /// <returns><c>true</c> if power units contain an unit with the specified <paramref name="name"/>; otherwise, <c>false</c>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="name"/> is <c>null</c>.</exception>
+    public static bool FromName(string name, out PowerUnit unit)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentNullException(nameof(name));
+
+        return AllUnits.Value.TryGetValue(name, out unit);
+    }
 }

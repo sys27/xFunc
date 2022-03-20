@@ -106,6 +106,26 @@ public class FracTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteLengthTest()
+    {
+        var exp = new Frac(LengthValue.Meter(5.5).AsExpression());
+        var result = exp.Execute();
+        var expected = LengthValue.Meter(0.5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void ExecuteNegativeLengthTest()
+    {
+        var exp = new Frac(LengthValue.Meter(-5.5).AsExpression());
+        var result = exp.Execute();
+        var expected = LengthValue.Meter(-0.5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Frac(Bool.False));
 

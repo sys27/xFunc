@@ -56,6 +56,16 @@ public class TruncTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteLengthTest()
+    {
+        var exp = new Trunc(LengthValue.Meter(5.55555555).AsExpression());
+        var result = exp.Execute();
+        var expected = LengthValue.Meter(5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Trunc(Bool.False));
 

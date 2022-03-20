@@ -55,6 +55,7 @@ https://github.com/sys27/xFunc/wiki/Breaking-Changes</PackageReleaseNotes>
     <Using Include="xFunc.Maths.Expressions.Units" />
     <Using Include="xFunc.Maths.Expressions.Units.AngleUnits" />
     <Using Include="xFunc.Maths.Expressions.Units.Converters" />
+    <Using Include="xFunc.Maths.Expressions.Units.LengthUnits" />
     <Using Include="xFunc.Maths.Expressions.Units.MassUnits" />
     <Using Include="xFunc.Maths.Expressions.Units.PowerUnits" />
     <Using Include="xFunc.Maths.Expressions.Units.TemperatureUnits" />

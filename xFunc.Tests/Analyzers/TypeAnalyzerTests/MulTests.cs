@@ -306,4 +306,26 @@ public class MulTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.MassNumber);
     }
+
+    [Fact]
+    public void TestMulNumberAndLength()
+    {
+        var exp = new Mul(
+            new Number(10),
+            LengthValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.LengthNumber);
+    }
+
+    [Fact]
+    public void TestMulLengthAndNumber()
+    {
+        var exp = new Mul(
+            LengthValue.Meter(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.LengthNumber);
+    }
 }

@@ -726,7 +726,8 @@ public partial class Parser : IParser
         var unit = ParseTemperatureUnit(ref tokenReader) ??
                    ParseAngleUnit(ref tokenReader) ??
                    ParsePowerUnit(ref tokenReader) ??
-                   ParseMassUnit(ref tokenReader);
+                   ParseMassUnit(ref tokenReader) ??
+                   ParseLengthUnit(ref tokenReader);
         if (unit is not null)
             return unit;
 
@@ -827,6 +828,40 @@ public partial class Parser : IParser
                 "t" => MassValue.Tonne(number.NumberValue).AsExpression(),
                 "oz" => MassValue.Ounce(number.NumberValue).AsExpression(),
                 "lb" => MassValue.Pound(number.NumberValue).AsExpression(),
+                _ => null,
+            };
+        });
+
+    private IExpression? ParseLengthUnit(ref TokenReader tokenReader)
+        => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
+        {
+            var number = reader.GetCurrent(TokenKind.Number);
+            if (number.IsEmpty())
+                return null;
+
+            var id = reader.GetCurrent(Id);
+            if (id.IsEmpty())
+                return null;
+
+            return id.StringValue switch
+            {
+                "m" => LengthValue.Meter(number.NumberValue).AsExpression(),
+                "nm" => LengthValue.Nanometer(number.NumberValue).AsExpression(),
+                "µm" => LengthValue.Micrometer(number.NumberValue).AsExpression(),
+                "mm" => LengthValue.Millimeter(number.NumberValue).AsExpression(),
+                "cm" => LengthValue.Centimeter(number.NumberValue).AsExpression(),
+                "dm" => LengthValue.Decimeter(number.NumberValue).AsExpression(),
+                "km" => LengthValue.Kilometer(number.NumberValue).AsExpression(),
+                "in" => LengthValue.Inch(number.NumberValue).AsExpression(),
+                "ft" => LengthValue.Foot(number.NumberValue).AsExpression(),
+                "yd" => LengthValue.Yard(number.NumberValue).AsExpression(),
+                "mi" => LengthValue.Mile(number.NumberValue).AsExpression(),
+                "nmi" => LengthValue.NauticalMile(number.NumberValue).AsExpression(),
+                "ch" => LengthValue.Chain(number.NumberValue).AsExpression(),
+                "rd" => LengthValue.Rod(number.NumberValue).AsExpression(),
+                "au" => LengthValue.AstronomicalUnit(number.NumberValue).AsExpression(),
+                "ly" => LengthValue.LightYear(number.NumberValue).AsExpression(),
+                "pc" => LengthValue.Parsec(number.NumberValue).AsExpression(),
                 _ => null,
             };
         });

@@ -4,25 +4,25 @@
 namespace xFunc.Maths.Expressions.Units.Converters;
 
 /// <summary>
-/// The power unit converter.
+/// The length unit converter.
 /// </summary>
-public class PowerConverter : IConverter<PowerValue>, IConverter<object>
+public class LengthConverter : IConverter<LengthValue>, IConverter<object>
 {
     /// <inheritdoc />
-    public PowerValue Convert(object value, string unit)
+    public LengthValue Convert(object value, string unit)
     {
         if (value is null)
             throw new ArgumentNullException(nameof(value));
         if (string.IsNullOrWhiteSpace(unit))
             throw new ArgumentNullException(nameof(unit));
 
-        if (!PowerUnit.FromName(unit, out var powerUnit))
+        if (!LengthUnit.FromName(unit, out var lengthUnit))
             throw new UnitIsNotSupportedException(unit);
 
         return value switch
         {
-            PowerValue powerValue => powerValue.To(powerUnit),
-            NumberValue numberValue => new PowerValue(numberValue, powerUnit),
+            LengthValue lengthValue => lengthValue.To(lengthUnit),
+            NumberValue numberValue => new LengthValue(numberValue, lengthUnit),
             _ => throw new ValueIsNotSupportedException(value),
         };
     }
@@ -33,5 +33,5 @@ public class PowerConverter : IConverter<PowerValue>, IConverter<object>
 
     /// <inheritdoc cref="IConverter{TValue}.CanConvertTo" />
     public bool CanConvertTo(string unit)
-        => PowerUnit.Names.Contains(unit.ToLower());
+        => LengthUnit.Names.Contains(unit.ToLower());
 }

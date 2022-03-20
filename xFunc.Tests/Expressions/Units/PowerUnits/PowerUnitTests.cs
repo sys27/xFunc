@@ -55,4 +55,11 @@ public class PowerUnitTests
 
         Assert.True(left != right);
     }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData(" ")]
+    public void FromNameEmptyString(string name)
+        => Assert.Throws<ArgumentNullException>(() => PowerUnit.FromName(name, out _));
 }

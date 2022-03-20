@@ -56,6 +56,16 @@ public class FloorTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteLengthTest()
+    {
+        var floor = new Floor(LengthValue.Meter(5.55555555).AsExpression());
+        var result = floor.Execute();
+        var expected = LengthValue.Meter(5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Floor(Bool.False));
 

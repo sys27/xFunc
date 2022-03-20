@@ -59,6 +59,10 @@ public class Add : BinaryExpression
             (MassValue left, NumberValue right) => left + right,
             (MassValue left, MassValue right) => left + right,
 
+            (NumberValue left, LengthValue right) => left + right,
+            (LengthValue left, NumberValue right) => left + right,
+            (LengthValue left, LengthValue right) => left + right,
+
             (NumberValue left, Complex right) => left + right,
             (Complex left, NumberValue right) => left + right,
             (Complex left, Complex right) => left + right,

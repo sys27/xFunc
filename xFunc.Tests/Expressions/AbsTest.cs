@@ -54,6 +54,15 @@ public class AbsTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteTestLengthValue()
+    {
+        var exp = new Abs(LengthValue.Meter(-1).AsExpression());
+        var expected = LengthValue.Meter(1);
+
+        Assert.Equal(expected, exp.Execute());
+    }
+
+    [Fact]
     public void ExecuteTestComplexNumber()
     {
         var exp = new Abs(new ComplexNumber(4, 2));

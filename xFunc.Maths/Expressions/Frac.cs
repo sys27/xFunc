@@ -42,6 +42,7 @@ public class Frac : UnaryExpression
             PowerValue power => PowerValue.Frac(power),
             TemperatureValue temperature => TemperatureValue.Frac(temperature),
             MassValue mass => MassValue.Frac(mass),
+            LengthValue length => LengthValue.Frac(length),
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }

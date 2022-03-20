@@ -42,6 +42,7 @@ public class Ceil : UnaryExpression
             PowerValue power => PowerValue.Ceiling(power),
             TemperatureValue temperature => TemperatureValue.Ceiling(temperature),
             MassValue mass => MassValue.Ceiling(mass),
+            LengthValue length => LengthValue.Ceiling(length),
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }

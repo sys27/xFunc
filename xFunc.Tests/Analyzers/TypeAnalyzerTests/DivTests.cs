@@ -152,4 +152,15 @@ public class DivTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.MassNumber);
     }
+
+    [Fact]
+    public void TestDivLengthNumber()
+    {
+        var exp = new Div(
+            LengthValue.Meter(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.LengthNumber);
+    }
 }

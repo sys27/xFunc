@@ -20,6 +20,7 @@ public class Converter : IConverter
             new PowerConverter(),
             new TemperatureConverter(),
             new MassConverter(),
+            new LengthConverter(),
         };
 
     /// <inheritdoc />

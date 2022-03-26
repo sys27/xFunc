@@ -43,6 +43,7 @@ public class Ceil : UnaryExpression
             TemperatureValue temperature => TemperatureValue.Ceiling(temperature),
             MassValue mass => MassValue.Ceiling(mass),
             LengthValue length => LengthValue.Ceiling(length),
+            TimeValue time => TimeValue.Ceiling(time),
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }

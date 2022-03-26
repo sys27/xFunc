@@ -65,6 +65,15 @@ public class CeilTest : BaseExpressionTests
         Assert.Equal(expected, result);
     }
 
+    [Fact]
+    public void ExecuteTestTimeNumber()
+    {
+        var ceil = new Ceil(TimeValue.Second(5.55555555).AsExpression());
+        var result = ceil.Execute();
+        var expected = TimeValue.Second(6);
+
+        Assert.Equal(expected, result);
+    }
 
     [Fact]
     public void ExecuteTestException()

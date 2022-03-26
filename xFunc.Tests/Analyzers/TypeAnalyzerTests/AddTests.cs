@@ -425,6 +425,39 @@ public class AddTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestAddNumberAndTime()
+    {
+        var exp = new Add(
+            new Number(10),
+            TimeValue.Second(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.TimeNumber);
+    }
+
+    [Fact]
+    public void TestAddTimeAndNumber()
+    {
+        var exp = new Add(
+            TimeValue.Second(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.TimeNumber);
+    }
+
+    [Fact]
+    public void TestAddTimeAndTime()
+    {
+        var exp = new Add(
+            TimeValue.Second(10).AsExpression(),
+            TimeValue.Second(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.TimeNumber);
+    }
+
+    [Fact]
     public void TestAddStringToString()
     {
         var exp = new Add(

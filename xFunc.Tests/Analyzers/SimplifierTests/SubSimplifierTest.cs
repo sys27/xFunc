@@ -212,6 +212,42 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
+    [Fact(DisplayName = "20 - 10 s")]
+    public void SubTimeFromNumber()
+    {
+        var sub = new Sub(
+            new Number(20),
+            TimeValue.Second(10).AsExpression()
+        );
+        var expected = TimeValue.Second(10).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
+    [Fact(DisplayName = "20 s - 10")]
+    public void SubNumberFromTime()
+    {
+        var sub = new Sub(
+            TimeValue.Second(20).AsExpression(),
+            new Number(10)
+        );
+        var expected = TimeValue.Second(10).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
+    [Fact(DisplayName = "20 min - 10 s")]
+    public void SubTimeFromTime()
+    {
+        var sub = new Sub(
+            TimeValue.Minute(20).AsExpression(),
+            TimeValue.Second(30).AsExpression()
+        );
+        var expected = TimeValue.Minute(19.5).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
     [Fact(DisplayName = "2 - -x")]
     public void SubSecondUnaryMinus()
     {

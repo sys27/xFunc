@@ -163,4 +163,15 @@ public class DivTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.LengthNumber);
     }
+
+    [Fact]
+    public void TestDivTimeNumber()
+    {
+        var exp = new Div(
+            TimeValue.Second(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.TimeNumber);
+    }
 }

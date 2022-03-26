@@ -328,4 +328,26 @@ public class MulTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.LengthNumber);
     }
+
+    [Fact]
+    public void TestMulNumberAndTime()
+    {
+        var exp = new Mul(
+            new Number(10),
+            TimeValue.Second(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.TimeNumber);
+    }
+
+    [Fact]
+    public void TestMulTimeAndNumber()
+    {
+        var exp = new Mul(
+            TimeValue.Second(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.TimeNumber);
+    }
 }

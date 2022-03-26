@@ -56,6 +56,16 @@ public class ToNumberTest
     }
 
     [Fact]
+    public void ExecuteTimeTest()
+    {
+        var exp = new ToNumber(TimeValue.Second(10).AsExpression());
+        var actual = exp.Execute();
+        var expected = new NumberValue(10.0);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteBoolTest()
     {
         Assert.Throws<ResultIsNotSupportedException>(() => new ToNumber(Bool.False).Execute());

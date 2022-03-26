@@ -43,6 +43,7 @@ public class Trunc : UnaryExpression
             TemperatureValue temperature => TemperatureValue.Truncate(temperature),
             MassValue mass => MassValue.Truncate(mass),
             LengthValue length => LengthValue.Truncate(length),
+            TimeValue time => TimeValue.Truncate(time),
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }

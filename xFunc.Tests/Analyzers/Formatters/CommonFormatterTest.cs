@@ -301,6 +301,14 @@ public class CommonFormatterTest
     }
 
     [Fact]
+    public void TimeNumberTest()
+    {
+        var exp = TimeValue.Second(10).AsExpression();
+
+        Assert.Equal("10 s", exp.ToString());
+    }
+
+    [Fact]
     public void ToDegreeTest()
     {
         var exp = new ToDegree(new Number(10));

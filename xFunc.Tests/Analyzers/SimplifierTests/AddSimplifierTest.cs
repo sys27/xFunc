@@ -221,6 +221,42 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
+    [Fact(DisplayName = "10 + 10 s")]
+    public void AddNumberAndTime()
+    {
+        var add = new Add(
+            new Number(10),
+            TimeValue.Second(10).AsExpression()
+        );
+        var expected = TimeValue.Second(20).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
+    [Fact(DisplayName = "10 s + 10")]
+    public void AddTimeAndNumber()
+    {
+        var add = new Add(
+            TimeValue.Second(10).AsExpression(),
+            new Number(10)
+        );
+        var expected = TimeValue.Second(20).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
+    [Fact(DisplayName = "10 min + 10 s")]
+    public void AddTwoTimeValues()
+    {
+        var add = new Add(
+            TimeValue.Minute(10).AsExpression(),
+            TimeValue.Second(30).AsExpression()
+        );
+        var expected = TimeValue.Minute(10.5).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
     [Fact(DisplayName = "-x + 2")]
     public void AddFirstUnaryMinus()
     {

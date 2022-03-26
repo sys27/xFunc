@@ -21,6 +21,7 @@ public class Converter : IConverter
             new TemperatureConverter(),
             new MassConverter(),
             new LengthConverter(),
+            new TimeConverter(),
         };
 
     /// <inheritdoc />

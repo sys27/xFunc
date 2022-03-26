@@ -115,6 +115,19 @@ public class DivTest : BaseExpressionTests
     }
 
     [Fact]
+    public void DivTimeAndNumber()
+    {
+        var exp = new Div(
+            TimeValue.Second(10).AsExpression(),
+            new Number(2)
+        );
+        var actual = exp.Execute();
+        var expected = TimeValue.Second(5);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteBoolTest()
     {
         var exp = new Div(Bool.False, Bool.True);

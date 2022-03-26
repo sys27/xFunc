@@ -32,6 +32,7 @@ public class UnaryMinus : UnaryExpression
             TemperatureValue temperature => -temperature,
             MassValue mass => -mass,
             LengthValue length => -length,
+            TimeValue time => -time,
             Complex complex => Complex.Negate(complex),
             _ => throw new ResultIsNotSupportedException(this, result),
         };

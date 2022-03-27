@@ -727,7 +727,8 @@ public partial class Parser : IParser
                    ParseAngleUnit(ref tokenReader) ??
                    ParsePowerUnit(ref tokenReader) ??
                    ParseMassUnit(ref tokenReader) ??
-                   ParseLengthUnit(ref tokenReader);
+                   ParseLengthUnit(ref tokenReader) ??
+                   ParseTimeUnit(ref tokenReader);
         if (unit is not null)
             return unit;
 
@@ -862,6 +863,32 @@ public partial class Parser : IParser
                 "au" => LengthValue.AstronomicalUnit(number.NumberValue).AsExpression(),
                 "ly" => LengthValue.LightYear(number.NumberValue).AsExpression(),
                 "pc" => LengthValue.Parsec(number.NumberValue).AsExpression(),
+                _ => null,
+            };
+        });
+
+    private IExpression? ParseTimeUnit(ref TokenReader tokenReader)
+        => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
+        {
+            var number = reader.GetCurrent(TokenKind.Number);
+            if (number.IsEmpty())
+                return null;
+
+            var id = reader.GetCurrent(Id);
+            if (id.IsEmpty())
+                return null;
+
+            return id.StringValue switch
+            {
+                "s" => TimeValue.Second(number.NumberValue).AsExpression(),
+                "ns" => TimeValue.Nanosecond(number.NumberValue).AsExpression(),
+                "μs" => TimeValue.Microsecond(number.NumberValue).AsExpression(),
+                "ms" => TimeValue.Millisecond(number.NumberValue).AsExpression(),
+                "min" => TimeValue.Minute(number.NumberValue).AsExpression(),
+                "h" => TimeValue.Hour(number.NumberValue).AsExpression(),
+                "day" => TimeValue.Day(number.NumberValue).AsExpression(),
+                "week" => TimeValue.Week(number.NumberValue).AsExpression(),
+                "year" => TimeValue.Year(number.NumberValue).AsExpression(),
                 _ => null,
             };
         });

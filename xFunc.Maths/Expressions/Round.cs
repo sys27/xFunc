@@ -55,6 +55,7 @@ public class Round : DifferentParametersExpression
             (MassValue left, NumberValue right) => MassValue.Round(left, right),
             (LengthValue left, NumberValue right) => LengthValue.Round(left, right),
             (TimeValue left, NumberValue right) => TimeValue.Round(left, right),
+            (AreaValue left, NumberValue right) => AreaValue.Round(left, right),
             _ => throw new ResultIsNotSupportedException(this, result, digits),
         };
     }

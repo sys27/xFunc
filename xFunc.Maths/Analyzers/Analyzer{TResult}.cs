@@ -109,6 +109,10 @@ public abstract class Analyzer<TResult> : IAnalyzer<TResult>
         => Analyze(exp as IExpression);
 
     /// <inheritdoc />
+    public virtual TResult Analyze(Area exp)
+        => Analyze(exp as IExpression);
+
+    /// <inheritdoc />
     public virtual TResult Analyze(Power exp)
         => Analyze(exp as IExpression);
 

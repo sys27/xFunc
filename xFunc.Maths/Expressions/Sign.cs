@@ -45,6 +45,7 @@ public class Sign : UnaryExpression
             MassValue mass => mass.Sign,
             LengthValue length => length.Sign,
             TimeValue time => time.Sign,
+            AreaValue area => area.Sign,
             _ => throw new ResultIsNotSupportedException(this, result),
         };
 

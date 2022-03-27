@@ -312,6 +312,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.LengthNumber => ResultTypes.LengthNumber,
             ResultTypes.MassNumber => ResultTypes.MassNumber,
             ResultTypes.TimeNumber => ResultTypes.TimeNumber,
+            ResultTypes.AreaNumber => ResultTypes.AreaNumber,
             _ => ResultTypes.NumbersOrComplexOrVector.ThrowFor(result),
         };
     }
@@ -363,6 +364,11 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (ResultTypes.TimeNumber, ResultTypes.TimeNumber)
                 => ResultTypes.TimeNumber,
 
+            (ResultTypes.Number, ResultTypes.AreaNumber) or
+                (ResultTypes.AreaNumber, ResultTypes.Number) or
+                (ResultTypes.AreaNumber, ResultTypes.AreaNumber)
+                => ResultTypes.AreaNumber,
+
             (ResultTypes.Number, ResultTypes.ComplexNumber) or
                 (ResultTypes.ComplexNumber, ResultTypes.Number) or
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
@@ -409,6 +415,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.MassNumber => ResultTypes.MassNumber,
             ResultTypes.LengthNumber => ResultTypes.LengthNumber,
             ResultTypes.TimeNumber => ResultTypes.TimeNumber,
+            ResultTypes.AreaNumber => ResultTypes.AreaNumber,
             _ => ResultTypes.Numbers.ThrowFor(result),
         };
     }
@@ -474,6 +481,9 @@ public class TypeAnalyzer : ITypeAnalyzer
             (ResultTypes.TimeNumber, ResultTypes.Number)
                 => ResultTypes.TimeNumber,
 
+            (ResultTypes.AreaNumber, ResultTypes.Number)
+                => ResultTypes.AreaNumber,
+
             (ResultTypes.Number, ResultTypes.ComplexNumber) or
                 (ResultTypes.ComplexNumber, ResultTypes.Number) or
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
@@ -537,6 +547,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.MassNumber => ResultTypes.MassNumber,
             ResultTypes.LengthNumber => ResultTypes.LengthNumber,
             ResultTypes.TimeNumber => ResultTypes.TimeNumber,
+            ResultTypes.AreaNumber => ResultTypes.AreaNumber,
             _ => ResultTypes.NumberOrAngle.ThrowFor(result),
         };
     }
@@ -559,6 +570,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.MassNumber => ResultTypes.MassNumber,
             ResultTypes.LengthNumber => ResultTypes.LengthNumber,
             ResultTypes.TimeNumber => ResultTypes.TimeNumber,
+            ResultTypes.AreaNumber => ResultTypes.AreaNumber,
             _ => ResultTypes.NumberOrAngle.ThrowFor(result),
         };
     }
@@ -581,6 +593,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.MassNumber => ResultTypes.MassNumber,
             ResultTypes.LengthNumber => ResultTypes.LengthNumber,
             ResultTypes.TimeNumber => ResultTypes.TimeNumber,
+            ResultTypes.AreaNumber => ResultTypes.AreaNumber,
             _ => ResultTypes.NumberOrAngle.ThrowFor(result),
         };
     }
@@ -761,6 +774,10 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (ResultTypes.TimeNumber, ResultTypes.Number)
                 => ResultTypes.TimeNumber,
 
+            (ResultTypes.Number, ResultTypes.AreaNumber) or
+                (ResultTypes.AreaNumber, ResultTypes.Number)
+                => ResultTypes.AreaNumber,
+
             (ResultTypes.Number, ResultTypes.ComplexNumber) or
                 (ResultTypes.ComplexNumber, ResultTypes.Number) or
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
@@ -801,6 +818,10 @@ public class TypeAnalyzer : ITypeAnalyzer
     /// <inheritdoc />
     public virtual ResultTypes Analyze(Angle exp)
         => CheckArgument(exp, ResultTypes.AngleNumber);
+
+    /// <inheritdoc />
+    public virtual ResultTypes Analyze(Area exp)
+        => CheckArgument(exp, ResultTypes.AreaNumber);
 
     /// <inheritdoc />
     public virtual ResultTypes Analyze(Power exp)
@@ -850,7 +871,8 @@ public class TypeAnalyzer : ITypeAnalyzer
                 ResultTypes.TemperatureNumber or
                 ResultTypes.MassNumber or
                 ResultTypes.LengthNumber or
-                ResultTypes.TimeNumber
+                ResultTypes.TimeNumber or
+                ResultTypes.AreaNumber
                 => ResultTypes.Number,
             _ => ResultTypes.AngleNumber.ThrowFor(result),
         };
@@ -931,6 +953,7 @@ public class TypeAnalyzer : ITypeAnalyzer
                 ResultTypes.MassNumber => ResultTypes.MassNumber,
                 ResultTypes.LengthNumber => ResultTypes.LengthNumber,
                 ResultTypes.TimeNumber => ResultTypes.TimeNumber,
+                ResultTypes.AreaNumber => ResultTypes.AreaNumber,
                 _ => throw new DifferentParameterTypeMismatchException(
                     ResultTypes.Undefined | ResultTypes.Numbers,
                     number,
@@ -999,6 +1022,11 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (ResultTypes.TimeNumber, ResultTypes.TimeNumber)
                 => ResultTypes.TimeNumber,
 
+            (ResultTypes.Number, ResultTypes.AreaNumber) or
+                (ResultTypes.AreaNumber, ResultTypes.Number) or
+                (ResultTypes.AreaNumber, ResultTypes.AreaNumber)
+                => ResultTypes.AreaNumber,
+
             (ResultTypes.Number, ResultTypes.ComplexNumber) or
                 (ResultTypes.ComplexNumber, ResultTypes.Number) or
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
@@ -1041,6 +1069,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.MassNumber => ResultTypes.MassNumber,
             ResultTypes.LengthNumber => ResultTypes.LengthNumber,
             ResultTypes.TimeNumber => ResultTypes.TimeNumber,
+            ResultTypes.AreaNumber => ResultTypes.AreaNumber,
             ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
             _ => ResultTypes.NumberOrComplex.ThrowFor(result),
         };
@@ -1079,7 +1108,9 @@ public class TypeAnalyzer : ITypeAnalyzer
                 ResultTypes.TemperatureNumber or
                 ResultTypes.MassNumber or
                 ResultTypes.LengthNumber or
-                ResultTypes.TimeNumber => ResultTypes.Number,
+                ResultTypes.TimeNumber or
+                ResultTypes.AreaNumber
+                => ResultTypes.Number,
 
             _ => ResultTypes.Numbers.ThrowFor(result),
         };

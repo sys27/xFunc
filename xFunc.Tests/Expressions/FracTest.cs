@@ -146,6 +146,26 @@ public class FracTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteAreaTest()
+    {
+        var exp = new Frac(AreaValue.Meter(5.5).AsExpression());
+        var result = exp.Execute();
+        var expected = AreaValue.Meter(0.5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void ExecuteNegativeAreaTest()
+    {
+        var exp = new Frac(AreaValue.Meter(-5.5).AsExpression());
+        var result = exp.Execute();
+        var expected = AreaValue.Meter(-0.5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Frac(Bool.False));
 

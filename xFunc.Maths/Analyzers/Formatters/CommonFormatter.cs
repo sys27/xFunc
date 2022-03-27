@@ -154,6 +154,10 @@ public class CommonFormatter : IFormatter
         => exp.Value.ToString();
 
     /// <inheritdoc />
+    public virtual string Analyze(Area exp)
+        => exp.Value.ToString();
+
+    /// <inheritdoc />
     public virtual string Analyze(Power exp)
         => exp.Value.ToString();
 

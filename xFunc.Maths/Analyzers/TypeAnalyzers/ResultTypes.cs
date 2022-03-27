@@ -87,6 +87,11 @@ public enum ResultTypes
     TimeNumber = 1 << 13,
 
     /// <summary>
+    /// The expression returns a area number.
+    /// </summary>
+    AreaNumber = 1 << 14,
+
+    /// <summary>
     /// The expression returns a number or a complex number.
     /// </summary>
     NumberOrComplex = Number | ComplexNumber,
@@ -109,7 +114,7 @@ public enum ResultTypes
     /// <summary>
     /// The expression returns any type of number.
     /// </summary>
-    Numbers = Number | AngleNumber | PowerNumber | TemperatureNumber | MassNumber | LengthNumber | TimeNumber,
+    Numbers = Number | AngleNumber | PowerNumber | TemperatureNumber | MassNumber | LengthNumber | TimeNumber | AreaNumber,
 
     /// <summary>
     /// The expression returns a number or a angle number or a complex number or a vector.

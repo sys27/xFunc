@@ -489,6 +489,26 @@ public readonly struct NumberValue :
         => new TimeValue(left.Number + right.Value, right.Unit);
 
     /// <summary>
+    /// Adds <see cref="AreaValue"/> and <see cref="NumberValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to add.</param>
+    /// <param name="right">The second object to add.</param>
+    /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static AreaValue operator +(AreaValue left, NumberValue right)
+        => new AreaValue(left.Value + right.Number, left.Unit);
+
+    /// <summary>
+    /// Adds <see cref="NumberValue"/> and <see cref="AreaValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to add.</param>
+    /// <param name="right">The second object to add.</param>
+    /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static AreaValue operator +(NumberValue left, AreaValue right)
+        => new AreaValue(left.Number + right.Value, right.Unit);
+
+    /// <summary>
     /// Adds <see cref="Complex"/> and <see cref="NumberValue"/>.
     /// </summary>
     /// <param name="left">The first object to add.</param>
@@ -657,6 +677,26 @@ public readonly struct NumberValue :
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static TimeValue operator -(TimeValue left, NumberValue right)
         => new TimeValue(left.Value - right.Number, left.Unit);
+
+    /// <summary>
+    /// Subtracts <see cref="NumberValue"/> and <see cref="AreaValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to sub.</param>
+    /// <param name="right">The second object to sub.</param>
+    /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static AreaValue operator -(NumberValue left, AreaValue right)
+        => new AreaValue(left.Number - right.Value, right.Unit);
+
+    /// <summary>
+    /// Subtracts <see cref="AreaValue"/> and <see cref="NumberValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to sub.</param>
+    /// <param name="right">The second object to sub.</param>
+    /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static AreaValue operator -(AreaValue left, NumberValue right)
+        => new AreaValue(left.Value - right.Number, left.Unit);
 
     /// <summary>
     /// Subtracts <see cref="NumberValue"/> and <see cref="Complex"/>.
@@ -829,6 +869,26 @@ public readonly struct NumberValue :
         => new TimeValue(left.Number * right.Value, right.Unit);
 
     /// <summary>
+    /// Multiplies <see cref="AreaValue"/> and <see cref="NumberValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to multiply.</param>
+    /// <param name="right">The second object to multiply.</param>
+    /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static AreaValue operator *(AreaValue left, NumberValue right)
+        => new AreaValue(left.Value * right.Number, left.Unit);
+
+    /// <summary>
+    /// Multiplies <see cref="NumberValue"/> and <see cref="AreaValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to multiply.</param>
+    /// <param name="right">The second object to multiply.</param>
+    /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static AreaValue operator *(NumberValue left, AreaValue right)
+        => new AreaValue(left.Number * right.Value, right.Unit);
+
+    /// <summary>
     /// Multiplies <see cref="Complex"/> and <see cref="NumberValue"/>.
     /// </summary>
     /// <param name="left">The first object to multiply.</param>
@@ -937,6 +997,16 @@ public readonly struct NumberValue :
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static TimeValue operator /(TimeValue left, NumberValue right)
         => new TimeValue(left.Value / right.Number, left.Unit);
+
+    /// <summary>
+    /// Divides <see cref="AreaValue"/> by <see cref="NumberValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to divide.</param>
+    /// <param name="right">The second object to divide.</param>
+    /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static AreaValue operator /(AreaValue left, NumberValue right)
+        => new AreaValue(left.Value / right.Number, left.Unit);
 
     /// <summary>
     /// Divides <see cref="Complex"/> by <see cref="NumberValue"/>.

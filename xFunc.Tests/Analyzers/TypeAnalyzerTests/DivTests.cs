@@ -174,4 +174,15 @@ public class DivTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.TimeNumber);
     }
+
+    [Fact]
+    public void TestDivAreaNumber()
+    {
+        var exp = new Div(
+            AreaValue.Meter(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.AreaNumber);
+    }
 }

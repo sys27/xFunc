@@ -67,6 +67,14 @@ public class TruncTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestAreaLength()
+    {
+        var exp = new Trunc(AreaValue.Meter(5.5).AsExpression());
+
+        Test(exp, ResultTypes.AreaNumber);
+    }
+
+    [Fact]
     public void TestTruncException()
     {
         var exp = new Trunc(Bool.False);

@@ -458,6 +458,39 @@ public class AddTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestAddNumberAndArea()
+    {
+        var exp = new Add(
+            new Number(10),
+            AreaValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.AreaNumber);
+    }
+
+    [Fact]
+    public void TestAddAreaAndNumber()
+    {
+        var exp = new Add(
+            AreaValue.Meter(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.AreaNumber);
+    }
+
+    [Fact]
+    public void TestAddAreaAndArea()
+    {
+        var exp = new Add(
+            AreaValue.Meter(10).AsExpression(),
+            AreaValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.AreaNumber);
+    }
+
+    [Fact]
     public void TestAddStringToString()
     {
         var exp = new Add(

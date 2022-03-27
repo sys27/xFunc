@@ -67,6 +67,14 @@ public class UnaryMinusTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestUnaryMinusArea()
+    {
+        var exp = new UnaryMinus(AreaValue.Meter(10).AsExpression());
+
+        Test(exp, ResultTypes.AreaNumber);
+    }
+
+    [Fact]
     public void TestUnaryMinusComplexNumber()
     {
         var exp = new UnaryMinus(new ComplexNumber(10, 10));

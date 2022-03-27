@@ -248,6 +248,42 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
+    [Fact(DisplayName = "20 - 10 m^2")]
+    public void SubAreaFromNumber()
+    {
+        var sub = new Sub(
+            new Number(20),
+            AreaValue.Meter(10).AsExpression()
+        );
+        var expected = AreaValue.Meter(10).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
+    [Fact(DisplayName = "20 m^2 - 10")]
+    public void SubNumberFromArea()
+    {
+        var sub = new Sub(
+            AreaValue.Meter(20).AsExpression(),
+            new Number(10)
+        );
+        var expected = AreaValue.Meter(10).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
+    [Fact(DisplayName = "20 km^2 - 10 m^2")]
+    public void SubAreaFromArea()
+    {
+        var sub = new Sub(
+            AreaValue.Kilometer(10).AsExpression(),
+            AreaValue.Meter(500000).AsExpression()
+        );
+        var expected = AreaValue.Kilometer(9.5).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
     [Fact(DisplayName = "2 - -x")]
     public void SubSecondUnaryMinus()
     {

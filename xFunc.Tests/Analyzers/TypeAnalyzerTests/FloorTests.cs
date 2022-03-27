@@ -59,11 +59,19 @@ public class FloorTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
-    public void TestTimeLength()
+    public void TestFloorTime()
     {
         var exp = new Floor(TimeValue.Second(5.5).AsExpression());
 
         Test(exp, ResultTypes.TimeNumber);
+    }
+
+    [Fact]
+    public void TestFloorArea()
+    {
+        var exp = new Floor(AreaValue.Meter(5.5).AsExpression());
+
+        Test(exp, ResultTypes.AreaNumber);
     }
 
     [Fact]

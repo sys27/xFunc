@@ -70,6 +70,15 @@ public class UnaryMinusTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteAreaNumberTest()
+    {
+        var exp = new UnaryMinus(AreaValue.Meter(10).AsExpression());
+        var expected = AreaValue.Meter(-10);
+
+        Assert.Equal(expected, exp.Execute());
+    }
+
+    [Fact]
     public void ExecuteComplexTest()
     {
         var complex = new Complex(2, 3);

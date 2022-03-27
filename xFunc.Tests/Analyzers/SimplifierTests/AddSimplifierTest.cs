@@ -257,6 +257,42 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
+    [Fact(DisplayName = "10 + 10 m^2")]
+    public void AddNumberAndArea()
+    {
+        var add = new Add(
+            new Number(10),
+            AreaValue.Meter(10).AsExpression()
+        );
+        var expected = AreaValue.Meter(20).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
+    [Fact(DisplayName = "10 m^2 + 10")]
+    public void AddAreaAndNumber()
+    {
+        var add = new Add(
+            AreaValue.Meter(10).AsExpression(),
+            new Number(10)
+        );
+        var expected = AreaValue.Meter(20).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
+    [Fact(DisplayName = "10 km^2 + 500000 m^2")]
+    public void AddTwoAreaValues()
+    {
+        var add = new Add(
+            AreaValue.Kilometer(10).AsExpression(),
+            AreaValue.Meter(500000).AsExpression()
+        );
+        var expected = AreaValue.Kilometer(10.5).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
     [Fact(DisplayName = "-x + 2")]
     public void AddFirstUnaryMinus()
     {

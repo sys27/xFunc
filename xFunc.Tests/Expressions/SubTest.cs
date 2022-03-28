@@ -350,6 +350,45 @@ public class SubTest : BaseExpressionTests
     }
 
     [Fact]
+    public void SubNumberAndArea()
+    {
+        var exp = new Sub(
+            Number.One,
+            AreaValue.Meter(10).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = AreaValue.Meter(-9);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void SubAreaAndNumber()
+    {
+        var exp = new Sub(
+            AreaValue.Meter(10).AsExpression(),
+            Number.One
+        );
+        var actual = exp.Execute();
+        var expected = AreaValue.Meter(9);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void SubAreaAndArea()
+    {
+        var exp = new Sub(
+            AreaValue.Meter(20).AsExpression(),
+            AreaValue.Meter(10).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = AreaValue.Meter(10);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteWrongArgumentTypeTest()
         => TestNotSupported(new Sub(Bool.True, Bool.True));
 

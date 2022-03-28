@@ -479,4 +479,37 @@ public class SubTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.TimeNumber);
     }
+
+    [Fact]
+    public void TestSubNumberAndArea()
+    {
+        var exp = new Sub(
+            new Number(10),
+            AreaValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.AreaNumber);
+    }
+
+    [Fact]
+    public void TestSubAreaAndNumber()
+    {
+        var exp = new Sub(
+            AreaValue.Meter(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.AreaNumber);
+    }
+
+    [Fact]
+    public void TestSubAreaAndArea()
+    {
+        var exp = new Sub(
+            AreaValue.Meter(10).AsExpression(),
+            AreaValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.AreaNumber);
+    }
 }

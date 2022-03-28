@@ -727,6 +727,7 @@ public partial class Parser : IParser
                    ParseAngleUnit(ref tokenReader) ??
                    ParsePowerUnit(ref tokenReader) ??
                    ParseMassUnit(ref tokenReader) ??
+                   ParseAreaUnit(ref tokenReader) ??
                    ParseLengthUnit(ref tokenReader) ??
                    ParseTimeUnit(ref tokenReader);
         if (unit is not null)
@@ -891,6 +892,51 @@ public partial class Parser : IParser
                 "year" => TimeValue.Year(number.NumberValue).AsExpression(),
                 _ => null,
             };
+        });
+
+    private IExpression? ParseAreaUnit(ref TokenReader tokenReader)
+        => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
+        {
+            var number = reader.GetCurrent(TokenKind.Number);
+            if (number.IsEmpty())
+                return null;
+
+            var id = reader.GetCurrent(Id);
+            if (id.IsEmpty())
+                return null;
+
+            var areaValue = id.StringValue switch
+            {
+                "ha" => AreaValue.Hectare(number.NumberValue).AsExpression(),
+                "ac" => AreaValue.Acre(number.NumberValue).AsExpression(),
+                _ => null,
+            };
+            if (areaValue is not null)
+                return areaValue;
+
+            areaValue = id.StringValue switch
+            {
+                "m" => AreaValue.Meter(number.NumberValue).AsExpression(),
+                "mm" => AreaValue.Millimeter(number.NumberValue).AsExpression(),
+                "cm" => AreaValue.Centimeter(number.NumberValue).AsExpression(),
+                "km" => AreaValue.Kilometer(number.NumberValue).AsExpression(),
+                "in" => AreaValue.Inch(number.NumberValue).AsExpression(),
+                "yd" => AreaValue.Yard(number.NumberValue).AsExpression(),
+                "ft" => AreaValue.Foot(number.NumberValue).AsExpression(),
+                "mi" => AreaValue.Mile(number.NumberValue).AsExpression(),
+                _ => null,
+            };
+            if (areaValue is null || !reader.Check(ExponentiationOperator))
+                return null;
+
+            var exponent = reader.GetCurrent(TokenKind.Number);
+            if (exponent.IsEmpty())
+                throw new ParseException(Resource.ExponentParseException);
+
+            if (exponent.NumberValue == 2)
+                return areaValue.Value.AsExpression();
+
+            return null;
         });
 
     private IExpression? ParsePolarComplexNumber(ref TokenReader tokenReader)

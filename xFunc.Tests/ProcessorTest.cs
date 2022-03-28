@@ -171,6 +171,28 @@ public class ProcessorTest
     }
 
     [Fact]
+    public void SolveTimeTest()
+    {
+        var processor = new Processor();
+
+        var result = processor.Solve<TimeNumberResult>("10 s");
+        var expected = TimeValue.Second(10);
+
+        Assert.Equal(expected, result.Result);
+    }
+
+    [Fact]
+    public void SolveAreaTest()
+    {
+        var processor = new Processor();
+
+        var result = processor.Solve<AreaNumberResult>("10 m^2");
+        var expected = AreaValue.Meter(10);
+
+        Assert.Equal(expected, result.Result);
+    }
+
+    [Fact]
     public void ParseTest()
     {
         var processor = new Processor();

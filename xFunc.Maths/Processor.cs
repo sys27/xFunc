@@ -131,6 +131,16 @@ public class Processor
             return new LengthNumberResult(length);
         }
 
+        if (result is TimeValue time)
+        {
+            return new TimeNumberResult(time);
+        }
+
+        if (result is AreaValue area)
+        {
+            return new AreaNumberResult(area);
+        }
+
         if (result is Complex complex)
         {
             return new ComplexNumberResult(complex);

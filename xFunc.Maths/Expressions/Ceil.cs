@@ -44,6 +44,7 @@ public class Ceil : UnaryExpression
             MassValue mass => MassValue.Ceiling(mass),
             LengthValue length => LengthValue.Ceiling(length),
             TimeValue time => TimeValue.Ceiling(time),
+            AreaValue area => AreaValue.Ceiling(area),
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }

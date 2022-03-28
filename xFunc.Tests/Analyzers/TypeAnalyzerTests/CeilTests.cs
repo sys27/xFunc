@@ -59,6 +59,14 @@ public class CeilTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestCeilArea()
+    {
+        var exp = new Ceil(AreaValue.Meter(5.5).AsExpression());
+
+        Test(exp, ResultTypes.AreaNumber);
+    }
+
+    [Fact]
     public void TestCeilVariable()
     {
         var exp = new Ceil(Variable.X);

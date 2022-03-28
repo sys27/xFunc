@@ -359,6 +359,45 @@ public class AddTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteNumberAndArea()
+    {
+        var exp = new Add(
+            Number.One,
+            AreaValue.Meter(1).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = AreaValue.Meter(2);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteAreaAndNumber()
+    {
+        var exp = new Add(
+            AreaValue.Meter(1).AsExpression(),
+            Number.One
+        );
+        var actual = exp.Execute();
+        var expected = AreaValue.Meter(2);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteTimeAndArea()
+    {
+        var exp = new Add(
+            AreaValue.Meter(1).AsExpression(),
+            AreaValue.Meter(2).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = AreaValue.Meter(3);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteStringAndString()
     {
         var exp = new Add(

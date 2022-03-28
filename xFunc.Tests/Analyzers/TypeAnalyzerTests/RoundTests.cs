@@ -70,6 +70,14 @@ public class RoundTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestRoundAreaNumber()
+    {
+        var exp = new Round(AreaValue.Meter(10).AsExpression(), new Number(10));
+
+        Test(exp, ResultTypes.AreaNumber);
+    }
+
+    [Fact]
     public void TestRoundWithUnsupportedPrecisionException()
     {
         var exp = new Round(new Number(10), new ComplexNumber(10));

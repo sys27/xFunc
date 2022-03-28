@@ -60,6 +60,15 @@ public class ToNumberSimplifierTest : BaseSimplifierTest
     }
 
     [Fact]
+    public void AreaToNumberTest()
+    {
+        var exp = new ToNumber(AreaValue.Meter(10).AsExpression());
+        var expected = new Number(10);
+
+        SimplifyTest(exp, expected);
+    }
+
+    [Fact]
     public void ToNumberArgumentSimplifiedTest()
     {
         var exp = new ToNumber(new Add(Number.One, Number.One));

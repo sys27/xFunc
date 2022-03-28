@@ -309,6 +309,14 @@ public class CommonFormatterTest
     }
 
     [Fact]
+    public void AreaNumberTest()
+    {
+        var exp = AreaValue.Meter(10).AsExpression();
+
+        Assert.Equal("10 m^2", exp.ToString());
+    }
+
+    [Fact]
     public void ToDegreeTest()
     {
         var exp = new ToDegree(new Number(10));

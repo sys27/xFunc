@@ -86,6 +86,16 @@ public class RoundTest : BaseExpressionTests
     }
 
     [Fact]
+    public void RoundAreaWithDigits()
+    {
+        var round = new Round(AreaValue.Meter(5.555555).AsExpression(), Number.Two);
+        var result = round.Execute();
+        var expected = AreaValue.Meter(5.56);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteArgumentIsNotNumber()
     {
         var exp = new Round(Bool.False, Number.Two);

@@ -73,6 +73,24 @@ public class ParameterTest
     }
 
     [Fact]
+    public void TimeValueCtor()
+    {
+        var value = TimeValue.Second(10);
+        var x = new Parameter("x", value);
+
+        Assert.Equal(value, x.Value);
+    }
+
+    [Fact]
+    public void AreaValueCtor()
+    {
+        var value = AreaValue.Meter(10);
+        var x = new Parameter("x", value);
+
+        Assert.Equal(value, x.Value);
+    }
+
+    [Fact]
     public void ComplexCtor()
     {
         var value = new Complex(1, 2);

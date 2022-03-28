@@ -67,6 +67,14 @@ public class FracTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestFracArea()
+    {
+        var exp = new Frac(AreaValue.Meter(5.5).AsExpression());
+
+        Test(exp, ResultTypes.AreaNumber);
+    }
+
+    [Fact]
     public void TestFracException()
     {
         var exp = new Frac(Bool.False);

@@ -76,6 +76,16 @@ public class CeilTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteTestAreaNumber()
+    {
+        var ceil = new Ceil(AreaValue.Meter(5.55555555).AsExpression());
+        var result = ceil.Execute();
+        var expected = AreaValue.Meter(6);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Ceil(Bool.False));
 

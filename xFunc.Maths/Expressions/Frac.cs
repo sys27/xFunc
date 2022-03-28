@@ -44,6 +44,7 @@ public class Frac : UnaryExpression
             MassValue mass => MassValue.Frac(mass),
             LengthValue length => LengthValue.Frac(length),
             TimeValue time => TimeValue.Frac(time),
+            AreaValue area => AreaValue.Frac(area),
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }

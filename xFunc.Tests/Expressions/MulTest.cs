@@ -388,6 +388,32 @@ public class MulTest : BaseExpressionTests
     }
 
     [Fact]
+    public void MulNumberAndArea()
+    {
+        var exp = new Mul(
+            Number.Two,
+            AreaValue.Meter(10).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = AreaValue.Meter(20);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void MulAreaAndNumber()
+    {
+        var exp = new Mul(
+            AreaValue.Meter(10).AsExpression(),
+            Number.Two
+        );
+        var actual = exp.Execute();
+        var expected = AreaValue.Meter(20);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteMulBoolByBoolTest()
         => TestNotSupported(new Mul(Bool.True, Bool.True));
 

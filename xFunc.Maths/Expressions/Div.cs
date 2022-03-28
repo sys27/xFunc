@@ -47,6 +47,7 @@ public class Div : BinaryExpression
             (MassValue left, NumberValue right) => left / right,
             (LengthValue left, NumberValue right) => left / right,
             (TimeValue left, NumberValue right) => left / right,
+            (AreaValue left, NumberValue right) => left / right,
 
             (NumberValue left, Complex right) => left / right,
             (Complex left, NumberValue right) => left / right,

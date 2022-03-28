@@ -66,6 +66,16 @@ public class ToNumberTest
     }
 
     [Fact]
+    public void ExecuteAreaTest()
+    {
+        var exp = new ToNumber(AreaValue.Meter(10).AsExpression());
+        var actual = exp.Execute();
+        var expected = new NumberValue(10.0);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteBoolTest()
     {
         Assert.Throws<ResultIsNotSupportedException>(() => new ToNumber(Bool.False).Execute());

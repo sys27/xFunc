@@ -67,6 +67,10 @@ public class Add : BinaryExpression
             (TimeValue left, NumberValue right) => left + right,
             (TimeValue left, TimeValue right) => left + right,
 
+            (NumberValue left, AreaValue right) => left + right,
+            (AreaValue left, NumberValue right) => left + right,
+            (AreaValue left, AreaValue right) => left + right,
+
             (NumberValue left, Complex right) => left + right,
             (Complex left, NumberValue right) => left + right,
             (Complex left, Complex right) => left + right,

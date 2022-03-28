@@ -350,4 +350,26 @@ public class MulTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.TimeNumber);
     }
+
+    [Fact]
+    public void TestMulNumberAndArea()
+    {
+        var exp = new Mul(
+            new Number(10),
+            AreaValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.AreaNumber);
+    }
+
+    [Fact]
+    public void TestMulAreaAndNumber()
+    {
+        var exp = new Mul(
+            AreaValue.Meter(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.AreaNumber);
+    }
 }

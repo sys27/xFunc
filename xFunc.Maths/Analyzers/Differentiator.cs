@@ -219,6 +219,14 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     }
 
     /// <inheritdoc />
+    public override IExpression Analyze(Area exp, DifferentiatorContext context)
+    {
+        ValidateArguments(exp, context);
+
+        return Number.Zero;
+    }
+
+    /// <inheritdoc />
     public override IExpression Analyze(Power exp, DifferentiatorContext context)
     {
         ValidateArguments(exp, context);

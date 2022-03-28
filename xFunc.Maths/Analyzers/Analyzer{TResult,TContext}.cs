@@ -110,6 +110,10 @@ public abstract class Analyzer<TResult, TContext> : IAnalyzer<TResult, TContext>
         => Analyze(exp as IExpression, context);
 
     /// <inheritdoc />
+    public virtual TResult Analyze(Area exp, TContext context)
+        => Analyze(exp as IExpression, context);
+
+    /// <inheritdoc />
     public virtual TResult Analyze(Power exp, TContext context)
         => Analyze(exp as IExpression, context);
 

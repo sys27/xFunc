@@ -62,6 +62,14 @@ public class AbsTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestAbsAreaNumber()
+    {
+        var exp = new Abs(AreaValue.Meter(1).AsExpression());
+
+        Test(exp, ResultTypes.AreaNumber);
+    }
+
+    [Fact]
     public void TestAbsComplexNumber()
     {
         var exp = new Abs(new ComplexNumber(2, 2));

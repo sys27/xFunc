@@ -51,6 +51,12 @@ public class SignTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestSignArea()
+    {
+        Test(new Sign(AreaValue.Meter(10).AsExpression()), ResultTypes.Number);
+    }
+
+    [Fact]
     public void TestSignException()
     {
         TestException(new Sign(Bool.False));

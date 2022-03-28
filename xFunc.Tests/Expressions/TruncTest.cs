@@ -76,6 +76,16 @@ public class TruncTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteAreaTest()
+    {
+        var exp = new Trunc(AreaValue.Meter(5.55555555).AsExpression());
+        var result = exp.Execute();
+        var expected = AreaValue.Meter(5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Trunc(Bool.False));
 

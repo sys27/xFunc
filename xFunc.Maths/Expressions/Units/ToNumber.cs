@@ -44,6 +44,7 @@ public class ToNumber : UnaryExpression
             MassValue massValue => massValue.Value,
             LengthValue lengthValue => lengthValue.Value,
             TimeValue timeValue => timeValue.Value,
+            AreaValue areaValue => areaValue.Value,
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }

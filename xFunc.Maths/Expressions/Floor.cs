@@ -44,6 +44,7 @@ public class Floor : UnaryExpression
             MassValue mass => MassValue.Floor(mass),
             LengthValue length => LengthValue.Floor(length),
             TimeValue time => TimeValue.Floor(time),
+            AreaValue area => AreaValue.Floor(area),
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }

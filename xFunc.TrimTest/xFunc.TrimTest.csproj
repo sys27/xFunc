@@ -11,6 +11,7 @@
     <RuntimeIdentifier>osx.10.12-arm64</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
 
   <ItemGroup>

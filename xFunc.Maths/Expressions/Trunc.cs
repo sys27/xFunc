@@ -45,6 +45,7 @@ public class Trunc : UnaryExpression
             LengthValue length => LengthValue.Truncate(length),
             TimeValue time => TimeValue.Truncate(time),
             AreaValue area => AreaValue.Truncate(area),
+            VolumeValue volume => VolumeValue.Truncate(volume),
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }

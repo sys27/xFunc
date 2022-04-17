@@ -491,6 +491,39 @@ public class AddTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestAddNumberAndVolume()
+    {
+        var exp = new Add(
+            new Number(10),
+            VolumeValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.VolumeNumber);
+    }
+
+    [Fact]
+    public void TestAddVolumeAndNumber()
+    {
+        var exp = new Add(
+            VolumeValue.Meter(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.VolumeNumber);
+    }
+
+    [Fact]
+    public void TestAddVolumeAndVolume()
+    {
+        var exp = new Add(
+            VolumeValue.Meter(10).AsExpression(),
+            VolumeValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.VolumeNumber);
+    }
+
+    [Fact]
     public void TestAddStringToString()
     {
         var exp = new Add(

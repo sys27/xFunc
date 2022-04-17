@@ -78,6 +78,14 @@ public class RoundTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestRoundVolumeNumber()
+    {
+        var exp = new Round(VolumeValue.Meter(10).AsExpression(), new Number(10));
+
+        Test(exp, ResultTypes.VolumeNumber);
+    }
+
+    [Fact]
     public void TestRoundWithUnsupportedPrecisionException()
     {
         var exp = new Round(new Number(10), new ComplexNumber(10));

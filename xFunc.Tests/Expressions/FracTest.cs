@@ -166,6 +166,26 @@ public class FracTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteVolumeTest()
+    {
+        var exp = new Frac(VolumeValue.Meter(5.5).AsExpression());
+        var result = exp.Execute();
+        var expected = VolumeValue.Meter(0.5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void ExecuteNegativeVolumeTest()
+    {
+        var exp = new Frac(VolumeValue.Meter(-5.5).AsExpression());
+        var result = exp.Execute();
+        var expected = VolumeValue.Meter(-0.5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Frac(Bool.False));
 

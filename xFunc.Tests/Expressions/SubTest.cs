@@ -389,6 +389,45 @@ public class SubTest : BaseExpressionTests
     }
 
     [Fact]
+    public void SubNumberAndVolume()
+    {
+        var exp = new Sub(
+            Number.One,
+            VolumeValue.Meter(10).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = VolumeValue.Meter(-9);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void SubVolumeAndNumber()
+    {
+        var exp = new Sub(
+            VolumeValue.Meter(10).AsExpression(),
+            Number.One
+        );
+        var actual = exp.Execute();
+        var expected = VolumeValue.Meter(9);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void SubVolumeAndVolume()
+    {
+        var exp = new Sub(
+            VolumeValue.Meter(20).AsExpression(),
+            VolumeValue.Meter(10).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = VolumeValue.Meter(10);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteWrongArgumentTypeTest()
         => TestNotSupported(new Sub(Bool.True, Bool.True));
 

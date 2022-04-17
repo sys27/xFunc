@@ -75,6 +75,14 @@ public class FracTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestFracVolume()
+    {
+        var exp = new Frac(VolumeValue.Meter(5.5).AsExpression());
+
+        Test(exp, ResultTypes.VolumeNumber);
+    }
+
+    [Fact]
     public void TestFracException()
     {
         var exp = new Frac(Bool.False);

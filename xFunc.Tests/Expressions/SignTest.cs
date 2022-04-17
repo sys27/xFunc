@@ -87,6 +87,15 @@ public class SignTest : BaseExpressionTests
     }
 
     [Fact]
+    public void VolumeSignTest()
+    {
+        var exp = new Sign(VolumeValue.Meter(10).AsExpression());
+        var result = exp.Execute();
+
+        Assert.Equal(new NumberValue(1.0), result);
+    }
+
+    [Fact]
     public void InvalidParameterTest()
         => TestNotSupported(new Sign(Bool.False));
 

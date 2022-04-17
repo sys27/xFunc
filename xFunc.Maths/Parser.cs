@@ -727,6 +727,7 @@ public partial class Parser : IParser
                    ParseAngleUnit(ref tokenReader) ??
                    ParsePowerUnit(ref tokenReader) ??
                    ParseMassUnit(ref tokenReader) ??
+                   ParseVolumeUnit(ref tokenReader) ??
                    ParseAreaUnit(ref tokenReader) ??
                    ParseLengthUnit(ref tokenReader) ??
                    ParseTimeUnit(ref tokenReader);
@@ -935,6 +936,48 @@ public partial class Parser : IParser
 
             if (exponent.NumberValue == 2)
                 return areaValue.Value.AsExpression();
+
+            return null;
+        });
+
+    private IExpression? ParseVolumeUnit(ref TokenReader tokenReader)
+        => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
+        {
+            var number = reader.GetCurrent(TokenKind.Number);
+            if (number.IsEmpty())
+                return null;
+
+            var id = reader.GetCurrent(Id);
+            if (id.IsEmpty())
+                return null;
+
+            var volumeValue = id.StringValue switch
+            {
+                "gal" => VolumeValue.Gallon(number.NumberValue).AsExpression(),
+                "l" => VolumeValue.Liter(number.NumberValue).AsExpression(),
+                _ => null,
+            };
+            if (volumeValue is not null)
+                return volumeValue;
+
+            volumeValue = id.StringValue switch
+            {
+                "m" => VolumeValue.Meter(number.NumberValue).AsExpression(),
+                "cm" => VolumeValue.Centimeter(number.NumberValue).AsExpression(),
+                "in" => VolumeValue.Inch(number.NumberValue).AsExpression(),
+                "yd" => VolumeValue.Yard(number.NumberValue).AsExpression(),
+                "ft" => VolumeValue.Foot(number.NumberValue).AsExpression(),
+                _ => null,
+            };
+            if (volumeValue is null || !reader.Check(ExponentiationOperator))
+                return null;
+
+            var exponent = reader.GetCurrent(TokenKind.Number);
+            if (exponent.IsEmpty())
+                throw new ParseException(Resource.ExponentParseException);
+
+            if (exponent.NumberValue == 3)
+                return volumeValue.Value.AsExpression();
 
             return null;
         });

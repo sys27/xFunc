@@ -81,6 +81,15 @@ public class AbsTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteTestVolumeValue()
+    {
+        var exp = new Abs(VolumeValue.Meter(-1).AsExpression());
+        var expected = VolumeValue.Meter(1);
+
+        Assert.Equal(expected, exp.Execute());
+    }
+
+    [Fact]
     public void ExecuteTestComplexNumber()
     {
         var exp = new Abs(new ComplexNumber(4, 2));

@@ -398,6 +398,45 @@ public class AddTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteNumberAndVolume()
+    {
+        var exp = new Add(
+            Number.One,
+            VolumeValue.Meter(1).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = VolumeValue.Meter(2);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteVolumeAndNumber()
+    {
+        var exp = new Add(
+            VolumeValue.Meter(1).AsExpression(),
+            Number.One
+        );
+        var actual = exp.Execute();
+        var expected = VolumeValue.Meter(2);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteTimeAndVolume()
+    {
+        var exp = new Add(
+            VolumeValue.Meter(1).AsExpression(),
+            VolumeValue.Meter(2).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = VolumeValue.Meter(3);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteStringAndString()
     {
         var exp = new Add(

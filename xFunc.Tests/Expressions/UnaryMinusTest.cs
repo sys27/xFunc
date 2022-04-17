@@ -79,6 +79,15 @@ public class UnaryMinusTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteVolumeNumberTest()
+    {
+        var exp = new UnaryMinus(VolumeValue.Meter(10).AsExpression());
+        var expected = VolumeValue.Meter(-10);
+
+        Assert.Equal(expected, exp.Execute());
+    }
+
+    [Fact]
     public void ExecuteComplexTest()
     {
         var complex = new Complex(2, 3);

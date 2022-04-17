@@ -47,6 +47,7 @@ public class Abs : UnaryExpression
             LengthValue length => LengthValue.Abs(length),
             TimeValue time => TimeValue.Abs(time),
             AreaValue area => AreaValue.Abs(area),
+            VolumeValue volume => VolumeValue.Abs(volume),
             Complex complex => Complex.Abs(complex),
             Vector vector => vector.Abs(parameters),
             _ => throw new ResultIsNotSupportedException(this, result),

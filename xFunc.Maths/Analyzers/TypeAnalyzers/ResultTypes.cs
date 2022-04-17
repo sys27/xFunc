@@ -92,6 +92,11 @@ public enum ResultTypes
     AreaNumber = 1 << 14,
 
     /// <summary>
+    /// The expression returns a volume number.
+    /// </summary>
+    VolumeNumber = 1 << 15,
+
+    /// <summary>
     /// The expression returns a number or a complex number.
     /// </summary>
     NumberOrComplex = Number | ComplexNumber,
@@ -114,7 +119,15 @@ public enum ResultTypes
     /// <summary>
     /// The expression returns any type of number.
     /// </summary>
-    Numbers = Number | AngleNumber | PowerNumber | TemperatureNumber | MassNumber | LengthNumber | TimeNumber | AreaNumber,
+    Numbers = Number |
+              AngleNumber |
+              PowerNumber |
+              TemperatureNumber |
+              MassNumber |
+              LengthNumber |
+              TimeNumber |
+              AreaNumber |
+              VolumeNumber,
 
     /// <summary>
     /// The expression returns a number or a angle number or a complex number or a vector.

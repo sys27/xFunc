@@ -86,6 +86,16 @@ public class TruncTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteVolumeTest()
+    {
+        var exp = new Trunc(VolumeValue.Meter(5.55555555).AsExpression());
+        var result = exp.Execute();
+        var expected = VolumeValue.Meter(5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Trunc(Bool.False));
 

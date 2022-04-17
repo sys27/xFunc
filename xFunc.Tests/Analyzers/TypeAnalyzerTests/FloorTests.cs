@@ -75,6 +75,14 @@ public class FloorTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestFloorVolume()
+    {
+        var exp = new Floor(VolumeValue.Meter(5.5).AsExpression());
+
+        Test(exp, ResultTypes.VolumeNumber);
+    }
+
+    [Fact]
     public void TestFloorException()
     {
         var exp = new Floor(Bool.False);

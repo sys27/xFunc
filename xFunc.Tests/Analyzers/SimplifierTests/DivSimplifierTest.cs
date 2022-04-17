@@ -133,6 +133,18 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
+    [Fact(DisplayName = "90 m^3 / 2")]
+    public void DivVolumeByNumber()
+    {
+        var div = new Div(
+            VolumeValue.Meter(90).AsExpression(),
+            new Number(2)
+        );
+        var expected = VolumeValue.Meter(45).AsExpression();
+
+        SimplifyTest(div, expected);
+    }
+
     [Fact(DisplayName = "(2 * x) / 4")]
     public void DivDiff_NumMulVar_DivNum()
     {

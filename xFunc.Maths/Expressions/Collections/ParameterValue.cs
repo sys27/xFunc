@@ -67,6 +67,12 @@ public readonly struct ParameterValue : IEquatable<ParameterValue>
     }
 
     /// <inheritdoc cref="ParameterValue(object)"/>
+    public ParameterValue(VolumeValue value)
+        : this(value as object)
+    {
+    }
+
+    /// <inheritdoc cref="ParameterValue(object)"/>
     public ParameterValue(Complex value)
         : this(value as object)
     {
@@ -114,6 +120,7 @@ public readonly struct ParameterValue : IEquatable<ParameterValue>
                 or LengthValue
                 or TimeValue
                 or AreaValue
+                or VolumeValue
                 or Complex
                 or bool
                 or Vector
@@ -162,6 +169,10 @@ public readonly struct ParameterValue : IEquatable<ParameterValue>
 
     /// <inheritdoc cref="ParameterValue.op_Implicit(double)"/>
     public static implicit operator ParameterValue(AreaValue value)
+        => new ParameterValue(value);
+
+    /// <inheritdoc cref="ParameterValue.op_Implicit(double)"/>
+    public static implicit operator ParameterValue(VolumeValue value)
         => new ParameterValue(value);
 
     /// <inheritdoc cref="ParameterValue.op_Implicit(double)"/>

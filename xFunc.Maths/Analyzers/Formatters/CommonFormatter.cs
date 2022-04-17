@@ -178,6 +178,10 @@ public class CommonFormatter : IFormatter
         => exp.Value.ToString();
 
     /// <inheritdoc />
+    public virtual string Analyze(Volume exp)
+        => exp.Value.ToString();
+
+    /// <inheritdoc />
     public virtual string Analyze(ToDegree exp)
         => ToString(exp, "todegree({0})");
 

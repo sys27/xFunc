@@ -284,6 +284,42 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
+    [Fact(DisplayName = "20 - 10 m^3")]
+    public void SubVolumeFromNumber()
+    {
+        var sub = new Sub(
+            new Number(20),
+            VolumeValue.Meter(10).AsExpression()
+        );
+        var expected = VolumeValue.Meter(10).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
+    [Fact(DisplayName = "20 m^3 - 10")]
+    public void SubNumberFromVolume()
+    {
+        var sub = new Sub(
+            VolumeValue.Meter(20).AsExpression(),
+            new Number(10)
+        );
+        var expected = VolumeValue.Meter(10).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
+    [Fact(DisplayName = "20 m^3 - 10 cm^3")]
+    public void SubVolumeAndVolume()
+    {
+        var sub = new Sub(
+            VolumeValue.Meter(10).AsExpression(),
+            VolumeValue.Centimeter(500000).AsExpression()
+        );
+        var expected = VolumeValue.Meter(9.5).AsExpression();
+
+        SimplifyTest(sub, expected);
+    }
+
     [Fact(DisplayName = "2 - -x")]
     public void SubSecondUnaryMinus()
     {

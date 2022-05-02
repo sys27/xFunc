@@ -245,6 +245,30 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
+    [Fact(DisplayName = "10 * 2 m^3")]
+    public void MulNumberByVolume()
+    {
+        var mul = new Mul(
+            new Number(10),
+            VolumeValue.Meter(2).AsExpression()
+        );
+        var expected = VolumeValue.Meter(20).AsExpression();
+
+        SimplifyTest(mul, expected);
+    }
+
+    [Fact(DisplayName = "2 m^3 * 10")]
+    public void MulVolumeByNumber()
+    {
+        var mul = new Mul(
+            VolumeValue.Meter(2).AsExpression(),
+            new Number(10)
+        );
+        var expected = VolumeValue.Meter(20).AsExpression();
+
+        SimplifyTest(mul, expected);
+    }
+
     [Fact(DisplayName = "2 * (2 * x)")]
     public void MulDiffNumMul_NumMulVar_()
     {

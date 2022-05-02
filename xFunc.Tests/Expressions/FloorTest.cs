@@ -86,6 +86,16 @@ public class FloorTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteVolumeTest()
+    {
+        var floor = new Floor(VolumeValue.Meter(5.55555555).AsExpression());
+        var result = floor.Execute();
+        var expected = VolumeValue.Meter(5);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Floor(Bool.False));
 

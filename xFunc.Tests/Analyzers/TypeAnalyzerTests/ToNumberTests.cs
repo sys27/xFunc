@@ -54,6 +54,12 @@ public class ToNumberTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestVolumeToNumber()
+    {
+        Test(new ToNumber(VolumeValue.Meter(10).AsExpression()), ResultTypes.Number);
+    }
+
+    [Fact]
     public void TestToNumberException()
     {
         TestException(new ToNumber(Bool.True));

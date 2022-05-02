@@ -34,6 +34,7 @@ public class UnaryMinus : UnaryExpression
             LengthValue length => -length,
             TimeValue time => -time,
             AreaValue area => -area,
+            VolumeValue volume => -volume,
             Complex complex => Complex.Negate(complex),
             _ => throw new ResultIsNotSupportedException(this, result),
         };

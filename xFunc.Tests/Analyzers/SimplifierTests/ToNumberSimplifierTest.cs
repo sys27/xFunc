@@ -69,6 +69,15 @@ public class ToNumberSimplifierTest : BaseSimplifierTest
     }
 
     [Fact]
+    public void VolumeToNumberTest()
+    {
+        var exp = new ToNumber(VolumeValue.Meter(10).AsExpression());
+        var expected = new Number(10);
+
+        SimplifyTest(exp, expected);
+    }
+
+    [Fact]
     public void ToNumberArgumentSimplifiedTest()
     {
         var exp = new ToNumber(new Add(Number.One, Number.One));

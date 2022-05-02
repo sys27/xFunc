@@ -75,6 +75,14 @@ public class TruncTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestVolumeLength()
+    {
+        var exp = new Trunc(VolumeValue.Meter(5.5).AsExpression());
+
+        Test(exp, ResultTypes.VolumeNumber);
+    }
+
+    [Fact]
     public void TestTruncException()
     {
         var exp = new Trunc(Bool.False);

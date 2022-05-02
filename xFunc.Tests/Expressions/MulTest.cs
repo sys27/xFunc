@@ -414,6 +414,32 @@ public class MulTest : BaseExpressionTests
     }
 
     [Fact]
+    public void MulNumberAndVolume()
+    {
+        var exp = new Mul(
+            Number.Two,
+            VolumeValue.Meter(10).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = VolumeValue.Meter(20);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void MulVolumeAndNumber()
+    {
+        var exp = new Mul(
+            VolumeValue.Meter(10).AsExpression(),
+            Number.Two
+        );
+        var actual = exp.Execute();
+        var expected = VolumeValue.Meter(20);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteMulBoolByBoolTest()
         => TestNotSupported(new Mul(Bool.True, Bool.True));
 

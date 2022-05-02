@@ -96,6 +96,16 @@ public class RoundTest : BaseExpressionTests
     }
 
     [Fact]
+    public void RoundVolumeWithDigits()
+    {
+        var round = new Round(VolumeValue.Meter(5.555555).AsExpression(), Number.Two);
+        var result = round.Execute();
+        var expected = VolumeValue.Meter(5.56);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void ExecuteArgumentIsNotNumber()
     {
         var exp = new Round(Bool.False, Number.Two);

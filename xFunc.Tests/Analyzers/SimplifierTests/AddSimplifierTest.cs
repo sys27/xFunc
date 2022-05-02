@@ -293,6 +293,42 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
+    [Fact(DisplayName = "10 + 10 m^3")]
+    public void AddNumberAndVolume()
+    {
+        var add = new Add(
+            new Number(10),
+            VolumeValue.Meter(10).AsExpression()
+        );
+        var expected = VolumeValue.Meter(20).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
+    [Fact(DisplayName = "10 m^3 + 10")]
+    public void AddVolumeAndNumber()
+    {
+        var add = new Add(
+            VolumeValue.Meter(10).AsExpression(),
+            new Number(10)
+        );
+        var expected = VolumeValue.Meter(20).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
+    [Fact(DisplayName = "1 m^3 + 500000 cm^3")]
+    public void AddTwoVolumeValues()
+    {
+        var add = new Add(
+            VolumeValue.Meter(1).AsExpression(),
+            VolumeValue.Centimeter(500000).AsExpression()
+        );
+        var expected = VolumeValue.Meter(1.5).AsExpression();
+
+        SimplifyTest(add, expected);
+    }
+
     [Fact(DisplayName = "-x + 2")]
     public void AddFirstUnaryMinus()
     {

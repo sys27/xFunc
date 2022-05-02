@@ -69,6 +69,10 @@ public class Sub : BinaryExpression
             (AreaValue left, NumberValue right) => left - right,
             (AreaValue left, AreaValue right) => left - right,
 
+            (NumberValue left, VolumeValue right) => left - right,
+            (VolumeValue left, NumberValue right) => left - right,
+            (VolumeValue left, VolumeValue right) => left - right,
+
             (NumberValue left, Complex right) => left - right,
             (Complex left, NumberValue right) => left - right,
             (Complex left, Complex right) => left - right,

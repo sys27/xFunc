@@ -75,6 +75,14 @@ public class UnaryMinusTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestUnaryMinusVolume()
+    {
+        var exp = new UnaryMinus(VolumeValue.Meter(10).AsExpression());
+
+        Test(exp, ResultTypes.VolumeNumber);
+    }
+
+    [Fact]
     public void TestUnaryMinusComplexNumber()
     {
         var exp = new UnaryMinus(new ComplexNumber(10, 10));

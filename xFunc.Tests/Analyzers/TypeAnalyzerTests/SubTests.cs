@@ -512,4 +512,37 @@ public class SubTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.AreaNumber);
     }
+
+    [Fact]
+    public void TestSubNumberAndVolume()
+    {
+        var exp = new Sub(
+            new Number(10),
+            VolumeValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.VolumeNumber);
+    }
+
+    [Fact]
+    public void TestSubVolumeAndNumber()
+    {
+        var exp = new Sub(
+            VolumeValue.Meter(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.VolumeNumber);
+    }
+
+    [Fact]
+    public void TestSubVolumeAndVolume()
+    {
+        var exp = new Sub(
+            VolumeValue.Meter(10).AsExpression(),
+            VolumeValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.VolumeNumber);
+    }
 }

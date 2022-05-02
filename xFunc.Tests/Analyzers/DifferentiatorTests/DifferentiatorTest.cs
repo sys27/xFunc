@@ -91,6 +91,14 @@ public class DifferentiatorTest
     }
 
     [Fact]
+    public void VolumeNumberTest()
+    {
+        var exp = Differentiate(VolumeValue.Meter(10).AsExpression());
+
+        Assert.Equal(zero, exp);
+    }
+
+    [Fact]
     public void VariableNullTest()
     {
         Assert.Throws<ArgumentNullException>(() => Differentiate(new Number(10), null));

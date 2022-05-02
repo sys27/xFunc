@@ -141,6 +141,11 @@ public class Processor
             return new AreaNumberResult(area);
         }
 
+        if (result is VolumeValue volume)
+        {
+            return new VolumeNumberResult(volume);
+        }
+
         if (result is Complex complex)
         {
             return new ComplexNumberResult(complex);

@@ -23,6 +23,7 @@ public class Converter : IConverter
             new AreaConverter(),
             new LengthConverter(),
             new TimeConverter(),
+            new VolumeConverter(),
         };
 
     /// <inheritdoc />

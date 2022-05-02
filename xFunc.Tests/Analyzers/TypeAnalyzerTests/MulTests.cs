@@ -372,4 +372,26 @@ public class MulTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.AreaNumber);
     }
+
+    [Fact]
+    public void TestMulNumberAndVolume()
+    {
+        var exp = new Mul(
+            new Number(10),
+            VolumeValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.VolumeNumber);
+    }
+
+    [Fact]
+    public void TestMulVolumeAndNumber()
+    {
+        var exp = new Mul(
+            VolumeValue.Meter(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.VolumeNumber);
+    }
 }

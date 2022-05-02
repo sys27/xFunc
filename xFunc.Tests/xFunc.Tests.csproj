@@ -39,6 +39,7 @@
     <Using Include="xFunc.Maths.Expressions.Units.PowerUnits" />
     <Using Include="xFunc.Maths.Expressions.Units.TemperatureUnits" />
     <Using Include="xFunc.Maths.Expressions.Units.TimeUnits" />
+    <Using Include="xFunc.Maths.Expressions.Units.VolumeUnits" />
     <Using Include="xFunc.Maths.Resources" />
     <Using Include="xFunc.Maths.Results" />
     <Using Include="xFunc.Maths.Tokenization" />

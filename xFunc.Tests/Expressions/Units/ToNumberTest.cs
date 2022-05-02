@@ -76,6 +76,16 @@ public class ToNumberTest
     }
 
     [Fact]
+    public void ExecuteVolumeTest()
+    {
+        var exp = new ToNumber(VolumeValue.Meter(10).AsExpression());
+        var actual = exp.Execute();
+        var expected = new NumberValue(10.0);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteBoolTest()
     {
         Assert.Throws<ResultIsNotSupportedException>(() => new ToNumber(Bool.False).Execute());

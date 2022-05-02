@@ -228,6 +228,13 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
             (Area left, Area right)
                 => (left.Value + right.Value).AsExpression(),
 
+            (Number left, Volume right)
+                => (left.Value + right.Value).AsExpression(),
+            (Volume left, Number right)
+                => (left.Value + right.Value).AsExpression(),
+            (Volume left, Volume right)
+                => (left.Value + right.Value).AsExpression(),
+
             // x + x
             (Variable left, Variable right) when left.Name == right.Name
                 => new Mul(Number.Two, left),
@@ -349,6 +356,8 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
             (Time left, Number right)
                 => (left.Value / right.Value).AsExpression(),
             (Area left, Number right)
+                => (left.Value / right.Value).AsExpression(),
+            (Volume left, Number right)
                 => (left.Value / right.Value).AsExpression(),
 
             // x / x
@@ -562,6 +571,11 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
             (Area left, Number right)
                 => (left.Value * right.Value).AsExpression(),
 
+            (Number left, Volume right)
+                => (left.Value * right.Value).AsExpression(),
+            (Volume left, Number right)
+                => (left.Value * right.Value).AsExpression(),
+
             // x * -y
             (var left, UnaryMinus minus)
                 => new UnaryMinus(new Mul(left, minus.Argument)),
@@ -694,6 +708,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
             Length(var length) => new Number(length.Value),
             Time(var time) => new Number(time.Value),
             Area(var area) => new Number(area.Value),
+            Volume(var volume) => new Number(volume.Value),
             var arg when IsChanged(exp, arg) => new ToNumber(arg),
             _ => exp,
         };
@@ -835,6 +850,13 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
             (Area left, Number right)
                 => (left.Value - right.Value).AsExpression(),
             (Area left, Area right)
+                => (left.Value - right.Value).AsExpression(),
+
+            (Number left, Volume right)
+                => (left.Value - right.Value).AsExpression(),
+            (Volume left, Number right)
+                => (left.Value - right.Value).AsExpression(),
+            (Volume left, Volume right)
                 => (left.Value - right.Value).AsExpression(),
 
             // x + x

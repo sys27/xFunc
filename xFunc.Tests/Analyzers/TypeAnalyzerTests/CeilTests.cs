@@ -67,6 +67,14 @@ public class CeilTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestCeilVolume()
+    {
+        var exp = new Ceil(VolumeValue.Meter(5.5).AsExpression());
+
+        Test(exp, ResultTypes.VolumeNumber);
+    }
+
+    [Fact]
     public void TestCeilVariable()
     {
         var exp = new Ceil(Variable.X);

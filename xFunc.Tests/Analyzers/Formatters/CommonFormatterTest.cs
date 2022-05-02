@@ -317,6 +317,14 @@ public class CommonFormatterTest
     }
 
     [Fact]
+    public void VolumeNumberTest()
+    {
+        var exp = VolumeValue.Meter(10).AsExpression();
+
+        Assert.Equal("10 m^3", exp.ToString());
+    }
+
+    [Fact]
     public void ToDegreeTest()
     {
         var exp = new ToDegree(new Number(10));

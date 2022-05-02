@@ -70,6 +70,14 @@ public class AbsTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestAbsVolumeNumber()
+    {
+        var exp = new Abs(VolumeValue.Meter(1).AsExpression());
+
+        Test(exp, ResultTypes.VolumeNumber);
+    }
+
+    [Fact]
     public void TestAbsComplexNumber()
     {
         var exp = new Abs(new ComplexNumber(2, 2));

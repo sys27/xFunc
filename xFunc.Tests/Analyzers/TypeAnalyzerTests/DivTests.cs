@@ -185,4 +185,15 @@ public class DivTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.AreaNumber);
     }
+
+    [Fact]
+    public void TestDivVolumeNumber()
+    {
+        var exp = new Div(
+            VolumeValue.Meter(10).AsExpression(),
+            new Number(10)
+        );
+
+        Test(exp, ResultTypes.VolumeNumber);
+    }
 }

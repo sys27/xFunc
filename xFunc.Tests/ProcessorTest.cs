@@ -193,6 +193,17 @@ public class ProcessorTest
     }
 
     [Fact]
+    public void SolveVolumeTest()
+    {
+        var processor = new Processor();
+
+        var result = processor.Solve<VolumeNumberResult>("10 m^3");
+        var expected = VolumeValue.Meter(10);
+
+        Assert.Equal(expected, result.Result);
+    }
+
+    [Fact]
     public void ParseTest()
     {
         var processor = new Processor();

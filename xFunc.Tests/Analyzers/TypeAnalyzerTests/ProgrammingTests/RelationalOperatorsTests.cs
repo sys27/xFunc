@@ -127,6 +127,81 @@ public class GreaterOrEqualTests : TypeAnalyzerBaseTests
     [InlineData(typeof(GreaterOrEqual))]
     [InlineData(typeof(LessThan))]
     [InlineData(typeof(LessOrEqual))]
+    public void TestMass(Type type)
+    {
+        var exp = CreateBinary(type,
+            MassValue.Gram(10).AsExpression(),
+            MassValue.Gram(12).AsExpression()
+        );
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(GreaterThan))]
+    [InlineData(typeof(GreaterOrEqual))]
+    [InlineData(typeof(LessThan))]
+    [InlineData(typeof(LessOrEqual))]
+    public void TestLength(Type type)
+    {
+        var exp = CreateBinary(type,
+            LengthValue.Meter(10).AsExpression(),
+            LengthValue.Meter(12).AsExpression()
+        );
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(GreaterThan))]
+    [InlineData(typeof(GreaterOrEqual))]
+    [InlineData(typeof(LessThan))]
+    [InlineData(typeof(LessOrEqual))]
+    public void TestTime(Type type)
+    {
+        var exp = CreateBinary(type,
+            TimeValue.Second(10).AsExpression(),
+            TimeValue.Second(12).AsExpression()
+        );
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(GreaterThan))]
+    [InlineData(typeof(GreaterOrEqual))]
+    [InlineData(typeof(LessThan))]
+    [InlineData(typeof(LessOrEqual))]
+    public void TestArea(Type type)
+    {
+        var exp = CreateBinary(type,
+            AreaValue.Meter(10).AsExpression(),
+            AreaValue.Meter(12).AsExpression()
+        );
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(GreaterThan))]
+    [InlineData(typeof(GreaterOrEqual))]
+    [InlineData(typeof(LessThan))]
+    [InlineData(typeof(LessOrEqual))]
+    public void TestVolume(Type type)
+    {
+        var exp = CreateBinary(type,
+            VolumeValue.Meter(10).AsExpression(),
+            VolumeValue.Meter(12).AsExpression()
+        );
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(GreaterThan))]
+    [InlineData(typeof(GreaterOrEqual))]
+    [InlineData(typeof(LessThan))]
+    [InlineData(typeof(LessOrEqual))]
     public void TestBoolNumberException(Type type)
     {
         var exp = CreateBinary(type, Bool.True, new Number(10));

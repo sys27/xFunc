@@ -27,8 +27,8 @@ public class GreaterTest
     public void GreaterAngleTest()
     {
         var exp = new GreaterThan(
-            AngleValue.Degree(12).AsExpression(),
-            AngleValue.Degree(10).AsExpression()
+            AngleValue.Degree(180).AsExpression(),
+            AngleValue.Radian(3).AsExpression()
         );
         var result = (bool)exp.Execute();
 
@@ -39,7 +39,7 @@ public class GreaterTest
     public void GreaterPowerTest()
     {
         var exp = new GreaterThan(
-            PowerValue.Watt(12).AsExpression(),
+            PowerValue.Kilowatt(12).AsExpression(),
             PowerValue.Watt(10).AsExpression()
         );
         var result = (bool)exp.Execute();
@@ -52,7 +52,67 @@ public class GreaterTest
     {
         var exp = new GreaterThan(
             TemperatureValue.Celsius(12).AsExpression(),
-            TemperatureValue.Celsius(10).AsExpression()
+            TemperatureValue.Fahrenheit(10).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void GreaterMassTest()
+    {
+        var exp = new GreaterThan(
+            MassValue.Kilogram(12).AsExpression(),
+            MassValue.Gram(10).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void GreaterLengthTest()
+    {
+        var exp = new GreaterThan(
+            LengthValue.Kilometer(12).AsExpression(),
+            LengthValue.Meter(10).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void GreaterTimeTest()
+    {
+        var exp = new GreaterThan(
+            TimeValue.Minute(12).AsExpression(),
+            TimeValue.Second(10).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void GreaterAreaTest()
+    {
+        var exp = new GreaterThan(
+            AreaValue.Meter(12).AsExpression(),
+            AreaValue.Centimeter(10).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void GreaterVolumeTest()
+    {
+        var exp = new GreaterThan(
+            VolumeValue.Meter(12).AsExpression(),
+            VolumeValue.Centimeter(10).AsExpression()
         );
         var result = (bool)exp.Execute();
 

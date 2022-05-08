@@ -36,8 +36,8 @@ public class GreaterOrEqualTest
     public void GreaterOrEqualAngleTest()
     {
         var exp = new GreaterOrEqual(
-            AngleValue.Degree(12).AsExpression(),
-            AngleValue.Degree(10).AsExpression()
+            AngleValue.Degree(180).AsExpression(),
+            AngleValue.Radian(3).AsExpression()
         );
         var result = (bool)exp.Execute();
 
@@ -48,7 +48,7 @@ public class GreaterOrEqualTest
     public void GreaterOrEqualPowerTest()
     {
         var exp = new GreaterOrEqual(
-            PowerValue.Watt(12).AsExpression(),
+            PowerValue.Kilowatt(12).AsExpression(),
             PowerValue.Watt(10).AsExpression()
         );
         var result = (bool)exp.Execute();
@@ -61,7 +61,67 @@ public class GreaterOrEqualTest
     {
         var exp = new GreaterOrEqual(
             TemperatureValue.Celsius(12).AsExpression(),
-            TemperatureValue.Celsius(10).AsExpression()
+            TemperatureValue.Fahrenheit(10).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void GreaterOrEqualMassTest()
+    {
+        var exp = new GreaterOrEqual(
+            MassValue.Kilogram(12).AsExpression(),
+            MassValue.Gram(10).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void GreaterOrEqualLengthTest()
+    {
+        var exp = new GreaterOrEqual(
+            LengthValue.Kilometer(12).AsExpression(),
+            LengthValue.Meter(10).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void GreaterOrEqualTimeTest()
+    {
+        var exp = new GreaterOrEqual(
+            TimeValue.Minute(12).AsExpression(),
+            TimeValue.Second(10).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void GreaterOrEqualAreaTest()
+    {
+        var exp = new GreaterOrEqual(
+            AreaValue.Meter(12).AsExpression(),
+            AreaValue.Centimeter(10).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void GreaterOrEqualVolumeTest()
+    {
+        var exp = new GreaterOrEqual(
+            VolumeValue.Meter(12).AsExpression(),
+            VolumeValue.Centimeter(10).AsExpression()
         );
         var result = (bool)exp.Execute();
 

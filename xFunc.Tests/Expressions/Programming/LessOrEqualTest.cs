@@ -37,7 +37,7 @@ public class LessOrEqualTest
     {
         var exp = new LessOrEqual(
             AngleValue.Degree(10).AsExpression(),
-            AngleValue.Degree(12).AsExpression()
+            AngleValue.Radian(3.14).AsExpression()
         );
         var result = (bool)exp.Execute();
 
@@ -49,7 +49,7 @@ public class LessOrEqualTest
     {
         var exp = new LessOrEqual(
             PowerValue.Watt(10).AsExpression(),
-            PowerValue.Watt(12).AsExpression()
+            PowerValue.Kilowatt(12).AsExpression()
         );
         var result = (bool)exp.Execute();
 
@@ -60,8 +60,68 @@ public class LessOrEqualTest
     public void LessOrEqualTemperatureTest()
     {
         var exp = new LessOrEqual(
-            TemperatureValue.Celsius(10).AsExpression(),
+            TemperatureValue.Fahrenheit(10).AsExpression(),
             TemperatureValue.Celsius(12).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void LessOrEqualMassTest()
+    {
+        var exp = new LessOrEqual(
+            MassValue.Gram(10).AsExpression(),
+            MassValue.Kilogram(12).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void LessOrEqualLengthTest()
+    {
+        var exp = new LessOrEqual(
+            LengthValue.Meter(10).AsExpression(),
+            LengthValue.Kilometer(12).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void LessOrEqualTimeTest()
+    {
+        var exp = new LessOrEqual(
+            TimeValue.Second(10).AsExpression(),
+            TimeValue.Minute(12).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void LessOrEqualAreaTest()
+    {
+        var exp = new LessOrEqual(
+            AreaValue.Meter(10).AsExpression(),
+            AreaValue.Kilometer(12).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void LessOrEqualVolumeTest()
+    {
+        var exp = new LessOrEqual(
+            VolumeValue.Centimeter(10).AsExpression(),
+            VolumeValue.Meter(12).AsExpression()
         );
         var result = (bool)exp.Execute();
 

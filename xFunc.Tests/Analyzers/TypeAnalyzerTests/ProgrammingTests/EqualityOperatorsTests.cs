@@ -118,6 +118,106 @@ public class EqualityOperatorsTests : TypeAnalyzerBaseTests
     [Theory]
     [InlineData(typeof(Equal))]
     [InlineData(typeof(NotEqual))]
+    public void TestMassAndUndefined(Type type)
+    {
+        var exp = Create(type, MassValue.Gram(1).AsExpression(), Variable.X);
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestUndefinedAndMass(Type type)
+    {
+        var exp = Create(type, Variable.X, MassValue.Gram(1).AsExpression());
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestLengthAndUndefined(Type type)
+    {
+        var exp = Create(type, LengthValue.Centimeter(1).AsExpression(), Variable.X);
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestUndefinedAndLength(Type type)
+    {
+        var exp = Create(type, Variable.X, LengthValue.Centimeter(1).AsExpression());
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestTimeAndUndefined(Type type)
+    {
+        var exp = Create(type, TimeValue.Second(1).AsExpression(), Variable.X);
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestUndefinedAndTime(Type type)
+    {
+        var exp = Create(type, Variable.X, TimeValue.Second(1).AsExpression());
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestAreaAndUndefined(Type type)
+    {
+        var exp = Create(type, AreaValue.Meter(1).AsExpression(), Variable.X);
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestUndefinedAndArea(Type type)
+    {
+        var exp = Create(type, Variable.X, AreaValue.Meter(1).AsExpression());
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestVolumeAndUndefined(Type type)
+    {
+        var exp = Create(type, VolumeValue.Meter(1).AsExpression(), Variable.X);
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestUndefinedAndVolume(Type type)
+    {
+        var exp = Create(type, Variable.X, VolumeValue.Meter(1).AsExpression());
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
     public void TestNumber(Type type)
     {
         var exp = Create(type, new Number(20), new Number(10));
@@ -169,6 +269,71 @@ public class EqualityOperatorsTests : TypeAnalyzerBaseTests
         var exp = Create(type,
             TemperatureValue.Celsius(10).AsExpression(),
             TemperatureValue.Celsius(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestMassNumber(Type type)
+    {
+        var exp = Create(type,
+            MassValue.Gram(10).AsExpression(),
+            MassValue.Gram(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestLengthNumber(Type type)
+    {
+        var exp = Create(type,
+            LengthValue.Meter(10).AsExpression(),
+            LengthValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestTimeNumber(Type type)
+    {
+        var exp = Create(type,
+            TimeValue.Second(10).AsExpression(),
+            TimeValue.Second(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestAreaNumber(Type type)
+    {
+        var exp = Create(type,
+            AreaValue.Meter(10).AsExpression(),
+            AreaValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.Boolean);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestVolumeNumber(Type type)
+    {
+        var exp = Create(type,
+            VolumeValue.Meter(10).AsExpression(),
+            VolumeValue.Meter(10).AsExpression()
         );
 
         Test(exp, ResultTypes.Boolean);
@@ -286,6 +451,136 @@ public class EqualityOperatorsTests : TypeAnalyzerBaseTests
     {
         var exp = CreateBinary(type,
             TemperatureValue.Celsius(10).AsExpression(),
+            new ComplexNumber(1, 2)
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestComplexAndMass(Type type)
+    {
+        var exp = CreateBinary(type,
+            new ComplexNumber(1, 2),
+            MassValue.Gram(10).AsExpression()
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestMassAndComplex(Type type)
+    {
+        var exp = CreateBinary(type,
+            MassValue.Gram(10).AsExpression(),
+            new ComplexNumber(1, 2)
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestComplexAndLength(Type type)
+    {
+        var exp = CreateBinary(type,
+            new ComplexNumber(1, 2),
+            LengthValue.Meter(10).AsExpression()
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestLengthAndComplex(Type type)
+    {
+        var exp = CreateBinary(type,
+            LengthValue.Meter(10).AsExpression(),
+            new ComplexNumber(1, 2)
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestComplexAndTime(Type type)
+    {
+        var exp = CreateBinary(type,
+            new ComplexNumber(1, 2),
+            TimeValue.Second(10).AsExpression()
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestTimeAndComplex(Type type)
+    {
+        var exp = CreateBinary(type,
+            TimeValue.Second(10).AsExpression(),
+            new ComplexNumber(1, 2)
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestComplexAndArea(Type type)
+    {
+        var exp = CreateBinary(type,
+            new ComplexNumber(1, 2),
+            AreaValue.Meter(10).AsExpression()
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestAreaAndComplex(Type type)
+    {
+        var exp = CreateBinary(type,
+            AreaValue.Meter(10).AsExpression(),
+            new ComplexNumber(1, 2)
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestComplexAndVolume(Type type)
+    {
+        var exp = CreateBinary(type,
+            new ComplexNumber(1, 2),
+            VolumeValue.Meter(10).AsExpression()
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(Equal))]
+    [InlineData(typeof(NotEqual))]
+    public void TestVolumeAndComplex(Type type)
+    {
+        var exp = CreateBinary(type,
+            VolumeValue.Meter(10).AsExpression(),
             new ComplexNumber(1, 2)
         );
 

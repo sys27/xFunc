@@ -28,7 +28,7 @@ public class LessThanTest
     {
         var exp = new LessThan(
             AngleValue.Degree(10).AsExpression(),
-            AngleValue.Degree(12).AsExpression()
+            AngleValue.Radian(3.14).AsExpression()
         );
         var result = (bool)exp.Execute();
 
@@ -40,7 +40,7 @@ public class LessThanTest
     {
         var exp = new LessThan(
             PowerValue.Watt(10).AsExpression(),
-            PowerValue.Watt(12).AsExpression()
+            PowerValue.Kilowatt(12).AsExpression()
         );
         var result = (bool)exp.Execute();
 
@@ -51,8 +51,68 @@ public class LessThanTest
     public void LessTemperatureTest()
     {
         var exp = new LessThan(
-            TemperatureValue.Celsius(10).AsExpression(),
+            TemperatureValue.Fahrenheit(10).AsExpression(),
             TemperatureValue.Celsius(12).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void LessMassTest()
+    {
+        var exp = new LessThan(
+            MassValue.Gram(10).AsExpression(),
+            MassValue.Kilogram(12).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void LessLengthTest()
+    {
+        var exp = new LessThan(
+            LengthValue.Meter(10).AsExpression(),
+            LengthValue.Kilometer(12).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void LessTimeTest()
+    {
+        var exp = new LessThan(
+            TimeValue.Second(10).AsExpression(),
+            TimeValue.Minute(12).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void LessAreaTest()
+    {
+        var exp = new LessThan(
+            AreaValue.Meter(10).AsExpression(),
+            AreaValue.Kilometer(12).AsExpression()
+        );
+        var result = (bool)exp.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void LessVolumeTest()
+    {
+        var exp = new LessThan(
+            VolumeValue.Centimeter(10).AsExpression(),
+            VolumeValue.Meter(12).AsExpression()
         );
         var result = (bool)exp.Execute();
 

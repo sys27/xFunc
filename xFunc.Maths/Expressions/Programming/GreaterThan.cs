@@ -32,6 +32,11 @@ public class GreaterThan : BinaryExpression
             (AngleValue left, AngleValue right) => left > right,
             (PowerValue left, PowerValue right) => left > right,
             (TemperatureValue left, TemperatureValue right) => left > right,
+            (MassValue left, MassValue right) => left > right,
+            (LengthValue left, LengthValue right) => left > right,
+            (TimeValue left, TimeValue right) => left > right,
+            (AreaValue left, AreaValue right) => left > right,
+            (VolumeValue left, VolumeValue right) => left > right,
             _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
         };
     }

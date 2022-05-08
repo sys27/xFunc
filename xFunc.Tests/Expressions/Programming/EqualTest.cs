@@ -101,8 +101,8 @@ public class EqualTest
     public void AngleEqualTest()
     {
         var equal = new Equal(
-            AngleValue.Degree(10).AsExpression(),
-            AngleValue.Degree(10).AsExpression()
+            AngleValue.Degree(180).AsExpression(),
+            AngleValue.Radian(Math.PI).AsExpression()
         );
         var result = (bool)equal.Execute();
 
@@ -113,8 +113,8 @@ public class EqualTest
     public void PowerEqualTest()
     {
         var equal = new Equal(
-            PowerValue.Watt(10).AsExpression(),
-            PowerValue.Watt(10).AsExpression()
+            PowerValue.Watt(1000).AsExpression(),
+            PowerValue.Kilowatt(1).AsExpression()
         );
         var result = (bool)equal.Execute();
 
@@ -126,7 +126,67 @@ public class EqualTest
     {
         var equal = new Equal(
             TemperatureValue.Celsius(10).AsExpression(),
-            TemperatureValue.Celsius(10).AsExpression()
+            TemperatureValue.Fahrenheit(50).AsExpression()
+        );
+        var result = (bool)equal.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void MassEqualTest()
+    {
+        var equal = new Equal(
+            MassValue.Gram(1000).AsExpression(),
+            MassValue.Kilogram(1).AsExpression()
+        );
+        var result = (bool)equal.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void LengthEqualTest()
+    {
+        var equal = new Equal(
+            LengthValue.Centimeter(100).AsExpression(),
+            LengthValue.Meter(1).AsExpression()
+        );
+        var result = (bool)equal.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void TimeEqualTest()
+    {
+        var equal = new Equal(
+            TimeValue.Second(60).AsExpression(),
+            TimeValue.Minute(1).AsExpression()
+        );
+        var result = (bool)equal.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void AreaEqualTest()
+    {
+        var equal = new Equal(
+            AreaValue.Meter(1000000).AsExpression(),
+            AreaValue.Kilometer(1).AsExpression()
+        );
+        var result = (bool)equal.Execute();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void VolumeEqualTest()
+    {
+        var equal = new Equal(
+            VolumeValue.Meter(0.001).AsExpression(),
+            VolumeValue.Liter(1).AsExpression()
         );
         var result = (bool)equal.Execute();
 

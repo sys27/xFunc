@@ -102,6 +102,32 @@ public class AreaUnit : IEquatable<AreaUnit>
         => UnitName;
 
     /// <summary>
+    /// Maps the current area unit to volume unit.
+    /// </summary>
+    /// <returns>The volume unit.</returns>
+    /// <seealso cref="AreaUnit" />
+    /// <exception cref="InvalidOperationException">Cannot convert the current AreaUnit to an VolumeUnit.</exception>
+    public VolumeUnit ToVolumeUnit()
+    {
+        if (this == Meter)
+            return VolumeUnit.Meter;
+
+        if (this == Centimeter)
+            return VolumeUnit.Centimeter;
+
+        if (this == Inch)
+            return VolumeUnit.Inch;
+
+        if (this == Foot)
+            return VolumeUnit.Foot;
+
+        if (this == Yard)
+            return VolumeUnit.Yard;
+
+        throw new InvalidOperationException($"Cannot convert '{UnitName}' to an VolumeUnit.");
+    }
+
+    /// <summary>
     /// Gets a factor of conversion from this unit to base unit.
     /// </summary>
     public double Factor { get; }

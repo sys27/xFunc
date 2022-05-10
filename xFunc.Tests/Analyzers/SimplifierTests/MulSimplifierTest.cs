@@ -197,6 +197,42 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
+    [Fact(DisplayName = "2 m * 2 m")]
+    public void MulLengthByLength()
+    {
+        var mul = new Mul(
+            LengthValue.Meter(2).AsExpression(),
+            LengthValue.Meter(2).AsExpression()
+        );
+        var expected = AreaValue.Meter(4).AsExpression();
+
+        SimplifyTest(mul, expected);
+    }
+
+    [Fact(DisplayName = "2 m^2 * 2 m")]
+    public void MulAreaByLength()
+    {
+        var mul = new Mul(
+            AreaValue.Meter(2).AsExpression(),
+            LengthValue.Meter(2).AsExpression()
+        );
+        var expected = VolumeValue.Meter(4).AsExpression();
+
+        SimplifyTest(mul, expected);
+    }
+
+    [Fact(DisplayName = "2 m * 2 m^2")]
+    public void MulLengthByArea()
+    {
+        var mul = new Mul(
+            LengthValue.Meter(2).AsExpression(),
+            AreaValue.Meter(2).AsExpression()
+        );
+        var expected = VolumeValue.Meter(4).AsExpression();
+
+        SimplifyTest(mul, expected);
+    }
+
     [Fact(DisplayName = "10 * 2 s")]
     public void MulNumberByTime()
     {

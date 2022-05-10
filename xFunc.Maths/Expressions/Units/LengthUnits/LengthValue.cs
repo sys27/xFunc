@@ -421,6 +421,51 @@ public readonly struct LengthValue : IEquatable<LengthValue>, IComparable<Length
     public static LengthValue operator -(LengthValue value)
         => new LengthValue(-value.Value, value.Unit);
 
+    /// <summary>
+    /// Multiplies two objects of <see cref="LengthValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to multiply.</param>
+    /// <param name="right">The second object to multiply.</param>
+    /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    public static AreaValue operator *(LengthValue left, LengthValue right)
+    {
+        right = right.To(left.Unit);
+
+        var areaUnit = left.Unit.ToAreaUnit();
+
+        return new AreaValue(left.Value * right.Value, areaUnit);
+    }
+
+    /// <summary>
+    /// Multiplies two objects of <see cref="LengthValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to multiply.</param>
+    /// <param name="right">The second object to multiply.</param>
+    /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    public static VolumeValue operator *(AreaValue left, LengthValue right)
+    {
+        var areaUnit = right.Unit.ToAreaUnit();
+        var rightArea = new AreaValue(right.Value, areaUnit);
+        var volumeUnit = left.Unit.ToVolumeUnit();
+
+        return new VolumeValue(left.Value * rightArea.Value, volumeUnit);
+    }
+
+    /// <summary>
+    /// Multiplies two objects of <see cref="LengthValue"/>.
+    /// </summary>
+    /// <param name="left">The first object to multiply.</param>
+    /// <param name="right">The second object to multiply.</param>
+    /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
+    public static VolumeValue operator *(LengthValue left, AreaValue right)
+    {
+        var areaUnit = left.Unit.ToAreaUnit();
+        var leftArea = new AreaValue(left.Value, areaUnit);
+        var volumeUnit = right.Unit.ToVolumeUnit();
+
+        return new VolumeValue(leftArea.Value * right.Value, volumeUnit);
+    }
+
     private LengthValue ToBase()
         => new LengthValue(Value * Unit.Factor, LengthUnit.Meter);
 

@@ -314,6 +314,39 @@ public class LengthValueTest
         Assert.Equal(expected, result);
     }
 
+    [Fact]
+    public void MulOperatorTest()
+    {
+        var length1 = LengthValue.Kilometer(2);
+        var length2 = LengthValue.Meter(2000);
+        var expected = AreaValue.Kilometer(4);
+        var result = length1 * length2;
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void MulOperatorAreaLengthTest()
+    {
+        var length1 = AreaValue.Centimeter(20000);
+        var length2 = LengthValue.Meter(2);
+        var expected = VolumeValue.Centimeter(40000);
+        var result = length1 * length2;
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void MulOperatorLengthAreaTest()
+    {
+        var length1 = LengthValue.Meter(2);
+        var length2 = AreaValue.Centimeter(20000);
+        var expected = VolumeValue.Centimeter(40000);
+        var result = length1 * length2;
+
+        Assert.Equal(expected, result);
+    }
+
     public static IEnumerable<object[]> GetConversionTestCases()
     {
         yield return new object[] { 10.0, LengthUnit.Meter, LengthUnit.Meter, 10.0 };

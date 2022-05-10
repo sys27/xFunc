@@ -67,6 +67,38 @@ public class AreaUnitTest
         Assert.Equal("m^2", a.ToString());
     }
 
+    public static IEnumerable<object[]> GetToVolumeUnitTest()
+    {
+        yield return new object[] { AreaUnit.Meter, VolumeUnit.Meter };
+        yield return new object[] { AreaUnit.Centimeter, VolumeUnit.Centimeter };
+        yield return new object[] { AreaUnit.Inch, VolumeUnit.Inch };
+        yield return new object[] { AreaUnit.Foot, VolumeUnit.Foot };
+        yield return new object[] { AreaUnit.Yard, VolumeUnit.Yard };
+    }
+
+    [Theory]
+    [MemberData(nameof(GetToVolumeUnitTest))]
+    public void ToVolumeUnitTest(AreaUnit unit, VolumeUnit expected)
+    {
+        var actual = unit.ToVolumeUnit();
+
+        Assert.Equal(expected, actual);
+    }
+
+    public static IEnumerable<object[]> GetToVolumeUnitExceptionTest()
+    {
+        yield return new object[] { AreaUnit.Millimeter };
+        yield return new object[] { AreaUnit.Kilometer };
+        yield return new object[] { AreaUnit.Mile };
+        yield return new object[] { AreaUnit.Hectare };
+        yield return new object[] { AreaUnit.Acre };
+    }
+
+    [Theory]
+    [MemberData(nameof(GetToVolumeUnitExceptionTest))]
+    public void ToVolumeUnitExceptionTest(AreaUnit unit)
+        => Assert.Throws<InvalidOperationException>(unit.ToVolumeUnit);
+
     [Theory]
     [InlineData(null)]
     [InlineData("")]

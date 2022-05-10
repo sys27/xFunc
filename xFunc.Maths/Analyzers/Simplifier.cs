@@ -560,6 +560,12 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
                 => (left.Value * right.Value).AsExpression(),
             (Length left, Number right)
                 => (left.Value * right.Value).AsExpression(),
+            (Length left, Length right)
+                => (left.Value * right.Value).AsExpression(),
+            (Area left, Length right)
+                => (left.Value * right.Value).AsExpression(),
+            (Length left, Area right)
+                => (left.Value * right.Value).AsExpression(),
 
             (Number left, Time right)
                 => (left.Value * right.Value).AsExpression(),

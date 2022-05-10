@@ -362,6 +362,45 @@ public class MulTest : BaseExpressionTests
     }
 
     [Fact]
+    public void MulLengthAndLength()
+    {
+        var exp = new Mul(
+            LengthValue.Meter(10).AsExpression(),
+            LengthValue.Meter(2).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = AreaValue.Meter(20);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void MulAreaAndLength()
+    {
+        var exp = new Mul(
+            AreaValue.Meter(10).AsExpression(),
+            LengthValue.Meter(2).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = VolumeValue.Meter(20);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void MulLengthAndArea()
+    {
+        var exp = new Mul(
+            LengthValue.Meter(10).AsExpression(),
+            AreaValue.Meter(2).AsExpression()
+        );
+        var actual = exp.Execute();
+        var expected = VolumeValue.Meter(20);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void MulNumberAndTime()
     {
         var exp = new Mul(

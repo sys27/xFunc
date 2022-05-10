@@ -330,6 +330,39 @@ public class MulTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestMulLengthAndLength()
+    {
+        var exp = new Mul(
+            LengthValue.Meter(10).AsExpression(),
+            LengthValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.AreaNumber);
+    }
+
+    [Fact]
+    public void TestMulAreaAndLength()
+    {
+        var exp = new Mul(
+            AreaValue.Meter(10).AsExpression(),
+            LengthValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.VolumeNumber);
+    }
+
+    [Fact]
+    public void TestMulLengthAndArea()
+    {
+        var exp = new Mul(
+            LengthValue.Meter(10).AsExpression(),
+            AreaValue.Meter(10).AsExpression()
+        );
+
+        Test(exp, ResultTypes.VolumeNumber);
+    }
+
+    [Fact]
     public void TestMulNumberAndTime()
     {
         var exp = new Mul(

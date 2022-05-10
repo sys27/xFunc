@@ -137,6 +137,41 @@ public readonly struct LengthUnit : IEquatable<LengthUnit>
         => UnitName;
 
     /// <summary>
+    /// Maps the current length unit to area unit.
+    /// </summary>
+    /// <returns>The area unit.</returns>
+    /// <seealso cref="AreaUnit" />
+    /// <exception cref="InvalidOperationException">Cannot convert the current LengthUnit to an AreaUnit.</exception>
+    public AreaUnit ToAreaUnit()
+    {
+        if (this == Meter)
+            return AreaUnit.Meter;
+
+        if (this == Millimeter)
+            return AreaUnit.Millimeter;
+
+        if (this == Centimeter)
+            return AreaUnit.Centimeter;
+
+        if (this == Kilometer)
+            return AreaUnit.Kilometer;
+
+        if (this == Inch)
+            return AreaUnit.Inch;
+
+        if (this == Foot)
+            return AreaUnit.Foot;
+
+        if (this == Yard)
+            return AreaUnit.Yard;
+
+        if (this == Mile)
+            return AreaUnit.Mile;
+
+        throw new InvalidOperationException($"Cannot convert '{UnitName}' to an AreaUnit.");
+    }
+
+    /// <summary>
     /// Gets a factor of conversion from this unit to base unit.
     /// </summary>
     public double Factor { get; }

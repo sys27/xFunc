@@ -828,6 +828,13 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (ResultTypes.LengthNumber, ResultTypes.Number)
                 => ResultTypes.LengthNumber,
 
+            (ResultTypes.LengthNumber, ResultTypes.LengthNumber)
+                => ResultTypes.AreaNumber,
+
+            (ResultTypes.AreaNumber, ResultTypes.LengthNumber) or
+                (ResultTypes.LengthNumber, ResultTypes.AreaNumber)
+                => ResultTypes.VolumeNumber,
+
             (ResultTypes.Number, ResultTypes.TimeNumber) or
                 (ResultTypes.TimeNumber, ResultTypes.Number)
                 => ResultTypes.TimeNumber,

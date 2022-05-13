@@ -555,4 +555,40 @@ public class AddTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.String);
     }
+
+    public static IEnumerable<object[]> GetDataForTestAddAngleAndBoolTest()
+    {
+        yield return new object[] { AngleValue.Degree(90).AsExpression(), Bool.False };
+        yield return new object[] { Bool.False, AngleValue.Degree(90).AsExpression() };
+
+        yield return new object[] { PowerValue.Watt(90).AsExpression(), Bool.False };
+        yield return new object[] { Bool.False, PowerValue.Watt(90).AsExpression() };
+
+        yield return new object[] { TemperatureValue.Celsius(90).AsExpression(), Bool.False };
+        yield return new object[] { Bool.False, TemperatureValue.Celsius(90).AsExpression() };
+
+        yield return new object[] { MassValue.Gram(90).AsExpression(), Bool.False };
+        yield return new object[] { Bool.False, MassValue.Gram(90).AsExpression() };
+
+        yield return new object[] { LengthValue.Meter(90).AsExpression(), Bool.False };
+        yield return new object[] { Bool.False, LengthValue.Meter(90).AsExpression() };
+
+        yield return new object[] { TimeValue.Second(90).AsExpression(), Bool.False };
+        yield return new object[] { Bool.False, TimeValue.Second(90).AsExpression() };
+
+        yield return new object[] { AreaValue.Meter(90).AsExpression(), Bool.False };
+        yield return new object[] { Bool.False, AreaValue.Meter(90).AsExpression() };
+
+        yield return new object[] { VolumeValue.Meter(90).AsExpression(), Bool.False };
+        yield return new object[] { Bool.False, VolumeValue.Meter(90).AsExpression() };
+    }
+
+    [Theory]
+    [MemberData(nameof(GetDataForTestAddAngleAndBoolTest))]
+    public void TestAddAngleAndBoolTest(IExpression left, IExpression right)
+    {
+        var exp = new Add(left, right);
+
+        TestBinaryException(exp);
+    }
 }

@@ -316,6 +316,156 @@ public class GreaterOrEqualTests : TypeAnalyzerBaseTests
     [InlineData(typeof(GreaterOrEqual))]
     [InlineData(typeof(LessThan))]
     [InlineData(typeof(LessOrEqual))]
+    public void TestBoolMass(Type type)
+    {
+        var exp = CreateBinary(type,
+            Bool.True,
+            MassValue.Gram(12).AsExpression()
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(GreaterThan))]
+    [InlineData(typeof(GreaterOrEqual))]
+    [InlineData(typeof(LessThan))]
+    [InlineData(typeof(LessOrEqual))]
+    public void TestMassBool(Type type)
+    {
+        var exp = CreateBinary(type,
+            MassValue.Gram(12).AsExpression(),
+            Bool.True
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(GreaterThan))]
+    [InlineData(typeof(GreaterOrEqual))]
+    [InlineData(typeof(LessThan))]
+    [InlineData(typeof(LessOrEqual))]
+    public void TestBoolLength(Type type)
+    {
+        var exp = CreateBinary(type,
+            Bool.True,
+            LengthValue.Meter(12).AsExpression()
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(GreaterThan))]
+    [InlineData(typeof(GreaterOrEqual))]
+    [InlineData(typeof(LessThan))]
+    [InlineData(typeof(LessOrEqual))]
+    public void TestLengthBool(Type type)
+    {
+        var exp = CreateBinary(type,
+            LengthValue.Meter(12).AsExpression(),
+            Bool.True
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(GreaterThan))]
+    [InlineData(typeof(GreaterOrEqual))]
+    [InlineData(typeof(LessThan))]
+    [InlineData(typeof(LessOrEqual))]
+    public void TestBoolTime(Type type)
+    {
+        var exp = CreateBinary(type,
+            Bool.True,
+            TimeValue.Second(12).AsExpression()
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(GreaterThan))]
+    [InlineData(typeof(GreaterOrEqual))]
+    [InlineData(typeof(LessThan))]
+    [InlineData(typeof(LessOrEqual))]
+    public void TestTimeBool(Type type)
+    {
+        var exp = CreateBinary(type,
+            TimeValue.Second(12).AsExpression(),
+            Bool.True
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(GreaterThan))]
+    [InlineData(typeof(GreaterOrEqual))]
+    [InlineData(typeof(LessThan))]
+    [InlineData(typeof(LessOrEqual))]
+    public void TestBoolArea(Type type)
+    {
+        var exp = CreateBinary(type,
+            Bool.True,
+            AreaValue.Meter(12).AsExpression()
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(GreaterThan))]
+    [InlineData(typeof(GreaterOrEqual))]
+    [InlineData(typeof(LessThan))]
+    [InlineData(typeof(LessOrEqual))]
+    public void TestAreaBool(Type type)
+    {
+        var exp = CreateBinary(type,
+            AreaValue.Meter(12).AsExpression(),
+            Bool.True
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(GreaterThan))]
+    [InlineData(typeof(GreaterOrEqual))]
+    [InlineData(typeof(LessThan))]
+    [InlineData(typeof(LessOrEqual))]
+    public void TestBoolVolume(Type type)
+    {
+        var exp = CreateBinary(type,
+            Bool.True,
+            VolumeValue.Meter(12).AsExpression()
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(GreaterThan))]
+    [InlineData(typeof(GreaterOrEqual))]
+    [InlineData(typeof(LessThan))]
+    [InlineData(typeof(LessOrEqual))]
+    public void TestVolumeBool(Type type)
+    {
+        var exp = CreateBinary(type,
+            VolumeValue.Meter(12).AsExpression(),
+            Bool.True
+        );
+
+        TestBinaryException(exp);
+    }
+
+    [Theory]
+    [InlineData(typeof(GreaterThan))]
+    [InlineData(typeof(GreaterOrEqual))]
+    [InlineData(typeof(LessThan))]
+    [InlineData(typeof(LessOrEqual))]
     public void TestRelationalOperatorException(Type type)
     {
         var exp = CreateBinary(type, Bool.True, Bool.False);

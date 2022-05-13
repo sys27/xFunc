@@ -17,7 +17,7 @@ public enum ResultTypes
     /// <summary>
     /// The expression returns undefined result.
     /// </summary>
-    Undefined = 1,
+    Undefined = 1 << 0,
 
     /// <summary>
     /// The expression returns a number.
@@ -95,42 +95,4 @@ public enum ResultTypes
     /// The expression returns a volume number.
     /// </summary>
     VolumeNumber = 1 << 15,
-
-    /// <summary>
-    /// The expression returns a number or a complex number.
-    /// </summary>
-    NumberOrComplex = Number | ComplexNumber,
-
-    /// <summary>
-    /// The expression returns a number or a angle number.
-    /// </summary>
-    NumberOrAngle = Number | AngleNumber,
-
-    /// <summary>
-    /// The expression returns a number or a angle number or a complex number.
-    /// </summary>
-    NumberOrAngleOrComplex = NumberOrAngle | ComplexNumber,
-
-    /// <summary>
-    /// The expression returns a number or a vector or a matrix.
-    /// </summary>
-    NumberOrVectorOrMatrix = Number | Vector | Matrix,
-
-    /// <summary>
-    /// The expression returns any type of number.
-    /// </summary>
-    Numbers = Number |
-              AngleNumber |
-              PowerNumber |
-              TemperatureNumber |
-              MassNumber |
-              LengthNumber |
-              TimeNumber |
-              AreaNumber |
-              VolumeNumber,
-
-    /// <summary>
-    /// The expression returns a number or a angle number or a complex number or a vector.
-    /// </summary>
-    NumbersOrComplexOrVector = Numbers | ComplexNumber | Vector,
 }

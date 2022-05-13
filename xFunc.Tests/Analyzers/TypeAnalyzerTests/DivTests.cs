@@ -196,4 +196,25 @@ public class DivTests : TypeAnalyzerBaseTests
 
         Test(exp, ResultTypes.VolumeNumber);
     }
+
+    public static IEnumerable<object[]> GetDataForTestDivAngleAndBoolTest()
+    {
+        yield return new object[] { AngleValue.Degree(90).AsExpression() };
+        yield return new object[] { PowerValue.Watt(90).AsExpression() };
+        yield return new object[] { TemperatureValue.Celsius(90).AsExpression() };
+        yield return new object[] { MassValue.Gram(90).AsExpression() };
+        yield return new object[] { LengthValue.Meter(90).AsExpression() };
+        yield return new object[] { TimeValue.Second(90).AsExpression() };
+        yield return new object[] { AreaValue.Meter(90).AsExpression() };
+        yield return new object[] { VolumeValue.Meter(90).AsExpression() };
+    }
+
+    [Theory]
+    [MemberData(nameof(GetDataForTestDivAngleAndBoolTest))]
+    public void TestDivAngleAndBoolTest(IExpression left)
+    {
+        var exp = new Div(left, Bool.False);
+
+        TestBinaryException(exp);
+    }
 }

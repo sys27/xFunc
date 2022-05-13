@@ -9,10 +9,58 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers;
 /// <summary>
 /// Type Analyzer checks the expression tree for argument type and result type. If result type is Undefined, then Type Analyzer cannot determine the right type and bypass current expression.
 /// </summary>
-/// <seealso cref="ITypeAnalyzer"/>
+/// <seealso cref="ITypeAnalyzer" />
 /// <seealso cref="IAnalyzer{ResultType}" />
+/// <seealso cref="ResultTypes" />
 public class TypeAnalyzer : ITypeAnalyzer
 {
+    private const ResultTypes NumberOrComplex = ResultTypes.Number | ResultTypes.ComplexNumber;
+
+    private const ResultTypes NumberOrAngle = ResultTypes.Number | ResultTypes.AngleNumber;
+
+    private const ResultTypes NumberOrPower = ResultTypes.Number | ResultTypes.PowerNumber;
+
+    private const ResultTypes NumberOrTemperature = ResultTypes.Number | ResultTypes.TemperatureNumber;
+
+    private const ResultTypes NumberOrMass = ResultTypes.Number | ResultTypes.MassNumber;
+
+    private const ResultTypes NumberOrLength = ResultTypes.Number | ResultTypes.LengthNumber;
+
+    private const ResultTypes NumberOrTime = ResultTypes.Number | ResultTypes.TimeNumber;
+
+    private const ResultTypes NumberOrArea = ResultTypes.Number | ResultTypes.AreaNumber;
+
+    private const ResultTypes NumberOrVolume = ResultTypes.Number | ResultTypes.VolumeNumber;
+
+    private const ResultTypes NumberOrAngleOrComplex =
+        NumberOrAngle |
+        ResultTypes.ComplexNumber;
+
+    private const ResultTypes NumberOrVectorOrMatrix =
+        ResultTypes.Number |
+        ResultTypes.Vector |
+        ResultTypes.Matrix;
+
+    private const ResultTypes Units =
+        ResultTypes.AngleNumber |
+        ResultTypes.PowerNumber |
+        ResultTypes.TemperatureNumber |
+        ResultTypes.MassNumber |
+        ResultTypes.LengthNumber |
+        ResultTypes.TimeNumber |
+        ResultTypes.AreaNumber |
+        ResultTypes.VolumeNumber;
+
+    private const ResultTypes NumberOrUnits = ResultTypes.Number | Units;
+
+    private const ResultTypes NumbersOrComplex =
+        NumberOrUnits |
+        ResultTypes.ComplexNumber;
+
+    private const ResultTypes NumbersOrComplexOrVector =
+        NumbersOrComplex |
+        ResultTypes.Vector;
+
     private ResultTypes CheckArgument([NotNull] IExpression? exp, ResultTypes result)
     {
         if (exp is null)
@@ -47,7 +95,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.Undefined => ResultTypes.Undefined,
             ResultTypes.Number or ResultTypes.AngleNumber => ResultTypes.Number,
             ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
-            _ => ResultTypes.NumberOrAngleOrComplex.ThrowFor(result),
+            _ => NumberOrAngleOrComplex.ThrowFor(result),
         };
     }
 
@@ -63,7 +111,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.Undefined => ResultTypes.Undefined,
             ResultTypes.Number => ResultTypes.AngleNumber,
             ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
-            _ => ResultTypes.NumberOrComplex.ThrowFor(result),
+            _ => NumberOrComplex.ThrowFor(result),
         };
     }
 
@@ -107,30 +155,30 @@ public class TypeAnalyzer : ITypeAnalyzer
             (ResultTypes.Undefined, ResultTypes.Undefined) or
                 (ResultTypes.Number, ResultTypes.Undefined) or
                 (ResultTypes.Undefined, ResultTypes.Number) or
+                (ResultTypes.Number, ResultTypes.Number) or
                 (ResultTypes.AngleNumber, ResultTypes.Undefined) or
                 (ResultTypes.Undefined, ResultTypes.AngleNumber) or
+                (ResultTypes.AngleNumber, ResultTypes.AngleNumber) or
                 (ResultTypes.PowerNumber, ResultTypes.Undefined) or
                 (ResultTypes.Undefined, ResultTypes.PowerNumber) or
+                (ResultTypes.PowerNumber, ResultTypes.PowerNumber) or
                 (ResultTypes.TemperatureNumber, ResultTypes.Undefined) or
                 (ResultTypes.Undefined, ResultTypes.TemperatureNumber) or
+                (ResultTypes.TemperatureNumber, ResultTypes.TemperatureNumber) or
                 (ResultTypes.MassNumber, ResultTypes.Undefined) or
                 (ResultTypes.Undefined, ResultTypes.MassNumber) or
+                (ResultTypes.MassNumber, ResultTypes.MassNumber) or
                 (ResultTypes.LengthNumber, ResultTypes.Undefined) or
                 (ResultTypes.Undefined, ResultTypes.LengthNumber) or
+                (ResultTypes.LengthNumber, ResultTypes.LengthNumber) or
                 (ResultTypes.TimeNumber, ResultTypes.Undefined) or
                 (ResultTypes.Undefined, ResultTypes.TimeNumber) or
+                (ResultTypes.TimeNumber, ResultTypes.TimeNumber) or
                 (ResultTypes.AreaNumber, ResultTypes.Undefined) or
                 (ResultTypes.Undefined, ResultTypes.AreaNumber) or
+                (ResultTypes.AreaNumber, ResultTypes.AreaNumber) or
                 (ResultTypes.VolumeNumber, ResultTypes.Undefined) or
                 (ResultTypes.Undefined, ResultTypes.VolumeNumber) or
-                (ResultTypes.Number, ResultTypes.Number) or
-                (ResultTypes.AngleNumber, ResultTypes.AngleNumber) or
-                (ResultTypes.PowerNumber, ResultTypes.PowerNumber) or
-                (ResultTypes.TemperatureNumber, ResultTypes.TemperatureNumber) or
-                (ResultTypes.MassNumber, ResultTypes.MassNumber) or
-                (ResultTypes.LengthNumber, ResultTypes.LengthNumber) or
-                (ResultTypes.TimeNumber, ResultTypes.TimeNumber) or
-                (ResultTypes.AreaNumber, ResultTypes.AreaNumber) or
                 (ResultTypes.VolumeNumber, ResultTypes.VolumeNumber)
                 => ResultTypes.Boolean,
 
@@ -145,6 +193,21 @@ public class TypeAnalyzer : ITypeAnalyzer
 
             (_, ResultTypes.TemperatureNumber) => ResultTypes.TemperatureNumber.ThrowForLeft(leftResult),
             (ResultTypes.TemperatureNumber, _) => ResultTypes.TemperatureNumber.ThrowForRight(rightResult),
+
+            (_, ResultTypes.MassNumber) => ResultTypes.MassNumber.ThrowForLeft(leftResult),
+            (ResultTypes.MassNumber, _) => ResultTypes.MassNumber.ThrowForRight(rightResult),
+
+            (_, ResultTypes.LengthNumber) => ResultTypes.LengthNumber.ThrowForLeft(leftResult),
+            (ResultTypes.LengthNumber, _) => ResultTypes.LengthNumber.ThrowForRight(rightResult),
+
+            (_, ResultTypes.TimeNumber) => ResultTypes.TimeNumber.ThrowForLeft(leftResult),
+            (ResultTypes.TimeNumber, _) => ResultTypes.TimeNumber.ThrowForRight(rightResult),
+
+            (_, ResultTypes.AreaNumber) => ResultTypes.AreaNumber.ThrowForLeft(leftResult),
+            (ResultTypes.AreaNumber, _) => ResultTypes.AreaNumber.ThrowForRight(rightResult),
+
+            (_, ResultTypes.VolumeNumber) => ResultTypes.VolumeNumber.ThrowForLeft(leftResult),
+            (ResultTypes.VolumeNumber, _) => ResultTypes.VolumeNumber.ThrowForRight(rightResult),
 
             _ => throw new ParameterTypeMismatchException(),
         };
@@ -311,6 +374,7 @@ public class TypeAnalyzer : ITypeAnalyzer
 
             (ResultTypes.Number, _) => ResultTypes.Number.ThrowForRight(rightResult),
             (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
+
             _ => throw new ParameterTypeMismatchException(),
         };
     }
@@ -327,7 +391,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.Undefined or ResultTypes.Number or ResultTypes.AngleNumber
                 => ResultTypes.AngleNumber,
 
-            _ => ResultTypes.NumberOrAngle.ThrowFor(result),
+            _ => NumberOrAngle.ThrowFor(result),
         };
     }
 
@@ -359,7 +423,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.TimeNumber => ResultTypes.TimeNumber,
             ResultTypes.AreaNumber => ResultTypes.AreaNumber,
             ResultTypes.VolumeNumber => ResultTypes.VolumeNumber,
-            _ => ResultTypes.NumbersOrComplexOrVector.ThrowFor(result),
+            _ => NumbersOrComplexOrVector.ThrowFor(result),
         };
     }
 
@@ -432,17 +496,41 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (_, ResultTypes.String)
                 => ResultTypes.String,
 
-            (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
-            (ResultTypes.Number, _) => ResultTypes.Number.ThrowForRight(rightResult),
+            (_, ResultTypes.Number) => NumbersOrComplex.ThrowForLeft(leftResult),
+            (ResultTypes.Number, _) => NumbersOrComplex.ThrowForRight(rightResult),
 
-            (_, ResultTypes.ComplexNumber) => ResultTypes.NumberOrComplex.ThrowForLeft(leftResult),
-            (ResultTypes.ComplexNumber, _) => ResultTypes.NumberOrComplex.ThrowForRight(rightResult),
+            (_, ResultTypes.ComplexNumber) => NumberOrComplex.ThrowForLeft(leftResult),
+            (ResultTypes.ComplexNumber, _) => NumberOrComplex.ThrowForRight(rightResult),
 
             (_, ResultTypes.Vector) => ResultTypes.Vector.ThrowForLeft(leftResult),
             (ResultTypes.Vector, _) => ResultTypes.Vector.ThrowForRight(rightResult),
 
             (_, ResultTypes.Matrix) => ResultTypes.Matrix.ThrowForLeft(leftResult),
             (ResultTypes.Matrix, _) => ResultTypes.Matrix.ThrowForRight(rightResult),
+
+            (_, ResultTypes.AngleNumber) => NumberOrAngle.ThrowForLeft(leftResult),
+            (ResultTypes.AngleNumber, _) => NumberOrAngle.ThrowForRight(rightResult),
+
+            (_, ResultTypes.PowerNumber) => NumberOrPower.ThrowForLeft(leftResult),
+            (ResultTypes.PowerNumber, _) => NumberOrPower.ThrowForRight(rightResult),
+
+            (_, ResultTypes.TemperatureNumber) => NumberOrTemperature.ThrowForLeft(leftResult),
+            (ResultTypes.TemperatureNumber, _) => NumberOrTemperature.ThrowForRight(rightResult),
+
+            (_, ResultTypes.MassNumber) => NumberOrMass.ThrowForLeft(leftResult),
+            (ResultTypes.MassNumber, _) => NumberOrMass.ThrowForRight(rightResult),
+
+            (_, ResultTypes.LengthNumber) => NumberOrLength.ThrowForLeft(leftResult),
+            (ResultTypes.LengthNumber, _) => NumberOrLength.ThrowForRight(rightResult),
+
+            (_, ResultTypes.TimeNumber) => NumberOrTime.ThrowForLeft(leftResult),
+            (ResultTypes.TimeNumber, _) => NumberOrTime.ThrowForRight(rightResult),
+
+            (_, ResultTypes.AreaNumber) => NumberOrArea.ThrowForLeft(leftResult),
+            (ResultTypes.AreaNumber, _) => NumberOrArea.ThrowForRight(rightResult),
+
+            (_, ResultTypes.VolumeNumber) => NumberOrVolume.ThrowForLeft(leftResult),
+            (ResultTypes.VolumeNumber, _) => NumberOrVolume.ThrowForRight(rightResult),
 
             _ => throw new ParameterTypeMismatchException(),
         };
@@ -468,7 +556,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.TimeNumber => ResultTypes.TimeNumber,
             ResultTypes.AreaNumber => ResultTypes.AreaNumber,
             ResultTypes.VolumeNumber => ResultTypes.VolumeNumber,
-            _ => ResultTypes.Numbers.ThrowFor(result),
+            _ => NumberOrUnits.ThrowFor(result),
         };
     }
 
@@ -544,11 +632,21 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
                 => ResultTypes.ComplexNumber,
 
-            (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
-            (ResultTypes.Number, _) => ResultTypes.Number.ThrowForRight(rightResult),
+            (_, ResultTypes.Number) => NumbersOrComplex.ThrowForLeft(leftResult),
+            (ResultTypes.Number, _) => NumbersOrComplex.ThrowForRight(rightResult),
 
-            (_, ResultTypes.ComplexNumber) => ResultTypes.NumberOrComplex.ThrowForLeft(leftResult),
-            (ResultTypes.ComplexNumber, _) => ResultTypes.NumberOrComplex.ThrowForRight(rightResult),
+            (_, ResultTypes.ComplexNumber) => NumberOrComplex.ThrowForLeft(leftResult),
+            (ResultTypes.ComplexNumber, _) => NumberOrComplex.ThrowForRight(rightResult),
+
+            (ResultTypes.AngleNumber, _) or
+                (ResultTypes.PowerNumber, _) or
+                (ResultTypes.TemperatureNumber, _) or
+                (ResultTypes.MassNumber, _) or
+                (ResultTypes.LengthNumber, _) or
+                (ResultTypes.TimeNumber, _) or
+                (ResultTypes.AreaNumber, _) or
+                (ResultTypes.VolumeNumber, _)
+                => ResultTypes.Number.ThrowForRight(rightResult),
 
             _ => throw new ParameterTypeMismatchException(),
         };
@@ -567,7 +665,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.Undefined => ResultTypes.Undefined,
             ResultTypes.Number => ResultTypes.Number,
             ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
-            _ => ResultTypes.NumberOrComplex.ThrowFor(result),
+            _ => NumberOrComplex.ThrowFor(result),
         };
     }
 
@@ -578,7 +676,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ArgNull(ExceptionArgument.exp);
 
         var result = exp.Argument.Analyze(this);
-        if (result == ResultTypes.Undefined || result == ResultTypes.Number)
+        if (result is ResultTypes.Undefined or ResultTypes.Number)
             return ResultTypes.Number;
 
         return ResultTypes.Number.ThrowFor(result);
@@ -604,7 +702,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.TimeNumber => ResultTypes.TimeNumber,
             ResultTypes.AreaNumber => ResultTypes.AreaNumber,
             ResultTypes.VolumeNumber => ResultTypes.VolumeNumber,
-            _ => ResultTypes.NumberOrAngle.ThrowFor(result),
+            _ => NumberOrUnits.ThrowFor(result),
         };
     }
 
@@ -628,7 +726,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.TimeNumber => ResultTypes.TimeNumber,
             ResultTypes.AreaNumber => ResultTypes.AreaNumber,
             ResultTypes.VolumeNumber => ResultTypes.VolumeNumber,
-            _ => ResultTypes.NumberOrAngle.ThrowFor(result),
+            _ => NumberOrUnits.ThrowFor(result),
         };
     }
 
@@ -652,7 +750,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.TimeNumber => ResultTypes.TimeNumber,
             ResultTypes.AreaNumber => ResultTypes.AreaNumber,
             ResultTypes.VolumeNumber => ResultTypes.VolumeNumber,
-            _ => ResultTypes.NumberOrAngle.ThrowFor(result),
+            _ => NumberOrUnits.ThrowFor(result),
         };
     }
 
@@ -682,7 +780,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ArgNull(ExceptionArgument.exp);
 
         var result = exp.Argument.Analyze(this);
-        if (result == ResultTypes.Undefined || result == ResultTypes.Number)
+        if (result is ResultTypes.Undefined or ResultTypes.Number)
             return ResultTypes.Number;
 
         return ResultTypes.Number.ThrowFor(result);
@@ -720,7 +818,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.Undefined => ResultTypes.Undefined,
             ResultTypes.Number => ResultTypes.Number,
             ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
-            _ => ResultTypes.NumberOrComplex.ThrowFor(result),
+            _ => NumberOrComplex.ThrowFor(result),
         };
     }
 
@@ -737,7 +835,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.Undefined => ResultTypes.Undefined,
             ResultTypes.Number => ResultTypes.Number,
             ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
-            _ => ResultTypes.NumberOrComplex.ThrowFor(result),
+            _ => NumberOrComplex.ThrowFor(result),
         };
     }
 
@@ -759,7 +857,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Number,
             (ResultTypes.Number, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
 
-            (ResultTypes.Number, _) => ResultTypes.NumberOrComplex.ThrowForRight(rightResult),
+            (ResultTypes.Number, _) => NumberOrComplex.ThrowForRight(rightResult),
 
             _ => ResultTypes.Number.ThrowForLeft(leftResult),
         };
@@ -867,14 +965,42 @@ public class TypeAnalyzer : ITypeAnalyzer
             (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
             (ResultTypes.Number, _) => ResultTypes.Number.ThrowForRight(rightResult),
 
-            (_, ResultTypes.ComplexNumber) => ResultTypes.NumberOrComplex.ThrowForLeft(leftResult),
-            (ResultTypes.ComplexNumber, _) => ResultTypes.NumberOrComplex.ThrowForRight(rightResult),
+            (_, ResultTypes.ComplexNumber) => NumberOrComplex.ThrowForLeft(leftResult),
+            (ResultTypes.ComplexNumber, _) => NumberOrComplex.ThrowForRight(rightResult),
 
-            (_, ResultTypes.Vector) => ResultTypes.NumberOrVectorOrMatrix.ThrowForLeft(leftResult),
-            (ResultTypes.Vector, _) => ResultTypes.NumberOrVectorOrMatrix.ThrowForRight(rightResult),
+            (_, ResultTypes.Vector) => NumberOrVectorOrMatrix.ThrowForLeft(leftResult),
+            (ResultTypes.Vector, _) => NumberOrVectorOrMatrix.ThrowForRight(rightResult),
 
-            (_, ResultTypes.Matrix) => ResultTypes.NumberOrVectorOrMatrix.ThrowForLeft(leftResult),
-            (ResultTypes.Matrix, _) => ResultTypes.NumberOrVectorOrMatrix.ThrowForRight(rightResult),
+            (_, ResultTypes.Matrix) => NumberOrVectorOrMatrix.ThrowForLeft(leftResult),
+            (ResultTypes.Matrix, _) => NumberOrVectorOrMatrix.ThrowForRight(rightResult),
+
+            (_, ResultTypes.AngleNumber) => ResultTypes.Number.ThrowForLeft(leftResult),
+            (ResultTypes.AngleNumber, _) => ResultTypes.Number.ThrowForRight(rightResult),
+
+            (_, ResultTypes.PowerNumber) => ResultTypes.Number.ThrowForLeft(leftResult),
+            (ResultTypes.PowerNumber, _) => ResultTypes.Number.ThrowForRight(rightResult),
+
+            (_, ResultTypes.TemperatureNumber) => ResultTypes.Number.ThrowForLeft(leftResult),
+            (ResultTypes.TemperatureNumber, _) => ResultTypes.Number.ThrowForRight(rightResult),
+
+            (_, ResultTypes.MassNumber) => ResultTypes.Number.ThrowForLeft(leftResult),
+            (ResultTypes.MassNumber, _) => ResultTypes.Number.ThrowForRight(rightResult),
+
+            (_, ResultTypes.LengthNumber) =>
+                (ResultTypes.Number | ResultTypes.LengthNumber | ResultTypes.AreaNumber).ThrowForLeft(leftResult),
+            (ResultTypes.LengthNumber, _) =>
+                (ResultTypes.Number | ResultTypes.LengthNumber | ResultTypes.AreaNumber).ThrowForRight(rightResult),
+
+            (_, ResultTypes.TimeNumber) => ResultTypes.Number.ThrowForLeft(leftResult),
+            (ResultTypes.TimeNumber, _) => ResultTypes.Number.ThrowForRight(rightResult),
+
+            (_, ResultTypes.AreaNumber)
+                => (ResultTypes.Number | ResultTypes.LengthNumber).ThrowForLeft(leftResult),
+            (ResultTypes.AreaNumber, _)
+                => (ResultTypes.Number | ResultTypes.LengthNumber).ThrowForRight(rightResult),
+
+            (_, ResultTypes.VolumeNumber) => ResultTypes.Number.ThrowForLeft(leftResult),
+            (ResultTypes.VolumeNumber, _) => ResultTypes.Number.ThrowForRight(rightResult),
 
             _ => throw new ParameterTypeMismatchException(),
         };
@@ -948,7 +1074,7 @@ public class TypeAnalyzer : ITypeAnalyzer
                 ResultTypes.AreaNumber or
                 ResultTypes.VolumeNumber
                 => ResultTypes.Number,
-            _ => ResultTypes.AngleNumber.ThrowFor(result),
+            _ => Units.ThrowFor(result),
         };
     }
 
@@ -1030,7 +1156,7 @@ public class TypeAnalyzer : ITypeAnalyzer
                 ResultTypes.AreaNumber => ResultTypes.AreaNumber,
                 ResultTypes.VolumeNumber => ResultTypes.VolumeNumber,
                 _ => throw new DifferentParameterTypeMismatchException(
-                    ResultTypes.Undefined | ResultTypes.Numbers,
+                    ResultTypes.Undefined | NumberOrUnits,
                     number,
                     0),
             };
@@ -1115,17 +1241,41 @@ public class TypeAnalyzer : ITypeAnalyzer
             (ResultTypes.Vector, ResultTypes.Vector) => ResultTypes.Vector,
             (ResultTypes.Matrix, ResultTypes.Matrix) => ResultTypes.Matrix,
 
-            (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
-            (ResultTypes.Number, _) => ResultTypes.Number.ThrowForRight(rightResult),
+            (_, ResultTypes.Number) => NumbersOrComplex.ThrowForLeft(leftResult),
+            (ResultTypes.Number, _) => NumbersOrComplex.ThrowForRight(rightResult),
 
-            (_, ResultTypes.ComplexNumber) => ResultTypes.NumberOrComplex.ThrowForLeft(leftResult),
-            (ResultTypes.ComplexNumber, _) => ResultTypes.NumberOrComplex.ThrowForRight(rightResult),
+            (_, ResultTypes.ComplexNumber) => NumberOrComplex.ThrowForLeft(leftResult),
+            (ResultTypes.ComplexNumber, _) => NumberOrComplex.ThrowForRight(rightResult),
 
             (_, ResultTypes.Vector) => ResultTypes.Vector.ThrowForLeft(leftResult),
             (ResultTypes.Vector, _) => ResultTypes.Vector.ThrowForRight(rightResult),
 
             (_, ResultTypes.Matrix) => ResultTypes.Matrix.ThrowForLeft(leftResult),
             (ResultTypes.Matrix, _) => ResultTypes.Matrix.ThrowForRight(rightResult),
+
+            (_, ResultTypes.AngleNumber) => NumberOrAngle.ThrowForLeft(leftResult),
+            (ResultTypes.AngleNumber, _) => NumberOrAngle.ThrowForRight(rightResult),
+
+            (_, ResultTypes.PowerNumber) => NumberOrPower.ThrowForLeft(leftResult),
+            (ResultTypes.PowerNumber, _) => NumberOrPower.ThrowForRight(rightResult),
+
+            (_, ResultTypes.TemperatureNumber) => NumberOrTemperature.ThrowForLeft(leftResult),
+            (ResultTypes.TemperatureNumber, _) => NumberOrTemperature.ThrowForRight(rightResult),
+
+            (_, ResultTypes.MassNumber) => NumberOrMass.ThrowForLeft(leftResult),
+            (ResultTypes.MassNumber, _) => NumberOrMass.ThrowForRight(rightResult),
+
+            (_, ResultTypes.LengthNumber) => NumberOrLength.ThrowForLeft(leftResult),
+            (ResultTypes.LengthNumber, _) => NumberOrLength.ThrowForRight(rightResult),
+
+            (_, ResultTypes.TimeNumber) => NumberOrTime.ThrowForLeft(leftResult),
+            (ResultTypes.TimeNumber, _) => NumberOrTime.ThrowForRight(rightResult),
+
+            (_, ResultTypes.AreaNumber) => NumberOrArea.ThrowForLeft(leftResult),
+            (ResultTypes.AreaNumber, _) => NumberOrArea.ThrowForRight(rightResult),
+
+            (_, ResultTypes.VolumeNumber) => NumberOrVolume.ThrowForLeft(leftResult),
+            (ResultTypes.VolumeNumber, _) => NumberOrVolume.ThrowForRight(rightResult),
 
             _ => throw new ParameterTypeMismatchException(),
         };
@@ -1152,7 +1302,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.AreaNumber => ResultTypes.AreaNumber,
             ResultTypes.VolumeNumber => ResultTypes.VolumeNumber,
             ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
-            _ => ResultTypes.NumberOrComplex.ThrowFor(result),
+            _ => NumberOrComplex.ThrowFor(result),
         };
     }
 
@@ -1194,7 +1344,7 @@ public class TypeAnalyzer : ITypeAnalyzer
                 ResultTypes.VolumeNumber
                 => ResultTypes.Number,
 
-            _ => ResultTypes.Numbers.ThrowFor(result),
+            _ => NumberOrUnits.ThrowFor(result),
         };
     }
 
@@ -1232,7 +1382,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.MassNumber => ResultTypes.MassNumber,
             ResultTypes.LengthNumber => ResultTypes.LengthNumber,
 
-            _ => ResultTypes.Numbers.ThrowFor(valueResult),
+            _ => NumberOrUnits.ThrowFor(valueResult),
         };
     }
 

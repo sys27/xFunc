@@ -47,7 +47,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\xFunc.Maths\xFunc.Maths.csproj" />
-    <ProjectReference Include="..\xFunc.UnitConverters\xFunc.UnitConverters.csproj" />
   </ItemGroup>
 
   <ItemGroup>

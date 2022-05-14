@@ -10,6 +10,8 @@ xFunc is a simple and easy to use application that allows you to build mathemati
 
 xFunc is a small-sized and portable application that you can use to create complex mathematical expressions which will be automatically computed. It can be used by teachers and students alike.
 
+Note: The WPF application (xFunc UI) was migrated to a separate repository [xFunc.UI](https://github.com/sys27/xFunc.UI).
+
 ## Features:
 
 * Calculating expressions ([supported functions and operations](https://github.com/sys27/xFunc/wiki/Supported-functions-and-operations));

@@ -10,9 +10,9 @@ public class HyperbolicArtangentTest : BaseExpressionTests
     [Fact]
     public void ExecuteNumberTest()
     {
-        var exp = new Artanh(new Number(0.5));
+        var exp = new Artanh(new Number(0.6));
         var result = exp.Execute();
-        var expected = AngleValue.Radian(0.5493061443340549);
+        var expected = AngleValue.Radian(0.6931471805599453);
 
         Assert.Equal(expected, result);
     }

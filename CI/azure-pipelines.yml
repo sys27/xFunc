@@ -76,10 +76,5 @@ jobs:
 
     - task: PublishPipelineArtifact@1
       inputs:
-        path: xFunc.UnitConverters/bin/Release/netstandard2.1
-        artifact: xFunc.UnitConverters
-
-    - task: PublishPipelineArtifact@1
-      inputs:
         path: nupkgs
         artifact: NuGet Packages

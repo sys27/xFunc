@@ -123,7 +123,7 @@ public class TypeAnalyzer : ITypeAnalyzer
         if (exp.ParametersCount == 1)
         {
             var result = exp[0].Analyze(this);
-            if (result == ResultTypes.Number || result == ResultTypes.Vector)
+            if (result is ResultTypes.Number or ResultTypes.Vector)
                 return ResultTypes.Number;
 
             throw new DifferentParameterTypeMismatchException(ResultTypes.Number | ResultTypes.Vector, result, 0);
@@ -1138,8 +1138,8 @@ public class TypeAnalyzer : ITypeAnalyzer
         if (exp is null)
             ArgNull(ExceptionArgument.exp);
 
-        var number = exp.Arguments[0].Analyze(this);
-        var digits = exp.Arguments[1]?.Analyze(this) ?? ResultTypes.None;
+        var number = exp.Argument.Analyze(this);
+        var digits = exp.Digits?.Analyze(this) ?? ResultTypes.None;
 
         if (digits is ResultTypes.None or ResultTypes.Undefined or ResultTypes.Number)
         {
@@ -1381,6 +1381,9 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.TemperatureNumber => ResultTypes.TemperatureNumber,
             ResultTypes.MassNumber => ResultTypes.MassNumber,
             ResultTypes.LengthNumber => ResultTypes.LengthNumber,
+            ResultTypes.TimeNumber => ResultTypes.TimeNumber,
+            ResultTypes.AreaNumber => ResultTypes.AreaNumber,
+            ResultTypes.VolumeNumber => ResultTypes.VolumeNumber,
 
             _ => NumberOrUnits.ThrowFor(valueResult),
         };
@@ -1432,7 +1435,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ArgNull(ExceptionArgument.exp);
 
         var result = exp.Argument.Analyze(this);
-        if (result == ResultTypes.Undefined || result == ResultTypes.Matrix)
+        if (result is ResultTypes.Undefined or ResultTypes.Matrix)
             return ResultTypes.Number;
 
         throw new ParameterTypeMismatchException(ResultTypes.Matrix, result);
@@ -1445,7 +1448,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ArgNull(ExceptionArgument.exp);
 
         var result = exp.Argument.Analyze(this);
-        if (result == ResultTypes.Undefined || result == ResultTypes.Matrix)
+        if (result is ResultTypes.Undefined or ResultTypes.Matrix)
             return ResultTypes.Matrix;
 
         throw new ParameterTypeMismatchException(ResultTypes.Matrix, result);
@@ -1538,7 +1541,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ArgNull(ExceptionArgument.exp);
 
         var result = exp.Argument.Analyze(this);
-        if (result == ResultTypes.Undefined || result == ResultTypes.ComplexNumber)
+        if (result is ResultTypes.Undefined or ResultTypes.ComplexNumber)
             return ResultTypes.Number;
 
         throw new ParameterTypeMismatchException(ResultTypes.ComplexNumber, result);
@@ -1551,7 +1554,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ArgNull(ExceptionArgument.exp);
 
         var result = exp.Argument.Analyze(this);
-        if (result == ResultTypes.Undefined || result == ResultTypes.ComplexNumber)
+        if (result is ResultTypes.Undefined or ResultTypes.ComplexNumber)
             return ResultTypes.Number;
 
         throw new ParameterTypeMismatchException(ResultTypes.ComplexNumber, result);
@@ -1564,7 +1567,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ArgNull(ExceptionArgument.exp);
 
         var result = exp.Argument.Analyze(this);
-        if (result == ResultTypes.Undefined || result == ResultTypes.ComplexNumber)
+        if (result is ResultTypes.Undefined or ResultTypes.ComplexNumber)
             return ResultTypes.Number;
 
         throw new ParameterTypeMismatchException(ResultTypes.ComplexNumber, result);

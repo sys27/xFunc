@@ -575,6 +575,42 @@ public class StandardTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestTimeConvert()
+    {
+        var exp = new Convert(
+            new Converter(),
+            TimeValue.Second(10).AsExpression(),
+            new StringExpression("s")
+        );
+
+        Test(exp, ResultTypes.TimeNumber);
+    }
+
+    [Fact]
+    public void TestAreaConvert()
+    {
+        var exp = new Convert(
+            new Converter(),
+            AreaValue.Meter(10).AsExpression(),
+            new StringExpression("m^2")
+        );
+
+        Test(exp, ResultTypes.AreaNumber);
+    }
+
+    [Fact]
+    public void TestVolumeConvert()
+    {
+        var exp = new Convert(
+            new Converter(),
+            VolumeValue.Meter(10).AsExpression(),
+            new StringExpression("m^3")
+        );
+
+        Test(exp, ResultTypes.VolumeNumber);
+    }
+
+    [Fact]
     public void TestConvertException()
     {
         var exp = new Convert(

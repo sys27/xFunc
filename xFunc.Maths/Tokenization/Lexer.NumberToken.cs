@@ -137,7 +137,7 @@ internal ref partial struct Lexer
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static bool IsBinaryNumber(char symbol)
-        => symbol == '0' || symbol == '1';
+        => symbol is '0' or '1';
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static bool IsHexNumber(char symbol)

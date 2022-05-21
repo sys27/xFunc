@@ -19,9 +19,9 @@ public class Define : IExpression
     public Define(IExpression key, IExpression value)
     {
         if (key is null)
-            throw new ArgumentNullException(nameof(key));
+            throw new ArgumentNullException(nameof(value));
 
-        if (key is not Variable and not UserFunction)
+        if (!(key is Variable || key is UserFunction))
             throw new NotSupportedException();
 
         if (value is null)
@@ -37,7 +37,8 @@ public class Define : IExpression
         if (ReferenceEquals(this, obj))
             return true;
 
-        if (obj is not Define def)
+        var def = obj as Define;
+        if (def is null)
             return false;
 
         return Key.Equals(def.Key) && Value.Equals(def.Value);

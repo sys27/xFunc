@@ -31,8 +31,7 @@ public class Undefine : IExpression
         if (ReferenceEquals(this, obj))
             return true;
 
-        var undef = obj as Undefine;
-        if (undef is null)
+        if (obj is not Undefine undef)
             return false;
 
         return Key.Equals(undef.Key);

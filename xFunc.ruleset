@@ -13,7 +13,9 @@
     <Rule Id="SA1503" Action="None" />
     <Rule Id="SA1516" Action="None" />
     <Rule Id="SA1519" Action="None" />
-    <Rule Id="SA1633" Action="Hidden" />
     <Rule Id="CS0659" Action="None" />
+    <Rule Id="CS8019" Action="Warning" />
+    <Rule Id="IDE0005" Action="Warning" />
+    <Rule Id="IDE0090" Action="None" />
   </Rules>
 </RuleSet>

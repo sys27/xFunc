@@ -1,77 +1,59 @@
-// Copyright 2012-2021 Dmytro Kyshchenko
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
-// express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// Copyright (c) Dmytro Kyshchenko. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.LogicalAndBitwise;
-using xFunc.Maths.Expressions.Matrices;
-using Xunit;
+namespace xFunc.Tests.Expressions.Matrices;
 
-namespace xFunc.Tests.Expressions.Matrices
+public class TransposeTest : BaseExpressionTests
 {
-    public class TransposeTest : BaseExpressionTests
+    [Fact]
+    public void ExecuteMatrixTest()
     {
-        [Fact]
-        public void ExecuteMatrixTest()
+        var matrix = new Matrix(new[]
         {
-            var matrix = new Matrix(new[]
-            {
-                new Vector(new[] { Number.One, Number.Two }),
-                new Vector(new[] { new Number(3), new Number(4) }),
-                new Vector(new[] { new Number(5), new Number(6) })
-            });
+            new Vector(new[] { Number.One, Number.Two }),
+            new Vector(new[] { new Number(3), new Number(4) }),
+            new Vector(new[] { new Number(5), new Number(6) })
+        });
 
-            var expected = new Matrix(new[]
-            {
-                new Vector(new[] { Number.One, new Number(3), new Number(5) }),
-                new Vector(new[] { Number.Two, new Number(4), new Number(6) })
-            });
-            var exp = new Transpose(matrix);
-
-            Assert.Equal(expected, exp.Execute());
-        }
-
-        [Fact]
-        public void ExecuteVectorTest()
+        var expected = new Matrix(new[]
         {
-            var vector = new Vector(new[] { Number.One, Number.Two });
+            new Vector(new[] { Number.One, new Number(3), new Number(5) }),
+            new Vector(new[] { Number.Two, new Number(4), new Number(6) })
+        });
+        var exp = new Transpose(matrix);
 
-            var expected = new Matrix(new[]
-            {
-                new Vector(new[] { Number.One }),
-                new Vector(new[] { Number.Two })
-            });
-            var exp = new Transpose(vector);
+        Assert.Equal(expected, exp.Execute());
+    }
 
-            Assert.Equal(expected, exp.Execute());
-        }
+    [Fact]
+    public void ExecuteVectorTest()
+    {
+        var vector = new Vector(new[] { Number.One, Number.Two });
 
-        [Fact]
-        public void ExecuteWrongArgumentTypeTest()
+        var expected = new Matrix(new[]
         {
-            var exp = new Transpose(Bool.True);
+            new Vector(new[] { Number.One }),
+            new Vector(new[] { Number.Two })
+        });
+        var exp = new Transpose(vector);
 
-            TestNotSupported(exp);
-        }
+        Assert.Equal(expected, exp.Execute());
+    }
 
-        [Fact]
-        public void CloneTest()
-        {
-            var exp = new Transpose(new Vector(new[] { Number.One, Number.Two }));
-            var clone = exp.Clone();
+    [Fact]
+    public void ExecuteWrongArgumentTypeTest()
+    {
+        var exp = new Transpose(Bool.True);
 
-            Assert.Equal(exp, clone);
-        }
+        TestNotSupported(exp);
+    }
+
+    [Fact]
+    public void CloneTest()
+    {
+        var exp = new Transpose(new Vector(new[] { Number.One, Number.Two }));
+        var clone = exp.Clone();
+
+        Assert.Equal(exp, clone);
     }
 }

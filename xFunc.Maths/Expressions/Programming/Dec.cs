@@ -1,53 +1,39 @@
-// Copyright 2012-2021 Dmytro Kyshchenko
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
-// express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the Licens
+// Copyright (c) Dmytro Kyshchenko. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics.CodeAnalysis;
-using xFunc.Maths.Analyzers;
 
-namespace xFunc.Maths.Expressions.Programming
+namespace xFunc.Maths.Expressions.Programming;
+
+/// <summary>
+/// Represents the decrement operator.
+/// </summary>
+public class Dec : VariableUnaryExpression
 {
     /// <summary>
-    /// Represents the decrement operator.
+    /// Initializes a new instance of the <see cref="Dec"/> class.
     /// </summary>
-    public class Dec : VariableUnaryExpression
+    /// <param name="argument">The variable.</param>
+    public Dec(Variable argument)
+        : base(argument)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Dec"/> class.
-        /// </summary>
-        /// <param name="argument">The variable.</param>
-        public Dec(Variable argument)
-            : base(argument)
-        {
-        }
-
-        /// <inheritdoc />
-        protected override object Execute(NumberValue number) => number - 1;
-
-        /// <inheritdoc />
-        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-            => analyzer.Analyze(this);
-
-        /// <inheritdoc />
-        [ExcludeFromCodeCoverage]
-        protected override TResult AnalyzeInternal<TResult, TContext>(
-            IAnalyzer<TResult, TContext> analyzer,
-            TContext context)
-            => analyzer.Analyze(this, context);
-
-        /// <inheritdoc />
-        public override IExpression Clone(Variable? variable = null)
-            => new Dec(variable ?? Variable);
     }
+
+    /// <inheritdoc />
+    protected override object Execute(NumberValue number) => number - 1;
+
+    /// <inheritdoc />
+    protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        => analyzer.Analyze(this);
+
+    /// <inheritdoc />
+    [ExcludeFromCodeCoverage]
+    protected override TResult AnalyzeInternal<TResult, TContext>(
+        IAnalyzer<TResult, TContext> analyzer,
+        TContext context)
+        => analyzer.Analyze(this, context);
+
+    /// <inheritdoc />
+    public override IExpression Clone(Variable? variable = null)
+        => new Dec(variable ?? Variable);
 }

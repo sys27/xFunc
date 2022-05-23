@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <LangVersion>9.0</LangVersion>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
     <IsPackable>false</IsPackable>
     <RootNamespace>xFunc.Tests</RootNamespace>
     <DebugType>portable</DebugType>
@@ -13,28 +13,58 @@
     <Exclude>[xFunc.*]*Exception</Exclude>
     <Threshold>90</Threshold>
     <ThresholdStat>total</ThresholdStat>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Using Include="xFunc.Maths" />
+    <Using Include="xFunc.Maths.Analyzers" />
+    <Using Include="xFunc.Maths.Analyzers.Formatters" />
+    <Using Include="xFunc.Maths.Analyzers.TypeAnalyzers" />
+    <Using Include="xFunc.Maths.Expressions" />
+    <Using Include="xFunc.Maths.Expressions.Collections" />
+    <Using Include="xFunc.Maths.Expressions.ComplexNumbers" />
+    <Using Include="xFunc.Maths.Expressions.Hyperbolic" />
+    <Using Include="xFunc.Maths.Expressions.LogicalAndBitwise" />
+    <Using Include="xFunc.Maths.Expressions.Matrices" />
+    <Using Include="xFunc.Maths.Expressions.Programming" />
+    <Using Include="xFunc.Maths.Expressions.Statistical" />
+    <Using Include="xFunc.Maths.Expressions.Trigonometric" />
+    <Using Include="xFunc.Maths.Expressions.Units" />
+    <Using Include="xFunc.Maths.Expressions.Units.AngleUnits" />
+    <Using Include="xFunc.Maths.Expressions.Units.AreaUnits" />
+    <Using Include="xFunc.Maths.Expressions.Units.Converters" />
+    <Using Include="xFunc.Maths.Expressions.Units.LengthUnits" />
+    <Using Include="xFunc.Maths.Expressions.Units.MassUnits" />
+    <Using Include="xFunc.Maths.Expressions.Units.PowerUnits" />
+    <Using Include="xFunc.Maths.Expressions.Units.TemperatureUnits" />
+    <Using Include="xFunc.Maths.Expressions.Units.TimeUnits" />
+    <Using Include="xFunc.Maths.Expressions.Units.VolumeUnits" />
+    <Using Include="xFunc.Maths.Resources" />
+    <Using Include="xFunc.Maths.Results" />
+    <Using Include="xFunc.Maths.Tokenization" />
+    <Using Include="Xunit" />
+  </ItemGroup>
+  
   <Target Name="GenerateHtmlCoverageReport" AfterTargets="GenerateCoverageResultAfterTest" Condition="'$(CollectCoverage)' == 'true'">
     <ReportGenerator ReportFiles="$(CoverletOutput)/coverage.cobertura.xml" TargetDirectory="$(CoverletOutput)" ReportTypes="HtmlInline_AzurePipelines" />
   </Target>
 
   <ItemGroup>
-    <PackageReference Include="coverlet.msbuild" Version="3.0.1">
+    <PackageReference Include="coverlet.msbuild" Version="3.1.2">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
-    <PackageReference Include="Moq" Version="4.16.0" />
-    <PackageReference Include="ReportGenerator" Version="4.8.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+    <PackageReference Include="Moq" Version="4.18.1" />
+    <PackageReference Include="ReportGenerator" Version="5.1.9" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.analyzers" Version="0.10.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\xFunc.Maths\xFunc.Maths.csproj" />
-    <ProjectReference Include="..\xFunc.UnitConverters\xFunc.UnitConverters.csproj" />
   </ItemGroup>
 
 </Project>

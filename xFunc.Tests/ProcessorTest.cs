@@ -1,225 +1,292 @@
-// Copyright 2012-2021 Dmytro Kyshchenko
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
-// express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// Copyright (c) Dmytro Kyshchenko. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using xFunc.Maths;
-using xFunc.Maths.Expressions;
-using Xunit;
-using xFunc.Maths.Results;
 using System.Numerics;
-using xFunc.Maths.Analyzers;
-using xFunc.Maths.Expressions.Angles;
-using System;
-using xFunc.Maths.Analyzers.TypeAnalyzers;
 
-namespace xFunc.Tests
+namespace xFunc.Tests;
+
+public class ProcessorTest
 {
-    public class ProcessorTest
+    [Fact]
+    public void SimplifierNull()
+        => Assert.Throws<ArgumentNullException>(() => new Processor(null, null, null, null, null));
+
+    [Fact]
+    public void DifferentiatorNull()
     {
-        [Fact]
-        public void SimplifierNull()
-            => Assert.Throws<ArgumentNullException>(() => new Processor(null, null, null, null));
+        var simplifier = new Simplifier();
 
-        [Fact]
-        public void DifferentiatorNull()
-        {
-            var simplifier = new Simplifier();
+        Assert.Throws<ArgumentNullException>(() => new Processor(simplifier, null));
+    }
 
-            Assert.Throws<ArgumentNullException>(() => new Processor(simplifier, null));
-        }
+    [Fact]
+    public void ConverterNull()
+    {
+        var simplifier = new Simplifier();
+        var differentiator = new Differentiator();
 
-        [Fact]
-        public void TypeAnalyzerNull()
-        {
-            var simplifier = new Simplifier();
-            var differentiator = new Differentiator();
+        Assert.Throws<ArgumentNullException>(() => new Processor(simplifier, differentiator, null, null, null));
+    }
 
-            Assert.Throws<ArgumentNullException>(() => new Processor(simplifier, differentiator, null, null));
-        }
+    [Fact]
+    public void TypeAnalyzerNull()
+    {
+        var simplifier = new Simplifier();
+        var differentiator = new Differentiator();
+        var converter = new Converter();
 
-        [Fact]
-        public void CtorTest()
-        {
-            var simplifier = new Simplifier();
-            var differentiator = new Differentiator();
+        Assert.Throws<ArgumentNullException>(() => new Processor(simplifier, differentiator, converter, null, null));
+    }
 
-            var processor = new Processor(simplifier, differentiator);
-        }
+    [Fact]
+    public void CtorTest()
+    {
+        var simplifier = new Simplifier();
+        var differentiator = new Differentiator();
 
-        [Fact]
-        public void CtorTest2()
-        {
-            var simplifier = new Simplifier();
-            var differentiator = new Differentiator();
-            var typeAnalyzer = new TypeAnalyzer();
-            var parameters = new ExpressionParameters();
+        var processor = new Processor(simplifier, differentiator);
+    }
 
-            var processor = new Processor(simplifier, differentiator, typeAnalyzer, parameters);
-        }
+    [Fact]
+    public void CtorTest2()
+    {
+        var simplifier = new Simplifier();
+        var differentiator = new Differentiator();
+        var converter = new Converter();
+        var typeAnalyzer = new TypeAnalyzer();
+        var parameters = new ExpressionParameters();
 
-        [Fact]
-        public void SolveDoubleTest()
-        {
-            var processor = new Processor();
-            var result = processor.Solve<NumberResult>("1 + 1.1");
+        var processor = new Processor(simplifier, differentiator, converter, typeAnalyzer, parameters);
+    }
 
-            Assert.Equal(2.1, result.Result);
-        }
+    [Fact]
+    public void SolveDoubleTest()
+    {
+        var processor = new Processor();
+        var result = processor.Solve<NumberResult>("1 + 1.1");
 
-        [Fact]
-        public void SolveComplexTest()
-        {
-            var processor = new Processor();
+        Assert.Equal(2.1, result.Result);
+    }
 
-            var result = processor.Solve<ComplexNumberResult>("conjugate(2.3 + 1.4i)");
-            var expected = Complex.Conjugate(new Complex(2.3, 1.4));
+    [Fact]
+    public void SolveComplexTest()
+    {
+        var processor = new Processor();
 
-            Assert.Equal(expected, result.Result);
-        }
+        var result = processor.Solve<ComplexNumberResult>("conjugate(2.3 + 1.4i)");
+        var expected = Complex.Conjugate(new Complex(2.3, 1.4));
 
-        [Fact]
-        public void SolveBoolTest()
-        {
-            var processor = new Processor();
-            var result = processor.Solve<BooleanResult>("true & false");
+        Assert.Equal(expected, result.Result);
+    }
 
-            Assert.False(result.Result);
-        }
+    [Fact]
+    public void SolveBoolTest()
+    {
+        var processor = new Processor();
+        var result = processor.Solve<BooleanResult>("true & false");
 
-        [Fact]
-        public void SolveStringTest()
-        {
-            var processor = new Processor();
-            var result = processor.Solve<StringResult>("x := 1");
+        Assert.False(result.Result);
+    }
 
-            Assert.Equal("The value '1' was assigned to the variable 'x'.", result.Result);
-        }
+    [Fact]
+    public void SolveStringTest()
+    {
+        var processor = new Processor();
+        var result = processor.Solve<StringResult>("x := 1");
 
-        [Fact]
-        public void SolveExpTest()
-        {
-            var processor = new Processor();
-            var result = processor.Solve<ExpressionResult>("deriv(x)");
+        Assert.Equal("The value '1' was assigned to the variable 'x'.", result.Result);
+    }
 
-            Assert.Equal(Number.One, result.Result);
-        }
+    [Fact]
+    public void SolveExpTest()
+    {
+        var processor = new Processor();
+        var result = processor.Solve<ExpressionResult>("deriv(x)");
 
-        [Fact]
-        public void SolveExpDoNotSimplifyTest()
-        {
-            var processor = new Processor();
-            var result = processor.Solve<ExpressionResult>("deriv(x + 1)", false);
+        Assert.Equal(Number.One, result.Result);
+    }
 
-            Assert.Equal(Number.One, result.Result);
-        }
+    [Fact]
+    public void SolveExpDoNotSimplifyTest()
+    {
+        var processor = new Processor();
+        var result = processor.Solve<ExpressionResult>("deriv(x + 1)", false);
 
-        [Fact]
-        public void SolveAngleTest()
-        {
-            var processor = new Processor();
+        Assert.Equal(Number.One, result.Result);
+    }
 
-            var result = processor.Solve<AngleNumberResult>("90 degree");
-            var expected = AngleValue.Degree(90);
+    [Fact]
+    public void SolveAngleTest()
+    {
+        var processor = new Processor();
 
-            Assert.Equal(expected, result.Result);
-        }
+        var result = processor.Solve<AngleNumberResult>("90 degree");
+        var expected = AngleValue.Degree(90);
 
-        [Fact]
-        public void ParseTest()
-        {
-            var processor = new Processor();
+        Assert.Equal(expected, result.Result);
+    }
 
-            var result = processor.Parse("x + 1");
-            var expected = new Add(Variable.X, Number.One);
+    [Fact]
+    public void SolvePowerTest()
+    {
+        var processor = new Processor();
 
-            Assert.Equal(expected, result);
-        }
+        var result = processor.Solve<PowerNumberResult>("10 W");
+        var expected = PowerValue.Watt(10);
 
-        [Fact]
-        public void SimplifyTest()
-        {
-            var processor = new Processor();
+        Assert.Equal(expected, result.Result);
+    }
 
-            var exp = new Add(Number.One, Number.One);
-            var result = processor.Simplify(exp);
+    [Fact]
+    public void SolveTemperatureTest()
+    {
+        var processor = new Processor();
 
-            Assert.Equal(Number.Two, result);
-        }
+        var result = processor.Solve<TemperatureNumberResult>("10 °C");
+        var expected = TemperatureValue.Celsius(10);
 
-        [Fact]
-        public void SimplifyFunctionTest()
-        {
-            var processor = new Processor();
-            var result = processor.Simplify("1 + 1");
+        Assert.Equal(expected, result.Result);
+    }
 
-            Assert.Equal(Number.Two, result);
-        }
+    [Fact]
+    public void SolveMassTest()
+    {
+        var processor = new Processor();
 
-        [Fact]
-        public void SimplifyNullTest()
-        {
-            var processor = new Processor();
+        var result = processor.Solve<MassNumberResult>("10 g");
+        var expected = MassValue.Gram(10);
 
-            Assert.Throws<ArgumentNullException>(() => processor.Simplify(null as IExpression));
-        }
+        Assert.Equal(expected, result.Result);
+    }
 
-        [Fact]
-        public void DifferentiateExpTest()
-        {
-            var processor = new Processor();
-            var result = processor.Differentiate(new Add(Variable.X, Number.One));
+    [Fact]
+    public void SolveLengthTest()
+    {
+        var processor = new Processor();
 
-            Assert.Equal(Number.One, result);
-        }
+        var result = processor.Solve<LengthNumberResult>("10 m");
+        var expected = LengthValue.Meter(10);
 
-        [Fact]
-        public void DifferentiateFunctionTest()
-        {
-            var processor = new Processor();
-            var result = processor.Differentiate("x + 1");
+        Assert.Equal(expected, result.Result);
+    }
 
-            Assert.Equal(Number.One, result);
-        }
+    [Fact]
+    public void SolveTimeTest()
+    {
+        var processor = new Processor();
 
-        [Fact]
-        public void DifferentiateNullExpTest()
-        {
-            var processor = new Processor();
+        var result = processor.Solve<TimeNumberResult>("10 s");
+        var expected = TimeValue.Second(10);
 
-            Assert.Throws<ArgumentNullException>(() => processor.Differentiate(null as IExpression));
-        }
+        Assert.Equal(expected, result.Result);
+    }
 
-        [Fact]
-        public void DifferentiateVarTest()
-        {
-            var processor = new Processor();
+    [Fact]
+    public void SolveAreaTest()
+    {
+        var processor = new Processor();
 
-            var y = new Variable("y");
-            var result = processor.Differentiate(new Add(y, Number.One), y);
+        var result = processor.Solve<AreaNumberResult>("10 m^2");
+        var expected = AreaValue.Meter(10);
 
-            Assert.Equal(Number.One, result);
-        }
+        Assert.Equal(expected, result.Result);
+    }
 
-        [Fact]
-        public void DifferentiateParamsTest()
-        {
-            var processor = new Processor();
+    [Fact]
+    public void SolveVolumeTest()
+    {
+        var processor = new Processor();
 
-            var y = new Variable("y");
-            var result = processor.Differentiate(new Add(y, Number.One), y, new ExpressionParameters());
+        var result = processor.Solve<VolumeNumberResult>("10 m^3");
+        var expected = VolumeValue.Meter(10);
 
-            Assert.Equal(Number.One, result);
-        }
+        Assert.Equal(expected, result.Result);
+    }
+
+    [Fact]
+    public void ParseTest()
+    {
+        var processor = new Processor();
+
+        var result = processor.Parse("x + 1");
+        var expected = new Add(Variable.X, Number.One);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void SimplifyTest()
+    {
+        var processor = new Processor();
+
+        var exp = new Add(Number.One, Number.One);
+        var result = processor.Simplify(exp);
+
+        Assert.Equal(Number.Two, result);
+    }
+
+    [Fact]
+    public void SimplifyFunctionTest()
+    {
+        var processor = new Processor();
+        var result = processor.Simplify("1 + 1");
+
+        Assert.Equal(Number.Two, result);
+    }
+
+    [Fact]
+    public void SimplifyNullTest()
+    {
+        var processor = new Processor();
+
+        Assert.Throws<ArgumentNullException>(() => processor.Simplify(null as IExpression));
+    }
+
+    [Fact]
+    public void DifferentiateExpTest()
+    {
+        var processor = new Processor();
+        var result = processor.Differentiate(new Add(Variable.X, Number.One));
+
+        Assert.Equal(Number.One, result);
+    }
+
+    [Fact]
+    public void DifferentiateFunctionTest()
+    {
+        var processor = new Processor();
+        var result = processor.Differentiate("x + 1");
+
+        Assert.Equal(Number.One, result);
+    }
+
+    [Fact]
+    public void DifferentiateNullExpTest()
+    {
+        var processor = new Processor();
+
+        Assert.Throws<ArgumentNullException>(() => processor.Differentiate(null as IExpression));
+    }
+
+    [Fact]
+    public void DifferentiateVarTest()
+    {
+        var processor = new Processor();
+
+        var y = Variable.Y;
+        var result = processor.Differentiate(new Add(y, Number.One), y);
+
+        Assert.Equal(Number.One, result);
+    }
+
+    [Fact]
+    public void DifferentiateParamsTest()
+    {
+        var processor = new Processor();
+
+        var y = Variable.Y;
+        var result = processor.Differentiate(new Add(y, Number.One), y, new ExpressionParameters());
+
+        Assert.Equal(Number.One, result);
     }
 }

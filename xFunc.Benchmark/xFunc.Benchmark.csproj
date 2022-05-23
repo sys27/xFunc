@@ -2,13 +2,24 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-    <LangVersion>9.0</LangVersion>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
     <IsPackable>false</IsPackable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.12.1" />
+    <Using Include="BenchmarkDotNet.Attributes" />
+    <Using Include="xFunc.Maths" />
+    <Using Include="xFunc.Maths.Analyzers" />
+    <Using Include="xFunc.Maths.Analyzers.TypeAnalyzers" />
+    <Using Include="xFunc.Maths.Expressions" />
+    <Using Include="xFunc.Maths.Expressions.Matrices" />
+    <Using Include="xFunc.Maths.Results" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.1" />
   </ItemGroup>
 
   <ItemGroup>

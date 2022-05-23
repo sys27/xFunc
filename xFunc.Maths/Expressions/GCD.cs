@@ -1,101 +1,86 @@
-// Copyright 2012-2021 Dmytro Kyshchenko
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
-// express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// Copyright (c) Dmytro Kyshchenko. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
-using xFunc.Maths.Analyzers;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions;
+
+/// <summary>
+/// Represents a greatest common divisor.
+/// </summary>
+public class GCD : DifferentParametersExpression
 {
     /// <summary>
-    /// Represents a greatest common divisor.
+    /// Initializes a new instance of the <see cref="GCD"/> class.
     /// </summary>
-    public class GCD : DifferentParametersExpression
+    /// <param name="args">The arguments.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
+    public GCD(IExpression[] args)
+        : base(args)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GCD"/> class.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public GCD(IExpression[] args)
-            : base(args)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GCD"/> class.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public GCD(ImmutableArray<IExpression> args)
-            : base(args)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GCD"/> class.
-        /// </summary>
-        /// <param name="first">The first operand.</param>
-        /// <param name="second">The second operand.</param>
-        public GCD(IExpression first, IExpression second)
-            : this(ImmutableArray.Create(first, second))
-        {
-        }
-
-        /// <inheritdoc />
-        public override object Execute(ExpressionParameters? parameters)
-        {
-            var gcd = new NumberValue(0.0);
-            foreach (var argument in Arguments)
-            {
-                var result = argument.Execute(parameters);
-
-                gcd = result switch
-                {
-                    NumberValue number => NumberValue.GCD(gcd, number),
-                    _ => throw new ResultIsNotSupportedException(this, result),
-                };
-            }
-
-            return gcd;
-        }
-
-        /// <inheritdoc />
-        protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-            => analyzer.Analyze(this);
-
-        /// <inheritdoc />
-        [ExcludeFromCodeCoverage]
-        protected override TResult AnalyzeInternal<TResult, TContext>(
-            IAnalyzer<TResult, TContext> analyzer,
-            TContext context)
-            => analyzer.Analyze(this, context);
-
-        /// <inheritdoc />
-        public override IExpression Clone(ImmutableArray<IExpression>? arguments = null)
-            => new GCD(arguments ?? Arguments);
-
-        /// <summary>
-        /// Gets the minimum count of parameters.
-        /// </summary>
-        public override int? MinParametersCount => 2;
-
-        /// <summary>
-        /// Gets the maximum count of parameters. <c>null</c> - Infinity.
-        /// </summary>
-        public override int? MaxParametersCount => null;
     }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="GCD"/> class.
+    /// </summary>
+    /// <param name="args">The arguments.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
+    public GCD(ImmutableArray<IExpression> args)
+        : base(args)
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="GCD"/> class.
+    /// </summary>
+    /// <param name="first">The first operand.</param>
+    /// <param name="second">The second operand.</param>
+    public GCD(IExpression first, IExpression second)
+        : this(ImmutableArray.Create(first, second))
+    {
+    }
+
+    /// <inheritdoc />
+    public override object Execute(ExpressionParameters? parameters)
+    {
+        var gcd = new NumberValue(0.0);
+        foreach (var argument in Arguments)
+        {
+            var result = argument.Execute(parameters);
+
+            gcd = result switch
+            {
+                NumberValue number => NumberValue.GCD(gcd, number),
+                _ => throw new ResultIsNotSupportedException(this, result),
+            };
+        }
+
+        return gcd;
+    }
+
+    /// <inheritdoc />
+    protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+        => analyzer.Analyze(this);
+
+    /// <inheritdoc />
+    [ExcludeFromCodeCoverage]
+    protected override TResult AnalyzeInternal<TResult, TContext>(
+        IAnalyzer<TResult, TContext> analyzer,
+        TContext context)
+        => analyzer.Analyze(this, context);
+
+    /// <inheritdoc />
+    public override IExpression Clone(ImmutableArray<IExpression>? arguments = null)
+        => new GCD(arguments ?? Arguments);
+
+    /// <summary>
+    /// Gets the minimum count of parameters.
+    /// </summary>
+    public override int? MinParametersCount => 2;
+
+    /// <summary>
+    /// Gets the maximum count of parameters. <c>null</c> - Infinity.
+    /// </summary>
+    public override int? MaxParametersCount => null;
 }

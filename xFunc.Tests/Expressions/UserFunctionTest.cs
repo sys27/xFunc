@@ -1,155 +1,135 @@
-// Copyright 2012-2021 Dmytro Kyshchenko
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
-// express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// Copyright (c) Dmytro Kyshchenko. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Collections;
-using xFunc.Maths.Expressions.LogicalAndBitwise;
-using xFunc.Maths.Expressions.Programming;
-using Xunit;
 
-namespace xFunc.Tests.Expressions
+namespace xFunc.Tests.Expressions;
+
+public class UserFunctionTest
 {
-    public class UserFunctionTest
+    [Fact]
+    public void NullCtor()
     {
-        [Fact]
-        public void NullCtor()
+        ImmutableArray<IExpression> arguments = default;
+
+        Assert.Throws<ArgumentNullException>(() => new UserFunction("f", arguments));
+    }
+
+    [Fact]
+    public void ExecuteTest1()
+    {
+        var functions = new FunctionCollection
         {
-            ImmutableArray<IExpression> arguments = default;
+            { new UserFunction("f", new IExpression[] { Variable.X }), new Ln(Variable.X) }
+        };
+        var func = new UserFunction("f", new IExpression[] { Number.One });
 
-            Assert.Throws<ArgumentNullException>(() => new UserFunction("f", arguments));
-        }
+        var actual = func.Execute(functions);
+        var expected = new NumberValue(Math.Log(1));
 
-        [Fact]
-        public void ExecuteTest1()
-        {
-            var functions = new FunctionCollection
-            {
-                { new UserFunction("f", new IExpression[] { Variable.X }), new Ln(Variable.X) }
-            };
-            var func = new UserFunction("f", new IExpression[] { Number.One });
+        Assert.Equal(expected, actual);
+    }
 
-            var actual = func.Execute(functions);
-            var expected = new NumberValue(Math.Log(1));
+    [Fact]
+    public void ExecuteTest2()
+    {
+        var functions = new FunctionCollection();
 
-            Assert.Equal(expected, actual);
-        }
+        var func = new UserFunction("f", new IExpression[] { Number.One });
 
-        [Fact]
-        public void ExecuteTest2()
-        {
-            var functions = new FunctionCollection();
+        Assert.Throws<KeyNotFoundException>(() => func.Execute(functions));
+    }
 
-            var func = new UserFunction("f", new IExpression[] { Number.One });
+    [Fact]
+    public void ExecuteRecursiveTest()
+    {
+        var expParams = new ExpressionParameters();
 
-            Assert.Throws<KeyNotFoundException>(() => func.Execute(functions));
-        }
+        var exp = new If(new Equal(Variable.X, Number.Zero),
+            Number.One,
+            new Mul(Variable.X, new UserFunction("f", new[] { new Sub(Variable.X, Number.One) })));
+        expParams.Functions.Add(new UserFunction("f", new[] { Variable.X }), exp);
 
-        [Fact]
-        public void ExecuteRecursiveTest()
-        {
-            var expParams = new ExpressionParameters();
+        var func = new UserFunction("f", new[] { new Number(4) });
 
-            var exp = new If(new Equal(Variable.X, Number.Zero),
-                Number.One,
-                new Mul(Variable.X, new UserFunction("f", new[] { new Sub(Variable.X, Number.One) })));
-            expParams.Functions.Add(new UserFunction("f", new[] { Variable.X }), exp);
+        Assert.Equal(new NumberValue(24.0), func.Execute(expParams));
+    }
 
-            var func = new UserFunction("f", new[] { new Number(4) });
+    [Fact]
+    public void ExecuteBoolTest()
+    {
+        var expParams = new ExpressionParameters();
 
-            Assert.Equal(new NumberValue(24.0), func.Execute(expParams));
-        }
+        var exp = new Not(Variable.X);
+        expParams.Functions.Add(new UserFunction("f", new[] { Variable.X }), exp);
 
-        [Fact]
-        public void ExecuteBoolTest()
-        {
-            var expParams = new ExpressionParameters();
+        var func = new UserFunction("f", new[] { Bool.False });
 
-            var exp = new Not(Variable.X);
-            expParams.Functions.Add(new UserFunction("f", new[] { Variable.X }), exp);
+        Assert.Equal(true, func.Execute(expParams));
+    }
 
-            var func = new UserFunction("f", new[] { Bool.False });
+    [Fact]
+    public void ExecuteNullTest()
+    {
+        var exp = new UserFunction("f", new IExpression[0]);
 
-            Assert.Equal(true, func.Execute(expParams));
-        }
+        Assert.Throws<ArgumentNullException>(() => exp.Execute());
+    }
 
-        [Fact]
-        public void ExecuteNullTest()
-        {
-            var exp = new UserFunction("f", new IExpression[0]);
+    [Fact]
+    public void ArgumentsAreNullTest()
+    {
+        Assert.Throws<ArgumentNullException>(() => new UserFunction("f", null));
+    }
 
-            Assert.Throws<ArgumentNullException>(() => exp.Execute());
-        }
+    [Fact]
+    public void EqualDiffNameTest()
+    {
+        var exp1 = new UserFunction("f", new[] { new Number(5) });
+        var exp2 = new UserFunction("f2", new[] { new Number(5) });
 
-        [Fact]
-        public void ArgumentsAreNullTest()
-        {
-            Assert.Throws<ArgumentNullException>(() => new UserFunction("f", null));
-        }
+        Assert.False(exp1.Equals(exp2));
+    }
 
-        [Fact]
-        public void EqualDiffNameTest()
-        {
-            var exp1 = new UserFunction("f", new[] { new Number(5) });
-            var exp2 = new UserFunction("f2", new[] { new Number(5) });
+    [Fact]
+    public void EqualDiffCountTest()
+    {
+        var exp1 = new UserFunction("f", new[] { new Number(5) });
+        var exp2 = new UserFunction("f", new[] { new Number(5), Number.Two });
 
-            Assert.False(exp1.Equals(exp2));
-        }
+        Assert.False(exp1.Equals(exp2));
+    }
 
-        [Fact]
-        public void EqualDiffCountTest()
-        {
-            var exp1 = new UserFunction("f", new[] { new Number(5) });
-            var exp2 = new UserFunction("f", new[] { new Number(5), Number.Two });
+    [Fact]
+    public void EqualDiffTypeTest()
+    {
+        var exp1 = new UserFunction("f", new[] { new Number(5) });
 
-            Assert.False(exp1.Equals(exp2));
-        }
+        Assert.False(exp1.Equals(Variable.X));
+    }
 
-        [Fact]
-        public void EqualDiffTypeTest()
-        {
-            var exp1 = new UserFunction("f", new[] { new Number(5) });
+    [Fact]
+    public void ComplexNumberAnalyzeNull()
+    {
+        var exp = new UserFunction("f", new[] { new Number(5) });
 
-            Assert.False(exp1.Equals(Variable.X));
-        }
+        Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
+    }
 
-        [Fact]
-        public void ComplexNumberAnalyzeNull()
-        {
-            var exp = new UserFunction("f", new[] { new Number(5) });
+    [Fact]
+    public void ComplexNumberAnalyzeContextNull()
+    {
+        var exp = new UserFunction("f", new[] { new Number(5) });
 
-            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
-        }
+        Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
+    }
 
-        [Fact]
-        public void ComplexNumberAnalyzeContextNull()
-        {
-            var exp = new UserFunction("f", new[] { new Number(5) });
+    [Fact]
+    public void CloneTest()
+    {
+        var exp = new UserFunction("f", new[] { new Number(5) });
+        var clone = exp.Clone();
 
-            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
-        }
-
-        [Fact]
-        public void CloneTest()
-        {
-            var exp = new UserFunction("f", new[] { new Number(5) });
-            var clone = exp.Clone();
-
-            Assert.Equal(exp, clone);
-        }
+        Assert.Equal(exp, clone);
     }
 }

@@ -2,43 +2,57 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
-    <LangVersion>9.0</LangVersion>
+    <TargetFrameworks>netcoreapp3.1;net6.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>xFunc</ToolCommandName>    
     <PackageId>xFunc.DotnetTool</PackageId>
-    <Version>4.0.0</Version>
+    <Version>4.1.0</Version>
     <Product>xFunc.Maths</Product>
     <Authors>Dmytro Kyshchenko</Authors>
     <Company />
-    <Copyright>Copyright ©2012-2021 Dmytro Kyshchenko</Copyright>
+    <Copyright>Copyright ©2012-2022 Dmytro Kyshchenko</Copyright>
     <PackageProjectUrl>https://github.com/sys27/xFunc</PackageProjectUrl>
     <PackageIcon>xFunc.png</PackageIcon>
     <PackageTags>Math Expression Expressions Parser MathParser Differentiation Simplification</PackageTags>
-    <AssemblyVersion>4.0.0</AssemblyVersion>
-    <FileVersion>4.0.0</FileVersion>
+    <AssemblyVersion>4.1.0</AssemblyVersion>
+    <FileVersion>4.1.0</FileVersion>
     <RepositoryUrl>https://github.com/sys27/xFunc</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
+    <Using Include="CommandLine" />
+    <Using Include="CommandLine.Text" />
+    <Using Include="xFunc.Maths" />
+    <Using Include="xFunc.Maths.Analyzers" />
+    <Using Include="xFunc.Maths.Analyzers.TypeAnalyzers" />
+    <Using Include="xFunc.Maths.Expressions" />
+    <Using Include="xFunc.Maths.Expressions.Collections" />
+    <Using Include="xFunc.Maths.Expressions.Matrices" />
+    <Using Include="xFunc.Maths.Expressions.Units" />
+    <Using Include="xFunc.Maths.Results" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.8.0" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.3.37">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.5.107" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\xFunc.Maths\xFunc.Maths.csproj" />
-    <ProjectReference Include="..\xFunc.UnitConverters\xFunc.UnitConverters.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\LICENSE" Link="LICENSE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="..\xFunc.png" Pack="true" PackagePath="" />
   </ItemGroup>
 

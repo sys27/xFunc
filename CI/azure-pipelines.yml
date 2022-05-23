@@ -15,20 +15,18 @@ pr:
 jobs:
   - job: xFunc
     pool:
-      vmImage: 'windows-latest'
+      vmImage: 'ubuntu-latest'
 
     variables:
-      uiSolution: 'xFunc/xFunc.UI.sln'
       solution: 'xFunc.sln'
-      buildPlatform: 'Any CPU'
       buildConfiguration: 'Release'
 
     steps:
     - task: UseDotNet@2
-      displayName: 'Install .NET 5'
+      displayName: 'Install .NET 6'
       inputs:
         packageType: 'sdk'
-        version: '5.0.x'
+        version: '6.0.x'
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet restore'
@@ -40,7 +38,7 @@ jobs:
       displayName: 'dotnet build'
       inputs:
         projects: '$(solution)'
-        arguments: '-c $(buildConfiguration)'
+        arguments: '--nologo -c $(buildConfiguration)'
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet test'
@@ -61,18 +59,6 @@ jobs:
       displayName: 'Publish to Codecov'
       env:
         CODECOV_TOKEN: $(CODECOV_TOKEN)
-
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet restore'
-      inputs:
-        command: restore
-        projects: '$(uiSolution)'
-
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet build'
-      inputs:
-        projects: '$(uiSolution)'
-        arguments: '-c $(buildConfiguration)'
     
     - task: DotNetCoreCLI@2
       displayName: 'dotnet pack'
@@ -90,20 +76,5 @@ jobs:
 
     - task: PublishPipelineArtifact@1
       inputs:
-        path: xFunc.UnitConverters/bin/Release/netstandard2.1
-        artifact: xFunc.UnitConverters
-
-    - task: PublishPipelineArtifact@1
-      inputs:
         path: nupkgs
         artifact: NuGet Packages
-
-    - task: PublishPipelineArtifact@1
-      inputs:
-        path: xFunc/bin/Release/netcoreapp3.1
-        artifact: xFunc.UI (.NET Core 3.1)
-
-    - task: PublishPipelineArtifact@1
-      inputs:
-        path: xFunc/bin/Release/net5.0-windows
-        artifact: xFunc.UI (.NET 5)

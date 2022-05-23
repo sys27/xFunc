@@ -350,5 +350,23 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("MissingExpParseException", resourceCulture);
             }
         }
+        
+        internal static string StringTokenizeException {
+            get {
+                return ResourceManager.GetString("StringTokenizeException", resourceCulture);
+            }
+        }
+        
+        internal static string UnitIsNotSupportedException {
+            get {
+                return ResourceManager.GetString("UnitIsNotSupportedException", resourceCulture);
+            }
+        }
+        
+        internal static string ValueIsNotSupportedException {
+            get {
+                return ResourceManager.GetString("ValueIsNotSupportedException", resourceCulture);
+            }
+        }
     }
 }

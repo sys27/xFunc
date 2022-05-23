@@ -211,4 +211,13 @@
   <data name="MissingExpParseException" xml:space="preserve">
     <value>Cannot parse an expression after the comma symbol.</value>
   </data>
+  <data name="StringTokenizeException" xml:space="preserve">
+    <value>Cannot find the end of string expression.</value>
+  </data>
+  <data name="UnitIsNotSupportedException" xml:space="preserve">
+    <value>The '{0}' unit is not supported.</value>
+  </data>
+  <data name="ValueIsNotSupportedException" xml:space="preserve">
+    <value>The '{0} ({1})' conversion value is not supported.</value>
+  </data>
 </root>

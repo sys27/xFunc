@@ -34,7 +34,7 @@ public class Converter : IConverter
         if (string.IsNullOrWhiteSpace(unit))
             throw new ArgumentNullException(nameof(unit));
 
-        unit = unit.ToLower();
+        unit = unit.ToLowerInvariant();
 
         foreach (var converter in converters)
             if (converter.CanConvertTo(unit))

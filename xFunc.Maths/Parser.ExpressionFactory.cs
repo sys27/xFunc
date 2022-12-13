@@ -18,7 +18,7 @@ public partial class Parser
         Debug.Assert(token.IsId(), "Token should be Id.");
         Debug.Assert(!string.IsNullOrWhiteSpace(token.StringValue), "Id is empty.");
 
-        return token.StringValue switch
+        return token.StringValue.ToLowerInvariant() switch
         {
             "add" => new Add(arguments),
             "sub" => new Sub(arguments),

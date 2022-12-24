@@ -101,75 +101,52 @@ public class Processor
         exp.Analyze(typeAnalyzer);
 
         var result = exp.Execute(Parameters);
-        if (result is NumberValue number)
+        return result switch
         {
-            return new NumberResult(number.Number);
-        }
+            NumberValue number
+                => new NumberResult(number.Number),
 
-        if (result is AngleValue angle)
-        {
-            return new AngleNumberResult(angle);
-        }
+            AngleValue angle
+                => new AngleNumberResult(angle),
 
-        if (result is PowerValue power)
-        {
-            return new PowerNumberResult(power);
-        }
+            PowerValue power
+                => new PowerNumberResult(power),
 
-        if (result is TemperatureValue temperature)
-        {
-            return new TemperatureNumberResult(temperature);
-        }
+            TemperatureValue temperature
+                => new TemperatureNumberResult(temperature),
 
-        if (result is MassValue mass)
-        {
-            return new MassNumberResult(mass);
-        }
+            MassValue mass
+                => new MassNumberResult(mass),
 
-        if (result is LengthValue length)
-        {
-            return new LengthNumberResult(length);
-        }
+            LengthValue length
+                => new LengthNumberResult(length),
 
-        if (result is TimeValue time)
-        {
-            return new TimeNumberResult(time);
-        }
+            TimeValue time
+                => new TimeNumberResult(time),
 
-        if (result is AreaValue area)
-        {
-            return new AreaNumberResult(area);
-        }
+            AreaValue area
+                => new AreaNumberResult(area),
 
-        if (result is VolumeValue volume)
-        {
-            return new VolumeNumberResult(volume);
-        }
+            VolumeValue volume
+                => new VolumeNumberResult(volume),
 
-        if (result is Complex complex)
-        {
-            return new ComplexNumberResult(complex);
-        }
+            Complex complex
+                => new ComplexNumberResult(complex),
 
-        if (result is bool boolean)
-        {
-            return new BooleanResult(boolean);
-        }
+            bool boolean
+                => new BooleanResult(boolean),
 
-        if (result is string str)
-        {
-            return new StringResult(str);
-        }
+            string str
+                => new StringResult(str),
 
-        if (result is IExpression expression)
-        {
-            if (simplify)
-                return new ExpressionResult(Simplify(expression));
+            IExpression expression when simplify
+                => new ExpressionResult(Simplify(expression)),
 
-            return new ExpressionResult(expression);
-        }
+            IExpression expression
+                => new ExpressionResult(expression),
 
-        throw new InvalidResultException();
+            _ => throw new InvalidResultException(),
+        };
     }
 
     /// <summary>

@@ -646,6 +646,10 @@ public class ParserTest : BaseParserTests
         => ParseTest("sIn(x)", new Sin(Variable.X));
 
     [Fact]
+    public void VariableCaseSensitive()
+        => ParseTest("X", new Variable("X"));
+
+    [Fact]
     public void VarWithNumber1()
         => ParseTest("x1", new Variable("x1"));
 
@@ -695,5 +699,4 @@ public class ParserTest : BaseParserTests
     [Fact]
     public void TrailingSpaces()
         => ParseTest("1  ", Number.One);
-
 }

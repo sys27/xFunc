@@ -775,7 +775,8 @@ public partial class Parser : IParser
             if (id.IsEmpty())
                 return null;
 
-            return id.StringValue switch
+            // TODO: span?
+            return id.StringValue!.ToLowerInvariant() switch
             {
                 "w" => PowerValue.Watt(number.NumberValue).AsExpression(),
                 "kw" => PowerValue.Kilowatt(number.NumberValue).AsExpression(),
@@ -796,16 +797,16 @@ public partial class Parser : IParser
                 var id = reader.GetCurrent(Id);
                 if (id.IsNotEmpty())
                 {
-                    if (id.StringValue == "c")
+                    if (id.StringValue!.Equals("c", StringComparison.OrdinalIgnoreCase))
                         return TemperatureValue.Celsius(number.NumberValue).AsExpression();
-                    if (id.StringValue == "f")
+                    if (id.StringValue!.Equals("f", StringComparison.OrdinalIgnoreCase))
                         return TemperatureValue.Fahrenheit(number.NumberValue).AsExpression();
                 }
             }
             else
             {
                 var id = reader.GetCurrent(Id);
-                if (id.IsNotEmpty() && id.StringValue == "k")
+                if (id.IsNotEmpty() && id.StringValue!.Equals("k", StringComparison.OrdinalIgnoreCase))
                     return TemperatureValue.Kelvin(number.NumberValue).AsExpression();
             }
 
@@ -823,7 +824,7 @@ public partial class Parser : IParser
             if (id.IsEmpty())
                 return null;
 
-            return id.StringValue switch
+            return id.StringValue!.ToLowerInvariant() switch
             {
                 "mg" => MassValue.Milligram(number.NumberValue).AsExpression(),
                 "g" => MassValue.Gram(number.NumberValue).AsExpression(),
@@ -846,7 +847,7 @@ public partial class Parser : IParser
             if (id.IsEmpty())
                 return null;
 
-            return id.StringValue switch
+            return id.StringValue!.ToLowerInvariant() switch
             {
                 "m" => LengthValue.Meter(number.NumberValue).AsExpression(),
                 "nm" => LengthValue.Nanometer(number.NumberValue).AsExpression(),
@@ -880,7 +881,7 @@ public partial class Parser : IParser
             if (id.IsEmpty())
                 return null;
 
-            return id.StringValue switch
+            return id.StringValue!.ToLowerInvariant() switch
             {
                 "s" => TimeValue.Second(number.NumberValue).AsExpression(),
                 "ns" => TimeValue.Nanosecond(number.NumberValue).AsExpression(),
@@ -906,7 +907,7 @@ public partial class Parser : IParser
             if (id.IsEmpty())
                 return null;
 
-            var areaValue = id.StringValue switch
+            var areaValue = id.StringValue!.ToLowerInvariant() switch
             {
                 "ha" => AreaValue.Hectare(number.NumberValue).AsExpression(),
                 "ac" => AreaValue.Acre(number.NumberValue).AsExpression(),
@@ -915,7 +916,7 @@ public partial class Parser : IParser
             if (areaValue is not null)
                 return areaValue;
 
-            areaValue = id.StringValue switch
+            areaValue = id.StringValue!.ToLowerInvariant() switch
             {
                 "m" => AreaValue.Meter(number.NumberValue).AsExpression(),
                 "mm" => AreaValue.Millimeter(number.NumberValue).AsExpression(),
@@ -934,7 +935,7 @@ public partial class Parser : IParser
             if (exponent.IsEmpty())
                 throw new ParseException(Resource.ExponentParseException);
 
-            if (exponent.NumberValue == 2)
+            if (MathExtensions.Equals(exponent.NumberValue, 2))
                 return areaValue.Value.AsExpression();
 
             return null;
@@ -951,7 +952,7 @@ public partial class Parser : IParser
             if (id.IsEmpty())
                 return null;
 
-            var volumeValue = id.StringValue switch
+            var volumeValue = id.StringValue!.ToLowerInvariant() switch
             {
                 "gal" => VolumeValue.Gallon(number.NumberValue).AsExpression(),
                 "l" => VolumeValue.Liter(number.NumberValue).AsExpression(),
@@ -960,7 +961,7 @@ public partial class Parser : IParser
             if (volumeValue is not null)
                 return volumeValue;
 
-            volumeValue = id.StringValue switch
+            volumeValue = id.StringValue!.ToLowerInvariant() switch
             {
                 "m" => VolumeValue.Meter(number.NumberValue).AsExpression(),
                 "cm" => VolumeValue.Centimeter(number.NumberValue).AsExpression(),
@@ -976,7 +977,7 @@ public partial class Parser : IParser
             if (exponent.IsEmpty())
                 throw new ParseException(Resource.ExponentParseException);
 
-            if (exponent.NumberValue == 3)
+            if (MathExtensions.Equals(exponent.NumberValue, 3))
                 return volumeValue.Value.AsExpression();
 
             return null;

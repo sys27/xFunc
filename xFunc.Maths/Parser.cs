@@ -755,7 +755,7 @@ public partial class Parser : IParser
             if (id.IsEmpty())
                 return null;
 
-            return id.StringValue switch
+            return id.StringValue!.ToLowerInvariant() switch
             {
                 "deg" or "degree" or "degrees" => AngleValue.Degree(number.NumberValue).AsExpression(),
                 "rad" or "radian" or "radians" => AngleValue.Radian(number.NumberValue).AsExpression(),

@@ -44,6 +44,7 @@ jobs:
       displayName: 'dotnet test'
       inputs:
         command: test
+        projects: '$(solution)'
         arguments: '--nologo --no-build -c $(buildConfiguration) -p:CollectCoverage=true -p:CoverletOutput=$(Build.SourcesDirectory)/coverage/'
         publishTestResults: true
 

@@ -50,10 +50,16 @@ public class ComplexNumber : IExpression
     /// <inheritdoc />
     public override bool Equals(object? obj)
     {
-        if (obj is ComplexNumber num)
-            return Value.Equals(num.Value);
+        if (obj is not ComplexNumber num)
+            return false;
 
-        return false;
+        var leftReal = Value.Real;
+        var leftImaginary = Value.Imaginary;
+        var rightReal = num.Value.Real;
+        var rightImaginary = num.Value.Imaginary;
+
+        return MathExtensions.Equals(leftReal, rightReal) &&
+               MathExtensions.Equals(leftImaginary, rightImaginary);
     }
 
     /// <inheritdoc />

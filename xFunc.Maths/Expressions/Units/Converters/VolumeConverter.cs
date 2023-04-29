@@ -32,6 +32,6 @@ public class VolumeConverter : IConverter<VolumeValue>, IConverter<object>
         => Convert(value, unit);
 
     /// <inheritdoc cref="IConverter{TValue}.CanConvertTo" />
-    public bool CanConvertTo(string unit)
-        => VolumeUnit.Names.Contains(unit.ToLower());
+    public bool CanConvertTo(object value, string unit)
+        => value is VolumeValue or NumberValue && VolumeUnit.Names.Contains(unit.ToLower());
 }

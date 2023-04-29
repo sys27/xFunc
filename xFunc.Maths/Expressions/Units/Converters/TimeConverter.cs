@@ -32,6 +32,6 @@ public class TimeConverter : IConverter<TimeValue>, IConverter<object>
         => Convert(value, unit);
 
     /// <inheritdoc cref="IConverter{TValue}.CanConvertTo" />
-    public bool CanConvertTo(string unit)
-        => TimeUnit.Names.Contains(unit.ToLower());
+    public bool CanConvertTo(object value, string unit)
+        => value is TimeValue or NumberValue && TimeUnit.Names.Contains(unit.ToLower());
 }

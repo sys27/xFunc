@@ -652,7 +652,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
         {
             Number number => AngleValue.Degree(number.Value).AsExpression(),
 
-            Angle({ Unit: AngleUnit.Degree }) number => number,
+            Angle({ Unit.IsDegree: true }) number => number,
 
             Angle(var angle) => angle.ToDegree().AsExpression(),
 
@@ -671,7 +671,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
         {
             Number number => AngleValue.Radian(number.Value).AsExpression(),
 
-            Angle({ Unit: AngleUnit.Radian }) number => number,
+            Angle({ Unit.IsRadian: true }) number => number,
 
             Angle(var angle) => angle.ToRadian().AsExpression(),
 
@@ -690,7 +690,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
         {
             Number number => AngleValue.Gradian(number.Value).AsExpression(),
 
-            Angle({ Unit: AngleUnit.Gradian }) number => number,
+            Angle({ Unit.IsGradian: true }) number => number,
 
             Angle(var angle) => angle.ToGradian().AsExpression(),
 

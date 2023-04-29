@@ -8,13 +8,6 @@ namespace xFunc.Maths.Expressions.Units.Converters;
 /// </summary>
 public class AngleConverter : IConverter<AngleValue>, IConverter<object>
 {
-    private readonly HashSet<string> units = new HashSet<string>
-    {
-        "rad", "radian", "radians",
-        "deg", "degree", "degrees",
-        "grad", "gradian", "gradians",
-    };
-
     /// <inheritdoc />
     public AngleValue Convert(object value, string unit)
     {
@@ -23,24 +16,14 @@ public class AngleConverter : IConverter<AngleValue>, IConverter<object>
         if (string.IsNullOrWhiteSpace(unit))
             throw new ArgumentNullException(nameof(unit));
 
-        return (value, unit) switch
+        if (!AngleUnit.FromName(unit, out var angleUnit))
+            throw new UnitIsNotSupportedException(unit);
+
+        return value switch
         {
-            (AngleValue angleValue, "rad" or "radian" or "radians")
-                => angleValue.ToRadian(),
-            (AngleValue angleValue, "deg" or "degree" or "degrees")
-                => angleValue.ToDegree(),
-            (AngleValue angleValue, "grad" or "gradian" or "gradians")
-                => angleValue.ToGradian(),
-
-            (NumberValue numberValue, "rad" or "radian" or "radians")
-                => AngleValue.Radian(numberValue),
-            (NumberValue numberValue, "deg" or "degree" or "degrees")
-                => AngleValue.Degree(numberValue),
-            (NumberValue numberValue, "grad" or "gradian" or "gradians")
-                => AngleValue.Gradian(numberValue),
-
-            _ when CanConvertTo(unit) => throw new ValueIsNotSupportedException(value),
-            _ => throw new UnitIsNotSupportedException(unit),
+            AngleValue angleValue => angleValue.To(angleUnit),
+            NumberValue numberValue => new AngleValue(numberValue, angleUnit),
+            _ => throw new ValueIsNotSupportedException(value),
         };
     }
 
@@ -49,6 +32,6 @@ public class AngleConverter : IConverter<AngleValue>, IConverter<object>
         => Convert(value, unit);
 
     /// <inheritdoc cref="IConverter{TValue}.CanConvertTo" />
-    public bool CanConvertTo(string unit)
-        => units.Contains(unit.ToLower());
+    public bool CanConvertTo(object value, string unit)
+        => value is AngleValue or NumberValue && AngleUnit.Names.Contains(unit.ToLower());
 }

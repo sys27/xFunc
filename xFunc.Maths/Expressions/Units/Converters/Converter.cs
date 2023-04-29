@@ -37,7 +37,7 @@ public class Converter : IConverter
         unit = unit.ToLowerInvariant();
 
         foreach (var converter in converters)
-            if (converter.CanConvertTo(unit))
+            if (converter.CanConvertTo(value, unit))
                 return converter.Convert(value, unit);
 
         throw new UnitIsNotSupportedException(unit);

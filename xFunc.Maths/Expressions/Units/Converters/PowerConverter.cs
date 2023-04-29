@@ -32,6 +32,6 @@ public class PowerConverter : IConverter<PowerValue>, IConverter<object>
         => Convert(value, unit);
 
     /// <inheritdoc cref="IConverter{TValue}.CanConvertTo" />
-    public bool CanConvertTo(string unit)
-        => PowerUnit.Names.Contains(unit.ToLower());
+    public bool CanConvertTo(object value, string unit)
+        => value is PowerValue or NumberValue && PowerUnit.Names.Contains(unit.ToLower());
 }

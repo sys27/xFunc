@@ -32,6 +32,6 @@ public class TemperatureConverter : IConverter<TemperatureValue>, IConverter<obj
         => Convert(value, unit);
 
     /// <inheritdoc cref="IConverter{TValue}.CanConvertTo" />
-    public bool CanConvertTo(string unit)
-        => TemperatureUnit.Names.Contains(unit.ToLower());
+    public bool CanConvertTo(object value, string unit)
+        => value is TemperatureValue or NumberValue && TemperatureUnit.Names.Contains(unit.ToLower());
 }

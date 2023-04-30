@@ -755,13 +755,17 @@ public partial class Parser : IParser
             if (id.IsEmpty())
                 return null;
 
-            return id.StringValue!.ToLowerInvariant() switch
-            {
-                "deg" or "degree" or "degrees" => AngleValue.Degree(number.NumberValue).AsExpression(),
-                "rad" or "radian" or "radians" => AngleValue.Radian(number.NumberValue).AsExpression(),
-                "grad" or "gradian" or "gradians" => AngleValue.Gradian(number.NumberValue).AsExpression(),
-                _ => null,
-            };
+            var lowerUnit = id.StringValue!.ToLowerInvariant();
+            if (AngleUnit.Degree.UnitNames.Contains(lowerUnit))
+                return AngleValue.Degree(number.NumberValue).AsExpression();
+
+            if (AngleUnit.Radian.UnitNames.Contains(lowerUnit))
+                return AngleValue.Radian(number.NumberValue).AsExpression();
+
+            if (AngleUnit.Gradian.UnitNames.Contains(lowerUnit))
+                return AngleValue.Gradian(number.NumberValue).AsExpression();
+
+            return null;
         });
 
     private IExpression? ParsePowerUnit(ref TokenReader tokenReader)

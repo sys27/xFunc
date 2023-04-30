@@ -32,6 +32,6 @@ public class AreaConverter : IConverter<AreaValue>, IConverter<object>
         => Convert(value, unit);
 
     /// <inheritdoc cref="IConverter{TValue}.CanConvertTo" />
-    public bool CanConvertTo(string unit)
-        => AreaUnit.Names.Contains(unit.ToLower());
+    public bool CanConvertTo(object value, string unit)
+        => value is AreaValue or NumberValue && AreaUnit.Names.Contains(unit.ToLower());
 }

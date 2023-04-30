@@ -1,6 +1,9 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+
 namespace xFunc.Maths.Expressions.Units.AngleUnits;
 
 /// <summary>
@@ -25,7 +28,7 @@ public readonly struct AngleValue : IEquatable<AngleValue>, IComparable<AngleVal
     /// <param name="value">The value.</param>
     /// <returns>The angle.</returns>
     public static AngleValue Degree(double value)
-        => new AngleValue(new NumberValue(value), AngleUnit.Degree);
+        => Degree(new NumberValue(value));
 
     /// <summary>
     /// Creates the <see cref="AngleValue"/> struct with <c>Degree</c> unit.
@@ -41,7 +44,7 @@ public readonly struct AngleValue : IEquatable<AngleValue>, IComparable<AngleVal
     /// <param name="value">The value.</param>
     /// <returns>The angle.</returns>
     public static AngleValue Radian(double value)
-        => new AngleValue(new NumberValue(value), AngleUnit.Radian);
+        => Radian(new NumberValue(value));
 
     /// <summary>
     /// Creates the <see cref="AngleValue"/> struct with <c>Radian</c> unit.
@@ -57,7 +60,7 @@ public readonly struct AngleValue : IEquatable<AngleValue>, IComparable<AngleVal
     /// <param name="value">The value.</param>
     /// <returns>The angle.</returns>
     public static AngleValue Gradian(double value)
-        => new AngleValue(new NumberValue(value), AngleUnit.Gradian);
+        => Gradian(new NumberValue(value));
 
     /// <summary>
     /// Creates the <see cref="AngleValue"/> struct with <c>Gradian</c> unit.
@@ -70,9 +73,10 @@ public readonly struct AngleValue : IEquatable<AngleValue>, IComparable<AngleVal
     /// <inheritdoc />
     public bool Equals(AngleValue other)
     {
-        var (left, right) = ToCommonUnits(this, other);
+        var inBase = ToBase();
+        var otherInBase = other.ToBase();
 
-        return left.Angle.Equals(right.Angle);
+        return inBase.Value.Equals(otherInBase.Value);
     }
 
     /// <inheritdoc />
@@ -82,35 +86,29 @@ public readonly struct AngleValue : IEquatable<AngleValue>, IComparable<AngleVal
     /// <inheritdoc />
     public int CompareTo(AngleValue other)
     {
-        var (left, right) = ToCommonUnits(this, other);
+        var inBase = ToBase();
+        var otherInBase = other.ToBase();
 
-        return left.Angle.CompareTo(right.Angle);
+        return inBase.Value.CompareTo(otherInBase.Value);
     }
 
     /// <inheritdoc />
     public int CompareTo(object? obj)
-    {
-        if (obj is null)
-            return 1;
-
-        if (obj is AngleValue other)
-            return CompareTo(other);
-
-        throw new ArgumentException($"Object must be of type {nameof(AngleValue)}");
-    }
+        => obj switch
+        {
+            null => 1,
+            AngleValue other => CompareTo(other),
+            _ => throw new ArgumentException($"Object must be of type {nameof(AngleValue)}"),
+        };
 
     /// <inheritdoc />
+    [ExcludeFromCodeCoverage]
     public override int GetHashCode()
-        => HashCode.Combine(Angle, (int)Unit);
+        => HashCode.Combine(Angle, Unit);
 
     /// <inheritdoc />
-    public override string ToString() => Unit switch
-    {
-        AngleUnit.Degree => $"{Angle} degree",
-        AngleUnit.Radian => $"{Angle} radian",
-        AngleUnit.Gradian => $"{Angle} gradian",
-        _ => throw new InvalidOperationException(),
-    };
+    public override string ToString()
+        => $"{Angle} {Unit}";
 
     /// <summary>
     /// Determines whether two specified instances of <see cref="AngleValue"/> are equal.
@@ -174,7 +172,7 @@ public readonly struct AngleValue : IEquatable<AngleValue>, IComparable<AngleVal
     /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
     public static AngleValue operator +(AngleValue left, AngleValue right)
     {
-        (left, right) = ToCommonUnits(left, right);
+        right = right.To(left.Unit);
 
         return new AngleValue(left.Angle + right.Angle, left.Unit);
     }
@@ -187,7 +185,7 @@ public readonly struct AngleValue : IEquatable<AngleValue>, IComparable<AngleVal
     /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
     public static AngleValue operator -(AngleValue left, AngleValue right)
     {
-        (left, right) = ToCommonUnits(left, right);
+        right = right.To(left.Unit);
 
         return new AngleValue(left.Angle - right.Angle, left.Unit);
     }
@@ -200,73 +198,42 @@ public readonly struct AngleValue : IEquatable<AngleValue>, IComparable<AngleVal
     public static AngleValue operator -(AngleValue angleValue)
         => new AngleValue(-angleValue.Angle, angleValue.Unit);
 
-    private static (AngleValue Left, AngleValue Right) ToCommonUnits(AngleValue left, AngleValue right)
-    {
-        var commonUnit = GetCommonUnit(left.Unit, right.Unit);
-
-        return (left.To(commonUnit), right.To(commonUnit));
-    }
-
-    private static AngleUnit GetCommonUnit(AngleUnit left, AngleUnit right)
-        => (left, right) switch
-        {
-            _ when left == right => left,
-
-            (AngleUnit.Radian, AngleUnit.Gradian) or
-                (AngleUnit.Gradian, AngleUnit.Radian)
-                => AngleUnit.Radian,
-
-            _ => AngleUnit.Degree,
-        };
+    private AreaValue ToBase()
+        => new AreaValue(Angle * Unit.Factor, AreaUnit.Meter);
 
     /// <summary>
-    /// Converts the current object to the specified <paramref name="unit"/>.
+    /// Converts the current object to the specified <paramref name="newUnit"/>.
     /// </summary>
-    /// <param name="unit">The unit to convert to.</param>
-    /// <returns>The angle which is converted to the specified <paramref name="unit"/>.</returns>
-    public AngleValue To(AngleUnit unit) => unit switch
+    /// <param name="newUnit">The unit to convert to.</param>
+    /// <returns>The angle which is converted to the specified <paramref name="newUnit"/>.</returns>
+    public AngleValue To(AngleUnit newUnit)
     {
-        AngleUnit.Degree => ToDegree(),
-        AngleUnit.Radian => ToRadian(),
-        AngleUnit.Gradian => ToGradian(),
-        _ => throw new ArgumentOutOfRangeException(nameof(unit), unit, null),
-    };
+        var inBase = Angle * Unit.Factor;
+        var converted = inBase / newUnit.Factor;
+
+        return new AngleValue(converted, newUnit);
+    }
 
     /// <summary>
     /// Converts the current object to degrees.
     /// </summary>
     /// <returns>The angle which is converted to degrees.</returns>
-    public AngleValue ToDegree() => Unit switch
-    {
-        AngleUnit.Degree => this,
-        AngleUnit.Radian => Degree(Angle * 180 / Math.PI),
-        AngleUnit.Gradian => Degree(Angle * 0.9),
-        _ => throw new InvalidOperationException(),
-    };
+    public AngleValue ToDegree()
+        => To(AngleUnit.Degree);
 
     /// <summary>
     /// Converts the current object to radians.
     /// </summary>
     /// <returns>The angle which is converted to radians.</returns>
-    public AngleValue ToRadian() => Unit switch
-    {
-        AngleUnit.Degree => Radian(Angle * Math.PI / 180),
-        AngleUnit.Radian => this,
-        AngleUnit.Gradian => Radian(Angle * Math.PI / 200),
-        _ => throw new InvalidOperationException(),
-    };
+    public AngleValue ToRadian()
+        => To(AngleUnit.Radian);
 
     /// <summary>
     /// Converts the current object to gradians.
     /// </summary>
     /// <returns>The angle which is converted to gradians.</returns>
-    public AngleValue ToGradian() => Unit switch
-    {
-        AngleUnit.Degree => Gradian(Angle / 0.9),
-        AngleUnit.Radian => Gradian(Angle * 200 / Math.PI),
-        AngleUnit.Gradian => this,
-        _ => throw new InvalidOperationException(),
-    };
+    public AngleValue ToGradian()
+        => To(AngleUnit.Gradian);
 
     /// <summary>
     /// Normalizes the current angle between [0, 2pi).
@@ -287,13 +254,16 @@ public readonly struct AngleValue : IEquatable<AngleValue>, IComparable<AngleVal
             return value;
         }
 
-        return Unit switch
-        {
-            AngleUnit.Degree => Degree(NormalizeInternal(Angle.Number, degreeFullCircle)),
-            AngleUnit.Radian => Radian(NormalizeInternal(Angle.Number, radianFullCircle)),
-            AngleUnit.Gradian => Gradian(NormalizeInternal(Angle.Number, gradianFullCircle)),
-            _ => throw new InvalidOperationException(),
-        };
+        if (Unit == AngleUnit.Degree)
+            return Degree(NormalizeInternal(Angle.Number, degreeFullCircle));
+
+        if (Unit == AngleUnit.Radian)
+            return Radian(NormalizeInternal(Angle.Number, radianFullCircle));
+
+        // if (Unit == AngleUnit.Gradian)
+        Debug.Assert(Unit == AngleUnit.Gradian, "Should be Gradian");
+
+        return Gradian(NormalizeInternal(Angle.Number, gradianFullCircle));
     }
 
     /// <summary>

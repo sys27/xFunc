@@ -32,6 +32,6 @@ public class LengthConverter : IConverter<LengthValue>, IConverter<object>
         => Convert(value, unit);
 
     /// <inheritdoc cref="IConverter{TValue}.CanConvertTo" />
-    public bool CanConvertTo(string unit)
-        => LengthUnit.Names.Contains(unit.ToLower());
+    public bool CanConvertTo(object value, string unit)
+        => value is LengthValue or NumberValue && LengthUnit.Names.Contains(unit.ToLower());
 }

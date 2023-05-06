@@ -13,8 +13,16 @@ namespace xFunc.Maths.Expressions.Collections;
 /// </summary>
 public class ParameterCollection : IEnumerable<Parameter>, INotifyCollectionChanged
 {
-    private readonly Dictionary<string, Parameter> constants;
+    private static readonly Dictionary<string, Parameter> Constants;
     private readonly Dictionary<string, Parameter> collection;
+    private readonly bool withConstants;
+
+    static ParameterCollection()
+    {
+        Constants = new Dictionary<string, Parameter>();
+
+        InitializeConstants();
+    }
 
     /// <summary>
     /// Occurs when the collection changes.
@@ -66,13 +74,11 @@ public class ParameterCollection : IEnumerable<Parameter>, INotifyCollectionChan
         if (parameters is null)
             throw new ArgumentNullException(nameof(parameters));
 
-        constants = new Dictionary<string, Parameter>();
         collection = new Dictionary<string, Parameter>();
         foreach (var item in parameters)
             collection.Add(item.Key, item);
 
-        if (initConstants)
-            InitializeConstants();
+        withConstants = initConstants;
     }
 
     /// <summary>
@@ -82,7 +88,7 @@ public class ParameterCollection : IEnumerable<Parameter>, INotifyCollectionChan
     protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
         => CollectionChanged?.Invoke(this, args);
 
-    private void InitializeConstants()
+    private static void InitializeConstants()
     {
         // Archimedes' constant
         AddConstant(Parameter.Constant("π", AngleValue.Radian(Math.PI)));
@@ -127,14 +133,20 @@ public class ParameterCollection : IEnumerable<Parameter>, INotifyCollectionChan
         AddConstant(Parameter.Constant("γ", 0.57721566490153286060651));
     }
 
+    private static void AddConstant(Parameter parameter)
+        => Constants.Add(parameter.Key, parameter);
+
     /// <inheritdoc />
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     /// <inheritdoc />
     public IEnumerator<Parameter> GetEnumerator()
     {
-        foreach (var (_, item) in constants)
-            yield return item;
+        if (withConstants)
+        {
+            foreach (var (_, item) in Constants)
+                yield return item;
+        }
 
         foreach (var (_, item) in collection)
             yield return item;
@@ -165,15 +177,12 @@ public class ParameterCollection : IEnumerable<Parameter>, INotifyCollectionChan
         }
     }
 
-    private void AddConstant(Parameter parameter)
-        => constants.Add(parameter.Key, parameter);
-
     private Parameter GetParameterByKey(string key)
     {
         if (collection.TryGetValue(key, out var param))
             return param;
 
-        if (constants.TryGetValue(key, out param))
+        if (withConstants && Constants.TryGetValue(key, out param))
             return param;
 
         throw new KeyNotFoundException(string.Format(CultureInfo.InvariantCulture, Resource.VariableNotFoundExceptionError, key));
@@ -264,5 +273,5 @@ public class ParameterCollection : IEnumerable<Parameter>, INotifyCollectionChan
     /// <param name="key">The name of variable.</param>
     /// <returns><c>true</c> if the object contains the specified key; otherwise, <c>false</c>.</returns>
     public bool ContainsKey(string key)
-        => collection.ContainsKey(key) || constants.ContainsKey(key);
+        => collection.ContainsKey(key);
 }

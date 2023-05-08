@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions.Units;
 /// <summary>
 /// Represents the convert function.
 /// </summary>
+[FunctionName("convert")]
 public class Convert : IExpression
 {
     private readonly IConverter converter;

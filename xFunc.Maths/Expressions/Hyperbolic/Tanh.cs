@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic;
 /// <summary>
 /// Represents the Hyperbolic tangent function.
 /// </summary>
+[FunctionName("th")]
+[FunctionName("tanh")]
 public class Tanh : HyperbolicExpression
 {
     /// <summary>

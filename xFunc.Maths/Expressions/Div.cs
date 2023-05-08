@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the Division operator.
 /// </summary>
+[FunctionName("div")]
 public class Div : BinaryExpression
 {
     /// <summary>

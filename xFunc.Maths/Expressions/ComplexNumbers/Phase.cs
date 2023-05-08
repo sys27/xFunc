@@ -11,6 +11,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers;
 /// Represent the Phase function.
 /// </summary>
 /// <seealso cref="UnaryExpression" />
+[FunctionName("phase")]
 public class Phase : UnaryExpression
 {
     /// <summary>

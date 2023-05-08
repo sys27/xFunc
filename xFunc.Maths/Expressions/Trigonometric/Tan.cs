@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions.Trigonometric;
 /// <summary>
 /// Represents the Tangent function.
 /// </summary>
+[FunctionName("tan")]
+[FunctionName("tg")]
 public class Tan : TrigonometricExpression
 {
     /// <summary>

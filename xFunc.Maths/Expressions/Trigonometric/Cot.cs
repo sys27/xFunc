@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions.Trigonometric;
 /// <summary>
 /// Represents the Cotangent function.
 /// </summary>
+[FunctionName("cot")]
+[FunctionName("ctg")]
 public class Cot : TrigonometricExpression
 {
     /// <summary>

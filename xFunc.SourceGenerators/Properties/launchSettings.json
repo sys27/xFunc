@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Debug Source Generator": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "../xFunc.Maths/xFunc.Maths.csproj"
+    }
+  }
+}

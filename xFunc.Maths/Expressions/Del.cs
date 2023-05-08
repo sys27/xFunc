@@ -11,6 +11,8 @@ namespace xFunc.Maths.Expressions;
 /// Represents the "Del" operator.
 /// </summary>
 /// <seealso cref="UnaryExpression" />
+[FunctionName("del")]
+[FunctionName("nabla")]
 public class Del : UnaryExpression
 {
     private readonly IDifferentiator differentiator;

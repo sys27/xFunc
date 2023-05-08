@@ -11,6 +11,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers;
 /// Represents the Reciprocal function.
 /// </summary>
 /// <seealso cref="UnaryExpression" />
+[FunctionName("reciprocal")]
 public class Reciprocal : UnaryExpression
 {
     /// <summary>

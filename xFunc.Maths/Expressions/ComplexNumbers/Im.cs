@@ -11,6 +11,8 @@ namespace xFunc.Maths.Expressions.ComplexNumbers;
 /// Represent the function which returns the imaginary part of complex number.
 /// </summary>
 /// <seealso cref="UnaryExpression" />
+[FunctionName("im")]
+[FunctionName("imaginary")]
 public class Im : UnaryExpression
 {
     /// <summary>

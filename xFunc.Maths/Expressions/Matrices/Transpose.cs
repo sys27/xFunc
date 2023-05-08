@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions.Matrices;
 /// <summary>
 /// Represents the Transpose function.
 /// </summary>
+[FunctionName("transpose")]
 public class Transpose : UnaryExpression
 {
     /// <summary>

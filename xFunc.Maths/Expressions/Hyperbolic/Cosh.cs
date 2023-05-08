@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic;
 /// <summary>
 /// Represents the Hyperbolic cosine function.
 /// </summary>
+[FunctionName("ch")]
+[FunctionName("cosh")]
 public class Cosh : HyperbolicExpression
 {
     /// <summary>

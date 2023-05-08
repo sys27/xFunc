@@ -10,6 +10,7 @@ namespace xFunc.Maths.Expressions.Statistical;
 /// Represents the STDEVP function.
 /// </summary>
 /// <seealso cref="DifferentParametersExpression" />
+[FunctionName("stdevp")]
 public class Stdevp : StatisticalExpression
 {
     /// <summary>

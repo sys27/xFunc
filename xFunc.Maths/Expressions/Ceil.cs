@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the "ceil" function.
 /// </summary>
+[FunctionName("ceil")]
 public class Ceil : UnaryExpression
 {
     /// <summary>

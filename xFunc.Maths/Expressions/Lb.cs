@@ -8,6 +8,8 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the binary logarithm function.
 /// </summary>
+[FunctionName("lb")]
+[FunctionName("log2")]
 public class Lb : UnaryExpression
 {
     /// <summary>

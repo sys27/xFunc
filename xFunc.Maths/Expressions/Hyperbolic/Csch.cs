@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic;
 /// <summary>
 /// Represents the Hyperbolic cosecant function.
 /// </summary>
+[FunctionName("csch")]
 public class Csch : HyperbolicExpression
 {
     /// <summary>

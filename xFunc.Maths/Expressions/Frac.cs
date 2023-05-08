@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the 'frac' function.
 /// </summary>
+[FunctionName("frac")]
 public class Frac : UnaryExpression
 {
     /// <summary>

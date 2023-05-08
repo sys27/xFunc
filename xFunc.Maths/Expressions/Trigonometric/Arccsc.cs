@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions.Trigonometric;
 /// <summary>
 /// Represents the Arccosecant function.
 /// </summary>
+[FunctionName("arccsc")]
+[FunctionName("arccosec")]
 public class Arccsc : InverseTrigonometricExpression
 {
     /// <summary>

@@ -10,6 +10,7 @@ namespace xFunc.Maths.Expressions.Statistical;
 /// Represent the Max function.
 /// </summary>
 /// <seealso cref="DifferentParametersExpression" />
+[FunctionName("max")]
 public class Max : StatisticalExpression
 {
     /// <summary>

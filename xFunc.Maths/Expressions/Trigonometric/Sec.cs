@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions.Trigonometric;
 /// <summary>
 /// Represents the Secant function.
 /// </summary>
+[FunctionName("sec")]
 public class Sec : TrigonometricExpression
 {
     /// <summary>

@@ -10,6 +10,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers;
 /// <summary>
 /// Represents the 'tocomplex' function.
 /// </summary>
+[FunctionName("tocomplex")]
 public class ToComplex : UnaryExpression
 {
     /// <summary>

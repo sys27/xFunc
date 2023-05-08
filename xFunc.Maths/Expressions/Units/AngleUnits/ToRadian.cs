@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions.Units.AngleUnits;
 /// <summary>
 /// Represents the 'toradian' function.
 /// </summary>
+[FunctionName("torad")]
+[FunctionName("toradian")]
 public class ToRadian : UnaryExpression
 {
     /// <summary>

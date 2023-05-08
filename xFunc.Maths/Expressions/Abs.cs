@@ -10,6 +10,7 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the Absolute operator.
 /// </summary>
+[FunctionName("abs")]
 public class Abs : UnaryExpression
 {
     /// <summary>

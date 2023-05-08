@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions.Matrices;
 /// <summary>
 /// Represents a dot product of vectors.
 /// </summary>
+[FunctionName("dotproduct")]
 public class DotProduct : BinaryExpression
 {
     /// <summary>

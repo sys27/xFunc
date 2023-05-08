@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the 'tooct' function.
 /// </summary>
+[FunctionName("tooct")]
 public class ToOct : UnaryExpression
 {
     /// <summary>

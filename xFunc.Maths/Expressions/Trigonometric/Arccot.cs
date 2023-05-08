@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions.Trigonometric;
 /// <summary>
 /// Represents the Arcotangent function.
 /// </summary>
+[FunctionName("arccot")]
+[FunctionName("arcctg")]
 public class Arccot : InverseTrigonometricExpression
 {
     /// <summary>

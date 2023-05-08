@@ -10,6 +10,7 @@ namespace xFunc.Maths.Expressions.Statistical;
 /// Represent the Avg function.
 /// </summary>
 /// <seealso cref="DifferentParametersExpression" />
+[FunctionName("avg")]
 public class Avg : StatisticalExpression
 {
     /// <summary>

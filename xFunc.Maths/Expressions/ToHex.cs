@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the 'tohex' function.
 /// </summary>
+[FunctionName("tohex")]
 public class ToHex : UnaryExpression
 {
     /// <summary>

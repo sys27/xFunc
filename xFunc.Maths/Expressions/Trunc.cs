@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the 'truncate' function.
 /// </summary>
+[FunctionName("trunc")]
+[FunctionName("truncate")]
 public class Trunc : UnaryExpression
 {
     /// <summary>

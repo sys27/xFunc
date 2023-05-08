@@ -10,6 +10,7 @@ namespace xFunc.Maths.Expressions.Statistical;
 /// Represent the Count function.
 /// </summary>
 /// <seealso cref="DifferentParametersExpression" />
+[FunctionName("count")]
 public class Count : StatisticalExpression
 {
     /// <summary>

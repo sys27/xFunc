@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions.Statistical;
 /// <summary>
 /// Represents the "sum" function.
 /// </summary>
+[FunctionName("sum")]
 public class Sum : StatisticalExpression
 {
     /// <summary>

@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic;
 /// <summary>
 /// Represents the Artanh function.
 /// </summary>
+[FunctionName("arth")]
+[FunctionName("artanh")]
 public class Artanh : InverseHyperbolicExpression
 {
     /// <summary>

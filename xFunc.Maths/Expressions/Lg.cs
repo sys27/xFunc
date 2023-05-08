@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the Common logarithm function.
 /// </summary>
+[FunctionName("lg")]
 public class Lg : UnaryExpression
 {
     /// <summary>

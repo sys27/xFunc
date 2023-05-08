@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic;
 /// <summary>
 /// Represents the Hyperbolic sine function.
 /// </summary>
+[FunctionName("sh")]
+[FunctionName("sinh")]
 public class Sinh : HyperbolicExpression
 {
     /// <summary>

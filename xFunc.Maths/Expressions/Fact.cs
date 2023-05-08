@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the Factorial function.
 /// </summary>
+[FunctionName("fact")]
+[FunctionName("factorial")]
 public class Fact : UnaryExpression
 {
     /// <summary>

@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the "round" function.
 /// </summary>
+[FunctionName("round")]
 public class Round : DifferentParametersExpression
 {
     /// <summary>

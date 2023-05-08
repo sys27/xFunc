@@ -11,6 +11,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers;
 /// Represents the Conjugate function.
 /// </summary>
 /// <seealso cref="UnaryExpression" />
+[FunctionName("conjugate")]
 public class Conjugate : UnaryExpression
 {
     /// <summary>

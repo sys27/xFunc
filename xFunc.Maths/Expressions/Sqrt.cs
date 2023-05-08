@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the Square Root function.
 /// </summary>
+[FunctionName("sqrt")]
 public class Sqrt : UnaryExpression
 {
     /// <summary>

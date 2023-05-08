@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions.Units;
 /// <summary>
 /// Represents the 'tonumber' function.
 /// </summary>
+[FunctionName("tonumber")]
 public class ToNumber : UnaryExpression
 {
     /// <summary>

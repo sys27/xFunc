@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions.Matrices;
 /// <summary>
 /// Represents a cross product of vectors.
 /// </summary>
+[FunctionName("crossproduct")]
 public class CrossProduct : BinaryExpression
 {
     /// <summary>

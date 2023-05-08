@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions.Units.AngleUnits;
 /// <summary>
 /// Represents the 'todegree' function.
 /// </summary>
+[FunctionName("todeg")]
+[FunctionName("todegree")]
 public class ToDegree : UnaryExpression
 {
     /// <summary>

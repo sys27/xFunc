@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the Exponentiation operator.
 /// </summary>
+[FunctionName("pow")]
 public class Pow : BinaryExpression
 {
     /// <summary>

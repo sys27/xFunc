@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions.Statistical;
 /// <summary>
 /// Represents the "product" function.
 /// </summary>
+[FunctionName("product")]
 public class Product : StatisticalExpression
 {
     /// <summary>

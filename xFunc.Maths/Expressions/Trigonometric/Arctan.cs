@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions.Trigonometric;
 /// <summary>
 /// Represents the Arctangent function.
 /// </summary>
+[FunctionName("arctan")]
+[FunctionName("arctg")]
 public class Arctan : InverseTrigonometricExpression
 {
     /// <summary>

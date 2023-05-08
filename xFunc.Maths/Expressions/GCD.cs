@@ -9,6 +9,9 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents a greatest common divisor.
 /// </summary>
+[FunctionName("gcd")]
+[FunctionName("gcf")]
+[FunctionName("hcf")]
 public class GCD : DifferentParametersExpression
 {
     /// <summary>

@@ -10,6 +10,7 @@ namespace xFunc.Maths.Expressions.Statistical;
 /// Represent the Min function.
 /// </summary>
 /// <seealso cref="DifferentParametersExpression" />
+[FunctionName("min")]
 public class Min : StatisticalExpression
 {
     /// <summary>

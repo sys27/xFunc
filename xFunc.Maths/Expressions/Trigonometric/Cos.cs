@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions.Trigonometric;
 /// <summary>
 /// Represents the Cosine function.
 /// </summary>
+[FunctionName("cos")]
 public class Cos : TrigonometricExpression
 {
     /// <summary>

@@ -8,6 +8,7 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the nth root operator.
 /// </summary>
+[FunctionName("root")]
 public class Root : BinaryExpression
 {
     /// <summary>

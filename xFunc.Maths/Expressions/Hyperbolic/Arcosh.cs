@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic;
 /// <summary>
 /// Represents the Arcosh function.
 /// </summary>
+[FunctionName("arch")]
+[FunctionName("arcosh")]
 public class Arcosh : InverseHyperbolicExpression
 {
     /// <summary>

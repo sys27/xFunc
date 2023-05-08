@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions.Matrices;
 /// <summary>
 /// Represents the Inverse function.
 /// </summary>
+[FunctionName("inverse")]
 public class Inverse : UnaryExpression
 {
     /// <summary>

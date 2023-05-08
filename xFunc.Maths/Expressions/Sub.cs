@@ -10,6 +10,7 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the Subtraction operator.
 /// </summary>
+[FunctionName("sub")]
 public class Sub : BinaryExpression
 {
     /// <summary>

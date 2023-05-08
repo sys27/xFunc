@@ -10,6 +10,7 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents an Addition operator.
 /// </summary>
+[FunctionName("add")]
 public class Add : BinaryExpression
 {
     /// <summary>

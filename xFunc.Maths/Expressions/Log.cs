@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the Logarithm function.
 /// </summary>
+[FunctionName("log")]
 public class Log : BinaryExpression
 {
     /// <summary>

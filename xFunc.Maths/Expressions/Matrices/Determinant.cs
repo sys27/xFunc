@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions.Matrices;
 /// <summary>
 /// Represents a determinant.
 /// </summary>
+[FunctionName("det")]
+[FunctionName("determinant")]
 public class Determinant : UnaryExpression
 {
     /// <summary>

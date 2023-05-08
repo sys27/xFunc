@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the 'tobin' function.
 /// </summary>
+[FunctionName("tobin")]
 public class ToBin : UnaryExpression
 {
     /// <summary>

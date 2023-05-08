@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the 'deriv' function.
 /// </summary>
+[FunctionName("deriv")]
+[FunctionName("derivative")]
 public class Derivative : DifferentParametersExpression
 {
     /// <summary>

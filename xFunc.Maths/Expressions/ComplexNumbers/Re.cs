@@ -11,6 +11,8 @@ namespace xFunc.Maths.Expressions.ComplexNumbers;
 /// Represent the function which returns the real part of complex number.
 /// </summary>
 /// <seealso cref="UnaryExpression" />
+[FunctionName("re")]
+[FunctionName("real")]
 public class Re : UnaryExpression
 {
     /// <summary>

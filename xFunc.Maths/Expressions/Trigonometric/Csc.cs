@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions.Trigonometric;
 /// <summary>
 /// Represents the Cosecant function.
 /// </summary>
+[FunctionName("csc")]
+[FunctionName("cosec")]
 public class Csc : TrigonometricExpression
 {
     /// <summary>

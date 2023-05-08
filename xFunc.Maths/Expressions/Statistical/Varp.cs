@@ -10,6 +10,7 @@ namespace xFunc.Maths.Expressions.Statistical;
 /// Represents the VARP function.
 /// </summary>
 /// <seealso cref="DifferentParametersExpression" />
+[FunctionName("varp")]
 public class Varp : StatisticalExpression
 {
     /// <summary>

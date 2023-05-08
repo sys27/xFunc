@@ -10,6 +10,7 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the Multiplication operator.
 /// </summary>
+[FunctionName("mul")]
 public class Mul : BinaryExpression
 {
     /// <summary>

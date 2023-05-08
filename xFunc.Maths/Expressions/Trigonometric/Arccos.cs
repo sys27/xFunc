@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions.Trigonometric;
 /// <summary>
 /// Represents the Arccosine function.
 /// </summary>
+[FunctionName("arccos")]
 public class Arccos : InverseTrigonometricExpression
 {
     /// <summary>

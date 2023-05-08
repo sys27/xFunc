@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions.Units.AngleUnits;
 /// <summary>
 /// Represents the 'togradian' function.
 /// </summary>
+[FunctionName("tograd")]
+[FunctionName("togradian")]
 public class ToGradian : UnaryExpression
 {
     /// <summary>

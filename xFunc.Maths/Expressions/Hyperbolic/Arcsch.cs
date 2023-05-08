@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic;
 /// <summary>
 /// Represents the Arcsch function.
 /// </summary>
+[FunctionName("arcsch")]
 public class Arcsch : InverseHyperbolicExpression
 {
     /// <summary>

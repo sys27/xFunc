@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents a least common multiple.
 /// </summary>
+[FunctionName("lcm")]
+[FunctionName("scm")]
 public class LCM : DifferentParametersExpression
 {
     /// <summary>

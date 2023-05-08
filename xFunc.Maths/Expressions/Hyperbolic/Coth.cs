@@ -9,6 +9,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic;
 /// <summary>
 /// Represents the Hyperbolic cotangent function.
 /// </summary>
+[FunctionName("cth")]
+[FunctionName("coth")]
 public class Coth : HyperbolicExpression
 {
     /// <summary>

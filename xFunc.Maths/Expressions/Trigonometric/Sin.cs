@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions.Trigonometric;
 /// <summary>
 /// Represents the Sine function.
 /// </summary>
+[FunctionName("sin")]
 public class Sin : TrigonometricExpression
 {
     /// <summary>

@@ -10,6 +10,7 @@ namespace xFunc.Maths.Expressions.Statistical;
 /// Represents the VAR function.
 /// </summary>
 /// <seealso cref="DifferentParametersExpression" />
+[FunctionName("var")]
 public class Var : StatisticalExpression
 {
     /// <summary>

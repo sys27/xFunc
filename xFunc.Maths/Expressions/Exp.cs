@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the Exponential function.
 /// </summary>
+[FunctionName("exp")]
 public class Exp : UnaryExpression
 {
     /// <summary>

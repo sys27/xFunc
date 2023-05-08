@@ -9,6 +9,7 @@ namespace xFunc.Maths.Expressions;
 /// <summary>
 /// Represents the Sign function.
 /// </summary>
+[FunctionName("sign")]
 public class Sign : UnaryExpression
 {
     /// <summary>

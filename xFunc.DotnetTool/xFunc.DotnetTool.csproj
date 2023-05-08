@@ -11,7 +11,7 @@
     <Product>xFunc.Maths</Product>
     <Authors>Dmytro Kyshchenko</Authors>
     <Company />
-    <Copyright>Copyright ©2012-2022 Dmytro Kyshchenko</Copyright>
+    <Copyright>Copyright ©2012-2023 Dmytro Kyshchenko</Copyright>
     <PackageProjectUrl>https://github.com/sys27/xFunc</PackageProjectUrl>
     <PackageIcon>xFunc.png</PackageIcon>
     <PackageTags>Math Expression Expressions Parser MathParser Differentiation Simplification</PackageTags>

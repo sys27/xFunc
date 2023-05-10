@@ -7,14 +7,11 @@
     <RootNamespace>xFunc.Tests</RootNamespace>
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <CoverletOutputFormat>cobertura</CoverletOutputFormat>
-    <CoverletOutput>../coverage/</CoverletOutput>
-    <ExcludeByAttribute>ExcludeFromCodeCoverage,GeneratedCode</ExcludeByAttribute>
-    <Exclude>[xFunc.*]*Exception</Exclude>
-    <Threshold>90</Threshold>
-    <ThresholdStat>total</ThresholdStat>
     <ImplicitUsings>enable</ImplicitUsings>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <_CoverageFolder>$(SolutionDir)/coverage</_CoverageFolder>
+    <_CoverageFileName>coverage.cobertura.xml</_CoverageFileName>
+    <_PathToCopy>$(_CoverageFolder)/**/$(_CoverageFileName)</_PathToCopy>
   </PropertyGroup>
 
   <ItemGroup>
@@ -47,12 +44,23 @@
     <Using Include="Xunit" />
   </ItemGroup>
   
-  <Target Name="GenerateHtmlCoverageReport" AfterTargets="GenerateCoverageResultAfterTest" Condition="'$(CollectCoverage)' == 'true'">
-    <ReportGenerator ReportFiles="$(CoverletOutput)/coverage.cobertura.xml" TargetDirectory="$(CoverletOutput)" ReportTypes="HtmlInline_AzurePipelines" />
+  <Target Name="RemoveCoverageFolder" BeforeTargets="VSTest">
+    <RemoveDir Directories="$(_CoverageFolder)" />
+  </Target>
+  
+  <Target Name="GenerateHtmlCoverageReport">
+    <CreateItem Include="$(_PathToCopy)">
+      <Output TaskParameter="Include" ItemName="CoverageReport" />
+    </CreateItem>
+    <Copy SourceFiles="@(CoverageReport)" 
+          DestinationFolder="$(_CoverageFolder)" />
+    <ReportGenerator ReportFiles="$(_CoverageFolder)/$(_CoverageFileName)" 
+                     TargetDirectory="$(_CoverageFolder)" 
+                     ReportTypes="HtmlInline_AzurePipelines" />
   </Target>
 
   <ItemGroup>
-    <PackageReference Include="coverlet.msbuild" PrivateAssets="All" />
+    <PackageReference Include="coverlet.collector" PrivateAssets="All" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="Moq" />
     <PackageReference Include="ReportGenerator" />

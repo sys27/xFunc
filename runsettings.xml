@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <RunConfiguration>
+    <TreatTestAdapterErrorsAsWarnings>false</TreatTestAdapterErrorsAsWarnings>
+    <ResultsDirectory>coverage</ResultsDirectory>
+    <MaxCpuCount>0</MaxCpuCount>
+    <TestSessionTimeout>10000</TestSessionTimeout>
+    <TreatNoTestsAsError>true</TreatNoTestsAsError>
+    <CollectSourceInformation>true</CollectSourceInformation>
+  </RunConfiguration>
+
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat code coverage">
+        <Configuration>
+          <Format>cobertura</Format>
+          <Exclude>[xFunc.*]*Exception</Exclude>
+          <ExcludeByAttribute>ExcludeFromCodeCoverage,GeneratedCode</ExcludeByAttribute>
+          <SingleHit>false</SingleHit>
+          <UseSourceLink>false</UseSourceLink>
+          <IncludeTestAssembly>false</IncludeTestAssembly>
+          <SkipAutoProps>false</SkipAutoProps>
+          <DeterministicReport>true</DeterministicReport>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>

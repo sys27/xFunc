@@ -40,8 +40,10 @@
             "args": [
                 "test",
                 "${workspaceFolder}/xFunc.sln",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "-c:${input:configurationType}",
+                "--collect:\"XPlat Code Coverage\"",
+                "--settings",
+                "runsettings.xml"
             ],
             "problemMatcher": "$msCompile"
         },
@@ -51,12 +53,13 @@
             "command": "dotnet",
             "type": "process",
             "args": [
-                "test",
+                "msbuild",
                 "${workspaceFolder}/xFunc.sln",
-                "-c:${input:configurationType}",
-                "-p:CollectCoverage=true"
+                "-p:Configuration=${input:configurationType}",
+                "-target:\"xFunc_Tests:GenerateHtmlCoverageReport\""
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "dependsOn": ["Test"]
         }
     ],
     "inputs": [

@@ -45,8 +45,16 @@ jobs:
       inputs:
         command: test
         projects: '$(solution)'
-        arguments: '--nologo --no-build -c $(buildConfiguration) -p:CollectCoverage=true -p:CoverletOutput=$(Build.SourcesDirectory)/coverage/'
+        arguments: '--nologo --no-build -c $(buildConfiguration) --collect:"XPlat Code Coverage" --settings runsettings.xml'
         publishTestResults: true
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Generate Report'
+      inputs:
+        command: custom
+        custom: msbuild
+        projects: '$(solution)'
+        arguments: '-p:Configuration=$(buildConfiguration) -p:_PathToCopy="$(Agent.TempDirectory)/**/coverage.cobertura.xml" -target:"xFunc_Tests:GenerateHtmlCoverageReport"'
 
     - task: PublishCodeCoverageResults@1
       inputs:

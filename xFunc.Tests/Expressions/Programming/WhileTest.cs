@@ -9,7 +9,7 @@ public class WhileTest
     public void CalculateWhileTest()
     {
         var parameters = new ExpressionParameters();
-        parameters.Variables.Add(new Parameter("x", 0));
+        parameters.Add(new Parameter("x", 0));
 
         var body = new Define(Variable.X, new Add(Variable.X, Number.Two));
         var cond = new LessThan(Variable.X, new Number(10));
@@ -17,7 +17,7 @@ public class WhileTest
         var @while = new While(body, cond);
         @while.Execute(parameters);
 
-        Assert.Equal(new NumberValue(10.0), parameters.Variables["x"]);
+        Assert.Equal(new NumberValue(10.0), parameters["x"]);
     }
 
     [Fact]

@@ -8,7 +8,7 @@ public class MulAssignTest
     [Fact]
     public void MulAssignCalc()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 10) };
+        var parameters = new ExpressionParameters { new Parameter("x", 10) };
         var mul = new MulAssign(Variable.X, Number.Two);
         var result = mul.Execute(parameters);
         var expected = new NumberValue(20.0);
@@ -20,7 +20,7 @@ public class MulAssignTest
     [Fact]
     public void MulAssignAsExpressionTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 10) };
+        var parameters = new ExpressionParameters { new Parameter("x", 10) };
         var add = new Add(Number.Two, new MulAssign(Variable.X, Number.Two));
         var result = add.Execute(parameters);
 
@@ -40,7 +40,7 @@ public class MulAssignTest
     public void MulValueBoolParameters()
     {
         var exp = new MulAssign(Variable.X, Bool.False);
-        var parameters = new ParameterCollection { new Parameter("x", 1) };
+        var parameters = new ExpressionParameters { new Parameter("x", 1) };
 
         Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));
     }
@@ -48,7 +48,7 @@ public class MulAssignTest
     [Fact]
     public void BoolMulNumberTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", true) };
+        var parameters = new ExpressionParameters { new Parameter("x", true) };
         var mul = new MulAssign(Variable.X, Number.Two);
 
         Assert.Throws<ResultIsNotSupportedException>(() => mul.Execute(parameters));

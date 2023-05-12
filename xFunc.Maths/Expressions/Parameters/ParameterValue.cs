@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Numerics;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
-namespace xFunc.Maths.Expressions.Collections;
+namespace xFunc.Maths.Expressions.Parameters;
 
 /// <summary>
 /// Represents a parameter value.
@@ -102,6 +102,12 @@ public readonly struct ParameterValue : IEquatable<ParameterValue>
     {
     }
 
+    /// <inheritdoc cref="ParameterValue(object)"/>
+    public ParameterValue(Lambda lambda)
+        : this(lambda as object)
+    {
+    }
+
     /// <summary>
     /// Initializes a new instance of the <see cref="ParameterValue" /> struct.
     /// </summary>
@@ -125,7 +131,8 @@ public readonly struct ParameterValue : IEquatable<ParameterValue>
                 or bool
                 or Vector
                 or Matrix
-                or string,
+                or string
+                or Lambda,
             "Unsupported parameter value.");
 
         Value = value;
@@ -193,6 +200,10 @@ public readonly struct ParameterValue : IEquatable<ParameterValue>
 
     /// <inheritdoc cref="ParameterValue.op_Implicit(double)"/>
     public static implicit operator ParameterValue(string value)
+        => new ParameterValue(value);
+
+    /// <inheritdoc cref="ParameterValue.op_Implicit(double)"/>
+    public static implicit operator ParameterValue(Lambda value)
         => new ParameterValue(value);
 
     /// <inheritdoc />

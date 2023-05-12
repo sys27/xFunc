@@ -145,6 +145,9 @@ public class Processor
             IExpression expression
                 => new ExpressionResult(expression),
 
+            Lambda lambda
+                => new LambdaResult(lambda),
+
             _ => throw new InvalidResultException(),
         };
     }

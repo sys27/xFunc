@@ -6,12 +6,6 @@ namespace xFunc.Tests.Expressions;
 public class UndefineTest
 {
     [Fact]
-    public void InvalidTypeTest()
-    {
-        Assert.Throws<NotSupportedException>(() => new Undefine(Number.One));
-    }
-
-    [Fact]
     public void ExecuteFailTest()
     {
         Assert.Throws<NotSupportedException>(() => new Undefine(Variable.X).Execute());
@@ -21,12 +15,6 @@ public class UndefineTest
     public void ExecuteParamNullTest()
     {
         Assert.Throws<ArgumentNullException>(() => new Undefine(Variable.X).Execute(null));
-    }
-
-    [Fact]
-    public void KeyNotSupportedTest()
-    {
-        Assert.Throws<NotSupportedException>(() => new Undefine(Number.One));
     }
 
     [Fact]
@@ -73,7 +61,7 @@ public class UndefineTest
     [Fact]
     public void UndefVarTest()
     {
-        var parameters = new ParameterCollection { { "a", new NumberValue(1) } };
+        var parameters = new ExpressionParameters { { "a", new NumberValue(1) } };
 
         var undef = new Undefine(new Variable("a"));
         undef.Execute(parameters);
@@ -83,47 +71,22 @@ public class UndefineTest
     [Fact]
     public void UndefFuncTest()
     {
-        var key1 = new UserFunction("f", new IExpression[0]);
-        var key2 = new UserFunction("f", new IExpression[] { Variable.X });
-
-        var functions = new FunctionCollection
+        var lambda = new Lambda(new[] { "x" }, Variable.X);
+        var parameters = new ExpressionParameters
         {
-            { key1, Number.One },
-            { key2, Number.Two },
+            { Variable.X.Name, lambda }
         };
+        var undef = new Undefine(Variable.X);
 
-        var undef = new Undefine(key1);
-        var result = undef.Execute(functions);
+        var result = undef.Execute(parameters);
 
-        Assert.False(functions.ContainsKey(key1));
-        Assert.True(functions.ContainsKey(key2));
-        Assert.Equal("The 'f()' function is removed.", result);
-    }
-
-    [Fact]
-    public void UndefFuncWithParamsTest()
-    {
-        var key1 = new UserFunction("f", new IExpression[0]);
-        var key2 = new UserFunction("f", new IExpression[] { Variable.X });
-
-        var functions = new FunctionCollection
-        {
-            { key1, Number.One },
-            { key2, Number.Two },
-        };
-
-        var undef = new Undefine(key2);
-        var result = undef.Execute(functions);
-
-        Assert.True(functions.ContainsKey(key1));
-        Assert.False(functions.ContainsKey(key2));
-        Assert.Equal("The 'f(x)' function is removed.", result);
+        Assert.Equal("'x' is removed.", result);
     }
 
     [Fact]
     public void UndefConstTest()
     {
-        var parameters = new ParameterCollection();
+        var parameters = new ExpressionParameters();
 
         var undef = new Undefine(new Variable("π"));
 

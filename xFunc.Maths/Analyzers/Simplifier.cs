@@ -938,26 +938,43 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     }
 
     /// <inheritdoc />
-    public override IExpression Analyze(UserFunction exp)
+    public override IExpression Analyze(CallExpression exp)
     {
         if (exp is null)
             ArgNull(ExceptionArgument.exp);
 
-        var arguments = exp.Arguments;
-        var isExpChanged = false;
+        var function = exp.Function.Analyze(this);
+        var isChanged = IsChanged(exp.Function, function);
+        var parameters = exp.Parameters;
 
-        for (var i = 0; i < exp.ParametersCount; i++)
+        for (var i = 0; i < exp.Parameters.Length; i++)
         {
-            var expression = exp[i].Analyze(this);
-            if (IsChanged(exp[i], expression))
+            var parameter = exp.Parameters[i];
+            var simplified = parameter.Analyze(this);
+            if (IsChanged(parameter, simplified))
             {
-                isExpChanged = true;
-                arguments = arguments.SetItem(i, expression);
+                parameters = parameters.SetItem(i, simplified);
+                isChanged = true;
             }
         }
 
-        if (isExpChanged)
-            return exp.Clone(arguments);
+        if (isChanged)
+            return exp.Clone(function, parameters);
+
+        return exp;
+    }
+
+    /// <inheritdoc />
+    public override IExpression Analyze(LambdaExpression exp)
+    {
+        if (exp is null)
+            ArgNull(ExceptionArgument.exp);
+
+        var body = exp.Lambda.Body.Analyze(this);
+        if (IsChanged(exp.Lambda.Body, body))
+        {
+            return exp.Clone(new Lambda(exp.Lambda.Parameters, body));
+        }
 
         return exp;
     }

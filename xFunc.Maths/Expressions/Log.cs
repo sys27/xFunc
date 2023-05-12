@@ -12,6 +12,13 @@ namespace xFunc.Maths.Expressions;
 public class Log : BinaryExpression
 {
     /// <summary>
+    /// Gets the lambda for the current expression.
+    /// </summary>
+    internal static Lambda Lambda { get; } = new Lambda(
+        new[] { Variable.X.Name, Variable.Y.Name },
+        new Log(Variable.X, Variable.Y));
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="Log"/> class.
     /// </summary>
     /// <param name="base">The right operand.</param>

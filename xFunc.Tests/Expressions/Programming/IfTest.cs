@@ -1,14 +1,27 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Collections.Immutable;
+
 namespace xFunc.Tests.Expressions.Programming;
 
 public class IfTest : BaseExpressionTests
 {
     [Fact]
+    public void CtorMaxParametersExceeded()
+        => Assert.Throws<ArgumentException>(() => new If(new IExpression[]
+        {
+            Variable.X,
+            Variable.X,
+            Variable.X,
+            Variable.X,
+            Variable.X,
+        }.ToImmutableArray()));
+
+    [Fact]
     public void CalculateIfElseTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 10) };
+        var parameters = new ExpressionParameters { new Parameter("x", 10) };
 
         var cond = new Equal(Variable.X, new Number(10));
         var @if = new If(cond, new Number(20), Number.Zero);
@@ -23,7 +36,7 @@ public class IfTest : BaseExpressionTests
     [Fact]
     public void CalculateIfElseNegativeNumberTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 0) };
+        var parameters = new ExpressionParameters { new Parameter("x", 0) };
 
         var cond = new Equal(Variable.X, Number.Zero);
         var @if = new If(cond, Number.One, new UnaryMinus(Number.One));
@@ -38,7 +51,7 @@ public class IfTest : BaseExpressionTests
     [Fact]
     public void CalculateIfTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 10) };
+        var parameters = new ExpressionParameters { new Parameter("x", 10) };
 
         var cond = new Equal(Variable.X, new Number(10));
         var @if = new If(cond, new Number(20));
@@ -49,7 +62,7 @@ public class IfTest : BaseExpressionTests
     [Fact]
     public void CalculateElseTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 0) };
+        var parameters = new ExpressionParameters { new Parameter("x", 0) };
 
         var cond = new Equal(Variable.X, new Number(10));
         var @if = new If(cond, new Number(20));

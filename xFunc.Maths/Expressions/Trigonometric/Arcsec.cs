@@ -12,6 +12,11 @@ namespace xFunc.Maths.Expressions.Trigonometric;
 public class Arcsec : InverseTrigonometricExpression
 {
     /// <summary>
+    /// Gets the lambda for the current expression.
+    /// </summary>
+    internal static Lambda Lambda { get; } = new Lambda(new[] { Variable.X.Name }, new Arcsec(Variable.X));
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="Arcsec"/> class.
     /// </summary>
     /// <param name="expression">The argument of function.</param>

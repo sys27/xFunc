@@ -13,6 +13,13 @@ namespace xFunc.Maths.Expressions;
 public class Add : BinaryExpression
 {
     /// <summary>
+    /// Gets the lambda for the current expression.
+    /// </summary>
+    internal static Lambda Lambda { get; } = new Lambda(
+        new[] { Variable.X.Name, Variable.Y.Name },
+        new Add(Variable.X, Variable.Y));
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="Add"/> class.
     /// </summary>
     /// <param name="left">The left operand.</param>

@@ -58,20 +58,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AssignFunction" xml:space="preserve">
-    <value>The expression '{1}' was assigned to the function '{0}'.</value>
-  </data>
-  <data name="AssignVariable" xml:space="preserve">
-    <value>The value '{1}' was assigned to the variable '{0}'.</value>
+  <data name="Assign" xml:space="preserve">
+    <value>The value '{1}' was assigned to '{0}'.</value>
   </data>
   <data name="ConstError" xml:space="preserve">
     <value>You can't change constants.</value>
   </data>
   <data name="ErrorWhileParsingTree" xml:space="preserve">
     <value>An error occurred while parsing the tree.</value>
-  </data>
-  <data name="FunctionNotFoundExceptionError" xml:space="preserve">
-    <value>The '{0}' function not found.</value>
   </data>
   <data name="LessParams" xml:space="preserve">
     <value>The number of parameters is less than expected.</value>
@@ -91,11 +85,8 @@
   <data name="ReadOnlyError" xml:space="preserve">
     <value>You cannot change the read-only variable.</value>
   </data>
-  <data name="UndefineFunction" xml:space="preserve">
-    <value>The '{0}' function is removed.</value>
-  </data>
-  <data name="UndefineVariable" xml:space="preserve">
-    <value>The '{0}' variable is removed.</value>
+  <data name="Undefine" xml:space="preserve">
+    <value>'{0}' is removed.</value>
   </data>
   <data name="VariableNotFoundExceptionError" xml:space="preserve">
     <value>The '{0}' variable not found.</value>
@@ -181,9 +172,6 @@
   <data name="CommaParseException" xml:space="preserve">
     <value>The comma symbol (',') is expected after '{0}' expression.</value>
   </data>
-  <data name="ExpParenParseException" xml:space="preserve">
-    <value>Cannot parse expression after '(' symbol.</value>
-  </data>
   <data name="CloseParenParseException" xml:space="preserve">
     <value>The ')' symbol is expected after '{0}' expression.</value>
   </data>
@@ -219,5 +207,14 @@
   </data>
   <data name="ValueIsNotSupportedException" xml:space="preserve">
     <value>The '{0} ({1})' conversion value is not supported.</value>
+  </data>
+  <data name="MissingLambdaParseException" xml:space="preserve">
+    <value>The lambda operator ('=&gt;') is missng.</value>
+  </data>
+  <data name="DuplidateLambdaParameterParseException" xml:space="preserve">
+    <value>The '{0}' parameter is already present in the lambda.</value>
+  </data>
+  <data name="MissingLambdaBodyParseException" xml:space="preserve">
+    <value>Can't parse the body of the lambda expression.</value>
   </data>
 </root>

@@ -354,7 +354,15 @@ public interface IAnalyzer<out TResult, in TContext>
     /// <param name="exp">The expression.</param>
     /// <param name="context">The context.</param>
     /// <returns>The result of analysis.</returns>
-    TResult Analyze(UserFunction exp, TContext context);
+    TResult Analyze(CallExpression exp, TContext context);
+
+    /// <summary>
+    /// Analyzes the specified expression.
+    /// </summary>
+    /// <param name="exp">The expression.</param>
+    /// <param name="context">The context.</param>
+    /// <returns>The result of analysis.</returns>
+    TResult Analyze(LambdaExpression exp, TContext context);
 
     /// <summary>
     /// Analyzes the specified expression.

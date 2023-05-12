@@ -1,6 +1,8 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Collections.Immutable;
+
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class SubTests : TypeAnalyzerBaseTests
@@ -162,7 +164,9 @@ public class SubTests : TypeAnalyzerBaseTests
     {
         var exp = new Sub(
             Number.One,
-            new UserFunction("f", new IExpression[] { Number.One }));
+            new CallExpression(
+                new Variable("f"),
+                new IExpression[] { Number.One }.ToImmutableArray()));
 
         Test(exp, ResultTypes.Undefined);
     }
@@ -172,7 +176,9 @@ public class SubTests : TypeAnalyzerBaseTests
     {
         var exp = new Sub(
             new ComplexNumber(3, 2),
-            new UserFunction("f", new IExpression[] { Number.One }));
+            new CallExpression(
+                new Variable("f"),
+                new IExpression[] { Number.One }.ToImmutableArray()));
 
         Test(exp, ResultTypes.Undefined);
     }
@@ -208,8 +214,11 @@ public class SubTests : TypeAnalyzerBaseTests
     [Fact]
     public void SubVectorAllTest()
     {
-        var vector = new Vector(new IExpression[] { Number.One });
-        var exp = new Sub(vector, new UserFunction("f", new IExpression[] { Number.One }));
+        var exp = new Sub(
+            new Vector(new IExpression[] { Number.One }),
+            new CallExpression(
+                new Variable("f"),
+                new IExpression[] { Number.One }.ToImmutableArray()));
 
         Test(exp, ResultTypes.Undefined);
     }
@@ -221,7 +230,11 @@ public class SubTests : TypeAnalyzerBaseTests
         {
             new Vector(new IExpression[] { Number.One })
         });
-        var exp = new Sub(matrix, new UserFunction("f", new IExpression[] { Number.One }));
+        var exp = new Sub(
+            matrix,
+            new CallExpression(
+                new Variable("f"),
+                new IExpression[] { Number.One }.ToImmutableArray()));
 
         Test(exp, ResultTypes.Undefined);
     }

@@ -17,7 +17,7 @@ public class ForTest
         var @for = new For(new Variable("i"), init, cond, iter);
         @for.Execute(parameters);
 
-        Assert.Equal(new NumberValue(10.0), parameters.Variables["i"]);
+        Assert.Equal(new NumberValue(10.0), parameters["i"]);
     }
 
     [Fact]

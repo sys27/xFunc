@@ -1,6 +1,7 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Collections.Immutable;
 using System.Reflection;
 using Xunit.Sdk;
 
@@ -52,7 +53,6 @@ public class NullArgumentTest : BaseTest
     [InlineData(typeof(Sqrt))]
     [InlineData(typeof(Sub))]
     [InlineData(typeof(UnaryMinus))]
-    [InlineData(typeof(UserFunction))]
     [InlineData(typeof(Variable))]
     [InlineData(typeof(Arccos))]
     [InlineData(typeof(Arccot))]
@@ -117,7 +117,7 @@ public class NullArgumentTest : BaseTest
     {
         var exp = Create(type, Variable.X);
 
-        Assert.Throws<ArgumentNullException>(() => { exp.Analyze(differentiator, null); });
+        Assert.Throws<ArgumentNullException>(() => exp.Analyze(differentiator, null));
     }
 
     [Theory]
@@ -132,7 +132,7 @@ public class NullArgumentTest : BaseTest
     {
         var exp = Create(type, Variable.X, Variable.X);
 
-        Assert.Throws<ArgumentNullException>(() => { exp.Analyze(differentiator, null); });
+        Assert.Throws<ArgumentNullException>(() => exp.Analyze(differentiator, null));
     }
 
     [Fact]
@@ -168,18 +168,28 @@ public class NullArgumentTest : BaseTest
     }
 
     [Fact]
-    public void UserFunctionContextArgumentTest()
-    {
-        var exp = new UserFunction("func", new IExpression[] { Variable.X });
-
-        Assert.Throws<ArgumentNullException>(() => differentiator.Analyze(exp, null));
-    }
-
-    [Fact]
     public void VariableContextArgumentTest()
     {
         var exp = Variable.X;
 
         Assert.Throws<ArgumentNullException>(() => differentiator.Analyze(exp, null));
+    }
+
+    [Fact]
+    public void CallExpressionContextNullArgument()
+    {
+        var exp = new CallExpression(
+            new Lambda(new[] { "x" }, Variable.X).AsExpression(),
+            new IExpression[] { Variable.X }.ToImmutableArray());
+
+        Assert.Throws<NotSupportedException>(() => exp.Analyze(differentiator, null));
+    }
+
+    [Fact]
+    public void LambdaExpressionContextNullArgument()
+    {
+        var exp = new Lambda(new[] { "x" }, Variable.X).AsExpression();
+
+        Assert.Throws<NotSupportedException>(() => exp.Analyze(differentiator, null));
     }
 }

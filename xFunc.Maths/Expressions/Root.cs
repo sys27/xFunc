@@ -11,6 +11,13 @@ namespace xFunc.Maths.Expressions;
 public class Root : BinaryExpression
 {
     /// <summary>
+    /// Gets the lambda for the current expression.
+    /// </summary>
+    internal static Lambda Lambda { get; } = new Lambda(
+        new[] { Variable.X.Name, Variable.Y.Name },
+        new Root(Variable.X, Variable.Y));
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="Root"/> class.
     /// </summary>
     /// <param name="radicand">The radicand.</param>

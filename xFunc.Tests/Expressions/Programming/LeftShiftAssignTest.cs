@@ -9,7 +9,7 @@ public class LeftShiftAssignTest
     public void ExecuteTest()
     {
         var exp = new LeftShiftAssign(Variable.X, new Number(10));
-        var parameters = new ParameterCollection
+        var parameters = new ExpressionParameters
         {
             new Parameter("x", 1.0)
         };
@@ -23,7 +23,7 @@ public class LeftShiftAssignTest
     public void ExecuteAsExpressionTest()
     {
         var exp = new Add(Number.One, new LeftShiftAssign(Variable.X, new Number(10)));
-        var parameters = new ParameterCollection
+        var parameters = new ExpressionParameters
         {
             new Parameter("x", 1.0)
         };
@@ -45,7 +45,7 @@ public class LeftShiftAssignTest
     public void ExecuteDoubleLeftTest()
     {
         var exp = new LeftShiftAssign(Variable.X, new Number(10));
-        var parameters = new ParameterCollection
+        var parameters = new ExpressionParameters
         {
             new Parameter("x", 1.5)
         };
@@ -57,7 +57,7 @@ public class LeftShiftAssignTest
     public void ExecuteDoubleRightTest()
     {
         var exp = new LeftShiftAssign(Variable.X, new Number(10.1));
-        var parameters = new ParameterCollection
+        var parameters = new ExpressionParameters
         {
             new Parameter("x", 1.0)
         };
@@ -69,7 +69,7 @@ public class LeftShiftAssignTest
     public void ExecuteBoolRightTest()
     {
         var exp = new LeftShiftAssign(Variable.X, Bool.True);
-        var parameters = new ParameterCollection
+        var parameters = new ExpressionParameters
         {
             new Parameter("x", 1.0)
         };
@@ -81,7 +81,7 @@ public class LeftShiftAssignTest
     public void ExecuteBoolLeftTest()
     {
         var exp = new LeftShiftAssign(Variable.X, Bool.True);
-        var parameters = new ParameterCollection
+        var parameters = new ExpressionParameters
         {
             new Parameter("x", false)
         };

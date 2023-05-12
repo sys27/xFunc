@@ -186,7 +186,11 @@ public abstract class Analyzer<TResult, TContext> : IAnalyzer<TResult, TContext>
         => Analyze(exp as IExpression, context);
 
     /// <inheritdoc />
-    public virtual TResult Analyze(UserFunction exp, TContext context)
+    public virtual TResult Analyze(CallExpression exp, TContext context)
+        => Analyze(exp as IExpression, context);
+
+    /// <inheritdoc />
+    public virtual TResult Analyze(LambdaExpression exp, TContext context)
         => Analyze(exp as IExpression, context);
 
     /// <inheritdoc />

@@ -1,10 +1,16 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Collections.Immutable;
+
 namespace xFunc.Tests.ParserTests;
 
 public class GCDTests : BaseParserTests
 {
+    [Fact]
+    public void CtorNullTest()
+        => Assert.Throws<ArgumentNullException>(() => new GCD(new ImmutableArray<IExpression>()));
+
     [Theory]
     [InlineData("gcd(12, 16)")]
     [InlineData("gcf(12, 16)")]

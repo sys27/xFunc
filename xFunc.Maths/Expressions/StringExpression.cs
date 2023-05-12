@@ -54,7 +54,7 @@ public class StringExpression : IExpression, IEquatable<StringExpression>
 
     /// <inheritdoc />
     public override string ToString()
-        => ToString(new CommonFormatter());
+        => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
     public object Execute() => Value;

@@ -1,6 +1,7 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Collections.Immutable;
 using System.Text;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
@@ -76,14 +77,29 @@ public class ParserTest : BaseParserTests
         => ParseErrorTest("sin(x)2");
 
     [Fact]
-    public void UserFunc()
+    public void ParseCallExpression()
     {
         var expected = new Add(
             Number.One,
-            new UserFunction("func", new IExpression[] { Variable.X })
+            new CallExpression(
+                new Variable("func"),
+                new IExpression[] { Variable.X }.ToImmutableArray())
         );
 
         ParseTest("1 + func(x)", expected);
+    }
+
+    [Fact]
+    public void ParseCallExpressionZeroParameters()
+    {
+        var expected = new Add(
+            Number.One,
+            new CallExpression(
+                new Variable("func"),
+                ImmutableArray<IExpression>.Empty)
+        );
+
+        ParseTest("1 + func()", expected);
     }
 
     [Fact]
@@ -660,25 +676,6 @@ public class ParserTest : BaseParserTests
     [Fact]
     public void VarWithNumber3()
         => ParseTest("x1b2v3", new Variable("x1b2v3"));
-
-    [Fact]
-    public void HugeFunctionDeclaration()
-    {
-        var sb = new StringBuilder();
-        sb.Append("func(");
-
-        var i = 0;
-        for (; i < 100; i++)
-            sb.AppendFormat("x{0}, ", i);
-
-        sb.AppendFormat("x{0}", i);
-        sb.Append(") := 0");
-
-        var function = sb.ToString();
-        var exp = parser.Parse(function);
-
-        Assert.NotNull(exp);
-    }
 
     [Fact]
     public void ToBinTest()

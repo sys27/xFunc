@@ -13,6 +13,13 @@ namespace xFunc.Maths.Expressions;
 public class Sub : BinaryExpression
 {
     /// <summary>
+    /// Gets the lambda for the current expression.
+    /// </summary>
+    internal static Lambda Lambda { get; } = new Lambda(
+        new[] { Variable.X.Name, Variable.Y.Name },
+        new Sub(Variable.X, Variable.Y));
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="Sub"/> class.
     /// </summary>
     /// <param name="left">The minuend.</param>

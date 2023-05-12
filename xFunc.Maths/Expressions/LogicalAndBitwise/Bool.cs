@@ -91,7 +91,7 @@ public class Bool : IExpression, IEquatable<Bool>
     public string ToString(IFormatter formatter) => Analyze(formatter);
 
     /// <inheritdoc />
-    public override string ToString() => ToString(new CommonFormatter());
+    public override string ToString() => ToString(CommonFormatter.Instance);
 
     /// <summary>
     /// Gets the value of this expression.

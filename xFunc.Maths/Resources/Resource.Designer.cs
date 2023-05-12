@@ -45,15 +45,9 @@ namespace xFunc.Maths.Resources {
             }
         }
         
-        internal static string AssignFunction {
+        internal static string Assign {
             get {
-                return ResourceManager.GetString("AssignFunction", resourceCulture);
-            }
-        }
-        
-        internal static string AssignVariable {
-            get {
-                return ResourceManager.GetString("AssignVariable", resourceCulture);
+                return ResourceManager.GetString("Assign", resourceCulture);
             }
         }
         
@@ -66,12 +60,6 @@ namespace xFunc.Maths.Resources {
         internal static string ErrorWhileParsingTree {
             get {
                 return ResourceManager.GetString("ErrorWhileParsingTree", resourceCulture);
-            }
-        }
-        
-        internal static string FunctionNotFoundExceptionError {
-            get {
-                return ResourceManager.GetString("FunctionNotFoundExceptionError", resourceCulture);
             }
         }
         
@@ -111,15 +99,9 @@ namespace xFunc.Maths.Resources {
             }
         }
         
-        internal static string UndefineFunction {
+        internal static string Undefine {
             get {
-                return ResourceManager.GetString("UndefineFunction", resourceCulture);
-            }
-        }
-        
-        internal static string UndefineVariable {
-            get {
-                return ResourceManager.GetString("UndefineVariable", resourceCulture);
+                return ResourceManager.GetString("Undefine", resourceCulture);
             }
         }
         
@@ -291,12 +273,6 @@ namespace xFunc.Maths.Resources {
             }
         }
         
-        internal static string ExpParenParseException {
-            get {
-                return ResourceManager.GetString("ExpParenParseException", resourceCulture);
-            }
-        }
-        
         internal static string CloseParenParseException {
             get {
                 return ResourceManager.GetString("CloseParenParseException", resourceCulture);
@@ -366,6 +342,24 @@ namespace xFunc.Maths.Resources {
         internal static string ValueIsNotSupportedException {
             get {
                 return ResourceManager.GetString("ValueIsNotSupportedException", resourceCulture);
+            }
+        }
+        
+        internal static string MissingLambdaParseException {
+            get {
+                return ResourceManager.GetString("MissingLambdaParseException", resourceCulture);
+            }
+        }
+        
+        internal static string DuplidateLambdaParameterParseException {
+            get {
+                return ResourceManager.GetString("DuplidateLambdaParameterParseException", resourceCulture);
+            }
+        }
+        
+        internal static string MissingLambdaBodyParseException {
+            get {
+                return ResourceManager.GetString("MissingLambdaBodyParseException", resourceCulture);
             }
         }
     }

@@ -3,7 +3,7 @@
 
 using System.Runtime.Serialization;
 
-namespace xFunc.Maths.Expressions.Collections;
+namespace xFunc.Maths.Expressions.Parameters;
 
 /// <summary>
 /// Trying to change a read-only variable.

@@ -16,19 +16,10 @@ public class Define : IExpression
     /// <param name="key">The key.</param>
     /// <param name="value">The value.</param>
     /// <exception cref="ArgumentNullException"><paramref name="key"/> or <paramref name="value"/> is null.</exception>
-    public Define(IExpression key, IExpression value)
+    public Define(Variable key, IExpression value)
     {
-        if (key is null)
-            throw new ArgumentNullException(nameof(value));
-
-        if (!(key is Variable || key is UserFunction))
-            throw new NotSupportedException();
-
-        if (value is null)
-            throw new ArgumentNullException(nameof(value));
-
-        Key = key;
-        Value = value;
+        Key = key ?? throw new ArgumentNullException(nameof(key));
+        Value = value ?? throw new ArgumentNullException(nameof(value));
     }
 
     /// <inheritdoc />
@@ -48,7 +39,7 @@ public class Define : IExpression
     public string ToString(IFormatter formatter) => Analyze(formatter);
 
     /// <inheritdoc />
-    public override string ToString() => ToString(new CommonFormatter());
+    public override string ToString() => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
     public object Execute() => throw new NotSupportedException();
@@ -59,16 +50,9 @@ public class Define : IExpression
         if (parameters is null)
             throw new ArgumentNullException(nameof(parameters));
 
-        if (Key is Variable variable)
-        {
-            parameters.Variables[variable.Name] = new ParameterValue(Value.Execute(parameters));
+        parameters[Key.Name] = new ParameterValue(Value.Execute(parameters));
 
-            return string.Format(CultureInfo.InvariantCulture, Resource.AssignVariable, Key, Value);
-        }
-
-        parameters.Functions[(UserFunction)Key] = Value;
-
-        return string.Format(CultureInfo.InvariantCulture, Resource.AssignFunction, Key, Value);
+        return string.Format(CultureInfo.InvariantCulture, Resource.Assign, Key, Value);
     }
 
     /// <inheritdoc />
@@ -99,13 +83,13 @@ public class Define : IExpression
     /// <returns>
     /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
     /// </returns>
-    public IExpression Clone(IExpression? key = null, IExpression? value = null)
+    public IExpression Clone(Variable? key = null, IExpression? value = null)
         => new Define(key ?? Key, value ?? Value);
 
     /// <summary>
     /// Gets the key.
     /// </summary>
-    public IExpression Key { get; }
+    public Variable Key { get; }
 
     /// <summary>
     /// Gets the value.

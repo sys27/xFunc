@@ -116,7 +116,7 @@ public partial class Parser
 
             "convert" => new Expressions.Units.Convert(converter, arguments),
 
-            var id => new UserFunction(id, arguments),
+            var id => new CallExpression(new Variable(id), arguments),
         };
     }
 
@@ -146,9 +146,9 @@ public partial class Parser
         IExpression first,
         IExpression second)
     {
-        if (token.Is(ImplicationOperator) || token.Is(ImplKeyword))
+        if (token.Is(ImplKeyword))
             return new Implication(first, second);
-        if (token.Is(EqualityOperator) || token.Is(EqKeyword))
+        if (token.Is(EqKeyword))
             return new Equality(first, second);
 
         if (token.Is(NAndKeyword))

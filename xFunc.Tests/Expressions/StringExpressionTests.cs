@@ -24,7 +24,7 @@ public class StringExpressionTests : BaseExpressionTests
     public void ExecuteWithParamsTest()
     {
         var exp = new StringExpression("hello");
-        var parameters = new ParameterCollection();
+        var parameters = new ExpressionParameters();
         var expected = "hello";
 
         Assert.Equal(expected, exp.Execute(parameters));

@@ -19,6 +19,28 @@ public class CrossProductTests : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteLeftLessThenThreeTest()
+    {
+        var exp = new CrossProduct(
+            new Vector(new[] { Number.One, Number.Two, }),
+            new Vector(new[] { new Number(4), new Number(5), new Number(6) })
+        );
+
+        Assert.Throws<ArgumentException>(() => exp.Execute());
+    }
+
+    [Fact]
+    public void ExecuteRightLessThenThreeTest()
+    {
+        var exp = new CrossProduct(
+            new Vector(new[] { Number.One, Number.Two, new Number(3) }),
+            new Vector(new[] { new Number(4), new Number(5), })
+        );
+
+        Assert.Throws<ArgumentException>(() => exp.Execute());
+    }
+
+    [Fact]
     public void ExecuteTypeExceptionTest()
         => TestNotSupported(new CrossProduct(Number.One, Number.Two));
 

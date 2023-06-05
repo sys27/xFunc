@@ -3,6 +3,14 @@ namespace xFunc.Tests.Expressions.Units.AngleUnits;
 public class AngleUnitTest
 {
     [Fact]
+    public void EqualsNullTest()
+    {
+        var a = AngleUnit.Degree;
+
+        Assert.False(a.Equals(null));
+    }
+
+    [Fact]
     public void EqualsTest()
     {
         var a = AngleUnit.Degree;
@@ -18,6 +26,14 @@ public class AngleUnitTest
         var b = AngleUnit.Radian;
 
         Assert.False(a.Equals(b));
+    }
+
+    [Fact]
+    public void ObjectEqualsNullTest()
+    {
+        var a = AngleUnit.Degree;
+
+        Assert.False(a.Equals(null as object));
     }
 
     [Fact]

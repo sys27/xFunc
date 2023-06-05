@@ -72,6 +72,22 @@ public class MulTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteDotProductErrorTest()
+    {
+        var vector1 = new Vector(new IExpression[]
+        {
+            Number.One, Number.Two,
+        });
+        var vector2 = new Vector(new IExpression[]
+        {
+            new Number(4), new Number(5), new Number(6)
+        });
+        var exp = new Mul(vector1, vector2);
+
+        Assert.Throws<ArgumentException>(() => exp.Execute());
+    }
+
+    [Fact]
     public void ExecuteMulComplexByBool()
     {
         var complex = new ComplexNumber(3, 2);

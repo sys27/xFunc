@@ -140,7 +140,7 @@ public readonly struct MassValue : IEquatable<MassValue>, IComparable<MassValue>
     }
 
     /// <inheritdoc />
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
         => obj switch
         {
             null => 1,

@@ -6,6 +6,14 @@ namespace xFunc.Tests.Expressions.Units.AreaUnits;
 public class AreaUnitTest
 {
     [Fact]
+    public void EqualsNullTest()
+    {
+        var a = AreaUnit.Meter;
+
+        Assert.False(a.Equals(null));
+    }
+
+    [Fact]
     public void EqualsTest()
     {
         var a = AreaUnit.Meter;
@@ -21,6 +29,14 @@ public class AreaUnitTest
         var b = AreaUnit.Kilometer;
 
         Assert.False(a.Equals(b));
+    }
+
+    [Fact]
+    public void ObjectEqualsNullTest()
+    {
+        var a = AreaUnit.Meter;
+
+        Assert.False(a.Equals(null as object));
     }
 
     [Fact]

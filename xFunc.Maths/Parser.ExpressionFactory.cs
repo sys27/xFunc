@@ -15,7 +15,7 @@ public partial class Parser
 {
     private IExpression CreateFunction(in Token token, ImmutableArray<IExpression> arguments)
     {
-        Debug.Assert(token.IsId(), "Token should be Id.");
+        Debug.Assert(token.Is(Id), "Token should be Id.");
         Debug.Assert(!string.IsNullOrWhiteSpace(token.StringValue), "Id is empty.");
 
         return token.StringValue.ToLowerInvariant() switch

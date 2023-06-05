@@ -1,6 +1,8 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Collections.Immutable;
+
 namespace xFunc.Tests.Analyzers.SimplifierTests;
 
 public class SimplifierTest : BaseSimplifierTest
@@ -87,23 +89,6 @@ public class SimplifierTest : BaseSimplifierTest
         var differentiator = new Differentiator();
         var simplifier = new Simplifier();
         var exp = new Derivative(differentiator, simplifier, Number.Two);
-
-        SimplifyTest(exp, exp);
-    }
-
-    [Fact]
-    public void UserFunc()
-    {
-        var exp = new UserFunction("f", new IExpression[] { new Mul(Number.Two, Number.Two) });
-        var expected = new UserFunction("f", new IExpression[] { new Number(4) });
-
-        SimplifyTest(exp, expected);
-    }
-
-    [Fact]
-    public void UserFuncNotSimplified()
-    {
-        var exp = new UserFunction("f", new IExpression[] { Number.One });
 
         SimplifyTest(exp, exp);
     }
@@ -241,6 +226,46 @@ public class SimplifierTest : BaseSimplifierTest
     public void ModNotSimplifiedTest()
     {
         var exp = new Mod(Number.One, Number.One);
+
+        SimplifyTest(exp, exp);
+    }
+
+    [Fact]
+    public void CallExpressionSimplifiedTest()
+    {
+        var exp = new CallExpression(
+            new Lambda(new[] { "x" }, new Add(Variable.X, Number.Zero)).AsExpression(),
+            new IExpression[] { new Add(Number.One, Number.One) }.ToImmutableArray());
+        var expected = new CallExpression(
+            new Lambda(new[] { "x" }, Variable.X).AsExpression(),
+            new IExpression[] { Number.Two }.ToImmutableArray());
+
+        SimplifyTest(exp, expected);
+    }
+
+    [Fact]
+    public void CallExpressionNotSimplifiedTest()
+    {
+        var exp = new CallExpression(
+            new Lambda(new[] { "x" }, Variable.X).AsExpression(),
+            new IExpression[] { Variable.X }.ToImmutableArray());
+
+        SimplifyTest(exp, exp);
+    }
+
+    [Fact]
+    public void LambdaExpressionSimplifiedTest()
+    {
+        var exp = new Lambda(new[] { "x" }, new Add(Variable.X, Number.Zero)).AsExpression();
+        var expected = new Lambda(new[] { "x" }, Variable.X).AsExpression();
+
+        SimplifyTest(exp, expected);
+    }
+
+    [Fact]
+    public void LambdaExpressionNotSimplifiedTest()
+    {
+        var exp = new Lambda(new[] { "x" }, Variable.X).AsExpression();
 
         SimplifyTest(exp, exp);
     }

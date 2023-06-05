@@ -1,8 +1,6 @@
 // It's just a reference grammar for xFunc (The implementaion is not completely equal to grammar).
 
-statement = unaryAssign 
-          / binaryAssign
-          / assign
+statement = assign
           / def
           / undef
           / if
@@ -26,7 +24,7 @@ binaryAssign = variable ('+=' / '-=' / '*=' / '/=' / '<<=' / '>>=') exp
 ternary = conditional ('?' exp ':' exp)*
 
 conditional = bitwise (('&&' / '||') bitwise)*
-bitwise = equality (('&' / 'and' / '|' / 'or' / 'xor' / '=>' / '->' / 'impl' / '<=>' / '<->' / 'eq' / 'nor' / 'nand') equality)*
+bitwise = equality (('&' / 'and' / '|' / 'or' / 'xor' / 'impl' / 'eq' / 'nor' / 'nand') equality)*
 equality = shift (('==' / '!=' / '<' / '<=' / '>' / '>=') shift)*
 shift = addSub (('<<' / '>>') addSub)*
 addSub = mulDivMod (('+' / '-') mulDivMod)*
@@ -48,6 +46,8 @@ operand = complexnumber /
           variable /
           boolean /
           bracketExp /
+          callExp /
+          lambda /
           matrix /
           vector
 
@@ -71,3 +71,6 @@ vector = ('{' / '(') parameters ('}' / ')')
 matrix = ('{' / '(') vector (',' vector) ('}' / ')')
 
 functionDeclaration = id '(' (variable (',' variable)* / '') ')'
+
+lambda = '(' (id (',' id) / '') ')' '=>' exp
+callExp = '(' lambda ')' '(' parameters ')'

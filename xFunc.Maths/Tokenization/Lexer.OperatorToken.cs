@@ -18,9 +18,6 @@ internal ref partial struct Lexer
 
         var (kind, size) = (first, second, third) switch
         {
-            ('<', '-', '>') or
-                ('<', '−', '>') or
-                ('<', '=', '>') => (EqualityOperator, 3),
             ('<', '<', '=') => (LeftShiftAssignOperator, 3),
             ('>', '>', '=') => (RightShiftAssignOperator, 3),
 
@@ -42,7 +39,7 @@ internal ref partial struct Lexer
                 ('−', '−', _) => (DecrementOperator, 2),
             ('-', '>', _) or
                 ('−', '>', _) or
-                ('=', '>', _) => (ImplicationOperator, 2),
+                ('=', '>', _) => (LambdaOperator, 2),
             ('<', '<', _) => (LeftShiftOperator, 2),
             ('>', '>', _) => (RightShiftOperator, 2),
 

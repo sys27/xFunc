@@ -95,4 +95,9 @@ public enum ResultTypes
     /// The expression returns a volume number.
     /// </summary>
     VolumeNumber = 1 << 15,
+
+    /// <summary>
+    /// The expression return a function.
+    /// </summary>
+    Function = 1 << 16,
 }

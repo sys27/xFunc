@@ -8,9 +8,9 @@ public class UndefineTests : BaseParserTests
     [Fact]
     public void UndefParseTest()
     {
-        var expected = new Undefine(new UserFunction("f", new IExpression[] { Variable.X }));
+        var expected = new Undefine(new Variable("f"));
 
-        ParseTest("undef(f(x))", expected);
+        ParseTest("undef(f)", expected);
     }
 
     [Theory]

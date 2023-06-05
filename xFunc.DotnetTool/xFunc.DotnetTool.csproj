@@ -34,7 +34,7 @@
     <Using Include="xFunc.Maths.Analyzers" />
     <Using Include="xFunc.Maths.Analyzers.TypeAnalyzers" />
     <Using Include="xFunc.Maths.Expressions" />
-    <Using Include="xFunc.Maths.Expressions.Collections" />
+    <Using Include="xFunc.Maths.Expressions.Parameters" />
     <Using Include="xFunc.Maths.Expressions.Matrices" />
     <Using Include="xFunc.Maths.Expressions.Units" />
     <Using Include="xFunc.Maths.Results" />

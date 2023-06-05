@@ -94,7 +94,7 @@ public class ProcessorTest
         var processor = new Processor();
         var result = processor.Solve<StringResult>("x := 1");
 
-        Assert.Equal("The value '1' was assigned to the variable 'x'.", result.Result);
+        Assert.Equal("The value '1' was assigned to 'x'.", result.Result);
     }
 
     [Fact]
@@ -199,6 +199,17 @@ public class ProcessorTest
 
         var result = processor.Solve<VolumeNumberResult>("10 m^3");
         var expected = VolumeValue.Meter(10);
+
+        Assert.Equal(expected, result.Result);
+    }
+
+    [Fact]
+    public void SolveLambdaTest()
+    {
+        var processor = new Processor();
+
+        var result = processor.Solve<LambdaResult>("(x) => x");
+        var expected = new Lambda(new[] { "x" }, Variable.X);
 
         Assert.Equal(expected, result.Result);
     }

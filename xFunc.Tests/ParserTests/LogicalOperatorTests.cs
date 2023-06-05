@@ -46,21 +46,13 @@ public class LogicalOperatorTests : BaseParserTests
     public void NAndTest()
         => ParseTest("true nand true", new NAnd(Bool.True, Bool.True));
 
-    [Theory]
-    [InlineData("true -> true")]
-    [InlineData("true −> true")]
-    [InlineData("true => true")]
-    [InlineData("true impl true")]
-    public void ImplicationTest(string function)
-        => ParseTest(function, new Implication(Bool.True, Bool.True));
+    [Fact]
+    public void ImplicationTest()
+        => ParseTest("true impl true", new Implication(Bool.True, Bool.True));
 
-    [Theory]
-    [InlineData("true <-> true")]
-    [InlineData("true <−> true")]
-    [InlineData("true <=> true")]
-    [InlineData("true eq true")]
-    public void EqualityTest(string function)
-        => ParseTest(function, new Equality(Bool.True, Bool.True));
+    [Fact]
+    public void EqualityTest()
+        => ParseTest("true eq true", new Equality(Bool.True, Bool.True));
 
     [Fact]
     public void AndXOrOrPrecedenceTest()

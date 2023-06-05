@@ -1311,8 +1311,12 @@ public class TypeAnalyzer : ITypeAnalyzer
         => CheckArgument(exp, ResultTypes.String);
 
     /// <inheritdoc />
-    public virtual ResultTypes Analyze(UserFunction exp)
+    public virtual ResultTypes Analyze(CallExpression exp)
         => CheckArgument(exp, ResultTypes.Undefined);
+
+    /// <inheritdoc />
+    public virtual ResultTypes Analyze(LambdaExpression exp)
+        => CheckArgument(exp, ResultTypes.Function);
 
     /// <inheritdoc />
     public virtual ResultTypes Analyze(Variable exp)

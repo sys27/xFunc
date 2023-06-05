@@ -11,6 +11,11 @@ namespace xFunc.Maths.Expressions;
 public class Lb : UnaryExpression
 {
     /// <summary>
+    /// Gets the lambda for the current expression.
+    /// </summary>
+    internal static Lambda Lambda { get; } = new Lambda(new[] { Variable.X.Name }, new Lb(Variable.X));
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="Lb"/> class.
     /// </summary>
     /// <param name="expression">The argument of function.</param>

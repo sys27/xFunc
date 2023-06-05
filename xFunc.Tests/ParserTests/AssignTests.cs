@@ -37,10 +37,10 @@ public class AssignTests : BaseParserTests
     public void DefineUserFuncTest()
     {
         var expected = new Define(
-            new UserFunction("func", new IExpression[] { Variable.X, Variable.Y }),
-            new Sin(Variable.X));
+            new Variable("f"),
+            new Lambda(new[] { Variable.X.Name }, Variable.X).AsExpression());
 
-        ParseTest("func(x, y) := sin(x)", expected);
+        ParseTest("f := (x) => x", expected);
     }
 
     [Fact]

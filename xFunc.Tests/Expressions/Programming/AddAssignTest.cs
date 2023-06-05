@@ -20,7 +20,7 @@ public class AddAssignTest
     [Fact]
     public void AddAssignCalc()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 10) };
+        var parameters = new ExpressionParameters { new Parameter("x", 10) };
         var add = new AddAssign(Variable.X, Number.Two);
         var result = add.Execute(parameters);
         var expected = new NumberValue(12.0);
@@ -32,7 +32,7 @@ public class AddAssignTest
     [Fact]
     public void AddAssignAsExpressionTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 10) };
+        var parameters = new ExpressionParameters { new Parameter("x", 10) };
         var add = new Add(Number.One, new AddAssign(Variable.X, Number.Two));
         var result = add.Execute(parameters);
 
@@ -52,7 +52,7 @@ public class AddAssignTest
     public void SubValueBoolParameters()
     {
         var exp = new AddAssign(Variable.X, Bool.False);
-        var parameters = new ParameterCollection { new Parameter("x", 1) };
+        var parameters = new ExpressionParameters { new Parameter("x", 1) };
 
         Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));
     }
@@ -60,7 +60,7 @@ public class AddAssignTest
     [Fact]
     public void BoolAddNumberTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", true) };
+        var parameters = new ExpressionParameters { new Parameter("x", true) };
         var add = new AddAssign(Variable.X, Number.Two);
 
         Assert.Throws<ResultIsNotSupportedException>(() => add.Execute(parameters));

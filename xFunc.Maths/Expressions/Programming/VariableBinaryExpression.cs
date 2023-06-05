@@ -41,7 +41,7 @@ public abstract class VariableBinaryExpression : IExpression
     public string ToString(IFormatter formatter) => Analyze(formatter);
 
     /// <inheritdoc />
-    public override string ToString() => ToString(new CommonFormatter());
+    public override string ToString() => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
     public object Execute() => Execute(null);
@@ -59,7 +59,7 @@ public abstract class VariableBinaryExpression : IExpression
             if (rightResult is NumberValue number)
             {
                 var parameterValue = new ParameterValue(Execute(variable, number));
-                parameters.Variables[Variable.Name] = parameterValue;
+                parameters[Variable.Name] = parameterValue;
 
                 return parameterValue.Value;
             }

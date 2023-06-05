@@ -1,6 +1,8 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Collections.Immutable;
+
 namespace xFunc.Tests.Expressions;
 
 public class LCMTest : BaseExpressionTests
@@ -38,5 +40,16 @@ public class LCMTest : BaseExpressionTests
         var clone = exp.Clone();
 
         Assert.Equal(exp, clone);
+    }
+
+    [Fact]
+    public void CloneWithArgsTest()
+    {
+        var exp = new LCM(Variable.X, Number.Zero);
+        var args = new IExpression[] { Variable.X, Variable.Y, }.ToImmutableArray();
+        var clone = exp.Clone(args);
+        var expected = new LCM(args);
+
+        Assert.Equal(expected, clone);
     }
 }

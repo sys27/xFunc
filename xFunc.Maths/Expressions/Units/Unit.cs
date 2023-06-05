@@ -55,7 +55,7 @@ public abstract class Unit<T> : IExpression, IEquatable<Unit<T>>
 
     /// <inheritdoc />
     public override string ToString()
-        => ToString(new CommonFormatter());
+        => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
     public object Execute() => Value;

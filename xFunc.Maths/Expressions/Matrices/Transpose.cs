@@ -12,6 +12,11 @@ namespace xFunc.Maths.Expressions.Matrices;
 public class Transpose : UnaryExpression
 {
     /// <summary>
+    /// Gets the lambda for the current expression.
+    /// </summary>
+    internal static Lambda Lambda { get; } = new Lambda(new[] { Variable.X.Name }, new Transpose(Variable.X));
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="Transpose"/> class.
     /// </summary>
     /// <param name="argument">The expression, which returns matrix of vector.</param>

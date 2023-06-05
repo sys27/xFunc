@@ -92,7 +92,7 @@ public class Derivative : DifferentParametersExpression
         if (point is not null)
         {
             parameters ??= new ExpressionParameters();
-            parameters.Variables[variable.Name] = point.Value;
+            parameters[variable.Name] = point.Value;
 
             return diff.Execute(parameters);
         }

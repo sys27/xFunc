@@ -23,7 +23,7 @@
     <Using Include="xFunc.Maths.Analyzers.Formatters" />
     <Using Include="xFunc.Maths.Analyzers.TypeAnalyzers" />
     <Using Include="xFunc.Maths.Expressions" />
-    <Using Include="xFunc.Maths.Expressions.Collections" />
+    <Using Include="xFunc.Maths.Expressions.Parameters" />
     <Using Include="xFunc.Maths.Expressions.ComplexNumbers" />
     <Using Include="xFunc.Maths.Expressions.Hyperbolic" />
     <Using Include="xFunc.Maths.Expressions.LogicalAndBitwise" />

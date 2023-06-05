@@ -289,14 +289,9 @@ internal enum TokenKind
     OrOperator,
 
     /// <summary>
-    /// The '=>, ->, impl' token.
+    /// The '=>, ->' token.
     /// </summary>
-    ImplicationOperator,
-
-    /// <summary>
-    /// The '&lt;=>, &lt;->, eq' token.
-    /// </summary>
-    EqualityOperator,
+    LambdaOperator,
 
     /// <summary>
     /// The '&lt;&lt;' token.

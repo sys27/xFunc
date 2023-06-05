@@ -12,7 +12,7 @@ public class IncTest
     [Fact]
     public void IncCalcTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 10) };
+        var parameters = new ExpressionParameters { new Parameter("x", 10) };
         var inc = new Inc(Variable.X);
         var result = (NumberValue)inc.Execute(parameters);
         var expected = new NumberValue(11.0);
@@ -24,7 +24,7 @@ public class IncTest
     [Fact]
     public void IncAsExpExecuteTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 10) };
+        var parameters = new ExpressionParameters { new Parameter("x", 10) };
         var inc = new Add(Number.One, new Inc(Variable.X));
         var result = (NumberValue)inc.Execute(parameters);
 
@@ -41,7 +41,7 @@ public class IncTest
     [Fact]
     public void IncBoolTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", true) };
+        var parameters = new ExpressionParameters { new Parameter("x", true) };
         var inc = new Inc(Variable.X);
 
         Assert.Throws<ResultIsNotSupportedException>(() => inc.Execute(parameters));

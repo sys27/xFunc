@@ -85,7 +85,7 @@ public class Variable : IExpression, IEquatable<Variable>
 
     /// <inheritdoc />
     public override string ToString()
-        => ToString(new CommonFormatter());
+        => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
     /// <exception cref="NotSupportedException">Always.</exception>
@@ -97,7 +97,7 @@ public class Variable : IExpression, IEquatable<Variable>
         if (parameters is null)
             throw new ArgumentNullException(nameof(parameters));
 
-        return parameters.Variables[Name].Value;
+        return parameters[Name].Value;
     }
 
     /// <inheritdoc />

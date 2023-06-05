@@ -12,7 +12,7 @@ public class DecTest
     [Fact]
     public void DecCalcTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 10) };
+        var parameters = new ExpressionParameters { new Parameter("x", 10) };
         var dec = new Dec(Variable.X);
         var result = (NumberValue)dec.Execute(parameters);
         var expected = new NumberValue(9.0);
@@ -24,7 +24,7 @@ public class DecTest
     [Fact]
     public void DecAsExpExecuteTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 10) };
+        var parameters = new ExpressionParameters { new Parameter("x", 10) };
         var inc = new Add(Number.One, new Dec(Variable.X));
         var result = (NumberValue)inc.Execute(parameters);
 
@@ -41,7 +41,7 @@ public class DecTest
     [Fact]
     public void DecBoolTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", true) };
+        var parameters = new ExpressionParameters { new Parameter("x", true) };
         var dec = new Dec(Variable.X);
 
         Assert.Throws<ResultIsNotSupportedException>(() => dec.Execute(parameters));

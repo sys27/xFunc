@@ -12,6 +12,13 @@ namespace xFunc.Maths.Expressions;
 public class Div : BinaryExpression
 {
     /// <summary>
+    /// Gets the lambda for the current expression.
+    /// </summary>
+    internal static Lambda Lambda { get; } = new Lambda(
+        new[] { Variable.X.Name, Variable.Y.Name },
+        new Div(Variable.X, Variable.Y));
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="Div"/> class.
     /// </summary>
     /// <param name="left">The first (left) operand.</param>

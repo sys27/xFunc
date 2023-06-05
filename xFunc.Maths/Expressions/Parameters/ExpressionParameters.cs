@@ -6,18 +6,18 @@ using System.Collections.Specialized;
 using System.Globalization;
 using System.Numerics;
 
-namespace xFunc.Maths.Expressions.Collections;
+namespace xFunc.Maths.Expressions.Parameters;
 
 /// <summary>
 /// Strongly typed dictionary that contains value of variables.
 /// </summary>
-public class ParameterCollection : IEnumerable<Parameter>, INotifyCollectionChanged
+public class ExpressionParameters : IEnumerable<Parameter>, INotifyCollectionChanged
 {
     private static readonly Dictionary<string, Parameter> Constants;
     private readonly Dictionary<string, Parameter> collection;
     private readonly bool withConstants;
 
-    static ParameterCollection()
+    static ExpressionParameters()
     {
         Constants = new Dictionary<string, Parameter>();
 
@@ -30,46 +30,46 @@ public class ParameterCollection : IEnumerable<Parameter>, INotifyCollectionChan
     public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ParameterCollection"/> class.
+    /// Initializes a new instance of the <see cref="ExpressionParameters"/> class.
     /// </summary>
-    public ParameterCollection()
+    public ExpressionParameters()
         : this(true)
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ParameterCollection" /> class.
+    /// Initializes a new instance of the <see cref="ExpressionParameters" /> class.
     /// </summary>
     /// <param name="initConstants">if set to <c>true</c> initialize constants.</param>
-    public ParameterCollection(bool initConstants)
+    public ExpressionParameters(bool initConstants)
         : this(Array.Empty<Parameter>(), initConstants)
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ParameterCollection"/> class.
+    /// Initializes a new instance of the <see cref="ExpressionParameters"/> class.
     /// </summary>
     /// <param name="parameters">The parameters.</param>
-    public ParameterCollection(IEnumerable<Parameter> parameters)
+    public ExpressionParameters(IEnumerable<Parameter> parameters)
         : this(parameters, true)
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ParameterCollection"/> class.
+    /// Initializes a new instance of the <see cref="ExpressionParameters"/> class.
     /// </summary>
     /// <param name="parameters">The parameters.</param>
-    public ParameterCollection(ParameterCollection parameters)
+    public ExpressionParameters(ExpressionParameters parameters)
         : this(parameters?.collection.Values, true)
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ParameterCollection" /> class.
+    /// Initializes a new instance of the <see cref="ExpressionParameters" /> class.
     /// </summary>
     /// <param name="parameters">The parameters.</param>
     /// <param name="initConstants">if set to <c>true</c> initialize constants.</param>
-    public ParameterCollection(IEnumerable<Parameter>? parameters, bool initConstants)
+    public ExpressionParameters(IEnumerable<Parameter>? parameters, bool initConstants)
     {
         if (parameters is null)
             throw new ArgumentNullException(nameof(parameters));
@@ -131,6 +131,104 @@ public class ParameterCollection : IEnumerable<Parameter>, INotifyCollectionChan
 
         // Euler–Mascheroni constant
         AddConstant(Parameter.Constant("γ", 0.57721566490153286060651));
+
+        // functions
+        AddConstant(Parameter.Constant("add", Expressions.Add.Lambda));
+        AddConstant(Parameter.Constant("sub", Sub.Lambda));
+        AddConstant(Parameter.Constant("mul", Mul.Lambda));
+        AddConstant(Parameter.Constant("div", Div.Lambda));
+        AddConstant(Parameter.Constant("pow", Pow.Lambda));
+        AddConstant(Parameter.Constant("exp", Exp.Lambda));
+        AddConstant(Parameter.Constant("abs", Abs.Lambda));
+        AddConstant(Parameter.Constant("sqrt", Sqrt.Lambda));
+        AddConstant(Parameter.Constant("root", Root.Lambda));
+
+        AddConstant(Parameter.Constant("fact", Fact.Lambda));
+        AddConstant(Parameter.Constant("factorial", Fact.Lambda));
+
+        AddConstant(Parameter.Constant("ln", Ln.Lambda));
+        AddConstant(Parameter.Constant("lg", Lg.Lambda));
+        AddConstant(Parameter.Constant("lb", Lb.Lambda));
+        AddConstant(Parameter.Constant("log2", Lb.Lambda));
+        AddConstant(Parameter.Constant("log", Log.Lambda));
+
+        AddConstant(Parameter.Constant("todeg", ToDegree.Lambda));
+        AddConstant(Parameter.Constant("todegree", ToDegree.Lambda));
+        AddConstant(Parameter.Constant("torad", ToRadian.Lambda));
+        AddConstant(Parameter.Constant("toradian", ToRadian.Lambda));
+        AddConstant(Parameter.Constant("tograd", ToGradian.Lambda));
+        AddConstant(Parameter.Constant("togradian", ToGradian.Lambda));
+
+        AddConstant(Parameter.Constant("sin", Sin.Lambda));
+        AddConstant(Parameter.Constant("cos", Cos.Lambda));
+        AddConstant(Parameter.Constant("tan", Tan.Lambda));
+        AddConstant(Parameter.Constant("tg", Tan.Lambda));
+        AddConstant(Parameter.Constant("cot", Cot.Lambda));
+        AddConstant(Parameter.Constant("ctg", Cot.Lambda));
+        AddConstant(Parameter.Constant("sec", Sec.Lambda));
+        AddConstant(Parameter.Constant("cosec", Csc.Lambda));
+        AddConstant(Parameter.Constant("csc", Csc.Lambda));
+
+        AddConstant(Parameter.Constant("arcsin", Arcsin.Lambda));
+        AddConstant(Parameter.Constant("arccos", Arccos.Lambda));
+        AddConstant(Parameter.Constant("arctan", Arctan.Lambda));
+        AddConstant(Parameter.Constant("arctg", Arctan.Lambda));
+        AddConstant(Parameter.Constant("arccot", Arccot.Lambda));
+        AddConstant(Parameter.Constant("arcctg", Arccot.Lambda));
+        AddConstant(Parameter.Constant("arcsec", Arcsec.Lambda));
+        AddConstant(Parameter.Constant("arccosec", Arccsc.Lambda));
+        AddConstant(Parameter.Constant("arccsc", Arccsc.Lambda));
+
+        AddConstant(Parameter.Constant("sh", Sinh.Lambda));
+        AddConstant(Parameter.Constant("sinh", Sinh.Lambda));
+        AddConstant(Parameter.Constant("ch", Cosh.Lambda));
+        AddConstant(Parameter.Constant("cosh", Cosh.Lambda));
+        AddConstant(Parameter.Constant("th", Tanh.Lambda));
+        AddConstant(Parameter.Constant("tanh", Tanh.Lambda));
+        AddConstant(Parameter.Constant("cth", Coth.Lambda));
+        AddConstant(Parameter.Constant("coth", Coth.Lambda));
+        AddConstant(Parameter.Constant("sech", Sech.Lambda));
+        AddConstant(Parameter.Constant("csch", Csch.Lambda));
+
+        AddConstant(Parameter.Constant("arsh", Arsinh.Lambda));
+        AddConstant(Parameter.Constant("arsinh", Arsinh.Lambda));
+        AddConstant(Parameter.Constant("arch", Arcosh.Lambda));
+        AddConstant(Parameter.Constant("arcosh", Arcosh.Lambda));
+        AddConstant(Parameter.Constant("arth", Artanh.Lambda));
+        AddConstant(Parameter.Constant("artanh", Artanh.Lambda));
+        AddConstant(Parameter.Constant("arcth", Arcoth.Lambda));
+        AddConstant(Parameter.Constant("arcoth", Arcoth.Lambda));
+        AddConstant(Parameter.Constant("arsch", Arsech.Lambda));
+        AddConstant(Parameter.Constant("arsech", Arsech.Lambda));
+        AddConstant(Parameter.Constant("arcsch", Arcsch.Lambda));
+
+        AddConstant(Parameter.Constant("round", Round.Lambda));
+        AddConstant(Parameter.Constant("floor", Floor.Lambda));
+        AddConstant(Parameter.Constant("ceil", Ceil.Lambda));
+        AddConstant(Parameter.Constant("trunc", Trunc.Lambda));
+        AddConstant(Parameter.Constant("truncate", Trunc.Lambda));
+        AddConstant(Parameter.Constant("frac", Frac.Lambda));
+
+        AddConstant(Parameter.Constant("transpose", Transpose.Lambda));
+        AddConstant(Parameter.Constant("det", Determinant.Lambda));
+        AddConstant(Parameter.Constant("determinant", Determinant.Lambda));
+        AddConstant(Parameter.Constant("inverse", Inverse.Lambda));
+        AddConstant(Parameter.Constant("dotproduct", DotProduct.Lambda));
+        AddConstant(Parameter.Constant("crossproduct", CrossProduct.Lambda));
+
+        AddConstant(Parameter.Constant("im", Im.Lambda));
+        AddConstant(Parameter.Constant("imaginary", Im.Lambda));
+        AddConstant(Parameter.Constant("re", Re.Lambda));
+        AddConstant(Parameter.Constant("real", Re.Lambda));
+        AddConstant(Parameter.Constant("phase", Phase.Lambda));
+        AddConstant(Parameter.Constant("conjugate", Conjugate.Lambda));
+        AddConstant(Parameter.Constant("reciprocal", Reciprocal.Lambda));
+        AddConstant(Parameter.Constant("tocomplex", ToComplex.Lambda));
+
+        AddConstant(Parameter.Constant("sign", Sign.Lambda));
+        AddConstant(Parameter.Constant("tobin", ToBin.Lambda));
+        AddConstant(Parameter.Constant("tooct", ToOct.Lambda));
+        AddConstant(Parameter.Constant("tohex", ToHex.Lambda));
     }
 
     private static void AddConstant(Parameter parameter)
@@ -140,7 +238,7 @@ public class ParameterCollection : IEnumerable<Parameter>, INotifyCollectionChan
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     /// <inheritdoc />
-    public IEnumerator<Parameter> GetEnumerator()
+    public virtual IEnumerator<Parameter> GetEnumerator()
     {
         if (withConstants)
         {
@@ -160,7 +258,7 @@ public class ParameterCollection : IEnumerable<Parameter>, INotifyCollectionChan
     /// </value>
     /// <param name="key">The name of variable.</param>
     /// <returns>The value of variable.</returns>
-    public ParameterValue this[string key]
+    public virtual ParameterValue this[string key]
     {
         get => GetParameterByKey(key).Value;
         set
@@ -259,7 +357,7 @@ public class ParameterCollection : IEnumerable<Parameter>, INotifyCollectionChan
     /// </summary>
     /// <param name="param">The element.</param>
     /// <returns><c>true</c> if the object contains the specified element; otherwise, <c>false</c>.</returns>
-    public bool Contains(Parameter param)
+    public virtual bool Contains(Parameter param)
     {
         if (param is null)
             throw new ArgumentNullException(nameof(param));
@@ -272,6 +370,51 @@ public class ParameterCollection : IEnumerable<Parameter>, INotifyCollectionChan
     /// </summary>
     /// <param name="key">The name of variable.</param>
     /// <returns><c>true</c> if the object contains the specified key; otherwise, <c>false</c>.</returns>
-    public bool ContainsKey(string key)
+    public virtual bool ContainsKey(string key)
         => collection.ContainsKey(key);
+
+    /// <summary>
+    /// Creates a new nested scope of parameters.
+    /// </summary>
+    /// <returns>The expression parameters.</returns>
+    public ExpressionParameters CreateScope()
+        => new ScopedExpressionParameters(withConstants, this);
+
+    private sealed class ScopedExpressionParameters : ExpressionParameters
+    {
+        private readonly ExpressionParameters parent;
+
+        public ScopedExpressionParameters(bool initConstants, ExpressionParameters parent)
+            : base(initConstants)
+            => this.parent = parent;
+
+        public override IEnumerator<Parameter> GetEnumerator()
+        {
+            foreach (var parameter in parent)
+                yield return parameter;
+
+            foreach (var (_, parameter) in collection)
+                yield return parameter;
+        }
+
+        public override ParameterValue this[string key]
+        {
+            get
+            {
+                if (collection.TryGetValue(key, out var parameter))
+                {
+                    return parameter.Value;
+                }
+
+                return parent[key];
+            }
+            set => base[key] = value;
+        }
+
+        public override bool Contains(Parameter param)
+            => base.Contains(param) || parent.Contains(param);
+
+        public override bool ContainsKey(string key)
+            => base.ContainsKey(key) || parent.ContainsKey(key);
+    }
 }

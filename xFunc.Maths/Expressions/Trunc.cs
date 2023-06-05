@@ -12,6 +12,11 @@ namespace xFunc.Maths.Expressions;
 public class Trunc : UnaryExpression
 {
     /// <summary>
+    /// Gets the lambda for the current expression.
+    /// </summary>
+    internal static Lambda Lambda { get; } = new Lambda(new[] { Variable.X.Name }, new Trunc(Variable.X));
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="Trunc"/> class.
     /// </summary>
     /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded down.</param>

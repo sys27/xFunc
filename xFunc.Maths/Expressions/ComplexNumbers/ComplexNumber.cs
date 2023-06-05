@@ -66,7 +66,7 @@ public class ComplexNumber : IExpression
     public string ToString(IFormatter formatter) => Analyze(formatter);
 
     /// <inheritdoc />
-    public override string ToString() => ToString(new CommonFormatter());
+    public override string ToString() => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
     public object Execute() => Value;

@@ -47,7 +47,7 @@ public class HelperTests
         var function = "a | b & c & (a | c)";
         var exp = new Parser().Parse(function);
 
-        var expected = new ParameterCollection(false)
+        var expected = new ExpressionParameters(false)
         {
             new Parameter("a", false),
             new Parameter("b", false),

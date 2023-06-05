@@ -77,7 +77,7 @@ public class Number : IExpression, IEquatable<Number>
 
     /// <inheritdoc />
     public override string ToString()
-        => ToString(new CommonFormatter());
+        => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
     public object Execute() => Value;

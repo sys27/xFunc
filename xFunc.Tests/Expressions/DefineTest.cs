@@ -6,34 +6,27 @@ namespace xFunc.Tests.Expressions;
 public class DefineTest
 {
     [Fact]
-    public void InvalidTypeTest()
-    {
-        Assert.Throws<NotSupportedException>(() => new Define(Number.One, Number.One));
-    }
-
-    [Fact]
-    public void SimpDefineTest()
+    public void SimpleDefineTest()
     {
         var exp = new Define(Variable.X, Number.One);
         var parameters = new ExpressionParameters();
 
         var answer = exp.Execute(parameters);
 
-        Assert.Equal(new NumberValue(1.0), parameters.Variables["x"]);
-        Assert.Equal("The value '1' was assigned to the variable 'x'.", answer);
+        Assert.Equal(new NumberValue(1.0), parameters["x"]);
+        Assert.Equal("The value '1' was assigned to 'x'.", answer);
     }
 
     [Fact]
     public void DefineWithFuncTest()
     {
         var exp = new Define(Variable.X, new Sin(AngleValue.Radian(1).AsExpression()));
-        var parameters = new ParameterCollection();
-        var expParams = new ExpressionParameters(parameters);
+        var parameters = new ExpressionParameters();
 
-        var answer = exp.Execute(expParams);
+        var answer = exp.Execute(parameters);
 
-        Assert.Equal(new NumberValue(Math.Sin(1)), parameters["x"]);
-        Assert.Equal("The value 'sin(1 radian)' was assigned to the variable 'x'.", answer);
+        Assert.Equal(new NumberValue(Math.Sin(1)), parameters[Variable.X.Name]);
+        Assert.Equal("The value 'sin(1 radian)' was assigned to 'x'.", answer);
     }
 
     [Fact]
@@ -44,8 +37,8 @@ public class DefineTest
 
         var answer = exp.Execute(parameters);
 
-        Assert.Equal(new NumberValue(36.0), parameters.Variables["x"]);
-        Assert.Equal("The value '4 * (8 + 1)' was assigned to the variable 'x'.", answer);
+        Assert.Equal(new NumberValue(36.0), parameters["x"]);
+        Assert.Equal("The value '4 * (8 + 1)' was assigned to 'x'.", answer);
     }
 
     [Fact]
@@ -56,35 +49,37 @@ public class DefineTest
 
         exp.Execute(parameters);
 
-        Assert.Equal(new NumberValue(1.0), parameters.Variables["π"]);
+        Assert.Equal(new NumberValue(1.0), parameters["π"]);
     }
 
     [Fact]
     public void DefineFuncTest()
     {
-        var uf = new UserFunction("s", new IExpression[0]);
-        var func = new Sin(Number.One);
-        var exp = new Define(uf, func);
-        var parameters = new ExpressionParameters();
+        var function = new Lambda(Array.Empty<string>(), Number.One)
+            .AsExpression();
+        var variable = new Variable("f");
+        var exp = new Define(variable, function);
 
+        var parameters = new ExpressionParameters();
         var result = exp.Execute(parameters);
 
-        Assert.Equal(func, parameters.Functions[uf]);
-        Assert.Equal("The expression 'sin(1)' was assigned to the function 's()'.", result);
+        Assert.Equal("The value '() => 1' was assigned to 'f'.", result);
     }
 
     [Fact]
     public void DefineFuncWithParamsTest()
     {
-        var uf = new UserFunction("s", new IExpression[] { Variable.X });
-        var func = new Sin(Variable.X);
-        var exp = new Define(uf, func);
-        var parameters = new ExpressionParameters();
+        var function = new Lambda(
+                new[] { "x", "y" },
+                new Add(Variable.X, Variable.Y))
+            .AsExpression();
+        var variable = new Variable("f");
+        var exp = new Define(variable, function);
 
+        var parameters = new ExpressionParameters();
         var result = exp.Execute(parameters);
 
-        Assert.Equal(func, parameters.Functions[uf]);
-        Assert.Equal("The expression 'sin(x)' was assigned to the function 's(x)'.", result);
+        Assert.Equal("The value '(x, y) => x + y' was assigned to 'f'.", result);
     }
 
     [Fact]
@@ -94,7 +89,7 @@ public class DefineTest
     }
 
     [Fact]
-    public void ExecuteWithoutParametesTest()
+    public void ExecuteWithoutParametersTest()
     {
         Assert.Throws<NotSupportedException>(() => new Define(new Variable("π"), Number.One).Execute());
     }

@@ -8,11 +8,11 @@ public class DelegateExpressionTest
     [Fact]
     public void ExecuteTest1()
     {
-        var parameters = new ParameterCollection()
+        var parameters = new ExpressionParameters()
         {
             new Parameter("x", 10)
         };
-        var func = new DelegateExpression(p => (NumberValue)p.Variables["x"].Value + 1);
+        var func = new DelegateExpression(p => (NumberValue)p["x"].Value + 1);
 
         var result = func.Execute(parameters);
 
@@ -27,24 +27,6 @@ public class DelegateExpressionTest
         var result = func.Execute(null);
 
         Assert.Equal(10.0, result);
-    }
-
-    [Fact]
-    public void ExecuteTest3()
-    {
-        var uf1 = new UserFunction("func", new[] { Variable.X });
-        var func = new DelegateExpression(p =>
-            (NumberValue)p.Variables["x"].Value == 10
-                ? new NumberValue(0.0)
-                : new NumberValue(1.0));
-        var funcs = new FunctionCollection
-        {
-            { uf1, func }
-        };
-        var uf2 = new UserFunction("func", new[] { new Number(12) });
-        var result = uf2.Execute(new ExpressionParameters(funcs));
-
-        Assert.Equal(new NumberValue(1.0), result);
     }
 
     [Fact]

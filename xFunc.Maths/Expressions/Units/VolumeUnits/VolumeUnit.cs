@@ -70,12 +70,31 @@ public class VolumeUnit : IEquatable<VolumeUnit>
         => !left.Equals(right);
 
     /// <inheritdoc />
-    public bool Equals(VolumeUnit other)
-        => Factor.Equals(other.Factor) && UnitName == other.UnitName;
+    public bool Equals(VolumeUnit? other)
+    {
+        if (ReferenceEquals(null, other))
+            return false;
+
+        if (ReferenceEquals(this, other))
+            return true;
+
+        return Factor.Equals(other.Factor) && UnitName == other.UnitName;
+    }
 
     /// <inheritdoc />
     public override bool Equals(object? obj)
-        => obj is VolumeUnit other && Equals(other);
+    {
+        if (ReferenceEquals(null, obj))
+            return false;
+
+        if (ReferenceEquals(this, obj))
+            return true;
+
+        if (obj.GetType() != GetType())
+            return false;
+
+        return Equals((VolumeUnit)obj);
+    }
 
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
@@ -129,7 +148,7 @@ public class VolumeUnit : IEquatable<VolumeUnit>
     /// <param name="unit">When this method returns, the value associated with the specified name, if the unit is found; otherwise, the default value for the type of the value parameter. This parameter is passed uninitialized.</param>
     /// <returns><c>true</c> if volume units contain an unit with the specified <paramref name="name"/>; otherwise, <c>false</c>.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="name"/> is <c>null</c>.</exception>
-    public static bool FromName(string name, out VolumeUnit unit)
+    public static bool FromName(string name, [NotNullWhen(true)] out VolumeUnit? unit)
     {
         if (string.IsNullOrWhiteSpace(name))
             throw new ArgumentNullException(nameof(name));

@@ -188,7 +188,7 @@ public readonly struct TimeValue : IEquatable<TimeValue>, IComparable<TimeValue>
     }
 
     /// <inheritdoc />
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
         => obj switch
         {
             null => 1,

@@ -92,7 +92,7 @@ public readonly struct PowerValue : IEquatable<PowerValue>, IComparable<PowerVal
     }
 
     /// <inheritdoc />
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
         => obj switch
         {
             null => 1,

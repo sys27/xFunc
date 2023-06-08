@@ -204,7 +204,7 @@ public readonly struct AreaValue : IEquatable<AreaValue>, IComparable<AreaValue>
     }
 
     /// <inheritdoc />
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
         => obj switch
         {
             null => 1,

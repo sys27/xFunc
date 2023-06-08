@@ -16,7 +16,7 @@ public class ExpressionResult : IResult
         => Result = exp ?? throw new ArgumentNullException(nameof(exp));
 
     /// <inheritdoc />
-    public override string ToString() => Result.ToString();
+    public override string ToString() => Result.ToString()!;
 
     /// <inheritdoc cref="IResult.Result" />
     public IExpression Result { get; }

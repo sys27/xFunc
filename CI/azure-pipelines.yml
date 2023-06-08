@@ -71,7 +71,7 @@ jobs:
 
     - task: PublishPipelineArtifact@1
       inputs:
-        path: xFunc.Maths/bin/Release/netstandard2.1
+        path: xFunc.Maths/bin/Release/net6.0
         artifact: xFunc.Maths
 
     - task: PublishPipelineArtifact@1

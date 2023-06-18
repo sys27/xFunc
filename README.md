@@ -19,7 +19,7 @@ Note: The WPF application (xFunc UI) was migrated to a separate repository [xFun
 * Derivative and simplifying expressions;
 * Plotting graphs;
 * Truth tables;
-* Supported Framework: .NET Standard 2.1+;
+* Supported Framework: .NET 6+;
 
 ## Usage
 
@@ -39,7 +39,7 @@ var exp = processor.Parse("2 + x");
 // you can calculate it or process it by analyzers (Differentiator, Simplifier, etc.)
 
 // 'exp' has a parameter
-// we should provide a value for varible 'x'
+// we should provide a value for variable 'x'
 var parameters = new ParameterCollection
 {
     { "x", 10 }
@@ -49,13 +49,13 @@ var result = exp.Execute(parameters);
 // result will be equal to 12
 ```
 
-_Note: The `Parse` method won't simplify expression automatically, it will return the complete representation of provided string expression._
+_Note: The `Parse` method won't simplify the expression automatically, it will return the complete representation of provided string expression._
 
 **Solve:**
 
-This method parses string expression (like `Parse` method) and then calculates it (returns object which implements `IResult` interface).
+This method parses string expression (like the `Parse` method) and then calculates it (returns object which implements the `IResult` interface).
 
-There is two overloads of this method (common and generic). The common returns just `IResult` (you can access result by `Result` property). The generic allows to return specific implementation of `IResult` (eg. `NumberResult`).
+There are two overloads of this method (common and generic). The "common" returns just `IResult` (you can access result by `Result` property). The generic allows to return specific implementation of `IResult` (eg. `NumberResult`).
 
 ```csharp
 var processor = new Processor();
@@ -71,12 +71,12 @@ If your expression has any parameter, you need to assign a value to it (otherwis
 ```csharp
 processor.Solve("x := 10");
 
-// or explicitly throught Parameters property
+// or explicitly through Parameters property
 
 processor.Parameters.Variables.Add("x", 10);
 ```
 
-_Note: The `Solve` method automatically simplifies expression, to control this behavior you can use `simplify` argument. It's useful for differentiation, because it will eliminate unnecessary expression nodes._
+_Note: The `Solve` method automatically simplifies expression, to control this behavior you can use the `simplify` argument. It's useful for differentiation because it will eliminate unnecessary expression nodes._
 
 **Simplify:**
 
@@ -102,7 +102,7 @@ processor.Differentiate("2x");
 // will return "2"
 ```
 
-You can specified variable (default is "x") of differentiation:
+You can specify variable (default is "x") of differentiation:
 
 ```csharp
 var processor = new Processor();
@@ -137,7 +137,6 @@ xFunc is released under MIT License.
 
 [@RonnyCSHARP](https://github.com/ronnycsharp)
 
-[Fluent.Ribbon](https://github.com/fluentribbon/Fluent.Ribbon)  
 [Azure Pipelines](https://azure.microsoft.com/en-us/services/devops/pipelines/)  
 [Coverlet](https://github.com/coverlet-coverage/coverlet)  
 [ReportGenerator](https://github.com/danielpalme/ReportGenerator)  

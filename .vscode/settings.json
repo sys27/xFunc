@@ -15,5 +15,6 @@
         "coverage.cobertura.xml": true,
         "xFunc": true,
         "desktop.ini": true
-    }
+    },
+    "dotnet.defaultSolution": "xFunc.sln"
 }

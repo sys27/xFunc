@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Immutable;
+using System.Runtime.CompilerServices;
 
 namespace xFunc.Maths.Expressions.Matrices;
 
@@ -82,12 +83,12 @@ public class Matrix : IExpression
     /// <inheritdoc />
     public object Execute(ExpressionParameters? parameters)
     {
-        var args = ImmutableArray.CreateBuilder<Vector>(Rows);
+        var args = new Vector[Rows];
 
-        foreach (var vector in Vectors)
-            args.Add((Vector)vector.Execute(parameters));
+        for (var i = 0; i < Vectors.Length; i++)
+            args[i] = (Vector)Vectors[i].Execute(parameters);
 
-        return new Matrix(args.ToImmutableArray());
+        return new Matrix(Unsafe.As<Vector[], ImmutableArray<Vector>>(ref args));
     }
 
     /// <inheritdoc />

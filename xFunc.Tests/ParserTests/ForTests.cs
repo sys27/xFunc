@@ -10,9 +10,9 @@ public class ForTests : BaseParserTests
     {
         var expected = new For(
             Number.Two,
-            new Define(Variable.X, Number.Zero),
+            new Assign(Variable.X, Number.Zero),
             new LessThan(Variable.X, new Number(10)),
-            new Define(Variable.X, new Add(Variable.X, Number.One))
+            new Assign(Variable.X, new Add(Variable.X, Number.One))
         );
 
         ParseTest("for(2, x := 0, x < 10, x := x + 1)", expected);
@@ -23,7 +23,7 @@ public class ForTests : BaseParserTests
     {
         var expected = new For(
             Number.Two,
-            new Define(Variable.X, Number.Zero),
+            new Assign(Variable.X, Number.Zero),
             new LessThan(Variable.X, new Number(10)),
             new Inc(Variable.X)
         );

@@ -6,9 +6,22 @@ namespace xFunc.Tests.ParserTests;
 public class AssignTests : BaseParserTests
 {
     [Fact]
+    public void DefTest()
+        => ParseTest("assign(x, 2)", new Assign(Variable.X, Number.Two));
+
+    [Theory]
+    [InlineData("assign x, 2)")]
+    [InlineData("assign(, 2)")]
+    [InlineData("assign(x 2)")]
+    [InlineData("assign(x,)")]
+    [InlineData("assign(x, 2")]
+    public void DefMissingOpenParen(string function)
+        => ParseErrorTest(function);
+
+    [Fact]
     public void ParseDefine()
     {
-        var expected = new Define(Variable.X, new Number(3));
+        var expected = new Assign(Variable.X, new Number(3));
 
         ParseTest("x := 3", expected);
     }
@@ -20,7 +33,7 @@ public class AssignTests : BaseParserTests
     [Fact]
     public void DefineComplexParserTest()
     {
-        var expected = new Define(
+        var expected = new Assign(
             new Variable("aaa"),
             new Add(
                 new Number(3),
@@ -36,7 +49,7 @@ public class AssignTests : BaseParserTests
     [Fact]
     public void DefineUserFuncTest()
     {
-        var expected = new Define(
+        var expected = new Assign(
             new Variable("f"),
             new Lambda(new[] { Variable.X.Name }, Variable.X).AsExpression());
 
@@ -46,7 +59,7 @@ public class AssignTests : BaseParserTests
     [Fact]
     public void UnaryMinusAssignTest()
     {
-        var expected = new Define(
+        var expected = new Assign(
             Variable.X,
             new UnaryMinus(new Sin(Number.Two))
         );

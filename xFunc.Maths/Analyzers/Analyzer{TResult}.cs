@@ -33,7 +33,7 @@ public abstract class Analyzer<TResult> : IAnalyzer<TResult>
         => Analyze(exp as IExpression);
 
     /// <inheritdoc />
-    public virtual TResult Analyze(Define exp)
+    public virtual TResult Analyze(Assign exp)
         => Analyze(exp as IExpression);
 
     /// <inheritdoc />
@@ -181,7 +181,7 @@ public abstract class Analyzer<TResult> : IAnalyzer<TResult>
         => Analyze(exp as IExpression);
 
     /// <inheritdoc />
-    public virtual TResult Analyze(Undefine exp)
+    public virtual TResult Analyze(Unassign exp)
         => Analyze(exp as IExpression);
 
     /// <inheritdoc />

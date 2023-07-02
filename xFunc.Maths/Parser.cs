@@ -97,12 +97,12 @@ public partial class Parser : IParser
             var right = parser.ParseExpression(ref reader) ??
                         MissingSecondOperand(AssignOperator);
 
-            return new Define(left, right);
+            return new Assign(left, right);
         });
 
     private IExpression? ParseDef(ref TokenReader tokenReader)
     {
-        var def = tokenReader.GetCurrent(DefineKeyword);
+        var def = tokenReader.GetCurrent(AssignKeyword);
         if (def.IsEmpty())
             return null;
 
@@ -121,12 +121,12 @@ public partial class Parser : IParser
         if (!tokenReader.Check(CloseParenthesisSymbol))
             MissingCloseParenthesis(def.Kind);
 
-        return new Define(key, value);
+        return new Assign(key, value);
     }
 
     private IExpression? ParseUndef(ref TokenReader tokenReader)
     {
-        var undef = tokenReader.GetCurrent(UndefineKeyword);
+        var undef = tokenReader.GetCurrent(UnassignKeyword);
         if (undef.IsEmpty())
             return null;
 
@@ -139,7 +139,7 @@ public partial class Parser : IParser
         if (!tokenReader.Check(CloseParenthesisSymbol))
             MissingCloseParenthesis(undef.Kind);
 
-        return new Undefine(key);
+        return new Unassign(key);
     }
 
     private IExpression? ParseFor(ref TokenReader tokenReader)

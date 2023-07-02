@@ -6,21 +6,16 @@ using System.Globalization;
 namespace xFunc.Maths.Expressions;
 
 /// <summary>
-/// Represents the Define operator.
+/// Represents the unassign function.
 /// </summary>
-public class Define : IExpression
+public class Unassign : IExpression
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="Define"/> class.
+    /// Initializes a new instance of the <see cref="Unassign"/> class.
     /// </summary>
     /// <param name="key">The key.</param>
-    /// <param name="value">The value.</param>
-    /// <exception cref="ArgumentNullException"><paramref name="key"/> or <paramref name="value"/> is null.</exception>
-    public Define(Variable key, IExpression value)
-    {
-        Key = key ?? throw new ArgumentNullException(nameof(key));
-        Value = value ?? throw new ArgumentNullException(nameof(value));
-    }
+    public Unassign(Variable key)
+        => Key = key ?? throw new ArgumentNullException(nameof(key));
 
     /// <inheritdoc />
     public override bool Equals(object? obj)
@@ -28,11 +23,10 @@ public class Define : IExpression
         if (ReferenceEquals(this, obj))
             return true;
 
-        var def = obj as Define;
-        if (def is null)
+        if (obj is not Unassign undef)
             return false;
 
-        return Key.Equals(def.Key) && Value.Equals(def.Value);
+        return Key.Equals(undef.Key);
     }
 
     /// <inheritdoc />
@@ -42,7 +36,9 @@ public class Define : IExpression
     public override string ToString() => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
-    public object Execute() => throw new NotSupportedException();
+    /// <exception cref="NotSupportedException">Always.</exception>
+    public object Execute()
+        => throw new NotSupportedException();
 
     /// <inheritdoc />
     public object Execute(ExpressionParameters? parameters)
@@ -50,9 +46,9 @@ public class Define : IExpression
         if (parameters is null)
             throw new ArgumentNullException(nameof(parameters));
 
-        parameters[Key.Name] = new ParameterValue(Value.Execute(parameters));
+        parameters.Remove(Key.Name);
 
-        return string.Format(CultureInfo.InvariantCulture, Resource.Assign, Key, Value);
+        return string.Format(CultureInfo.InvariantCulture, Resource.Undefine, Key);
     }
 
     /// <inheritdoc />
@@ -78,21 +74,15 @@ public class Define : IExpression
     /// <summary>
     /// Clones this instance of the <see cref="IExpression" />.
     /// </summary>
-    /// <param name="key">The left argument of new expression.</param>
-    /// <param name="value">The right argument of new expression.</param>
+    /// <param name="key">The argument of new expression.</param>
     /// <returns>
     /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
     /// </returns>
-    public IExpression Clone(Variable? key = null, IExpression? value = null)
-        => new Define(key ?? Key, value ?? Value);
+    public IExpression Clone(Variable? key = null)
+        => new Unassign(key ?? Key);
 
     /// <summary>
     /// Gets the key.
     /// </summary>
     public Variable Key { get; }
-
-    /// <summary>
-    /// Gets the value.
-    /// </summary>
-    public IExpression Value { get; }
 }

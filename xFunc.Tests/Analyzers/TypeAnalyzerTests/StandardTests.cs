@@ -11,7 +11,7 @@ public class StandardTests : TypeAnalyzerBaseTests
     [Fact]
     public void TestDefineUndefined()
     {
-        var exp = new Define(Variable.X, new Number(-2));
+        var exp = new Assign(Variable.X, new Number(-2));
 
         Test(exp, ResultTypes.String);
     }
@@ -396,7 +396,7 @@ public class StandardTests : TypeAnalyzerBaseTests
     [Fact]
     public void TestUndefine()
     {
-        Test(new Undefine(Variable.X), ResultTypes.String);
+        Test(new Unassign(Variable.X), ResultTypes.String);
     }
 
     [Fact]

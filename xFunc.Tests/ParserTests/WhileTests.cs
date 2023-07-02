@@ -9,7 +9,7 @@ public class WhileTests : BaseParserTests
     public void WhileTest()
     {
         var expected = new While(
-            new Define(Variable.X, new Add(Variable.X, Number.One)),
+            new Assign(Variable.X, new Add(Variable.X, Number.One)),
             new Equal(Number.One, Number.One)
         );
 

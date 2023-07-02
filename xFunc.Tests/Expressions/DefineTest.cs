@@ -8,7 +8,7 @@ public class DefineTest
     [Fact]
     public void SimpleDefineTest()
     {
-        var exp = new Define(Variable.X, Number.One);
+        var exp = new Assign(Variable.X, Number.One);
         var parameters = new ExpressionParameters();
 
         var answer = exp.Execute(parameters);
@@ -20,7 +20,7 @@ public class DefineTest
     [Fact]
     public void DefineWithFuncTest()
     {
-        var exp = new Define(Variable.X, new Sin(AngleValue.Radian(1).AsExpression()));
+        var exp = new Assign(Variable.X, new Sin(AngleValue.Radian(1).AsExpression()));
         var parameters = new ExpressionParameters();
 
         var answer = exp.Execute(parameters);
@@ -32,7 +32,7 @@ public class DefineTest
     [Fact]
     public void DefineExpTest()
     {
-        var exp = new Define(Variable.X, new Mul(new Number(4), new Add(new Number(8), Number.One)));
+        var exp = new Assign(Variable.X, new Mul(new Number(4), new Add(new Number(8), Number.One)));
         var parameters = new ExpressionParameters();
 
         var answer = exp.Execute(parameters);
@@ -44,7 +44,7 @@ public class DefineTest
     [Fact]
     public void OverrideConstTest()
     {
-        var exp = new Define(new Variable("π"), Number.One);
+        var exp = new Assign(new Variable("π"), Number.One);
         var parameters = new ExpressionParameters();
 
         exp.Execute(parameters);
@@ -58,7 +58,7 @@ public class DefineTest
         var function = new Lambda(Array.Empty<string>(), Number.One)
             .AsExpression();
         var variable = new Variable("f");
-        var exp = new Define(variable, function);
+        var exp = new Assign(variable, function);
 
         var parameters = new ExpressionParameters();
         var result = exp.Execute(parameters);
@@ -74,7 +74,7 @@ public class DefineTest
                 new Add(Variable.X, Variable.Y))
             .AsExpression();
         var variable = new Variable("f");
-        var exp = new Define(variable, function);
+        var exp = new Assign(variable, function);
 
         var parameters = new ExpressionParameters();
         var result = exp.Execute(parameters);
@@ -85,31 +85,31 @@ public class DefineTest
     [Fact]
     public void ParamsNullTest()
     {
-        Assert.Throws<ArgumentNullException>(() => new Define(new Variable("π"), Number.One).Execute(null));
+        Assert.Throws<ArgumentNullException>(() => new Assign(new Variable("π"), Number.One).Execute(null));
     }
 
     [Fact]
     public void ExecuteWithoutParametersTest()
     {
-        Assert.Throws<NotSupportedException>(() => new Define(new Variable("π"), Number.One).Execute());
+        Assert.Throws<NotSupportedException>(() => new Assign(new Variable("π"), Number.One).Execute());
     }
 
     [Fact]
     public void KeyIsNullTest()
     {
-        Assert.Throws<ArgumentNullException>(() => new Define(null, Number.One));
+        Assert.Throws<ArgumentNullException>(() => new Assign(null, Number.One));
     }
 
     [Fact]
     public void ValueIsNullTest()
     {
-        Assert.Throws<ArgumentNullException>(() => new Define(Variable.X, null));
+        Assert.Throws<ArgumentNullException>(() => new Assign(Variable.X, null));
     }
 
     [Fact]
     public void EqualsSameReferenceTest()
     {
-        var def = new Define(Variable.X, Number.One);
+        var def = new Assign(Variable.X, Number.One);
 
         Assert.True(def.Equals(def));
     }
@@ -117,7 +117,7 @@ public class DefineTest
     [Fact]
     public void EqualsDifferentTypesTest()
     {
-        var def = new Define(Variable.X, Number.One);
+        var def = new Assign(Variable.X, Number.One);
         var number = Number.One;
 
         Assert.False(def.Equals(number));
@@ -126,8 +126,8 @@ public class DefineTest
     [Fact]
     public void EqualsDifferentOnjectsTest()
     {
-        var def1 = new Define(Variable.X, Number.One);
-        var def2 = new Define(Variable.Y, Number.Two);
+        var def1 = new Assign(Variable.X, Number.One);
+        var def2 = new Assign(Variable.Y, Number.Two);
 
         Assert.False(def1.Equals(def2));
     }
@@ -135,7 +135,7 @@ public class DefineTest
     [Fact]
     public void CloneTest()
     {
-        var exp = new Define(Variable.X, Number.Zero);
+        var exp = new Assign(Variable.X, Number.Zero);
         var clone = exp.Clone();
 
         Assert.Equal(exp, clone);
@@ -144,7 +144,7 @@ public class DefineTest
     [Fact]
     public void NullAnalyzerTest1()
     {
-        var exp = new Define(Variable.X, Number.Zero);
+        var exp = new Assign(Variable.X, Number.Zero);
 
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
@@ -152,7 +152,7 @@ public class DefineTest
     [Fact]
     public void NullAnalyzerTest2()
     {
-        var exp = new Define(Variable.X, Number.Zero);
+        var exp = new Assign(Variable.X, Number.Zero);
 
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
     }

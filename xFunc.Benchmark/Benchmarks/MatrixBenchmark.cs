@@ -5,11 +5,10 @@ using System.Collections.Immutable;
 
 namespace xFunc.Benchmark.Benchmarks;
 
-public class MulMatrixBenchmark
+public class MatrixBenchmark
 {
-    private readonly Random random = new Random();
-
-    private Mul mul;
+    private Matrix matrix1;
+    private Matrix matrix2;
 
     [Params(2, 10, 100)]
     public int Size;
@@ -17,10 +16,8 @@ public class MulMatrixBenchmark
     [GlobalSetup]
     public void Setup()
     {
-        var left = CreateMatrix();
-        var right = CreateMatrix();
-
-        mul = new Mul(left, right);
+        matrix1 = CreateMatrix();
+        matrix2 = CreateMatrix();
     }
 
     private Matrix CreateMatrix()
@@ -30,7 +27,7 @@ public class MulMatrixBenchmark
         {
             var vector = ImmutableArray.CreateBuilder<IExpression>(Size);
             for (var j = 0; j < Size; j++)
-                vector.Add(new Number(random.Next()));
+                vector.Add(new Number(Random.Shared.Next()));
 
             vectors.Add(new Vector(vector.ToImmutableArray()));
         }
@@ -39,5 +36,18 @@ public class MulMatrixBenchmark
     }
 
     [Benchmark]
-    public object MulMatrix() => mul.Execute();
+    public object AddMatrix()
+        => new Add(matrix1, matrix2).Execute();
+
+    [Benchmark]
+    public object SubMatrix()
+        => new Sub(matrix1, matrix2).Execute();
+
+    [Benchmark]
+    public object MulMatrix()
+        => new Mul(matrix1, matrix2).Execute();
+
+    [Benchmark]
+    public object MulMatrixByNumber()
+        => new Mul(matrix1, Number.Two).Execute();
 }

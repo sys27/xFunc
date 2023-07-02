@@ -7,8 +7,6 @@ namespace xFunc.Benchmark.Benchmarks;
 
 public class TransposeBenchmark
 {
-    private readonly Random random = new Random();
-
     private Transpose transpose;
 
     [ParamsSource(nameof(GetSizes))]
@@ -35,7 +33,7 @@ public class TransposeBenchmark
         {
             var vector = ImmutableArray.CreateBuilder<IExpression>(Size.columns);
             for (var j = 0; j < Size.columns; j++)
-                vector.Add(new Number(random.Next()));
+                vector.Add(new Number(Random.Shared.Next()));
 
             vectors.Add(new Vector(vector.ToImmutableArray()));
         }

@@ -50,7 +50,7 @@ public interface IAnalyzer<out TResult, in TContext>
     /// <param name="exp">The expression.</param>
     /// <param name="context">The context.</param>
     /// <returns>The result of analysis.</returns>
-    TResult Analyze(Define exp, TContext context);
+    TResult Analyze(Assign exp, TContext context);
 
     /// <summary>
     /// Analyzes the specified expression.
@@ -346,7 +346,7 @@ public interface IAnalyzer<out TResult, in TContext>
     /// <param name="exp">The expression.</param>
     /// <param name="context">The context.</param>
     /// <returns>The result of analysis.</returns>
-    TResult Analyze(Undefine exp, TContext context);
+    TResult Analyze(Unassign exp, TContext context);
 
     /// <summary>
     /// Analyzes the specified expression.

@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Immutable;
-using System.Text;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Tests.ParserTests;
@@ -517,7 +516,7 @@ public class ParserTest : BaseParserTests
             new Variable("pi")
         );
 
-        ParseTest("3pi", expected);
+        ParseTest("3 * pi", expected);
     }
 
     [Fact]
@@ -534,23 +533,19 @@ public class ParserTest : BaseParserTests
         ParseTest("2 * (x + y)", expected);
     }
 
-    [Theory]
-    [InlineData("2 * {1, 2}")]
-    [InlineData("2{1, 2}")]
-    public void NumberMulVectorTest(string function)
+    [Fact]
+    public void NumberMulVectorTest()
     {
         var expected = new Mul(
             Number.Two,
             new Vector(new IExpression[] { Number.One, Number.Two })
         );
 
-        ParseTest(function, expected);
+        ParseTest("2 * {1, 2}", expected);
     }
 
-    [Theory]
-    [InlineData("2 * {{1, 2}, {3, 4}}")]
-    [InlineData("2{{1, 2}, {3, 4}}")]
-    public void NumberMulMatrixTest(string function)
+    [Fact]
+    public void NumberMulMatrixTest()
     {
         var expected = new Mul(
             Number.Two,
@@ -561,7 +556,7 @@ public class ParserTest : BaseParserTests
             })
         );
 
-        ParseTest(function, expected);
+        ParseTest("2 * {{1, 2}, {3, 4}}", expected);
     }
 
     [Fact]
@@ -696,4 +691,8 @@ public class ParserTest : BaseParserTests
     [Fact]
     public void TrailingSpaces()
         => ParseTest("1  ", Number.One);
+
+    [Fact]
+    public void BufferOverflow()
+        => parser.Parse("a1 := (a2 := (a3 := (a4 := (a5 := (a6 := (a7 := (a8 := (a9 := (a10 := (a11 := (a12 := (a13 := (a14 := (a15 := (a16 := (a17 := (a18 := 1)))))))))))))))))");
 }

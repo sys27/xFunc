@@ -561,7 +561,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     }
 
     /// <inheritdoc />
-    public virtual ResultTypes Analyze(Define exp)
+    public virtual ResultTypes Analyze(Assign exp)
         => CheckArgument(exp, ResultTypes.String);
 
     /// <inheritdoc />
@@ -1307,7 +1307,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     }
 
     /// <inheritdoc />
-    public virtual ResultTypes Analyze(Undefine exp)
+    public virtual ResultTypes Analyze(Unassign exp)
         => CheckArgument(exp, ResultTypes.String);
 
     /// <inheritdoc />

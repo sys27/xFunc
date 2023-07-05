@@ -1,14 +1,29 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Collections.Immutable;
+
 namespace xFunc.Tests.ParserTests;
 
 public class AssignTests : BaseParserTests
 {
     [Fact]
+    public void DefTest()
+        => ParseTest("assign(x, 2)", new Assign(Variable.X, Number.Two));
+
+    [Theory]
+    [InlineData("assign x, 2)")]
+    [InlineData("assign(, 2)")]
+    [InlineData("assign(x 2)")]
+    [InlineData("assign(x,)")]
+    [InlineData("assign(x, 2")]
+    public void DefMissingOpenParen(string function)
+        => ParseErrorTest(function);
+
+    [Fact]
     public void ParseDefine()
     {
-        var expected = new Define(Variable.X, new Number(3));
+        var expected = new Assign(Variable.X, new Number(3));
 
         ParseTest("x := 3", expected);
     }
@@ -20,7 +35,7 @@ public class AssignTests : BaseParserTests
     [Fact]
     public void DefineComplexParserTest()
     {
-        var expected = new Define(
+        var expected = new Assign(
             new Variable("aaa"),
             new Add(
                 new Number(3),
@@ -36,7 +51,7 @@ public class AssignTests : BaseParserTests
     [Fact]
     public void DefineUserFuncTest()
     {
-        var expected = new Define(
+        var expected = new Assign(
             new Variable("f"),
             new Lambda(new[] { Variable.X.Name }, Variable.X).AsExpression());
 
@@ -46,7 +61,7 @@ public class AssignTests : BaseParserTests
     [Fact]
     public void UnaryMinusAssignTest()
     {
-        var expected = new Define(
+        var expected = new Assign(
             Variable.X,
             new UnaryMinus(new Sin(Number.Two))
         );
@@ -257,5 +272,43 @@ public class AssignTests : BaseParserTests
         var expected = new Add(Number.One, new Dec(Variable.X));
 
         ParseTest("1 + x--", expected);
+    }
+
+    [Theory]
+    [InlineData("1 + (x := 2)")]
+    [InlineData("1 + assign(x, 2)")]
+    public void AssignAsExpression(string function)
+    {
+        var expected = new Add(
+            Number.One,
+            new Assign(Variable.X, Number.Two));
+
+        ParseTest(function, expected);
+    }
+
+    [Fact]
+    public void UnassignAsExpression()
+    {
+        var expected = new Add(
+            Number.One,
+            new Unassign(Variable.X));
+
+        ParseTest("1 + unassign(x)", expected);
+    }
+
+    [Theory]
+    [InlineData("(f := (x) => x * x)(2)")]
+    [InlineData("(assign(f, (x) => x * x))(2)")]
+    public void AssignLambdaAsExpression(string function)
+    {
+        var expected = new CallExpression(
+            new Assign(
+                new Variable("f"),
+                new Lambda(
+                    new[] { Variable.X.Name },
+                    new Mul(Variable.X, Variable.X)).AsExpression()),
+            Number.Two);
+
+        ParseTest(function, expected);
     }
 }

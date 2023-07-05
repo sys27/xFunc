@@ -3,20 +3,20 @@
 
 namespace xFunc.Tests.ParserTests;
 
-public class UndefineTests : BaseParserTests
+public class UnassignTests : BaseParserTests
 {
     [Fact]
     public void UndefParseTest()
     {
-        var expected = new Undefine(new Variable("f"));
+        var expected = new Unassign(new Variable("f"));
 
-        ParseTest("undef(f)", expected);
+        ParseTest("unassign(f)", expected);
     }
 
     [Theory]
-    [InlineData("undef x)")]
-    [InlineData("undef()")]
-    [InlineData("undef(x")]
+    [InlineData("unassign x)")]
+    [InlineData("unassign()")]
+    [InlineData("unassign(x")]
     public void UndefMissingPartsTest(string function)
         => ParseErrorTest(function);
 }

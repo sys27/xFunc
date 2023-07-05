@@ -58,9 +58,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Assign" xml:space="preserve">
-    <value>The value '{1}' was assigned to '{0}'.</value>
-  </data>
   <data name="ConstError" xml:space="preserve">
     <value>You can't change constants.</value>
   </data>
@@ -84,9 +81,6 @@
   </data>
   <data name="ReadOnlyError" xml:space="preserve">
     <value>You cannot change the read-only variable.</value>
-  </data>
-  <data name="Undefine" xml:space="preserve">
-    <value>'{0}' is removed.</value>
   </data>
   <data name="VariableNotFoundExceptionError" xml:space="preserve">
     <value>The '{0}' variable not found.</value>

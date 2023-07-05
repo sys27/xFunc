@@ -83,7 +83,7 @@ public class CommonFormatter : IFormatter
         => ToString(exp, "ceil({0})");
 
     /// <inheritdoc />
-    public virtual string Analyze(Define exp)
+    public virtual string Analyze(Assign exp)
         => $"{exp.Key.Analyze(this)} := {exp.Value.Analyze(this)}";
 
     /// <inheritdoc />
@@ -236,7 +236,7 @@ public class CommonFormatter : IFormatter
     }
 
     /// <inheritdoc />
-    public virtual string Analyze(Undefine exp)
+    public virtual string Analyze(Unassign exp)
         => $"undef({exp.Key.Analyze(this)})";
 
     /// <inheritdoc />

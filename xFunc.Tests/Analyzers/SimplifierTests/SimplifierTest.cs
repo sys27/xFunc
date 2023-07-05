@@ -49,8 +49,8 @@ public class SimplifierTest : BaseSimplifierTest
     [Fact]
     public void Define()
     {
-        var define = new Define(Variable.X, new Add(Number.Two, Number.Two));
-        var expected = new Define(Variable.X, new Number(4));
+        var define = new Assign(Variable.X, new Add(Number.Two, Number.Two));
+        var expected = new Assign(Variable.X, new Number(4));
 
         SimplifyTest(define, expected);
     }
@@ -58,7 +58,7 @@ public class SimplifierTest : BaseSimplifierTest
     [Fact]
     public void DefineNotSimplifierTest()
     {
-        var define = new Define(Variable.X, Number.Two);
+        var define = new Assign(Variable.X, Number.Two);
 
         SimplifyTest(define, define);
     }

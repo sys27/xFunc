@@ -1,21 +1,24 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Globalization;
-
 namespace xFunc.Maths.Expressions;
 
 /// <summary>
-/// Represents the Undefine operator.
+/// Represents the ":=" operator and the assign function.
 /// </summary>
-public class Undefine : IExpression
+public class Assign : IExpression
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="Undefine"/> class.
+    /// Initializes a new instance of the <see cref="Assign"/> class.
     /// </summary>
     /// <param name="key">The key.</param>
-    public Undefine(Variable key)
-        => Key = key ?? throw new ArgumentNullException(nameof(key));
+    /// <param name="value">The value.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="key"/> or <paramref name="value"/> is null.</exception>
+    public Assign(Variable key, IExpression value)
+    {
+        Key = key ?? throw new ArgumentNullException(nameof(key));
+        Value = value ?? throw new ArgumentNullException(nameof(value));
+    }
 
     /// <inheritdoc />
     public override bool Equals(object? obj)
@@ -23,11 +26,10 @@ public class Undefine : IExpression
         if (ReferenceEquals(this, obj))
             return true;
 
-        var undef = obj as Undefine;
-        if (undef is null)
+        if (obj is not Assign def)
             return false;
 
-        return Key.Equals(undef.Key);
+        return Key.Equals(def.Key) && Value.Equals(def.Value);
     }
 
     /// <inheritdoc />
@@ -37,9 +39,7 @@ public class Undefine : IExpression
     public override string ToString() => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
-    /// <exception cref="NotSupportedException">Always.</exception>
-    public object Execute()
-        => throw new NotSupportedException();
+    public object Execute() => throw new NotSupportedException();
 
     /// <inheritdoc />
     public object Execute(ExpressionParameters? parameters)
@@ -47,9 +47,10 @@ public class Undefine : IExpression
         if (parameters is null)
             throw new ArgumentNullException(nameof(parameters));
 
-        parameters.Remove(Key.Name);
+        var value = Value.Execute(parameters);
+        parameters[Key.Name] = new ParameterValue(value);
 
-        return string.Format(CultureInfo.InvariantCulture, Resource.Undefine, Key);
+        return value;
     }
 
     /// <inheritdoc />
@@ -75,15 +76,21 @@ public class Undefine : IExpression
     /// <summary>
     /// Clones this instance of the <see cref="IExpression" />.
     /// </summary>
-    /// <param name="key">The argument of new expression.</param>
+    /// <param name="key">The left argument of new expression.</param>
+    /// <param name="value">The right argument of new expression.</param>
     /// <returns>
     /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
     /// </returns>
-    public IExpression Clone(Variable? key = null)
-        => new Undefine(key ?? Key);
+    public IExpression Clone(Variable? key = null, IExpression? value = null)
+        => new Assign(key ?? Key, value ?? Value);
 
     /// <summary>
     /// Gets the key.
     /// </summary>
     public Variable Key { get; }
+
+    /// <summary>
+    /// Gets the value.
+    /// </summary>
+    public IExpression Value { get; }
 }

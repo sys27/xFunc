@@ -296,14 +296,14 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
         => AnalyzeUnary(exp);
 
     /// <inheritdoc />
-    public override IExpression Analyze(Define exp)
+    public override IExpression Analyze(Assign exp)
     {
         if (exp is null)
             ArgNull(ExceptionArgument.exp);
 
         var value = exp.Value.Analyze(this);
         if (IsChanged(exp.Value, value))
-            return new Define(exp.Key, value);
+            return new Assign(exp.Key, value);
 
         return exp;
     }

@@ -31,8 +31,8 @@ internal ref partial struct Lexer
         {
             "true" => TrueKeyword,
             "false" => FalseKeyword,
-            "def" or "define" => DefineKeyword,
-            "undef" or "undefine" => UndefineKeyword,
+            "assign" => AssignKeyword,
+            "unassign" => UnassignKeyword,
             "if" => IfKeyword,
             "for" => ForKeyword,
             "while" => WhileKeyword,

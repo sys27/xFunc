@@ -73,7 +73,7 @@ public class ProcessorTest
     {
         var processor = new Processor();
 
-        var result = processor.Solve<ComplexNumberResult>("conjugate(2.3 + 1.4i)");
+        var result = processor.Solve<ComplexNumberResult>("conjugate(2.3 + 1.4*i)");
         var expected = Complex.Conjugate(new Complex(2.3, 1.4));
 
         Assert.Equal(expected, result.Result);
@@ -92,9 +92,9 @@ public class ProcessorTest
     public void SolveStringTest()
     {
         var processor = new Processor();
-        var result = processor.Solve<StringResult>("x := 1");
+        var result = processor.Solve<NumberResult>("x := 1");
 
-        Assert.Equal("The value '1' was assigned to 'x'.", result.Result);
+        Assert.Equal(1.0, result.Result);
     }
 
     [Fact]

@@ -75,72 +75,10 @@ public partial class Parser : IParser
         }
     }
 
-    // TODO: to expressions?
     private IExpression? ParseStatement(ref TokenReader tokenReader)
-        => ParseAssign(ref tokenReader) ??
-           ParseDef(ref tokenReader) ??
-           ParseUndef(ref tokenReader) ??
-           ParseFor(ref tokenReader) ??
+        => ParseFor(ref tokenReader) ??
            ParseWhile(ref tokenReader) ??
            ParseExpression(ref tokenReader);
-
-    private IExpression? ParseAssign(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
-        {
-            var left = parser.ParseVariable(ref reader);
-            if (left is null)
-                return null;
-
-            if (!reader.Check(AssignOperator))
-                return null;
-
-            var right = parser.ParseExpression(ref reader) ??
-                        MissingSecondOperand(AssignOperator);
-
-            return new Define(left, right);
-        });
-
-    private IExpression? ParseDef(ref TokenReader tokenReader)
-    {
-        var def = tokenReader.GetCurrent(DefineKeyword);
-        if (def.IsEmpty())
-            return null;
-
-        if (!tokenReader.Check(OpenParenthesisSymbol))
-            MissingOpenParenthesis(def.Kind);
-
-        var key = ParseVariable(ref tokenReader) ??
-                  throw new ParseException(Resource.AssignKeyParseException);
-
-        if (!tokenReader.Check(CommaSymbol))
-            MissingComma(key);
-
-        var value = ParseExpression(ref tokenReader) ??
-                    throw new ParseException(Resource.DefValueParseException);
-
-        if (!tokenReader.Check(CloseParenthesisSymbol))
-            MissingCloseParenthesis(def.Kind);
-
-        return new Define(key, value);
-    }
-
-    private IExpression? ParseUndef(ref TokenReader tokenReader)
-    {
-        var undef = tokenReader.GetCurrent(UndefineKeyword);
-        if (undef.IsEmpty())
-            return null;
-
-        if (!tokenReader.Check(OpenParenthesisSymbol))
-            MissingOpenParenthesis(undef.Kind);
-
-        var key = ParseVariable(ref tokenReader) ??
-                  throw new ParseException(Resource.AssignKeyParseException);
-
-        if (!tokenReader.Check(CloseParenthesisSymbol))
-            MissingCloseParenthesis(undef.Kind);
-
-        return new Undefine(key);
-    }
 
     private IExpression? ParseFor(ref TokenReader tokenReader)
     {
@@ -203,17 +141,18 @@ public partial class Parser : IParser
     }
 
     private IExpression? ParseExpression(ref TokenReader tokenReader)
-        => ParseBinaryAssign(ref tokenReader) ??
+        => ParseAssignOperators(ref tokenReader) ??
            ParseTernary(ref tokenReader);
 
-    private IExpression? ParseBinaryAssign(ref TokenReader tokenReader)
+    private IExpression? ParseAssignOperators(ref TokenReader tokenReader)
         => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
         {
             var variable = parser.ParseVariable(ref reader);
             if (variable is null)
                 return null;
 
-            var @operator = reader.GetCurrent(MulAssignOperator) ||
+            var @operator = reader.GetCurrent(AssignOperator) ||
+                            reader.GetCurrent(MulAssignOperator) ||
                             reader.GetCurrent(DivAssignOperator) ||
                             reader.GetCurrent(AddAssignOperator) ||
                             reader.GetCurrent(SubAssignOperator) ||
@@ -226,7 +165,7 @@ public partial class Parser : IParser
             var exp = parser.ParseExpression(ref reader) ??
                       MissingSecondOperand(@operator.Kind);
 
-            return parser.CreateBinaryAssign(@operator, variable, exp);
+            return parser.CreateAssign(@operator, variable, exp);
         });
 
     private IExpression? ParseTernary(ref TokenReader tokenReader)
@@ -461,7 +400,7 @@ public partial class Parser : IParser
 
     private IExpression? ParseMulDivMod(ref TokenReader tokenReader)
     {
-        var left = ParseMulImplicit(ref tokenReader);
+        var left = ParseLeftUnary(ref tokenReader);
         if (left is null)
             return null;
 
@@ -475,53 +414,11 @@ public partial class Parser : IParser
             if (token.IsEmpty())
                 return left;
 
-            var right = ParseMulImplicit(ref tokenReader) ??
+            var right = ParseLeftUnary(ref tokenReader) ??
                         MissingSecondOperand(token.Kind);
 
             left = CreateMulDivMod(token, left, right);
         }
-    }
-
-    private IExpression? ParseMulImplicit(ref TokenReader tokenReader)
-        => ParseMulImplicitLeftUnary(ref tokenReader) ??
-           ParseLeftUnary(ref tokenReader);
-
-    private IExpression? ParseMulImplicitLeftUnary(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
-        {
-            var minusOperator = reader.GetCurrent(MinusOperator);
-            var number = parser.ParseNumberAndUnit(ref reader);
-            if (number is null)
-                return null;
-
-            var rightUnary = parser.ParseMulImplicitExponentiation(ref reader) ??
-                             parser.ParseParenthesesExpression(ref reader) ??
-                             parser.ParseMatrix(ref reader) ??
-                             parser.ParseVector(ref reader);
-
-            if (rightUnary is null)
-                return null;
-
-            if (minusOperator.IsNotEmpty())
-                number = new UnaryMinus(number);
-
-            return new Mul(number, rightUnary);
-        });
-
-    private IExpression? ParseMulImplicitExponentiation(ref TokenReader tokenReader)
-    {
-        var left = ParseFunctionOrVariable(ref tokenReader);
-        if (left is null)
-            return null;
-
-        var @operator = tokenReader.GetCurrent(ExponentiationOperator);
-        if (@operator.IsEmpty())
-            return left;
-
-        var right = ParseExponentiation(ref tokenReader) ??
-                    throw new ParseException(Resource.ExponentParseException);
-
-        return new Pow(left, right);
     }
 
     private IExpression? ParseLeftUnary(ref TokenReader tokenReader)
@@ -585,13 +482,15 @@ public partial class Parser : IParser
             if (reader.Check(DecrementOperator))
                 return new Dec(variable);
 
-            return variable;
+            return null;
         });
 
     private IExpression? ParseOperand(ref TokenReader tokenReader)
         => ParsePolarComplexNumber(ref tokenReader) ??
            ParseNumberAndUnit(ref tokenReader) ??
            ParseIf(ref tokenReader) ??
+           ParseAssignFunction(ref tokenReader) ??
+           ParseUnassignFunction(ref tokenReader) ??
            ParseFunctionOrVariable(ref tokenReader) ??
            ParseBoolean(ref tokenReader) ??
            ParseParenthesesOrCallExpression(ref tokenReader) ??
@@ -632,14 +531,54 @@ public partial class Parser : IParser
         return new If(condition, then);
     }
 
+    private IExpression? ParseAssignFunction(ref TokenReader tokenReader)
+    {
+        var def = tokenReader.GetCurrent(AssignKeyword);
+        if (def.IsEmpty())
+            return null;
+
+        if (!tokenReader.Check(OpenParenthesisSymbol))
+            MissingOpenParenthesis(def.Kind);
+
+        var key = ParseVariable(ref tokenReader) ??
+                  throw new ParseException(Resource.AssignKeyParseException);
+
+        if (!tokenReader.Check(CommaSymbol))
+            MissingComma(key);
+
+        var value = ParseExpression(ref tokenReader) ??
+                    throw new ParseException(Resource.DefValueParseException);
+
+        if (!tokenReader.Check(CloseParenthesisSymbol))
+            MissingCloseParenthesis(def.Kind);
+
+        return new Assign(key, value);
+    }
+
+    private IExpression? ParseUnassignFunction(ref TokenReader tokenReader)
+    {
+        var undef = tokenReader.GetCurrent(UnassignKeyword);
+        if (undef.IsEmpty())
+            return null;
+
+        if (!tokenReader.Check(OpenParenthesisSymbol))
+            MissingOpenParenthesis(undef.Kind);
+
+        var key = ParseVariable(ref tokenReader) ??
+                  throw new ParseException(Resource.AssignKeyParseException);
+
+        if (!tokenReader.Check(CloseParenthesisSymbol))
+            MissingCloseParenthesis(undef.Kind);
+
+        return new Unassign(key);
+    }
+
     private IExpression? ParseParenthesesOrCallExpression(ref TokenReader tokenReader)
         => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
         {
             var exp = parser.ParseParenthesesExpression(ref reader);
             if (exp is null)
-            {
                 return null;
-            }
 
             return parser.ParseCallExpression(exp, ref reader);
         });
@@ -666,18 +605,13 @@ public partial class Parser : IParser
             return exp;
         });
 
-    private IExpression? ParseCallExpression(IExpression expression, ref TokenReader tokenReader)
+    private IExpression ParseCallExpression(IExpression expression, ref TokenReader tokenReader)
     {
-        if (expression is not LambdaExpression lambdaExpression)
-            return expression;
-
         var parameters = ParseParameterList(ref tokenReader);
         if (parameters is null)
-        {
             return expression;
-        }
 
-        var callExpression = new CallExpression(lambdaExpression, parameters.Value);
+        var callExpression = new CallExpression(expression, parameters.Value);
 
         return callExpression;
     }

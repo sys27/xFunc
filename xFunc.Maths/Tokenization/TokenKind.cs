@@ -90,14 +90,14 @@ internal enum TokenKind
     FalseKeyword,
 
     /// <summary>
-    /// The 'def, define' token.
+    /// The 'assign' token.
     /// </summary>
-    DefineKeyword,
+    AssignKeyword,
 
     /// <summary>
-    /// The 'undef, undefine' token.
+    /// The 'unassign' token.
     /// </summary>
-    UndefineKeyword,
+    UnassignKeyword,
 
     /// <summary>
     /// The 'if' token.

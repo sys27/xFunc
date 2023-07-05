@@ -46,7 +46,7 @@ public class CommonFormatterTest
     [Fact]
     public void DefineToStringTest()
     {
-        var exp = new Define(Variable.X, Number.Zero);
+        var exp = new Assign(Variable.X, Number.Zero);
 
         Assert.Equal("x := 0", exp.ToString());
     }
@@ -488,7 +488,7 @@ public class CommonFormatterTest
     [Fact]
     public void UndefineToStringTest()
     {
-        var exp = new Undefine(Variable.X);
+        var exp = new Unassign(Variable.X);
 
         Assert.Equal("undef(x)", exp.ToString());
     }
@@ -1460,7 +1460,7 @@ public class CommonFormatterTest
     [Fact]
     public void ForToString()
     {
-        var exp = new For(new Number(5), new Define(Variable.X, Number.Zero), new Equal(new Number(5), new Number(5)), new AddAssign(Variable.X, Number.One));
+        var exp = new For(new Number(5), new Assign(Variable.X, Number.Zero), new Equal(new Number(5), new Number(5)), new AddAssign(Variable.X, Number.One));
 
         Assert.Equal("for(5, x := 0, 5 == 5, x += 1)", exp.ToString());
     }

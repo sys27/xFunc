@@ -120,11 +120,13 @@ public partial class Parser
         };
     }
 
-    private IExpression CreateBinaryAssign(
+    private IExpression CreateAssign(
         in Token token,
         Variable first,
         IExpression second)
     {
+        if (token.Is(AssignOperator))
+            return new Assign(first, second);
         if (token.Is(AddAssignOperator))
             return new AddAssign(first, second);
         if (token.Is(SubAssignOperator))
@@ -136,7 +138,7 @@ public partial class Parser
         if (token.Is(LeftShiftAssignOperator))
             return new LeftShiftAssign(first, second);
 
-        Debug.Assert(token.Is(RightShiftAssignOperator), "Only '+=', '-=', '*=', '/=', '<<=', '>>=' operators are allowed here.");
+        Debug.Assert(token.Is(RightShiftAssignOperator), "Only ':=', '+=', '-=', '*=', '/=', '<<=', '>>=' operators are allowed here.");
 
         return new RightShiftAssign(first, second);
     }

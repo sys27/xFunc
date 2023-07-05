@@ -1,8 +1,6 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Globalization;
-
 namespace xFunc.Maths.Expressions;
 
 /// <summary>
@@ -28,8 +26,7 @@ public class Assign : IExpression
         if (ReferenceEquals(this, obj))
             return true;
 
-        var def = obj as Assign;
-        if (def is null)
+        if (obj is not Assign def)
             return false;
 
         return Key.Equals(def.Key) && Value.Equals(def.Value);
@@ -50,9 +47,10 @@ public class Assign : IExpression
         if (parameters is null)
             throw new ArgumentNullException(nameof(parameters));
 
-        parameters[Key.Name] = new ParameterValue(Value.Execute(parameters));
+        var value = Value.Execute(parameters);
+        parameters[Key.Name] = new ParameterValue(value);
 
-        return string.Format(CultureInfo.InvariantCulture, Resource.Assign, Key, Value);
+        return value;
     }
 
     /// <inheritdoc />

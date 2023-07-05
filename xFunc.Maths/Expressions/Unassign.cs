@@ -1,8 +1,6 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Globalization;
-
 namespace xFunc.Maths.Expressions;
 
 /// <summary>
@@ -46,9 +44,11 @@ public class Unassign : IExpression
         if (parameters is null)
             throw new ArgumentNullException(nameof(parameters));
 
+        var parameter = parameters[Key.Name];
+
         parameters.Remove(Key.Name);
 
-        return string.Format(CultureInfo.InvariantCulture, Resource.Undefine, Key);
+        return parameter.Value;
     }
 
     /// <inheritdoc />

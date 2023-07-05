@@ -3,7 +3,7 @@
 
 namespace xFunc.Tests.Expressions;
 
-public class UndefineTest
+public class UnassignTest
 {
     [Fact]
     public void ExecuteFailTest()
@@ -80,7 +80,7 @@ public class UndefineTest
 
         var result = undef.Execute(parameters);
 
-        Assert.Equal("'x' is removed.", result);
+        Assert.Equal("(x) => x", result.ToString());
     }
 
     [Fact]

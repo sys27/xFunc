@@ -43,7 +43,7 @@ public class PowerTests : BaseParserTests
             new Pow(new Sin(Variable.X), Number.Two)
         );
 
-        ParseTest("2sin(x) ^ 2", expected);
+        ParseTest("2 * sin(x) ^ 2", expected);
     }
 
     [Fact]
@@ -54,7 +54,7 @@ public class PowerTests : BaseParserTests
             new Pow(Variable.X, Number.Two)
         );
 
-        ParseTest("2x^2", expected);
+        ParseTest("2 * x^2", expected);
     }
 
     [Fact]
@@ -65,7 +65,7 @@ public class PowerTests : BaseParserTests
             new Pow(Variable.X, Number.Two)
         );
 
-        ParseTest("-2x^2", expected);
+        ParseTest("-2 * x^2", expected);
     }
 
     [Theory]

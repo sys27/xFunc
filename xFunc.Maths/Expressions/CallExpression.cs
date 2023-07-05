@@ -15,6 +15,27 @@ public class CallExpression : IExpression, IEquatable<CallExpression>
     /// Initializes a new instance of the <see cref="CallExpression"/> class.
     /// </summary>
     /// <param name="function">The expression that returns function.</param>
+    /// <param name="argument">The parameter of the function.</param>
+    public CallExpression(IExpression function, IExpression argument)
+        : this(function, ImmutableArray.Create(argument))
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CallExpression"/> class.
+    /// </summary>
+    /// <param name="function">The expression that returns function.</param>
+    /// <param name="argument1">The first parameter of the function.</param>
+    /// <param name="argument2">The second parameter of the function.</param>
+    public CallExpression(IExpression function, IExpression argument1, IExpression argument2)
+        : this(function, ImmutableArray.Create(argument1, argument2))
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CallExpression"/> class.
+    /// </summary>
+    /// <param name="function">The expression that returns function.</param>
     /// <param name="parameters">The list of parameters of the function.</param>
     public CallExpression(IExpression function, ImmutableArray<IExpression> parameters)
     {
@@ -58,21 +79,15 @@ public class CallExpression : IExpression, IEquatable<CallExpression>
     public object Execute(ExpressionParameters? parameters)
     {
         if (parameters is null)
-        {
             throw new ArgumentNullException(nameof(parameters));
-        }
 
         if (Function.Execute(parameters) is not Lambda function)
-        {
             throw new ResultIsNotSupportedException(this, Function);
-        }
 
         var nestedScope = parameters.CreateScope();
         var zip = function.Parameters.Zip(Parameters, (parameter, expression) => (parameter, expression));
         foreach (var (parameter, expression) in zip)
-        {
             nestedScope[parameter] = new ParameterValue(expression.Execute(nestedScope));
-        }
 
         var result = function.Call(nestedScope);
 

@@ -59,7 +59,7 @@ public class LambdaTests : BaseParserTests
                     new[] { "x" },
                     new Sin(Variable.X))
                 .AsExpression(),
-            new IExpression[] { new Number(90) }.ToImmutableArray());
+            new Number(90));
 
         ParseTest("((x) => sin(x))(90)", expected);
     }
@@ -82,7 +82,8 @@ public class LambdaTests : BaseParserTests
                     new[] { "x", "y" },
                     new Add(Variable.X, Variable.Y))
                 .AsExpression(),
-            new IExpression[] { Number.One, Number.Two }.ToImmutableArray());
+            Number.One,
+            Number.Two);
 
         ParseTest("((x, y) => x + y)(1, 2)", expected);
     }

@@ -3,7 +3,7 @@
 
 namespace xFunc.Tests.Expressions;
 
-public class DefineTest
+public class AssignTest
 {
     [Fact]
     public void SimpleDefineTest()
@@ -13,8 +13,9 @@ public class DefineTest
 
         var answer = exp.Execute(parameters);
 
-        Assert.Equal(new NumberValue(1.0), parameters["x"]);
-        Assert.Equal("The value '1' was assigned to 'x'.", answer);
+        var expected = new NumberValue(1.0);
+        Assert.Equal(expected, parameters["x"]);
+        Assert.Equal(expected, answer);
     }
 
     [Fact]
@@ -25,8 +26,9 @@ public class DefineTest
 
         var answer = exp.Execute(parameters);
 
-        Assert.Equal(new NumberValue(Math.Sin(1)), parameters[Variable.X.Name]);
-        Assert.Equal("The value 'sin(1 radian)' was assigned to 'x'.", answer);
+        var expected = new NumberValue(Math.Sin(1));
+        Assert.Equal(expected, parameters[Variable.X.Name]);
+        Assert.Equal(expected, answer);
     }
 
     [Fact]
@@ -37,8 +39,9 @@ public class DefineTest
 
         var answer = exp.Execute(parameters);
 
-        Assert.Equal(new NumberValue(36.0), parameters["x"]);
-        Assert.Equal("The value '4 * (8 + 1)' was assigned to 'x'.", answer);
+        var expected = new NumberValue(36.0);
+        Assert.Equal(expected, parameters["x"]);
+        Assert.Equal(expected, answer);
     }
 
     [Fact]
@@ -63,7 +66,7 @@ public class DefineTest
         var parameters = new ExpressionParameters();
         var result = exp.Execute(parameters);
 
-        Assert.Equal("The value '() => 1' was assigned to 'f'.", result);
+        Assert.Equal("() => 1", result.ToString());
     }
 
     [Fact]
@@ -79,7 +82,7 @@ public class DefineTest
         var parameters = new ExpressionParameters();
         var result = exp.Execute(parameters);
 
-        Assert.Equal("The value '(x, y) => x + y' was assigned to 'f'.", result);
+        Assert.Equal("(x, y) => x + y", result.ToString());
     }
 
     [Fact]

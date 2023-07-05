@@ -1,26 +1,19 @@
-// It's just a reference grammar for xFunc (The implementaion is not completely equal to grammar).
+// It's just a reference grammar for xFunc (The implementation is not completely equal to grammar).
 
-statement = assign
-          / def
-          / undef
-          / if
-          / for
+statement = for
           / while
           / exp
 
-assignmentKey = functionDeclaration / variable
-assign = assignmentKey ':=' exp
-def = ('def' / 'define') '(' assignmentKey ',' exp ')'
-undef = ('undef' / 'undefine') '(' assignmentKey ')'
-
+def = ('assign') '(' variable ',' exp ')'
+undef = ('unassign') '(' variable ')'
 if = 'if' '(' conditional ',' exp (',' exp)* ')'
 for = 'for' '(' statement ',' exp ',' conditional ',' statement ')'
 while = 'while' '(' exp ',' conditional ')'
 
-exp = binaryAssign
-    / ternary 
+exp = assign / 
+      ternary 
 
-binaryAssign = variable ('+=' / '-=' / '*=' / '/=' / '<<=' / '>>=') exp
+assign = variable (':=', '+=' / '-=' / '*=' / '/=' / '<<=' / '>>=') exp
 ternary = conditional ('?' exp ':' exp)*
 
 conditional = bitwise (('&&' / '||') bitwise)*
@@ -41,6 +34,9 @@ incDec = variable ('++' / '--')
 factorial = (number '!')
 
 operand = complexnumber /
+          if /
+          def /
+          undef /
           number /
           function /
           variable /

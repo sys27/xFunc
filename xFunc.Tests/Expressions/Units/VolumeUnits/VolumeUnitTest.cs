@@ -6,6 +6,14 @@ namespace xFunc.Tests.Expressions.Units.VolumeUnits;
 public class VolumeUnitTest
 {
     [Fact]
+    public void EqualsNullTest()
+    {
+        var a = VolumeUnit.Meter;
+
+        Assert.False(a.Equals(null));
+    }
+
+    [Fact]
     public void EqualsTest()
     {
         var a = VolumeUnit.Meter;
@@ -21,6 +29,14 @@ public class VolumeUnitTest
         var b = VolumeUnit.Centimeter;
 
         Assert.False(a.Equals(b));
+    }
+
+    [Fact]
+    public void ObjectEqualsNullTest()
+    {
+        var a = VolumeUnit.Meter;
+
+        Assert.False(a.Equals(null as object));
     }
 
     [Fact]

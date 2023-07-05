@@ -1,6 +1,7 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Collections.Immutable;
 using System.Numerics;
 using Matrices = xFunc.Maths.Expressions.Matrices;
 
@@ -45,7 +46,7 @@ public class CommonFormatterTest
     [Fact]
     public void DefineToStringTest()
     {
-        var exp = new Define(Variable.X, Number.Zero);
+        var exp = new Assign(Variable.X, Number.Zero);
 
         Assert.Equal("x := 0", exp.ToString());
     }
@@ -487,17 +488,38 @@ public class CommonFormatterTest
     [Fact]
     public void UndefineToStringTest()
     {
-        var exp = new Undefine(Variable.X);
+        var exp = new Unassign(Variable.X);
 
         Assert.Equal("undef(x)", exp.ToString());
     }
 
     [Fact]
-    public void UserFunctionToStringArgTest()
+    public void LambdaExpressionToStringArgTest()
     {
-        var exp = new UserFunction("f", new IExpression[] { new Number(5), Number.Two });
+        var exp = new Lambda(new[] { "x", "y" }, new Add(Variable.X, Variable.Y))
+            .AsExpression();
+
+        Assert.Equal("(x, y) => x + y", exp.ToString());
+    }
+
+    [Fact]
+    public void CallExpressionToStringArgTest()
+    {
+        var exp = new CallExpression(
+            new Variable("f"),
+            new IExpression[] { new Number(5), Number.Two }.ToImmutableArray());
 
         Assert.Equal("f(5, 2)", exp.ToString());
+    }
+
+    [Fact]
+    public void InlineCallExpressionToStringArgTest()
+    {
+        var exp = new CallExpression(
+            new Lambda(new[] { "x" }, Variable.X).AsExpression(),
+            new IExpression[] { new Number(5) }.ToImmutableArray());
+
+        Assert.Equal("((x) => x)(5)", exp.ToString());
     }
 
     [Fact]
@@ -1438,7 +1460,7 @@ public class CommonFormatterTest
     [Fact]
     public void ForToString()
     {
-        var exp = new For(new Number(5), new Define(Variable.X, Number.Zero), new Equal(new Number(5), new Number(5)), new AddAssign(Variable.X, Number.One));
+        var exp = new For(new Number(5), new Assign(Variable.X, Number.Zero), new Equal(new Number(5), new Number(5)), new AddAssign(Variable.X, Number.One));
 
         Assert.Equal("for(5, x := 0, 5 == 5, x += 1)", exp.ToString());
     }

@@ -37,10 +37,8 @@ public class ComplexNumberTests : BaseParserTests
         ParseTest("3-2*i", expected);
     }
 
-    [Theory]
-    [InlineData("-3-2*i")]
-    [InlineData("-3-2i")]
-    public void ComplexNumberNegativeAllPartsTest(string exp)
+    [Fact]
+    public void ComplexNumberNegativeAllPartsTest()
     {
         var expected = new Sub(
             new UnaryMinus(new Number(3)),
@@ -50,7 +48,7 @@ public class ComplexNumberTests : BaseParserTests
             )
         );
 
-        ParseTest(exp, expected);
+        ParseTest("-3-2*i", expected);
     }
 
     [Fact]

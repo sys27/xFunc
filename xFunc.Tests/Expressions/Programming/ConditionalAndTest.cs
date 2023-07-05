@@ -8,7 +8,7 @@ public class ConditionalAndTest
     [Fact]
     public void CalculateAndTrueTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 0) };
+        var parameters = new ExpressionParameters { new Parameter("x", 0) };
         var lessThen = new LessThan(Variable.X, new Number(10));
         var greaterThen = new GreaterThan(Variable.X, new Number(-10));
         var and = new ConditionalAnd(lessThen, greaterThen);
@@ -19,7 +19,7 @@ public class ConditionalAndTest
     [Fact]
     public void CalculateAndFalseTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 0) };
+        var parameters = new ExpressionParameters { new Parameter("x", 0) };
         var lessThen = new LessThan(Variable.X, new Number(10));
         var greaterThen = new GreaterThan(Variable.X, new Number(10));
         var and = new ConditionalAnd(lessThen, greaterThen);

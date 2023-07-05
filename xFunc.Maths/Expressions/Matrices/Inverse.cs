@@ -12,6 +12,11 @@ namespace xFunc.Maths.Expressions.Matrices;
 public class Inverse : UnaryExpression
 {
     /// <summary>
+    /// Gets the lambda for the current expression.
+    /// </summary>
+    internal static Lambda Lambda { get; } = new Lambda(new[] { Variable.X.Name }, new Inverse(Variable.X));
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="Inverse"/> class.
     /// </summary>
     /// <param name="argument">A matrix.</param>

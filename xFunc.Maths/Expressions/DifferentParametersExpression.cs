@@ -71,7 +71,7 @@ public abstract class DifferentParametersExpression : IExpression
     public string ToString(IFormatter formatter) => Analyze(formatter);
 
     /// <inheritdoc />
-    public override string ToString() => ToString(new CommonFormatter());
+    public override string ToString() => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
     public virtual object Execute() => Execute(null);

@@ -156,7 +156,7 @@ public readonly struct VolumeValue : IEquatable<VolumeValue>, IComparable<Volume
     }
 
     /// <inheritdoc />
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
         => obj switch
         {
             null => 1,

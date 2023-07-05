@@ -12,6 +12,13 @@ namespace xFunc.Maths.Expressions.Matrices;
 public class CrossProduct : BinaryExpression
 {
     /// <summary>
+    /// Gets the lambda for the current expression.
+    /// </summary>
+    internal static Lambda Lambda { get; } = new Lambda(
+        new[] { Variable.X.Name, Variable.Y.Name },
+        new CrossProduct(Variable.X, Variable.Y));
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="CrossProduct"/> class.
     /// </summary>
     /// <param name="left">The left (first) operand.</param>

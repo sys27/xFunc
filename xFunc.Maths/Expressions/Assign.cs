@@ -1,34 +1,23 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Globalization;
-
 namespace xFunc.Maths.Expressions;
 
 /// <summary>
-/// Represents the Define operator.
+/// Represents the ":=" operator and the assign function.
 /// </summary>
-public class Define : IExpression
+public class Assign : IExpression
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="Define"/> class.
+    /// Initializes a new instance of the <see cref="Assign"/> class.
     /// </summary>
     /// <param name="key">The key.</param>
     /// <param name="value">The value.</param>
     /// <exception cref="ArgumentNullException"><paramref name="key"/> or <paramref name="value"/> is null.</exception>
-    public Define(IExpression key, IExpression value)
+    public Assign(Variable key, IExpression value)
     {
-        if (key is null)
-            throw new ArgumentNullException(nameof(value));
-
-        if (!(key is Variable || key is UserFunction))
-            throw new NotSupportedException();
-
-        if (value is null)
-            throw new ArgumentNullException(nameof(value));
-
-        Key = key;
-        Value = value;
+        Key = key ?? throw new ArgumentNullException(nameof(key));
+        Value = value ?? throw new ArgumentNullException(nameof(value));
     }
 
     /// <inheritdoc />
@@ -37,8 +26,7 @@ public class Define : IExpression
         if (ReferenceEquals(this, obj))
             return true;
 
-        var def = obj as Define;
-        if (def is null)
+        if (obj is not Assign def)
             return false;
 
         return Key.Equals(def.Key) && Value.Equals(def.Value);
@@ -48,7 +36,7 @@ public class Define : IExpression
     public string ToString(IFormatter formatter) => Analyze(formatter);
 
     /// <inheritdoc />
-    public override string ToString() => ToString(new CommonFormatter());
+    public override string ToString() => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
     public object Execute() => throw new NotSupportedException();
@@ -59,16 +47,10 @@ public class Define : IExpression
         if (parameters is null)
             throw new ArgumentNullException(nameof(parameters));
 
-        if (Key is Variable variable)
-        {
-            parameters.Variables[variable.Name] = new ParameterValue(Value.Execute(parameters));
+        var value = Value.Execute(parameters);
+        parameters[Key.Name] = new ParameterValue(value);
 
-            return string.Format(CultureInfo.InvariantCulture, Resource.AssignVariable, Key, Value);
-        }
-
-        parameters.Functions[(UserFunction)Key] = Value;
-
-        return string.Format(CultureInfo.InvariantCulture, Resource.AssignFunction, Key, Value);
+        return value;
     }
 
     /// <inheritdoc />
@@ -99,13 +81,13 @@ public class Define : IExpression
     /// <returns>
     /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
     /// </returns>
-    public IExpression Clone(IExpression? key = null, IExpression? value = null)
-        => new Define(key ?? Key, value ?? Value);
+    public IExpression Clone(Variable? key = null, IExpression? value = null)
+        => new Assign(key ?? Key, value ?? Value);
 
     /// <summary>
     /// Gets the key.
     /// </summary>
-    public IExpression Key { get; }
+    public Variable Key { get; }
 
     /// <summary>
     /// Gets the value.

@@ -1,6 +1,7 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Collections.Immutable;
 using Convert = xFunc.Maths.Expressions.Units.Convert;
 
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
@@ -10,7 +11,7 @@ public class StandardTests : TypeAnalyzerBaseTests
     [Fact]
     public void TestDefineUndefined()
     {
-        var exp = new Define(Variable.X, new Number(-2));
+        var exp = new Assign(Variable.X, new Number(-2));
 
         Test(exp, ResultTypes.String);
     }
@@ -395,13 +396,22 @@ public class StandardTests : TypeAnalyzerBaseTests
     [Fact]
     public void TestUndefine()
     {
-        Test(new Undefine(Variable.X), ResultTypes.String);
+        Test(new Unassign(Variable.X), ResultTypes.String);
     }
 
     [Fact]
-    public void TestUserFunction()
+    public void TestCallExpression()
     {
-        Test(new UserFunction("f", new IExpression[0]), ResultTypes.Undefined);
+        Test(new CallExpression(new Variable("f"), ImmutableArray<IExpression>.Empty), ResultTypes.Undefined);
+    }
+
+    [Fact]
+    public void TestLambdaExpression()
+    {
+        var exp = new Lambda(Array.Empty<string>(), Number.One)
+            .AsExpression();
+
+        Test(exp, ResultTypes.Function);
     }
 
     [Fact]

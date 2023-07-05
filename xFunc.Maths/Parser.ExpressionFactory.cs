@@ -15,10 +15,10 @@ public partial class Parser
 {
     private IExpression CreateFunction(in Token token, ImmutableArray<IExpression> arguments)
     {
-        Debug.Assert(token.IsId(), "Token should be Id.");
+        Debug.Assert(token.Is(Id), "Token should be Id.");
         Debug.Assert(!string.IsNullOrWhiteSpace(token.StringValue), "Id is empty.");
 
-        return token.StringValue switch
+        return token.StringValue.ToLowerInvariant() switch
         {
             "add" => new Add(arguments),
             "sub" => new Sub(arguments),
@@ -116,15 +116,17 @@ public partial class Parser
 
             "convert" => new Expressions.Units.Convert(converter, arguments),
 
-            var id => new UserFunction(id, arguments),
+            var id => new CallExpression(new Variable(id), arguments),
         };
     }
 
-    private IExpression CreateBinaryAssign(
+    private IExpression CreateAssign(
         in Token token,
         Variable first,
         IExpression second)
     {
+        if (token.Is(AssignOperator))
+            return new Assign(first, second);
         if (token.Is(AddAssignOperator))
             return new AddAssign(first, second);
         if (token.Is(SubAssignOperator))
@@ -136,7 +138,7 @@ public partial class Parser
         if (token.Is(LeftShiftAssignOperator))
             return new LeftShiftAssign(first, second);
 
-        Debug.Assert(token.Is(RightShiftAssignOperator), "Only '+=', '-=', '*=', '/=', '<<=', '>>=' operators are allowed here.");
+        Debug.Assert(token.Is(RightShiftAssignOperator), "Only ':=', '+=', '-=', '*=', '/=', '<<=', '>>=' operators are allowed here.");
 
         return new RightShiftAssign(first, second);
     }
@@ -146,9 +148,9 @@ public partial class Parser
         IExpression first,
         IExpression second)
     {
-        if (token.Is(ImplicationOperator) || token.Is(ImplKeyword))
+        if (token.Is(ImplKeyword))
             return new Implication(first, second);
-        if (token.Is(EqualityOperator) || token.Is(EqKeyword))
+        if (token.Is(EqKeyword))
             return new Equality(first, second);
 
         if (token.Is(NAndKeyword))

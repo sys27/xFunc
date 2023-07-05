@@ -39,7 +39,7 @@ public static class Helpers
     /// </summary>
     /// <param name="expression">The expression.</param>
     /// <returns>A collection of parameters.</returns>
-    public static ParameterCollection GetParameters(IExpression expression)
+    public static ExpressionParameters GetParameters(IExpression expression)
     {
         if (expression is null)
             throw new ArgumentNullException(nameof(expression));
@@ -50,7 +50,7 @@ public static class Helpers
         foreach (var variable in variables)
             parameters.Add(new Parameter(variable.Name, false));
 
-        return new ParameterCollection(parameters, false);
+        return new ExpressionParameters(parameters, false);
     }
 
     /// <summary>

@@ -3,10 +3,10 @@
 
 using System.Globalization;
 
-namespace xFunc.Maths.Expressions.Collections;
+namespace xFunc.Maths.Expressions.Parameters;
 
 /// <summary>
-/// Item of <see cref="ParameterCollection"/>.
+/// Item of <see cref="ExpressionParameters"/>.
 /// </summary>
 public class Parameter : IComparable<Parameter>, IEquatable<Parameter>
 {

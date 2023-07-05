@@ -4,7 +4,7 @@
 using System.Numerics;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
-namespace xFunc.Tests.Expressions.Collections;
+namespace xFunc.Tests.Expressions.Parameters;
 
 public class ParameterTest
 {

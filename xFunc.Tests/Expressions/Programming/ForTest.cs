@@ -10,22 +10,22 @@ public class ForTest
     {
         var parameters = new ExpressionParameters();
 
-        var init = new Define(new Variable("i"), Number.Zero);
+        var init = new Assign(new Variable("i"), Number.Zero);
         var cond = new LessThan(new Variable("i"), new Number(10));
-        var iter = new Define(new Variable("i"), new Add(new Variable("i"), Number.One));
+        var iter = new Assign(new Variable("i"), new Add(new Variable("i"), Number.One));
 
         var @for = new For(new Variable("i"), init, cond, iter);
         @for.Execute(parameters);
 
-        Assert.Equal(new NumberValue(10.0), parameters.Variables["i"]);
+        Assert.Equal(new NumberValue(10.0), parameters["i"]);
     }
 
     [Fact]
     public void CloneTest()
     {
-        var init = new Define(new Variable("i"), Number.Zero);
+        var init = new Assign(new Variable("i"), Number.Zero);
         var cond = new LessThan(new Variable("i"), new Number(10));
-        var iter = new Define(new Variable("i"), new Add(new Variable("i"), Number.One));
+        var iter = new Assign(new Variable("i"), new Add(new Variable("i"), Number.One));
 
         var exp = new For(new Variable("i"), init, cond, iter);
         var clone = exp.Clone();

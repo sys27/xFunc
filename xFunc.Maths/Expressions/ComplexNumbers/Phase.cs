@@ -14,6 +14,11 @@ namespace xFunc.Maths.Expressions.ComplexNumbers;
 public class Phase : UnaryExpression
 {
     /// <summary>
+    /// Gets the lambda for the current expression.
+    /// </summary>
+    internal static Lambda Lambda { get; } = new Lambda(new[] { Variable.X.Name }, new Phase(Variable.X));
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="Phase"/> class.
     /// </summary>
     /// <param name="argument">The expression.</param>

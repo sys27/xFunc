@@ -12,6 +12,11 @@ namespace xFunc.Maths.Expressions;
 public class Fact : UnaryExpression
 {
     /// <summary>
+    /// Gets the lambda for the current expression.
+    /// </summary>
+    internal static Lambda Lambda { get; } = new Lambda(new[] { Variable.X.Name }, new Fact(Variable.X));
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="Fact"/> class.
     /// </summary>
     /// <param name="argument">The expression.</param>

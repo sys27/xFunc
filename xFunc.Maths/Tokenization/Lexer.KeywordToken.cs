@@ -1,7 +1,6 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Runtime.CompilerServices;
 using static xFunc.Maths.Tokenization.TokenKind;
 
 namespace xFunc.Maths.Tokenization;
@@ -21,40 +20,33 @@ internal ref partial struct Lexer
             endIndex++;
 
         var keyword = function[..endIndex];
-        var kind = Empty;
 
-        if (Compare(keyword, "true"))
-            kind = TrueKeyword;
-        else if (Compare(keyword, "false"))
-            kind = FalseKeyword;
-        else if (Compare(keyword, "def") || Compare(keyword, "define"))
-            kind = DefineKeyword;
-        else if (Compare(keyword, "undef") || Compare(keyword, "undefine"))
-            kind = UndefineKeyword;
-        else if (Compare(keyword, "if"))
-            kind = IfKeyword;
-        else if (Compare(keyword, "for"))
-            kind = ForKeyword;
-        else if (Compare(keyword, "while"))
-            kind = WhileKeyword;
-        else if (Compare(keyword, "nand"))
-            kind = NAndKeyword;
-        else if (Compare(keyword, "nor"))
-            kind = NOrKeyword;
-        else if (Compare(keyword, "and"))
-            kind = AndKeyword;
-        else if (Compare(keyword, "or"))
-            kind = OrKeyword;
-        else if (Compare(keyword, "xor"))
-            kind = XOrKeyword;
-        else if (Compare(keyword, "not"))
-            kind = NotKeyword;
-        else if (Compare(keyword, "eq"))
-            kind = EqKeyword;
-        else if (Compare(keyword, "impl"))
-            kind = ImplKeyword;
-        else if (Compare(keyword, "mod"))
-            kind = ModKeyword;
+        var lowerKeyword = keyword.Length <= 1024
+            ? stackalloc char[keyword.Length]
+            : new char[keyword.Length];
+
+        keyword.ToLowerInvariant(lowerKeyword);
+
+        var kind = lowerKeyword switch
+        {
+            "true" => TrueKeyword,
+            "false" => FalseKeyword,
+            "assign" => AssignKeyword,
+            "unassign" => UnassignKeyword,
+            "if" => IfKeyword,
+            "for" => ForKeyword,
+            "while" => WhileKeyword,
+            "nand" => NAndKeyword,
+            "nor" => NOrKeyword,
+            "and" => AndKeyword,
+            "or" => OrKeyword,
+            "xor" => XOrKeyword,
+            "not" => NotKeyword,
+            "eq" => EqKeyword,
+            "impl" => ImplKeyword,
+            "mod" => ModKeyword,
+            _ => Empty,
+        };
 
         if (kind == Empty)
             return false;
@@ -64,8 +56,4 @@ internal ref partial struct Lexer
 
         return true;
     }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool Compare(ReadOnlySpan<char> id, string str)
-        => id.Equals(str, StringComparison.OrdinalIgnoreCase);
 }

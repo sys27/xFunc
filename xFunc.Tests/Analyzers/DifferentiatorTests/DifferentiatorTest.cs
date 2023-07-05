@@ -1885,27 +1885,6 @@ public class DifferentiatorTest
     #endregion Hyperbolic
 
     [Fact]
-    public void UserFunctionDerivTest()
-    {
-        var parameters = new FunctionCollection();
-        var uf = new UserFunction("f", new IExpression[] { Variable.X });
-        parameters.Add(uf, new Sin(Variable.X));
-
-        var diff = Differentiate(uf, "x", parameters);
-        var expected = new Mul(new Cos(Variable.X), Number.One);
-
-        Assert.Equal(expected, diff);
-    }
-
-    [Fact]
-    public void UserFunctionNullParamsDerivTest()
-    {
-        var uf = new UserFunction("f", new IExpression[] { Variable.X });
-
-        Assert.Throws<InvalidOperationException>(() => Differentiate(uf, "x", null));
-    }
-
-    [Fact]
     public void DerivSimplify()
     {
         var simp = new Simplifier();

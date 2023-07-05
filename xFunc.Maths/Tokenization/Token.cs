@@ -77,10 +77,10 @@ internal readonly struct Token
     [ExcludeFromCodeCoverage]
     public override string ToString()
     {
-        if (IsId() || Is(TokenKind.String))
+        if (Is(TokenKind.Id) || Is(TokenKind.String))
             return $"String: {StringValue}";
 
-        if (IsNumber())
+        if (Is(TokenKind.Number))
             return $"Number: {NumberValue}";
 
         return $"Kind: {Kind}";
@@ -160,24 +160,6 @@ internal readonly struct Token
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool IsNotEmpty() => !Is(TokenKind.Empty);
-
-    /// <summary>
-    /// Determines whether the current token is <c>Id</c> token.
-    /// </summary>
-    /// <returns>
-    /// <c>true</c> if the current token is <c>Id</c> token; otherwise, <c>false</c>.
-    /// </returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool IsId() => Is(TokenKind.Id);
-
-    /// <summary>
-    /// Determines whether the current token is <c>Number</c> token.
-    /// </summary>
-    /// <returns>
-    /// <c>true</c> if the current token is <c>Number</c> token; otherwise, <c>false</c>.
-    /// </returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool IsNumber() => Is(TokenKind.Number);
 
     /// <summary>
     /// Gets a token kind.

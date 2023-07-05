@@ -34,7 +34,7 @@ public abstract class Analyzer<TResult, TContext> : IAnalyzer<TResult, TContext>
         => Analyze(exp as IExpression, context);
 
     /// <inheritdoc />
-    public virtual TResult Analyze(Define exp, TContext context)
+    public virtual TResult Analyze(Assign exp, TContext context)
         => Analyze(exp as IExpression, context);
 
     /// <inheritdoc />
@@ -182,11 +182,15 @@ public abstract class Analyzer<TResult, TContext> : IAnalyzer<TResult, TContext>
         => Analyze(exp as IExpression, context);
 
     /// <inheritdoc />
-    public virtual TResult Analyze(Undefine exp, TContext context)
+    public virtual TResult Analyze(Unassign exp, TContext context)
         => Analyze(exp as IExpression, context);
 
     /// <inheritdoc />
-    public virtual TResult Analyze(UserFunction exp, TContext context)
+    public virtual TResult Analyze(CallExpression exp, TContext context)
+        => Analyze(exp as IExpression, context);
+
+    /// <inheritdoc />
+    public virtual TResult Analyze(LambdaExpression exp, TContext context)
         => Analyze(exp as IExpression, context);
 
     /// <inheritdoc />

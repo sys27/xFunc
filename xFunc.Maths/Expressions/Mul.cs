@@ -13,6 +13,13 @@ namespace xFunc.Maths.Expressions;
 public class Mul : BinaryExpression
 {
     /// <summary>
+    /// Gets the lambda for the current expression.
+    /// </summary>
+    internal static Lambda Lambda { get; } = new Lambda(
+        new[] { Variable.X.Name, Variable.Y.Name },
+        new Mul(Variable.X, Variable.Y));
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="Mul"/> class.
     /// </summary>
     /// <param name="left">The first (left) operand.</param>

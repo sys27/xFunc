@@ -13,6 +13,11 @@ namespace xFunc.Maths.Analyzers.Formatters;
 /// <seealso cref="IFormatter" />
 public class CommonFormatter : IFormatter
 {
+    /// <summary>
+    /// Gets the instance of <see cref="CommonFormatter"/>.
+    /// </summary>
+    public static CommonFormatter Instance { get; } = new CommonFormatter();
+
     private string ToString(UnaryExpression exp, string format)
     {
         var arg = exp.Argument.Analyze(this);
@@ -78,7 +83,7 @@ public class CommonFormatter : IFormatter
         => ToString(exp, "ceil({0})");
 
     /// <inheritdoc />
-    public virtual string Analyze(Define exp)
+    public virtual string Analyze(Assign exp)
         => $"{exp.Key.Analyze(this)} := {exp.Value.Analyze(this)}";
 
     /// <inheritdoc />
@@ -231,26 +236,21 @@ public class CommonFormatter : IFormatter
     }
 
     /// <inheritdoc />
-    public virtual string Analyze(Undefine exp)
+    public virtual string Analyze(Unassign exp)
         => $"undef({exp.Key.Analyze(this)})";
 
     /// <inheritdoc />
-    public virtual string Analyze(UserFunction exp)
+    public virtual string Analyze(CallExpression exp)
     {
-        var sb = new StringBuilder();
+        if (exp.Function is LambdaExpression)
+            return $"({exp.Function})({string.Join(", ", exp.Parameters)})";
 
-        sb.Append(exp.Function).Append('(');
-        if (exp.ParametersCount > 0)
-        {
-            foreach (var item in exp.Arguments)
-                sb.Append(item).Append(", ");
-            sb.Remove(sb.Length - 2, 2);
-        }
-
-        sb.Append(')');
-
-        return sb.ToString();
+        return $"{exp.Function}({string.Join(", ", exp.Parameters)})";
     }
+
+    /// <inheritdoc />
+    public virtual string Analyze(LambdaExpression exp)
+        => $"{exp.Lambda}";
 
     /// <inheritdoc />
     public virtual string Analyze(Variable exp) => exp.Name;

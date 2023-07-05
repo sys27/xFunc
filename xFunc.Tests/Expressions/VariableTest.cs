@@ -32,7 +32,7 @@ public class VariableTest
     {
         var exp = Variable.X;
         var parameters = new ExpressionParameters();
-        parameters.Variables.Add("x", new NumberValue(1.0));
+        parameters.Add("x", new NumberValue(1.0));
 
         var result = exp.Execute(parameters);
 

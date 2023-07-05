@@ -34,10 +34,10 @@ public class Converter : IConverter
         if (string.IsNullOrWhiteSpace(unit))
             throw new ArgumentNullException(nameof(unit));
 
-        unit = unit.ToLower();
+        unit = unit.ToLowerInvariant();
 
         foreach (var converter in converters)
-            if (converter.CanConvertTo(unit))
+            if (converter.CanConvertTo(value, unit))
                 return converter.Convert(value, unit);
 
         throw new UnitIsNotSupportedException(unit);

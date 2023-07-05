@@ -8,7 +8,7 @@ public class DivAssignTest
     [Fact]
     public void DivAssignCalc()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 10) };
+        var parameters = new ExpressionParameters { new Parameter("x", 10) };
         var div = new DivAssign(Variable.X, Number.Two);
         var result = div.Execute(parameters);
         var expected = new NumberValue(5.0);
@@ -20,7 +20,7 @@ public class DivAssignTest
     [Fact]
     public void DivAssignAsExpressionTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 10) };
+        var parameters = new ExpressionParameters { new Parameter("x", 10) };
         var add = new Add(new DivAssign(Variable.X, Number.Two), Number.Two);
         var result = add.Execute(parameters);
 
@@ -40,7 +40,7 @@ public class DivAssignTest
     public void DivValueBoolParameters()
     {
         var exp = new DivAssign(Variable.X, Bool.False);
-        var parameters = new ParameterCollection { new Parameter("x", 1) };
+        var parameters = new ExpressionParameters { new Parameter("x", 1) };
 
         Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));
     }
@@ -48,7 +48,7 @@ public class DivAssignTest
     [Fact]
     public void BoolDivNumberTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", true) };
+        var parameters = new ExpressionParameters { new Parameter("x", true) };
         var add = new DivAssign(Variable.X, Number.Two);
 
         Assert.Throws<ResultIsNotSupportedException>(() => add.Execute(parameters));

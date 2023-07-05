@@ -23,10 +23,10 @@ jobs:
 
     steps:
     - task: UseDotNet@2
-      displayName: 'Install .NET 6'
+      displayName: 'Install .NET 7'
       inputs:
         packageType: 'sdk'
-        version: '6.0.x'
+        version: '7.0.x'
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet restore'
@@ -71,7 +71,7 @@ jobs:
 
     - task: PublishPipelineArtifact@1
       inputs:
-        path: xFunc.Maths/bin/Release/netstandard2.1
+        path: xFunc.Maths/bin/Release/net6.0
         artifact: xFunc.Maths
 
     - task: PublishPipelineArtifact@1

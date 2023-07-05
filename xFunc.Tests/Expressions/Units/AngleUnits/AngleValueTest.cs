@@ -181,14 +181,6 @@ public class AngleValueTest
     }
 
     [Fact]
-    public void ToStringUnsupported()
-    {
-        var angle = new AngleValue(new NumberValue(10), (AngleUnit)10);
-
-        Assert.Throws<InvalidOperationException>(() => angle.ToString());
-    }
-
-    [Fact]
     public void DegreeToDegreeTest()
     {
         var angle = AngleValue.Degree(10);
@@ -278,71 +270,30 @@ public class AngleValueTest
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void ToUnsupportedUnit()
+    public static IEnumerable<object[]> NormalizeTestsCases()
     {
-        var angle = AngleValue.Degree(1);
-
-        Assert.Throws<ArgumentOutOfRangeException>(() => angle.To((AngleUnit)10));
-    }
-
-    [Fact]
-    public void FromUnsupportedUnitToWatt()
-    {
-        var angle = new AngleValue(new NumberValue(10), (AngleUnit)10);
-
-        Assert.Throws<InvalidOperationException>(() => angle.ToDegree());
-    }
-
-    [Fact]
-    public void FromUnsupportedUnitToKilowatt()
-    {
-        var angle = new AngleValue(new NumberValue(10), (AngleUnit)10);
-
-        Assert.Throws<InvalidOperationException>(() => angle.ToRadian());
-    }
-
-    [Fact]
-    public void FromUnsupportedUnitToHorsepower()
-    {
-        var angle = new AngleValue(new NumberValue(10), (AngleUnit)10);
-
-        Assert.Throws<InvalidOperationException>(() => angle.ToGradian());
+        yield return new object[] { 0, AngleUnit.Degree, 0 };
+        yield return new object[] { 0, AngleUnit.Radian, 0 };
+        yield return new object[] { 0, AngleUnit.Gradian, 0 };
+        yield return new object[] { 90, AngleUnit.Degree, 90 };
+        yield return new object[] { 1.5707963267948966, AngleUnit.Radian, 1.5707963267948966 };
+        yield return new object[] { 100, AngleUnit.Gradian, 100 };
+        yield return new object[] { 360, AngleUnit.Degree, 0 };
+        yield return new object[] { 6.283185307179586, AngleUnit.Radian, 0 };
+        yield return new object[] { 400, AngleUnit.Gradian, 0 };
+        yield return new object[] { 1110.0, AngleUnit.Degree, 30 };
+        yield return new object[] { 19.37315469713706, AngleUnit.Radian, 0.5235987755982988 };
+        yield return new object[] { 1233, AngleUnit.Gradian, 33 };
+        yield return new object[] { 1770.0, AngleUnit.Degree, 330 };
+        yield return new object[] { 30.892327760299633, AngleUnit.Radian, 5.759586531581287 };
+        yield return new object[] { 1966, AngleUnit.Gradian, 366 };
+        yield return new object[] { -390.0, AngleUnit.Degree, 330 };
+        yield return new object[] { -6.8067840827778845, AngleUnit.Radian, 5.759586531581287 };
+        yield return new object[] { -434.0, AngleUnit.Gradian, 366 };
     }
 
     [Theory]
-    [InlineData(AngleUnit.Gradian, AngleUnit.Gradian, AngleUnit.Gradian)]
-    [InlineData(AngleUnit.Radian, AngleUnit.Gradian, AngleUnit.Radian)]
-    [InlineData(AngleUnit.Gradian, AngleUnit.Radian, AngleUnit.Radian)]
-    [InlineData(AngleUnit.Radian, AngleUnit.Degree, AngleUnit.Degree)]
-    public void CommonUnitsTests(AngleUnit left, AngleUnit right, AngleUnit expected)
-    {
-        var x = new AngleValue(new NumberValue(90), left);
-        var y = new AngleValue(new NumberValue(90), right);
-        var result = x + y;
-
-        Assert.Equal(expected, result.Unit);
-    }
-
-    [Theory]
-    [InlineData(0, AngleUnit.Degree, 0)]
-    [InlineData(0, AngleUnit.Radian, 0)]
-    [InlineData(0, AngleUnit.Gradian, 0)]
-    [InlineData(90, AngleUnit.Degree, 90)]
-    [InlineData(1.5707963267948966, AngleUnit.Radian, 1.5707963267948966)]
-    [InlineData(100, AngleUnit.Gradian, 100)]
-    [InlineData(360, AngleUnit.Degree, 0)]
-    [InlineData(6.283185307179586, AngleUnit.Radian, 0)]
-    [InlineData(400, AngleUnit.Gradian, 0)]
-    [InlineData(1110.0, AngleUnit.Degree, 30)]
-    [InlineData(19.37315469713706, AngleUnit.Radian, 0.5235987755982988)]
-    [InlineData(1233, AngleUnit.Gradian, 33)]
-    [InlineData(1770.0, AngleUnit.Degree, 330)]
-    [InlineData(30.892327760299633, AngleUnit.Radian, 5.759586531581287)]
-    [InlineData(1966, AngleUnit.Gradian, 366)]
-    [InlineData(-390.0, AngleUnit.Degree, 330)]
-    [InlineData(-6.8067840827778845, AngleUnit.Radian, 5.759586531581287)]
-    [InlineData(-434.0, AngleUnit.Gradian, 366)]
+    [MemberData(nameof(NormalizeTestsCases))]
     public void NormalizeTests(double angleValue, AngleUnit unit, double expectedValue)
     {
         var angle = new AngleValue(new NumberValue(angleValue), unit);
@@ -350,13 +301,5 @@ public class AngleValueTest
         var expected = new AngleValue(new NumberValue(expectedValue), unit);
 
         Assert.Equal(expected, normalized);
-    }
-
-    [Fact]
-    public void NormalizeUnsupportedUnit()
-    {
-        var angle = new AngleValue(new NumberValue(10), (AngleUnit)10);
-
-        Assert.Throws<InvalidOperationException>(() => angle.Normalize());
     }
 }

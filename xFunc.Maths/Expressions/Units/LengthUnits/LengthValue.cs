@@ -316,7 +316,7 @@ public readonly struct LengthValue : IEquatable<LengthValue>, IComparable<Length
     }
 
     /// <inheritdoc />
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
         => obj switch
         {
             null => 1,

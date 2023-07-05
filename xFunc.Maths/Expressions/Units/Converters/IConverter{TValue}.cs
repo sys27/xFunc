@@ -20,9 +20,10 @@ public interface IConverter<out TValue>
     /// <summary>
     /// Determines whether the current converter can convert to specified unit.
     /// </summary>
+    /// <param name="value">The value to convert.</param>
     /// <param name="unit">The unit to convert to.</param>
     /// <returns>
     /// <c>true</c> if converter can convert using <paramref name="unit"/>; otherwise, <c>false</c>.
     /// </returns>
-    bool CanConvertTo(string unit);
+    bool CanConvertTo(object value, string unit);
 }

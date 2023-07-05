@@ -17,7 +17,7 @@ public class NotEqualTest
     [Fact]
     public void NumberVarEqualTest()
     {
-        var parameters = new ParameterCollection
+        var parameters = new ExpressionParameters
         {
             new Parameter("x", 11),
             new Parameter("y", 10)
@@ -31,7 +31,7 @@ public class NotEqualTest
     [Fact]
     public void NumberAndBoolVarEqualTest()
     {
-        var parameters = new ParameterCollection
+        var parameters = new ExpressionParameters
         {
             new Parameter("x", 10),
             new Parameter("y", false)
@@ -53,7 +53,7 @@ public class NotEqualTest
     [Fact]
     public void BoolTrueVarEqualTest()
     {
-        var parameters = new ParameterCollection
+        var parameters = new ExpressionParameters
         {
             new Parameter("x", true),
             new Parameter("y", true)
@@ -76,7 +76,7 @@ public class NotEqualTest
     [Fact]
     public void BoolTrueAndFalseVarEqualTest()
     {
-        var parameters = new ParameterCollection
+        var parameters = new ExpressionParameters
         {
             new Parameter("x", true),
             new Parameter("y", false)
@@ -99,7 +99,7 @@ public class NotEqualTest
     [Fact]
     public void BoolFalseVarEqualTest()
     {
-        var parameters = new ParameterCollection
+        var parameters = new ExpressionParameters
         {
             new Parameter("x", false),
             new Parameter("y", false)

@@ -296,14 +296,14 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
         => AnalyzeUnary(exp);
 
     /// <inheritdoc />
-    public override IExpression Analyze(Define exp)
+    public override IExpression Analyze(Assign exp)
     {
         if (exp is null)
             ArgNull(ExceptionArgument.exp);
 
         var value = exp.Value.Analyze(this);
         if (IsChanged(exp.Value, value))
-            return new Define(exp.Key, value);
+            return new Assign(exp.Key, value);
 
         return exp;
     }
@@ -652,7 +652,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
         {
             Number number => AngleValue.Degree(number.Value).AsExpression(),
 
-            Angle({ Unit: AngleUnit.Degree }) number => number,
+            Angle({ Unit.IsDegree: true }) number => number,
 
             Angle(var angle) => angle.ToDegree().AsExpression(),
 
@@ -671,7 +671,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
         {
             Number number => AngleValue.Radian(number.Value).AsExpression(),
 
-            Angle({ Unit: AngleUnit.Radian }) number => number,
+            Angle({ Unit.IsRadian: true }) number => number,
 
             Angle(var angle) => angle.ToRadian().AsExpression(),
 
@@ -690,7 +690,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
         {
             Number number => AngleValue.Gradian(number.Value).AsExpression(),
 
-            Angle({ Unit: AngleUnit.Gradian }) number => number,
+            Angle({ Unit.IsGradian: true }) number => number,
 
             Angle(var angle) => angle.ToGradian().AsExpression(),
 
@@ -938,26 +938,43 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     }
 
     /// <inheritdoc />
-    public override IExpression Analyze(UserFunction exp)
+    public override IExpression Analyze(CallExpression exp)
     {
         if (exp is null)
             ArgNull(ExceptionArgument.exp);
 
-        var arguments = exp.Arguments;
-        var isExpChanged = false;
+        var function = exp.Function.Analyze(this);
+        var isChanged = IsChanged(exp.Function, function);
+        var parameters = exp.Parameters;
 
-        for (var i = 0; i < exp.ParametersCount; i++)
+        for (var i = 0; i < exp.Parameters.Length; i++)
         {
-            var expression = exp[i].Analyze(this);
-            if (IsChanged(exp[i], expression))
+            var parameter = exp.Parameters[i];
+            var simplified = parameter.Analyze(this);
+            if (IsChanged(parameter, simplified))
             {
-                isExpChanged = true;
-                arguments = arguments.SetItem(i, expression);
+                parameters = parameters.SetItem(i, simplified);
+                isChanged = true;
             }
         }
 
-        if (isExpChanged)
-            return exp.Clone(arguments);
+        if (isChanged)
+            return exp.Clone(function, parameters);
+
+        return exp;
+    }
+
+    /// <inheritdoc />
+    public override IExpression Analyze(LambdaExpression exp)
+    {
+        if (exp is null)
+            ArgNull(ExceptionArgument.exp);
+
+        var body = exp.Lambda.Body.Analyze(this);
+        if (IsChanged(exp.Lambda.Body, body))
+        {
+            return exp.Clone(new Lambda(exp.Lambda.Parameters, body));
+        }
 
         return exp;
     }

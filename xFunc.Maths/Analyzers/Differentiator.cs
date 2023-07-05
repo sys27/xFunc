@@ -372,17 +372,6 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     }
 
     /// <inheritdoc />
-    public override IExpression Analyze(UserFunction exp, DifferentiatorContext context)
-    {
-        ValidateArguments(exp, context);
-
-        if (context.Parameters is null)
-            throw new InvalidOperationException();
-
-        return context.Parameters.Functions[exp].Analyze(this, context);
-    }
-
-    /// <inheritdoc />
     public override IExpression Analyze(Variable exp, DifferentiatorContext context)
     {
         ValidateArguments(exp, context);

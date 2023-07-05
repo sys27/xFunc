@@ -561,7 +561,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     }
 
     /// <inheritdoc />
-    public virtual ResultTypes Analyze(Define exp)
+    public virtual ResultTypes Analyze(Assign exp)
         => CheckArgument(exp, ResultTypes.String);
 
     /// <inheritdoc />
@@ -1307,12 +1307,16 @@ public class TypeAnalyzer : ITypeAnalyzer
     }
 
     /// <inheritdoc />
-    public virtual ResultTypes Analyze(Undefine exp)
+    public virtual ResultTypes Analyze(Unassign exp)
         => CheckArgument(exp, ResultTypes.String);
 
     /// <inheritdoc />
-    public virtual ResultTypes Analyze(UserFunction exp)
+    public virtual ResultTypes Analyze(CallExpression exp)
         => CheckArgument(exp, ResultTypes.Undefined);
+
+    /// <inheritdoc />
+    public virtual ResultTypes Analyze(LambdaExpression exp)
+        => CheckArgument(exp, ResultTypes.Function);
 
     /// <inheritdoc />
     public virtual ResultTypes Analyze(Variable exp)

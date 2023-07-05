@@ -8,7 +8,7 @@ public class GreaterTest
     [Fact]
     public void CalculateGreaterTrueTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 463) };
+        var parameters = new ExpressionParameters { new Parameter("x", 463) };
         var greaterThen = new GreaterThan(Variable.X, new Number(10));
 
         Assert.True((bool)greaterThen.Execute(parameters));
@@ -17,7 +17,7 @@ public class GreaterTest
     [Fact]
     public void CalculateGreaterFalseTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 0) };
+        var parameters = new ExpressionParameters { new Parameter("x", 0) };
         var greaterThan = new GreaterThan(Variable.X, new Number(10));
 
         Assert.False((bool)greaterThan.Execute(parameters));

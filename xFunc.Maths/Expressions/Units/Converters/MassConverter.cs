@@ -32,6 +32,6 @@ public class MassConverter : IConverter<MassValue>, IConverter<object>
         => Convert(value, unit);
 
     /// <inheritdoc cref="IConverter{TValue}.CanConvertTo" />
-    public bool CanConvertTo(string unit)
-        => MassUnit.Names.Contains(unit.ToLower());
+    public bool CanConvertTo(object value, string unit)
+        => value is MassValue or NumberValue && MassUnit.Names.Contains(unit.ToLower());
 }

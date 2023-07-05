@@ -1,32 +1,23 @@
-// It's just a reference grammar for xFunc (The implementaion is not completely equal to grammar).
+// It's just a reference grammar for xFunc (The implementation is not completely equal to grammar).
 
-statement = unaryAssign 
-          / binaryAssign
-          / assign
-          / def
-          / undef
-          / if
-          / for
+statement = for
           / while
           / exp
 
-assignmentKey = functionDeclaration / variable
-assign = assignmentKey ':=' exp
-def = ('def' / 'define') '(' assignmentKey ',' exp ')'
-undef = ('undef' / 'undefine') '(' assignmentKey ')'
-
+def = ('assign') '(' variable ',' exp ')'
+undef = ('unassign') '(' variable ')'
 if = 'if' '(' conditional ',' exp (',' exp)* ')'
 for = 'for' '(' statement ',' exp ',' conditional ',' statement ')'
 while = 'while' '(' exp ',' conditional ')'
 
-exp = binaryAssign
-    / ternary 
+exp = assign / 
+      ternary 
 
-binaryAssign = variable ('+=' / '-=' / '*=' / '/=' / '<<=' / '>>=') exp
+assign = variable (':=', '+=' / '-=' / '*=' / '/=' / '<<=' / '>>=') exp
 ternary = conditional ('?' exp ':' exp)*
 
 conditional = bitwise (('&&' / '||') bitwise)*
-bitwise = equality (('&' / 'and' / '|' / 'or' / 'xor' / '=>' / '->' / 'impl' / '<=>' / '<->' / 'eq' / 'nor' / 'nand') equality)*
+bitwise = equality (('&' / 'and' / '|' / 'or' / 'xor' / 'impl' / 'eq' / 'nor' / 'nand') equality)*
 equality = shift (('==' / '!=' / '<' / '<=' / '>' / '>=') shift)*
 shift = addSub (('<<' / '>>') addSub)*
 addSub = mulDivMod (('+' / '-') mulDivMod)*
@@ -43,11 +34,16 @@ incDec = variable ('++' / '--')
 factorial = (number '!')
 
 operand = complexnumber /
+          if /
+          def /
+          undef /
           number /
           function /
           variable /
           boolean /
           bracketExp /
+          callExp /
+          lambda /
           matrix /
           vector
 
@@ -71,3 +67,6 @@ vector = ('{' / '(') parameters ('}' / ')')
 matrix = ('{' / '(') vector (',' vector) ('}' / ')')
 
 functionDeclaration = id '(' (variable (',' variable)* / '') ')'
+
+lambda = '(' (id (',' id) / '') ')' '=>' exp
+callExp = '(' lambda ')' '(' parameters ')'

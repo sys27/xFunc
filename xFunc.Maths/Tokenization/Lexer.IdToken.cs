@@ -19,7 +19,7 @@ internal ref partial struct Lexer
 
         var id = function[..endIndex];
         function = function[endIndex..];
-        Current = Token.Id(id.ToString().ToLowerInvariant()); // TODO:
+        Current = Token.Id(id.ToString()); // TODO:
 
         return true;
     }

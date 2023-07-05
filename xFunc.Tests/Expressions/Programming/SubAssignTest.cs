@@ -8,7 +8,7 @@ public class SubAssignTest
     [Fact]
     public void SubAssignCalc()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 10) };
+        var parameters = new ExpressionParameters { new Parameter("x", 10) };
         var sub = new SubAssign(Variable.X, Number.Two);
         var result = sub.Execute(parameters);
         var expected = new NumberValue(8.0);
@@ -20,7 +20,7 @@ public class SubAssignTest
     [Fact]
     public void SubAssignAsExpressionTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", 10) };
+        var parameters = new ExpressionParameters { new Parameter("x", 10) };
         var add = new Add(Number.One, new SubAssign(Variable.X, Number.Two));
         var result = add.Execute(parameters);
 
@@ -40,7 +40,7 @@ public class SubAssignTest
     public void SubValueBoolParameters()
     {
         var exp = new SubAssign(Variable.X, Bool.False);
-        var parameters = new ParameterCollection { new Parameter("x", 1) };
+        var parameters = new ExpressionParameters { new Parameter("x", 1) };
 
         Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));
     }
@@ -48,7 +48,7 @@ public class SubAssignTest
     [Fact]
     public void BoolSubNumberTest()
     {
-        var parameters = new ParameterCollection { new Parameter("x", true) };
+        var parameters = new ExpressionParameters { new Parameter("x", true) };
         var add = new SubAssign(Variable.X, Number.Two);
 
         Assert.Throws<ResultIsNotSupportedException>(() => add.Execute(parameters));

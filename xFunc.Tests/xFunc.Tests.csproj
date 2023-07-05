@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <IsPackable>false</IsPackable>
     <RootNamespace>xFunc.Tests</RootNamespace>
@@ -14,6 +14,7 @@
     <Threshold>90</Threshold>
     <ThresholdStat>total</ThresholdStat>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,7 +23,7 @@
     <Using Include="xFunc.Maths.Analyzers.Formatters" />
     <Using Include="xFunc.Maths.Analyzers.TypeAnalyzers" />
     <Using Include="xFunc.Maths.Expressions" />
-    <Using Include="xFunc.Maths.Expressions.Collections" />
+    <Using Include="xFunc.Maths.Expressions.Parameters" />
     <Using Include="xFunc.Maths.Expressions.ComplexNumbers" />
     <Using Include="xFunc.Maths.Expressions.Hyperbolic" />
     <Using Include="xFunc.Maths.Expressions.LogicalAndBitwise" />
@@ -51,16 +52,13 @@
   </Target>
 
   <ItemGroup>
-    <PackageReference Include="coverlet.msbuild" Version="3.1.2">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
-    <PackageReference Include="Moq" Version="4.18.1" />
-    <PackageReference Include="ReportGenerator" Version="5.1.9" />
-    <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.analyzers" Version="0.10.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5" />
+    <PackageReference Include="coverlet.msbuild" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="Moq" />
+    <PackageReference Include="ReportGenerator" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.analyzers" />
+    <PackageReference Include="xunit.runner.visualstudio" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,6 +3,7 @@
 
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace xFunc.Maths.Expressions.Matrices;
 
@@ -34,25 +35,25 @@ public class Vector : DifferentParametersExpression
     /// <inheritdoc />
     public override object Execute(ExpressionParameters? parameters)
     {
-        var args = ImmutableArray.CreateBuilder<IExpression>(ParametersCount);
+        var args = new IExpression[ParametersCount];
 
         for (var i = 0; i < ParametersCount; i++)
         {
             if (this[i] is Number)
             {
-                args.Add(this[i]);
+                args[i] = this[i];
             }
             else
             {
                 var result = this[i].Execute(parameters);
                 if (result is NumberValue number)
-                    args.Add(new Number(number));
+                    args[i] = new Number(number);
                 else
                     throw new ResultIsNotSupportedException(this, result);
             }
         }
 
-        return new Vector(args.ToImmutableArray());
+        return new Vector(Unsafe.As<IExpression[], ImmutableArray<IExpression>>(ref args));
     }
 
     /// <inheritdoc />

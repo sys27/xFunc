@@ -1,7 +1,7 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Text;
+using System.Collections.Immutable;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Tests.ParserTests;
@@ -76,14 +76,29 @@ public class ParserTest : BaseParserTests
         => ParseErrorTest("sin(x)2");
 
     [Fact]
-    public void UserFunc()
+    public void ParseCallExpression()
     {
         var expected = new Add(
             Number.One,
-            new UserFunction("func", new IExpression[] { Variable.X })
+            new CallExpression(
+                new Variable("func"),
+                new IExpression[] { Variable.X }.ToImmutableArray())
         );
 
         ParseTest("1 + func(x)", expected);
+    }
+
+    [Fact]
+    public void ParseCallExpressionZeroParameters()
+    {
+        var expected = new Add(
+            Number.One,
+            new CallExpression(
+                new Variable("func"),
+                ImmutableArray<IExpression>.Empty)
+        );
+
+        ParseTest("1 + func()", expected);
     }
 
     [Fact]
@@ -501,7 +516,7 @@ public class ParserTest : BaseParserTests
             new Variable("pi")
         );
 
-        ParseTest("3pi", expected);
+        ParseTest("3 * pi", expected);
     }
 
     [Fact]
@@ -518,23 +533,19 @@ public class ParserTest : BaseParserTests
         ParseTest("2 * (x + y)", expected);
     }
 
-    [Theory]
-    [InlineData("2 * {1, 2}")]
-    [InlineData("2{1, 2}")]
-    public void NumberMulVectorTest(string function)
+    [Fact]
+    public void NumberMulVectorTest()
     {
         var expected = new Mul(
             Number.Two,
             new Vector(new IExpression[] { Number.One, Number.Two })
         );
 
-        ParseTest(function, expected);
+        ParseTest("2 * {1, 2}", expected);
     }
 
-    [Theory]
-    [InlineData("2 * {{1, 2}, {3, 4}}")]
-    [InlineData("2{{1, 2}, {3, 4}}")]
-    public void NumberMulMatrixTest(string function)
+    [Fact]
+    public void NumberMulMatrixTest()
     {
         var expected = new Mul(
             Number.Two,
@@ -545,7 +556,7 @@ public class ParserTest : BaseParserTests
             })
         );
 
-        ParseTest(function, expected);
+        ParseTest("2 * {{1, 2}, {3, 4}}", expected);
     }
 
     [Fact]
@@ -646,6 +657,10 @@ public class ParserTest : BaseParserTests
         => ParseTest("sIn(x)", new Sin(Variable.X));
 
     [Fact]
+    public void VariableCaseSensitive()
+        => ParseTest("X", new Variable("X"));
+
+    [Fact]
     public void VarWithNumber1()
         => ParseTest("x1", new Variable("x1"));
 
@@ -656,25 +671,6 @@ public class ParserTest : BaseParserTests
     [Fact]
     public void VarWithNumber3()
         => ParseTest("x1b2v3", new Variable("x1b2v3"));
-
-    [Fact]
-    public void HugeFunctionDeclaration()
-    {
-        var sb = new StringBuilder();
-        sb.Append("func(");
-
-        var i = 0;
-        for (; i < 100; i++)
-            sb.AppendFormat("x{0}, ", i);
-
-        sb.AppendFormat("x{0}", i);
-        sb.Append(") := 0");
-
-        var function = sb.ToString();
-        var exp = parser.Parse(function);
-
-        Assert.NotNull(exp);
-    }
 
     [Fact]
     public void ToBinTest()
@@ -696,4 +692,7 @@ public class ParserTest : BaseParserTests
     public void TrailingSpaces()
         => ParseTest("1  ", Number.One);
 
+    [Fact]
+    public void BufferOverflow()
+        => parser.Parse("a1 := (a2 := (a3 := (a4 := (a5 := (a6 := (a7 := (a8 := (a9 := (a10 := (a11 := (a12 := (a13 := (a14 := (a15 := (a16 := (a17 := (a18 := 1)))))))))))))))))");
 }

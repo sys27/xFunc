@@ -85,12 +85,31 @@ public class AreaUnit : IEquatable<AreaUnit>
         => !left.Equals(right);
 
     /// <inheritdoc />
-    public bool Equals(AreaUnit other)
-        => Factor.Equals(other.Factor) && UnitName == other.UnitName;
+    public bool Equals(AreaUnit? other)
+    {
+        if (ReferenceEquals(null, other))
+            return false;
+
+        if (ReferenceEquals(this, other))
+            return true;
+
+        return Factor.Equals(other.Factor) && UnitName == other.UnitName;
+    }
 
     /// <inheritdoc />
     public override bool Equals(object? obj)
-        => obj is AreaUnit other && Equals(other);
+    {
+        if (ReferenceEquals(null, obj))
+            return false;
+
+        if (ReferenceEquals(this, obj))
+            return true;
+
+        if (obj.GetType() != GetType())
+            return false;
+
+        return Equals((AreaUnit)obj);
+    }
 
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
@@ -173,7 +192,7 @@ public class AreaUnit : IEquatable<AreaUnit>
     /// <param name="unit">When this method returns, the value associated with the specified name, if the unit is found; otherwise, the default value for the type of the value parameter. This parameter is passed uninitialized.</param>
     /// <returns><c>true</c> if area units contain an unit with the specified <paramref name="name"/>; otherwise, <c>false</c>.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="name"/> is <c>null</c>.</exception>
-    public static bool FromName(string name, out AreaUnit unit)
+    public static bool FromName(string name, [NotNullWhen(true)] out AreaUnit? unit)
     {
         if (string.IsNullOrWhiteSpace(name))
             throw new ArgumentNullException(nameof(name));

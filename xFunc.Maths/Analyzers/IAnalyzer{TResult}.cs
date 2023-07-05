@@ -44,7 +44,7 @@ public interface IAnalyzer<out TResult>
     /// </summary>
     /// <param name="exp">The expression.</param>
     /// <returns>The result of analysis.</returns>
-    TResult Analyze(Define exp);
+    TResult Analyze(Assign exp);
 
     /// <summary>
     /// Analyzes the specified expression.
@@ -303,14 +303,21 @@ public interface IAnalyzer<out TResult>
     /// </summary>
     /// <param name="exp">The expression.</param>
     /// <returns>The result of analysis.</returns>
-    TResult Analyze(Undefine exp);
+    TResult Analyze(Unassign exp);
 
     /// <summary>
     /// Analyzes the specified expression.
     /// </summary>
     /// <param name="exp">The expression.</param>
     /// <returns>The result of analysis.</returns>
-    TResult Analyze(UserFunction exp);
+    TResult Analyze(CallExpression exp);
+
+    /// <summary>
+    /// Analyzes the specified expression.
+    /// </summary>
+    /// <param name="exp">The expression.</param>
+    /// <returns>The result of analysis.</returns>
+    TResult Analyze(LambdaExpression exp);
 
     /// <summary>
     /// Analyzes the specified expression.

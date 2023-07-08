@@ -61,7 +61,7 @@ public class SubTest : BaseExpressionTests
         var vector2 = new Vector(new IExpression[] { new Number(7), Number.One });
         var sub = new Sub(vector1, vector2);
 
-        var expected = new Vector(new IExpression[] { new Number(-5), Number.Two });
+        var expected = VectorValue.Create(new NumberValue(-5), NumberValue.Two);
         var result = sub.Execute();
 
         Assert.Equal(expected, result);
@@ -82,10 +82,10 @@ public class SubTest : BaseExpressionTests
         });
         var sub = new Sub(matrix1, matrix2);
 
-        var expected = new Matrix(new[]
+        var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new Vector(new IExpression[] { new Number(-3), Number.One }),
-            new Vector(new IExpression[] { new Number(-2), new Number(-2) })
+            new NumberValue[] { new NumberValue(-3), NumberValue.One, },
+            new NumberValue[] { new NumberValue(-2), new NumberValue(-2), },
         });
         var result = sub.Execute();
 
@@ -103,7 +103,7 @@ public class SubTest : BaseExpressionTests
         var sub2 = new Sub(vector3, vector4);
         var sub3 = new Sub(sub1, sub2);
 
-        var expected = new Vector(new IExpression[] { Number.Zero, Number.Zero });
+        var expected = VectorValue.Create(NumberValue.Zero, NumberValue.Zero);
 
         Assert.Equal(expected, sub3.Execute());
     }

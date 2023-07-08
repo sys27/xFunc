@@ -996,7 +996,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
         var arguments = exp.Vectors;
         var isExpChanged = false;
 
-        for (var i = 0; i < exp.Rows; i++)
+        for (var i = 0; i < exp.Vectors.Length; i++)
         {
             var expression = exp[i].Analyze(this);
             if (IsChanged(exp[i], expression))

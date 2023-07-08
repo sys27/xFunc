@@ -3,7 +3,6 @@
 
 using System.Collections.Immutable;
 using System.Numerics;
-using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Maths.Expressions;
 
@@ -86,8 +85,8 @@ public class Add : BinaryExpression
             (Complex left, NumberValue right) => left + right,
             (Complex left, Complex right) => left + right,
 
-            (Vector left, Vector right) => left.Add(right, parameters),
-            (Matrix left, Matrix right) => left.Add(right, parameters),
+            (VectorValue left, VectorValue right) => left + right,
+            (MatrixValue left, MatrixValue right) => left + right,
 
             (string left, var right) => left + right,
             (var left, string right) => left + right,

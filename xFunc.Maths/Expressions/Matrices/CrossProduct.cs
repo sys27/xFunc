@@ -46,7 +46,7 @@ public class CrossProduct : BinaryExpression
 
         return (left, right) switch
         {
-            (Vector leftVector, Vector rightVector) => leftVector.Cross(rightVector, parameters),
+            (VectorValue leftVector, VectorValue rightVector) => VectorValue.Cross(leftVector, rightVector),
             _ => throw new ResultIsNotSupportedException(this, left, right),
         };
     }

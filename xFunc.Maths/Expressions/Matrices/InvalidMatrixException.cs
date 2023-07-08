@@ -9,40 +9,40 @@ namespace xFunc.Maths.Expressions.Matrices;
 /// Thrown in matrix building.
 /// </summary>
 [Serializable]
-public class MatrixIsInvalidException : Exception
+public class InvalidMatrixException : Exception
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="MatrixIsInvalidException"/> class.
+    /// Initializes a new instance of the <see cref="InvalidMatrixException"/> class.
     /// </summary>
-    public MatrixIsInvalidException()
+    public InvalidMatrixException()
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="MatrixIsInvalidException"/> class.
+    /// Initializes a new instance of the <see cref="InvalidMatrixException"/> class.
     /// </summary>
     /// <param name="message">The message that describes the error.</param>
-    public MatrixIsInvalidException(string message)
+    public InvalidMatrixException(string message)
         : base(message)
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="MatrixIsInvalidException"/> class.
+    /// Initializes a new instance of the <see cref="InvalidMatrixException"/> class.
     /// </summary>
     /// <param name="message">A <see cref="string"/> that describes the error.</param>
     /// <param name="inner">The exception that is the cause of the current exception.</param>
-    public MatrixIsInvalidException(string message, Exception inner)
+    public InvalidMatrixException(string message, Exception inner)
         : base(message, inner)
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="MatrixIsInvalidException"/> class.
+    /// Initializes a new instance of the <see cref="InvalidMatrixException"/> class.
     /// </summary>
     /// <param name="info">The object that holds the serialized object data.</param>
     /// <param name="context">The contextual information about the source or destination.</param>
-    protected MatrixIsInvalidException(SerializationInfo info, StreamingContext context)
+    protected InvalidMatrixException(SerializationInfo info, StreamingContext context)
         : base(info, context)
     {
     }

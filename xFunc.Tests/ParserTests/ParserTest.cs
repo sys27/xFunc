@@ -179,7 +179,7 @@ public class ParserTest : BaseParserTests
 
     [Fact]
     public void MatrixWithDiffVectorSizeTest()
-        => ParseErrorTest<MatrixIsInvalidException>("{{2, 3}, {4, 7, 2}}");
+        => ParseErrorTest<InvalidMatrixException>("{{2, 3}, {4, 7, 2}}");
 
     [Fact]
     public void TooMuchParamsTest()

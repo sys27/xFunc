@@ -23,7 +23,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         var simp = new Simplifier();
         var exp = new Del(diff, simp, Number.Two);
 
-        Test(exp, ResultTypes.Vector);
+        Test(exp, ResultTypes.Expression);
     }
 
     [Fact]

@@ -3,7 +3,6 @@
 
 using System.Collections.Immutable;
 using System.Numerics;
-using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Maths.Expressions;
 
@@ -80,16 +79,16 @@ public class Mul : BinaryExpression
             (Complex left, NumberValue right) => left * right,
             (Complex left, Complex right) => left * right,
 
-            (Vector left, Vector right) => left.Mul(right, parameters),
-            (NumberValue left, Vector right) => right.Mul(left, parameters),
-            (Vector left, NumberValue right) => left.Mul(right, parameters),
+            (VectorValue left, VectorValue right) => left * right,
+            (NumberValue left, VectorValue right) => right * left,
+            (VectorValue left, NumberValue right) => left * right,
 
-            (Matrix left, Matrix right) => left.Mul(right, parameters),
-            (NumberValue left, Matrix right) => right.Mul(left, parameters),
-            (Matrix left, NumberValue right) => left.Mul(right, parameters),
+            (MatrixValue left, MatrixValue right) => left * right,
+            (NumberValue left, MatrixValue right) => right * left,
+            (MatrixValue left, NumberValue right) => left * right,
 
-            (Matrix left, Vector right) => left.Mul(right, parameters),
-            (Vector left, Matrix right) => left.Mul(right, parameters),
+            (MatrixValue left, VectorValue right) => left * right,
+            (VectorValue left, MatrixValue right) => left * right,
 
             _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
         };

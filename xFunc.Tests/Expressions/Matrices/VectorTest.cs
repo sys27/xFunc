@@ -34,11 +34,11 @@ public class VectorTest : BaseExpressionTests
     [Fact]
     public void MulByNumberVectorTest()
     {
-        var vector = new Vector(new[] { Number.Two, new Number(3) });
+        var vector = new Vector(new IExpression[] { Number.Two, new Number(3) });
         var number = new Number(5);
         var exp = new Mul(vector, number);
 
-        var expected = new Vector(new[] { new Number(10), new Number(15) });
+        var expected = VectorValue.Create(new NumberValue(10), new NumberValue(15));
         var result = exp.Execute();
 
         Assert.Equal(expected, result);
@@ -47,11 +47,11 @@ public class VectorTest : BaseExpressionTests
     [Fact]
     public void AddVectorsTest()
     {
-        var vector1 = new Vector(new[] { Number.Two, new Number(3) });
-        var vector2 = new Vector(new[] { new Number(7), Number.One });
+        var vector1 = new Vector(new IExpression[] { Number.Two, new Number(3) });
+        var vector2 = new Vector(new IExpression[] { new Number(7), Number.One });
         var exp = new Add(vector1, vector2);
 
-        var expected = new Vector(new[] { new Number(9), new Number(4) });
+        var expected = VectorValue.Create(new NumberValue(9), new NumberValue(4));
         var result = exp.Execute();
 
         Assert.Equal(expected, result);
@@ -60,8 +60,8 @@ public class VectorTest : BaseExpressionTests
     [Fact]
     public void VectorWithAddTest()
     {
-        var vector = new Vector(new[] { new Add(Number.Two, new Number(3)) });
-        var expected = new Vector(new[] { new Number(5) });
+        var vector = new Vector(new IExpression[] { new Add(Number.Two, new Number(3)) });
+        var expected = VectorValue.Create(new NumberValue(5));
         var result = vector.Execute();
 
         Assert.Equal(expected, result);
@@ -80,11 +80,11 @@ public class VectorTest : BaseExpressionTests
     [Fact]
     public void SubVectorsTest()
     {
-        var vector1 = new Vector(new[] { Number.Two, new Number(3) });
-        var vector2 = new Vector(new[] { new Number(7), Number.One });
+        var vector1 = new Vector(new IExpression[] { Number.Two, new Number(3) });
+        var vector2 = new Vector(new IExpression[] { new Number(7), Number.One });
         var exp = new Sub(vector1, vector2);
 
-        var expected = new Vector(new[] { new Number(-5), Number.Two });
+        var expected = VectorValue.Create(new NumberValue(-5), NumberValue.Two);
         var result = exp.Execute();
 
         Assert.Equal(expected, result);
@@ -106,10 +106,10 @@ public class VectorTest : BaseExpressionTests
         var vector = new Vector(new[] { Number.One, Number.Two });
         var exp = new Transpose(vector);
 
-        var expected = new Matrix(new[]
+        var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new Vector(new[] { Number.One }),
-            new Vector(new[] { Number.Two })
+            new NumberValue[] { NumberValue.One },
+            new NumberValue[] { NumberValue.Two },
         });
         var result = exp.Execute();
 
@@ -127,7 +127,7 @@ public class VectorTest : BaseExpressionTests
         });
         var exp = new Mul(vector, matrix);
 
-        var expected = new Matrix(new[] { new Vector(new[] { new Number(-7) }) });
+        var expected = MatrixValue.Create(new NumberValue(-7));
         var result = exp.Execute();
 
         Assert.Equal(expected, result);
@@ -137,12 +137,12 @@ public class VectorTest : BaseExpressionTests
     public void MultiOpMulAdd()
     {
         // ({1, 2, 3} * 4) + {2, 3, 4}
-        var vector1 = new Vector(new[] { Number.One, Number.Two, new Number(3) });
-        var vector2 = new Vector(new[] { Number.Two, new Number(3), new Number(4) });
+        var vector1 = new Vector(new IExpression[] { Number.One, Number.Two, new Number(3) });
+        var vector2 = new Vector(new IExpression[] { Number.Two, new Number(3), new Number(4) });
         var mul = new Mul(vector1, new Number(4));
         var add = new Add(mul, vector2);
 
-        var expected = new Vector(new[] { new Number(6), new Number(11), new Number(16) });
+        var expected = VectorValue.Create(new NumberValue(6), new NumberValue(11), new NumberValue(16));
         var result = add.Execute();
 
         Assert.Equal(expected, result);
@@ -157,7 +157,7 @@ public class VectorTest : BaseExpressionTests
         var mul = new Mul(vector1, new Number(4));
         var sub = new Sub(mul, vector2);
 
-        var expected = new Vector(new[] { Number.Two, new Number(5), new Number(8) });
+        var expected = VectorValue.Create(new NumberValue(2), new NumberValue(5), new NumberValue(8));
         var result = sub.Execute();
 
         Assert.Equal(expected, result);
@@ -172,7 +172,7 @@ public class VectorTest : BaseExpressionTests
         var sub = new Sub(vector2, vector1);
         var mul = new Mul(sub, new Number(4));
 
-        var expected = new Vector(new[] { new Number(4), new Number(4), new Number(4) });
+        var expected = VectorValue.Create(new NumberValue(4), new NumberValue(4), new NumberValue(4));
         var result = mul.Execute();
 
         Assert.Equal(expected, result);
@@ -182,12 +182,12 @@ public class VectorTest : BaseExpressionTests
     public void MultiOpAddMul()
     {
         // ({2, 3, 4} + {1, 2, 3}) * 4
-        var vector1 = new Vector(new[] { Number.One, Number.Two, new Number(3) });
-        var vector2 = new Vector(new[] { Number.Two, new Number(3), new Number(4) });
+        var vector1 = new Vector(new IExpression[] { Number.One, Number.Two, new Number(3) });
+        var vector2 = new Vector(new IExpression[] { Number.Two, new Number(3), new Number(4) });
         var add = new Add(vector2, vector1);
         var mul = new Mul(add, new Number(4));
 
-        var expected = new Vector(new[] { new Number(12), new Number(20), new Number(28) });
+        var expected = VectorValue.Create(new NumberValue(12), new NumberValue(20), new NumberValue(28));
         var result = mul.Execute();
 
         Assert.Equal(expected, result);
@@ -201,7 +201,7 @@ public class VectorTest : BaseExpressionTests
         var mul1 = new Mul(vector, Number.Two);
         var mul2 = new Mul(mul1, new Number(4));
 
-        var expected = new Vector(new[] { new Number(8), new Number(16), new Number(24) });
+        var expected = VectorValue.Create(new NumberValue(8), new NumberValue(16), new NumberValue(24));
         var result = mul2.Execute();
 
         Assert.Equal(expected, result);

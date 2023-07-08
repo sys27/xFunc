@@ -566,7 +566,7 @@ public class TypeAnalyzer : ITypeAnalyzer
 
     /// <inheritdoc />
     public virtual ResultTypes Analyze(Del exp)
-        => CheckArgument(exp, ResultTypes.Vector);
+        => CheckArgument(exp, ResultTypes.Expression);
 
     /// <inheritdoc />
     public virtual ResultTypes Analyze(Derivative exp)

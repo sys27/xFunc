@@ -1,6 +1,9 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Numerics;
+using Vector = xFunc.Maths.Expressions.Matrices.Vector;
+
 namespace xFunc.Tests.Expressions.Statistical;
 
 public class StdevTest
@@ -9,9 +12,9 @@ public class StdevTest
     public void OneNumberTest()
     {
         var exp = new Stdev(new[] { new Number(4) });
-        var result = (NumberValue)exp.Execute();
+        var result = (Complex)exp.Execute();
 
-        Assert.True(result.IsNaN);
+        Assert.True(Complex.IsNaN(result));
     }
 
     [Fact]

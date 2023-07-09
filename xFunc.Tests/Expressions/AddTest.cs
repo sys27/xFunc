@@ -70,7 +70,7 @@ public class AddTest : BaseExpressionTests
         var vector2 = new Vector(new IExpression[] { new Number(7), Number.One });
         var add = new Add(vector1, vector2);
 
-        var expected = new Vector(new IExpression[] { new Number(9), new Number(4) });
+        var expected = VectorValue.Create(new NumberValue(9), new NumberValue(4));
         var result = add.Execute();
 
         Assert.Equal(expected, result);
@@ -91,10 +91,10 @@ public class AddTest : BaseExpressionTests
         });
         var add = new Add(matrix1, matrix2);
 
-        var expected = new Matrix(new[]
+        var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new Vector(new IExpression[] { new Number(15), new Number(5) }),
-            new Vector(new IExpression[] { new Number(6), new Number(4) })
+            new NumberValue[] { new NumberValue(15), new NumberValue(5) },
+            new NumberValue[] { new NumberValue(6), new NumberValue(4) },
         });
         var result = add.Execute();
 
@@ -112,7 +112,7 @@ public class AddTest : BaseExpressionTests
         var add2 = new Add(vector3, vector4);
         var add3 = new Add(add1, add2);
 
-        var expected = new Vector(new IExpression[] { new Number(4), new Number(8) });
+        var expected = VectorValue.Create(new NumberValue(4), new NumberValue(8));
 
         Assert.Equal(expected, add3.Execute());
     }

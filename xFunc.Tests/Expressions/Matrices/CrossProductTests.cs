@@ -13,7 +13,7 @@ public class CrossProductTests : BaseExpressionTests
             new Vector(new[] { new Number(4), new Number(5), new Number(6) })
         );
         var result = exp.Execute();
-        var expected = new Vector(new[] { new Number(-3), new Number(6), new Number(-3) });
+        var expected = VectorValue.Create(new NumberValue(-3), new NumberValue(6), new NumberValue(-3));
 
         Assert.Equal(expected, result);
     }

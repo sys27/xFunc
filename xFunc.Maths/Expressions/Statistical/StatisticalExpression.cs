@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Immutable;
+using System.Runtime.CompilerServices;
 
 namespace xFunc.Maths.Expressions.Statistical;
 
@@ -32,35 +33,38 @@ public abstract class StatisticalExpression : DifferentParametersExpression
     /// <summary>
     /// Executes this expression.
     /// </summary>
-    /// <param name="numbers">The array of expressions.</param>
-    /// <returns>
-    /// A result of the execution.
-    /// </returns>
-    protected abstract double ExecuteInternal(double[] numbers);
+    /// <param name="vector">The array of numbers.</param>
+    /// <returns>A result of the execution.</returns>
+    protected abstract object ExecuteInternal(VectorValue vector);
 
     /// <inheritdoc />
     public override object Execute(ExpressionParameters? parameters)
     {
-        var (data, size) = (Arguments, ParametersCount);
+        var vector = default(VectorValue);
 
         if (ParametersCount == 1)
         {
             var result = this[0].Execute(parameters);
-            if (result is Vector vector)
-                (data, size) = (vector.Arguments, vector.ParametersCount);
+            if (result is VectorValue vectorValue)
+                vector = vectorValue;
         }
 
-        var calculated = new double[size];
-        for (var i = 0; i < data.Length; i++)
+        if (vector == default)
         {
-            var result = data[i].Execute(parameters);
-            if (!(result is NumberValue number))
-                throw new ResultIsNotSupportedException(this, result);
+            var array = new NumberValue[ParametersCount];
+            for (var i = 0; i < array.Length; i++)
+            {
+                var result = this[i].Execute(parameters);
+                if (result is not NumberValue number)
+                    throw new ResultIsNotSupportedException(this, result);
 
-            calculated[i] = number.Number;
+                array[i] = number;
+            }
+
+            vector = Unsafe.As<NumberValue[], VectorValue>(ref array);
         }
 
-        return new NumberValue(ExecuteInternal(calculated));
+        return ExecuteInternal(vector);
     }
 
     /// <summary>

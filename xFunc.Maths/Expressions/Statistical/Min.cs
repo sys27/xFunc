@@ -31,8 +31,8 @@ public class Min : StatisticalExpression
     }
 
     /// <inheritdoc />
-    protected override double ExecuteInternal(double[] numbers)
-        => numbers.Min();
+    protected override object ExecuteInternal(VectorValue vector)
+        => vector.Min();
 
     /// <inheritdoc />
     protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)

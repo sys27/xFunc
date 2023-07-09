@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 namespace xFunc.Maths.Expressions.Matrices;
 
 /// <summary>
-/// Represents a matrix.
+/// Represents a matrix expression.
 /// </summary>
 public class Matrix : IExpression
 {
@@ -39,7 +39,7 @@ public class Matrix : IExpression
         var size = vectors[0].ParametersCount;
         foreach (var vector in vectors)
             if (vector.ParametersCount != size)
-                throw new MatrixIsInvalidException();
+                throw new InvalidMatrixException();
 
         Vectors = vectors;
     }
@@ -83,12 +83,18 @@ public class Matrix : IExpression
     /// <inheritdoc />
     public object Execute(ExpressionParameters? parameters)
     {
-        var args = new Vector[Rows];
+        var vectors = new VectorValue[Vectors.Length];
 
         for (var i = 0; i < Vectors.Length; i++)
-            args[i] = (Vector)Vectors[i].Execute(parameters);
+        {
+            var result = Vectors[i].Execute(parameters);
+            if (result is not VectorValue vectorValue)
+                throw new ResultIsNotSupportedException(this, result);
 
-        return new Matrix(Unsafe.As<Vector[], ImmutableArray<Vector>>(ref args));
+            vectors[i] = vectorValue;
+        }
+
+        return Unsafe.As<VectorValue[], MatrixValue>(ref vectors);
     }
 
     /// <inheritdoc />
@@ -122,37 +128,7 @@ public class Matrix : IExpression
         => new Matrix(vectors ?? Vectors);
 
     /// <summary>
-    /// Calculates current matrix and returns it as an two dimensional array.
-    /// </summary>
-    /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
-    /// <returns>The two dimensional array which represents current vector.</returns>
-    internal NumberValue[][] ToCalculatedArray(ExpressionParameters? parameters)
-    {
-        var results = new NumberValue[Rows][];
-
-        for (var i = 0; i < Rows; i++)
-            results[i] = Vectors[i].ToCalculatedArray(parameters);
-
-        return results;
-    }
-
-    /// <summary>
     /// Gets the vectors.
     /// </summary>
     public ImmutableArray<Vector> Vectors { get; }
-
-    /// <summary>
-    /// Gets the count of rows.
-    /// </summary>
-    public int Rows => Vectors.Length;
-
-    /// <summary>
-    /// Gets the count of columns.
-    /// </summary>
-    public int Columns => Vectors[0].ParametersCount;
-
-    /// <summary>
-    /// Gets a value indicating whether matrix is square.
-    /// </summary>
-    public bool IsSquare => Rows == Columns;
 }

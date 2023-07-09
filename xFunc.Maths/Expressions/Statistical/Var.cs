@@ -31,14 +31,18 @@ public class Var : StatisticalExpression
     }
 
     /// <inheritdoc />
-    protected override double ExecuteInternal(double[] numbers)
+    protected override object ExecuteInternal(VectorValue vector)
     {
-        var avg = numbers.Average();
-        var sum = 0.0;
-        foreach (var number in numbers)
-            sum += Math.Pow(number - avg, 2);
+        var avg = vector.Average();
+        var sum = NumberValue.Zero;
 
-        return sum / (numbers.Length - 1);
+        foreach (var number in vector)
+        {
+            // because power = 2, we can cast directly to `NumberValue`
+            sum += (NumberValue)NumberValue.Pow(number - avg, NumberValue.Two);
+        }
+
+        return sum / (vector.Size - 1);
     }
 
     /// <inheritdoc />

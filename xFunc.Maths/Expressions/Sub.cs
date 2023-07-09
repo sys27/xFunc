@@ -3,7 +3,6 @@
 
 using System.Collections.Immutable;
 using System.Numerics;
-using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Maths.Expressions;
 
@@ -84,8 +83,8 @@ public class Sub : BinaryExpression
             (Complex left, NumberValue right) => left - right,
             (Complex left, Complex right) => left - right,
 
-            (Vector left, Vector right) => left.Sub(right, parameters),
-            (Matrix left, Matrix right) => left.Sub(right, parameters),
+            (VectorValue left, VectorValue right) => left - right,
+            (MatrixValue left, MatrixValue right) => left - right,
 
             _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
         };

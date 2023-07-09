@@ -3,7 +3,6 @@
 
 using System.Diagnostics;
 using System.Numerics;
-using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Maths.Expressions.Parameters;
 
@@ -85,13 +84,13 @@ public readonly struct ParameterValue : IEquatable<ParameterValue>
     }
 
     /// <inheritdoc cref="ParameterValue(object)"/>
-    public ParameterValue(Vector value)
+    public ParameterValue(VectorValue value)
         : this(value as object)
     {
     }
 
     /// <inheritdoc cref="ParameterValue(object)"/>
-    public ParameterValue(Matrix value)
+    public ParameterValue(MatrixValue value)
         : this(value as object)
     {
     }
@@ -129,8 +128,8 @@ public readonly struct ParameterValue : IEquatable<ParameterValue>
                 or VolumeValue
                 or Complex
                 or bool
-                or Vector
-                or Matrix
+                or VectorValue
+                or MatrixValue
                 or string
                 or Lambda,
             "Unsupported parameter value.");
@@ -191,11 +190,11 @@ public readonly struct ParameterValue : IEquatable<ParameterValue>
         => new ParameterValue(value);
 
     /// <inheritdoc cref="ParameterValue.op_Implicit(double)"/>
-    public static implicit operator ParameterValue(Vector value)
+    public static implicit operator ParameterValue(VectorValue value)
         => new ParameterValue(value);
 
     /// <inheritdoc cref="ParameterValue.op_Implicit(double)"/>
-    public static implicit operator ParameterValue(Matrix value)
+    public static implicit operator ParameterValue(MatrixValue value)
         => new ParameterValue(value);
 
     /// <inheritdoc cref="ParameterValue.op_Implicit(double)"/>

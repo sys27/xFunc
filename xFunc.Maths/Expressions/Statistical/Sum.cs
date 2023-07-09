@@ -32,8 +32,8 @@ public class Sum : StatisticalExpression
     }
 
     /// <inheritdoc />
-    protected override double ExecuteInternal(double[] numbers)
-        => numbers.Sum();
+    protected override object ExecuteInternal(VectorValue vector)
+        => vector.Sum();
 
     /// <inheritdoc />
     protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)

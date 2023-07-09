@@ -31,8 +31,8 @@ public class Max : StatisticalExpression
     }
 
     /// <inheritdoc />
-    protected override double ExecuteInternal(double[] numbers)
-        => numbers.Max();
+    protected override object ExecuteInternal(VectorValue vector)
+        => vector.Max();
 
     /// <inheritdoc />
     protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)

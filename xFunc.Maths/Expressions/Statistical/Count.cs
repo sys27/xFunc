@@ -31,8 +31,8 @@ public class Count : StatisticalExpression
     }
 
     /// <inheritdoc />
-    protected override double ExecuteInternal(double[] numbers)
-        => numbers.Length;
+    protected override object ExecuteInternal(VectorValue vector)
+        => new NumberValue(vector.Size);
 
     /// <inheritdoc />
     protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)

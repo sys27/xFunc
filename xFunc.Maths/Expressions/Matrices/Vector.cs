@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 namespace xFunc.Maths.Expressions.Matrices;
 
 /// <summary>
-/// Represents a vector.
+/// Represents a vector expression.
 /// </summary>
 public class Vector : DifferentParametersExpression
 {
@@ -35,25 +35,18 @@ public class Vector : DifferentParametersExpression
     /// <inheritdoc />
     public override object Execute(ExpressionParameters? parameters)
     {
-        var args = new IExpression[ParametersCount];
+        var values = new NumberValue[ParametersCount];
 
-        for (var i = 0; i < ParametersCount; i++)
+        for (var i = 0; i < values.Length; i++)
         {
-            if (this[i] is Number)
-            {
-                args[i] = this[i];
-            }
-            else
-            {
-                var result = this[i].Execute(parameters);
-                if (result is NumberValue number)
-                    args[i] = new Number(number);
-                else
-                    throw new ResultIsNotSupportedException(this, result);
-            }
+            var result = this[i].Execute(parameters);
+            if (result is not NumberValue number)
+                throw new ResultIsNotSupportedException(this, result);
+
+            values[i] = number;
         }
 
-        return new Vector(Unsafe.As<IExpression[], ImmutableArray<IExpression>>(ref args));
+        return Unsafe.As<NumberValue[], VectorValue>(ref values);
     }
 
     /// <inheritdoc />
@@ -70,21 +63,6 @@ public class Vector : DifferentParametersExpression
     /// <inheritdoc />
     public override IExpression Clone(ImmutableArray<IExpression>? arguments = null)
         => new Vector(arguments ?? Arguments);
-
-    /// <summary>
-    /// Calculates current vector and returns it as an array.
-    /// </summary>
-    /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
-    /// <returns>The array which represents current vector.</returns>
-    internal NumberValue[] ToCalculatedArray(ExpressionParameters? parameters)
-    {
-        var results = new NumberValue[ParametersCount];
-
-        for (var i = 0; i < ParametersCount; i++)
-            results[i] = (NumberValue)this[i].Execute(parameters);
-
-        return results;
-    }
 
     /// <summary>
     /// Gets the minimum count of parameters.

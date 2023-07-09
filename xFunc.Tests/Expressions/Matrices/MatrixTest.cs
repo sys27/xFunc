@@ -20,10 +20,10 @@ public class MatrixTest
         var number = new Number(5);
         var exp = new Mul(matrix, number);
 
-        var expected = new Matrix(new[]
+        var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new Vector(new IExpression[] { new Number(10), new Number(15) }),
-            new Vector(new IExpression[] { new Number(45), new Number(25) })
+            new NumberValue[] { new NumberValue(10), new NumberValue(15) },
+            new NumberValue[] { new NumberValue(45), new NumberValue(25) },
         });
         var result = exp.Execute();
 
@@ -45,10 +45,10 @@ public class MatrixTest
         });
         var exp = new Add(matrix1, matrix2);
 
-        var expected = new Matrix(new[]
+        var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new Vector(new IExpression[] { new Number(15), new Number(5) }),
-            new Vector(new IExpression[] { new Number(6), new Number(4) })
+            new NumberValue[] { new NumberValue(15), new NumberValue(5) },
+            new NumberValue[] { new NumberValue(6), new NumberValue(4) },
         });
         var result = exp.Execute();
 
@@ -58,7 +58,7 @@ public class MatrixTest
     [Fact]
     public void AddMatricesDiffSizeTest1()
     {
-        Assert.Throws<MatrixIsInvalidException>(() =>
+        Assert.Throws<InvalidMatrixException>(() =>
             new Matrix(new[]
             {
                 new Vector(new IExpression[] { new Number(9), Number.Two }),
@@ -100,10 +100,10 @@ public class MatrixTest
         });
         var exp = new Sub(matrix1, matrix2);
 
-        var expected = new Matrix(new[]
+        var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new Vector(new IExpression[] { new Number(-3), Number.One }),
-            new Vector(new IExpression[] { new Number(-2), new Number(-2) })
+            new NumberValue[] { new NumberValue(-3), new NumberValue(1) },
+            new NumberValue[] { new NumberValue(-2), new NumberValue(-2) },
         });
         var result = exp.Execute();
 
@@ -113,7 +113,7 @@ public class MatrixTest
     [Fact]
     public void SubMatricesDiffSizeTest1()
     {
-        Assert.Throws<MatrixIsInvalidException>(() =>
+        Assert.Throws<InvalidMatrixException>(() =>
             new Matrix(new[]
             {
                 new Vector(new IExpression[] { new Number(9), Number.Two }),
@@ -151,10 +151,10 @@ public class MatrixTest
         });
         var exp = new Transpose(matrix);
 
-        var expected = new Matrix(new[]
+        var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new Vector(new IExpression[] { Number.One, new Number(3), new Number(5) }),
-            new Vector(new IExpression[] { Number.Two, new Number(4), new Number(6) })
+            new NumberValue[] { NumberValue.One, new NumberValue(3), new NumberValue(5) },
+            new NumberValue[] { NumberValue.Two, new NumberValue(4), new NumberValue(6) },
         });
         var result = exp.Execute();
 
@@ -176,10 +176,10 @@ public class MatrixTest
         });
         var exp = new Mul(left, right);
 
-        var expected = new Matrix(new[]
+        var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new Vector(new IExpression[] { new Number(-7) }),
-            new Vector(new IExpression[] { new Number(11) })
+            new NumberValue[] { new NumberValue(-7) },
+            new NumberValue[] { new NumberValue(11) },
         });
         var result = exp.Execute();
 
@@ -203,11 +203,11 @@ public class MatrixTest
         });
         var exp = new Mul(left, right);
 
-        var expected = new Matrix(new[]
+        var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new Vector(new IExpression[] { new Number(11), new Number(-22), new Number(29) }),
-            new Vector(new IExpression[] { new Number(9), new Number(-27), new Number(32) }),
-            new Vector(new IExpression[] { new Number(13), new Number(-17), new Number(26) })
+            new NumberValue[] { new NumberValue(11), new NumberValue(-22), new NumberValue(29) },
+            new NumberValue[] { new NumberValue(9), new NumberValue(-27), new NumberValue(32) },
+            new NumberValue[] { new NumberValue(13), new NumberValue(-17), new NumberValue(26) },
         });
         var result = exp.Execute();
 
@@ -267,52 +267,52 @@ public class MatrixTest
             }),
         });
         var exp = new Mul(left, right);
-        var expected = new Matrix(new[]
+        var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new Vector(new IExpression[]
+            new NumberValue[]
             {
-                Number.One, Number.Two, new Number(3), new Number(4), new Number(5), new Number(6), new Number(7), new Number(8), new Number(9), new Number(10), new Number(11),
-            }),
-            new Vector(new IExpression[]
+                NumberValue.One, NumberValue.Two, new NumberValue(3), new NumberValue(4), new NumberValue(5), new NumberValue(6), new NumberValue(7), new NumberValue(8), new NumberValue(9), new NumberValue(10), new NumberValue(11),
+            },
+            new NumberValue[]
             {
-                Number.Two, new Number(4), new Number(6), new Number(8), new Number(10), new Number(12), new Number(14), new Number(16), new Number(18), new Number(20), new Number(22),
-            }),
-            new Vector(new IExpression[]
+                NumberValue.Two, new NumberValue(4), new NumberValue(6), new NumberValue(8), new NumberValue(10), new NumberValue(12), new NumberValue(14), new NumberValue(16), new NumberValue(18), new NumberValue(20), new NumberValue(22),
+            },
+            new NumberValue[]
             {
-                new Number(3), new Number(6), new Number(9), new Number(12), new Number(15), new Number(18), new Number(21), new Number(24), new Number(27), new Number(30), new Number(33),
-            }),
-            new Vector(new IExpression[]
+                new NumberValue(3), new NumberValue(6), new NumberValue(9), new NumberValue(12), new NumberValue(15), new NumberValue(18), new NumberValue(21), new NumberValue(24), new NumberValue(27), new NumberValue(30), new NumberValue(33),
+            },
+            new NumberValue[]
             {
-                new Number(4), new Number(8), new Number(12), new Number(16), new Number(20), new Number(24), new Number(28), new Number(32), new Number(36), new Number(40), new Number(44),
-            }),
-            new Vector(new IExpression[]
+                new NumberValue(4), new NumberValue(8), new NumberValue(12), new NumberValue(16), new NumberValue(20), new NumberValue(24), new NumberValue(28), new NumberValue(32), new NumberValue(36), new NumberValue(40), new NumberValue(44),
+            },
+            new NumberValue[]
             {
-                new Number(5), new Number(10), new Number(15), new Number(20), new Number(25), new Number(30), new Number(35), new Number(40), new Number(45), new Number(50), new Number(55),
-            }),
-            new Vector(new IExpression[]
+                new NumberValue(5), new NumberValue(10), new NumberValue(15), new NumberValue(20), new NumberValue(25), new NumberValue(30), new NumberValue(35), new NumberValue(40), new NumberValue(45), new NumberValue(50), new NumberValue(55),
+            },
+            new NumberValue[]
             {
-                new Number(6), new Number(12), new Number(18), new Number(24), new Number(30), new Number(36), new Number(42), new Number(48), new Number(54), new Number(60), new Number(66),
-            }),
-            new Vector(new IExpression[]
+                new NumberValue(6), new NumberValue(12), new NumberValue(18), new NumberValue(24), new NumberValue(30), new NumberValue(36), new NumberValue(42), new NumberValue(48), new NumberValue(54), new NumberValue(60), new NumberValue(66),
+            },
+            new NumberValue[]
             {
-                new Number(7), new Number(14), new Number(21), new Number(28), new Number(35), new Number(42), new Number(49), new Number(56), new Number(63), new Number(70), new Number(77),
-            }),
-            new Vector(new IExpression[]
+                new NumberValue(7), new NumberValue(14), new NumberValue(21), new NumberValue(28), new NumberValue(35), new NumberValue(42), new NumberValue(49), new NumberValue(56), new NumberValue(63), new NumberValue(70), new NumberValue(77),
+            },
+            new NumberValue[]
             {
-                new Number(8), new Number(16), new Number(24), new Number(32), new Number(40), new Number(48), new Number(56), new Number(64), new Number(72), new Number(80), new Number(88),
-            }),
-            new Vector(new IExpression[]
+                new NumberValue(8), new NumberValue(16), new NumberValue(24), new NumberValue(32), new NumberValue(40), new NumberValue(48), new NumberValue(56), new NumberValue(64), new NumberValue(72), new NumberValue(80), new NumberValue(88),
+            },
+            new NumberValue[]
             {
-                new Number(9), new Number(18), new Number(27), new Number(36), new Number(45), new Number(54), new Number(63), new Number(72), new Number(81), new Number(90), new Number(99),
-            }),
-            new Vector(new IExpression[]
+                new NumberValue(9), new NumberValue(18), new NumberValue(27), new NumberValue(36), new NumberValue(45), new NumberValue(54), new NumberValue(63), new NumberValue(72), new NumberValue(81), new NumberValue(90), new NumberValue(99),
+            },
+            new NumberValue[]
             {
-                new Number(10), new Number(20), new Number(30), new Number(40), new Number(50), new Number(60), new Number(70), new Number(80), new Number(90), new Number(100), new Number(110),
-            }),
-            new Vector(new IExpression[]
+                new NumberValue(10), new NumberValue(20), new NumberValue(30), new NumberValue(40), new NumberValue(50), new NumberValue(60), new NumberValue(70), new NumberValue(80), new NumberValue(90), new NumberValue(100), new NumberValue(110),
+            },
+            new NumberValue[]
             {
-                new Number(11), new Number(22), new Number(33), new Number(44), new Number(55), new Number(66), new Number(77), new Number(88), new Number(99), new Number(110), new Number(121),
-            }),
+                new NumberValue(11), new NumberValue(22), new NumberValue(33), new NumberValue(44), new NumberValue(55), new NumberValue(66), new NumberValue(77), new NumberValue(88), new NumberValue(99), new NumberValue(110), new NumberValue(121),
+            },
         });
 
         Assert.Equal(expected, exp.Execute());
@@ -329,10 +329,10 @@ public class MatrixTest
         });
         var exp = new Mul(matrix, vector);
 
-        var expected = new Matrix(new[]
+        var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new Vector(new IExpression[] { new Number(-6), new Number(3) }),
-            new Vector(new IExpression[] { Number.Two, new Number(-1) })
+            new NumberValue[] { new NumberValue(-6), new NumberValue(3) },
+            new NumberValue[] { new NumberValue(2), new NumberValue(-1) },
         });
         var result = exp.Execute();
 
@@ -368,12 +368,12 @@ public class MatrixTest
         });
         var exp = new Inverse(matrix);
 
-        var expected = new Matrix(new[]
+        var expected = MatrixValue.Create(new[]
         {
-            new Vector(new IExpression[] { new Number(0.0970873786407767), new Number(-0.18270079435128), new Number(-0.114739629302736), new Number(0.224183583406884) }),
-            new Vector(new IExpression[] { new Number(-0.0194174757281553), new Number(0.145631067961165), new Number(-0.0679611650485437), new Number(0.00970873786407767) }),
-            new Vector(new IExpression[] { new Number(-0.087378640776699), new Number(0.0644307149161518), new Number(0.103265666372463), new Number(-0.00176522506619595) }),
-            new Vector(new IExpression[] { new Number(0.203883495145631), new Number(-0.120035304501324), new Number(0.122683142100618), new Number(-0.147396293027361) })
+            new NumberValue[] { new NumberValue(0.0970873786407767), new NumberValue(-0.18270079435128), new NumberValue(-0.114739629302736), new NumberValue(0.224183583406884) },
+            new NumberValue[] { new NumberValue(-0.0194174757281553), new NumberValue(0.145631067961165), new NumberValue(-0.0679611650485437), new NumberValue(0.00970873786407767) },
+            new NumberValue[] { new NumberValue(-0.087378640776699), new NumberValue(0.0644307149161518), new NumberValue(0.103265666372463), new NumberValue(-0.00176522506619595) },
+            new NumberValue[] { new NumberValue(0.203883495145631), new NumberValue(-0.120035304501324), new NumberValue(0.122683142100618), new NumberValue(-0.147396293027361) },
         });
 
         var actual = exp.Execute();
@@ -427,8 +427,13 @@ public class MatrixTest
         });
 
         var result = matrix.Execute();
+        var expected = MatrixValue.Create(new NumberValue[][]
+        {
+            new NumberValue[] { new NumberValue(3) },
+            new NumberValue[] { new NumberValue(-1) },
+        });
 
-        Assert.True(matrix.Equals(result));
+        Assert.True(expected.Equals(result));
     }
 
     [Fact]

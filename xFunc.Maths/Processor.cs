@@ -148,6 +148,12 @@ public class Processor
             Lambda lambda
                 => new LambdaResult(lambda),
 
+            VectorValue vectorValue
+                => new VectorValueResult(vectorValue),
+
+            MatrixValue matrixValue
+                => new MatrixValueResult(matrixValue),
+
             _ => throw new InvalidResultException(),
         };
     }

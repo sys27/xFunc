@@ -215,6 +215,32 @@ public class ProcessorTest
     }
 
     [Fact]
+    public void SolveVectorTest()
+    {
+        var processor = new Processor();
+
+        var result = processor.Solve<VectorValueResult>("{1, 2}");
+        var expected = VectorValue.Create(NumberValue.One, NumberValue.Two);
+
+        Assert.Equal(expected, result.Result);
+    }
+
+    [Fact]
+    public void SolveMatrixTest()
+    {
+        var processor = new Processor();
+
+        var result = processor.Solve<MatrixValueResult>("{{1, 2}, {2, 1}}");
+        var expected = MatrixValue.Create(new NumberValue[][]
+        {
+            new NumberValue[] { NumberValue.One, NumberValue.Two },
+            new NumberValue[] { NumberValue.Two, NumberValue.One },
+        });
+
+        Assert.Equal(expected, result.Result);
+    }
+
+    [Fact]
     public void ParseTest()
     {
         var processor = new Processor();

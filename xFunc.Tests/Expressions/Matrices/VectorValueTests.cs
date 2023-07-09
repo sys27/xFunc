@@ -79,4 +79,333 @@ public class VectorValueTests
 
         Assert.Equal(expected, vector.ToString());
     }
+
+    public static IEnumerable<object[]> AbsTestData()
+    {
+        yield return new object[]
+        {
+            VectorValue.Create(new NumberValue(1), new NumberValue(2), new NumberValue(3)),
+            new NumberValue(3.7416573867739413)
+        };
+
+        yield return new object[]
+        {
+            VectorValue.Create(
+                new NumberValue(1),
+                new NumberValue(2),
+                new NumberValue(3),
+                new NumberValue(4),
+                new NumberValue(5),
+                new NumberValue(6),
+                new NumberValue(7),
+                new NumberValue(8)),
+            new NumberValue(14.2828568570857)
+        };
+
+        yield return new object[]
+        {
+            VectorValue.Create(
+                new NumberValue(1),
+                new NumberValue(2),
+                new NumberValue(3),
+                new NumberValue(4),
+                new NumberValue(5),
+                new NumberValue(6),
+                new NumberValue(7),
+                new NumberValue(8),
+                new NumberValue(9)),
+            new NumberValue(16.881943016134134)
+        };
+    }
+
+    [Theory]
+    [MemberData(nameof(AbsTestData))]
+    public void AbsTest(VectorValue vector, NumberValue expected)
+        => Assert.Equal(expected, VectorValue.Abs(vector));
+
+    public static IEnumerable<object[]> AddTestData()
+    {
+        yield return new object[]
+        {
+            VectorValue.Create(new NumberValue(1), new NumberValue(2), new NumberValue(3)),
+            VectorValue.Create(new NumberValue(3), new NumberValue(2), new NumberValue(1)),
+            VectorValue.Create(new NumberValue(4), new NumberValue(4), new NumberValue(4)),
+        };
+
+        yield return new object[]
+        {
+            VectorValue.Create(
+                new NumberValue(1),
+                new NumberValue(2),
+                new NumberValue(3),
+                new NumberValue(4),
+                new NumberValue(5),
+                new NumberValue(6),
+                new NumberValue(7),
+                new NumberValue(8)),
+            VectorValue.Create(
+                new NumberValue(1),
+                new NumberValue(2),
+                new NumberValue(3),
+                new NumberValue(4),
+                new NumberValue(5),
+                new NumberValue(6),
+                new NumberValue(7),
+                new NumberValue(8)),
+            VectorValue.Create(
+                new NumberValue(2),
+                new NumberValue(4),
+                new NumberValue(6),
+                new NumberValue(8),
+                new NumberValue(10),
+                new NumberValue(12),
+                new NumberValue(14),
+                new NumberValue(16)),
+        };
+
+        yield return new object[]
+        {
+            VectorValue.Create(
+                new NumberValue(1),
+                new NumberValue(2),
+                new NumberValue(3),
+                new NumberValue(4),
+                new NumberValue(5),
+                new NumberValue(6),
+                new NumberValue(7),
+                new NumberValue(8),
+                new NumberValue(9)),
+            VectorValue.Create(
+                new NumberValue(1),
+                new NumberValue(2),
+                new NumberValue(3),
+                new NumberValue(4),
+                new NumberValue(5),
+                new NumberValue(6),
+                new NumberValue(7),
+                new NumberValue(8),
+                new NumberValue(9)),
+            VectorValue.Create(
+                new NumberValue(2),
+                new NumberValue(4),
+                new NumberValue(6),
+                new NumberValue(8),
+                new NumberValue(10),
+                new NumberValue(12),
+                new NumberValue(14),
+                new NumberValue(16),
+                new NumberValue(18)),
+        };
+    }
+
+    [Theory]
+    [MemberData(nameof(AddTestData))]
+    public void AddTest(VectorValue v1, VectorValue v2, VectorValue expected)
+        => Assert.Equal(expected, v1 + v2);
+
+    public static IEnumerable<object[]> SubTestData()
+    {
+        yield return new object[]
+        {
+            VectorValue.Create(new NumberValue(1), new NumberValue(2), new NumberValue(3)),
+            VectorValue.Create(new NumberValue(3), new NumberValue(2), new NumberValue(1)),
+            VectorValue.Create(new NumberValue(-2), new NumberValue(0), new NumberValue(2)),
+        };
+
+        yield return new object[]
+        {
+            VectorValue.Create(
+                new NumberValue(1),
+                new NumberValue(2),
+                new NumberValue(3),
+                new NumberValue(4),
+                new NumberValue(5),
+                new NumberValue(6),
+                new NumberValue(7),
+                new NumberValue(8)),
+            VectorValue.Create(
+                new NumberValue(1),
+                new NumberValue(2),
+                new NumberValue(3),
+                new NumberValue(4),
+                new NumberValue(5),
+                new NumberValue(6),
+                new NumberValue(7),
+                new NumberValue(8)),
+            VectorValue.Create(
+                new NumberValue(0),
+                new NumberValue(0),
+                new NumberValue(0),
+                new NumberValue(0),
+                new NumberValue(0),
+                new NumberValue(0),
+                new NumberValue(0),
+                new NumberValue(0)),
+        };
+
+        yield return new object[]
+        {
+            VectorValue.Create(
+                new NumberValue(10),
+                new NumberValue(20),
+                new NumberValue(30),
+                new NumberValue(40),
+                new NumberValue(50),
+                new NumberValue(60),
+                new NumberValue(70),
+                new NumberValue(80),
+                new NumberValue(90)),
+            VectorValue.Create(
+                new NumberValue(1),
+                new NumberValue(2),
+                new NumberValue(3),
+                new NumberValue(4),
+                new NumberValue(5),
+                new NumberValue(6),
+                new NumberValue(7),
+                new NumberValue(8),
+                new NumberValue(9)),
+            VectorValue.Create(
+                new NumberValue(9),
+                new NumberValue(18),
+                new NumberValue(27),
+                new NumberValue(36),
+                new NumberValue(45),
+                new NumberValue(54),
+                new NumberValue(63),
+                new NumberValue(72),
+                new NumberValue(81)),
+        };
+    }
+
+    [Theory]
+    [MemberData(nameof(SubTestData))]
+    public void SubTest(VectorValue v1, VectorValue v2, VectorValue expected)
+        => Assert.Equal(expected, v1 - v2);
+
+    public static IEnumerable<object[]> MulByScalarTestData()
+    {
+        yield return new object[]
+        {
+            VectorValue.Create(new NumberValue(1), new NumberValue(2), new NumberValue(3)),
+            NumberValue.Two,
+            VectorValue.Create(new NumberValue(2), new NumberValue(4), new NumberValue(6)),
+        };
+
+        yield return new object[]
+        {
+            VectorValue.Create(
+                new NumberValue(1),
+                new NumberValue(2),
+                new NumberValue(3),
+                new NumberValue(4),
+                new NumberValue(5),
+                new NumberValue(6),
+                new NumberValue(7),
+                new NumberValue(8)),
+            NumberValue.Two,
+            VectorValue.Create(
+                new NumberValue(2),
+                new NumberValue(4),
+                new NumberValue(6),
+                new NumberValue(8),
+                new NumberValue(10),
+                new NumberValue(12),
+                new NumberValue(14),
+                new NumberValue(16)),
+        };
+
+        yield return new object[]
+        {
+            VectorValue.Create(
+                new NumberValue(1),
+                new NumberValue(2),
+                new NumberValue(3),
+                new NumberValue(4),
+                new NumberValue(5),
+                new NumberValue(6),
+                new NumberValue(7),
+                new NumberValue(8),
+                new NumberValue(9)),
+            NumberValue.Two,
+            VectorValue.Create(
+                new NumberValue(2),
+                new NumberValue(4),
+                new NumberValue(6),
+                new NumberValue(8),
+                new NumberValue(10),
+                new NumberValue(12),
+                new NumberValue(14),
+                new NumberValue(16),
+                new NumberValue(18)),
+        };
+    }
+
+    [Theory]
+    [MemberData(nameof(MulByScalarTestData))]
+    public void MulByScalarTest(VectorValue v1, NumberValue v2, VectorValue expected)
+        => Assert.Equal(expected, v1 * v2);
+
+    public static IEnumerable<object[]> MulTestData()
+    {
+        yield return new object[]
+        {
+            VectorValue.Create(new NumberValue(1), new NumberValue(2), new NumberValue(3)),
+            VectorValue.Create(new NumberValue(3), new NumberValue(2), new NumberValue(1)),
+            new NumberValue(10),
+        };
+
+        yield return new object[]
+        {
+            VectorValue.Create(
+                new NumberValue(1),
+                new NumberValue(2),
+                new NumberValue(3),
+                new NumberValue(4),
+                new NumberValue(5),
+                new NumberValue(6),
+                new NumberValue(7),
+                new NumberValue(8)),
+            VectorValue.Create(
+                new NumberValue(1),
+                new NumberValue(2),
+                new NumberValue(3),
+                new NumberValue(4),
+                new NumberValue(5),
+                new NumberValue(6),
+                new NumberValue(7),
+                new NumberValue(8)),
+            new NumberValue(204),
+        };
+
+        yield return new object[]
+        {
+            VectorValue.Create(
+                new NumberValue(10),
+                new NumberValue(20),
+                new NumberValue(30),
+                new NumberValue(40),
+                new NumberValue(50),
+                new NumberValue(60),
+                new NumberValue(70),
+                new NumberValue(80),
+                new NumberValue(90)),
+            VectorValue.Create(
+                new NumberValue(1),
+                new NumberValue(2),
+                new NumberValue(3),
+                new NumberValue(4),
+                new NumberValue(5),
+                new NumberValue(6),
+                new NumberValue(7),
+                new NumberValue(8),
+                new NumberValue(9)),
+            new NumberValue(2850),
+        };
+    }
+
+    [Theory]
+    [MemberData(nameof(MulTestData))]
+    public void MulTest(VectorValue v1, VectorValue v2, NumberValue expected)
+        => Assert.Equal(expected, v1 * v2);
 }

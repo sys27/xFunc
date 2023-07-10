@@ -30,6 +30,10 @@ public class VectorBenchmark
     }
 
     [Benchmark]
+    public object AbsVector()
+        => new Abs(vector1).Execute();
+
+    [Benchmark]
     public object AddVectors()
         => new Add(vector1, vector2).Execute();
 

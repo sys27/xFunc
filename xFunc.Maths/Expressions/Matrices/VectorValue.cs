@@ -5,6 +5,7 @@ using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Simd = System.Numerics;
 
 namespace xFunc.Maths.Expressions.Matrices;
 
@@ -161,6 +162,27 @@ public readonly struct VectorValue : IEquatable<VectorValue>, IEnumerable<Number
     }
 
     /// <summary>
+    /// Computes the average of a sequence of numeric values.
+    /// </summary>
+    /// <returns>The average value.</returns>
+    public NumberValue Average()
+        => Sum() / Size;
+
+    /// <summary>
+    /// Computes the sum of a sequence of numeric values.
+    /// </summary>
+    /// <returns>The sum of the values in the vector.</returns>
+    public NumberValue Sum()
+    {
+        var sum = NumberValue.Zero;
+
+        for (var i = 0; i < Size; i++)
+            sum += array[i];
+
+        return sum;
+    }
+
+    /// <summary>
     /// Gets the size of the current vector.
     /// </summary>
     public int Size
@@ -173,9 +195,36 @@ public readonly struct VectorValue : IEquatable<VectorValue>, IEnumerable<Number
     /// <returns>Return the absolute value of vector.</returns>
     public static object Abs(VectorValue vector)
     {
-        var sum = vector.array.Aggregate(NumberValue.Zero, (acc, value) => acc + value * value);
+        var size = Simd.Vector<double>.Count;
 
-        return NumberValue.Sqrt(sum);
+        if (Simd.Vector.IsHardwareAccelerated && vector.Size >= size)
+        {
+            var span = Unsafe.As<double[]>(vector.array).AsSpan();
+
+            var v = Simd.Vector<double>.Zero;
+            var i = 0;
+
+            for (; i <= span.Length - size; i += size)
+            {
+                var chunkVector = new Simd.Vector<double>(span[i..]);
+                v += chunkVector * chunkVector;
+            }
+
+            var sum = Simd.Vector.Sum(v);
+
+            for (; i < span.Length; i++)
+                sum += span[i] * span[i];
+
+            return NumberValue.Sqrt(new NumberValue(sum));
+        }
+        else
+        {
+            var sum = NumberValue.Zero;
+            for (var i = 0; i < vector.Size; i++)
+                sum += vector[i] * vector[i];
+
+            return NumberValue.Sqrt(sum);
+        }
     }
 
     /// <summary>
@@ -243,11 +292,39 @@ public readonly struct VectorValue : IEquatable<VectorValue>, IEnumerable<Number
         if (left.Size != right.Size)
             throw new ArgumentException(Resource.MatrixArgException);
 
-        var product = new NumberValue(0.0);
-        for (var i = 0; i < left.Size; i++)
-            product += left[i] * right[i];
+        var size = Simd.Vector<double>.Count;
 
-        return product;
+        if (Simd.Vector.IsHardwareAccelerated && left.Size >= size)
+        {
+            var leftSpan = Unsafe.As<double[]>(left.array).AsSpan();
+            var rightSpan = Unsafe.As<double[]>(right.array).AsSpan();
+
+            var v = Simd.Vector<double>.Zero;
+            var i = 0;
+
+            for (; i <= leftSpan.Length - size; i += size)
+            {
+                var leftV = new Simd.Vector<double>(leftSpan[i..]);
+                var rightV = new Simd.Vector<double>(rightSpan[i..]);
+
+                v += leftV * rightV;
+            }
+
+            var product = Simd.Vector.Sum(v);
+
+            for (; i < leftSpan.Length; i++)
+                product += leftSpan[i] * rightSpan[i];
+
+            return new NumberValue(product);
+        }
+        else
+        {
+            var product = new NumberValue(0.0);
+            for (var i = 0; i < left.Size; i++)
+                product += left[i] * right[i];
+
+            return product;
+        }
     }
 
     /// <summary>

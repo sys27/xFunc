@@ -408,4 +408,47 @@ public class VectorValueTests
     [MemberData(nameof(MulTestData))]
     public void MulTest(VectorValue v1, VectorValue v2, NumberValue expected)
         => Assert.Equal(expected, v1 * v2);
+
+    public static IEnumerable<object[]> SumTestData()
+    {
+        yield return new object[]
+        {
+            VectorValue.Create(new NumberValue(1), new NumberValue(2), new NumberValue(3)),
+            new NumberValue(6),
+        };
+
+        yield return new object[]
+        {
+            VectorValue.Create(
+                new NumberValue(1),
+                new NumberValue(2),
+                new NumberValue(3),
+                new NumberValue(4),
+                new NumberValue(5),
+                new NumberValue(6),
+                new NumberValue(7),
+                new NumberValue(8)),
+            new NumberValue(36),
+        };
+
+        yield return new object[]
+        {
+            VectorValue.Create(
+                new NumberValue(10),
+                new NumberValue(20),
+                new NumberValue(30),
+                new NumberValue(40),
+                new NumberValue(50),
+                new NumberValue(60),
+                new NumberValue(70),
+                new NumberValue(80),
+                new NumberValue(90)),
+            new NumberValue(450),
+        };
+    }
+
+    [Theory]
+    [MemberData(nameof(SumTestData))]
+    public void SumTest(VectorValue v1, NumberValue expected)
+        => Assert.Equal(expected, v1.Sum());
 }

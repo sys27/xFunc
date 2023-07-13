@@ -58,8 +58,7 @@ public class AssignTest
     [Fact]
     public void DefineFuncTest()
     {
-        var function = new Lambda(Array.Empty<string>(), Number.One)
-            .AsExpression();
+        var function = Number.One.ToLambdaExpression();
         var variable = new Variable("f");
         var exp = new Assign(variable, function);
 
@@ -72,10 +71,8 @@ public class AssignTest
     [Fact]
     public void DefineFuncWithParamsTest()
     {
-        var function = new Lambda(
-                new[] { "x", "y" },
-                new Add(Variable.X, Variable.Y))
-            .AsExpression();
+        var function = new Add(Variable.X, Variable.Y)
+            .ToLambdaExpression(Variable.X.Name, Variable.Y.Name);
         var variable = new Variable("f");
         var exp = new Assign(variable, function);
 

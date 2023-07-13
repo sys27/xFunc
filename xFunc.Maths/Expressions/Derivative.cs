@@ -84,9 +84,13 @@ public class Derivative : DifferentParametersExpression
     /// <inheritdoc />
     public override object Execute(ExpressionParameters? parameters)
     {
+        var result = Expression.Execute(parameters);
+        if (result is not Lambda lambda)
+            throw new ResultIsNotSupportedException(this, result);
+
         var variable = Variable;
         var context = new DifferentiatorContext(parameters, variable);
-        var diff = Analyze(Differentiator, context);
+        var derivative = lambda.Body.Analyze(Differentiator, context);
 
         var point = DerivativePoint;
         if (point is not null)
@@ -94,10 +98,12 @@ public class Derivative : DifferentParametersExpression
             parameters ??= new ExpressionParameters();
             parameters[variable.Name] = point.Value;
 
-            return diff.Execute(parameters);
+            return derivative.Execute(parameters);
         }
 
-        return diff.Analyze(Simplifier);
+        return derivative
+            .Analyze(Simplifier)
+            .ToLambda(lambda.Parameters);
     }
 
     /// <inheritdoc />

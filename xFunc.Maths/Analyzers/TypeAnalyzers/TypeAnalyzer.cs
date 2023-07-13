@@ -566,7 +566,7 @@ public class TypeAnalyzer : ITypeAnalyzer
 
     /// <inheritdoc />
     public virtual ResultTypes Analyze(Del exp)
-        => CheckArgument(exp, ResultTypes.Expression);
+        => CheckArgument(exp, ResultTypes.Function);
 
     /// <inheritdoc />
     public virtual ResultTypes Analyze(Derivative exp)
@@ -575,10 +575,10 @@ public class TypeAnalyzer : ITypeAnalyzer
             ArgNull(ExceptionArgument.exp);
 
         if (exp.ParametersCount == 1)
-            return ResultTypes.Expression;
+            return ResultTypes.Function;
 
         if (exp.ParametersCount == 2 && exp[1] is Variable)
-            return ResultTypes.Expression;
+            return ResultTypes.Function;
 
         if (exp.ParametersCount == 3 && exp[1] is Variable && exp[2] is Number)
             return ResultTypes.Number;
@@ -1170,7 +1170,7 @@ public class TypeAnalyzer : ITypeAnalyzer
 
     /// <inheritdoc />
     public virtual ResultTypes Analyze(Simplify exp)
-        => CheckArgument(exp, ResultTypes.Undefined);
+        => CheckArgument(exp, ResultTypes.Function);
 
     /// <inheritdoc />
     public virtual ResultTypes Analyze(Sqrt exp)

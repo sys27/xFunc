@@ -47,7 +47,7 @@ public enum ResultTypes
     /// <summary>
     /// The expression returns other expression.
     /// </summary>
-    Expression = 1 << 6,
+    Function = 1 << 6,
 
     /// <summary>
     /// The expression returns an angle.
@@ -95,9 +95,4 @@ public enum ResultTypes
     /// The expression returns a volume number.
     /// </summary>
     VolumeNumber = 1 << 15,
-
-    /// <summary>
-    /// The expression return a function.
-    /// </summary>
-    Function = 1 << 16,
 }

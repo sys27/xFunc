@@ -3,6 +3,7 @@
 
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using static xFunc.Maths.ThrowHelpers;
 
 namespace xFunc.Maths.Expressions;
@@ -54,21 +55,34 @@ public class Del : UnaryExpression
     /// <inheritdoc />
     public override object Execute(ExpressionParameters? parameters)
     {
-        var context = new DifferentiatorContext(parameters);
+        var result = Argument.Execute(parameters);
+        if (result is not Lambda lambda)
+            throw new ResultIsNotSupportedException(this, result);
 
-        var variables = Helpers.GetAllVariables(Argument).ToList();
-        var vector = ImmutableArray.CreateBuilder<IExpression>(variables.Count);
+        var context = new DifferentiatorContext(parameters);
+        var body = lambda.Body;
+        var variables = Helpers.GetAllVariables(body);
+        if (!variables.TryGetNonEnumeratedCount(out var variablesCount))
+            variablesCount = variables.Count();
+
+        var vectorItems = new IExpression[variablesCount];
+        var i = 0;
 
         foreach (var variable in variables)
         {
             context.Variable = variable;
 
-            vector.Add(Argument
+            vectorItems[i] = body
                 .Analyze(differentiator, context)
-                .Analyze(simplifier));
+                .Analyze(simplifier);
+
+            i++;
         }
 
-        return new Vector(vector.ToImmutableArray());
+        var resultLambda = new Vector(Unsafe.As<IExpression[], ImmutableArray<IExpression>>(ref vectorItems))
+            .ToLambda(lambda.Parameters);
+
+        return resultLambda;
     }
 
     /// <inheritdoc />

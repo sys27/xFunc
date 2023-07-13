@@ -16,12 +16,22 @@ public class SimplifyTest
     {
         var mock = new Mock<ISimplifier>();
         mock
-            .Setup(x => x.Analyze(It.IsAny<Simplify>()))
+            .Setup(x => x.Analyze(It.IsAny<Sin>()))
             .Returns<IExpression>(x => x);
 
-        var exp = new Simplify(mock.Object, new Sin(Variable.X));
+        var lambda = new Sin(Variable.X).ToLambda(Variable.X.Name);
+        var exp = new Simplify(mock.Object, lambda.AsExpression());
 
-        Assert.Equal(exp, exp.Execute());
+        Assert.Equal(lambda, exp.Execute());
+    }
+
+    [Fact]
+    public void ExecuteNonLambdaTest()
+    {
+        var simplifier = new Mock<ISimplifier>();
+        var simplify = new Simplify(simplifier.Object, Number.One);
+
+        Assert.Throws<ResultIsNotSupportedException>(() => simplify.Execute());
     }
 
     [Fact]

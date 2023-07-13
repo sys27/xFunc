@@ -139,12 +139,6 @@ public class Processor
             string str
                 => new StringResult(str),
 
-            IExpression expression when simplify
-                => new ExpressionResult(Simplify(expression)),
-
-            IExpression expression
-                => new ExpressionResult(expression),
-
             Lambda lambda
                 => new LambdaResult(lambda),
 

@@ -457,7 +457,7 @@ public partial class Parser : IParser
     private IExpression? ParseRightUnary(ref TokenReader tokenReader)
         => ParseFactorial(ref tokenReader) ??
            ParseIncDec(ref tokenReader) ??
-           ParseOperand(ref tokenReader);
+           ParseCallExpression(ref tokenReader);
 
     private IExpression? ParseFactorial(ref TokenReader tokenReader)
         => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
@@ -485,6 +485,22 @@ public partial class Parser : IParser
             return null;
         });
 
+    private IExpression? ParseCallExpression(ref TokenReader tokenReader)
+    {
+        var operand = ParseOperand(ref tokenReader);
+        if (operand is null)
+            return null;
+
+        while (true)
+        {
+            var parameters = ParseParameterList(ref tokenReader);
+            if (parameters is null)
+                return operand;
+
+            operand = new CallExpression(operand, parameters.Value);
+        }
+    }
+
     private IExpression? ParseOperand(ref TokenReader tokenReader)
         => ParsePolarComplexNumber(ref tokenReader) ??
            ParseNumberAndUnit(ref tokenReader) ??
@@ -493,7 +509,7 @@ public partial class Parser : IParser
            ParseUnassignFunction(ref tokenReader) ??
            ParseFunctionOrVariable(ref tokenReader) ??
            ParseBoolean(ref tokenReader) ??
-           ParseParenthesesOrCallExpression(ref tokenReader) ??
+           ParseParenthesesExpression(ref tokenReader) ??
            ParseLambda(ref tokenReader) ??
            ParseMatrix(ref tokenReader) ??
            ParseVector(ref tokenReader) ??
@@ -573,16 +589,6 @@ public partial class Parser : IParser
         return new Unassign(key);
     }
 
-    private IExpression? ParseParenthesesOrCallExpression(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
-        {
-            var exp = parser.ParseParenthesesExpression(ref reader);
-            if (exp is null)
-                return null;
-
-            return parser.ParseCallExpression(exp, ref reader);
-        });
-
     private IExpression? ParseParenthesesExpression(ref TokenReader tokenReader)
         => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
         {
@@ -604,17 +610,6 @@ public partial class Parser : IParser
 
             return exp;
         });
-
-    private IExpression ParseCallExpression(IExpression expression, ref TokenReader tokenReader)
-    {
-        var parameters = ParseParameterList(ref tokenReader);
-        if (parameters is null)
-            return expression;
-
-        var callExpression = new CallExpression(expression, parameters.Value);
-
-        return callExpression;
-    }
 
     private IExpression? ParseLambda(ref TokenReader tokenReader)
     {

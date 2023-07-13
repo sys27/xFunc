@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using Moq;
 
 namespace xFunc.Tests.ParserTests;
 
@@ -51,6 +52,16 @@ public class LambdaTests : BaseParserTests
         ParseTest("(x) => (y) => x + y", expected);
     }
 
+    [Theory]
+    [InlineData("(x, ")]
+    [InlineData("(x, y")]
+    [InlineData("(x, y)")]
+    [InlineData("(x, y) =>")]
+    [InlineData("(x, x) => x + x")]
+    [InlineData("(x,) => x")]
+    public void ParseLambdaErrorTests(string function)
+        => ParseErrorTest(function);
+
     [Fact]
     public void ParseInlineTest()
     {
@@ -88,13 +99,40 @@ public class LambdaTests : BaseParserTests
         ParseTest("((x, y) => x + y)(1, 2)", expected);
     }
 
-    [Theory]
-    [InlineData("(x, ")]
-    [InlineData("(x, y")]
-    [InlineData("(x, y)")]
-    [InlineData("(x, y) =>")]
-    [InlineData("(x, x) => x + x")]
-    [InlineData("(x,) => x")]
-    public void ParseLambdaErrorTests(string function)
-        => ParseErrorTest(function);
+    [Fact]
+    public void ParseFunctionWithCallExpression()
+    {
+        var simplifier = new Mock<ISimplifier>();
+        var expected = new CallExpression(
+            new Simplify(
+                simplifier.Object,
+                new Mul(Variable.X, Variable.X).ToLambdaExpression(Variable.X.Name)),
+            Number.One);
+
+        ParseTest("simplify((x) => x * x)(1)", expected);
+    }
+
+    [Fact]
+    public void ParseNestedCallExpression()
+    {
+        var expected = new CallExpression(
+            new CallExpression(
+                new CallExpression(new Variable("f"), new Variable("g")),
+                Number.One),
+            Number.Two);
+
+        ParseTest("f(g)(1)(2)", expected);
+    }
+
+    [Fact]
+    public void ParseComplexCallExpression()
+    {
+        var expected = new Add(
+            Number.One,
+            new CallExpression(
+                new CallExpression(new Variable("f"), new Variable("g")),
+                Number.One));
+
+        ParseTest("1 + f(g)(1)", expected);
+    }
 }

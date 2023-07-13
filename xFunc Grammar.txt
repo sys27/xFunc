@@ -28,10 +28,12 @@ leftUnary = ('~' / '-')* exponentiation
 exponentiation = rightUnary ('^' exponentiation)*
 rightUnary = incDec
            / factorial
-           / operand
+           / callExp
 
 incDec = variable ('++' / '--')
 factorial = (number '!')
+
+callExp = operand parameters*
 
 operand = complexnumber /
           if /
@@ -42,7 +44,6 @@ operand = complexnumber /
           variable /
           boolean /
           bracketExp /
-          callExp /
           lambda /
           matrix /
           vector
@@ -66,7 +67,4 @@ parameters = (statement (',' statement)*)*
 vector = ('{' / '(') parameters ('}' / ')')
 matrix = ('{' / '(') vector (',' vector) ('}' / ')')
 
-functionDeclaration = id '(' (variable (',' variable)* / '') ')'
-
 lambda = '(' (id (',' id) / '') ')' '=>' exp
-callExp = '(' lambda ')' '(' parameters ')'

@@ -14,6 +14,15 @@ public readonly struct Lambda : IEquatable<Lambda>
     /// <summary>
     /// Initializes a new instance of the <see cref="Lambda"/> struct.
     /// </summary>
+    /// <param name="body">The body of the function.</param>
+    public Lambda(IExpression body)
+        : this(ImmutableArray.Create<string>(), body)
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Lambda"/> struct.
+    /// </summary>
     /// <param name="parameters">The list of parameters of the function.</param>
     /// <param name="body">The body of the function.</param>
     public Lambda(IEnumerable<string> parameters, IExpression body)

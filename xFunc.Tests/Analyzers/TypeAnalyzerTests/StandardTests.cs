@@ -23,7 +23,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         var simp = new Simplifier();
         var exp = new Del(diff, simp, Number.Two);
 
-        Test(exp, ResultTypes.Expression);
+        Test(exp, ResultTypes.Function);
     }
 
     [Fact]
@@ -33,7 +33,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         var simp = new Simplifier();
         var exp = new Derivative(diff, simp, Variable.X);
 
-        Test(exp, ResultTypes.Expression);
+        Test(exp, ResultTypes.Function);
     }
 
     [Fact]
@@ -43,7 +43,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         var simp = new Simplifier();
         var exp = new Derivative(diff, simp, Variable.X, Variable.X);
 
-        Test(exp, ResultTypes.Expression);
+        Test(exp, ResultTypes.Function);
     }
 
     [Fact]
@@ -384,7 +384,7 @@ public class StandardTests : TypeAnalyzerBaseTests
     public void TestSimplify()
     {
         var simp = new Simplifier();
-        Test(new Simplify(simp, Variable.X), ResultTypes.Undefined);
+        Test(new Simplify(simp, Variable.X), ResultTypes.Function);
     }
 
     [Fact]
@@ -408,8 +408,7 @@ public class StandardTests : TypeAnalyzerBaseTests
     [Fact]
     public void TestLambdaExpression()
     {
-        var exp = new Lambda(Array.Empty<string>(), Number.One)
-            .AsExpression();
+        var exp = Number.One.ToLambdaExpression();
 
         Test(exp, ResultTypes.Function);
     }

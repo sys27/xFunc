@@ -92,27 +92,30 @@ public class ProcessorTest
     public void SolveStringTest()
     {
         var processor = new Processor();
-        var result = processor.Solve<NumberResult>("x := 1");
+        var result = processor.Solve<StringResult>("'hello'");
+        var expected = "hello";
 
-        Assert.Equal(1.0, result.Result);
+        Assert.Equal(expected, result.Result);
     }
 
     [Fact]
     public void SolveExpTest()
     {
         var processor = new Processor();
-        var result = processor.Solve<ExpressionResult>("deriv(x)");
+        var result = processor.Solve<LambdaResult>("deriv(() => x)");
+        var expected = Number.One.ToLambda();
 
-        Assert.Equal(Number.One, result.Result);
+        Assert.Equal(expected, result.Result);
     }
 
     [Fact]
     public void SolveExpDoNotSimplifyTest()
     {
         var processor = new Processor();
-        var result = processor.Solve<ExpressionResult>("deriv(x + 1)", false);
+        var result = processor.Solve<LambdaResult>("deriv(() => x + 1)", false);
+        var expected = Number.One.ToLambda();
 
-        Assert.Equal(Number.One, result.Result);
+        Assert.Equal(expected, result.Result);
     }
 
     [Fact]
@@ -325,5 +328,17 @@ public class ProcessorTest
         var result = processor.Differentiate(new Add(y, Number.One), y, new ExpressionParameters());
 
         Assert.Equal(Number.One, result);
+    }
+
+    [Fact]
+    public void AliasTest()
+    {
+        var processor = new Processor();
+
+        processor.Solve("s := (x) => simplify(x)");
+        var result = processor.Solve<LambdaResult>("s(() => x * x)");
+        var expected = new Pow(Variable.X, Number.Two).ToLambda();
+
+        Assert.Equal(expected, result.Result);
     }
 }

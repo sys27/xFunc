@@ -496,8 +496,8 @@ public class CommonFormatterTest
     [Fact]
     public void LambdaExpressionToStringArgTest()
     {
-        var exp = new Lambda(new[] { "x", "y" }, new Add(Variable.X, Variable.Y))
-            .AsExpression();
+        var exp = new Add(Variable.X, Variable.Y)
+            .ToLambdaExpression(Variable.X, Variable.Y);
 
         Assert.Equal("(x, y) => x + y", exp.ToString());
     }
@@ -516,7 +516,7 @@ public class CommonFormatterTest
     public void InlineCallExpressionToStringArgTest()
     {
         var exp = new CallExpression(
-            new Lambda(new[] { "x" }, Variable.X).AsExpression(),
+            Variable.X.ToLambdaExpression(Variable.X.Name),
             new IExpression[] { new Number(5) }.ToImmutableArray());
 
         Assert.Equal("((x) => x)(5)", exp.ToString());

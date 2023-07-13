@@ -49,7 +49,17 @@ public class Simplify : UnaryExpression
     /// <exception cref="ArgumentNullException">Simplifier is null.</exception>
     /// <seealso cref="ExpressionParameters" />
     public override object Execute(ExpressionParameters? parameters)
-        => Analyze(simplifier);
+    {
+        var result = Argument.Execute(parameters);
+        if (result is not Lambda lambda)
+            throw new ResultIsNotSupportedException(this, result);
+
+        var simplifiedExpression = lambda.Body
+            .Analyze(simplifier)
+            .ToLambda(lambda.Parameters);
+
+        return simplifiedExpression;
+    }
 
     /// <inheritdoc />
     protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)

@@ -9,7 +9,7 @@
     <Product>xFunc.Maths</Product>
     <Authors>Dmytro Kyshchenko</Authors>
     <Company />
-    <Copyright>Copyright © 2012-2022 Dmytro Kyshchenko</Copyright>
+    <Copyright>Copyright © 2012-2023 Dmytro Kyshchenko</Copyright>
     <Description>xFunc.Maths is a simple and easy to use library that allows you to build mathematical expressions.</Description>
     <PackageProjectUrl>https://github.com/sys27/xFunc</PackageProjectUrl>
     <PackageIcon>xFunc.png</PackageIcon>

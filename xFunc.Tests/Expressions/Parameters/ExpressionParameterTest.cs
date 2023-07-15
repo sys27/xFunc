@@ -43,9 +43,7 @@ public class ExpressionParameterTest
 
     [Fact]
     public void InitializeNullTest()
-    {
-        Assert.Throws<ArgumentNullException>(() => new ExpressionParameters(null));
-    }
+        => Assert.Throws<ArgumentNullException>(() => new ExpressionParameters(null));
 
     [Fact]
     public void ChangedEventTest()
@@ -53,13 +51,13 @@ public class ExpressionParameterTest
         var isExecuted = false;
 
         var parameters = new ExpressionParameters(false);
-        parameters.CollectionChanged += (sender, args) =>
+        parameters.CollectionChanged += (_, args) =>
         {
             isExecuted = true;
 
             Assert.Equal(NotifyCollectionChangedAction.Add, args.Action);
             Assert.Null(args.OldItems);
-            Assert.Equal(1, args.NewItems.Count);
+            Assert.Single(args.NewItems);
         };
 
         parameters.Add(new Parameter("xxx", 1.0));

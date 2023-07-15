@@ -1,21 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: "nuget"
-    directory: "./xFunc.Maths/"
-    schedule:
-      interval: "daily"
-    target-branch: "dev"
-    assignees:
-      - "sys27"
-  - package-ecosystem: "nuget"
-    directory: "./xFunc.Benchmark/"
-    schedule:
-      interval: "daily"
-    target-branch: "dev"
-    assignees:
-      - "sys27"
-  - package-ecosystem: "nuget"
-    directory: "./xFunc.Tests/"
+    directory: "/"
     schedule:
       interval: "daily"
     target-branch: "dev"

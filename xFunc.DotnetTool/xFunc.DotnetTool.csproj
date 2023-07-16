@@ -5,7 +5,7 @@
     <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <PackAsTool>true</PackAsTool>
-    <ToolCommandName>xFunc</ToolCommandName>    
+    <ToolCommandName>xfunc</ToolCommandName>    
     <PackageId>xFunc.DotnetTool</PackageId>
     <Version>4.2.0</Version>
     <Product>xFunc.Maths</Product>

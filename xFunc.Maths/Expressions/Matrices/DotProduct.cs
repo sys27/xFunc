@@ -39,7 +39,7 @@ public class DotProduct : BinaryExpression
     }
 
     /// <inheritdoc />
-    public override object Execute(ExpressionParameters? parameters)
+    public override object Execute(IExpressionParameters? parameters)
     {
         var left = Left.Execute(parameters);
         var right = Right.Execute(parameters);

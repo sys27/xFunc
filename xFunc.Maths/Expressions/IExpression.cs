@@ -20,7 +20,7 @@ public interface IExpression
     /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
     /// <returns>A result of the execution.</returns>
     /// <seealso cref="ExpressionParameters"/>
-    object Execute(ExpressionParameters? parameters);
+    object Execute(IExpressionParameters? parameters);
 
     /// <summary>
     /// Returns a <see cref="string" /> that represents this instance.

@@ -164,7 +164,7 @@ public class ExpressionParameterTest
         };
 
         Assert.True(parameters.ContainsKey("x"));
-        Assert.True(parameters.Contains(new Parameter("x", 2.3)));
+        Assert.Contains(new Parameter("x", 2.3), parameters);
         Assert.Equal(new NumberValue(2.3), parameters["x"]);
     }
 
@@ -245,12 +245,10 @@ public class ExpressionParameterTest
         {
             { "x", new ParameterValue(1) }
         };
-        var scoped = parameters.CreateScope();
+        var scoped = ExpressionParameters.CreateScoped(parameters);
         scoped["y"] = new ParameterValue(2);
 
-        var count = scoped.Count();
-
-        Assert.Equal(2, count);
+        Assert.Equal(2, scoped.Count());
     }
 
     [Fact]
@@ -261,7 +259,7 @@ public class ExpressionParameterTest
         {
             parameter
         };
-        var scoped = parameters.CreateScope();
+        var scoped = ExpressionParameters.CreateScoped(parameters);
         scoped["y"] = new ParameterValue(2);
 
         var result = scoped[parameter.Key];
@@ -277,7 +275,7 @@ public class ExpressionParameterTest
         {
             parameter
         };
-        var scoped = parameters.CreateScope();
+        var scoped = ExpressionParameters.CreateScoped(parameters);
         scoped["y"] = new ParameterValue(2);
 
         var result = scoped.Contains(parameter);
@@ -293,7 +291,7 @@ public class ExpressionParameterTest
         {
             parameter
         };
-        var scoped = parameters.CreateScope();
+        var scoped = ExpressionParameters.CreateScoped(parameters);
         scoped["y"] = new ParameterValue(2);
 
         var result = scoped.Contains(new Parameter("z", new ParameterValue(1)));
@@ -311,7 +309,7 @@ public class ExpressionParameterTest
         {
             x
         };
-        var scoped = parameters.CreateScope();
+        var scoped = ExpressionParameters.CreateScoped(parameters);
         scoped.Add(y);
 
         var result = scoped.Contains(y);
@@ -329,7 +327,7 @@ public class ExpressionParameterTest
         {
             x
         };
-        var scoped = parameters.CreateScope();
+        var scoped = ExpressionParameters.CreateScoped(parameters);
         scoped.Add(y);
 
         var result = scoped.Contains(new Parameter("z", new ParameterValue(1)));

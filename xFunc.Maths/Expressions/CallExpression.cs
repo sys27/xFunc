@@ -76,7 +76,7 @@ public class CallExpression : IExpression, IEquatable<CallExpression>
         => throw new NotSupportedException();
 
     /// <inheritdoc />
-    public object Execute(ExpressionParameters? parameters)
+    public object Execute(IExpressionParameters? parameters)
     {
         if (parameters is null)
             throw new ArgumentNullException(nameof(parameters));
@@ -84,7 +84,7 @@ public class CallExpression : IExpression, IEquatable<CallExpression>
         if (Function.Execute(parameters) is not Lambda function)
             throw new ResultIsNotSupportedException(this, Function);
 
-        var nestedScope = parameters.CreateScope();
+        var nestedScope = ExpressionParameters.CreateScoped(parameters);
         var zip = function.Parameters.Zip(Parameters, (parameter, expression) => (parameter, expression));
         foreach (var (parameter, expression) in zip)
             nestedScope[parameter] = new ParameterValue(expression.Execute(nestedScope));

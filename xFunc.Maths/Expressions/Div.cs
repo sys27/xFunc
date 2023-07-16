@@ -39,7 +39,7 @@ public class Div : BinaryExpression
     }
 
     /// <inheritdoc />
-    public override object Execute(ExpressionParameters? parameters)
+    public override object Execute(IExpressionParameters? parameters)
     {
         var leftResult = Left.Execute(parameters);
         var rightResult = Right.Execute(parameters);

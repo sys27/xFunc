@@ -92,7 +92,7 @@ public class Variable : IExpression, IEquatable<Variable>
     public object Execute() => throw new NotSupportedException();
 
     /// <inheritdoc />
-    public object Execute(ExpressionParameters? parameters)
+    public object Execute(IExpressionParameters? parameters)
     {
         if (parameters is null)
             throw new ArgumentNullException(nameof(parameters));

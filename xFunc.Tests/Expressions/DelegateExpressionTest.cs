@@ -66,7 +66,7 @@ public class DelegateExpressionTest
     [Fact]
     public void EqualSameTest()
     {
-        Func<ExpressionParameters, object> d = _ => 1.0;
+        Func<IExpressionParameters, object> d = _ => 1.0;
         var exp1 = new DelegateExpression(d);
         var exp2 = new DelegateExpression(d);
 

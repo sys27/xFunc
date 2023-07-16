@@ -47,7 +47,7 @@ public abstract class VariableBinaryExpression : IExpression
     public object Execute() => Execute(null);
 
     /// <inheritdoc />
-    public object Execute(ExpressionParameters? parameters)
+    public object Execute(IExpressionParameters? parameters)
     {
         if (parameters is null)
             throw new ArgumentNullException(nameof(parameters));

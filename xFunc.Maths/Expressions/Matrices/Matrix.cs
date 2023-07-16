@@ -81,7 +81,7 @@ public class Matrix : IExpression
     public object Execute() => Execute(null);
 
     /// <inheritdoc />
-    public object Execute(ExpressionParameters? parameters)
+    public object Execute(IExpressionParameters? parameters)
     {
         var vectors = new VectorValue[Vectors.Length];
 

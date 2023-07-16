@@ -14,7 +14,7 @@ public class DifferentiatorContext
     /// Initializes a new instance of the <see cref="DifferentiatorContext"/> class.
     /// </summary>
     /// <param name="parameters">The parameters.</param>
-    public DifferentiatorContext(ExpressionParameters? parameters)
+    public DifferentiatorContext(IExpressionParameters? parameters)
         : this(parameters, Variable.X)
     {
     }
@@ -24,7 +24,7 @@ public class DifferentiatorContext
     /// </summary>
     /// <param name="parameters">The parameters.</param>
     /// <param name="variable">The variable.</param>
-    public DifferentiatorContext(ExpressionParameters? parameters, Variable variable)
+    public DifferentiatorContext(IExpressionParameters? parameters, Variable variable)
     {
         Parameters = parameters;
         Variable = variable;
@@ -43,7 +43,7 @@ public class DifferentiatorContext
     /// <value>
     /// The parameters.
     /// </value>
-    public ExpressionParameters? Parameters { get; }
+    public IExpressionParameters? Parameters { get; }
 
     /// <summary>
     /// Gets or sets the variable.

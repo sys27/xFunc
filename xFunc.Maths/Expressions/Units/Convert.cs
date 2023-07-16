@@ -75,7 +75,7 @@ public class Convert : IExpression
     public object Execute() => Execute(null);
 
     /// <inheritdoc />
-    public object Execute(ExpressionParameters? parameters)
+    public object Execute(IExpressionParameters? parameters)
     {
         var valueResult = Value.Execute(parameters);
         var unitResult = Unit.Execute(parameters);

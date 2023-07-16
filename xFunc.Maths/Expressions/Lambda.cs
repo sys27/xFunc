@@ -11,12 +11,14 @@ namespace xFunc.Maths.Expressions;
 /// </summary>
 public readonly struct Lambda : IEquatable<Lambda>
 {
+    private readonly IExpressionParameters? capturedParameters;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="Lambda"/> struct.
     /// </summary>
     /// <param name="body">The body of the function.</param>
     public Lambda(IExpression body)
-        : this(ImmutableArray.Create<string>(), body)
+        : this(ImmutableArray.Create<string>(), body, null)
     {
     }
 
@@ -26,7 +28,7 @@ public readonly struct Lambda : IEquatable<Lambda>
     /// <param name="parameters">The list of parameters of the function.</param>
     /// <param name="body">The body of the function.</param>
     public Lambda(IEnumerable<string> parameters, IExpression body)
-        : this(parameters.ToImmutableArray(), body)
+        : this(parameters.ToImmutableArray(), body, null)
     {
     }
 
@@ -36,9 +38,15 @@ public readonly struct Lambda : IEquatable<Lambda>
     /// <param name="parameters">The list of parameters of the function.</param>
     /// <param name="body">The body of the function.</param>
     public Lambda(ImmutableArray<string> parameters, IExpression body)
+        : this(parameters, body, null)
+    {
+    }
+
+    private Lambda(ImmutableArray<string> parameters, IExpression body, IExpressionParameters? capturedParameters)
     {
         Parameters = parameters;
         Body = body;
+        this.capturedParameters = capturedParameters;
     }
 
     /// <summary>
@@ -80,10 +88,18 @@ public readonly struct Lambda : IEquatable<Lambda>
     /// <summary>
     /// Calls the function.
     /// </summary>
-    /// <param name="expressionParameters">An object that contains all parameters and functions for expressions.</param>
+    /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
     /// <returns>A result of the execution.</returns>
-    public object Call(ExpressionParameters expressionParameters)
-        => Body.Execute(expressionParameters);
+    public object Call(IExpressionParameters parameters)
+        => Body.Execute(ExpressionParameters.CreateCombined(parameters, capturedParameters));
+
+    /// <summary>
+    /// Returns a new lambda instance with captured parameters.
+    /// </summary>
+    /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+    /// <returns>The lambda with captured parameters.</returns>
+    public Lambda Capture(IExpressionParameters? parameters)
+        => new Lambda(Parameters, Body, parameters);
 
     /// <summary>
     /// Converts <see cref="Lambda"/> to <see cref="LambdaExpression"/>.

@@ -21,7 +21,7 @@ public class Not : UnaryExpression
     }
 
     /// <inheritdoc />
-    public override object Execute(ExpressionParameters? parameters)
+    public override object Execute(IExpressionParameters? parameters)
     {
         var arg = Argument.Execute(parameters);
 

@@ -75,7 +75,7 @@ public abstract class BinaryExpression : IExpression
     public object Execute() => Execute(null);
 
     /// <inheritdoc />
-    public abstract object Execute(ExpressionParameters? parameters);
+    public abstract object Execute(IExpressionParameters? parameters);
 
     /// <inheritdoc />
     public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)

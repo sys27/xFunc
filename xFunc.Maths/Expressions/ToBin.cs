@@ -36,7 +36,7 @@ public class ToBin : UnaryExpression
     }
 
     /// <inheritdoc />
-    public override object Execute(ExpressionParameters? parameters)
+    public override object Execute(IExpressionParameters? parameters)
     {
         var result = Argument.Execute(parameters);
 

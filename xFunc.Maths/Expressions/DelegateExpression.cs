@@ -8,13 +8,13 @@ namespace xFunc.Maths.Expressions;
 /// </summary>
 public class DelegateExpression : IExpression
 {
-    private readonly Func<IExpressionParameters?, object> func;
+    private readonly Func<ExpressionParameters?, object> func;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="DelegateExpression"/> class.
     /// </summary>
     /// <param name="func">The delegate of function.</param>
-    public DelegateExpression(Func<IExpressionParameters?, object> func)
+    public DelegateExpression(Func<ExpressionParameters?, object> func)
         => this.func = func;
 
     /// <inheritdoc />
@@ -39,7 +39,7 @@ public class DelegateExpression : IExpression
     public object Execute() => func(null);
 
     /// <inheritdoc />
-    public object Execute(IExpressionParameters? parameters)
+    public object Execute(ExpressionParameters? parameters)
         => func(parameters);
 
     /// <inheritdoc />

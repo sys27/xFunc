@@ -42,7 +42,7 @@ public class GCD : DifferentParametersExpression
     }
 
     /// <inheritdoc />
-    public override object Execute(IExpressionParameters? parameters)
+    public override object Execute(ExpressionParameters? parameters)
     {
         var gcd = new NumberValue(0.0);
         foreach (var argument in Arguments)

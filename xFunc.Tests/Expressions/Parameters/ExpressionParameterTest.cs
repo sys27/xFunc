@@ -268,6 +268,46 @@ public class ExpressionParameterTest
     }
 
     [Fact]
+    public void ScopedSetActualValue()
+    {
+        const string key = "x";
+        var parent = new ExpressionParameters(false)
+        {
+            [key] = new ParameterValue(NumberValue.One)
+        };
+
+        var scoped = ExpressionParameters.CreateScoped(parent);
+        scoped.Add(key, new ParameterValue(NumberValue.One));
+        scoped[key] = new ParameterValue(NumberValue.Two);
+
+        var result = scoped[key];
+        var parentResult = parent[key];
+
+        Assert.Equal(new ParameterValue(NumberValue.Two), result);
+        Assert.Equal(new ParameterValue(NumberValue.One), parentResult);
+    }
+
+    [Fact]
+    public void ScopedSetParentValue()
+    {
+        const string key = "x";
+
+        var parent = new ExpressionParameters(false)
+        {
+            [key] = new ParameterValue(NumberValue.One)
+        };
+
+        var scoped = ExpressionParameters.CreateScoped(parent);
+        scoped[key] = new ParameterValue(NumberValue.Two);
+
+        var result = scoped[key];
+        var parentResult = parent[key];
+
+        Assert.Equal(new ParameterValue(NumberValue.Two), result);
+        Assert.Equal(new ParameterValue(NumberValue.Two), parentResult);
+    }
+
+    [Fact]
     public void ScopedContainsParentValue()
     {
         var parameter = new Parameter("x", new ParameterValue(1));

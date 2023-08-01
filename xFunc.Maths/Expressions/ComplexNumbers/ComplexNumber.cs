@@ -72,7 +72,7 @@ public class ComplexNumber : IExpression
     public object Execute() => Value;
 
     /// <inheritdoc />
-    public object Execute(IExpressionParameters? parameters) => Value;
+    public object Execute(ExpressionParameters? parameters) => Value;
 
     /// <inheritdoc />
     public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)

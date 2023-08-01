@@ -63,7 +63,7 @@ public abstract class UnaryExpression : IExpression
     public object Execute() => Execute(null);
 
     /// <inheritdoc />
-    public abstract object Execute(IExpressionParameters? parameters);
+    public abstract object Execute(ExpressionParameters? parameters);
 
     /// <inheritdoc />
     public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)

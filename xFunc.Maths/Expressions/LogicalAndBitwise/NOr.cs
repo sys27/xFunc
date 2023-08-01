@@ -21,7 +21,7 @@ public class NOr : BinaryExpression
     }
 
     /// <inheritdoc />
-    public override object Execute(IExpressionParameters? parameters)
+    public override object Execute(ExpressionParameters? parameters)
     {
         var left = Left.Execute(parameters);
         var right = Right.Execute(parameters);

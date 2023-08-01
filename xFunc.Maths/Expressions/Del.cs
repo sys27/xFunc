@@ -53,7 +53,7 @@ public class Del : UnaryExpression
     }
 
     /// <inheritdoc />
-    public override object Execute(IExpressionParameters? parameters)
+    public override object Execute(ExpressionParameters? parameters)
     {
         var result = Argument.Execute(parameters);
         if (result is not Lambda lambda)

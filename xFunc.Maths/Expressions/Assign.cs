@@ -42,7 +42,7 @@ public class Assign : IExpression
     public object Execute() => throw new NotSupportedException();
 
     /// <inheritdoc />
-    public object Execute(IExpressionParameters? parameters)
+    public object Execute(ExpressionParameters? parameters)
     {
         if (parameters is null)
             throw new ArgumentNullException(nameof(parameters));

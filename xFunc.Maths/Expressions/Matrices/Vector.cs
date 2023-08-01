@@ -33,7 +33,7 @@ public class Vector : DifferentParametersExpression
     }
 
     /// <inheritdoc />
-    public override object Execute(IExpressionParameters? parameters)
+    public override object Execute(ExpressionParameters? parameters)
     {
         var values = new NumberValue[ParametersCount];
 

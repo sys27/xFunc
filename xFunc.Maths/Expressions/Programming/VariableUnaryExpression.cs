@@ -41,7 +41,7 @@ public abstract class VariableUnaryExpression : IExpression
     public object Execute() => Execute(null);
 
     /// <inheritdoc />
-    public object Execute(IExpressionParameters? parameters)
+    public object Execute(ExpressionParameters? parameters)
     {
         if (parameters is null)
             throw new ArgumentNullException(nameof(parameters));

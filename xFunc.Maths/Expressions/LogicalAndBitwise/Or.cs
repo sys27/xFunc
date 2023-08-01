@@ -21,7 +21,7 @@ public class Or : BinaryExpression
     }
 
     /// <inheritdoc />
-    public override object Execute(IExpressionParameters? parameters)
+    public override object Execute(ExpressionParameters? parameters)
     {
         var leftResult = Left.Execute(parameters);
         var rightResult = Right.Execute(parameters);

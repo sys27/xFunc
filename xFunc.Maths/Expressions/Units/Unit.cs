@@ -61,7 +61,7 @@ public abstract class Unit<T> : IExpression, IEquatable<Unit<T>>
     public object Execute() => Value;
 
     /// <inheritdoc />
-    public object Execute(IExpressionParameters? parameters) => Value;
+    public object Execute(ExpressionParameters? parameters) => Value;
 
     /// <inheritdoc />
     public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)

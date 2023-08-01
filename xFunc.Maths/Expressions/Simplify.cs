@@ -48,7 +48,7 @@ public class Simplify : UnaryExpression
     /// </returns>
     /// <exception cref="ArgumentNullException">Simplifier is null.</exception>
     /// <seealso cref="ExpressionParameters" />
-    public override object Execute(IExpressionParameters? parameters)
+    public override object Execute(ExpressionParameters? parameters)
     {
         var result = Argument.Execute(parameters);
         if (result is not Lambda lambda)

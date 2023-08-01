@@ -10,9 +10,9 @@ public partial class ExpressionParameters
 {
     private sealed class ScopedExpressionParameters : ExpressionParameters
     {
-        private readonly IExpressionParameters parent;
+        private readonly ExpressionParameters parent;
 
-        public ScopedExpressionParameters(IExpressionParameters parent)
+        public ScopedExpressionParameters(ExpressionParameters parent)
             : base(false)
             => this.parent = parent;
 
@@ -30,7 +30,15 @@ public partial class ExpressionParameters
             get => collection.TryGetValue(key, out var parameter)
                 ? parameter.Value
                 : parent[key];
-            set => base[key] = value;
+            set
+            {
+                if (collection.TryGetValue(key, out _))
+                    base[key] = value;
+                else if (parent.TryGetParameter(key, out _))
+                    parent[key] = value;
+                else
+                    base[key] = value;
+            }
         }
 
         public override bool Contains(Parameter param)

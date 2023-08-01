@@ -42,7 +42,7 @@ public class LCM : DifferentParametersExpression
     }
 
     /// <inheritdoc />
-    public override object Execute(IExpressionParameters? parameters)
+    public override object Execute(ExpressionParameters? parameters)
     {
         var lcm = new NumberValue(1.0);
         foreach (var argument in Arguments)

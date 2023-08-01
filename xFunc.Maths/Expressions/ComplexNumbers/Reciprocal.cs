@@ -38,7 +38,7 @@ public class Reciprocal : UnaryExpression
     }
 
     /// <inheritdoc />
-    public override object Execute(IExpressionParameters? parameters)
+    public override object Execute(ExpressionParameters? parameters)
     {
         var result = Argument.Execute(parameters);
 

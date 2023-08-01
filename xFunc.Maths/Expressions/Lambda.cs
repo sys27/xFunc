@@ -11,8 +11,6 @@ namespace xFunc.Maths.Expressions;
 /// </summary>
 public readonly struct Lambda : IEquatable<Lambda>
 {
-    private readonly IExpressionParameters? capturedParameters;
-
     /// <summary>
     /// Initializes a new instance of the <see cref="Lambda"/> struct.
     /// </summary>
@@ -42,11 +40,11 @@ public readonly struct Lambda : IEquatable<Lambda>
     {
     }
 
-    private Lambda(ImmutableArray<string> parameters, IExpression body, IExpressionParameters? capturedParameters)
+    private Lambda(ImmutableArray<string> parameters, IExpression body, ExpressionParameters? capturedScope)
     {
         Parameters = parameters;
         Body = body;
-        this.capturedParameters = capturedParameters;
+        CapturedScope = capturedScope;
     }
 
     /// <summary>
@@ -90,15 +88,15 @@ public readonly struct Lambda : IEquatable<Lambda>
     /// </summary>
     /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
     /// <returns>A result of the execution.</returns>
-    public object Call(IExpressionParameters parameters)
-        => Body.Execute(ExpressionParameters.CreateCombined(parameters, capturedParameters));
+    public object Call(ExpressionParameters parameters)
+        => Body.Execute(parameters);
 
     /// <summary>
     /// Returns a new lambda instance with captured parameters.
     /// </summary>
     /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
     /// <returns>The lambda with captured parameters.</returns>
-    public Lambda Capture(IExpressionParameters? parameters)
+    public Lambda Capture(ExpressionParameters? parameters)
         => new Lambda(Parameters, Body, parameters);
 
     /// <summary>
@@ -117,4 +115,9 @@ public readonly struct Lambda : IEquatable<Lambda>
     /// Gets an expression of the function body.
     /// </summary>
     public IExpression Body { get; }
+
+    /// <summary>
+    /// Gets the captured scope.
+    /// </summary>
+    internal ExpressionParameters? CapturedScope { get; }
 }

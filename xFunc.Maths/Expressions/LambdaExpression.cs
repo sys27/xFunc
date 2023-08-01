@@ -47,7 +47,7 @@ public class LambdaExpression : IExpression, IEquatable<LambdaExpression>
         => Execute(null);
 
     /// <inheritdoc />
-    public object Execute(IExpressionParameters? parameters)
+    public object Execute(ExpressionParameters? parameters)
         => Lambda.Capture(parameters);
 
     /// <inheritdoc />

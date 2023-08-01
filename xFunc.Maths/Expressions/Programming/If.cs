@@ -42,7 +42,7 @@ public class If : DifferentParametersExpression
     }
 
     /// <inheritdoc />
-    public override object Execute(IExpressionParameters? parameters)
+    public override object Execute(ExpressionParameters? parameters)
     {
         var result = Condition.Execute(parameters);
         if (result is bool condition)

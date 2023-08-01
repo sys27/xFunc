@@ -357,4 +357,16 @@ public class ProcessorTest
         Assert.Equal("(x) => (y) => x + y", lambdaResult.Result.ToString());
         Assert.Equal(3.0, result.Result);
     }
+
+    [Fact]
+    public void ClosureTest()
+    {
+        var processor = new Processor();
+
+        processor.Solve("x := 1");
+        processor.Solve("(() => x := 2)()");
+        var result = processor.Solve<NumberResult>("x");
+
+        Assert.Equal(2.0, result.Result);
+    }
 }

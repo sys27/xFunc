@@ -82,7 +82,7 @@ public class Derivative : DifferentParametersExpression
     }
 
     /// <inheritdoc />
-    public override object Execute(IExpressionParameters? parameters)
+    public override object Execute(ExpressionParameters? parameters)
     {
         var result = Expression.Execute(parameters);
         if (result is not Lambda lambda)

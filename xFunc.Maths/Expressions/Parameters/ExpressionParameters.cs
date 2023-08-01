@@ -12,7 +12,7 @@ namespace xFunc.Maths.Expressions.Parameters;
 /// <summary>
 /// Strongly typed collection that contains parameters.
 /// </summary>
-public partial class ExpressionParameters : IExpressionParameters, INotifyCollectionChanged
+public partial class ExpressionParameters : IEnumerable<Parameter>, INotifyCollectionChanged
 {
     private static readonly Dictionary<string, Parameter> Constants;
     private readonly Dictionary<string, Parameter> collection;
@@ -334,7 +334,13 @@ public partial class ExpressionParameters : IExpressionParameters, INotifyCollec
     public void Add(string key, ParameterValue value)
         => Add(new Parameter(key, value));
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Removes the specified element from this object.
+    /// </summary>
+    /// <param name="param">The element.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="param"/> is null.</exception>
+    /// <exception cref="ParameterIsReadOnlyException">The variable is read only.</exception>
+    /// <returns><c>true</c> if item was successfully removed from the collection; otherwise, <c>false</c>.</returns>
     public bool Remove(Parameter param)
     {
         if (param is null)
@@ -397,23 +403,6 @@ public partial class ExpressionParameters : IExpressionParameters, INotifyCollec
     /// </summary>
     /// <param name="parameters">The instance of the base parameters collection.</param>
     /// <returns>The expression parameters.</returns>
-    public static IExpressionParameters CreateScoped(IExpressionParameters parameters)
+    public static ExpressionParameters CreateScoped(ExpressionParameters parameters)
         => new ScopedExpressionParameters(parameters);
-
-    /// <summary>
-    /// Creates a new <see cref="IExpressionParameters"/> instance based on two specified <see cref="IExpressionParameters"/>.
-    /// </summary>
-    /// <param name="actual">The instance with actual parameters.</param>
-    /// <param name="parent">The instance with parent parameters.</param>
-    /// <returns>The expression parameters.</returns>
-    public static IExpressionParameters? CreateCombined(IExpressionParameters? actual, IExpressionParameters? parent)
-    {
-        if (parent is null)
-            return actual;
-
-        if (actual is null)
-            return parent;
-
-        return new ScopedWrapperExpressionParameters(actual, new WrapperExpressionParameters(parent));
-    }
 }

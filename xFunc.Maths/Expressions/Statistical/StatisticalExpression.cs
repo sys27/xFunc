@@ -38,7 +38,7 @@ public abstract class StatisticalExpression : DifferentParametersExpression
     protected abstract object ExecuteInternal(VectorValue vector);
 
     /// <inheritdoc />
-    public override object Execute(IExpressionParameters? parameters)
+    public override object Execute(ExpressionParameters? parameters)
     {
         var vector = default(VectorValue);
 

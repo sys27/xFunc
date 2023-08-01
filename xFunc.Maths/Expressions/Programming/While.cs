@@ -21,7 +21,7 @@ public class While : BinaryExpression
     }
 
     /// <inheritdoc />
-    public override object Execute(IExpressionParameters? parameters)
+    public override object Execute(ExpressionParameters? parameters)
     {
         while ((bool)Right.Execute(parameters))
             Left.Execute(parameters);

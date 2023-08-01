@@ -87,15 +87,7 @@ public class Processor
     /// </summary>
     /// <param name="function">The function.</param>
     /// <returns>The result of solving.</returns>
-    public IResult Solve(string function) => Solve(function, true);
-
-    /// <summary>
-    /// Solves the specified expression.
-    /// </summary>
-    /// <param name="function">The function.</param>
-    /// <param name="simplify">if set to <c>true</c> parser will simplify expression.</param>
-    /// <returns>The result of solving.</returns>
-    public IResult Solve(string function, bool simplify)
+    public IResult Solve(string function)
     {
         var exp = Parse(function);
         exp.Analyze(typeAnalyzer);
@@ -160,16 +152,6 @@ public class Processor
     /// <returns>The result of solving.</returns>
     public TResult Solve<TResult>(string function) where TResult : IResult
         => (TResult)Solve(function);
-
-    /// <summary>
-    /// Solves the specified function.
-    /// </summary>
-    /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <param name="function">The function.</param>
-    /// <param name="simplify">if set to <c>true</c> parser will simplify expression.</param>
-    /// <returns>The result of solving.</returns>
-    public TResult Solve<TResult>(string function, bool simplify) where TResult : IResult
-        => (TResult)Solve(function, simplify);
 
     /// <summary>
     /// Simplifies the <paramref name="function"/>.

@@ -109,16 +109,6 @@ public class ProcessorTest
     }
 
     [Fact]
-    public void SolveExpDoNotSimplifyTest()
-    {
-        var processor = new Processor();
-        var result = processor.Solve<LambdaResult>("deriv(() => x + 1)", false);
-        var expected = Number.One.ToLambda();
-
-        Assert.Equal(expected, result.Result);
-    }
-
-    [Fact]
     public void SolveAngleTest()
     {
         var processor = new Processor();
@@ -340,5 +330,43 @@ public class ProcessorTest
         var expected = new Pow(Variable.X, Number.Two).ToLambda();
 
         Assert.Equal(expected, result.Result);
+    }
+
+    [Fact]
+    public void LambdaClosureTest1()
+    {
+        var processor = new Processor();
+
+        var lambdaResult = processor.Solve<LambdaResult>("f := (x) => (y) => x + y");
+        var addResult = processor.Solve<LambdaResult>("add1 := f(1)");
+        var result = processor.Solve<NumberResult>("add1(2)");
+
+        Assert.Equal("(x) => (y) => x + y", lambdaResult.Result.ToString());
+        Assert.Equal("(y) => x + y", addResult.Result.ToString());
+        Assert.Equal(3.0, result.Result);
+    }
+
+    [Fact]
+    public void LambdaClosureTest2()
+    {
+        var processor = new Processor();
+
+        var lambdaResult = processor.Solve<LambdaResult>("f := (x) => (y) => x + y");
+        var result = processor.Solve<NumberResult>("f(1)(2)");
+
+        Assert.Equal("(x) => (y) => x + y", lambdaResult.Result.ToString());
+        Assert.Equal(3.0, result.Result);
+    }
+
+    [Fact]
+    public void ClosureTest()
+    {
+        var processor = new Processor();
+
+        processor.Solve("x := 1");
+        processor.Solve("(() => x := 2)()");
+        var result = processor.Solve<NumberResult>("x");
+
+        Assert.Equal(2.0, result.Result);
     }
 }

@@ -11,6 +11,11 @@ namespace xFunc.Maths.Expressions.Trigonometric;
 /// </summary>
 public class Arccos : InverseTrigonometricExpression
 {
+    private static readonly Lazy<Domain> domain = new Lazy<Domain>(
+        () => new DomainBuilder(1)
+            .AddRange(r => r.StartInclusive(-NumberValue.One).EndInclusive(NumberValue.One))
+            .Build());
+
     /// <summary>
     /// Gets the lambda for the current expression.
     /// </summary>
@@ -56,4 +61,9 @@ public class Arccos : InverseTrigonometricExpression
     /// <inheritdoc />
     public override IExpression Clone(IExpression? argument = null)
         => new Arccos(argument ?? Argument);
+
+    /// <summary>
+    /// Gets the domain of the function.
+    /// </summary>
+    public static Domain Domain => domain.Value;
 }

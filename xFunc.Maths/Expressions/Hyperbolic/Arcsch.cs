@@ -11,6 +11,12 @@ namespace xFunc.Maths.Expressions.Hyperbolic;
 /// </summary>
 public class Arcsch : InverseHyperbolicExpression
 {
+    private static readonly Lazy<Domain> domain = new Lazy<Domain>(
+        () => new DomainBuilder(2)
+            .AddRange(r => r.Start(NumberValue.NegativeInfinity).End(NumberValue.Zero))
+            .AddRange(r => r.Start(NumberValue.Zero).End(NumberValue.PositiveInfinity))
+            .Build());
+
     /// <summary>
     /// Gets the lambda for the current expression.
     /// </summary>
@@ -56,4 +62,9 @@ public class Arcsch : InverseHyperbolicExpression
     /// <inheritdoc />
     public override IExpression Clone(IExpression? argument = null)
         => new Arcsch(argument ?? Argument);
+
+    /// <summary>
+    /// Gets the domain of the function.
+    /// </summary>
+    public static Domain Domain => domain.Value;
 }

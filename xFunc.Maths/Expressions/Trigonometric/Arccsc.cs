@@ -11,6 +11,12 @@ namespace xFunc.Maths.Expressions.Trigonometric;
 /// </summary>
 public class Arccsc : InverseTrigonometricExpression
 {
+    private static readonly Lazy<Domain> domain = new Lazy<Domain>(
+        () => new DomainBuilder(2)
+            .AddRange(r => r.Start(NumberValue.NegativeInfinity).EndInclusive(-NumberValue.One))
+            .AddRange(r => r.StartInclusive(NumberValue.One).End(NumberValue.PositiveInfinity))
+            .Build());
+
     /// <summary>
     /// Gets the lambda for the current expression.
     /// </summary>
@@ -56,4 +62,9 @@ public class Arccsc : InverseTrigonometricExpression
     /// <inheritdoc />
     public override IExpression Clone(IExpression? argument = null)
         => new Arccsc(argument ?? Argument);
+
+    /// <summary>
+    /// Gets the domain of the function.
+    /// </summary>
+    public static Domain Domain => domain.Value;
 }

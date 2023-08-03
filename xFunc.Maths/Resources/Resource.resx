@@ -211,4 +211,16 @@
   <data name="MissingLambdaBodyParseException" xml:space="preserve">
     <value>Can't parse the body of the lambda expression.</value>
   </data>
+  <data name="DomainRangeIsIncorrect" xml:space="preserve">
+    <value>The domain range is incorrect.</value>
+  </data>
+  <data name="DomainRangeStartIsGreaterThanEnd" xml:space="preserve">
+    <value>The 'start' parameter is greater than 'end'.</value>
+  </data>
+  <data name="DomainRangeExceeded" xml:space="preserve">
+    <value>The amount of added ranges exceeded the amount specified on the builder creation.</value>
+  </data>
+  <data name="DomainIsInvalid" xml:space="preserve">
+    <value>The domain is invalid.</value>
+  </data>
 </root>

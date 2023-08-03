@@ -77,7 +77,7 @@ public readonly struct NumberValue :
     /// <summary>
     /// NegativeInfinity.
     /// </summary>
-    public static readonly NumberValue NegativeInfinity = new NumberValue(double.PositiveInfinity);
+    public static readonly NumberValue NegativeInfinity = new NumberValue(double.NegativeInfinity);
 
     /// <summary>
     /// NaN.
@@ -135,7 +135,15 @@ public readonly struct NumberValue :
 
     /// <inheritdoc />
     public override string ToString()
-        => Number.ToString(CultureInfo.InvariantCulture);
+    {
+        if (IsNegativeInfinity)
+            return "-∞";
+
+        if (IsPositiveInfinity)
+            return "∞";
+
+        return Number.ToString(CultureInfo.InvariantCulture);
+    }
 
     /// <summary>
     /// Determines whether two specified instances of <see cref="NumberValue"/> are equal.

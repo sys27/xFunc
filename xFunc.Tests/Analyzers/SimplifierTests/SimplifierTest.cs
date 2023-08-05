@@ -273,4 +273,30 @@ public class SimplifierTest : BaseSimplifierTest
     [Theory]
     [ClassData(typeof(AllExpressionsData))]
     public void TestNullException(Type type) => TestNullExp(type);
+
+    [Fact]
+    public void MulOrderingTest()
+    {
+        // 2 * (1 * (3 * (x ^ (3 - 1))))
+        var exp = new Mul(
+            Number.Two,
+            new Mul(
+                Number.One,
+                new Mul(
+                    new Number(3),
+                    new Pow(
+                        Variable.X,
+                        new Sub(
+                            new Number(3),
+                            Number.One)
+                    )
+                )
+            )
+        );
+
+        // 6 * (x ^ 2)
+        var expected = new Mul(new Number(6), new Pow(Variable.X, Number.Two));
+
+        SimplifyTest(exp, expected);
+    }
 }

@@ -511,7 +511,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
                 => Analyze(new Mul(mul, variable)),
 
             // 2 * (2 * x) -> (2 * x) * 2
-            (Number number, Mul(Number, Variable) mul)
+            (Number number, Mul(Number, not Number) mul)
                 => Analyze(new Mul(mul, number)),
 
             // mul by zero

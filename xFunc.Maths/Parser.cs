@@ -455,19 +455,8 @@ public partial class Parser : IParser
     }
 
     private IExpression? ParseRightUnary(ref TokenReader tokenReader)
-        => ParseFactorial(ref tokenReader) ??
-           ParseIncDec(ref tokenReader) ??
-           ParseCallExpression(ref tokenReader);
-
-    private IExpression? ParseFactorial(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
-        {
-            var number = parser.ParseNumberAndUnit(ref reader);
-            if (number is not null && reader.Check(FactorialOperator))
-                return new Fact(number);
-
-            return null;
-        });
+        => ParseIncDec(ref tokenReader) ??
+           ParseFactorialOrCallExpression(ref tokenReader);
 
     private IExpression? ParseIncDec(ref TokenReader tokenReader)
         => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
@@ -485,11 +474,14 @@ public partial class Parser : IParser
             return null;
         });
 
-    private IExpression? ParseCallExpression(ref TokenReader tokenReader)
+    private IExpression? ParseFactorialOrCallExpression(ref TokenReader tokenReader)
     {
         var operand = ParseOperand(ref tokenReader);
         if (operand is null)
             return null;
+
+        if (tokenReader.Check(FactorialOperator))
+            return new Fact(operand);
 
         while (true)
         {

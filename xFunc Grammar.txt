@@ -27,12 +27,13 @@ mulImplicitLeftUnary = '-'* number rightUnary
 leftUnary = ('~' / '-')* exponentiation
 exponentiation = rightUnary ('^' exponentiation)*
 rightUnary = incDec
-           / factorial
-           / callExp
+           / factorialOrCallExpression
 
 incDec = variable ('++' / '--')
-factorial = (number '!')
 
+factorialOrCallExpression = factorial
+                          / callExp
+factorial = (operand '!')
 callExp = operand parameters*
 
 operand = complexnumber /

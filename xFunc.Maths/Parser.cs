@@ -494,7 +494,8 @@ public partial class Parser : IParser
     }
 
     private IExpression? ParseOperand(ref TokenReader tokenReader)
-        => ParsePolarComplexNumber(ref tokenReader) ??
+        => ParseComplexNumber(ref tokenReader) ??
+           ParsePolarComplexNumber(ref tokenReader) ??
            ParseNumberAndUnit(ref tokenReader) ??
            ParseIf(ref tokenReader) ??
            ParseAssignFunction(ref tokenReader) ??
@@ -975,6 +976,66 @@ public partial class Parser : IParser
             var sign = phaseSign.Is(MinusOperator) ? -1 : 1;
             var phaseNumber = AngleValue.Degree(phase.NumberValue * sign).ToRadian();
             var complex = Complex.FromPolarCoordinates(magnitudeNumber, phaseNumber.Angle.Number);
+
+            return new ComplexNumber(complex);
+        });
+
+    private IExpression? ParseComplexNumber(ref TokenReader tokenReader)
+        => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
+        {
+            var number1Sign = reader.GetCurrent(PlusOperator) ||
+                              reader.GetCurrent(MinusOperator);
+            var number1 = reader.GetCurrent(TokenKind.Number);
+
+            var number2Sign = reader.GetCurrent(PlusOperator) ||
+                              reader.GetCurrent(MinusOperator);
+            var number2 = reader.GetCurrent(TokenKind.Number);
+
+            var i = reader.GetCurrent(Id);
+            if (i.IsEmpty() || i.StringValue != "i") // TODO:
+                return null;
+
+            var (real, imaginary) = (number1Sign.Kind, number1.Kind, number2Sign.Kind, number2.Kind) switch
+            {
+                // + x + y i
+                (PlusOperator, not Empty, PlusOperator, not Empty)
+                    => (number1.NumberValue, number2.NumberValue),
+
+                // + x - y i
+                (PlusOperator, not Empty, MinusOperator, not Empty)
+                    => (number1.NumberValue, -number2.NumberValue),
+
+                // - x + y i
+                (MinusOperator, not Empty, PlusOperator, not Empty)
+                    => (-number1.NumberValue, number2.NumberValue),
+
+                // - x - y i
+                (MinusOperator, not Empty, MinusOperator, not Empty)
+                    => (-number1.NumberValue, -number2.NumberValue),
+
+                // x + y i
+                (Empty, not Empty, PlusOperator, not Empty)
+                    => (number1.NumberValue, number2.NumberValue),
+
+                // x - y i
+                (Empty, not Empty, MinusOperator, not Empty)
+                    => (number1.NumberValue, -number2.NumberValue),
+
+                // + y i
+                (Empty, Empty, PlusOperator, not Empty)
+                    => (0, number2.NumberValue),
+
+                // - y i
+                (Empty, Empty, MinusOperator, not Empty)
+                    => (0, -number2.NumberValue),
+
+                // y i
+                (Empty, Empty, Empty, not Empty)
+                    => (0, number2.NumberValue),
+
+                _ => (0, 1),
+            };
+            var complex = new Complex(real, imaginary);
 
             return new ComplexNumber(complex);
         });

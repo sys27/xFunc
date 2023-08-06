@@ -1,6 +1,8 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Numerics;
+
 namespace xFunc.Tests.ParserTests;
 
 public class AssignTests : BaseParserTests
@@ -35,15 +37,10 @@ public class AssignTests : BaseParserTests
     {
         var expected = new Assign(
             new Variable("aaa"),
-            new Add(
-                new Number(3),
-                new Mul(
-                    Number.Two,
-                    new Variable("i")
-                )
-            ));
+            new ComplexNumber(new Complex(3, 2))
+        );
 
-        ParseTest("aaa := 3+2*i", expected);
+        ParseTest("aaa := 3+2i", expected);
     }
 
     [Fact]

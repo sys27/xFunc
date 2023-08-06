@@ -8,17 +8,11 @@ namespace xFunc.Tests.ParserTests;
 public class ComplexNumberTests : BaseParserTests
 {
     [Theory]
-    [InlineData("3+2*i")]
-    [InlineData("+3+2*i")]
+    [InlineData("3+2i")]
+    [InlineData("+3+2i")]
     public void ComplexNumberTest(string exp)
     {
-        var expected = new Add(
-            new Number(3),
-            new Mul(
-                Number.Two,
-                new Variable("i")
-            )
-        );
+        var expected = new ComplexNumber(new Complex(3, 2));
 
         ParseTest(exp, expected);
     }
@@ -26,71 +20,41 @@ public class ComplexNumberTests : BaseParserTests
     [Fact]
     public void ComplexNumberNegativeTest()
     {
-        var expected = new Sub(
-            new Number(3),
-            new Mul(
-                Number.Two,
-                new Variable("i")
-            )
-        );
+        var expected = new ComplexNumber(new Complex(3, -2));
 
-        ParseTest("3-2*i", expected);
+        ParseTest("3-2i", expected);
     }
 
     [Fact]
     public void ComplexNumberNegativeAllPartsTest()
     {
-        var expected = new Sub(
-            new UnaryMinus(new Number(3)),
-            new Mul(
-                Number.Two,
-                new Variable("i")
-            )
-        );
+        var expected = new ComplexNumber(new Complex(-3, -2));
 
-        ParseTest("-3-2*i", expected);
+        ParseTest("-3-2i", expected);
     }
 
     [Fact]
     public void ComplexOnlyRePartTest()
     {
-        var expected = new Add(
-            new Number(3),
-            new Mul(
-                Number.Zero,
-                new Variable("i")
-            )
-        );
+        var expected = new ComplexNumber(new Complex(3, 0));
 
-        ParseTest("3+0*i", expected);
+        ParseTest("3+0i", expected);
     }
 
     [Fact]
     public void ComplexOnlyImPartTest()
     {
-        var expected = new Add(
-            Number.Zero,
-            new Mul(
-                Number.Two,
-                new Variable("i")
-            )
-        );
+        var expected = new ComplexNumber(new Complex(0, 2));
 
-        ParseTest("0+2*i", expected);
+        ParseTest("0+2i", expected);
     }
 
     [Fact]
     public void ComplexOnlyImPartNegativeTest()
     {
-        var expected = new Sub(
-            Number.Zero,
-            new Mul(
-                Number.Two,
-                new Variable("i")
-            )
-        );
+        var expected = new ComplexNumber(new Complex(0, -2));
 
-        ParseTest("0-2*i", expected);
+        ParseTest("0-2i", expected);
     }
 
     [Fact]
@@ -98,16 +62,10 @@ public class ComplexNumberTests : BaseParserTests
     {
         var expected = new Sub(
             Variable.X,
-            new Add(
-                Number.Zero,
-                new Mul(
-                    Number.Two,
-                    new Variable("i")
-                )
-            )
+            new ComplexNumber(new Complex(0, 2))
         );
 
-        ParseTest("x - (0+2*i)", expected);
+        ParseTest("x - (0+2i)", expected);
     }
 
     [Fact]
@@ -115,16 +73,10 @@ public class ComplexNumberTests : BaseParserTests
     {
         var expected = new Add(
             Variable.X,
-            new Sub(
-                new Number(3),
-                new Mul(
-                    Number.Two,
-                    new Variable("i")
-                )
-            )
+            new ComplexNumber(new Complex(3, -2))
         );
 
-        ParseTest("x + (3-2*i)", expected);
+        ParseTest("x + (3-2i)", expected);
     }
 
     [Theory]
@@ -166,37 +118,21 @@ public class ComplexNumberTests : BaseParserTests
         => ParseErrorTest(exp);
 
     [Theory]
-    [InlineData("im(3-2*i)")]
-    [InlineData("imaginary(3-2*i)")]
+    [InlineData("im(3-2i)")]
+    [InlineData("imaginary(3-2i)")]
     public void ImTest(string function)
     {
-        var expected = new Im(
-            new Sub(
-                new Number(3),
-                new Mul(
-                    Number.Two,
-                    new Variable("i")
-                )
-            )
-        );
+        var expected = new Im(new ComplexNumber(new Complex(3, -2)));
 
         ParseTest(function, expected);
     }
 
     [Theory]
-    [InlineData("re(3-2*i)")]
-    [InlineData("real(3-2*i)")]
+    [InlineData("re(3-2i)")]
+    [InlineData("real(3-2i)")]
     public void ReTest(string function)
     {
-        var expected = new Re(
-            new Sub(
-                new Number(3),
-                new Mul(
-                    Number.Two,
-                    new Variable("i")
-                )
-            )
-        );
+        var expected = new Re(new ComplexNumber(new Complex(3, -2)));
 
         ParseTest(function, expected);
     }
@@ -204,49 +140,25 @@ public class ComplexNumberTests : BaseParserTests
     [Fact]
     public void PhaseTest()
     {
-        var expected = new Phase(
-            new Sub(
-                new Number(3),
-                new Mul(
-                    Number.Two,
-                    new Variable("i")
-                )
-            )
-        );
+        var expected = new Phase(new ComplexNumber(new Complex(3, -2)));
 
-        ParseTest("phase(3-2*i)", expected);
+        ParseTest("phase(3-2i)", expected);
     }
 
     [Fact]
     public void ConjugateTest()
     {
-        var expected = new Conjugate(
-            new Sub(
-                new Number(3),
-                new Mul(
-                    Number.Two,
-                    new Variable("i")
-                )
-            )
-        );
+        var expected = new Conjugate(new ComplexNumber(new Complex(3, -2)));
 
-        ParseTest("conjugate(3-2*i)", expected);
+        ParseTest("conjugate(3-2i)", expected);
     }
 
     [Fact]
     public void ReciprocalTest()
     {
-        var expected = new Reciprocal(
-            new Sub(
-                new Number(3),
-                new Mul(
-                    Number.Two,
-                    new Variable("i")
-                )
-            )
-        );
+        var expected = new Reciprocal(new ComplexNumber(new Complex(3, -2)));
 
-        ParseTest("reciprocal(3-2*i)", expected);
+        ParseTest("reciprocal(3-2i)", expected);
     }
 
     [Fact]

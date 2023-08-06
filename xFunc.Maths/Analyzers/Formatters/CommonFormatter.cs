@@ -229,7 +229,7 @@ public class CommonFormatter : IFormatter
     /// <inheritdoc />
     public virtual string Analyze(UnaryMinus exp)
     {
-        if (exp.Argument is BinaryExpression)
+        if (exp.Argument is BinaryExpression or ComplexNumber)
             return ToString(exp, "-({0})");
 
         return ToString(exp, "-{0}");

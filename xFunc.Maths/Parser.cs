@@ -400,7 +400,7 @@ public partial class Parser : IParser
 
     private IExpression? ParseMulDivMod(ref TokenReader tokenReader)
     {
-        var left = ParseLeftUnary(ref tokenReader);
+        var left = ParseMulImplicit(ref tokenReader);
         if (left is null)
             return null;
 
@@ -414,11 +414,53 @@ public partial class Parser : IParser
             if (token.IsEmpty())
                 return left;
 
-            var right = ParseLeftUnary(ref tokenReader) ??
+            var right = ParseMulImplicit(ref tokenReader) ??
                         MissingSecondOperand(token.Kind);
 
             left = CreateMulDivMod(token, left, right);
         }
+    }
+
+    private IExpression? ParseMulImplicit(ref TokenReader tokenReader)
+        => ParseMulImplicitLeftUnary(ref tokenReader) ??
+           ParseLeftUnary(ref tokenReader);
+
+    private IExpression? ParseMulImplicitLeftUnary(ref TokenReader tokenReader)
+        => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
+        {
+            var minusOperator = reader.GetCurrent(MinusOperator);
+            var number = parser.ParseNumberAndUnit(ref reader);
+            if (number is null)
+                return null;
+
+            var rightUnary = parser.ParseMulImplicitExponentiation(ref reader) ??
+                             parser.ParseParenthesesExpression(ref reader) ??
+                             parser.ParseMatrix(ref reader) ??
+                             parser.ParseVector(ref reader);
+
+            if (rightUnary is null)
+                return null;
+
+            if (minusOperator.IsNotEmpty())
+                number = new UnaryMinus(number);
+
+            return new Mul(number, rightUnary);
+        });
+
+    private IExpression? ParseMulImplicitExponentiation(ref TokenReader tokenReader)
+    {
+        var left = ParseFunctionOrVariable(ref tokenReader);
+        if (left is null)
+            return null;
+
+        var @operator = tokenReader.GetCurrent(ExponentiationOperator);
+        if (@operator.IsEmpty())
+            return left;
+
+        var right = ParseExponentiation(ref tokenReader) ??
+                    throw new ParseException(Resource.ExponentParseException);
+
+        return new Pow(left, right);
     }
 
     private IExpression? ParseLeftUnary(ref TokenReader tokenReader)

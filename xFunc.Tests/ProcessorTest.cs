@@ -73,7 +73,7 @@ public class ProcessorTest
     {
         var processor = new Processor();
 
-        var result = processor.Solve<ComplexNumberResult>("conjugate(2.3 + 1.4*i)");
+        var result = processor.Solve<ComplexNumberResult>("conjugate(2.3 + 1.4i)");
         var expected = Complex.Conjugate(new Complex(2.3, 1.4));
 
         Assert.Equal(expected, result.Result);

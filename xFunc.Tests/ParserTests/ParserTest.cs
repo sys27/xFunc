@@ -542,7 +542,7 @@ public class ParserTest : BaseParserTests
             new Variable("pi")
         );
 
-        ParseTest("3 * pi", expected);
+        ParseTest("3pi", expected);
     }
 
     [Fact]
@@ -567,7 +567,7 @@ public class ParserTest : BaseParserTests
             new Vector(new IExpression[] { Number.One, Number.Two })
         );
 
-        ParseTest("2 * {1, 2}", expected);
+        ParseTest("2{1, 2}", expected);
     }
 
     [Fact]
@@ -582,7 +582,7 @@ public class ParserTest : BaseParserTests
             })
         );
 
-        ParseTest("2 * {{1, 2}, {3, 4}}", expected);
+        ParseTest("2{{1, 2}, {3, 4}}", expected);
     }
 
     [Fact]

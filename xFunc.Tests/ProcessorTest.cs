@@ -73,7 +73,7 @@ public class ProcessorTest
     {
         var processor = new Processor();
 
-        var result = processor.Solve<ComplexNumberResult>("conjugate(2.3 + 1.4*i)");
+        var result = processor.Solve<ComplexNumberResult>("conjugate(2.3 + 1.4i)");
         var expected = Complex.Conjugate(new Complex(2.3, 1.4));
 
         Assert.Equal(expected, result.Result);
@@ -113,7 +113,7 @@ public class ProcessorTest
     {
         var processor = new Processor();
 
-        var result = processor.Solve<AngleNumberResult>("90 degree");
+        var result = processor.Solve<AngleNumberResult>("90 'degree'");
         var expected = AngleValue.Degree(90);
 
         Assert.Equal(expected, result.Result);
@@ -124,7 +124,7 @@ public class ProcessorTest
     {
         var processor = new Processor();
 
-        var result = processor.Solve<PowerNumberResult>("10 W");
+        var result = processor.Solve<PowerNumberResult>("10 'W'");
         var expected = PowerValue.Watt(10);
 
         Assert.Equal(expected, result.Result);
@@ -135,7 +135,7 @@ public class ProcessorTest
     {
         var processor = new Processor();
 
-        var result = processor.Solve<TemperatureNumberResult>("10 °C");
+        var result = processor.Solve<TemperatureNumberResult>("10 '°C'");
         var expected = TemperatureValue.Celsius(10);
 
         Assert.Equal(expected, result.Result);
@@ -146,7 +146,7 @@ public class ProcessorTest
     {
         var processor = new Processor();
 
-        var result = processor.Solve<MassNumberResult>("10 g");
+        var result = processor.Solve<MassNumberResult>("10 'g'");
         var expected = MassValue.Gram(10);
 
         Assert.Equal(expected, result.Result);
@@ -157,7 +157,7 @@ public class ProcessorTest
     {
         var processor = new Processor();
 
-        var result = processor.Solve<LengthNumberResult>("10 m");
+        var result = processor.Solve<LengthNumberResult>("10 'm'");
         var expected = LengthValue.Meter(10);
 
         Assert.Equal(expected, result.Result);
@@ -168,7 +168,7 @@ public class ProcessorTest
     {
         var processor = new Processor();
 
-        var result = processor.Solve<TimeNumberResult>("10 s");
+        var result = processor.Solve<TimeNumberResult>("10 's'");
         var expected = TimeValue.Second(10);
 
         Assert.Equal(expected, result.Result);
@@ -179,7 +179,7 @@ public class ProcessorTest
     {
         var processor = new Processor();
 
-        var result = processor.Solve<AreaNumberResult>("10 m^2");
+        var result = processor.Solve<AreaNumberResult>("10 'm^2'");
         var expected = AreaValue.Meter(10);
 
         Assert.Equal(expected, result.Result);
@@ -190,7 +190,7 @@ public class ProcessorTest
     {
         var processor = new Processor();
 
-        var result = processor.Solve<VolumeNumberResult>("10 m^3");
+        var result = processor.Solve<VolumeNumberResult>("10 'm^3'");
         var expected = VolumeValue.Meter(10);
 
         Assert.Equal(expected, result.Result);

@@ -82,35 +82,35 @@ public partial class Parser : IParser
 
     private IExpression? ParseFor(ref TokenReader tokenReader)
     {
-        var @for = tokenReader.GetCurrent(ForKeyword);
+        var @for = tokenReader.GetCurrentAndAdvance(ForKeyword);
         if (@for.IsEmpty())
             return null;
 
-        if (!tokenReader.Check(OpenParenthesisSymbol))
+        if (!tokenReader.CheckAndAdvance(OpenParenthesisSymbol))
             MissingOpenParenthesis(@for.Kind);
 
         var body = ParseStatement(ref tokenReader) ??
                    throw new ParseException(Resource.ForBodyParseException);
 
-        if (!tokenReader.Check(CommaSymbol))
+        if (!tokenReader.CheckAndAdvance(CommaSymbol))
             MissingComma(body);
 
         var init = ParseStatement(ref tokenReader) ??
                    throw new ParseException(Resource.ForInitParseException);
 
-        if (!tokenReader.Check(CommaSymbol))
+        if (!tokenReader.CheckAndAdvance(CommaSymbol))
             MissingComma(init);
 
         var condition = ParseConditionalOrOperator(ref tokenReader) ??
                         throw new ParseException(Resource.ForConditionParseException);
 
-        if (!tokenReader.Check(CommaSymbol))
+        if (!tokenReader.CheckAndAdvance(CommaSymbol))
             MissingComma(condition);
 
         var iter = ParseStatement(ref tokenReader) ??
                    throw new ParseException(Resource.ForIterParseException);
 
-        if (!tokenReader.Check(CloseParenthesisSymbol))
+        if (!tokenReader.CheckAndAdvance(CloseParenthesisSymbol))
             MissingCloseParenthesis(@for.Kind);
 
         return new For(body, init, condition, iter);
@@ -118,23 +118,23 @@ public partial class Parser : IParser
 
     private IExpression? ParseWhile(ref TokenReader tokenReader)
     {
-        var @while = tokenReader.GetCurrent(WhileKeyword);
+        var @while = tokenReader.GetCurrentAndAdvance(WhileKeyword);
         if (@while.IsEmpty())
             return null;
 
-        if (!tokenReader.Check(OpenParenthesisSymbol))
+        if (!tokenReader.CheckAndAdvance(OpenParenthesisSymbol))
             MissingOpenParenthesis(@while.Kind);
 
         var body = ParseStatement(ref tokenReader) ??
                    throw new ParseException(Resource.WhileBodyParseException);
 
-        if (!tokenReader.Check(CommaSymbol))
+        if (!tokenReader.CheckAndAdvance(CommaSymbol))
             MissingComma(body);
 
         var condition = ParseConditionalOrOperator(ref tokenReader) ??
                         throw new ParseException(Resource.WhileConditionParseException);
 
-        if (!tokenReader.Check(CloseParenthesisSymbol))
+        if (!tokenReader.CheckAndAdvance(CloseParenthesisSymbol))
             MissingCloseParenthesis(@while.Kind);
 
         return new While(body, condition);
@@ -151,13 +151,13 @@ public partial class Parser : IParser
             if (variable is null)
                 return null;
 
-            var @operator = reader.GetCurrent(AssignOperator) ||
-                            reader.GetCurrent(MulAssignOperator) ||
-                            reader.GetCurrent(DivAssignOperator) ||
-                            reader.GetCurrent(AddAssignOperator) ||
-                            reader.GetCurrent(SubAssignOperator) ||
-                            reader.GetCurrent(LeftShiftAssignOperator) ||
-                            reader.GetCurrent(RightShiftAssignOperator);
+            var @operator = reader.GetCurrentAndAdvance(AssignOperator) ||
+                            reader.GetCurrentAndAdvance(MulAssignOperator) ||
+                            reader.GetCurrentAndAdvance(DivAssignOperator) ||
+                            reader.GetCurrentAndAdvance(AddAssignOperator) ||
+                            reader.GetCurrentAndAdvance(SubAssignOperator) ||
+                            reader.GetCurrentAndAdvance(LeftShiftAssignOperator) ||
+                            reader.GetCurrentAndAdvance(RightShiftAssignOperator);
 
             if (@operator.IsEmpty())
                 return null;
@@ -175,13 +175,13 @@ public partial class Parser : IParser
             if (condition is null)
                 return null;
 
-            if (!reader.Check(QuestionMarkSymbol))
+            if (!reader.CheckAndAdvance(QuestionMarkSymbol))
                 return condition;
 
             var then = parser.ParseExpression(ref reader) ??
                        throw new ParseException(Resource.TernaryThenParseException);
 
-            if (!reader.Check(ColonSymbol))
+            if (!reader.CheckAndAdvance(ColonSymbol))
                 throw new ParseException(Resource.TernaryColonParseException);
 
             var @else = parser.ParseExpression(ref reader) ??
@@ -198,7 +198,7 @@ public partial class Parser : IParser
 
         while (true)
         {
-            var @operator = tokenReader.Check(ConditionalOrOperator);
+            var @operator = tokenReader.CheckAndAdvance(ConditionalOrOperator);
             if (!@operator)
                 return left;
 
@@ -217,7 +217,7 @@ public partial class Parser : IParser
 
         while (true)
         {
-            var @operator = tokenReader.Check(ConditionalAndOperator);
+            var @operator = tokenReader.CheckAndAdvance(ConditionalAndOperator);
             if (!@operator)
                 return left;
 
@@ -236,10 +236,10 @@ public partial class Parser : IParser
 
         while (true)
         {
-            var token = tokenReader.GetCurrent(NAndKeyword) ||
-                        tokenReader.GetCurrent(NOrKeyword) ||
-                        tokenReader.GetCurrent(EqKeyword) ||
-                        tokenReader.GetCurrent(ImplKeyword);
+            var token = tokenReader.GetCurrentAndAdvance(NAndKeyword) ||
+                        tokenReader.GetCurrentAndAdvance(NOrKeyword) ||
+                        tokenReader.GetCurrentAndAdvance(EqKeyword) ||
+                        tokenReader.GetCurrentAndAdvance(ImplKeyword);
 
             if (token.IsEmpty())
                 return left;
@@ -259,8 +259,8 @@ public partial class Parser : IParser
 
         while (true)
         {
-            var token = tokenReader.Check(OrOperator) ||
-                        tokenReader.Check(OrKeyword);
+            var token = tokenReader.CheckAndAdvance(OrOperator) ||
+                        tokenReader.CheckAndAdvance(OrKeyword);
 
             if (!token)
                 return left;
@@ -280,7 +280,7 @@ public partial class Parser : IParser
 
         while (true)
         {
-            var token = tokenReader.Check(XOrKeyword);
+            var token = tokenReader.CheckAndAdvance(XOrKeyword);
             if (!token)
                 return left;
 
@@ -299,8 +299,8 @@ public partial class Parser : IParser
 
         while (true)
         {
-            var token = tokenReader.Check(AndOperator) ||
-                        tokenReader.Check(AndKeyword);
+            var token = tokenReader.CheckAndAdvance(AndOperator) ||
+                        tokenReader.CheckAndAdvance(AndKeyword);
 
             if (!token)
                 return left;
@@ -320,8 +320,8 @@ public partial class Parser : IParser
 
         while (true)
         {
-            var @operator = tokenReader.GetCurrent(EqualOperator) ||
-                            tokenReader.GetCurrent(NotEqualOperator);
+            var @operator = tokenReader.GetCurrentAndAdvance(EqualOperator) ||
+                            tokenReader.GetCurrentAndAdvance(NotEqualOperator);
 
             if (@operator.IsEmpty())
                 return left;
@@ -341,10 +341,10 @@ public partial class Parser : IParser
 
         while (true)
         {
-            var @operator = tokenReader.GetCurrent(LessThanOperator) ||
-                            tokenReader.GetCurrent(LessOrEqualOperator) ||
-                            tokenReader.GetCurrent(GreaterThanOperator) ||
-                            tokenReader.GetCurrent(GreaterOrEqualOperator);
+            var @operator = tokenReader.GetCurrentAndAdvance(LessThanOperator) ||
+                            tokenReader.GetCurrentAndAdvance(LessOrEqualOperator) ||
+                            tokenReader.GetCurrentAndAdvance(GreaterThanOperator) ||
+                            tokenReader.GetCurrentAndAdvance(GreaterOrEqualOperator);
 
             if (@operator.IsEmpty())
                 return left;
@@ -364,8 +364,8 @@ public partial class Parser : IParser
 
         while (true)
         {
-            var @operator = tokenReader.GetCurrent(LeftShiftOperator) ||
-                            tokenReader.GetCurrent(RightShiftOperator);
+            var @operator = tokenReader.GetCurrentAndAdvance(LeftShiftOperator) ||
+                            tokenReader.GetCurrentAndAdvance(RightShiftOperator);
 
             if (@operator.IsEmpty())
                 return left;
@@ -385,8 +385,8 @@ public partial class Parser : IParser
 
         while (true)
         {
-            var @operator = tokenReader.GetCurrent(PlusOperator) ||
-                            tokenReader.GetCurrent(MinusOperator);
+            var @operator = tokenReader.GetCurrentAndAdvance(PlusOperator) ||
+                            tokenReader.GetCurrentAndAdvance(MinusOperator);
 
             if (@operator.IsEmpty())
                 return left;
@@ -400,33 +400,75 @@ public partial class Parser : IParser
 
     private IExpression? ParseMulDivMod(ref TokenReader tokenReader)
     {
-        var left = ParseLeftUnary(ref tokenReader);
+        var left = ParseMulImplicit(ref tokenReader);
         if (left is null)
             return null;
 
         while (true)
         {
-            var token = tokenReader.GetCurrent(MultiplicationOperator) ||
-                        tokenReader.GetCurrent(DivisionOperator) ||
-                        tokenReader.GetCurrent(ModuloOperator) ||
-                        tokenReader.GetCurrent(ModKeyword);
+            var token = tokenReader.GetCurrentAndAdvance(MultiplicationOperator) ||
+                        tokenReader.GetCurrentAndAdvance(DivisionOperator) ||
+                        tokenReader.GetCurrentAndAdvance(ModuloOperator) ||
+                        tokenReader.GetCurrentAndAdvance(ModKeyword);
 
             if (token.IsEmpty())
                 return left;
 
-            var right = ParseLeftUnary(ref tokenReader) ??
+            var right = ParseMulImplicit(ref tokenReader) ??
                         MissingSecondOperand(token.Kind);
 
             left = CreateMulDivMod(token, left, right);
         }
     }
 
+    private IExpression? ParseMulImplicit(ref TokenReader tokenReader)
+        => ParseMulImplicitLeftUnary(ref tokenReader) ??
+           ParseLeftUnary(ref tokenReader);
+
+    private IExpression? ParseMulImplicitLeftUnary(ref TokenReader tokenReader)
+        => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
+        {
+            var minusOperator = reader.GetCurrentAndAdvance(MinusOperator);
+            var number = parser.ParseNumberAndUnit(ref reader);
+            if (number is null)
+                return null;
+
+            var rightUnary = parser.ParseMulImplicitExponentiation(ref reader) ??
+                             parser.ParseParenthesesExpression(ref reader) ??
+                             parser.ParseMatrix(ref reader) ??
+                             parser.ParseVector(ref reader);
+
+            if (rightUnary is null)
+                return null;
+
+            if (minusOperator.IsNotEmpty())
+                number = new UnaryMinus(number);
+
+            return new Mul(number, rightUnary);
+        });
+
+    private IExpression? ParseMulImplicitExponentiation(ref TokenReader tokenReader)
+    {
+        var left = ParseFunctionOrVariable(ref tokenReader);
+        if (left is null)
+            return null;
+
+        var @operator = tokenReader.GetCurrentAndAdvance(ExponentiationOperator);
+        if (@operator.IsEmpty())
+            return left;
+
+        var right = ParseExponentiation(ref tokenReader) ??
+                    throw new ParseException(Resource.ExponentParseException);
+
+        return new Pow(left, right);
+    }
+
     private IExpression? ParseLeftUnary(ref TokenReader tokenReader)
     {
-        var token = tokenReader.GetCurrent(NotOperator) ||
-                    tokenReader.GetCurrent(MinusOperator) ||
-                    tokenReader.GetCurrent(PlusOperator) ||
-                    tokenReader.GetCurrent(NotKeyword);
+        var token = tokenReader.GetCurrentAndAdvance(NotOperator) ||
+                    tokenReader.GetCurrentAndAdvance(MinusOperator) ||
+                    tokenReader.GetCurrentAndAdvance(PlusOperator) ||
+                    tokenReader.GetCurrentAndAdvance(NotKeyword);
 
         var operand = ParseExponentiation(ref tokenReader);
         if (operand is null || token.IsEmpty() || token.Is(PlusOperator))
@@ -444,7 +486,7 @@ public partial class Parser : IParser
         if (left is null)
             return null;
 
-        var @operator = tokenReader.GetCurrent(ExponentiationOperator);
+        var @operator = tokenReader.GetCurrentAndAdvance(ExponentiationOperator);
         if (@operator.IsEmpty())
             return left;
 
@@ -465,10 +507,10 @@ public partial class Parser : IParser
             if (variable is null)
                 return null;
 
-            if (reader.Check(IncrementOperator))
+            if (reader.CheckAndAdvance(IncrementOperator))
                 return new Inc(variable);
 
-            if (reader.Check(DecrementOperator))
+            if (reader.CheckAndAdvance(DecrementOperator))
                 return new Dec(variable);
 
             return null;
@@ -480,7 +522,7 @@ public partial class Parser : IParser
         if (operand is null)
             return null;
 
-        if (tokenReader.Check(FactorialOperator))
+        if (tokenReader.CheckAndAdvance(FactorialOperator))
             return new Fact(operand);
 
         while (true)
@@ -509,28 +551,28 @@ public partial class Parser : IParser
 
     private IExpression? ParseIf(ref TokenReader tokenReader)
     {
-        var @if = tokenReader.GetCurrent(IfKeyword);
+        var @if = tokenReader.GetCurrentAndAdvance(IfKeyword);
         if (@if.IsEmpty())
             return null;
 
-        if (!tokenReader.Check(OpenParenthesisSymbol))
+        if (!tokenReader.CheckAndAdvance(OpenParenthesisSymbol))
             MissingOpenParenthesis(@if.Kind);
 
         var condition = ParseConditionalOrOperator(ref tokenReader) ??
                         throw new ParseException(Resource.IfConditionParseException);
 
-        if (!tokenReader.Check(CommaSymbol))
+        if (!tokenReader.CheckAndAdvance(CommaSymbol))
             MissingComma(condition);
 
         var then = ParseExpression(ref tokenReader) ??
                    throw new ParseException(Resource.IfThenParseException);
 
         IExpression? @else = null;
-        if (tokenReader.Check(CommaSymbol))
+        if (tokenReader.CheckAndAdvance(CommaSymbol))
             @else = ParseExpression(ref tokenReader) ??
                     throw new ParseException(Resource.IfElseParseException);
 
-        if (!tokenReader.Check(CloseParenthesisSymbol))
+        if (!tokenReader.CheckAndAdvance(CloseParenthesisSymbol))
             MissingCloseParenthesis(@if.Kind);
 
         if (@else is not null)
@@ -541,23 +583,23 @@ public partial class Parser : IParser
 
     private IExpression? ParseAssignFunction(ref TokenReader tokenReader)
     {
-        var def = tokenReader.GetCurrent(AssignKeyword);
+        var def = tokenReader.GetCurrentAndAdvance(AssignKeyword);
         if (def.IsEmpty())
             return null;
 
-        if (!tokenReader.Check(OpenParenthesisSymbol))
+        if (!tokenReader.CheckAndAdvance(OpenParenthesisSymbol))
             MissingOpenParenthesis(def.Kind);
 
         var key = ParseVariable(ref tokenReader) ??
                   throw new ParseException(Resource.AssignKeyParseException);
 
-        if (!tokenReader.Check(CommaSymbol))
+        if (!tokenReader.CheckAndAdvance(CommaSymbol))
             MissingComma(key);
 
         var value = ParseExpression(ref tokenReader) ??
                     throw new ParseException(Resource.DefValueParseException);
 
-        if (!tokenReader.Check(CloseParenthesisSymbol))
+        if (!tokenReader.CheckAndAdvance(CloseParenthesisSymbol))
             MissingCloseParenthesis(def.Kind);
 
         return new Assign(key, value);
@@ -565,17 +607,17 @@ public partial class Parser : IParser
 
     private IExpression? ParseUnassignFunction(ref TokenReader tokenReader)
     {
-        var undef = tokenReader.GetCurrent(UnassignKeyword);
+        var undef = tokenReader.GetCurrentAndAdvance(UnassignKeyword);
         if (undef.IsEmpty())
             return null;
 
-        if (!tokenReader.Check(OpenParenthesisSymbol))
+        if (!tokenReader.CheckAndAdvance(OpenParenthesisSymbol))
             MissingOpenParenthesis(undef.Kind);
 
         var key = ParseVariable(ref tokenReader) ??
                   throw new ParseException(Resource.AssignKeyParseException);
 
-        if (!tokenReader.Check(CloseParenthesisSymbol))
+        if (!tokenReader.CheckAndAdvance(CloseParenthesisSymbol))
             MissingCloseParenthesis(undef.Kind);
 
         return new Unassign(key);
@@ -584,20 +626,20 @@ public partial class Parser : IParser
     private IExpression? ParseParenthesesExpression(ref TokenReader tokenReader)
         => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
         {
-            if (!reader.Check(OpenParenthesisSymbol))
+            if (!reader.CheckAndAdvance(OpenParenthesisSymbol))
                 return null;
 
             var exp = parser.ParseExpression(ref reader);
             if (exp is null)
                 return null;
 
-            if (reader.Check(CommaSymbol))
+            if (reader.CheckAndAdvance(CommaSymbol))
                 return null;
 
-            if (!reader.Check(CloseParenthesisSymbol))
+            if (!reader.CheckAndAdvance(CloseParenthesisSymbol))
                 throw new ParseException(string.Format(CultureInfo.InvariantCulture, Resource.CloseParenParseException, exp));
 
-            if (reader.Check(LambdaOperator))
+            if (reader.CheckAndAdvance(LambdaOperator))
                 return null;
 
             return exp;
@@ -605,18 +647,18 @@ public partial class Parser : IParser
 
     private IExpression? ParseLambda(ref TokenReader tokenReader)
     {
-        if (!tokenReader.Check(OpenParenthesisSymbol))
+        if (!tokenReader.CheckAndAdvance(OpenParenthesisSymbol))
             return null;
 
         var parameters = new HashSet<string>();
-        var parameter = tokenReader.GetCurrent(Id);
+        var parameter = tokenReader.GetCurrentAndAdvance(Id);
         if (parameter.IsNotEmpty())
         {
             parameters.Add(parameter.StringValue!);
 
-            while (tokenReader.Check(CommaSymbol))
+            while (tokenReader.CheckAndAdvance(CommaSymbol))
             {
-                parameter = tokenReader.GetCurrent(Id);
+                parameter = tokenReader.GetCurrentAndAdvance(Id);
                 if (parameter.IsEmpty())
                     return MissingExpression();
 
@@ -628,10 +670,10 @@ public partial class Parser : IParser
             }
         }
 
-        if (!tokenReader.Check(CloseParenthesisSymbol))
+        if (!tokenReader.CheckAndAdvance(CloseParenthesisSymbol))
             throw new ParseException(Resource.ParameterListCloseParseException);
 
-        if (!tokenReader.Check(LambdaOperator))
+        if (!tokenReader.CheckAndAdvance(LambdaOperator))
             throw new ParseException(Resource.MissingLambdaParseException);
 
         var body = ParseExpression(ref tokenReader) ??
@@ -644,7 +686,7 @@ public partial class Parser : IParser
 
     private IExpression? ParseFunctionOrVariable(ref TokenReader tokenReader)
     {
-        var function = tokenReader.GetCurrent(Id);
+        var function = tokenReader.GetCurrentAndAdvance(Id);
         if (function.IsEmpty())
             return null;
 
@@ -657,7 +699,7 @@ public partial class Parser : IParser
 
     private ImmutableArray<IExpression>? ParseParameterList(ref TokenReader tokenReader)
     {
-        if (!tokenReader.Check(OpenParenthesisSymbol))
+        if (!tokenReader.CheckAndAdvance(OpenParenthesisSymbol))
             return null;
 
         var parameterList = ImmutableArray.CreateBuilder<IExpression>(1);
@@ -667,7 +709,7 @@ public partial class Parser : IParser
         {
             parameterList.Add(exp);
 
-            while (tokenReader.Check(CommaSymbol))
+            while (tokenReader.CheckAndAdvance(CommaSymbol))
             {
                 exp = ParseExpression(ref tokenReader) ??
                       MissingExpression();
@@ -676,7 +718,7 @@ public partial class Parser : IParser
             }
         }
 
-        if (!tokenReader.Check(CloseParenthesisSymbol))
+        if (!tokenReader.CheckAndAdvance(CloseParenthesisSymbol))
             throw new ParseException(Resource.ParameterListCloseParseException);
 
         return parameterList.ToImmutableArray();
@@ -684,291 +726,170 @@ public partial class Parser : IParser
 
     private IExpression? ParseNumberAndUnit(ref TokenReader tokenReader)
     {
-        var unit = ParseTemperatureUnit(ref tokenReader) ??
-                   ParseAngleUnit(ref tokenReader) ??
-                   ParsePowerUnit(ref tokenReader) ??
-                   ParseMassUnit(ref tokenReader) ??
-                   ParseVolumeUnit(ref tokenReader) ??
-                   ParseAreaUnit(ref tokenReader) ??
-                   ParseLengthUnit(ref tokenReader) ??
-                   ParseTimeUnit(ref tokenReader);
-        if (unit is not null)
-            return unit;
+        var number = tokenReader.GetCurrentAndAdvance(TokenKind.Number);
+        if (number.IsEmpty())
+            return null;
 
-        var number = tokenReader.GetCurrent(TokenKind.Number);
-        if (number.IsNotEmpty())
-            return new Number(number.NumberValue);
+        var unitString = tokenReader.GetCurrentAndAdvance(TokenKind.String);
+        if (unitString.IsNotEmpty())
+        {
+            var unit = (ParseTemperatureUnit(number, unitString) ??
+                        ParseAngleUnit(number, unitString) ??
+                        ParsePowerUnit(number, unitString) ??
+                        ParseMassUnit(number, unitString) ??
+                        ParseVolumeUnit(number, unitString) ??
+                        ParseAreaUnit(number, unitString) ??
+                        ParseLengthUnit(number, unitString) ??
+                        ParseTimeUnit(number, unitString)) ??
+                       throw new ParseException(string.Format(CultureInfo.InvariantCulture, Resource.UnitIsNotSupportedException, unitString.StringValue));
+
+            return unit;
+        }
+
+        if (tokenReader.GetCurrentAndAdvance(DegreeSymbol))
+            return AngleValue.Degree(number.NumberValue).AsExpression();
+
+        return new Number(number.NumberValue);
+    }
+
+    private IExpression? ParseAngleUnit(Token number, Token unit)
+    {
+        var lowerUnit = unit.StringValue!.ToLowerInvariant();
+        if (AngleUnit.Degree.UnitNames.Contains(lowerUnit))
+            return AngleValue.Degree(number.NumberValue).AsExpression();
+
+        if (AngleUnit.Radian.UnitNames.Contains(lowerUnit))
+            return AngleValue.Radian(number.NumberValue).AsExpression();
+
+        if (AngleUnit.Gradian.UnitNames.Contains(lowerUnit))
+            return AngleValue.Gradian(number.NumberValue).AsExpression();
 
         return null;
     }
 
-    private IExpression? ParseAngleUnit(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
+    private IExpression? ParsePowerUnit(Token number, Token unit)
+        => unit.StringValue!.ToLowerInvariant() switch
         {
-            var number = reader.GetCurrent(TokenKind.Number);
-            if (number.IsEmpty())
-                return null;
+            "w" => PowerValue.Watt(number.NumberValue).AsExpression(),
+            "kw" => PowerValue.Kilowatt(number.NumberValue).AsExpression(),
+            "hp" => PowerValue.Horsepower(number.NumberValue).AsExpression(),
+            _ => null,
+        };
 
-            if (reader.Check(DegreeSymbol))
-                return AngleValue.Degree(number.NumberValue).AsExpression();
+    private IExpression? ParseTemperatureUnit(Token number, Token unit)
+    {
+        if (unit.StringValue!.Equals("°c", StringComparison.OrdinalIgnoreCase))
+            return TemperatureValue.Celsius(number.NumberValue).AsExpression();
 
-            var id = reader.GetCurrent(Id);
-            if (id.IsEmpty())
-                return null;
+        if (unit.StringValue!.Equals("°f", StringComparison.OrdinalIgnoreCase))
+            return TemperatureValue.Fahrenheit(number.NumberValue).AsExpression();
 
-            var lowerUnit = id.StringValue!.ToLowerInvariant();
-            if (AngleUnit.Degree.UnitNames.Contains(lowerUnit))
-                return AngleValue.Degree(number.NumberValue).AsExpression();
+        if (unit.StringValue!.Equals("k", StringComparison.OrdinalIgnoreCase))
+            return TemperatureValue.Kelvin(number.NumberValue).AsExpression();
 
-            if (AngleUnit.Radian.UnitNames.Contains(lowerUnit))
-                return AngleValue.Radian(number.NumberValue).AsExpression();
+        return null;
+    }
 
-            if (AngleUnit.Gradian.UnitNames.Contains(lowerUnit))
-                return AngleValue.Gradian(number.NumberValue).AsExpression();
-
-            return null;
-        });
-
-    private IExpression? ParsePowerUnit(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
+    private IExpression? ParseMassUnit(Token number, Token unit)
+        => unit.StringValue!.ToLowerInvariant() switch
         {
-            var number = reader.GetCurrent(TokenKind.Number);
-            if (number.IsEmpty())
-                return null;
+            "mg" => MassValue.Milligram(number.NumberValue).AsExpression(),
+            "g" => MassValue.Gram(number.NumberValue).AsExpression(),
+            "kg" => MassValue.Kilogram(number.NumberValue).AsExpression(),
+            "t" => MassValue.Tonne(number.NumberValue).AsExpression(),
+            "oz" => MassValue.Ounce(number.NumberValue).AsExpression(),
+            "lb" => MassValue.Pound(number.NumberValue).AsExpression(),
+            _ => null,
+        };
 
-            var id = reader.GetCurrent(Id);
-            if (id.IsEmpty())
-                return null;
-
-            // TODO: span?
-            return id.StringValue!.ToLowerInvariant() switch
-            {
-                "w" => PowerValue.Watt(number.NumberValue).AsExpression(),
-                "kw" => PowerValue.Kilowatt(number.NumberValue).AsExpression(),
-                "hp" => PowerValue.Horsepower(number.NumberValue).AsExpression(),
-                _ => null,
-            };
-        });
-
-    private IExpression? ParseTemperatureUnit(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
+    private IExpression? ParseLengthUnit(Token number, Token unit)
+        => unit.StringValue!.ToLowerInvariant() switch
         {
-            var number = reader.GetCurrent(TokenKind.Number);
-            if (number.IsEmpty())
-                return null;
+            "m" => LengthValue.Meter(number.NumberValue).AsExpression(),
+            "nm" => LengthValue.Nanometer(number.NumberValue).AsExpression(),
+            "µm" => LengthValue.Micrometer(number.NumberValue).AsExpression(),
+            "mm" => LengthValue.Millimeter(number.NumberValue).AsExpression(),
+            "cm" => LengthValue.Centimeter(number.NumberValue).AsExpression(),
+            "dm" => LengthValue.Decimeter(number.NumberValue).AsExpression(),
+            "km" => LengthValue.Kilometer(number.NumberValue).AsExpression(),
+            "in" => LengthValue.Inch(number.NumberValue).AsExpression(),
+            "ft" => LengthValue.Foot(number.NumberValue).AsExpression(),
+            "yd" => LengthValue.Yard(number.NumberValue).AsExpression(),
+            "mi" => LengthValue.Mile(number.NumberValue).AsExpression(),
+            "nmi" => LengthValue.NauticalMile(number.NumberValue).AsExpression(),
+            "ch" => LengthValue.Chain(number.NumberValue).AsExpression(),
+            "rd" => LengthValue.Rod(number.NumberValue).AsExpression(),
+            "au" => LengthValue.AstronomicalUnit(number.NumberValue).AsExpression(),
+            "ly" => LengthValue.LightYear(number.NumberValue).AsExpression(),
+            "pc" => LengthValue.Parsec(number.NumberValue).AsExpression(),
+            _ => null,
+        };
 
-            if (reader.Check(DegreeSymbol))
-            {
-                var id = reader.GetCurrent(Id);
-                if (id.IsNotEmpty())
-                {
-                    if (id.StringValue!.Equals("c", StringComparison.OrdinalIgnoreCase))
-                        return TemperatureValue.Celsius(number.NumberValue).AsExpression();
-                    if (id.StringValue!.Equals("f", StringComparison.OrdinalIgnoreCase))
-                        return TemperatureValue.Fahrenheit(number.NumberValue).AsExpression();
-                }
-            }
-            else
-            {
-                var id = reader.GetCurrent(Id);
-                if (id.IsNotEmpty() && id.StringValue!.Equals("k", StringComparison.OrdinalIgnoreCase))
-                    return TemperatureValue.Kelvin(number.NumberValue).AsExpression();
-            }
-
-            return null;
-        });
-
-    private IExpression? ParseMassUnit(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
+    private IExpression? ParseTimeUnit(Token number, Token unit)
+        => unit.StringValue!.ToLowerInvariant() switch
         {
-            var number = reader.GetCurrent(TokenKind.Number);
-            if (number.IsEmpty())
-                return null;
+            "s" => TimeValue.Second(number.NumberValue).AsExpression(),
+            "ns" => TimeValue.Nanosecond(number.NumberValue).AsExpression(),
+            "μs" => TimeValue.Microsecond(number.NumberValue).AsExpression(),
+            "ms" => TimeValue.Millisecond(number.NumberValue).AsExpression(),
+            "min" => TimeValue.Minute(number.NumberValue).AsExpression(),
+            "h" => TimeValue.Hour(number.NumberValue).AsExpression(),
+            "day" => TimeValue.Day(number.NumberValue).AsExpression(),
+            "week" => TimeValue.Week(number.NumberValue).AsExpression(),
+            "year" => TimeValue.Year(number.NumberValue).AsExpression(),
+            _ => null,
+        };
 
-            var id = reader.GetCurrent(Id);
-            if (id.IsEmpty())
-                return null;
-
-            return id.StringValue!.ToLowerInvariant() switch
-            {
-                "mg" => MassValue.Milligram(number.NumberValue).AsExpression(),
-                "g" => MassValue.Gram(number.NumberValue).AsExpression(),
-                "kg" => MassValue.Kilogram(number.NumberValue).AsExpression(),
-                "t" => MassValue.Tonne(number.NumberValue).AsExpression(),
-                "oz" => MassValue.Ounce(number.NumberValue).AsExpression(),
-                "lb" => MassValue.Pound(number.NumberValue).AsExpression(),
-                _ => null,
-            };
-        });
-
-    private IExpression? ParseLengthUnit(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
+    private IExpression? ParseAreaUnit(Token number, Token unit)
+        => unit.StringValue!.ToLowerInvariant() switch
         {
-            var number = reader.GetCurrent(TokenKind.Number);
-            if (number.IsEmpty())
-                return null;
+            "ha" => AreaValue.Hectare(number.NumberValue).AsExpression(),
+            "ac" => AreaValue.Acre(number.NumberValue).AsExpression(),
+            "m^2" => AreaValue.Meter(number.NumberValue).AsExpression(),
+            "mm^2" => AreaValue.Millimeter(number.NumberValue).AsExpression(),
+            "cm^2" => AreaValue.Centimeter(number.NumberValue).AsExpression(),
+            "km^2" => AreaValue.Kilometer(number.NumberValue).AsExpression(),
+            "in^2" => AreaValue.Inch(number.NumberValue).AsExpression(),
+            "yd^2" => AreaValue.Yard(number.NumberValue).AsExpression(),
+            "ft^2" => AreaValue.Foot(number.NumberValue).AsExpression(),
+            "mi^2" => AreaValue.Mile(number.NumberValue).AsExpression(),
+            _ => null,
+        };
 
-            var id = reader.GetCurrent(Id);
-            if (id.IsEmpty())
-                return null;
-
-            return id.StringValue!.ToLowerInvariant() switch
-            {
-                "m" => LengthValue.Meter(number.NumberValue).AsExpression(),
-                "nm" => LengthValue.Nanometer(number.NumberValue).AsExpression(),
-                "µm" => LengthValue.Micrometer(number.NumberValue).AsExpression(),
-                "mm" => LengthValue.Millimeter(number.NumberValue).AsExpression(),
-                "cm" => LengthValue.Centimeter(number.NumberValue).AsExpression(),
-                "dm" => LengthValue.Decimeter(number.NumberValue).AsExpression(),
-                "km" => LengthValue.Kilometer(number.NumberValue).AsExpression(),
-                "in" => LengthValue.Inch(number.NumberValue).AsExpression(),
-                "ft" => LengthValue.Foot(number.NumberValue).AsExpression(),
-                "yd" => LengthValue.Yard(number.NumberValue).AsExpression(),
-                "mi" => LengthValue.Mile(number.NumberValue).AsExpression(),
-                "nmi" => LengthValue.NauticalMile(number.NumberValue).AsExpression(),
-                "ch" => LengthValue.Chain(number.NumberValue).AsExpression(),
-                "rd" => LengthValue.Rod(number.NumberValue).AsExpression(),
-                "au" => LengthValue.AstronomicalUnit(number.NumberValue).AsExpression(),
-                "ly" => LengthValue.LightYear(number.NumberValue).AsExpression(),
-                "pc" => LengthValue.Parsec(number.NumberValue).AsExpression(),
-                _ => null,
-            };
-        });
-
-    private IExpression? ParseTimeUnit(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
+    private IExpression? ParseVolumeUnit(Token number, Token unit)
+        => unit.StringValue!.ToLowerInvariant() switch
         {
-            var number = reader.GetCurrent(TokenKind.Number);
-            if (number.IsEmpty())
-                return null;
-
-            var id = reader.GetCurrent(Id);
-            if (id.IsEmpty())
-                return null;
-
-            return id.StringValue!.ToLowerInvariant() switch
-            {
-                "s" => TimeValue.Second(number.NumberValue).AsExpression(),
-                "ns" => TimeValue.Nanosecond(number.NumberValue).AsExpression(),
-                "μs" => TimeValue.Microsecond(number.NumberValue).AsExpression(),
-                "ms" => TimeValue.Millisecond(number.NumberValue).AsExpression(),
-                "min" => TimeValue.Minute(number.NumberValue).AsExpression(),
-                "h" => TimeValue.Hour(number.NumberValue).AsExpression(),
-                "day" => TimeValue.Day(number.NumberValue).AsExpression(),
-                "week" => TimeValue.Week(number.NumberValue).AsExpression(),
-                "year" => TimeValue.Year(number.NumberValue).AsExpression(),
-                _ => null,
-            };
-        });
-
-    private IExpression? ParseAreaUnit(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
-        {
-            var number = reader.GetCurrent(TokenKind.Number);
-            if (number.IsEmpty())
-                return null;
-
-            var id = reader.GetCurrent(Id);
-            if (id.IsEmpty())
-                return null;
-
-            var areaValue = id.StringValue!.ToLowerInvariant() switch
-            {
-                "ha" => AreaValue.Hectare(number.NumberValue).AsExpression(),
-                "ac" => AreaValue.Acre(number.NumberValue).AsExpression(),
-                _ => null,
-            };
-            if (areaValue is not null)
-                return areaValue;
-
-            areaValue = id.StringValue!.ToLowerInvariant() switch
-            {
-                "m" => AreaValue.Meter(number.NumberValue).AsExpression(),
-                "mm" => AreaValue.Millimeter(number.NumberValue).AsExpression(),
-                "cm" => AreaValue.Centimeter(number.NumberValue).AsExpression(),
-                "km" => AreaValue.Kilometer(number.NumberValue).AsExpression(),
-                "in" => AreaValue.Inch(number.NumberValue).AsExpression(),
-                "yd" => AreaValue.Yard(number.NumberValue).AsExpression(),
-                "ft" => AreaValue.Foot(number.NumberValue).AsExpression(),
-                "mi" => AreaValue.Mile(number.NumberValue).AsExpression(),
-                _ => null,
-            };
-            if (areaValue is null || !reader.Check(ExponentiationOperator))
-                return null;
-
-            var exponent = reader.GetCurrent(TokenKind.Number);
-            if (exponent.IsEmpty())
-                throw new ParseException(Resource.ExponentParseException);
-
-            if (MathExtensions.Equals(exponent.NumberValue, 2))
-                return areaValue.Value.AsExpression();
-
-            return null;
-        });
-
-    private IExpression? ParseVolumeUnit(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
-        {
-            var number = reader.GetCurrent(TokenKind.Number);
-            if (number.IsEmpty())
-                return null;
-
-            var id = reader.GetCurrent(Id);
-            if (id.IsEmpty())
-                return null;
-
-            var volumeValue = id.StringValue!.ToLowerInvariant() switch
-            {
-                "gal" => VolumeValue.Gallon(number.NumberValue).AsExpression(),
-                "l" => VolumeValue.Liter(number.NumberValue).AsExpression(),
-                _ => null,
-            };
-            if (volumeValue is not null)
-                return volumeValue;
-
-            volumeValue = id.StringValue!.ToLowerInvariant() switch
-            {
-                "m" => VolumeValue.Meter(number.NumberValue).AsExpression(),
-                "cm" => VolumeValue.Centimeter(number.NumberValue).AsExpression(),
-                "in" => VolumeValue.Inch(number.NumberValue).AsExpression(),
-                "yd" => VolumeValue.Yard(number.NumberValue).AsExpression(),
-                "ft" => VolumeValue.Foot(number.NumberValue).AsExpression(),
-                _ => null,
-            };
-            if (volumeValue is null || !reader.Check(ExponentiationOperator))
-                return null;
-
-            var exponent = reader.GetCurrent(TokenKind.Number);
-            if (exponent.IsEmpty())
-                throw new ParseException(Resource.ExponentParseException);
-
-            if (MathExtensions.Equals(exponent.NumberValue, 3))
-                return volumeValue.Value.AsExpression();
-
-            return null;
-        });
+            "gal" => VolumeValue.Gallon(number.NumberValue).AsExpression(),
+            "l" => VolumeValue.Liter(number.NumberValue).AsExpression(),
+            "m^3" => VolumeValue.Meter(number.NumberValue).AsExpression(),
+            "cm^3" => VolumeValue.Centimeter(number.NumberValue).AsExpression(),
+            "in^3" => VolumeValue.Inch(number.NumberValue).AsExpression(),
+            "yd^3" => VolumeValue.Yard(number.NumberValue).AsExpression(),
+            "ft^3" => VolumeValue.Foot(number.NumberValue).AsExpression(),
+            _ => null,
+        };
 
     private IExpression? ParsePolarComplexNumber(ref TokenReader tokenReader)
         => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
         {
             // plus symbol can be ignored
-            reader.GetCurrent(PlusOperator);
+            reader.GetCurrentAndAdvance(PlusOperator);
 
-            var magnitude = reader.GetCurrent(TokenKind.Number);
+            var magnitude = reader.GetCurrentAndAdvance(TokenKind.Number);
             if (magnitude.IsEmpty())
                 return null;
 
-            if (!reader.Check(AngleSymbol))
+            if (!reader.CheckAndAdvance(AngleSymbol))
                 return null;
 
-            var phaseSign = reader.GetCurrent(PlusOperator) ||
-                            reader.GetCurrent(MinusOperator);
+            var phaseSign = reader.GetCurrentAndAdvance(PlusOperator) ||
+                            reader.GetCurrentAndAdvance(MinusOperator);
 
-            var phase = reader.GetCurrent(TokenKind.Number);
+            var phase = reader.GetCurrentAndAdvance(TokenKind.Number);
             if (phase.IsEmpty())
                 throw new ParseException(Resource.PhaseParseException);
 
-            if (!reader.Check(DegreeSymbol))
+            if (!reader.CheckAndAdvance(DegreeSymbol))
                 throw new ParseException(Resource.DegreeComplexNumberParseException);
 
             var magnitudeNumber = magnitude.NumberValue;
@@ -981,12 +902,12 @@ public partial class Parser : IParser
 
     private Variable? ParseVariable(ref TokenReader tokenReader)
     {
-        var variable = tokenReader.GetCurrent(Id);
+        var variable = tokenReader.GetCurrentAndAdvance(Id);
 
         // usually we use 'scope' in such cases, but here we can ignore it,
         // because parsing of variable is always 'scoped'
         // if it is not true anymore, then use 'scope'
-        if (variable.IsEmpty() || tokenReader.Check(OpenParenthesisSymbol))
+        if (variable.IsEmpty() || tokenReader.CheckAndAdvance(OpenParenthesisSymbol))
             return null;
 
         if (variable.StringValue == Variable.X.Name)
@@ -997,10 +918,10 @@ public partial class Parser : IParser
 
     private IExpression? ParseBoolean(ref TokenReader tokenReader)
     {
-        if (tokenReader.Check(TrueKeyword))
+        if (tokenReader.CheckAndAdvance(TrueKeyword))
             return Bool.True;
 
-        if (tokenReader.Check(FalseKeyword))
+        if (tokenReader.CheckAndAdvance(FalseKeyword))
             return Bool.False;
 
         return null;
@@ -1008,7 +929,7 @@ public partial class Parser : IParser
 
     private Vector? ParseVector(ref TokenReader tokenReader)
     {
-        if (!tokenReader.Check(OpenBraceSymbol))
+        if (!tokenReader.CheckAndAdvance(OpenBraceSymbol))
             return null;
 
         var exp = ParseExpression(ref tokenReader);
@@ -1018,7 +939,7 @@ public partial class Parser : IParser
         var parameterList = ImmutableArray.CreateBuilder<IExpression>(1);
         parameterList.Add(exp);
 
-        while (tokenReader.Check(CommaSymbol))
+        while (tokenReader.CheckAndAdvance(CommaSymbol))
         {
             exp = ParseExpression(ref tokenReader) ??
                   throw new ParseException(Resource.VectorCommaParseException);
@@ -1026,7 +947,7 @@ public partial class Parser : IParser
             parameterList.Add(exp);
         }
 
-        if (!tokenReader.Check(CloseBraceSymbol))
+        if (!tokenReader.CheckAndAdvance(CloseBraceSymbol))
             throw new ParseException(Resource.VectorCloseBraceParseException);
 
         return new Vector(parameterList.ToImmutableArray());
@@ -1035,7 +956,7 @@ public partial class Parser : IParser
     private IExpression? ParseMatrix(ref TokenReader tokenReader)
         => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
         {
-            if (!reader.Check(OpenBraceSymbol))
+            if (!reader.CheckAndAdvance(OpenBraceSymbol))
                 return null;
 
             var exp = parser.ParseVector(ref reader);
@@ -1045,7 +966,7 @@ public partial class Parser : IParser
             var vectors = ImmutableArray.CreateBuilder<Vector>(1);
             vectors.Add(exp);
 
-            while (reader.Check(CommaSymbol))
+            while (reader.CheckAndAdvance(CommaSymbol))
             {
                 exp = parser.ParseVector(ref reader) ??
                       throw new ParseException(Resource.MatrixCommaParseException);
@@ -1053,7 +974,7 @@ public partial class Parser : IParser
                 vectors.Add(exp);
             }
 
-            if (!reader.Check(CloseBraceSymbol))
+            if (!reader.CheckAndAdvance(CloseBraceSymbol))
                 throw new ParseException(Resource.MatrixCloseBraceParseException);
 
             return new Matrix(vectors.ToImmutableArray());
@@ -1061,7 +982,7 @@ public partial class Parser : IParser
 
     private IExpression? ParseString(ref TokenReader tokenReader)
     {
-        var str = tokenReader.GetCurrent(TokenKind.String);
+        var str = tokenReader.GetCurrentAndAdvance(TokenKind.String);
         if (str.IsEmpty())
             return null;
 

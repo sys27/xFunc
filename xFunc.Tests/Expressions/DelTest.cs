@@ -28,7 +28,7 @@ public class DelTest
                 new Pow(Variable.Y, Number.Two)
             ),
             new Pow(new Variable("z"), new Number(3))
-        );
+        ).ToLambdaExpression();
         var del = new Del(new Differentiator(), new Simplifier(), exp);
 
         var expected = new Vector(new IExpression[]
@@ -36,7 +36,7 @@ public class DelTest
             Number.Two,
             new Mul(Number.Two, Variable.Y),
             new Mul(new Number(3), new Pow(new Variable("z"), Number.Two))
-        });
+        }).ToLambda();
 
         Assert.Equal(expected, del.Execute());
     }
@@ -47,7 +47,7 @@ public class DelTest
         var exp = new Add(
             new Add(new Mul(Number.Two, new Variable("x1")), new Pow(new Variable("x2"), Number.Two)),
             new Pow(new Variable("x3"), new Number(3))
-        );
+        ).ToLambdaExpression();
         var del = new Del(new Differentiator(), new Simplifier(), exp);
 
         var expected = new Vector(new IExpression[]
@@ -55,9 +55,22 @@ public class DelTest
             Number.Two,
             new Mul(Number.Two, new Variable("x2")),
             new Mul(new Number(3), new Pow(new Variable("x3"), Number.Two))
-        });
+        }).ToLambda();
 
         Assert.Equal(expected, del.Execute());
+    }
+
+    [Fact]
+    public void ExecuteNonLambdaTest()
+    {
+        var differentiator = new Mock<IDifferentiator>();
+        var simplifier = new Mock<ISimplifier>();
+        var del = new Del(
+            differentiator.Object,
+            simplifier.Object,
+            Number.One);
+
+        Assert.Throws<ResultIsNotSupportedException>(() => del.Execute());
     }
 
     [Fact]

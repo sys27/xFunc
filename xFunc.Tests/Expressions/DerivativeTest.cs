@@ -24,15 +24,15 @@ public class DerivativeTest
     {
         var differentiator = new Mock<IDifferentiator>();
         differentiator
-            .Setup(d => d.Analyze(It.IsAny<Derivative>(), It.IsAny<DifferentiatorContext>()))
-            .Returns<Derivative, DifferentiatorContext>((exp, context) => exp.Expression);
+            .Setup(d => d.Analyze(It.IsAny<Variable>(), It.IsAny<DifferentiatorContext>()))
+            .Returns<Variable, DifferentiatorContext>((exp, _) => exp);
 
         var simplifier = new Mock<ISimplifier>();
 
         var deriv = new Derivative(
             differentiator.Object,
             simplifier.Object,
-            Variable.X,
+            Variable.X.ToLambdaExpression(),
             Variable.X,
             Number.Two);
 
@@ -40,27 +40,21 @@ public class DerivativeTest
     }
 
     [Fact]
-    public void ExecuteNullDerivTest()
+    public void ExecuteNonLambdaTest()
     {
-        Assert.Throws<ArgumentNullException>(() => new Derivative(null, null, Variable.X));
+        var differentiator = new Mock<IDifferentiator>();
+        var simplifier = new Mock<ISimplifier>();
+        var derivative = new Derivative(
+            differentiator.Object,
+            simplifier.Object,
+            Number.One);
+
+        Assert.Throws<ResultIsNotSupportedException>(() => derivative.Execute());
     }
 
     [Fact]
-    public void ExecuteNullSimpTest()
-    {
-        var differentiator = new Mock<IDifferentiator>();
-        differentiator
-            .Setup(d => d.Analyze(It.IsAny<Derivative>(), It.IsAny<DifferentiatorContext>()))
-            .Returns<Derivative, DifferentiatorContext>((e, context) => e.Expression);
-
-        var simplifier = new Mock<ISimplifier>();
-
-        var exp = new Derivative(differentiator.Object, simplifier.Object, Variable.X);
-
-        var result = exp.Execute();
-
-        Assert.Equal(result, result);
-    }
+    public void ExecuteNullDerivTest()
+        => Assert.Throws<ArgumentNullException>(() => new Derivative(null, null, Variable.X));
 
     [Fact]
     public void CloneTest()

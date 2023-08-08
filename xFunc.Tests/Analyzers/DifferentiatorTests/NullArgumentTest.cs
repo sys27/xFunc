@@ -179,7 +179,7 @@ public class NullArgumentTest : BaseTest
     public void CallExpressionContextNullArgument()
     {
         var exp = new CallExpression(
-            new Lambda(new[] { "x" }, Variable.X).AsExpression(),
+            Variable.X.ToLambdaExpression(Variable.X.Name),
             new IExpression[] { Variable.X }.ToImmutableArray());
 
         Assert.Throws<NotSupportedException>(() => exp.Analyze(differentiator, null));
@@ -188,7 +188,7 @@ public class NullArgumentTest : BaseTest
     [Fact]
     public void LambdaExpressionContextNullArgument()
     {
-        var exp = new Lambda(new[] { "x" }, Variable.X).AsExpression();
+        var exp = Variable.X.ToLambdaExpression(Variable.X.Name);
 
         Assert.Throws<NotSupportedException>(() => exp.Analyze(differentiator, null));
     }

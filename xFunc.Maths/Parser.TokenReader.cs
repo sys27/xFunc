@@ -89,7 +89,7 @@ public partial class Parser
 
         public Token GetCurrent() => Read();
 
-        public Token GetCurrent(TokenKind kind)
+        public Token GetCurrentAndAdvance(TokenKind kind)
         {
             var token = Read();
             if (token.Is(kind))
@@ -106,6 +106,13 @@ public partial class Parser
         {
             var token = Read();
             var result = token.Is(kind);
+
+            return result;
+        }
+
+        public bool CheckAndAdvance(TokenKind kind)
+        {
+            var result = Check(kind);
             if (result)
                 AdvanceToNextPosition();
 

@@ -8,8 +8,8 @@ namespace xFunc.Tests.ParserTests;
 public class ComplexNumberTests : BaseParserTests
 {
     [Theory]
-    [InlineData("3+2*i")]
-    [InlineData("+3+2*i")]
+    [InlineData("3+2i")]
+    [InlineData("+3+2i")]
     public void ComplexNumberTest(string exp)
     {
         var expected = new Add(
@@ -34,7 +34,7 @@ public class ComplexNumberTests : BaseParserTests
             )
         );
 
-        ParseTest("3-2*i", expected);
+        ParseTest("3-2i", expected);
     }
 
     [Fact]
@@ -48,7 +48,7 @@ public class ComplexNumberTests : BaseParserTests
             )
         );
 
-        ParseTest("-3-2*i", expected);
+        ParseTest("-3-2i", expected);
     }
 
     [Fact]
@@ -62,7 +62,7 @@ public class ComplexNumberTests : BaseParserTests
             )
         );
 
-        ParseTest("3+0*i", expected);
+        ParseTest("3+0i", expected);
     }
 
     [Fact]
@@ -76,7 +76,7 @@ public class ComplexNumberTests : BaseParserTests
             )
         );
 
-        ParseTest("0+2*i", expected);
+        ParseTest("0+2i", expected);
     }
 
     [Fact]
@@ -90,7 +90,7 @@ public class ComplexNumberTests : BaseParserTests
             )
         );
 
-        ParseTest("0-2*i", expected);
+        ParseTest("0-2i", expected);
     }
 
     [Fact]
@@ -107,7 +107,7 @@ public class ComplexNumberTests : BaseParserTests
             )
         );
 
-        ParseTest("x - (0+2*i)", expected);
+        ParseTest("x - (0+2i)", expected);
     }
 
     [Fact]
@@ -124,7 +124,7 @@ public class ComplexNumberTests : BaseParserTests
             )
         );
 
-        ParseTest("x + (3-2*i)", expected);
+        ParseTest("x + (3-2i)", expected);
     }
 
     [Theory]
@@ -166,8 +166,8 @@ public class ComplexNumberTests : BaseParserTests
         => ParseErrorTest(exp);
 
     [Theory]
-    [InlineData("im(3-2*i)")]
-    [InlineData("imaginary(3-2*i)")]
+    [InlineData("im(3-2i)")]
+    [InlineData("imaginary(3-2i)")]
     public void ImTest(string function)
     {
         var expected = new Im(
@@ -184,8 +184,8 @@ public class ComplexNumberTests : BaseParserTests
     }
 
     [Theory]
-    [InlineData("re(3-2*i)")]
-    [InlineData("real(3-2*i)")]
+    [InlineData("re(3-2i)")]
+    [InlineData("real(3-2i)")]
     public void ReTest(string function)
     {
         var expected = new Re(
@@ -214,7 +214,7 @@ public class ComplexNumberTests : BaseParserTests
             )
         );
 
-        ParseTest("phase(3-2*i)", expected);
+        ParseTest("phase(3-2i)", expected);
     }
 
     [Fact]
@@ -230,7 +230,7 @@ public class ComplexNumberTests : BaseParserTests
             )
         );
 
-        ParseTest("conjugate(3-2*i)", expected);
+        ParseTest("conjugate(3-2i)", expected);
     }
 
     [Fact]
@@ -246,7 +246,7 @@ public class ComplexNumberTests : BaseParserTests
             )
         );
 
-        ParseTest("reciprocal(3-2*i)", expected);
+        ParseTest("reciprocal(3-2i)", expected);
     }
 
     [Fact]

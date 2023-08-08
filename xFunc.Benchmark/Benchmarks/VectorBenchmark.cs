@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Immutable;
+using xFunc.Maths.Expressions.Statistical;
 
 namespace xFunc.Benchmark.Benchmarks;
 
@@ -30,6 +31,10 @@ public class VectorBenchmark
     }
 
     [Benchmark]
+    public object AbsVector()
+        => new Abs(vector1).Execute();
+
+    [Benchmark]
     public object AddVectors()
         => new Add(vector1, vector2).Execute();
 
@@ -44,4 +49,8 @@ public class VectorBenchmark
     [Benchmark]
     public object MulVectorByNumber()
         => new Mul(vector1, Number.Two).Execute();
+
+    [Benchmark]
+    public object SumVector()
+        => new Sum(new[] { vector1 }).Execute();
 }

@@ -46,7 +46,7 @@ public class DotProduct : BinaryExpression
 
         return (left, right) switch
         {
-            (Vector leftVector, Vector rightVector) => leftVector.Mul(rightVector, parameters),
+            (VectorValue leftVector, VectorValue rightVector) => leftVector * rightVector,
             _ => throw new ResultIsNotSupportedException(this, left, right),
         };
     }

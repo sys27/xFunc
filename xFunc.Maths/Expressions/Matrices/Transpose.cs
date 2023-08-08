@@ -42,8 +42,9 @@ public class Transpose : UnaryExpression
 
         return result switch
         {
-            Matrix matrix => matrix.Transpose(),
-            Vector vector => vector.Transpose(),
+            VectorValue vector => VectorValue.Transpose(vector),
+            MatrixValue matrix => MatrixValue.Transpose(matrix),
+
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }

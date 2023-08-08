@@ -32,8 +32,8 @@ public class Product : StatisticalExpression
     }
 
     /// <inheritdoc />
-    protected override double ExecuteInternal(double[] numbers)
-        => numbers.Aggregate(1.0, (acc, result) => acc * result);
+    protected override object ExecuteInternal(VectorValue vector)
+        => vector.Aggregate(NumberValue.One, (acc, result) => acc * result);
 
     /// <inheritdoc />
     protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)

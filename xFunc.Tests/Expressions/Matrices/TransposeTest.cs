@@ -15,10 +15,10 @@ public class TransposeTest : BaseExpressionTests
             new Vector(new[] { new Number(5), new Number(6) })
         });
 
-        var expected = new Matrix(new[]
+        var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new Vector(new[] { Number.One, new Number(3), new Number(5) }),
-            new Vector(new[] { Number.Two, new Number(4), new Number(6) })
+            new NumberValue[] { NumberValue.One, new NumberValue(3), new NumberValue(5) },
+            new NumberValue[] { NumberValue.Two, new NumberValue(4), new NumberValue(6) },
         });
         var exp = new Transpose(matrix);
 
@@ -30,10 +30,10 @@ public class TransposeTest : BaseExpressionTests
     {
         var vector = new Vector(new[] { Number.One, Number.Two });
 
-        var expected = new Matrix(new[]
+        var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new Vector(new[] { Number.One }),
-            new Vector(new[] { Number.Two })
+            new NumberValue[] { NumberValue.One },
+            new NumberValue[] { NumberValue.Two },
         });
         var exp = new Transpose(vector);
 

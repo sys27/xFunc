@@ -3,15 +3,16 @@
 
 using System.Collections;
 using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Numerics;
 
 namespace xFunc.Maths.Expressions.Parameters;
 
 /// <summary>
-/// Strongly typed dictionary that contains value of variables.
+/// Strongly typed collection that contains parameters.
 /// </summary>
-public class ExpressionParameters : IEnumerable<Parameter>, INotifyCollectionChanged
+public partial class ExpressionParameters : IEnumerable<Parameter>, INotifyCollectionChanged
 {
     private static readonly Dictionary<string, Parameter> Constants;
     private readonly Dictionary<string, Parameter> collection;
@@ -277,13 +278,34 @@ public class ExpressionParameters : IEnumerable<Parameter>, INotifyCollectionCha
 
     private Parameter GetParameterByKey(string key)
     {
-        if (collection.TryGetValue(key, out var param))
-            return param;
-
-        if (withConstants && Constants.TryGetValue(key, out param))
-            return param;
+        if (TryGetParameter(key, out var parameter))
+            return parameter;
 
         throw new KeyNotFoundException(string.Format(CultureInfo.InvariantCulture, Resource.VariableNotFoundExceptionError, key));
+    }
+
+    /// <summary>
+    /// Gets the value of parameter.
+    /// </summary>
+    /// <param name="key">The name of parameter.</param>
+    /// <param name="parameter">The parameter.</param>
+    /// <returns><c>true</c> if the current collection contains specified parameter, otherwise <c>false</c>.</returns>
+    public bool TryGetParameter(string key, [NotNullWhen(true)] out Parameter? parameter)
+    {
+        if (collection.TryGetValue(key, out var param))
+        {
+            parameter = param;
+            return true;
+        }
+
+        if (withConstants && Constants.TryGetValue(key, out param))
+        {
+            parameter = param;
+            return true;
+        }
+
+        parameter = null;
+        return false;
     }
 
     /// <summary>
@@ -318,15 +340,18 @@ public class ExpressionParameters : IEnumerable<Parameter>, INotifyCollectionCha
     /// <param name="param">The element.</param>
     /// <exception cref="ArgumentNullException"><paramref name="param"/> is null.</exception>
     /// <exception cref="ParameterIsReadOnlyException">The variable is read only.</exception>
-    public void Remove(Parameter param)
+    /// <returns><c>true</c> if item was successfully removed from the collection; otherwise, <c>false</c>.</returns>
+    public bool Remove(Parameter param)
     {
         if (param is null)
             throw new ArgumentNullException(nameof(param));
         if (param.Type == ParameterType.Constant)
             throw new ArgumentException(Resource.ConstError);
 
-        collection.Remove(param.Key);
+        var result = collection.Remove(param.Key);
         OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, param));
+
+        return result;
     }
 
     /// <summary>
@@ -376,45 +401,8 @@ public class ExpressionParameters : IEnumerable<Parameter>, INotifyCollectionCha
     /// <summary>
     /// Creates a new nested scope of parameters.
     /// </summary>
+    /// <param name="parameters">The instance of the base parameters collection.</param>
     /// <returns>The expression parameters.</returns>
-    public ExpressionParameters CreateScope()
-        => new ScopedExpressionParameters(withConstants, this);
-
-    private sealed class ScopedExpressionParameters : ExpressionParameters
-    {
-        private readonly ExpressionParameters parent;
-
-        public ScopedExpressionParameters(bool initConstants, ExpressionParameters parent)
-            : base(initConstants)
-            => this.parent = parent;
-
-        public override IEnumerator<Parameter> GetEnumerator()
-        {
-            foreach (var parameter in parent)
-                yield return parameter;
-
-            foreach (var (_, parameter) in collection)
-                yield return parameter;
-        }
-
-        public override ParameterValue this[string key]
-        {
-            get
-            {
-                if (collection.TryGetValue(key, out var parameter))
-                {
-                    return parameter.Value;
-                }
-
-                return parent[key];
-            }
-            set => base[key] = value;
-        }
-
-        public override bool Contains(Parameter param)
-            => base.Contains(param) || parent.Contains(param);
-
-        public override bool ContainsKey(string key)
-            => base.ContainsKey(key) || parent.ContainsKey(key);
-    }
+    public static ExpressionParameters CreateScoped(ExpressionParameters parameters)
+        => new ScopedExpressionParameters(parameters);
 }

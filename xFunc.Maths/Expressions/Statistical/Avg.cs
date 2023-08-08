@@ -31,8 +31,8 @@ public class Avg : StatisticalExpression
     }
 
     /// <inheritdoc />
-    protected override double ExecuteInternal(double[] numbers)
-        => numbers.Average();
+    protected override object ExecuteInternal(VectorValue vector)
+        => vector.Average();
 
     /// <inheritdoc />
     protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)

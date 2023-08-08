@@ -187,6 +187,15 @@ public class NumberValueTest
     }
 
     [Fact]
+    public void CompareToDifferentTypeTest()
+    {
+        var x = NumberValue.One;
+        var y = AngleValue.Degree(90);
+
+        Assert.Throws<ArgumentException>(() => x.CompareTo(y));
+    }
+
+    [Fact]
     public void RoundTest()
     {
         var x = new NumberValue(1.5);

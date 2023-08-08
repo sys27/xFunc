@@ -3,7 +3,6 @@
 
 using System.Collections.Immutable;
 using System.Numerics;
-using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Maths.Expressions;
 
@@ -54,7 +53,7 @@ public class Abs : UnaryExpression
             AreaValue area => AreaValue.Abs(area),
             VolumeValue volume => VolumeValue.Abs(volume),
             Complex complex => Complex.Abs(complex),
-            Vector vector => vector.Abs(parameters),
+            VectorValue vector => VectorValue.Abs(vector),
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }

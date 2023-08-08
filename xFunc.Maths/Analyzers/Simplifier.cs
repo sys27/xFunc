@@ -26,7 +26,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     private bool IsChanged(BinaryExpression old, IExpression left, IExpression right)
         => old.Left != left || old.Right != right;
 
-    private IExpression AnalyzeUnaryArgument([NotNull] UnaryExpression exp)
+    private IExpression AnalyzeUnaryArgument(UnaryExpression exp)
     {
         if (exp is null)
             ArgNull(ExceptionArgument.exp);
@@ -34,7 +34,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
         return exp.Argument.Analyze(this);
     }
 
-    private IExpression AnalyzeUnary([NotNull] UnaryExpression exp)
+    private IExpression AnalyzeUnary(UnaryExpression exp)
     {
         if (exp is null)
             ArgNull(ExceptionArgument.exp);
@@ -47,7 +47,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
         return exp;
     }
 
-    private (IExpression Left, IExpression Right) AnalyzeBinaryArgument([NotNull] BinaryExpression exp)
+    private (IExpression Left, IExpression Right) AnalyzeBinaryArgument(BinaryExpression exp)
     {
         if (exp is null)
             ArgNull(ExceptionArgument.exp);
@@ -58,7 +58,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
         return (left, right);
     }
 
-    private IExpression AnalyzeBinary([NotNull] BinaryExpression exp)
+    private IExpression AnalyzeBinary(BinaryExpression exp)
     {
         if (exp is null)
             ArgNull(ExceptionArgument.exp);
@@ -71,7 +71,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
         return exp;
     }
 
-    private IExpression AnalyzeTrigonometric<T>([NotNull] UnaryExpression exp)
+    private IExpression AnalyzeTrigonometric<T>(UnaryExpression exp)
         where T : UnaryExpression
     {
         if (exp is null)
@@ -87,7 +87,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
         return exp;
     }
 
-    private IExpression AnalyzeDiffParams([NotNull] DifferentParametersExpression exp)
+    private IExpression AnalyzeDiffParams(DifferentParametersExpression exp)
     {
         if (exp is null)
             ArgNull(ExceptionArgument.exp);
@@ -111,7 +111,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
         return exp;
     }
 
-    private IExpression AnalyzeVariableBinary([NotNull] VariableBinaryExpression exp)
+    private IExpression AnalyzeVariableBinary(VariableBinaryExpression exp)
     {
         if (exp is null)
             ArgNull(ExceptionArgument.exp);
@@ -511,7 +511,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
                 => Analyze(new Mul(mul, variable)),
 
             // 2 * (2 * x) -> (2 * x) * 2
-            (Number number, Mul(Number, Variable) mul)
+            (Number number, Mul(Number, not Number) mul)
                 => Analyze(new Mul(mul, number)),
 
             // mul by zero
@@ -996,7 +996,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
         var arguments = exp.Vectors;
         var isExpChanged = false;
 
-        for (var i = 0; i < exp.Rows; i++)
+        for (var i = 0; i < exp.Vectors.Length; i++)
         {
             var expression = exp[i].Analyze(this);
             if (IsChanged(exp[i], expression))
@@ -1090,7 +1090,20 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
 
     /// <inheritdoc />
     public override IExpression Analyze(Cos exp)
-        => AnalyzeTrigonometric<Arccos>(exp);
+    {
+        if (exp is null)
+            ArgNull(ExceptionArgument.exp);
+
+        var argument = AnalyzeUnaryArgument(exp);
+        if (argument is Arccos { Argument: Number inverseNumber } arccos &&
+            Arccos.Domain.IsInRange(inverseNumber.Value))
+            return arccos.Argument;
+
+        if (IsChanged(exp, argument))
+            return exp.Clone(argument);
+
+        return exp;
+    }
 
     /// <inheritdoc />
     public override IExpression Analyze(Cot exp)
@@ -1098,15 +1111,54 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
 
     /// <inheritdoc />
     public override IExpression Analyze(Csc exp)
-        => AnalyzeTrigonometric<Arccsc>(exp);
+    {
+        if (exp is null)
+            ArgNull(ExceptionArgument.exp);
+
+        var argument = AnalyzeUnaryArgument(exp);
+        if (argument is Arccsc { Argument: Number inverseNumber } arccsc &&
+            Arccsc.Domain.IsInRange(inverseNumber.Value))
+            return arccsc.Argument;
+
+        if (IsChanged(exp, argument))
+            return exp.Clone(argument);
+
+        return exp;
+    }
 
     /// <inheritdoc />
     public override IExpression Analyze(Sec exp)
-        => AnalyzeTrigonometric<Arcsec>(exp);
+    {
+        if (exp is null)
+            ArgNull(ExceptionArgument.exp);
+
+        var argument = AnalyzeUnaryArgument(exp);
+        if (argument is Arcsec { Argument: Number inverseNumber } arcsec &&
+            Arcsec.Domain.IsInRange(inverseNumber.Value))
+            return arcsec.Argument;
+
+        if (IsChanged(exp, argument))
+            return exp.Clone(argument);
+
+        return exp;
+    }
 
     /// <inheritdoc />
     public override IExpression Analyze(Sin exp)
-        => AnalyzeTrigonometric<Arcsin>(exp);
+    {
+        if (exp is null)
+            ArgNull(ExceptionArgument.exp);
+
+        var argument = AnalyzeUnaryArgument(exp);
+        if (argument is Arcsin { Argument: Number inverseNumber } arcsin &&
+            Arcsin.Domain.IsInRange(inverseNumber.Value))
+            return arcsin.Argument;
+
+        if (IsChanged(exp, argument))
+            return exp.Clone(argument);
+
+        return exp;
+    }
 
     /// <inheritdoc />
     public override IExpression Analyze(Tan exp)
@@ -1142,19 +1194,71 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
 
     /// <inheritdoc />
     public override IExpression Analyze(Cosh exp)
-        => AnalyzeTrigonometric<Arcosh>(exp);
+    {
+        if (exp is null)
+            ArgNull(ExceptionArgument.exp);
+
+        var argument = AnalyzeUnaryArgument(exp);
+        if (argument is Arcosh { Argument: Number inverseNumber } arcosh &&
+            Arcosh.Domain.IsInRange(inverseNumber.Value))
+            return arcosh.Argument;
+
+        if (IsChanged(exp, argument))
+            return exp.Clone(argument);
+
+        return exp;
+    }
 
     /// <inheritdoc />
     public override IExpression Analyze(Coth exp)
-        => AnalyzeTrigonometric<Arcoth>(exp);
+    {
+        if (exp is null)
+            ArgNull(ExceptionArgument.exp);
+
+        var argument = AnalyzeUnaryArgument(exp);
+        if (argument is Arcoth { Argument: Number inverseNumber } arcoth &&
+            Arcoth.Domain.IsInRange(inverseNumber.Value))
+            return arcoth.Argument;
+
+        if (IsChanged(exp, argument))
+            return exp.Clone(argument);
+
+        return exp;
+    }
 
     /// <inheritdoc />
     public override IExpression Analyze(Csch exp)
-        => AnalyzeTrigonometric<Arcsch>(exp);
+    {
+        if (exp is null)
+            ArgNull(ExceptionArgument.exp);
+
+        var argument = AnalyzeUnaryArgument(exp);
+        if (argument is Arcsch { Argument: Number inverseNumber } arcsch &&
+            Arcsch.Domain.IsInRange(inverseNumber.Value))
+            return arcsch.Argument;
+
+        if (IsChanged(exp, argument))
+            return exp.Clone(argument);
+
+        return exp;
+    }
 
     /// <inheritdoc />
     public override IExpression Analyze(Sech exp)
-        => AnalyzeTrigonometric<Arsech>(exp);
+    {
+        if (exp is null)
+            ArgNull(ExceptionArgument.exp);
+
+        var argument = AnalyzeUnaryArgument(exp);
+        if (argument is Arsech { Argument: Number inverseNumber } arsech &&
+            Arsech.Domain.IsInRange(inverseNumber.Value))
+            return arsech.Argument;
+
+        if (IsChanged(exp, argument))
+            return exp.Clone(argument);
+
+        return exp;
+    }
 
     /// <inheritdoc />
     public override IExpression Analyze(Sinh exp)
@@ -1162,7 +1266,20 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
 
     /// <inheritdoc />
     public override IExpression Analyze(Tanh exp)
-        => AnalyzeTrigonometric<Artanh>(exp);
+    {
+        if (exp is null)
+            ArgNull(ExceptionArgument.exp);
+
+        var argument = AnalyzeUnaryArgument(exp);
+        if (argument is Artanh { Argument: Number inverseNumber } artanh &&
+            Artanh.Domain.IsInRange(inverseNumber.Value))
+            return artanh.Argument;
+
+        if (IsChanged(exp, argument))
+            return exp.Clone(argument);
+
+        return exp;
+    }
 
     #endregion Hyperbolic
 

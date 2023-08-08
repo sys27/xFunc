@@ -71,7 +71,7 @@ public class UnassignTest
     [Fact]
     public void UndefFuncTest()
     {
-        var lambda = new Lambda(new[] { "x" }, Variable.X);
+        var lambda = Variable.X.ToLambda(Variable.X.Name);
         var parameters = new ExpressionParameters
         {
             { Variable.X.Name, lambda }

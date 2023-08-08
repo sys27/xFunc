@@ -64,5 +64,4 @@
   <ItemGroup>
     <ProjectReference Include="..\xFunc.Maths\xFunc.Maths.csproj" />
   </ItemGroup>
-
 </Project>

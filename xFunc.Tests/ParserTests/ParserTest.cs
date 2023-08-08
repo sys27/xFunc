@@ -126,9 +126,35 @@ public class ParserTest : BaseParserTests
         => ParseTest(function, new Fact(new Number(4)));
 
     [Theory]
+    [InlineData("factorial(x)")]
+    [InlineData("fact(x)")]
+    [InlineData("x!")]
+    public void FactorialVariableTest(string function)
+        => ParseTest(function, new Fact(Variable.X));
+
+    [Theory]
+    [InlineData("factorial(n - m)")]
+    [InlineData("fact(n - m)")]
+    [InlineData("(n - m)!")]
+    public void FactorialComplexTest(string function)
+        => ParseTest(function, new Fact(new Sub(new Variable("n"), new Variable("m"))));
+
+    [Fact]
+    public void FactorialLambdaTest()
+    {
+        var expected = new CallExpression(
+            new Lambda(
+                new[] { Variable.X.Name },
+                new Fact(new Sub(Variable.X, Number.One))
+            ).AsExpression(),
+            Number.Two);
+
+        ParseTest("((x) => (x - 1)!)(2)", expected);
+    }
+
+    [Theory]
     [InlineData("!")]
-    [InlineData("true!")]
-    public void FactWithoutNumberTest(string function)
+    public void FactIncorrectTest(string function)
         => ParseErrorTest(function);
 
     [Fact]
@@ -179,7 +205,7 @@ public class ParserTest : BaseParserTests
 
     [Fact]
     public void MatrixWithDiffVectorSizeTest()
-        => ParseErrorTest<MatrixIsInvalidException>("{{2, 3}, {4, 7, 2}}");
+        => ParseErrorTest<InvalidMatrixException>("{{2, 3}, {4, 7, 2}}");
 
     [Fact]
     public void TooMuchParamsTest()
@@ -516,7 +542,7 @@ public class ParserTest : BaseParserTests
             new Variable("pi")
         );
 
-        ParseTest("3 * pi", expected);
+        ParseTest("3pi", expected);
     }
 
     [Fact]
@@ -541,7 +567,7 @@ public class ParserTest : BaseParserTests
             new Vector(new IExpression[] { Number.One, Number.Two })
         );
 
-        ParseTest("2 * {1, 2}", expected);
+        ParseTest("2{1, 2}", expected);
     }
 
     [Fact]
@@ -556,7 +582,7 @@ public class ParserTest : BaseParserTests
             })
         );
 
-        ParseTest("2 * {{1, 2}, {3, 4}}", expected);
+        ParseTest("2{{1, 2}, {3, 4}}", expected);
     }
 
     [Fact]

@@ -124,10 +124,7 @@ public class MulTest : BaseExpressionTests
         });
         var exp = new Mul(vector, matrix);
 
-        var expected = new Matrix(new[]
-        {
-            new Vector(new IExpression[] { new Number(32) })
-        });
+        var expected = MatrixValue.Create(new NumberValue(32));
 
         Assert.Equal(expected, exp.Execute());
     }
@@ -149,20 +146,11 @@ public class MulTest : BaseExpressionTests
         });
         var exp = new Mul(matrix, vector);
 
-        var expected = new Matrix(new[]
+        var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new Vector(new IExpression[]
-            {
-                new Number(4), new Number(8), new Number(12)
-            }),
-            new Vector(new IExpression[]
-            {
-                new Number(5), new Number(10), new Number(15)
-            }),
-            new Vector(new IExpression[]
-            {
-                new Number(6), new Number(12), new Number(18)
-            })
+            new NumberValue[] { new NumberValue(4), new NumberValue(8), new NumberValue(12) },
+            new NumberValue[] { new NumberValue(5), new NumberValue(10), new NumberValue(15) },
+            new NumberValue[] { new NumberValue(6), new NumberValue(12), new NumberValue(18) },
         });
 
         Assert.Equal(expected, exp.Execute());
@@ -183,10 +171,7 @@ public class MulTest : BaseExpressionTests
         });
         var exp = new Mul(matrix1, matrix2);
 
-        var expected = new Matrix(new[]
-        {
-            new Vector(new IExpression[] { new Number(32) })
-        });
+        var expected = MatrixValue.Create(new NumberValue(32));
 
         Assert.Equal(expected, exp.Execute());
     }
@@ -203,12 +188,7 @@ public class MulTest : BaseExpressionTests
         });
         var exp = new Mul(number, vector);
 
-        var expected = new Vector(new IExpression[]
-        {
-            new Number(5),
-            new Number(10),
-            new Number(15)
-        });
+        var expected = VectorValue.Create(new NumberValue(5), new NumberValue(10), new NumberValue(15));
 
         Assert.Equal(expected, exp.Execute());
     }
@@ -224,10 +204,10 @@ public class MulTest : BaseExpressionTests
         var number = new Number(5);
         var exp = new Mul(matrix, number);
 
-        var expected = new Matrix(new[]
+        var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new Vector(new IExpression[] { new Number(5), new Number(10) }),
-            new Vector(new IExpression[] { new Number(15), new Number(20) })
+            new NumberValue[] { new NumberValue(5), new NumberValue(10) },
+            new NumberValue[] { new NumberValue(15), new NumberValue(20) },
         });
 
         Assert.Equal(expected, exp.Execute());
@@ -244,10 +224,10 @@ public class MulTest : BaseExpressionTests
         });
         var exp = new Mul(number, matrix);
 
-        var expected = new Matrix(new[]
+        var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new Vector(new IExpression[] { new Number(5), new Number(10) }),
-            new Vector(new IExpression[] { new Number(15), new Number(20) })
+            new NumberValue[] { new NumberValue(5), new NumberValue(10) },
+            new NumberValue[] { new NumberValue(15), new NumberValue(20) },
         });
 
         Assert.Equal(expected, exp.Execute());

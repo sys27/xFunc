@@ -84,7 +84,7 @@ public class CallExpression : IExpression, IEquatable<CallExpression>
         if (Function.Execute(parameters) is not Lambda function)
             throw new ResultIsNotSupportedException(this, Function);
 
-        var nestedScope = parameters.CreateScope();
+        var nestedScope = ExpressionParameters.CreateScoped(function.CapturedScope ?? parameters);
         var zip = function.Parameters.Zip(Parameters, (parameter, expression) => (parameter, expression));
         foreach (var (parameter, expression) in zip)
             nestedScope[parameter] = new ParameterValue(expression.Execute(nestedScope));

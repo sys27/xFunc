@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Numerics;
-using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Tests.Expressions.Parameters;
 
@@ -120,7 +119,7 @@ public class ParameterTest
     [Fact]
     public void VectorCtor()
     {
-        var value = new Vector(new IExpression[] { Number.One });
+        var value = VectorValue.Create(NumberValue.One);
         var x = new Parameter("x", value);
 
         Assert.Equal(value, x.Value);
@@ -129,10 +128,7 @@ public class ParameterTest
     [Fact]
     public void MatrixCtor()
     {
-        var value = new Matrix(new[]
-        {
-            new Vector(new IExpression[] { Number.One })
-        });
+        var value = MatrixValue.Create(NumberValue.One);
         var x = new Parameter("x", value);
 
         Assert.Equal(value, x.Value);
@@ -319,7 +315,7 @@ public class ParameterTest
     [Fact]
     public void SetNullValueTest()
     {
-        Assert.Throws<ArgumentNullException>(() => new Parameter("x", (Matrix)null));
+        Assert.Throws<ArgumentNullException>(() => new Parameter("x", (string)null));
     }
 
     [Fact]

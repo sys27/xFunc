@@ -83,7 +83,7 @@ _Note: The `Solve` method automatically simplifies expression, to control this b
 ```csharp
 var processor = new Processor();
 
-processor.Solve<ExpressionResult>("simplify((x) => arcsin(sin(x)))");
+processor.Solve<LambdaResult>("simplify((x) => arcsin(sin(x)))");
 // or
 processor.Simplify("arcsin(sin(x))");
 // will return simplified expression = "x"
@@ -96,7 +96,7 @@ _Detailed [simplification rules](https://github.com/sys27/xFunc/wiki/Simplificat
 ```csharp
 var processor = new Processor();
 
-processor.Solve<ExpressionResult>("deriv((x) => 2x)");
+processor.Solve<LambdaResult>("deriv((x) => 2x)");
 // or
 processor.Differentiate("2x");
 // will return "2"

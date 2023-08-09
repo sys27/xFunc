@@ -1,7 +1,7 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Moq;
+using NSubstitute;
 
 namespace xFunc.Tests.Expressions;
 
@@ -14,7 +14,7 @@ public class DelTest
     [Fact]
     public void SimplifierNull()
     {
-        var differentiator = new Mock<IDifferentiator>().Object;
+        var differentiator = Substitute.For<IDifferentiator>();
 
         Assert.Throws<ArgumentNullException>(() => new Del(differentiator, null, null));
     }
@@ -63,11 +63,11 @@ public class DelTest
     [Fact]
     public void ExecuteNonLambdaTest()
     {
-        var differentiator = new Mock<IDifferentiator>();
-        var simplifier = new Mock<ISimplifier>();
+        var differentiator = Substitute.For<IDifferentiator>();
+        var simplifier = Substitute.For<ISimplifier>();
         var del = new Del(
-            differentiator.Object,
-            simplifier.Object,
+            differentiator,
+            simplifier,
             Number.One);
 
         Assert.Throws<ResultIsNotSupportedException>(() => del.Execute());

@@ -1,5 +1,5 @@
 using System.Collections.Immutable;
-using Moq;
+using NSubstitute;
 
 namespace xFunc.Tests.ParserTests;
 
@@ -102,10 +102,10 @@ public class LambdaTests : BaseParserTests
     [Fact]
     public void ParseFunctionWithCallExpression()
     {
-        var simplifier = new Mock<ISimplifier>();
+        var simplifier = Substitute.For<ISimplifier>();
         var expected = new CallExpression(
             new Simplify(
-                simplifier.Object,
+                simplifier,
                 new Mul(Variable.X, Variable.X).ToLambdaExpression(Variable.X.Name)),
             Number.One);
 

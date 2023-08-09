@@ -143,4 +143,4 @@ xFunc is released under MIT License.
 [Coverlet](https://github.com/coverlet-coverage/coverlet)  
 [ReportGenerator](https://github.com/danielpalme/ReportGenerator)  
 [xUnit](https://github.com/xunit/xunit)  
-[Moq](https://github.com/moq/moq4)
+[NSubstitute](https://github.com/nsubstitute/NSubstitute)

@@ -1,7 +1,7 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Moq;
+using NSubstitute;
 
 namespace xFunc.Tests.Expressions;
 
@@ -14,7 +14,7 @@ public class DerivativeTest
     [Fact]
     public void SimplifierNull()
     {
-        var differentiator = new Mock<IDifferentiator>().Object;
+        var differentiator = Substitute.For<IDifferentiator>();
 
         Assert.Throws<ArgumentNullException>(() => new Derivative(differentiator, null, Variable.X));
     }
@@ -22,16 +22,16 @@ public class DerivativeTest
     [Fact]
     public void ExecutePointTest()
     {
-        var differentiator = new Mock<IDifferentiator>();
+        var differentiator = Substitute.For<IDifferentiator>();
         differentiator
-            .Setup(d => d.Analyze(It.IsAny<Variable>(), It.IsAny<DifferentiatorContext>()))
-            .Returns<Variable, DifferentiatorContext>((exp, _) => exp);
+            .Analyze(Arg.Any<Variable>(), Arg.Any<DifferentiatorContext>())
+            .Returns(info => info.Arg<Variable>());
 
-        var simplifier = new Mock<ISimplifier>();
+        var simplifier = Substitute.For<ISimplifier>();
 
         var deriv = new Derivative(
-            differentiator.Object,
-            simplifier.Object,
+            differentiator,
+            simplifier,
             Variable.X.ToLambdaExpression(),
             Variable.X,
             Number.Two);
@@ -42,11 +42,11 @@ public class DerivativeTest
     [Fact]
     public void ExecuteNonLambdaTest()
     {
-        var differentiator = new Mock<IDifferentiator>();
-        var simplifier = new Mock<ISimplifier>();
+        var differentiator = Substitute.For<IDifferentiator>();
+        var simplifier = Substitute.For<ISimplifier>();
         var derivative = new Derivative(
-            differentiator.Object,
-            simplifier.Object,
+            differentiator,
+            simplifier,
             Number.One);
 
         Assert.Throws<ResultIsNotSupportedException>(() => derivative.Execute());

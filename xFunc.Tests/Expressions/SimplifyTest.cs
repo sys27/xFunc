@@ -1,7 +1,7 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Moq;
+using NSubstitute;
 
 namespace xFunc.Tests.Expressions;
 
@@ -14,13 +14,11 @@ public class SimplifyTest
     [Fact]
     public void ExecuteTest()
     {
-        var mock = new Mock<ISimplifier>();
-        mock
-            .Setup(x => x.Analyze(It.IsAny<Sin>()))
-            .Returns<IExpression>(x => x);
+        var simplifier = Substitute.For<ISimplifier>();
+        simplifier.Analyze(Arg.Any<Sin>()).Returns(info => info.Arg<Sin>());
 
         var lambda = new Sin(Variable.X).ToLambda(Variable.X.Name);
-        var exp = new Simplify(mock.Object, lambda.AsExpression());
+        var exp = new Simplify(simplifier, lambda.AsExpression());
 
         Assert.Equal(lambda, exp.Execute());
     }
@@ -28,8 +26,8 @@ public class SimplifyTest
     [Fact]
     public void ExecuteNonLambdaTest()
     {
-        var simplifier = new Mock<ISimplifier>();
-        var simplify = new Simplify(simplifier.Object, Number.One);
+        var simplifier = Substitute.For<ISimplifier>();
+        var simplify = new Simplify(simplifier, Number.One);
 
         Assert.Throws<ResultIsNotSupportedException>(() => simplify.Execute());
     }

@@ -13,7 +13,7 @@
     <Description>xFunc.Maths is a simple and easy to use library that allows you to build mathematical expressions.</Description>
     <PackageProjectUrl>https://github.com/sys27/xFunc</PackageProjectUrl>
     <PackageIcon>xFunc.png</PackageIcon>
-    <PackageTags>Math Expression Expressions Parser MathParser Differentiation Simplification</PackageTags>
+    <PackageTags>math formula parse parser math-parser logic simplification derivative differentiation truth-table condition complex-numbers trigonometry unit-converter</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
     <AssemblyVersion>4.3.0</AssemblyVersion>
     <FileVersion>4.3.0</FileVersion>

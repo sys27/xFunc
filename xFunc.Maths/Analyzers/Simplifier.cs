@@ -3,7 +3,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
-using static xFunc.Maths.ThrowHelpers;
 
 namespace xFunc.Maths.Analyzers;
 
@@ -29,7 +28,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     private IExpression AnalyzeUnaryArgument(UnaryExpression exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         return exp.Argument.Analyze(this);
     }
@@ -37,7 +36,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     private IExpression AnalyzeUnary(UnaryExpression exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var argument = AnalyzeUnaryArgument(exp);
 
@@ -50,7 +49,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     private (IExpression Left, IExpression Right) AnalyzeBinaryArgument(BinaryExpression exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var left = exp.Left.Analyze(this);
         var right = exp.Right.Analyze(this);
@@ -61,7 +60,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     private IExpression AnalyzeBinary(BinaryExpression exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var (left, right) = AnalyzeBinaryArgument(exp);
 
@@ -75,7 +74,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
         where T : UnaryExpression
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var argument = AnalyzeUnaryArgument(exp);
         if (argument is T trigonometric)
@@ -90,7 +89,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     private IExpression AnalyzeDiffParams(DifferentParametersExpression exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var arguments = exp.Arguments;
         var isExpChanged = false;
@@ -114,7 +113,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     private IExpression AnalyzeVariableBinary(VariableBinaryExpression exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var value = exp.Value.Analyze(this);
 
@@ -129,7 +128,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     public override IExpression Analyze(IExpression exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         return exp;
     }
@@ -299,7 +298,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     public override IExpression Analyze(Assign exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var value = exp.Value.Analyze(this);
         if (IsChanged(exp.Value, value))
@@ -941,7 +940,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     public override IExpression Analyze(CallExpression exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var function = exp.Function.Analyze(this);
         var isChanged = IsChanged(exp.Function, function);
@@ -968,7 +967,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     public override IExpression Analyze(LambdaExpression exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var body = exp.Lambda.Body.Analyze(this);
         if (IsChanged(exp.Lambda.Body, body))
@@ -991,7 +990,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     public override IExpression Analyze(Matrix exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var arguments = exp.Vectors;
         var isExpChanged = false;
@@ -1092,7 +1091,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     public override IExpression Analyze(Cos exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var argument = AnalyzeUnaryArgument(exp);
         if (argument is Arccos { Argument: Number inverseNumber } arccos &&
@@ -1113,7 +1112,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     public override IExpression Analyze(Csc exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var argument = AnalyzeUnaryArgument(exp);
         if (argument is Arccsc { Argument: Number inverseNumber } arccsc &&
@@ -1130,7 +1129,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     public override IExpression Analyze(Sec exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var argument = AnalyzeUnaryArgument(exp);
         if (argument is Arcsec { Argument: Number inverseNumber } arcsec &&
@@ -1147,7 +1146,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     public override IExpression Analyze(Sin exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var argument = AnalyzeUnaryArgument(exp);
         if (argument is Arcsin { Argument: Number inverseNumber } arcsin &&
@@ -1196,7 +1195,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     public override IExpression Analyze(Cosh exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var argument = AnalyzeUnaryArgument(exp);
         if (argument is Arcosh { Argument: Number inverseNumber } arcosh &&
@@ -1213,7 +1212,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     public override IExpression Analyze(Coth exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var argument = AnalyzeUnaryArgument(exp);
         if (argument is Arcoth { Argument: Number inverseNumber } arcoth &&
@@ -1230,7 +1229,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     public override IExpression Analyze(Csch exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var argument = AnalyzeUnaryArgument(exp);
         if (argument is Arcsch { Argument: Number inverseNumber } arcsch &&
@@ -1247,7 +1246,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     public override IExpression Analyze(Sech exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var argument = AnalyzeUnaryArgument(exp);
         if (argument is Arsech { Argument: Number inverseNumber } arsech &&
@@ -1268,7 +1267,7 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
     public override IExpression Analyze(Tanh exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var argument = AnalyzeUnaryArgument(exp);
         if (argument is Artanh { Argument: Number inverseNumber } artanh &&

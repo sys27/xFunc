@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Immutable;
-using static xFunc.Maths.ThrowHelpers;
 
 namespace xFunc.Maths.Expressions;
 
@@ -72,13 +71,8 @@ public class Derivative : DifferentParametersExpression
         ImmutableArray<IExpression> args)
         : base(args)
     {
-        if (differentiator is null)
-            ArgNull(ExceptionArgument.differentiator);
-        if (simplifier is null)
-            ArgNull(ExceptionArgument.simplifier);
-
-        Differentiator = differentiator;
-        Simplifier = simplifier;
+        Differentiator = differentiator ?? throw new ArgumentNullException(nameof(differentiator));
+        Simplifier = simplifier ?? throw new ArgumentNullException(nameof(simplifier));
     }
 
     /// <inheritdoc />

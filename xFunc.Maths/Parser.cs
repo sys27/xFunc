@@ -2,9 +2,9 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Numerics;
-using static xFunc.Maths.ThrowHelpers;
 using static xFunc.Maths.Tokenization.TokenKind;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
@@ -35,16 +35,9 @@ public partial class Parser : IParser
     /// <param name="converter">The converter.</param>
     public Parser(IDifferentiator differentiator, ISimplifier simplifier, IConverter converter)
     {
-        if (differentiator is null)
-            ArgNull(ExceptionArgument.differentiator);
-        if (simplifier is null)
-            ArgNull(ExceptionArgument.simplifier);
-        if (converter is null)
-            ArgNull(ExceptionArgument.converter);
-
-        this.differentiator = differentiator;
-        this.simplifier = simplifier;
-        this.converter = converter;
+        this.differentiator = differentiator ?? throw new ArgumentNullException(nameof(differentiator));
+        this.simplifier = simplifier ?? throw new ArgumentNullException(nameof(simplifier));
+        this.converter = converter ?? throw new ArgumentNullException(nameof(converter));
     }
 
     /// <summary>
@@ -988,4 +981,24 @@ public partial class Parser : IParser
 
         return new StringExpression(str.StringValue!);
     }
+
+    [DoesNotReturn]
+    private static IExpression MissingSecondOperand(TokenKind tokenKind)
+        => throw new ParseException(string.Format(CultureInfo.InvariantCulture, Resource.SecondOperandParseException, tokenKind));
+
+    [DoesNotReturn]
+    private static void MissingOpenParenthesis(TokenKind tokenKind)
+        => throw new ParseException(string.Format(CultureInfo.InvariantCulture, Resource.FunctionOpenParenthesisParseException, tokenKind));
+
+    [DoesNotReturn]
+    private static void MissingCloseParenthesis(TokenKind tokenKind)
+        => throw new ParseException(string.Format(CultureInfo.InvariantCulture, Resource.FunctionCloseParenthesisParseException, tokenKind));
+
+    [DoesNotReturn]
+    private static void MissingComma(IExpression previousExpression)
+        => throw new ParseException(string.Format(CultureInfo.InvariantCulture, Resource.CommaParseException, previousExpression));
+
+    [DoesNotReturn]
+    private static IExpression MissingExpression()
+        => throw new ParseException(string.Format(CultureInfo.InvariantCulture, Resource.MissingExpParseException));
 }

@@ -45,7 +45,7 @@ internal ref partial struct Lexer
                          CreateStringToken();
 
             if (!result)
-                ThrowHelpers.NotSupportedSymbol(function[0]);
+                throw new TokenizeException(function[0]);
 
             return true;
         }

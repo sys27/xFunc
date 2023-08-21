@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics.CodeAnalysis;
-using static xFunc.Maths.ThrowHelpers;
 
 namespace xFunc.Maths.Analyzers;
 
@@ -16,9 +15,9 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     private void ValidateArguments([NotNull] IExpression? exp, [NotNull] DifferentiatorContext? context)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
         if (context is null)
-            ArgNull(ExceptionArgument.context);
+            throw new ArgumentNullException(nameof(context));
     }
 
     #region Standard

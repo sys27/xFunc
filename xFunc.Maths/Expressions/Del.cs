@@ -4,7 +4,6 @@
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
-using static xFunc.Maths.ThrowHelpers;
 
 namespace xFunc.Maths.Expressions;
 
@@ -26,13 +25,8 @@ public class Del : UnaryExpression
     public Del(IDifferentiator differentiator, ISimplifier simplifier, IExpression expression)
         : base(expression)
     {
-        if (differentiator is null)
-            ArgNull(ExceptionArgument.differentiator);
-        if (simplifier is null)
-            ArgNull(ExceptionArgument.simplifier);
-
-        this.differentiator = differentiator;
-        this.simplifier = simplifier;
+        this.differentiator = differentiator ?? throw new ArgumentNullException(nameof(differentiator));
+        this.simplifier = simplifier ?? throw new ArgumentNullException(nameof(simplifier));
     }
 
     /// <summary>

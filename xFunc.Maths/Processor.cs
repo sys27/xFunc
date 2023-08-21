@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Numerics;
-using static xFunc.Maths.ThrowHelpers;
 
 namespace xFunc.Maths;
 
@@ -63,21 +62,12 @@ public class Processor
         ITypeAnalyzer typeAnalyzer,
         ExpressionParameters parameters)
     {
-        if (simplifier is null)
-            ArgNull(ExceptionArgument.simplifier);
-        if (differentiator is null)
-            ArgNull(ExceptionArgument.differentiator);
-        if (converter is null)
-            ArgNull(ExceptionArgument.converter);
-        if (typeAnalyzer is null)
-            ArgNull(ExceptionArgument.typeAnalyzer);
-
         parser = new Parser();
 
-        this.simplifier = simplifier;
-        this.differentiator = differentiator;
-        this.converter = converter;
-        this.typeAnalyzer = typeAnalyzer;
+        this.simplifier = simplifier ?? throw new ArgumentNullException(nameof(simplifier));
+        this.differentiator = differentiator ?? throw new ArgumentNullException(nameof(differentiator));
+        this.converter = converter ?? throw new ArgumentNullException(nameof(converter));
+        this.typeAnalyzer = typeAnalyzer ?? throw new ArgumentNullException(nameof(typeAnalyzer));
 
         Parameters = parameters;
     }

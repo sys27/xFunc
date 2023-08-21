@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Immutable;
-using static xFunc.Maths.ThrowHelpers;
 
 namespace xFunc.Maths.Expressions;
 
@@ -20,12 +19,8 @@ public class Simplify : UnaryExpression
     /// <param name="expression">The argument of function.</param>
     public Simplify(ISimplifier simplifier, IExpression expression)
         : base(expression)
-    {
-        if (simplifier is null)
-            ArgNull(ExceptionArgument.simplifier);
-
-        this.simplifier = simplifier;
-    }
+        => this.simplifier = simplifier ??
+                             throw new ArgumentNullException(nameof(simplifier));
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Simplify"/> class.

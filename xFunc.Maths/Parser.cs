@@ -13,6 +13,12 @@ namespace xFunc.Maths;
 /// <summary>
 /// The parser for mathematical expressions.
 /// </summary>
+/// <example>
+///   <code>
+///     var parser = new Parser();
+///     var exp = parser.Parse("sin(x)");
+///   </code>
+/// </example>
 public partial class Parser : IParser
 {
     private readonly IDifferentiator differentiator;
@@ -20,8 +26,11 @@ public partial class Parser : IParser
     private readonly IConverter converter;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Parser"/> class with default implementations of <see cref="IDifferentiator"/> and <see cref="ISimplifier" />.
+    /// Initializes a new instance of the <see cref="Parser"/> class with default implementations of <see cref="IDifferentiator"/>, <see cref="ISimplifier" /> and <see cref="IConverter"/>.
     /// </summary>
+    /// <seealso cref="Differentiator"/>
+    /// <seealso cref="Simplifier"/>
+    /// <seealso cref="Converter"/>
     public Parser()
         : this(new Differentiator(), new Simplifier(), new Converter())
     {
@@ -32,7 +41,7 @@ public partial class Parser : IParser
     /// </summary>
     /// <param name="differentiator">The differentiator.</param>
     /// <param name="simplifier">The simplifier.</param>
-    /// <param name="converter">The converter.</param>
+    /// <param name="converter">The unit converter.</param>
     public Parser(IDifferentiator differentiator, ISimplifier simplifier, IConverter converter)
     {
         this.differentiator = differentiator ?? throw new ArgumentNullException(nameof(differentiator));
@@ -40,11 +49,7 @@ public partial class Parser : IParser
         this.converter = converter ?? throw new ArgumentNullException(nameof(converter));
     }
 
-    /// <summary>
-    /// Parses the specified function.
-    /// </summary>
-    /// <param name="expression">The string that contains the functions and operators.</param>
-    /// <returns>The parsed expression.</returns>
+    /// <inheritdoc />
     public IExpression Parse(string expression)
     {
         if (string.IsNullOrWhiteSpace(expression))

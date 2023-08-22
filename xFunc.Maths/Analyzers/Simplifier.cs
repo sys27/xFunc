@@ -9,8 +9,6 @@ namespace xFunc.Maths.Analyzers;
 /// <summary>
 /// The simplifier of expressions.
 /// </summary>
-/// <seealso cref="IAnalyzer{TResult}" />
-/// <seealso cref="ISimplifier" />
 public class Simplifier : Analyzer<IExpression>, ISimplifier
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

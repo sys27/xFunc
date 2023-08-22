@@ -10,7 +10,6 @@ namespace xFunc.Maths.Analyzers.Formatters;
 /// <summary>
 /// Converts expressions into string.
 /// </summary>
-/// <seealso cref="IFormatter" />
 public class CommonFormatter : IFormatter
 {
     /// <summary>

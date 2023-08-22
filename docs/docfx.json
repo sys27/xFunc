@@ -1,0 +1,71 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [
+            "**/xFunc.Maths/xFunc.Maths.csproj"
+          ],
+          "exclude": [
+            "**/bin/**",
+            "**/obj/**"
+          ],
+          "src": "../"
+        }
+      ],
+      "dest": "api",
+      "includePrivateMembers": false,
+      "disableGitFeatures": false,
+      "disableDefaultFilter": false,
+      "noRestore": true,
+      "namespaceLayout": "nested",
+      "memberLayout": "samePage",
+      "EnumSortOrder": "alphabetic",
+      "allowCompilationErrors": false
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "api/**.yml",
+          "api/index.md"
+        ]
+      },
+      {
+        "files": [
+          "articles/**.md",
+          "articles/**/toc.yml",
+          "toc.yml",
+          "*.md"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ]
+      }
+    ],
+    "output": "_site",
+    "globalMetadataFiles": [],
+    "fileMetadataFiles": [],
+    "template": [
+      "default",
+      "modern"
+    ],
+    "postProcessors": [
+      "ExtractSearchIndex"
+    ],
+    "keepFileLink": false,
+    "disableGitFeatures": false,
+    "globalMetadata": {
+      "_appTitle": "xFunc Docs",
+      "_appFooter": "Copyright © Dmytro Kyshchenko",
+      "_appLogoPath": "images/logo.png",
+      "_appFaviconPath": "images/favicon.ico",
+      "_enableSearch": "true"
+    }
+  }
+}

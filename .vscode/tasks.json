@@ -57,6 +57,14 @@
                 "-p:CollectCoverage=true"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Generate Documentation",
+            "command": "docfx",
+            "type": "process",
+            "args": [
+                "docs/docfx.json"
+            ]
         }
     ],
     "inputs": [

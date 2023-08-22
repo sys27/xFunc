@@ -23,7 +23,7 @@ Note: The WPF application (xFunc UI) was migrated to a separate repository [xFun
 
 ## Usage
 
-The main class of xFunc library is `Processor`.
+The main class of xFunc library is `Processor`. Detailed documentation is located on [GitHub Pages](https://sys27.github.io/xFunc/).
 
 ### Processor
 

@@ -9,9 +9,10 @@ namespace xFunc.Maths;
 public interface IParser
 {
     /// <summary>
-    /// Parses the specified function.
+    /// Parses the specified <paramref name="expression"/>.
     /// </summary>
-    /// <param name="expression">The string that contains the functions and operators.</param>
+    /// <param name="expression">The string expression.</param>
     /// <returns>The parsed expression.</returns>
+    /// <seealso cref="IExpression"/>
     IExpression Parse(string expression);
 }

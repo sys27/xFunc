@@ -1,0 +1,12 @@
+- name: Get Started
+  href: get-started.md
+- name: ChangeLog
+  href: change-log.md
+- name: Breaking Changes
+  href: breaking-changes.md
+- name: Performance comparison
+  href: performance-comparison.md
+- name: Supported Function and Operators
+  href: supported-functions-and-operations.md
+- name: Simplification rules
+  href: simplification-rules.md

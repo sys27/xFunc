@@ -17,6 +17,7 @@ public class Simplify : UnaryExpression
     /// </summary>
     /// <param name="simplifier">The simplifier.</param>
     /// <param name="expression">The argument of function.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="simplifier"/> is <c>null</c>.</exception>
     public Simplify(ISimplifier simplifier, IExpression expression)
         : base(expression)
         => this.simplifier = simplifier ??
@@ -30,9 +31,7 @@ public class Simplify : UnaryExpression
     /// <seealso cref="IExpression"/>
     internal Simplify(ISimplifier simplifier, ImmutableArray<IExpression> arguments)
         : base(arguments)
-    {
-        this.simplifier = simplifier;
-    }
+        => this.simplifier = simplifier;
 
     /// <summary>
     /// Executes this expression.
@@ -41,7 +40,6 @@ public class Simplify : UnaryExpression
     /// <returns>
     /// A result of the execution.
     /// </returns>
-    /// <exception cref="ArgumentNullException">Simplifier is null.</exception>
     /// <seealso cref="ExpressionParameters" />
     public override object Execute(ExpressionParameters? parameters)
     {

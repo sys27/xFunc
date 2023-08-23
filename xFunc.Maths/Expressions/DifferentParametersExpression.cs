@@ -23,6 +23,8 @@ public abstract class DifferentParametersExpression : IExpression
     /// Initializes a new instance of the <see cref="DifferentParametersExpression" /> class.
     /// </summary>
     /// <param name="arguments">The arguments.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="arguments"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentException">The amount of argument in the <paramref name="arguments"/> collection is less than <c>MinParametersCount</c> or greater than <c>MaxParametersCount</c>.</exception>
     protected DifferentParametersExpression(ImmutableArray<IExpression> arguments)
     {
         if (arguments == null)
@@ -74,12 +76,15 @@ public abstract class DifferentParametersExpression : IExpression
     public override string ToString() => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
+    /// <exception cref="ResultIsNotSupportedException">The result of evaluation of arguments is not supported.</exception>
     public virtual object Execute() => Execute(null);
 
     /// <inheritdoc />
+    /// <exception cref="ResultIsNotSupportedException">The result of evaluation of arguments is not supported.</exception>
     public abstract object Execute(ExpressionParameters? parameters);
 
     /// <inheritdoc />
+    /// <exception cref="ArgumentNullException"><paramref name="analyzer"/> is <c>null</c>.</exception>
     public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
     {
         if (analyzer is null)
@@ -89,6 +94,7 @@ public abstract class DifferentParametersExpression : IExpression
     }
 
     /// <inheritdoc />
+    /// <exception cref="ArgumentNullException"><paramref name="analyzer"/> is <c>null</c>.</exception>
     public TResult Analyze<TResult, TContext>(
         IAnalyzer<TResult, TContext> analyzer,
         TContext context)

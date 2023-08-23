@@ -12,6 +12,7 @@ public class StringExpression : IExpression, IEquatable<StringExpression>
     /// Initializes a new instance of the <see cref="StringExpression"/> class.
     /// </summary>
     /// <param name="value">A string.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="value"/> is <c>null</c>.</exception>
     public StringExpression(string value)
         => Value = value ?? throw new ArgumentNullException(nameof(value));
 
@@ -63,6 +64,7 @@ public class StringExpression : IExpression, IEquatable<StringExpression>
     public object Execute(ExpressionParameters? parameters) => Value;
 
     /// <inheritdoc />
+    /// <exception cref="ArgumentNullException"><paramref name="analyzer"/> is <c>null</c>.</exception>
     public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
     {
         if (analyzer is null)
@@ -72,6 +74,7 @@ public class StringExpression : IExpression, IEquatable<StringExpression>
     }
 
     /// <inheritdoc />
+    /// <exception cref="ArgumentNullException"><paramref name="analyzer"/> is <c>null</c>.</exception>
     public TResult Analyze<TResult, TContext>(
         IAnalyzer<TResult, TContext> analyzer,
         TContext context)

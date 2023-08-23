@@ -138,7 +138,7 @@ public readonly struct ParameterValue : IEquatable<ParameterValue>
     }
 
     /// <summary>
-    /// Converts a value to <see cref="ParameterValue"/>.
+    /// Converts the <paramref name="value"/> to <see cref="ParameterValue"/>.
     /// </summary>
     /// <param name="value">The value.</param>
     /// <returns>The parameter value.</returns>

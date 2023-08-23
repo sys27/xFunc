@@ -6,15 +6,15 @@ xFunc.DotnetTool: [![NuGet](https://img.shields.io/nuget/v/xFunc.DotnetTool.svg)
 xFunc
 =====
 
-xFunc is a simple and easy to use application that allows you to build mathematical and logical expressions. It's written on C#. The library includes well-documented code that allows developers to parse strings to expression tree, to analyze (derivate, simplify) expressions by using lexer, parser and etc.
+xFunc is a user-friendly C# library for constructing and manipulating mathematical and logical expressions. This lightweight library empowers developers to effortlessly parse strings into expression trees, analyze expressions (including derivatives and simplifications), and perform various mathematical operations.
 
-xFunc is a small-sized and portable application that you can use to create complex mathematical expressions which will be automatically computed. It can be used by teachers and students alike.
+xFunc is a versatile tool suitable for both educators and students, allowing the creation of complex mathematical expressions.
 
 Note: The WPF application (xFunc UI) was migrated to a separate repository [xFunc.UI](https://github.com/sys27/xFunc.UI).
 
 ## Features:
 
-* Calculating expressions ([supported functions and operations](https://github.com/sys27/xFunc/wiki/Supported-functions-and-operations));
+* Calculating expressions ([supported functions and operators](https://sys27.github.io/xFunc/articles/supported-functions-and-operations.html));
 * Supporting measures of angles;
 * Derivative and simplifying expressions;
 * Plotting graphs;
@@ -23,7 +23,7 @@ Note: The WPF application (xFunc UI) was migrated to a separate repository [xFun
 
 ## Usage
 
-The main class of xFunc library is `Processor`. Detailed documentation is located on [GitHub Pages](https://sys27.github.io/xFunc/).
+The main class of xFunc library is `Processor`. Detailed documentation is located on [GitHub Pages](https://sys27.github.io/xFunc/articles/get-started.html).
 
 ### Processor
 
@@ -89,7 +89,7 @@ processor.Simplify("arcsin(sin(x))");
 // will return simplified expression = "x"
 ```
 
-_Detailed [simplification rules](https://github.com/sys27/xFunc/wiki/Simplification-rules)_
+_Detailed [simplification rules](https://sys27.github.io/xFunc/articles/simplification-rules.html)_
 
 **Differentiate:**
 
@@ -117,19 +117,11 @@ processor.Differentiate("2x + sin(y)", new Variable("x")); // will return "2"
 | Version | Method |          Mean | Allocated |
 |--------:|--------|--------------:|----------:|
 |   3.7.3 | Parse  |   39,567.9 ns |   63736 B |
-|   4.0.0 | Parse  |  9,128.180 ns |    4760 B |
-|   4.2.0 | Parse  |  14,855.62 ns |    4872 B |
 |   4.3.0 | Parse  |  10,434.04 ns |    4848 B |
 |   3.7.3 | Solve  |   55,260.0 ns |   96920 B |
-|   4.0.0 | Solve  | 15,319.497 ns |   10672 B |
-|   4.2.0 | Solve  |  22,074.89 ns |    9936 B |
 |   4.3.0 | Solve  |  15,683.42 ns |    9552 B |
 
-[More details](https://github.com/sys27/xFunc/wiki/Performance-Comparison)
-
-## Bug Tracker
-
-Please, if you have a bug or a feature request, [create](https://github.com/sys27/xFunc/issues) a new issue. Before creating any issue, please search for existing issues.
+[More details](https://sys27.github.io/xFunc/articles/performance-comparison.html)
 
 ## License
 
@@ -137,10 +129,10 @@ xFunc is released under MIT License.
 
 ## Thanks
 
-[@RonnyCSHARP](https://github.com/ronnycsharp)
-
 [Azure Pipelines](https://azure.microsoft.com/en-us/services/devops/pipelines/)  
 [Coverlet](https://github.com/coverlet-coverage/coverlet)  
 [ReportGenerator](https://github.com/danielpalme/ReportGenerator)  
 [xUnit](https://github.com/xunit/xunit)  
 [NSubstitute](https://github.com/nsubstitute/NSubstitute)
+[docfx](https://github.com/dotnet/docfx)
+[BenchmarkDotNet](https://github.com/dotnet/BenchmarkDotNet)

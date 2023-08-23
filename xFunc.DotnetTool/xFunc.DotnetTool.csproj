@@ -12,9 +12,10 @@
     <Authors>Dmytro Kyshchenko</Authors>
     <Company />
     <Copyright>Copyright ©2012-2023 Dmytro Kyshchenko</Copyright>
+    <Description>xFunc provides a powerful parser and analyzer for mathematical expressions. It excels at calculating derivatives, simplifying expressions, and achieving high performance.</Description>
     <PackageProjectUrl>https://github.com/sys27/xFunc</PackageProjectUrl>
     <PackageIcon>xFunc.png</PackageIcon>
-    <PackageTags>Math Expression Expressions Parser MathParser Differentiation Simplification</PackageTags>
+    <PackageTags>math formula parse parser math-parser logic simplification derivative differentiation truth-table condition complex-numbers trigonometry unit-converter</PackageTags>
     <AssemblyVersion>4.3.0</AssemblyVersion>
     <FileVersion>4.3.0</FileVersion>
     <RepositoryUrl>https://github.com/sys27/xFunc</RepositoryUrl>

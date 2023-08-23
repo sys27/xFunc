@@ -25,9 +25,7 @@ public partial class ExpressionParameters : IEnumerable<Parameter>, INotifyColle
         InitializeConstants();
     }
 
-    /// <summary>
-    /// Occurs when the collection changes.
-    /// </summary>
+    /// <inheritdoc/>
     public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
     /// <summary>
@@ -70,6 +68,7 @@ public partial class ExpressionParameters : IEnumerable<Parameter>, INotifyColle
     /// </summary>
     /// <param name="parameters">The parameters.</param>
     /// <param name="initConstants">if set to <c>true</c> initialize constants.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="parameters"/> is <c>null</c>.</exception>
     public ExpressionParameters(IEnumerable<Parameter>? parameters, bool initConstants)
     {
         if (parameters is null)

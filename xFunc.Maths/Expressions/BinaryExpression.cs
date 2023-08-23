@@ -15,6 +15,7 @@ public abstract class BinaryExpression : IExpression
     /// </summary>
     /// <param name="left">The left (first) operand.</param>
     /// <param name="right">The right (second) operand.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="left"/> or <paramref name="right"/> is <c>null</c>.</exception>
     protected BinaryExpression(IExpression left, IExpression right)
     {
         Left = left ?? throw new ArgumentNullException(nameof(left));
@@ -25,6 +26,8 @@ public abstract class BinaryExpression : IExpression
     /// Initializes a new instance of the <see cref="BinaryExpression"/> class.
     /// </summary>
     /// <param name="arguments">The list of arguments.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="arguments"/> is <c>null</c>.</exception>
+    /// <exception cref="ParseException">The <paramref name="arguments"/> collection should have only two arguments.</exception>
     protected BinaryExpression(ImmutableArray<IExpression> arguments)
     {
         if (arguments == null)
@@ -72,12 +75,15 @@ public abstract class BinaryExpression : IExpression
     public override string ToString() => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
+    /// <exception cref="ResultIsNotSupportedException">The result of Left or Right operand evaluation is not supported by this expression.</exception>
     public object Execute() => Execute(null);
 
     /// <inheritdoc />
+    /// <exception cref="ResultIsNotSupportedException">The result of Left or Right operand evaluation is not supported by this expression.</exception>
     public abstract object Execute(ExpressionParameters? parameters);
 
     /// <inheritdoc />
+    /// <exception cref="ArgumentNullException"><paramref name="analyzer"/> is <c>null</c>.</exception>
     public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
     {
         if (analyzer is null)
@@ -87,6 +93,7 @@ public abstract class BinaryExpression : IExpression
     }
 
     /// <inheritdoc />
+    /// <exception cref="ArgumentNullException"><paramref name="analyzer"/> is <c>null</c>.</exception>
     public TResult Analyze<TResult, TContext>(
         IAnalyzer<TResult, TContext> analyzer,
         TContext context)

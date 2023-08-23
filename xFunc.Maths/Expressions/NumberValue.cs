@@ -1463,6 +1463,7 @@ public readonly struct NumberValue :
     /// </summary>
     /// <param name="numberValue">The number.</param>
     /// <returns>String that contains the number in the new numeral system.</returns>
+    /// <exception cref="ArgumentException">Only the integer value is supported.</exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string ToBin(NumberValue numberValue)
     {
@@ -1480,6 +1481,7 @@ public readonly struct NumberValue :
     /// </summary>
     /// <param name="numberValue">The number.</param>
     /// <returns>String that contains the number in the new numeral system.</returns>
+    /// <exception cref="ArgumentException">Only the integer value is supported.</exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string ToOct(NumberValue numberValue)
     {
@@ -1494,6 +1496,7 @@ public readonly struct NumberValue :
     /// </summary>
     /// <param name="numberValue">The number.</param>
     /// <returns>String that contains the number in the new numeral system.</returns>
+    /// <exception cref="ArgumentException">Only the integer value is supported.</exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string ToHex(NumberValue numberValue)
     {

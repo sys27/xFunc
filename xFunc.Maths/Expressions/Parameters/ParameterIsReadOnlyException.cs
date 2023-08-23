@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 namespace xFunc.Maths.Expressions.Parameters;
 
 /// <summary>
-/// Trying to change a read-only variable.
+/// Represents the expression that is thrown when the user tries to change the read-only parameter.
 /// </summary>
 [Serializable]
 public class ParameterIsReadOnlyException : Exception

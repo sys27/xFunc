@@ -71,7 +71,7 @@ public class CallExpression : IExpression, IEquatable<CallExpression>
     }
 
     /// <inheritdoc />
-    /// <exception cref="NotSupportedException">Always.</exception>
+    /// <exception cref="NotSupportedException">The evaluation of this expression requires <see cref="ExpressionParameters"/>.</exception>
     public object Execute()
         => throw new NotSupportedException();
 

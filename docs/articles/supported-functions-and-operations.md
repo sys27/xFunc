@@ -39,9 +39,9 @@
 
 | Function    | Class                                                                                                      | Alternative input     |
 |-------------|------------------------------------------------------------------------------------------------------------|-----------------------|
-| x rad       | [AngleNumber.cs](https://github.com/sys27/xFunc/blob/master/xFunc.Maths/Expressions/Angles/AngleNumber.cs) | x radian, x radians   |
-| x deg       | [AngleNumber.cs](https://github.com/sys27/xFunc/blob/master/xFunc.Maths/Expressions/Angles/AngleNumber.cs) | x degree, x degrees   |
-| x grad      | [AngleNumber.cs](https://github.com/sys27/xFunc/blob/master/xFunc.Maths/Expressions/Angles/AngleNumber.cs) | x gradian, x gradians |
+| x 'rad'       | [AngleNumber.cs](https://github.com/sys27/xFunc/blob/master/xFunc.Maths/Expressions/Angles/AngleNumber.cs) | x 'radian', x 'radians'   |
+| x 'deg'       | [AngleNumber.cs](https://github.com/sys27/xFunc/blob/master/xFunc.Maths/Expressions/Angles/AngleNumber.cs) | x 'degree', x 'degrees'   |
+| x 'grad'      | [AngleNumber.cs](https://github.com/sys27/xFunc/blob/master/xFunc.Maths/Expressions/Angles/AngleNumber.cs) | x 'gradian', x 'gradians' |
 | todeg(x)    | [ToDegree.cs](https://github.com/sys27/xFunc/blob/master/xFunc.Maths/Expressions/Angles/ToDegree.cs)       | todegree(x)           |
 | torad(x)    | [ToRadian.cs](https://github.com/sys27/xFunc/blob/master/xFunc.Maths/Expressions/Angles/ToRadian.cs)       | toradian(x)           |
 | tograd(x)   | [ToGradian.cs](https://github.com/sys27/xFunc/blob/master/xFunc.Maths/Expressions/Angles/ToGradian.cs)     | togradian(x)          |

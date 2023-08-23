@@ -38,6 +38,7 @@ public class Sub : BinaryExpression
     }
 
     /// <inheritdoc />
+    /// <exception cref="ResultIsNotSupportedException">The result of evaluation of Left or Right operand is not supported.</exception>
     public override object Execute(ExpressionParameters? parameters)
     {
         var leftResult = Left.Execute(parameters);

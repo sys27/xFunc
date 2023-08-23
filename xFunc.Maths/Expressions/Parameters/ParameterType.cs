@@ -9,17 +9,17 @@ namespace xFunc.Maths.Expressions.Parameters;
 public enum ParameterType
 {
     /// <summary>
-    /// Normal.
+    /// The normal parameter.
     /// </summary>
     Normal,
 
     /// <summary>
-    /// Read only.
+    /// The read-only parameter. It can be added/removed, but it can't be changed.
     /// </summary>
     ReadOnly,
 
     /// <summary>
-    /// Constant.
+    /// The constant parameter. It can be added, but can't be changed or removed.
     /// </summary>
     Constant,
 }

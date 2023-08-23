@@ -14,6 +14,7 @@ public abstract class UnaryExpression : IExpression
     /// Initializes a new instance of the <see cref="UnaryExpression"/> class.
     /// </summary>
     /// <param name="argument">The expression.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="argument"/> is <c>null</c>.</exception>
     protected UnaryExpression(IExpression argument)
         => Argument = argument ?? throw new ArgumentNullException(nameof(argument));
 
@@ -21,6 +22,8 @@ public abstract class UnaryExpression : IExpression
     /// Initializes a new instance of the <see cref="UnaryExpression"/> class.
     /// </summary>
     /// <param name="arguments">The list of arguments.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="arguments"/> is <c>null</c>.</exception>
+    /// <exception cref="ParseException">The <paramref name="arguments"/> collection should have only one argument.</exception>
     protected UnaryExpression(ImmutableArray<IExpression> arguments)
     {
         if (arguments == null)
@@ -60,12 +63,15 @@ public abstract class UnaryExpression : IExpression
     public override string ToString() => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
+    /// <exception cref="ResultIsNotSupportedException">The result of argument evaluation is not supported by this expression.</exception>
     public object Execute() => Execute(null);
 
     /// <inheritdoc />
+    /// <exception cref="ResultIsNotSupportedException">The result of argument evaluation is not supported by this expression.</exception>
     public abstract object Execute(ExpressionParameters? parameters);
 
     /// <inheritdoc />
+    /// <exception cref="ArgumentNullException"><paramref name="analyzer"/> is <c>null</c>.</exception>
     public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
     {
         if (analyzer is null)
@@ -75,6 +81,7 @@ public abstract class UnaryExpression : IExpression
     }
 
     /// <inheritdoc />
+    /// <exception cref="ArgumentNullException"><paramref name="analyzer"/> is <c>null</c>.</exception>
     public TResult Analyze<TResult, TContext>(
         IAnalyzer<TResult, TContext> analyzer,
         TContext context)

@@ -39,9 +39,11 @@ public class Assign : IExpression
     public override string ToString() => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
+    /// <exception cref="NotSupportedException">The evaluation of this expression requires <see cref="ExpressionParameters"/>.</exception>
     public object Execute() => throw new NotSupportedException();
 
     /// <inheritdoc />
+    /// <exception cref="ArgumentNullException"><paramref name="parameters"/> is <c>null</c>.</exception>
     public object Execute(ExpressionParameters? parameters)
     {
         if (parameters is null)

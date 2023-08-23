@@ -43,6 +43,7 @@ public class DelegateExpression : IExpression
         => func(parameters);
 
     /// <inheritdoc />
+    /// <exception cref="ArgumentNullException"><paramref name="analyzer"/> is <c>null</c>.</exception>
     public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
     {
         if (analyzer is null)
@@ -52,6 +53,7 @@ public class DelegateExpression : IExpression
     }
 
     /// <inheritdoc />
+    /// <exception cref="ArgumentNullException"><paramref name="analyzer"/> is <c>null</c>.</exception>
     public TResult Analyze<TResult, TContext>(
         IAnalyzer<TResult, TContext> analyzer,
         TContext context)

@@ -10,3 +10,9 @@
   href: supported-functions-and-operations.md
 - name: Simplification rules
   href: simplification-rules.md
+- name: Advanced
+  items:
+    - name: How to build project
+      href: how-to-build.md
+    - name: How to implement own expression
+      href: custom-expression.md

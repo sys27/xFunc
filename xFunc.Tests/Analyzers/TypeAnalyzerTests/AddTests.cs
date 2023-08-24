@@ -537,6 +537,39 @@ public class AddTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestAddRationalAndRational()
+    {
+        var exp = new Add(
+            new Rational(Number.One, Number.Two),
+            new Rational(Number.Two, Number.One)
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Fact]
+    public void TestAddNumberAndRational()
+    {
+        var exp = new Add(
+            Number.One,
+            new Rational(Number.Two, Number.One)
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Fact]
+    public void TestAddRationalAndNumber()
+    {
+        var exp = new Add(
+            new Rational(Number.One, Number.Two),
+            Number.One
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Fact]
     public void TestAddStringToString()
     {
         var exp = new Add(

@@ -3,7 +3,7 @@
 
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
-public class PowerTests : TypeAnalyzerBaseTests
+public class PowTests : TypeAnalyzerBaseTests
 {
     [Fact]
     public void TestPowComplexAndUndefined()
@@ -59,6 +59,16 @@ public class PowerTests : TypeAnalyzerBaseTests
         var exp = new Pow(Number.Two, new ComplexNumber(2, 4));
 
         Test(exp, ResultTypes.ComplexNumber);
+    }
+
+    [Fact]
+    public void TestRationalAndNumber()
+    {
+        var exp = new Pow(
+            new Rational(new Number(2), new Number(3)),
+            new Number(3));
+
+        Test(exp, ResultTypes.RationalNumber);
     }
 
     [Fact]

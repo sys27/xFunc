@@ -1,7 +1,7 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace xFunc.Tests.Expressions.Units;
+namespace xFunc.Tests.Expressions;
 
 public class ToNumberTest
 {
@@ -83,6 +83,15 @@ public class ToNumberTest
         var expected = new NumberValue(10.0);
 
         Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteRationalTest()
+    {
+        var exp = new ToNumber(new Rational(new Number(1), new Number(2)));
+        var actual = exp.Execute();
+
+        Assert.Equal(NumberValue.Half, actual);
     }
 
     [Fact]

@@ -140,30 +140,6 @@ public class StandardTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
-    public void TestLbUndefined()
-    {
-        var exp = new Lb(Variable.X);
-
-        Test(exp, ResultTypes.Number);
-    }
-
-    [Fact]
-    public void TestLbNumber()
-    {
-        var exp = new Lb(new Number(10));
-
-        Test(exp, ResultTypes.Number);
-    }
-
-    [Fact]
-    public void TestLbException()
-    {
-        var exp = new Lb(Bool.False);
-
-        TestException(exp);
-    }
-
-    [Fact]
     public void TestLCMUndefined()
     {
         var exp = new LCM(new Number(10), Variable.X);
@@ -188,118 +164,6 @@ public class StandardTests : TypeAnalyzerBaseTests
         var exp = new LCM(new ComplexNumber(10), new Number(10));
 
         TestDiffParamException(exp);
-    }
-
-    [Fact]
-    public void TestLgUndefined()
-    {
-        var exp = new Lg(Variable.X);
-
-        Test(exp, ResultTypes.Undefined);
-    }
-
-    [Fact]
-    public void TestLgNumber()
-    {
-        var exp = new Lg(new Number(10));
-
-        Test(exp, ResultTypes.Number);
-    }
-
-    [Fact]
-    public void TestLgComplexNumber()
-    {
-        var exp = new Lg(new ComplexNumber(10, 10));
-
-        Test(exp, ResultTypes.ComplexNumber);
-    }
-
-    [Fact]
-    public void TestLgException()
-    {
-        var exp = new Lg(Bool.False);
-
-        TestException(exp);
-    }
-
-    [Fact]
-    public void TestLnUndefined()
-    {
-        var exp = new Ln(Variable.X);
-
-        Test(exp, ResultTypes.Undefined);
-    }
-
-    [Fact]
-    public void TestLnNumber()
-    {
-        var exp = new Ln(new Number(10));
-
-        Test(exp, ResultTypes.Number);
-    }
-
-    [Fact]
-    public void TestLnComplexNumber()
-    {
-        var exp = new Ln(new ComplexNumber(10, 10));
-
-        Test(exp, ResultTypes.ComplexNumber);
-    }
-
-    [Fact]
-    public void TestLnException()
-    {
-        var exp = new Ln(Bool.False);
-
-        TestException(exp);
-    }
-
-    [Fact]
-    public void TestLogNumberAndUndefined()
-    {
-        var exp = new Log(Number.Two, Variable.X);
-
-        Test(exp, ResultTypes.Undefined);
-    }
-
-    [Fact]
-    public void TestLogUndefinedAndNumber()
-    {
-        var exp = new Log(Variable.X, Number.Two);
-
-        Test(exp, ResultTypes.Undefined);
-    }
-
-    [Fact]
-    public void TestLogNumber()
-    {
-        var exp = new Log(Number.Two, new Number(4));
-
-        Test(exp, ResultTypes.Number);
-    }
-
-    [Fact]
-    public void TestLogComplexNumber()
-    {
-        var exp = new Log(Number.Two, new ComplexNumber(8, 3));
-
-        Test(exp, ResultTypes.ComplexNumber);
-    }
-
-    [Fact]
-    public void TestLogException()
-    {
-        var exp = new Log(Number.Two, Bool.False);
-
-        TestBinaryException(exp);
-    }
-
-    [Fact]
-    public void TestLogBaseIsNotNumber()
-    {
-        var exp = new Log(Bool.False, Number.Two);
-
-        TestBinaryException(exp);
     }
 
     [Fact]
@@ -627,6 +491,78 @@ public class StandardTests : TypeAnalyzerBaseTests
             Bool.True,
             new StringExpression("rad")
         );
+
+        TestException(exp);
+    }
+
+    [Fact]
+    public void TestRational()
+    {
+        var exp = new Rational(Number.One, Number.Two);
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Fact]
+    public void TestRationalLeftUndefined()
+    {
+        var exp = new Rational(Variable.X, Number.Two);
+
+        Test(exp, ResultTypes.Undefined);
+    }
+
+    [Fact]
+    public void TestRationalRightUndefined()
+    {
+        var exp = new Rational(Number.One, Variable.X);
+
+        Test(exp, ResultTypes.Undefined);
+    }
+
+    [Fact]
+    public void TestRationalException()
+    {
+        var exp = new Rational(Bool.True, Bool.False);
+
+        TestException(exp);
+    }
+
+    [Fact]
+    public void TestRationalLeftException()
+    {
+        var exp = new Rational(Bool.True, Number.Two);
+
+        TestBinaryException(exp);
+    }
+
+    [Fact]
+    public void TestRationalRightException()
+    {
+        var exp = new Rational(Number.One, Bool.False);
+
+        TestBinaryException(exp);
+    }
+
+    [Fact]
+    public void TestToRational()
+    {
+        var exp = new ToRational(Number.Two);
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Fact]
+    public void TestToRationalUndefined()
+    {
+        var exp = new ToRational(Variable.X);
+
+        Test(exp, ResultTypes.Undefined);
+    }
+
+    [Fact]
+    public void TestToRationalException()
+    {
+        var exp = new ToRational(Bool.False);
 
         TestException(exp);
     }

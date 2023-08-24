@@ -422,6 +422,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.TimeNumber => ResultTypes.TimeNumber,
             ResultTypes.AreaNumber => ResultTypes.AreaNumber,
             ResultTypes.VolumeNumber => ResultTypes.VolumeNumber,
+            ResultTypes.RationalNumber => ResultTypes.RationalNumber,
             _ => NumbersOrComplexOrVector.ThrowFor(result),
         };
     }
@@ -487,6 +488,11 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (ResultTypes.ComplexNumber, ResultTypes.Number) or
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
                 => ResultTypes.ComplexNumber,
+
+            (ResultTypes.RationalNumber, ResultTypes.RationalNumber) or
+                (ResultTypes.Number, ResultTypes.RationalNumber) or
+                (ResultTypes.RationalNumber, ResultTypes.Number)
+                => ResultTypes.RationalNumber,
 
             (ResultTypes.Vector, ResultTypes.Vector) => ResultTypes.Vector,
             (ResultTypes.Matrix, ResultTypes.Matrix) => ResultTypes.Matrix,
@@ -630,6 +636,11 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (ResultTypes.ComplexNumber, ResultTypes.Number) or
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
                 => ResultTypes.ComplexNumber,
+
+            (ResultTypes.RationalNumber, ResultTypes.RationalNumber) or
+                (ResultTypes.Number, ResultTypes.RationalNumber) or
+                (ResultTypes.RationalNumber, ResultTypes.Number)
+                => ResultTypes.RationalNumber,
 
             (_, ResultTypes.Number) => NumbersOrComplex.ThrowForLeft(leftResult),
             (ResultTypes.Number, _) => NumbersOrComplex.ThrowForRight(rightResult),
@@ -779,10 +790,10 @@ public class TypeAnalyzer : ITypeAnalyzer
             throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
-        if (result is ResultTypes.Undefined or ResultTypes.Number)
+        if (result is ResultTypes.Undefined or ResultTypes.Number or ResultTypes.RationalNumber)
             return ResultTypes.Number;
 
-        return ResultTypes.Number.ThrowFor(result);
+        return (ResultTypes.Number | ResultTypes.RationalNumber).ThrowFor(result);
     }
 
     /// <inheritdoc />
@@ -817,6 +828,8 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.Undefined => ResultTypes.Undefined,
             ResultTypes.Number => ResultTypes.Number,
             ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
+            ResultTypes.RationalNumber => ResultTypes.Number,
+
             _ => NumberOrComplex.ThrowFor(result),
         };
     }
@@ -834,6 +847,8 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.Undefined => ResultTypes.Undefined,
             ResultTypes.Number => ResultTypes.Number,
             ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
+            ResultTypes.RationalNumber => ResultTypes.Number,
+
             _ => NumberOrComplex.ThrowFor(result),
         };
     }
@@ -855,6 +870,7 @@ public class TypeAnalyzer : ITypeAnalyzer
 
             (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Number,
             (ResultTypes.Number, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
+            (ResultTypes.Number, ResultTypes.RationalNumber) => ResultTypes.Number,
 
             (ResultTypes.Number, _) => NumberOrComplex.ThrowForRight(rightResult),
 
@@ -948,6 +964,11 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (ResultTypes.ComplexNumber, ResultTypes.Number) or
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
                 => ResultTypes.ComplexNumber,
+
+            (ResultTypes.RationalNumber, ResultTypes.RationalNumber) or
+                (ResultTypes.Number, ResultTypes.RationalNumber) or
+                (ResultTypes.RationalNumber, ResultTypes.Number)
+                => ResultTypes.RationalNumber,
 
             (ResultTypes.Vector, ResultTypes.Number) or
                 (ResultTypes.Number, ResultTypes.Vector) or
@@ -1071,7 +1092,8 @@ public class TypeAnalyzer : ITypeAnalyzer
                 ResultTypes.LengthNumber or
                 ResultTypes.TimeNumber or
                 ResultTypes.AreaNumber or
-                ResultTypes.VolumeNumber
+                ResultTypes.VolumeNumber or
+                ResultTypes.RationalNumber
                 => ResultTypes.Number,
             _ => Units.ThrowFor(result),
         };
@@ -1100,6 +1122,9 @@ public class TypeAnalyzer : ITypeAnalyzer
 
             (ResultTypes.Number, ResultTypes.Number)
                 => ResultTypes.Undefined,
+
+            (ResultTypes.RationalNumber, ResultTypes.Number)
+                => ResultTypes.RationalNumber,
 
             _ => ResultTypes.Number.ThrowForLeft(leftResult),
         };
@@ -1237,6 +1262,11 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
                 => ResultTypes.ComplexNumber,
 
+            (ResultTypes.RationalNumber, ResultTypes.RationalNumber) or
+                (ResultTypes.Number, ResultTypes.RationalNumber) or
+                (ResultTypes.RationalNumber, ResultTypes.Number)
+                => ResultTypes.RationalNumber,
+
             (ResultTypes.Vector, ResultTypes.Vector) => ResultTypes.Vector,
             (ResultTypes.Matrix, ResultTypes.Matrix) => ResultTypes.Matrix,
 
@@ -1301,6 +1331,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.AreaNumber => ResultTypes.AreaNumber,
             ResultTypes.VolumeNumber => ResultTypes.VolumeNumber,
             ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
+            ResultTypes.RationalNumber => ResultTypes.RationalNumber,
             _ => NumberOrComplex.ThrowFor(result),
         };
     }
@@ -1389,6 +1420,50 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.VolumeNumber => ResultTypes.VolumeNumber,
 
             _ => NumberOrUnits.ThrowFor(valueResult),
+        };
+    }
+
+    /// <inheritdoc />
+    public virtual ResultTypes Analyze(Rational exp)
+    {
+        if (exp is null)
+            throw new ArgumentNullException(nameof(exp));
+
+        var leftResult = exp.Left.Analyze(this);
+        var rightResult = exp.Right.Analyze(this);
+
+        return (leftResult, rightResult) switch
+        {
+            (ResultTypes.Undefined, _) or (_, ResultTypes.Undefined)
+                => ResultTypes.Undefined,
+
+            (ResultTypes.Number, ResultTypes.Number)
+                => ResultTypes.RationalNumber,
+
+            (ResultTypes.Number, _)
+                => ResultTypes.Number.ThrowForRight(rightResult),
+
+            (_, ResultTypes.Number)
+                => ResultTypes.Number.ThrowForLeft(leftResult),
+
+            _ => throw new ParameterTypeMismatchException(),
+        };
+    }
+
+    /// <inheritdoc />
+    public virtual ResultTypes Analyze(ToRational exp)
+    {
+        if (exp is null)
+            throw new ArgumentNullException(nameof(exp));
+
+        var argumentResult = exp.Argument.Analyze(this);
+
+        return argumentResult switch
+        {
+            ResultTypes.Undefined => ResultTypes.Undefined,
+            ResultTypes.Number => ResultTypes.RationalNumber,
+
+            _ => throw new ParameterTypeMismatchException(ResultTypes.Number, argumentResult),
         };
     }
 

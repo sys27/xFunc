@@ -476,6 +476,45 @@ public class AddTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteRationalAndRational()
+    {
+        var exp = new Add(
+            new Rational(Number.One, Number.Two),
+            new Rational(Number.Two, Number.One)
+        );
+        var expected = new RationalValue(5, 2);
+        var actual = exp.Execute();
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteNumberAndRational()
+    {
+        var exp = new Add(
+            Number.One,
+            new Rational(Number.Two, Number.One)
+        );
+        var expected = new RationalValue(3, 1);
+        var actual = exp.Execute();
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteRationalAndNumber()
+    {
+        var exp = new Add(
+            new Rational(Number.One, Number.Two),
+            Number.One
+        );
+        var expected = new RationalValue(3, 2);
+        var actual = exp.Execute();
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Add(Bool.False, Bool.False));
 

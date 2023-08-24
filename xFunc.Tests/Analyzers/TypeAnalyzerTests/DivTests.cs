@@ -197,6 +197,39 @@ public class DivTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.VolumeNumber);
     }
 
+    [Fact]
+    public void TestDivRationalAndRational()
+    {
+        var exp = new Div(
+            new Rational(Number.One, Number.Two),
+            new Rational(Number.Two, Number.One)
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Fact]
+    public void TestDivNumberAndRational()
+    {
+        var exp = new Div(
+            Number.One,
+            new Rational(Number.Two, Number.One)
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Fact]
+    public void TestDivRationalAndNumber()
+    {
+        var exp = new Div(
+            new Rational(Number.One, Number.Two),
+            Number.One
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
     public static IEnumerable<object[]> GetDataForTestDivAngleAndBoolTest()
     {
         yield return new object[] { AngleValue.Degree(90).AsExpression() };

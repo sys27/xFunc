@@ -8,7 +8,7 @@ namespace xFunc.Tests.Expressions;
 public class LgTest : BaseExpressionTests
 {
     [Fact]
-    public void ExecuteTest1()
+    public void ExecuteNumberTest()
     {
         var exp = new Lg(Number.Two);
         var expected = new NumberValue(Math.Log10(2));
@@ -17,11 +17,20 @@ public class LgTest : BaseExpressionTests
     }
 
     [Fact]
-    public void ExecuteTest2()
+    public void ExecuteComplexTest()
     {
         var complex = new Complex(2, 3);
         var exp = new Lg(new ComplexNumber(complex));
         var expected = Complex.Log10(complex);
+
+        Assert.Equal(expected, exp.Execute());
+    }
+
+    [Fact]
+    public void ExecuteRationalTest()
+    {
+        var exp = new Lg(new Rational(new Number(2), new Number(3)));
+        var expected = new NumberValue(-0.17609125905568124);
 
         Assert.Equal(expected, exp.Execute());
     }

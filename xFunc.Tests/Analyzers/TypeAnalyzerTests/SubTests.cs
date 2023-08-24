@@ -559,6 +559,39 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.VolumeNumber);
     }
 
+    [Fact]
+    public void TestSubRationalAndRational()
+    {
+        var exp = new Sub(
+            new Rational(Number.One, Number.Two),
+            new Rational(Number.Two, Number.One)
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Fact]
+    public void TestSubNumberAndRational()
+    {
+        var exp = new Sub(
+            Number.One,
+            new Rational(Number.Two, Number.One)
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Fact]
+    public void TestSubRationalAndNumber()
+    {
+        var exp = new Sub(
+            new Rational(Number.One, Number.Two),
+            Number.One
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
     public static IEnumerable<object[]> GetDataForTestSubAngleAndBoolTest()
     {
         yield return new object[] { AngleValue.Degree(90).AsExpression(), Bool.False };

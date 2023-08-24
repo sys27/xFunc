@@ -102,6 +102,14 @@ public class AbsTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestAbsRational()
+    {
+        var exp = new Abs(new Rational(new Number(1), new Number(2)));
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Fact]
     public void TestAbsException()
     {
         var exp = new Abs(Bool.False);

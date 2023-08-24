@@ -15,6 +15,15 @@ public class LbTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteRationalTest()
+    {
+        var exp = new Lb(new Rational(new Number(2), new Number(3)));
+        var expected = new NumberValue(-0.5849625007211563);
+
+        Assert.Equal(expected, exp.Execute());
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Lb(Bool.False));
 

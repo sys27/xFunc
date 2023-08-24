@@ -234,6 +234,17 @@ public class ProcessorTest
     }
 
     [Fact]
+    public void SolveRationalTest()
+    {
+        var processor = new Processor();
+
+        var result = processor.Solve<RationalValueResult>("1 // 3");
+        var expected = new RationalValue(1, 3);
+
+        Assert.Equal(expected, result.Result);
+    }
+
+    [Fact]
     public void ParseTest()
     {
         var processor = new Processor();

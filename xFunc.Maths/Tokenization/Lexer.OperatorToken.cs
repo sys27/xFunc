@@ -42,6 +42,7 @@ internal ref partial struct Lexer
                 ('=', '>', _) => (LambdaOperator, 2),
             ('<', '<', _) => (LeftShiftOperator, 2),
             ('>', '>', _) => (RightShiftOperator, 2),
+            ('/', '/', _) => (RationalOperator, 2),
 
             ('+', _, _) => (PlusOperator, 1),
             ('-', _, _) or

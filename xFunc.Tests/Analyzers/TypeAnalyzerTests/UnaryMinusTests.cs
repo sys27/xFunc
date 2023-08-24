@@ -91,6 +91,14 @@ public class UnaryMinusTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestUnaryMinusRationalNumber()
+    {
+        var exp = new UnaryMinus(new Rational(Number.One, Number.Two));
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Fact]
     public void TestUnaryMinusException()
     {
         var exp = new UnaryMinus(Bool.False);

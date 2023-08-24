@@ -60,6 +60,12 @@ public class ToNumberTests : TypeAnalyzerBaseTests
     }
 
     [Fact]
+    public void TestRationalToNumber()
+    {
+        Test(new ToNumber(new Rational(new Number(1), new Number(3))), ResultTypes.Number);
+    }
+
+    [Fact]
     public void TestToNumberException()
     {
         TestException(new ToNumber(Bool.True));

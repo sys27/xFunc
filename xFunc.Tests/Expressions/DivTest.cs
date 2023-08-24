@@ -154,6 +154,45 @@ public class DivTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteRationalAndRational()
+    {
+        var exp = new Div(
+            new Rational(Number.One, Number.Two),
+            new Rational(Number.Two, Number.One)
+        );
+        var expected = new RationalValue(1, 4);
+        var actual = exp.Execute();
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteNumberAndRational()
+    {
+        var exp = new Div(
+            Number.One,
+            new Rational(Number.Two, Number.One)
+        );
+        var expected = new RationalValue(1, 2);
+        var actual = exp.Execute();
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteRationalAndNumber()
+    {
+        var exp = new Div(
+            new Rational(new Number(3), Number.Two),
+            Number.Two
+        );
+        var expected = new RationalValue(3, 4);
+        var actual = exp.Execute();
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteBoolTest()
     {
         var exp = new Div(Bool.False, Bool.True);

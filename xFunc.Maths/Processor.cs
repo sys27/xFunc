@@ -171,6 +171,9 @@ public class Processor
             MatrixValue matrixValue
                 => new MatrixValueResult(matrixValue),
 
+            RationalValue rationalValue
+                => new RationalValueResult(rationalValue),
+
             _ => throw new InvalidResultException(),
         };
     }

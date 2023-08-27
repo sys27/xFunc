@@ -46,7 +46,7 @@ public class DelTest
     {
         var exp = new Add(
             new Add(new Mul(Number.Two, new Variable("x1")), new Pow(new Variable("x2"), Number.Two)),
-            new Pow(new Variable("x3"), new Number(3))
+            new UnaryMinus(new Variable("x3"))
         ).ToLambdaExpression();
         var del = new Del(new Differentiator(), new Simplifier(), exp);
 
@@ -54,7 +54,7 @@ public class DelTest
         {
             Number.Two,
             new Mul(Number.Two, new Variable("x2")),
-            new Mul(new Number(3), new Pow(new Variable("x3"), Number.Two))
+            new Number(-1),
         }).ToLambda();
 
         Assert.Equal(expected, del.Execute());

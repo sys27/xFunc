@@ -1,5 +1,7 @@
 ## xFunc 4.4.0 (dev)
 
+* The `Helpers` class is removed from the public API (see [#698](https://github.com/sys27/xFunc/pull/698)).
+
 ## xFunc 4.3.0
 
 * `MatrixIsInvalidException` -> `InvalidMatrixException`.

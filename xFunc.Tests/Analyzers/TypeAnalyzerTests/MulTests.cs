@@ -428,6 +428,39 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.VolumeNumber);
     }
 
+    [Fact]
+    public void TestMulRationalAndRational()
+    {
+        var exp = new Mul(
+            new Rational(Number.One, Number.Two),
+            new Rational(Number.Two, Number.One)
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Fact]
+    public void TestMulNumberAndRational()
+    {
+        var exp = new Mul(
+            Number.One,
+            new Rational(Number.Two, Number.One)
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Fact]
+    public void TestMulRationalAndNumber()
+    {
+        var exp = new Mul(
+            new Rational(Number.One, Number.Two),
+            Number.One
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
     public static IEnumerable<object[]> GetDataForTestMulAngleAndBoolTest()
     {
         yield return new object[] { AngleValue.Degree(90).AsExpression(), Bool.False };

@@ -224,6 +224,14 @@ public abstract class Analyzer<TResult> : IAnalyzer<TResult>
     public virtual TResult Analyze(Expressions.Units.Convert exp)
         => Analyze(exp as IExpression);
 
+    /// <inheritdoc />
+    public virtual TResult Analyze(Rational exp)
+        => Analyze(exp as IExpression);
+
+    /// <inheritdoc />
+    public virtual TResult Analyze(ToRational exp)
+        => Analyze(exp as IExpression);
+
     #endregion Standard
 
     #region Matrix

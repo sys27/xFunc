@@ -287,6 +287,14 @@ public class CommonFormatter : IFormatter
         return $"convert({value}, {unit})";
     }
 
+    /// <inheritdoc />
+    public virtual string Analyze(Rational exp)
+        => ToString(exp, "{0} // {1}");
+
+    /// <inheritdoc />
+    public virtual string Analyze(ToRational exp)
+        => ToString(exp, "torational({0})");
+
     #endregion Standard
 
     #region Matrix

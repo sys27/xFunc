@@ -475,6 +475,45 @@ public class MulTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteRationalAndRational()
+    {
+        var exp = new Mul(
+            new Rational(Number.One, Number.Two),
+            new Rational(Number.Two, Number.One)
+        );
+        var expected = new RationalValue(1, 1);
+        var actual = exp.Execute();
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteNumberAndRational()
+    {
+        var exp = new Mul(
+            Number.One,
+            new Rational(Number.Two, Number.One)
+        );
+        var expected = new RationalValue(2, 1);
+        var actual = exp.Execute();
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteRationalAndNumber()
+    {
+        var exp = new Mul(
+            new Rational(new Number(3), Number.Two),
+            Number.Two
+        );
+        var expected = new RationalValue(3, 1);
+        var actual = exp.Execute();
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteMulBoolByBoolTest()
         => TestNotSupported(new Mul(Bool.True, Bool.True));
 

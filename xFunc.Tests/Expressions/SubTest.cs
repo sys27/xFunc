@@ -428,6 +428,45 @@ public class SubTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteRationalAndRational()
+    {
+        var exp = new Sub(
+            new Rational(Number.One, Number.Two),
+            new Rational(Number.Two, Number.One)
+        );
+        var expected = new RationalValue(-3, 2);
+        var actual = exp.Execute();
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteNumberAndRational()
+    {
+        var exp = new Sub(
+            Number.One,
+            new Rational(Number.One, Number.Two)
+        );
+        var expected = new RationalValue(1, 2);
+        var actual = exp.Execute();
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ExecuteRationalAndNumber()
+    {
+        var exp = new Sub(
+            new Rational(new Number(3), Number.Two),
+            Number.One
+        );
+        var expected = new RationalValue(1, 2);
+        var actual = exp.Execute();
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void ExecuteWrongArgumentTypeTest()
         => TestNotSupported(new Sub(Bool.True, Bool.True));
 

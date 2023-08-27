@@ -4,7 +4,7 @@
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 
-namespace xFunc.Maths.Expressions.Units;
+namespace xFunc.Maths.Expressions;
 
 /// <summary>
 /// Represents the 'tonumber' function.
@@ -46,6 +46,7 @@ public class ToNumber : UnaryExpression
             TimeValue timeValue => timeValue.Value,
             AreaValue areaValue => areaValue.Value,
             VolumeValue volumeValue => volumeValue.Value,
+            RationalValue rationalValue => rationalValue.ToIrrational(),
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }

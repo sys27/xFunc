@@ -407,7 +407,8 @@ public partial class Parser : IParser
             var token = tokenReader.GetCurrentAndAdvance(MultiplicationOperator) ||
                         tokenReader.GetCurrentAndAdvance(DivisionOperator) ||
                         tokenReader.GetCurrentAndAdvance(ModuloOperator) ||
-                        tokenReader.GetCurrentAndAdvance(ModKeyword);
+                        tokenReader.GetCurrentAndAdvance(ModKeyword) ||
+                        tokenReader.GetCurrentAndAdvance(RationalOperator);
 
             if (token.IsEmpty())
                 return left;
@@ -415,7 +416,7 @@ public partial class Parser : IParser
             var right = ParseMulImplicit(ref tokenReader) ??
                         MissingSecondOperand(token.Kind);
 
-            left = CreateMulDivMod(token, left, right);
+            left = CreateMulDivModRational(token, left, right);
         }
     }
 

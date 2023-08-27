@@ -111,6 +111,15 @@ public class AbsTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteTestRational()
+    {
+        var exp = new Abs(new Rational(new Number(-1), new Number(3)));
+        var expected = new RationalValue(1, 3);
+
+        Assert.Equal(expected, exp.Execute());
+    }
+
+    [Fact]
     public void ExecuteTestException()
         => TestNotSupported(new Abs(Bool.False));
 

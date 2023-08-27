@@ -49,6 +49,7 @@ public class Log : BinaryExpression
         {
             (NumberValue left, NumberValue right) => NumberValue.Log(right, left),
             (NumberValue left, Complex complex) => NumberValue.Log(complex, left),
+            (NumberValue left, RationalValue right) => RationalValue.Log(right, left),
             _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
         };
     }

@@ -97,6 +97,16 @@ public class UnaryMinusTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteRationalNumberTest()
+    {
+        var rational = new UnaryMinus(new Rational(Number.One, Number.Two));
+        var expected = new RationalValue(-1, 2);
+        var actual = rational.Execute();
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void NotSupportedException()
         => TestNotSupported(new UnaryMinus(Bool.False));
 

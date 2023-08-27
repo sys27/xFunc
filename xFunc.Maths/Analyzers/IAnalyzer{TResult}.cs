@@ -375,6 +375,20 @@ public interface IAnalyzer<out TResult>
     /// <returns>The result of analysis.</returns>
     TResult Analyze(Expressions.Units.Convert exp);
 
+    /// <summary>
+    /// Analyzes the specified expression.
+    /// </summary>
+    /// <param name="exp">The expression.</param>
+    /// <returns>The result of analysis.</returns>
+    TResult Analyze(Rational exp);
+
+    /// <summary>
+    /// Analyzes the specified expression.
+    /// </summary>
+    /// <param name="exp">The expression.</param>
+    /// <returns>The result of analysis.</returns>
+    TResult Analyze(ToRational exp);
+
     #endregion Standard
 
     #region Matrix

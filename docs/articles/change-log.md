@@ -4,6 +4,7 @@
 
 * [#680](https://github.com/sys27/xFunc/issues/680) - Remove Moq. ([#651](https://github.com/sys27/xFunc/pull/651)).
 * [#688](https://github.com/sys27/xFunc/issues/688) - DocFx Documentation.
+* [#175](https://github.com/sys27/xFunc/pull/175) - Support rational numbers ([#693](https://github.com/sys27/xFunc/pull/693)).
 
 ## xFunc v4.3.0
 

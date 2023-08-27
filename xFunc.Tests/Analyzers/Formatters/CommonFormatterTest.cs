@@ -558,6 +558,22 @@ public class CommonFormatterTest
         Assert.Equal("convert(90 degree, 'rad')", exp.ToString());
     }
 
+    [Fact]
+    public void RationalTest()
+    {
+        var exp = new Rational(Number.One, Number.Two);
+
+        Assert.Equal("1 // 2", exp.ToString());
+    }
+
+    [Fact]
+    public void ToRationalTest()
+    {
+        var exp = new ToRational(Number.Two);
+
+        Assert.Equal("torational(2)", exp.ToString());
+    }
+
     #endregion Common
 
     #region Complex Numbers

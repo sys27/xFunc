@@ -102,6 +102,17 @@ public class PowTest : BaseExpressionTests
     }
 
     [Fact]
+    public void ExecuteRationalAndNumberTest()
+    {
+        var exp = new Pow(
+            new Rational(new Number(2), new Number(3)),
+            new Number(3));
+        var expected = new RationalValue(8, 27);
+
+        Assert.Equal(expected, exp.Execute());
+    }
+
+    [Fact]
     public void ExecuteWrongArgumentTypeTest()
         => TestNotSupported(new Pow(Bool.True, Bool.True));
 

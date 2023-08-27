@@ -144,6 +144,15 @@ public class ParameterTest
     }
 
     [Fact]
+    public void RationalCtor()
+    {
+        var rational = new RationalValue(1, 3);
+        var x = new Parameter("x", rational);
+
+        Assert.Equal(rational, x.Value);
+    }
+
+    [Fact]
     public void NullEqual()
     {
         var parameter = new Parameter("x", 1);

@@ -79,6 +79,10 @@ public class Mul : BinaryExpression
             (Complex left, NumberValue right) => left * right,
             (Complex left, Complex right) => left * right,
 
+            (NumberValue left, RationalValue right) => left * right,
+            (RationalValue left, NumberValue right) => left * right,
+            (RationalValue left, RationalValue right) => left * right,
+
             (VectorValue left, VectorValue right) => left * right,
             (NumberValue left, VectorValue right) => right * left,
             (VectorValue left, NumberValue right) => left * right,

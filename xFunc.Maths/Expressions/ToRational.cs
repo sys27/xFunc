@@ -1,21 +1,31 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Numerics;
+using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 
 namespace xFunc.Maths.Expressions;
 
 /// <summary>
-/// Represents the unary minus.
+/// Represents the function to convert <see cref="NumberValue" /> to <see cref="RationalValue"/>.
 /// </summary>
-public class UnaryMinus : UnaryExpression
+public class ToRational : UnaryExpression
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="UnaryMinus"/> class.
+    /// Initializes a new instance of the <see cref="ToRational"/> class.
     /// </summary>
-    /// <param name="expression">The expression.</param>
-    public UnaryMinus(IExpression expression)
-        : base(expression)
+    /// <param name="argument">The expression.</param>
+    public ToRational(IExpression argument)
+        : base(argument)
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ToRational"/> class.
+    /// </summary>
+    /// <param name="arguments">The list of arguments.</param>
+    internal ToRational(ImmutableArray<IExpression> arguments)
+        : base(arguments)
     {
     }
 
@@ -26,17 +36,8 @@ public class UnaryMinus : UnaryExpression
 
         return result switch
         {
-            NumberValue number => -number,
-            AngleValue angle => -angle,
-            PowerValue power => -power,
-            TemperatureValue temperature => -temperature,
-            MassValue mass => -mass,
-            LengthValue length => -length,
-            TimeValue time => -time,
-            AreaValue area => -area,
-            VolumeValue volume => -volume,
-            Complex complex => Complex.Negate(complex),
-            RationalValue rationalValue => -rationalValue,
+            NumberValue number => new RationalValue(number, NumberValue.One),
+
             _ => throw new ResultIsNotSupportedException(this, result),
         };
     }
@@ -46,6 +47,7 @@ public class UnaryMinus : UnaryExpression
         => analyzer.Analyze(this);
 
     /// <inheritdoc />
+    [ExcludeFromCodeCoverage]
     protected override TResult AnalyzeInternal<TResult, TContext>(
         IAnalyzer<TResult, TContext> analyzer,
         TContext context)
@@ -53,5 +55,5 @@ public class UnaryMinus : UnaryExpression
 
     /// <inheritdoc />
     public override IExpression Clone(IExpression? argument = null)
-        => new UnaryMinus(argument ?? Argument);
+        => new ToRational(argument ?? Argument);
 }

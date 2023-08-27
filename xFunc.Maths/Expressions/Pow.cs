@@ -50,6 +50,7 @@ public class Pow : BinaryExpression
             (NumberValue left, Complex right) => Complex.Pow(left.Number, right),
             (Complex left, NumberValue right) => NumberValue.Pow(left, right),
             (Complex left, Complex right) => Complex.Pow(left, right),
+            (RationalValue left, NumberValue right) => RationalValue.Pow(left, right),
             _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
         };
     }

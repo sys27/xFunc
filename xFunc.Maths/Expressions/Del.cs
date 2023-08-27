@@ -55,11 +55,10 @@ public class Del : UnaryExpression
 
         var context = new DifferentiatorContext(parameters);
         var body = lambda.Body;
-        var variables = Helpers.GetAllVariables(body);
-        if (!variables.TryGetNonEnumeratedCount(out var variablesCount))
-            variablesCount = variables.Count();
+        var variables = new HashSet<Variable>();
+        GetAllVariables(body, variables);
 
-        var vectorItems = new IExpression[variablesCount];
+        var vectorItems = new IExpression[variables.Count];
         var i = 0;
 
         foreach (var variable in variables)
@@ -77,6 +76,28 @@ public class Del : UnaryExpression
             .ToLambda(lambda.Parameters);
 
         return resultLambda;
+    }
+
+    private static void GetAllVariables(IExpression expression, HashSet<Variable> collection)
+    {
+        if (expression is UnaryExpression un)
+        {
+            GetAllVariables(un.Argument, collection);
+        }
+        else if (expression is BinaryExpression bin)
+        {
+            GetAllVariables(bin.Left, collection);
+            GetAllVariables(bin.Right, collection);
+        }
+        else if (expression is DifferentParametersExpression diff)
+        {
+            foreach (var exp in diff.Arguments)
+                GetAllVariables(exp, collection);
+        }
+        else if (expression is Variable variable)
+        {
+            collection.Add(variable);
+        }
     }
 
     /// <inheritdoc />

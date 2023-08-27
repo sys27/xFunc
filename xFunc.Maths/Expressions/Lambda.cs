@@ -43,7 +43,7 @@ public readonly struct Lambda : IEquatable<Lambda>
     private Lambda(ImmutableArray<string> parameters, IExpression body, ExpressionParameters? capturedScope)
     {
         Parameters = parameters;
-        Body = body;
+        Body = body ?? throw new ArgumentNullException(nameof(body));
         CapturedScope = capturedScope;
     }
 

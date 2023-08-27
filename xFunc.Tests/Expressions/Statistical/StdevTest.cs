@@ -8,7 +8,7 @@ namespace xFunc.Tests.Expressions.Statistical;
 
 public class StdevTest
 {
-    [Fact]
+    [Test]
     public void OneNumberTest()
     {
         var exp = new Stdev(new[] { new Number(4) });
@@ -17,33 +17,33 @@ public class StdevTest
         Assert.True(Complex.IsNaN(result));
     }
 
-    [Fact]
+    [Test]
     public void TwoNumberTest()
     {
         var exp = new Stdev(new[] { new Number(4), new Number(9) });
         var result = (NumberValue)exp.Execute();
         var expected = new NumberValue(3.53553390593274);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ThreeNumberTest()
     {
         var exp = new Stdev(new[] { new Number(9), Number.Two, new Number(4) });
         var result = (NumberValue)exp.Execute();
         var expected = new NumberValue(3.60555127546399);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void VectorTest()
     {
-        var exp = new Stdev(new[] { new Vector(new[] { Number.Two, new Number(4), new Number(9) }) });
+        var exp = new Stdev(new[] { new Vector(new IExpression[] { Number.Two, new Number(4), new Number(9) }) });
         var result = (NumberValue)exp.Execute();
         var expected = new NumberValue(3.60555127546399);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 }

@@ -10,12 +10,12 @@ public class DomainTests
         yield return new object[] { Array.Empty<DomainRange>() };
     }
 
-    [Theory]
-    [MemberData(nameof(GetCtorTestData))]
+    [Test]
+    [TestCaseSource(nameof(GetCtorTestData))]
     public void CtorNullTest(DomainRange[] ranges)
         => Assert.Throws<ArgumentNullException>(() => new Domain(ranges));
 
-    [Fact]
+    [Test]
     public void CtorInvalidDomainTest()
         => Assert.Throws<ArgumentException>(() => new Domain(new DomainRange[]
         {
@@ -23,70 +23,70 @@ public class DomainTests
             new DomainRange(NumberValue.NegativeInfinity, false, -NumberValue.One, true),
         }));
 
-    [Fact]
+    [Test]
     public void EqualTest()
     {
         var a = new Domain(new DomainRange[] { new DomainRange(-NumberValue.One, true, NumberValue.One, true) });
         var b = new Domain(new DomainRange[] { new DomainRange(-NumberValue.One, true, NumberValue.One, true) });
 
-        Assert.True(a.Equals(b));
+        Assert.That(a.Equals(b), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualTest()
     {
         var a = new Domain(new DomainRange[] { new DomainRange(-NumberValue.One, true, NumberValue.One, true) });
         var b = new Domain(new DomainRange[] { new DomainRange(-NumberValue.One, false, NumberValue.One, true) });
 
-        Assert.False(a.Equals(b));
+        Assert.That(a.Equals(b), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ObjectEqualTest()
     {
         var a = new Domain(new DomainRange[] { new DomainRange(-NumberValue.One, true, NumberValue.One, true) });
         var b = new Domain(new DomainRange[] { new DomainRange(-NumberValue.One, true, NumberValue.One, true) }) as object;
 
-        Assert.True(a.Equals(b));
+        Assert.That(a.Equals(b), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ObjectNotEqualTest1()
     {
         var a = new Domain(new DomainRange[] { new DomainRange(-NumberValue.One, true, NumberValue.One, true) });
         var b = new Domain(new DomainRange[] { new DomainRange(-NumberValue.One, false, NumberValue.One, true) }) as object;
 
-        Assert.False(a.Equals(b));
+        Assert.That(a.Equals(b), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ObjectNotEqualTest2()
     {
         var a = new Domain(new DomainRange[] { new DomainRange(-NumberValue.One, true, NumberValue.One, true) });
         var b = new object();
 
-        Assert.False(a.Equals(b));
+        Assert.That(a.Equals(b), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualOperatorTest()
     {
         var a = new Domain(new DomainRange[] { new DomainRange(-NumberValue.One, true, NumberValue.One, true) });
         var b = new Domain(new DomainRange[] { new DomainRange(-NumberValue.One, true, NumberValue.One, true) });
 
-        Assert.True(a == b);
+        Assert.That(a == b, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualOperatorTest()
     {
         var a = new Domain(new DomainRange[] { new DomainRange(-NumberValue.One, true, NumberValue.One, true) });
         var b = new Domain(new DomainRange[] { new DomainRange(-NumberValue.One, false, NumberValue.One, true) });
 
-        Assert.True(a != b);
+        Assert.That(a != b, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var domain = new Domain(new DomainRange[]
@@ -96,10 +96,10 @@ public class DomainTests
         });
         var expected = "(-∞; -1] ∪ [1; ∞)";
 
-        Assert.Equal(expected, domain.ToString());
+        Assert.That(domain.ToString(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void InRangeTest()
     {
         var domain = new Domain(new DomainRange[]
@@ -109,10 +109,10 @@ public class DomainTests
         });
         var result = domain.IsInRange(NumberValue.One);
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotInRangeTest()
     {
         var domain = new Domain(new DomainRange[]
@@ -122,6 +122,6 @@ public class DomainTests
         });
         var result = domain.IsInRange(NumberValue.Zero);
 
-        Assert.False(result);
+        Assert.That(result, Is.False);
     }
 }

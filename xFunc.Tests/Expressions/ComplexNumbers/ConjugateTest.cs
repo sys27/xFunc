@@ -7,25 +7,25 @@ namespace xFunc.Tests.Expressions.ComplexNumbers;
 
 public class ConjugateTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteComplexNumberTest()
     {
         var complex = new Complex(3.1, 2.5);
         var exp = new Conjugate(new ComplexNumber(complex));
 
-        Assert.Equal(Complex.Conjugate(complex), exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(Complex.Conjugate(complex)));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteExceptionTest()
         => TestNotSupported(new Conjugate(Number.Two));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Conjugate(new ComplexNumber(new Complex(2, 2)));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

@@ -7,11 +7,11 @@ namespace xFunc.Tests.Expressions;
 
 public class DerivativeTest
 {
-    [Fact]
+    [Test]
     public void DifferentiatorNull()
         => Assert.Throws<ArgumentNullException>(() => new Derivative(null, null, Variable.X));
 
-    [Fact]
+    [Test]
     public void SimplifierNull()
     {
         var differentiator = Substitute.For<IDifferentiator>();
@@ -19,7 +19,7 @@ public class DerivativeTest
         Assert.Throws<ArgumentNullException>(() => new Derivative(differentiator, null, Variable.X));
     }
 
-    [Fact]
+    [Test]
     public void ExecutePointTest()
     {
         var differentiator = Substitute.For<IDifferentiator>();
@@ -36,10 +36,10 @@ public class DerivativeTest
             Variable.X,
             Number.Two);
 
-        Assert.Equal(new NumberValue(2.0), deriv.Execute());
+        Assert.That(deriv.Execute(), Is.EqualTo(new NumberValue(2.0)));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNonLambdaTest()
     {
         var differentiator = Substitute.For<IDifferentiator>();
@@ -52,16 +52,16 @@ public class DerivativeTest
         Assert.Throws<ResultIsNotSupportedException>(() => derivative.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNullDerivTest()
         => Assert.Throws<ArgumentNullException>(() => new Derivative(null, null, Variable.X));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Derivative(new Differentiator(), new Simplifier(), new Sin(Variable.X), Variable.X, Number.One);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

@@ -5,7 +5,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class LogTests : TypeAnalyzerBaseTests
 {
-    [Fact]
+    [Test]
     public void TestLbUndefined()
     {
         var exp = new Lb(Variable.X);
@@ -13,7 +13,7 @@ public class LogTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestLbNumber()
     {
         var exp = new Lb(new Number(10));
@@ -21,7 +21,7 @@ public class LogTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestLbRational()
     {
         var exp = new Lb(new Rational(new Number(2), new Number(3)));
@@ -29,7 +29,7 @@ public class LogTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestLbException()
     {
         var exp = new Lb(Bool.False);
@@ -37,7 +37,7 @@ public class LogTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestLgUndefined()
     {
         var exp = new Lg(Variable.X);
@@ -45,7 +45,7 @@ public class LogTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestLgNumber()
     {
         var exp = new Lg(new Number(10));
@@ -53,7 +53,7 @@ public class LogTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestLgComplexNumber()
     {
         var exp = new Lg(new ComplexNumber(10, 10));
@@ -61,7 +61,7 @@ public class LogTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestLgRational()
     {
         var exp = new Lg(new Rational(new Number(2), new Number(3)));
@@ -69,7 +69,7 @@ public class LogTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestLgException()
     {
         var exp = new Lg(Bool.False);
@@ -77,7 +77,7 @@ public class LogTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestLnUndefined()
     {
         var exp = new Ln(Variable.X);
@@ -85,7 +85,7 @@ public class LogTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestLnNumber()
     {
         var exp = new Ln(new Number(10));
@@ -93,7 +93,7 @@ public class LogTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestLnComplexNumber()
     {
         var exp = new Ln(new ComplexNumber(10, 10));
@@ -101,7 +101,7 @@ public class LogTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestLnRational()
     {
         var exp = new Ln(new Rational(new Number(2), new Number(3)));
@@ -109,7 +109,7 @@ public class LogTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestLnException()
     {
         var exp = new Ln(Bool.False);
@@ -117,7 +117,7 @@ public class LogTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestLogNumberAndUndefined()
     {
         var exp = new Log(Number.Two, Variable.X);
@@ -125,7 +125,7 @@ public class LogTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestLogUndefinedAndNumber()
     {
         var exp = new Log(Variable.X, Number.Two);
@@ -133,7 +133,7 @@ public class LogTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestLogNumber()
     {
         var exp = new Log(Number.Two, new Number(4));
@@ -141,7 +141,7 @@ public class LogTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestLogComplexNumber()
     {
         var exp = new Log(Number.Two, new ComplexNumber(8, 3));
@@ -149,7 +149,7 @@ public class LogTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestLogRational()
     {
         var exp = new Log(new Number(3), new Rational(new Number(2), new Number(3)));
@@ -157,7 +157,7 @@ public class LogTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestLogException()
     {
         var exp = new Log(Number.Two, Bool.False);
@@ -165,7 +165,7 @@ public class LogTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestLogBaseIsNotNumber()
     {
         var exp = new Log(Bool.False, Number.Two);

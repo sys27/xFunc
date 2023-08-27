@@ -7,29 +7,29 @@ namespace xFunc.Tests.Expressions.Parameters;
 
 public class ExpressionParameterTest
 {
-    [Fact]
+    [Test]
     public void NullCtorTest()
     {
         Assert.Throws<ArgumentNullException>(() => new ExpressionParameters(null as ExpressionParameters));
     }
 
-    [Fact]
+    [Test]
     public void InitializeWithConstantsTest()
     {
         var parameters = new ExpressionParameters(true);
 
-        Assert.NotEmpty(parameters);
+        CollectionAssert.IsNotEmpty(parameters);
     }
 
-    [Fact]
+    [Test]
     public void InitializeWithoutConstantsTest()
     {
         var parameters = new ExpressionParameters(false);
 
-        Assert.Empty(parameters);
+        CollectionAssert.IsEmpty(parameters);
     }
 
-    [Fact]
+    [Test]
     public void InitializeDuplicatesTest()
     {
         var array = new[]
@@ -41,11 +41,11 @@ public class ExpressionParameterTest
         Assert.Throws<ArgumentException>(() => new ExpressionParameters(array));
     }
 
-    [Fact]
+    [Test]
     public void InitializeNullTest()
         => Assert.Throws<ArgumentNullException>(() => new ExpressionParameters(null));
 
-    [Fact]
+    [Test]
     public void ChangedEventTest()
     {
         var isExecuted = false;
@@ -55,9 +55,9 @@ public class ExpressionParameterTest
         {
             isExecuted = true;
 
-            Assert.Equal(NotifyCollectionChangedAction.Add, args.Action);
+            Assert.That(args.Action, Is.EqualTo(NotifyCollectionChangedAction.Add));
             Assert.Null(args.OldItems);
-            Assert.Single(args.NewItems);
+            Assert.That(args.NewItems, Has.Count.EqualTo(1));
         };
 
         parameters.Add(new Parameter("xxx", 1.0));
@@ -65,15 +65,15 @@ public class ExpressionParameterTest
         Assert.True(isExecuted);
     }
 
-    [Fact]
+    [Test]
     public void EnumeratorTest()
     {
         var parameters = new ExpressionParameters(true);
 
-        Assert.True(parameters.Any());
+        Assert.That(parameters.Any(), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void AddNullParameter()
     {
         var parameters = new ExpressionParameters(true);
@@ -81,7 +81,7 @@ public class ExpressionParameterTest
         Assert.Throws<ArgumentNullException>(() => parameters.Add(null as Parameter));
     }
 
-    [Fact]
+    [Test]
     public void AddConstantParameter()
     {
         var parameters = new ExpressionParameters(true);
@@ -90,7 +90,7 @@ public class ExpressionParameterTest
         Assert.Throws<ArgumentException>(() => parameters.Add(parameter));
     }
 
-    [Fact]
+    [Test]
     public void AddParameter()
     {
         var parameters = new ExpressionParameters(true);
@@ -100,10 +100,10 @@ public class ExpressionParameterTest
 
         var result = parameters[parameter.Key];
 
-        Assert.Equal(parameter.Value, result);
+        Assert.That(result, Is.EqualTo(parameter.Value));
     }
 
-    [Fact]
+    [Test]
     public void RemoveNullParameter()
     {
         var parameters = new ExpressionParameters(true);
@@ -111,7 +111,7 @@ public class ExpressionParameterTest
         Assert.Throws<ArgumentNullException>(() => parameters.Remove(null as Parameter));
     }
 
-    [Fact]
+    [Test]
     public void RemoveConstantParameter()
     {
         var parameters = new ExpressionParameters(true);
@@ -120,7 +120,7 @@ public class ExpressionParameterTest
         Assert.Throws<ArgumentException>(() => parameters.Add(parameter));
     }
 
-    [Fact]
+    [Test]
     public void RemoveStringParameter()
     {
         var parameters = new ExpressionParameters(true);
@@ -128,7 +128,7 @@ public class ExpressionParameterTest
         Assert.Throws<ArgumentNullException>(() => parameters.Remove(string.Empty));
     }
 
-    [Fact]
+    [Test]
     public void GetItemFromCollectionTest()
     {
         var parameters = new ExpressionParameters
@@ -136,26 +136,29 @@ public class ExpressionParameterTest
             new Parameter("x", 2.3)
         };
 
-        Assert.Equal(new NumberValue(2.3), parameters["x"]);
+        Assert.That(parameters["x"].Value, Is.EqualTo(new NumberValue(2.3)));
     }
 
-    [Fact]
+    [Test]
     public void GetItemFromConstsTest()
     {
         var parameters = new ExpressionParameters();
 
-        Assert.Equal(AngleValue.Radian(Math.PI), parameters["π"]);
+        Assert.That(parameters["π"].Value, Is.EqualTo(AngleValue.Radian(Math.PI)));
     }
 
-    [Fact]
+    [Test]
     public void GetItemKeyNotFoundTest()
     {
         var parameters = new ExpressionParameters();
 
-        Assert.Throws<KeyNotFoundException>(() => parameters["hello"]);
+        Assert.Throws<KeyNotFoundException>(() =>
+        {
+            var value = parameters["hello"].Value;
+        });
     }
 
-    [Fact]
+    [Test]
     public void SetItemFromCollectionTest()
     {
         var parameters = new ExpressionParameters
@@ -163,12 +166,12 @@ public class ExpressionParameterTest
             ["x"] = 2.3
         };
 
-        Assert.True(parameters.ContainsKey("x"));
-        Assert.Contains(new Parameter("x", 2.3), parameters);
-        Assert.Equal(new NumberValue(2.3), parameters["x"]);
+        Assert.That(parameters.ContainsKey("x"), Is.True);
+        CollectionAssert.Contains(parameters, new Parameter("x", 2.3));
+        Assert.That(parameters["x"].Value, Is.EqualTo(new NumberValue(2.3)));
     }
 
-    [Fact]
+    [Test]
     public void ContainsNullTest()
     {
         var parameters = new ExpressionParameters();
@@ -176,7 +179,7 @@ public class ExpressionParameterTest
         Assert.Throws<ArgumentNullException>(() => parameters.Contains(null));
     }
 
-    [Fact]
+    [Test]
     public void SetExistItemFromCollectionTest()
     {
         var parameters = new ExpressionParameters
@@ -185,11 +188,11 @@ public class ExpressionParameterTest
         };
         parameters["x"] = new NumberValue(3.3);
 
-        Assert.True(parameters.ContainsKey("x"));
-        Assert.Equal(new NumberValue(3.3), parameters["x"]);
+        Assert.That(parameters.ContainsKey("x"), Is.True);
+        Assert.That(parameters["x"].Value, Is.EqualTo(new NumberValue(3.3)));
     }
 
-    [Fact]
+    [Test]
     public void SetReadOnlyItemTest()
     {
         var parameters = new ExpressionParameters
@@ -200,7 +203,7 @@ public class ExpressionParameterTest
         Assert.Throws<ParameterIsReadOnlyException>(() => parameters["hello"] = 5);
     }
 
-    [Fact]
+    [Test]
     public void OverrideConstsTest()
     {
         var parameters = new ExpressionParameters
@@ -208,11 +211,11 @@ public class ExpressionParameterTest
             ["π"] = 4
         };
 
-        Assert.True(parameters.ContainsKey("π"));
-        Assert.Equal(new NumberValue(4.0), parameters["π"]);
+        Assert.That(parameters.ContainsKey("π"), Is.True);
+        Assert.That(parameters["π"].Value, Is.EqualTo(new NumberValue(4.0)));
     }
 
-    [Fact]
+    [Test]
     public void OverrideRemoveTest()
     {
         var parameters = new ExpressionParameters(false)
@@ -222,10 +225,10 @@ public class ExpressionParameterTest
         parameters["a"] = 2;
         parameters.Remove("a");
 
-        Assert.Empty(parameters);
+        CollectionAssert.IsEmpty(parameters);
     }
 
-    [Fact]
+    [Test]
     public void ClearTest()
     {
         var parameters = new ExpressionParameters(false)
@@ -235,10 +238,10 @@ public class ExpressionParameterTest
 
         parameters.Clear();
 
-        Assert.Empty(parameters);
+        CollectionAssert.IsEmpty(parameters);
     }
 
-    [Fact]
+    [Test]
     public void ScopedGetEnumerator()
     {
         var parameters = new ExpressionParameters(false)
@@ -248,10 +251,10 @@ public class ExpressionParameterTest
         var scoped = ExpressionParameters.CreateScoped(parameters);
         scoped["y"] = new ParameterValue(2);
 
-        Assert.Equal(2, scoped.Count());
+        Assert.That(scoped.Count(), Is.EqualTo(2));
     }
 
-    [Fact]
+    [Test]
     public void ScopedGetParentValue()
     {
         var parameter = new Parameter("x", new ParameterValue(1));
@@ -264,10 +267,10 @@ public class ExpressionParameterTest
 
         var result = scoped[parameter.Key];
 
-        Assert.Equal(parameter.Value, result);
+        Assert.That(result, Is.EqualTo(parameter.Value));
     }
 
-    [Fact]
+    [Test]
     public void ScopedSetActualValue()
     {
         const string key = "x";
@@ -283,11 +286,11 @@ public class ExpressionParameterTest
         var result = scoped[key];
         var parentResult = parent[key];
 
-        Assert.Equal(new ParameterValue(NumberValue.Two), result);
-        Assert.Equal(new ParameterValue(NumberValue.One), parentResult);
+        Assert.That(result, Is.EqualTo(new ParameterValue(NumberValue.Two)));
+        Assert.That(parentResult, Is.EqualTo(new ParameterValue(NumberValue.One)));
     }
 
-    [Fact]
+    [Test]
     public void ScopedSetParentValue()
     {
         const string key = "x";
@@ -303,11 +306,11 @@ public class ExpressionParameterTest
         var result = scoped[key];
         var parentResult = parent[key];
 
-        Assert.Equal(new ParameterValue(NumberValue.Two), result);
-        Assert.Equal(new ParameterValue(NumberValue.Two), parentResult);
+        Assert.That(result, Is.EqualTo(new ParameterValue(NumberValue.Two)));
+        Assert.That(parentResult, Is.EqualTo(new ParameterValue(NumberValue.Two)));
     }
 
-    [Fact]
+    [Test]
     public void ScopedContainsParentValue()
     {
         var parameter = new Parameter("x", new ParameterValue(1));
@@ -323,7 +326,7 @@ public class ExpressionParameterTest
         Assert.True(result);
     }
 
-    [Fact]
+    [Test]
     public void ScopedDoesntContainsParentValue()
     {
         var parameter = new Parameter("x", new ParameterValue(1));
@@ -339,7 +342,7 @@ public class ExpressionParameterTest
         Assert.False(result);
     }
 
-    [Fact]
+    [Test]
     public void ScopedContainsValue()
     {
         var x = new Parameter("x", new ParameterValue(1));
@@ -357,7 +360,7 @@ public class ExpressionParameterTest
         Assert.True(result);
     }
 
-    [Fact]
+    [Test]
     public void ScopedDoesntContainsValue()
     {
         var x = new Parameter("x", new ParameterValue(1));
@@ -375,97 +378,97 @@ public class ExpressionParameterTest
         Assert.False(result);
     }
 
-    [Theory]
-    [InlineData("add", typeof(Add))]
-    [InlineData("sub", typeof(Sub))]
-    [InlineData("mul", typeof(Mul))]
-    [InlineData("div", typeof(Div))]
-    [InlineData("pow", typeof(Pow))]
-    [InlineData("exp", typeof(Exp))]
-    [InlineData("abs", typeof(Abs))]
-    [InlineData("sqrt", typeof(Sqrt))]
-    [InlineData("root", typeof(Root))]
-    [InlineData("fact", typeof(Fact))]
-    [InlineData("factorial", typeof(Fact))]
-    [InlineData("ln", typeof(Ln))]
-    [InlineData("lg", typeof(Lg))]
-    [InlineData("lb", typeof(Lb))]
-    [InlineData("log2", typeof(Lb))]
-    [InlineData("log", typeof(Log))]
-    [InlineData("todeg", typeof(ToDegree))]
-    [InlineData("todegree", typeof(ToDegree))]
-    [InlineData("torad", typeof(ToRadian))]
-    [InlineData("toradian", typeof(ToRadian))]
-    [InlineData("tograd", typeof(ToGradian))]
-    [InlineData("togradian", typeof(ToGradian))]
-    [InlineData("sin", typeof(Sin))]
-    [InlineData("cos", typeof(Cos))]
-    [InlineData("tan", typeof(Tan))]
-    [InlineData("tg", typeof(Tan))]
-    [InlineData("cot", typeof(Cot))]
-    [InlineData("ctg", typeof(Cot))]
-    [InlineData("sec", typeof(Sec))]
-    [InlineData("cosec", typeof(Csc))]
-    [InlineData("csc", typeof(Csc))]
-    [InlineData("arcsin", typeof(Arcsin))]
-    [InlineData("arccos", typeof(Arccos))]
-    [InlineData("arctan", typeof(Arctan))]
-    [InlineData("arctg", typeof(Arctan))]
-    [InlineData("arccot", typeof(Arccot))]
-    [InlineData("arcctg", typeof(Arccot))]
-    [InlineData("arcsec", typeof(Arcsec))]
-    [InlineData("arccosec", typeof(Arccsc))]
-    [InlineData("arccsc", typeof(Arccsc))]
-    [InlineData("sh", typeof(Sinh))]
-    [InlineData("sinh", typeof(Sinh))]
-    [InlineData("ch", typeof(Cosh))]
-    [InlineData("cosh", typeof(Cosh))]
-    [InlineData("th", typeof(Tanh))]
-    [InlineData("tanh", typeof(Tanh))]
-    [InlineData("cth", typeof(Coth))]
-    [InlineData("coth", typeof(Coth))]
-    [InlineData("sech", typeof(Sech))]
-    [InlineData("csch", typeof(Csch))]
-    [InlineData("arsh", typeof(Arsinh))]
-    [InlineData("arsinh", typeof(Arsinh))]
-    [InlineData("arch", typeof(Arcosh))]
-    [InlineData("arcosh", typeof(Arcosh))]
-    [InlineData("arth", typeof(Artanh))]
-    [InlineData("artanh", typeof(Artanh))]
-    [InlineData("arcth", typeof(Arcoth))]
-    [InlineData("arcoth", typeof(Arcoth))]
-    [InlineData("arsch", typeof(Arsech))]
-    [InlineData("arsech", typeof(Arsech))]
-    [InlineData("arcsch", typeof(Arcsch))]
-    [InlineData("round", typeof(Round))]
-    [InlineData("floor", typeof(Floor))]
-    [InlineData("ceil", typeof(Ceil))]
-    [InlineData("trunc", typeof(Trunc))]
-    [InlineData("truncate", typeof(Trunc))]
-    [InlineData("frac", typeof(Frac))]
-    [InlineData("transpose", typeof(Transpose))]
-    [InlineData("det", typeof(Determinant))]
-    [InlineData("determinant", typeof(Determinant))]
-    [InlineData("inverse", typeof(Inverse))]
-    [InlineData("dotproduct", typeof(DotProduct))]
-    [InlineData("crossproduct", typeof(CrossProduct))]
-    [InlineData("im", typeof(Im))]
-    [InlineData("imaginary", typeof(Im))]
-    [InlineData("re", typeof(Re))]
-    [InlineData("real", typeof(Re))]
-    [InlineData("phase", typeof(Phase))]
-    [InlineData("conjugate", typeof(Conjugate))]
-    [InlineData("reciprocal", typeof(Reciprocal))]
-    [InlineData("tocomplex", typeof(ToComplex))]
-    [InlineData("sign", typeof(Sign))]
-    [InlineData("tobin", typeof(ToBin))]
-    [InlineData("tooct", typeof(ToOct))]
-    [InlineData("tohex", typeof(ToHex))]
+    [Test]
+    [TestCase("add", typeof(Add))]
+    [TestCase("sub", typeof(Sub))]
+    [TestCase("mul", typeof(Mul))]
+    [TestCase("div", typeof(Div))]
+    [TestCase("pow", typeof(Pow))]
+    [TestCase("exp", typeof(Exp))]
+    [TestCase("abs", typeof(Abs))]
+    [TestCase("sqrt", typeof(Sqrt))]
+    [TestCase("root", typeof(Root))]
+    [TestCase("fact", typeof(Fact))]
+    [TestCase("factorial", typeof(Fact))]
+    [TestCase("ln", typeof(Ln))]
+    [TestCase("lg", typeof(Lg))]
+    [TestCase("lb", typeof(Lb))]
+    [TestCase("log2", typeof(Lb))]
+    [TestCase("log", typeof(Log))]
+    [TestCase("todeg", typeof(ToDegree))]
+    [TestCase("todegree", typeof(ToDegree))]
+    [TestCase("torad", typeof(ToRadian))]
+    [TestCase("toradian", typeof(ToRadian))]
+    [TestCase("tograd", typeof(ToGradian))]
+    [TestCase("togradian", typeof(ToGradian))]
+    [TestCase("sin", typeof(Sin))]
+    [TestCase("cos", typeof(Cos))]
+    [TestCase("tan", typeof(Tan))]
+    [TestCase("tg", typeof(Tan))]
+    [TestCase("cot", typeof(Cot))]
+    [TestCase("ctg", typeof(Cot))]
+    [TestCase("sec", typeof(Sec))]
+    [TestCase("cosec", typeof(Csc))]
+    [TestCase("csc", typeof(Csc))]
+    [TestCase("arcsin", typeof(Arcsin))]
+    [TestCase("arccos", typeof(Arccos))]
+    [TestCase("arctan", typeof(Arctan))]
+    [TestCase("arctg", typeof(Arctan))]
+    [TestCase("arccot", typeof(Arccot))]
+    [TestCase("arcctg", typeof(Arccot))]
+    [TestCase("arcsec", typeof(Arcsec))]
+    [TestCase("arccosec", typeof(Arccsc))]
+    [TestCase("arccsc", typeof(Arccsc))]
+    [TestCase("sh", typeof(Sinh))]
+    [TestCase("sinh", typeof(Sinh))]
+    [TestCase("ch", typeof(Cosh))]
+    [TestCase("cosh", typeof(Cosh))]
+    [TestCase("th", typeof(Tanh))]
+    [TestCase("tanh", typeof(Tanh))]
+    [TestCase("cth", typeof(Coth))]
+    [TestCase("coth", typeof(Coth))]
+    [TestCase("sech", typeof(Sech))]
+    [TestCase("csch", typeof(Csch))]
+    [TestCase("arsh", typeof(Arsinh))]
+    [TestCase("arsinh", typeof(Arsinh))]
+    [TestCase("arch", typeof(Arcosh))]
+    [TestCase("arcosh", typeof(Arcosh))]
+    [TestCase("arth", typeof(Artanh))]
+    [TestCase("artanh", typeof(Artanh))]
+    [TestCase("arcth", typeof(Arcoth))]
+    [TestCase("arcoth", typeof(Arcoth))]
+    [TestCase("arsch", typeof(Arsech))]
+    [TestCase("arsech", typeof(Arsech))]
+    [TestCase("arcsch", typeof(Arcsch))]
+    [TestCase("round", typeof(Round))]
+    [TestCase("floor", typeof(Floor))]
+    [TestCase("ceil", typeof(Ceil))]
+    [TestCase("trunc", typeof(Trunc))]
+    [TestCase("truncate", typeof(Trunc))]
+    [TestCase("frac", typeof(Frac))]
+    [TestCase("transpose", typeof(Transpose))]
+    [TestCase("det", typeof(Determinant))]
+    [TestCase("determinant", typeof(Determinant))]
+    [TestCase("inverse", typeof(Inverse))]
+    [TestCase("dotproduct", typeof(DotProduct))]
+    [TestCase("crossproduct", typeof(CrossProduct))]
+    [TestCase("im", typeof(Im))]
+    [TestCase("imaginary", typeof(Im))]
+    [TestCase("re", typeof(Re))]
+    [TestCase("real", typeof(Re))]
+    [TestCase("phase", typeof(Phase))]
+    [TestCase("conjugate", typeof(Conjugate))]
+    [TestCase("reciprocal", typeof(Reciprocal))]
+    [TestCase("tocomplex", typeof(ToComplex))]
+    [TestCase("sign", typeof(Sign))]
+    [TestCase("tobin", typeof(ToBin))]
+    [TestCase("tooct", typeof(ToOct))]
+    [TestCase("tohex", typeof(ToHex))]
     public void LambdaParametersTest(string function, Type type)
     {
         var parameters = new ExpressionParameters();
         var lambda = (Lambda)parameters[function].Value;
 
-        Assert.IsType(type, lambda.Body);
+        Assert.That(lambda.Body, Is.InstanceOf(type));
     }
 }

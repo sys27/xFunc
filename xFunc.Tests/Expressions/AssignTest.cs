@@ -5,7 +5,7 @@ namespace xFunc.Tests.Expressions;
 
 public class AssignTest
 {
-    [Fact]
+    [Test]
     public void SimpleDefineTest()
     {
         var exp = new Assign(Variable.X, Number.One);
@@ -14,11 +14,11 @@ public class AssignTest
         var answer = exp.Execute(parameters);
 
         var expected = new NumberValue(1.0);
-        Assert.Equal(expected, parameters["x"]);
-        Assert.Equal(expected, answer);
+        Assert.That(parameters["x"].Value, Is.EqualTo(expected));
+        Assert.That(answer, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void DefineWithFuncTest()
     {
         var exp = new Assign(Variable.X, new Sin(AngleValue.Radian(1).AsExpression()));
@@ -27,11 +27,11 @@ public class AssignTest
         var answer = exp.Execute(parameters);
 
         var expected = new NumberValue(Math.Sin(1));
-        Assert.Equal(expected, parameters[Variable.X.Name]);
-        Assert.Equal(expected, answer);
+        Assert.That(parameters[Variable.X.Name].Value, Is.EqualTo(expected));
+        Assert.That(answer, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void DefineExpTest()
     {
         var exp = new Assign(Variable.X, new Mul(new Number(4), new Add(new Number(8), Number.One)));
@@ -40,11 +40,11 @@ public class AssignTest
         var answer = exp.Execute(parameters);
 
         var expected = new NumberValue(36.0);
-        Assert.Equal(expected, parameters["x"]);
-        Assert.Equal(expected, answer);
+        Assert.That(parameters["x"].Value, Is.EqualTo(expected));
+        Assert.That(answer, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void OverrideConstTest()
     {
         var exp = new Assign(new Variable("π"), Number.One);
@@ -52,10 +52,10 @@ public class AssignTest
 
         exp.Execute(parameters);
 
-        Assert.Equal(new NumberValue(1.0), parameters["π"]);
+        Assert.That(parameters["π"].Value, Is.EqualTo(new NumberValue(1.0)));
     }
 
-    [Fact]
+    [Test]
     public void DefineFuncTest()
     {
         var function = Number.One.ToLambdaExpression();
@@ -65,10 +65,10 @@ public class AssignTest
         var parameters = new ExpressionParameters();
         var result = exp.Execute(parameters);
 
-        Assert.Equal("() => 1", result.ToString());
+        Assert.That(result.ToString(), Is.EqualTo("() => 1"));
     }
 
-    [Fact]
+    [Test]
     public void DefineFuncWithParamsTest()
     {
         var function = new Add(Variable.X, Variable.Y)
@@ -79,69 +79,69 @@ public class AssignTest
         var parameters = new ExpressionParameters();
         var result = exp.Execute(parameters);
 
-        Assert.Equal("(x, y) => x + y", result.ToString());
+        Assert.That(result.ToString(), Is.EqualTo("(x, y) => x + y"));
     }
 
-    [Fact]
+    [Test]
     public void ParamsNullTest()
     {
         Assert.Throws<ArgumentNullException>(() => new Assign(new Variable("π"), Number.One).Execute(null));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteWithoutParametersTest()
     {
         Assert.Throws<NotSupportedException>(() => new Assign(new Variable("π"), Number.One).Execute());
     }
 
-    [Fact]
+    [Test]
     public void KeyIsNullTest()
     {
         Assert.Throws<ArgumentNullException>(() => new Assign(null, Number.One));
     }
 
-    [Fact]
+    [Test]
     public void ValueIsNullTest()
     {
         Assert.Throws<ArgumentNullException>(() => new Assign(Variable.X, null));
     }
 
-    [Fact]
+    [Test]
     public void EqualsSameReferenceTest()
     {
         var def = new Assign(Variable.X, Number.One);
 
-        Assert.True(def.Equals(def));
+        Assert.That(def.Equals(def), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualsDifferentTypesTest()
     {
         var def = new Assign(Variable.X, Number.One);
         var number = Number.One;
 
-        Assert.False(def.Equals(number));
+        Assert.That(def.Equals(number), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsDifferentOnjectsTest()
     {
         var def1 = new Assign(Variable.X, Number.One);
         var def2 = new Assign(Variable.Y, Number.Two);
 
-        Assert.False(def1.Equals(def2));
+        Assert.That(def1.Equals(def2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Assign(Variable.X, Number.Zero);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest1()
     {
         var exp = new Assign(Variable.X, Number.Zero);
@@ -149,7 +149,7 @@ public class AssignTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest2()
     {
         var exp = new Assign(Variable.X, Number.Zero);

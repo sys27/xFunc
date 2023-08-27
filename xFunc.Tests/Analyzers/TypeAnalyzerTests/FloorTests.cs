@@ -2,7 +2,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class FloorTests : TypeAnalyzerBaseTests
 {
-    [Fact]
+    [Test]
     public void TestFloorUndefined()
     {
         var exp = new Floor(Variable.X);
@@ -10,7 +10,7 @@ public class FloorTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestFloorNumber()
     {
         var exp = new Floor(new Number(10));
@@ -18,7 +18,7 @@ public class FloorTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestFloorAngle()
     {
         var exp = new Floor(AngleValue.Degree(5.5).AsExpression());
@@ -26,7 +26,7 @@ public class FloorTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestFloorPower()
     {
         var exp = new Floor(PowerValue.Watt(5.5).AsExpression());
@@ -34,7 +34,7 @@ public class FloorTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.PowerNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestFloorTemperature()
     {
         var exp = new Floor(TemperatureValue.Celsius(5.5).AsExpression());
@@ -42,7 +42,7 @@ public class FloorTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TemperatureNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestFloorMass()
     {
         var exp = new Floor(MassValue.Gram(5.5).AsExpression());
@@ -50,7 +50,7 @@ public class FloorTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.MassNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestFloorLength()
     {
         var exp = new Floor(LengthValue.Meter(5.5).AsExpression());
@@ -58,7 +58,7 @@ public class FloorTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.LengthNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestFloorTime()
     {
         var exp = new Floor(TimeValue.Second(5.5).AsExpression());
@@ -66,7 +66,7 @@ public class FloorTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TimeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestFloorArea()
     {
         var exp = new Floor(AreaValue.Meter(5.5).AsExpression());
@@ -74,7 +74,7 @@ public class FloorTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AreaNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestFloorVolume()
     {
         var exp = new Floor(VolumeValue.Meter(5.5).AsExpression());
@@ -82,7 +82,7 @@ public class FloorTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.VolumeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestFloorException()
     {
         var exp = new Floor(Bool.False);

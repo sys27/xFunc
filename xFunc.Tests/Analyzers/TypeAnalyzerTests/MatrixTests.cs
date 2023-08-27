@@ -5,7 +5,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class MatrixTests : TypeAnalyzerBaseTests
 {
-    [Fact]
+    [Test]
     public void TestVectorUndefined()
     {
         var exp = new Vector(new IExpression[] { new Number(10), Variable.X });
@@ -13,7 +13,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestVectorNumber()
     {
         var exp = new Vector(new IExpression[] { new Number(10), new Number(10), new Number(10) });
@@ -21,7 +21,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Vector);
     }
 
-    [Fact]
+    [Test]
     public void TestVectorException()
     {
         var exp = new Vector(new IExpression[] { new ComplexNumber(10), new Number(10) });
@@ -29,7 +29,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         TestDiffParamException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestMatrixVector()
     {
         var exp = new Matrix(new[]
@@ -41,7 +41,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Matrix);
     }
 
-    [Fact]
+    [Test]
     public void TestMatrixVectorUndefined()
     {
         var exp = new Matrix(new[]
@@ -52,7 +52,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestDeterminantUndefined()
     {
         var exp = new Determinant(Variable.X);
@@ -60,7 +60,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestDeterminantMatrix()
     {
         var matrix = new Matrix(new[]
@@ -73,7 +73,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestDeterminantException()
     {
         var exp = new Determinant(new ComplexNumber(2, 2));
@@ -81,7 +81,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestDeterminantsException2()
     {
         var exp = new Determinant(
@@ -96,7 +96,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestInverseUndefined()
     {
         var exp = new Inverse(Variable.X);
@@ -104,7 +104,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Matrix);
     }
 
-    [Fact]
+    [Test]
     public void TestInverseMatrix()
     {
         var matrix = new Matrix(new[]
@@ -117,7 +117,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Matrix);
     }
 
-    [Fact]
+    [Test]
     public void TestInverseException()
     {
         var exp = new Inverse(new ComplexNumber(2, 2));
@@ -125,7 +125,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestInverseException2()
     {
         var exp = new Inverse(
@@ -140,7 +140,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void DotProductUndefined()
     {
         var exp = new DotProduct(Variable.X, Variable.X);
@@ -148,7 +148,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void DotProductLeftUndefined()
     {
         var exp = new DotProduct(Variable.X, new Vector(new IExpression[] { Number.One }));
@@ -156,7 +156,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void DotProductRightUndefined()
     {
         var exp = new DotProduct(new Vector(new IExpression[] { Number.One }), Variable.X);
@@ -164,7 +164,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void DotProduct()
     {
         var exp = new DotProduct(
@@ -174,7 +174,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void DotProductLeftException()
     {
         var exp = new DotProduct(
@@ -184,7 +184,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void DotProductRightException()
     {
         var exp = new DotProduct(
@@ -194,7 +194,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void CrossProductUndefined()
     {
         var exp = new CrossProduct(Variable.X, Variable.X);
@@ -202,7 +202,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void CrossProductLeftUndefined()
     {
         var exp = new CrossProduct(Variable.X, new Vector(new IExpression[] { Number.One }));
@@ -210,7 +210,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void CrossProductRightUndefined()
     {
         var exp = new CrossProduct(new Vector(new IExpression[] { Number.One }), Variable.X);
@@ -218,7 +218,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void CrossProduct()
     {
         var exp = new CrossProduct(
@@ -228,7 +228,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Vector);
     }
 
-    [Fact]
+    [Test]
     public void CrossProductLeftException()
     {
         var exp = new CrossProduct(
@@ -238,7 +238,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void CrossProductRightException()
     {
         var exp = new CrossProduct(
@@ -248,7 +248,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestTransposeUndefined()
     {
         var exp = new Transpose(Variable.X);
@@ -256,7 +256,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Matrix);
     }
 
-    [Fact]
+    [Test]
     public void TestTransposeMatrix()
     {
         var matrix = new Matrix(new[]
@@ -269,7 +269,7 @@ public class MatrixTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Matrix);
     }
 
-    [Fact]
+    [Test]
     public void TestTransposeException()
     {
         var exp = new Transpose(new ComplexNumber(2, 2));

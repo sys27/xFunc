@@ -5,7 +5,7 @@ namespace xFunc.Tests.Expressions.Matrices;
 
 public class DeterminantTest
 {
-    [Fact]
+    [Test]
     public void ExecuteSingleTest()
     {
         var matrix = new Matrix(new[]
@@ -16,10 +16,10 @@ public class DeterminantTest
         var det = new Determinant(matrix);
         var expected = new NumberValue(1.0);
 
-        Assert.Equal(expected, det.Execute());
+        Assert.That(det.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteDoubleTest()
     {
         var matrix = new Matrix(new[]
@@ -31,10 +31,10 @@ public class DeterminantTest
         var det = new Determinant(matrix);
         var expected = new NumberValue(-2.0);
 
-        Assert.Equal(expected, det.Execute());
+        Assert.That(det.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest()
     {
         var matrix = new Matrix(new[]
@@ -47,10 +47,10 @@ public class DeterminantTest
         var det = new Determinant(matrix);
         var expected = new NumberValue(204.0);
 
-        Assert.Equal(expected, det.Execute());
+        Assert.That(det.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNegativeTest()
     {
         var matrix = new Matrix(new[]
@@ -63,10 +63,10 @@ public class DeterminantTest
         var det = new Determinant(matrix);
         var expected = new NumberValue(-72.00000000000004);
 
-        Assert.Equal(expected, det.Execute());
+        Assert.That(det.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteIsNotSquareTest()
     {
         var matrix = new Matrix(new[]
@@ -80,7 +80,7 @@ public class DeterminantTest
         Assert.Throws<ArgumentException>(() => det.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteVectorTest()
     {
         var vector = new Vector(new IExpression[] { Number.One, new Number(-2), new Number(3) });
@@ -89,7 +89,7 @@ public class DeterminantTest
         Assert.Throws<ResultIsNotSupportedException>(() => det.Execute());
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Determinant(new Matrix(new[]
@@ -100,6 +100,6 @@ public class DeterminantTest
         }));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

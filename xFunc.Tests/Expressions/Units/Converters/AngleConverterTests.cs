@@ -5,9 +5,9 @@ namespace xFunc.Tests.Expressions.Units.Converters;
 
 public class AngleConverterTests
 {
-    [Theory]
-    [InlineData(null, null)]
-    [InlineData(1, null)]
+    [Test]
+    [TestCase(null, null)]
+    [TestCase(1, null)]
     public void ConvertNull(object value, string unit)
     {
         var converter = new AngleConverter();
@@ -42,14 +42,14 @@ public class AngleConverterTests
         yield return new object[] { number, "gradians", AngleValue.Gradian(number) };
     }
 
-    [Theory]
-    [MemberData(nameof(GetConvertTestsData))]
+    [Test]
+    [TestCaseSource(nameof(GetConvertTestsData))]
     public void ConvertTests(object value, string unit, object expected)
     {
         var converter = new AngleConverter();
         var result = converter.Convert(value, unit);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
     public static IEnumerable<object[]> GetConvertUnsupportedUnitData()
@@ -58,8 +58,8 @@ public class AngleConverterTests
         yield return new object[] { new NumberValue(10), "xxx" };
     }
 
-    [Theory]
-    [MemberData(nameof(GetConvertUnsupportedUnitData))]
+    [Test]
+    [TestCaseSource(nameof(GetConvertUnsupportedUnitData))]
     public void ConvertUnsupportedUnit(object value, string unit)
     {
         var converter = new AngleConverter();
@@ -67,7 +67,7 @@ public class AngleConverterTests
         Assert.Throws<UnitIsNotSupportedException>(() => converter.Convert(value, unit));
     }
 
-    [Fact]
+    [Test]
     public void ConvertUnsupportedValue()
     {
         var converter = new AngleConverter();

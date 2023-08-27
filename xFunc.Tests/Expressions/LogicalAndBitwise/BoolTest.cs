@@ -5,115 +5,118 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise;
 
 public class BoolTest
 {
-    [Fact]
+    [Test]
     public void ExecuteTest1()
     {
         var exp = Bool.False;
 
-        Assert.False((bool)exp.Execute());
+        Assert.That((bool)exp.Execute(), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest2()
     {
         var exp = Bool.False;
 
-        Assert.False((bool)exp.Execute(null));
+        Assert.That((bool)exp.Execute(null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest3()
     {
         var exp = Bool.False;
 
-        Assert.False(exp);
+        Assert.That((bool)exp, Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest4()
     {
         var exp = (Bool)false;
 
-        Assert.False((bool)exp.Execute());
+        Assert.That((bool)exp.Execute(), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsTest()
     {
         var exp1 = Bool.False;
         var exp2 = Bool.True;
 
-        Assert.False(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsTest()
     {
         var exp1 = Bool.True;
         var exp2 = Bool.True;
 
-        Assert.True(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void DifferentTypesEqualsTest()
     {
         var exp1 = Bool.True;
         var exp2 = Number.Two;
 
-        Assert.False(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsBoolNullTest()
     {
         var boolean = Bool.True;
 
-        Assert.False(boolean.Equals(null));
+        Assert.That(boolean.Equals(null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsObjectNullTest()
     {
         var boolean = Bool.True;
 
-        Assert.False(boolean.Equals((object)null));
+        Assert.That(boolean.Equals((object)null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsBoolThisTest()
     {
         var boolean = Bool.True;
 
-        Assert.True(boolean.Equals(boolean));
+        Assert.That(boolean.Equals(boolean), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualsObjectThisTest()
     {
         var boolean = Bool.True;
 
-        Assert.True(boolean.Equals((object)boolean));
+        Assert.That(boolean.Equals((object)boolean), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualsObjectTest()
     {
         var exp1 = Bool.True;
         var exp2 = (object)Bool.False;
 
-        Assert.False(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ImplicitNullToString()
     {
         Bool x = null;
 
-        Assert.Throws<ArgumentNullException>(() => (bool)x);
+        Assert.Throws<ArgumentNullException>(() =>
+        {
+            var temp = (bool)x;
+        });
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest1()
     {
         var exp = Bool.True;
@@ -121,7 +124,7 @@ public class BoolTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest2()
     {
         var exp = Bool.True;
@@ -129,13 +132,13 @@ public class BoolTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var trueExp = Bool.True;
         var falseExp = Bool.False;
 
-        Assert.Equal("True", trueExp.ToString());
-        Assert.Equal("False", falseExp.ToString());
+        Assert.That(trueExp.ToString(), Is.EqualTo("True"));
+        Assert.That(falseExp.ToString(), Is.EqualTo("False"));
     }
 }

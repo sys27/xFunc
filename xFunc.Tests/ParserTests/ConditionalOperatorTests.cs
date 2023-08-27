@@ -5,7 +5,7 @@ namespace xFunc.Tests.ParserTests;
 
 public class ConditionalOperatorTests : BaseParserTests
 {
-    [Fact]
+    [Test]
     public void ConditionalAndTest()
     {
         var expected = new ConditionalAnd(
@@ -16,7 +16,7 @@ public class ConditionalOperatorTests : BaseParserTests
         ParseTest("x == 0 && y != 0", expected);
     }
 
-    [Fact]
+    [Test]
     public void ConditionalOrTest()
     {
         var expected = new ConditionalOr(
@@ -27,7 +27,7 @@ public class ConditionalOperatorTests : BaseParserTests
         ParseTest("x == 0 || y != 0", expected);
     }
 
-    [Fact]
+    [Test]
     public void ConditionalPrecedenceTest()
     {
         var expected = new ConditionalOr(
@@ -38,9 +38,9 @@ public class ConditionalOperatorTests : BaseParserTests
         ParseTest("x || y && z", expected);
     }
 
-    [Theory]
-    [InlineData("x == 0 &&")]
-    [InlineData("x == 0 ||")]
+    [Test]
+    [TestCase("x == 0 &&")]
+    [TestCase("x == 0 ||")]
     public void ConditionalMissingSecondOperand(string function)
         => ParseErrorTest(function);
 }

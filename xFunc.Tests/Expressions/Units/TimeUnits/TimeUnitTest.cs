@@ -5,72 +5,72 @@ namespace xFunc.Tests.Expressions.Units.TimeUnits;
 
 public class TimeUnitTest
 {
-    [Fact]
+    [Test]
     public void EqualsTest()
     {
         var a = TimeUnit.Second;
         var b = TimeUnit.Second;
 
-        Assert.True(a.Equals(b));
+        Assert.That(a.Equals(b), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsTest()
     {
         var a = TimeUnit.Second;
         var b = LengthUnit.Millimeter;
 
-        Assert.False(a.Equals(b));
+        Assert.That(a.Equals(b), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ObjectEqualsTest()
     {
         var a = TimeUnit.Second;
         var b = TimeUnit.Second as object;
 
-        Assert.True(a.Equals(b));
+        Assert.That(a.Equals(b), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ObjectEqualsWithDifferentTypesTest()
     {
         var a = TimeUnit.Second;
         var b = 1 as object;
 
-        Assert.False(a.Equals(b));
+        Assert.That(a.Equals(b), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsOperatorTest()
     {
         var a = TimeUnit.Second;
         var b = TimeUnit.Second;
 
-        Assert.True(a == b);
+        Assert.That(a == b, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsOperatorTest()
     {
         var a = TimeUnit.Second;
         var b = TimeUnit.Millisecond;
 
-        Assert.True(a != b);
+        Assert.That(a != b, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var a = TimeUnit.Second;
 
-        Assert.Equal("s", a.ToString());
+        Assert.That(a.ToString(), Is.EqualTo("s"));
     }
 
-    [Theory]
-    [InlineData(null)]
-    [InlineData("")]
-    [InlineData(" ")]
+    [Test]
+    [TestCase(null)]
+    [TestCase("")]
+    [TestCase(" ")]
     public void FromNameEmptyString(string name)
         => Assert.Throws<ArgumentNullException>(() => TimeUnit.FromName(name, out _));
 }

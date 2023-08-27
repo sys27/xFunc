@@ -5,70 +5,70 @@ namespace xFunc.Tests.Expressions;
 
 public class UnassignTest
 {
-    [Fact]
+    [Test]
     public void ExecuteFailTest()
     {
         Assert.Throws<NotSupportedException>(() => new Unassign(Variable.X).Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteParamNullTest()
     {
         Assert.Throws<ArgumentNullException>(() => new Unassign(Variable.X).Execute(null));
     }
 
-    [Fact]
+    [Test]
     public void KeyNullTest()
     {
         Assert.Throws<ArgumentNullException>(() => new Unassign(null));
     }
 
-    [Fact]
+    [Test]
     public void EqualRefTest()
     {
         var exp = new Unassign(Variable.X);
 
-        Assert.True(exp.Equals(exp));
+        Assert.That(exp.Equals(exp), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualDiffTypesTest()
     {
         var exp1 = new Unassign(Variable.X);
         var exp2 = Number.Two;
 
-        Assert.False(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualTest()
     {
         var exp1 = new Unassign(Variable.X);
         var exp2 = new Unassign(Variable.X);
 
-        Assert.True(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void Equal2Test()
     {
         var exp1 = new Unassign(Variable.X);
         var exp2 = new Unassign(Variable.Y);
 
-        Assert.False(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void UndefVarTest()
     {
         var parameters = new ExpressionParameters { { "a", new NumberValue(1) } };
 
         var undef = new Unassign(new Variable("a"));
         undef.Execute(parameters);
-        Assert.False(parameters.ContainsKey("a"));
+        Assert.That(parameters.ContainsKey("a"), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void UndefFuncTest()
     {
         var lambda = Variable.X.ToLambda(Variable.X.Name);
@@ -80,10 +80,10 @@ public class UnassignTest
 
         var result = undef.Execute(parameters);
 
-        Assert.Equal("(x) => x", result.ToString());
+        Assert.That(result.ToString(), Is.EqualTo("(x) => x"));
     }
 
-    [Fact]
+    [Test]
     public void UndefConstTest()
     {
         var parameters = new ExpressionParameters();
@@ -93,16 +93,16 @@ public class UnassignTest
         Assert.Throws<ArgumentException>(() => undef.Execute(parameters));
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Unassign(Variable.X);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest1()
     {
         var exp = new Unassign(Variable.X);
@@ -110,7 +110,7 @@ public class UnassignTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest2()
     {
         var exp = new Unassign(Variable.X);

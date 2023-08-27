@@ -2,64 +2,64 @@ namespace xFunc.Tests.Expressions.Units.PowerUnits;
 
 public class PowerUnitTests
 {
-    [Fact]
+    [Test]
     public void EqualTest()
     {
         var left = PowerUnit.Watt;
         var right = PowerUnit.Watt;
 
-        Assert.True(left.Equals(right));
+        Assert.That(left.Equals(right), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualTest()
     {
         var left = PowerUnit.Watt;
         var right = PowerUnit.Kilowatt;
 
-        Assert.False(left.Equals(right));
+        Assert.That(left.Equals(right), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ObjectEqualTest()
     {
         var left = PowerUnit.Watt;
         var right = PowerUnit.Watt as object;
 
-        Assert.True(left.Equals(right));
+        Assert.That(left.Equals(right), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ObjectNotEqualTest()
     {
         var left = PowerUnit.Watt;
         var right = new object();
 
-        Assert.False(left.Equals(right));
+        Assert.That(left.Equals(right), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualOperatorTest()
     {
         var left = PowerUnit.Watt;
         var right = PowerUnit.Watt;
 
-        Assert.True(left == right);
+        Assert.That(left == right, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualOperatorTest()
     {
         var left = PowerUnit.Watt;
         var right = PowerUnit.Kilowatt;
 
-        Assert.True(left != right);
+        Assert.That(left != right, Is.True);
     }
 
-    [Theory]
-    [InlineData(null)]
-    [InlineData("")]
-    [InlineData(" ")]
+    [Test]
+    [TestCase(null)]
+    [TestCase("")]
+    [TestCase(" ")]
     public void FromNameEmptyString(string name)
         => Assert.Throws<ArgumentNullException>(() => PowerUnit.FromName(name, out _));
 }

@@ -7,67 +7,67 @@ namespace xFunc.Tests.Expressions.Hyperbolic;
 
 public class HyperbolicTangentTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteNumberTest()
     {
         var exp = new Tanh(Number.One);
         var result = (NumberValue)exp.Execute();
         var expected = new NumberValue(0.017451520543541533);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteRadianTest()
     {
         var exp = new Tanh(AngleValue.Radian(1).AsExpression());
         var result = (NumberValue)exp.Execute();
         var expected = new NumberValue(0.7615941559557649);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteDegreeTest()
     {
         var exp = new Tanh(AngleValue.Degree(1).AsExpression());
         var result = (NumberValue)exp.Execute();
         var expected = new NumberValue(0.017451520543541533);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteGradianTest()
     {
         var exp = new Tanh(AngleValue.Gradian(1).AsExpression());
         var result = (NumberValue)exp.Execute();
         var expected = new NumberValue(0.015706671467249425);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteComplexNumberTest()
     {
         var complex = new Complex(3, 2);
         var exp = new Tanh(new ComplexNumber(complex));
         var result = (Complex)exp.Execute();
 
-        Assert.Equal(1.0032386273536098, result.Real, 15);
-        Assert.Equal(-0.0037640256415041864, result.Imaginary, 15);
+        Assert.That(result.Real, Is.EqualTo(1.0032386273536098).Within(15));
+        Assert.That(result.Imaginary, Is.EqualTo(-0.0037640256415041864).Within(15));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestException()
         => TestNotSupported(new Tanh(Bool.False));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Tanh(Number.One);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

@@ -5,66 +5,66 @@ namespace xFunc.Tests.Expressions.Units.TemperatureUnits;
 
 public class TemperatureTest
 {
-    [Fact]
+    [Test]
     public void EqualNullTest()
     {
         var exp = TemperatureValue.Celsius(10).AsExpression();
 
-        Assert.False(exp.Equals(null));
+        Assert.That(exp.Equals(null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualNullObjectTest()
     {
         var exp = TemperatureValue.Celsius(10).AsExpression();
 
-        Assert.False(exp.Equals((object)null));
+        Assert.That(exp.Equals((object)null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualSameTest()
     {
         var exp = TemperatureValue.Celsius(10).AsExpression();
 
-        Assert.True(exp.Equals(exp));
+        Assert.That(exp.Equals(exp), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualSameObjectTest()
     {
         var exp = TemperatureValue.Celsius(10).AsExpression();
 
-        Assert.True(exp.Equals((object)exp));
+        Assert.That(exp.Equals((object)exp), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualDiffTypeTest()
     {
         var exp = TemperatureValue.Celsius(10).AsExpression();
         var number = Number.One;
 
-        Assert.False(exp.Equals(number));
+        Assert.That(exp.Equals(number), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest()
     {
         var exp = TemperatureValue.Celsius(10).AsExpression();
         var expected = TemperatureValue.Celsius(10);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest2()
     {
         var exp = TemperatureValue.Celsius(10).AsExpression();
         var expected = TemperatureValue.Celsius(10);
 
-        Assert.Equal(expected, exp.Execute(null));
+        Assert.That(exp.Execute(null), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest1()
     {
         var exp = TemperatureValue.Celsius(10).AsExpression();
@@ -72,7 +72,7 @@ public class TemperatureTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest2()
     {
         var exp = TemperatureValue.Celsius(10).AsExpression();

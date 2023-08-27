@@ -5,30 +5,30 @@ namespace xFunc.Tests.Results;
 
 public class RationalValueResultTest
 {
-    [Fact]
+    [Test]
     public void ResultTest()
     {
         var angle = new RationalValue(1, 2);
         var result = new RationalValueResult(angle);
 
-        Assert.Equal(angle, result.Result);
+        Assert.That(result.Result, Is.EqualTo(angle));
     }
 
-    [Fact]
+    [Test]
     public void IResultTest()
     {
         var angle = new RationalValue(1, 2);
         var result = new RationalValueResult(angle) as IResult;
 
-        Assert.Equal(angle, result.Result);
+        Assert.That(result.Result, Is.EqualTo(angle));
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var angle = new RationalValue(1, 2);
         var result = new RationalValueResult(angle);
 
-        Assert.Equal("1 // 2", result.ToString());
+        Assert.That(result.ToString(), Is.EqualTo("1 // 2"));
     }
 }

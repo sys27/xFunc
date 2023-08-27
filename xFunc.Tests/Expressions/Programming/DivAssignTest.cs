@@ -5,7 +5,7 @@ namespace xFunc.Tests.Expressions.Programming;
 
 public class DivAssignTest
 {
-    [Fact]
+    [Test]
     public void DivAssignCalc()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 10) };
@@ -13,22 +13,22 @@ public class DivAssignTest
         var result = div.Execute(parameters);
         var expected = new NumberValue(5.0);
 
-        Assert.Equal(expected, result);
-        Assert.Equal(expected, parameters["x"]);
+        Assert.That(result, Is.EqualTo(expected));
+        Assert.That(parameters["x"].Value, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void DivAssignAsExpressionTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 10) };
         var add = new Add(new DivAssign(Variable.X, Number.Two), Number.Two);
         var result = add.Execute(parameters);
 
-        Assert.Equal(new NumberValue(7.0), result);
-        Assert.Equal(new NumberValue(5.0), parameters["x"]);
+        Assert.That(result, Is.EqualTo(new NumberValue(7.0)));
+        Assert.That(parameters["x"].Value, Is.EqualTo(new NumberValue(5.0)));
     }
 
-    [Fact]
+    [Test]
     public void DivNullParameters()
     {
         var exp = new DivAssign(Variable.X, Number.One);
@@ -36,7 +36,7 @@ public class DivAssignTest
         Assert.Throws<ArgumentNullException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void DivValueBoolParameters()
     {
         var exp = new DivAssign(Variable.X, Bool.False);
@@ -45,7 +45,7 @@ public class DivAssignTest
         Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));
     }
 
-    [Fact]
+    [Test]
     public void BoolDivNumberTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", true) };
@@ -54,32 +54,32 @@ public class DivAssignTest
         Assert.Throws<ResultIsNotSupportedException>(() => add.Execute(parameters));
     }
 
-    [Fact]
+    [Test]
     public void SameEqualsTest()
     {
         var exp = new DivAssign(Variable.X, Number.One);
 
-        Assert.True(exp.Equals(exp));
+        Assert.That(exp.Equals(exp), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualsNullTest()
     {
         var exp = new DivAssign(Variable.X, Number.One);
 
-        Assert.False(exp.Equals(null));
+        Assert.That(exp.Equals(null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsDifferentTypeTest()
     {
         var exp1 = new DivAssign(Variable.X, Number.One);
         var exp2 = new MulAssign(Variable.X, Number.One);
 
-        Assert.False(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest1()
     {
         var exp = new DivAssign(Variable.X, Number.One);
@@ -87,7 +87,7 @@ public class DivAssignTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest2()
     {
         var exp = new DivAssign(Variable.X, Number.One);
@@ -95,12 +95,12 @@ public class DivAssignTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new DivAssign(Variable.X, Number.Two);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

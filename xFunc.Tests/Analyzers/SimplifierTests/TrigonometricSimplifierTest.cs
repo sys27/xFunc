@@ -5,22 +5,22 @@ namespace xFunc.Tests.Analyzers.SimplifierTests;
 
 public class TrigonometricSimplifierTest : BaseSimplifierTest
 {
-    [Theory]
-    [InlineData(typeof(Arcsin), typeof(Sin))]
-    [InlineData(typeof(Arccos), typeof(Cos))]
-    [InlineData(typeof(Arctan), typeof(Tan))]
-    [InlineData(typeof(Arccot), typeof(Cot))]
-    [InlineData(typeof(Arcsec), typeof(Sec))]
-    [InlineData(typeof(Arccsc), typeof(Csc))]
-    [InlineData(typeof(Tan), typeof(Arctan))]
-    [InlineData(typeof(Cot), typeof(Arccot))]
-    [InlineData(typeof(Arsinh), typeof(Sinh))]
-    [InlineData(typeof(Arcosh), typeof(Cosh))]
-    [InlineData(typeof(Artanh), typeof(Tanh))]
-    [InlineData(typeof(Arcoth), typeof(Coth))]
-    [InlineData(typeof(Arsech), typeof(Sech))]
-    [InlineData(typeof(Arcsch), typeof(Csch))]
-    [InlineData(typeof(Sinh), typeof(Arsinh))]
+    [Test]
+    [TestCase(typeof(Arcsin), typeof(Sin))]
+    [TestCase(typeof(Arccos), typeof(Cos))]
+    [TestCase(typeof(Arctan), typeof(Tan))]
+    [TestCase(typeof(Arccot), typeof(Cot))]
+    [TestCase(typeof(Arcsec), typeof(Sec))]
+    [TestCase(typeof(Arccsc), typeof(Csc))]
+    [TestCase(typeof(Tan), typeof(Arctan))]
+    [TestCase(typeof(Cot), typeof(Arccot))]
+    [TestCase(typeof(Arsinh), typeof(Sinh))]
+    [TestCase(typeof(Arcosh), typeof(Cosh))]
+    [TestCase(typeof(Artanh), typeof(Tanh))]
+    [TestCase(typeof(Arcoth), typeof(Coth))]
+    [TestCase(typeof(Arsech), typeof(Sech))]
+    [TestCase(typeof(Arcsch), typeof(Csch))]
+    [TestCase(typeof(Sinh), typeof(Arsinh))]
     public void InverseFunctionsTest(Type outer, Type inner)
     {
         var innerFunction = Create(inner, Variable.X);
@@ -85,24 +85,24 @@ public class TrigonometricSimplifierTest : BaseSimplifierTest
         yield return new object[] { new Coth(new Arcoth(Number.Two)), Number.Two };
     }
 
-    [Theory]
-    [MemberData(nameof(GetInverseDomainTestData))]
+    [Test]
+    [TestCaseSource(nameof(GetInverseDomainTestData))]
     public void InverseDomainTest(IExpression exp, IExpression expected)
         => SimplifyTest(exp, expected);
 
-    [Theory]
-    [InlineData(typeof(Arcsin))]
-    [InlineData(typeof(Arccos))]
-    [InlineData(typeof(Arctan))]
-    [InlineData(typeof(Arccot))]
-    [InlineData(typeof(Arcsec))]
-    [InlineData(typeof(Arccsc))]
-    [InlineData(typeof(Sin))]
-    [InlineData(typeof(Cos))]
-    [InlineData(typeof(Tan))]
-    [InlineData(typeof(Cot))]
-    [InlineData(typeof(Sec))]
-    [InlineData(typeof(Csc))]
+    [Test]
+    [TestCase(typeof(Arcsin))]
+    [TestCase(typeof(Arccos))]
+    [TestCase(typeof(Arctan))]
+    [TestCase(typeof(Arccot))]
+    [TestCase(typeof(Arcsec))]
+    [TestCase(typeof(Arccsc))]
+    [TestCase(typeof(Sin))]
+    [TestCase(typeof(Cos))]
+    [TestCase(typeof(Tan))]
+    [TestCase(typeof(Cot))]
+    [TestCase(typeof(Sec))]
+    [TestCase(typeof(Csc))]
     public void SimplifyArgumentTest(Type type)
     {
         var exp = Create(type, new Add(Number.One, Number.Two));
@@ -111,12 +111,12 @@ public class TrigonometricSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Theory]
-    [InlineData(typeof(Cosh))]
-    [InlineData(typeof(Coth))]
-    [InlineData(typeof(Csch))]
-    [InlineData(typeof(Sech))]
-    [InlineData(typeof(Tanh))]
+    [Test]
+    [TestCase(typeof(Cosh))]
+    [TestCase(typeof(Coth))]
+    [TestCase(typeof(Csch))]
+    [TestCase(typeof(Sech))]
+    [TestCase(typeof(Tanh))]
     public void CoshCopy(Type expType)
     {
         var exp = Create(expType, new Add(Number.One, Number.One));

@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Reflection;
-using Xunit.Sdk;
+using NUnit.Framework.Internal;
 
 namespace xFunc.Tests.Analyzers.SimplifierTests;
 
@@ -19,7 +19,7 @@ public abstract class BaseSimplifierTest : BaseTest
     {
         var simple = exp.Analyze(simplifier);
 
-        Assert.Equal(expected, simple);
+        Assert.That(simple, Is.EqualTo(expected));
     }
 
     protected void TestNullExp(Type type)
@@ -38,6 +38,6 @@ public abstract class BaseSimplifierTest : BaseTest
             throw;
         }
 
-        throw new XunitException("The exception is expected.");
+        throw new NUnitException("The exception is expected.");
     }
 }

@@ -5,30 +5,30 @@ namespace xFunc.Tests.Results;
 
 public class TemperatureNumberResultTest
 {
-    [Fact]
+    [Test]
     public void ResultTest()
     {
         var power = TemperatureValue.Celsius(10);
         var result = new TemperatureNumberResult(power);
 
-        Assert.Equal(power, result.Result);
+        Assert.That(result.Result, Is.EqualTo(power));
     }
 
-    [Fact]
+    [Test]
     public void IResultTest()
     {
         var power = TemperatureValue.Celsius(10);
         var result = new TemperatureNumberResult(power) as IResult;
 
-        Assert.Equal(power, result.Result);
+        Assert.That(result.Result, Is.EqualTo(power));
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var power = TemperatureValue.Celsius(10);
         var result = new TemperatureNumberResult(power);
 
-        Assert.Equal("10 °C", result.ToString());
+        Assert.That(result.ToString(), Is.EqualTo("10 °C"));
     }
 }

@@ -2,7 +2,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class FracTests : TypeAnalyzerBaseTests
 {
-    [Fact]
+    [Test]
     public void TestFracUndefined()
     {
         var exp = new Frac(Variable.X);
@@ -10,7 +10,7 @@ public class FracTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestFracNumber()
     {
         var exp = new Frac(new Number(10));
@@ -18,7 +18,7 @@ public class FracTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestFracAngle()
     {
         var exp = new Frac(AngleValue.Degree(5.5).AsExpression());
@@ -26,7 +26,7 @@ public class FracTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestFracPower()
     {
         var exp = new Frac(PowerValue.Watt(5.5).AsExpression());
@@ -34,7 +34,7 @@ public class FracTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.PowerNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestFracTemperature()
     {
         var exp = new Frac(TemperatureValue.Celsius(5.5).AsExpression());
@@ -42,7 +42,7 @@ public class FracTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TemperatureNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestFracMass()
     {
         var exp = new Frac(MassValue.Gram(5.5).AsExpression());
@@ -50,7 +50,7 @@ public class FracTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.MassNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestFracLength()
     {
         var exp = new Frac(LengthValue.Meter(5.5).AsExpression());
@@ -58,7 +58,7 @@ public class FracTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.LengthNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestFracTime()
     {
         var exp = new Frac(TimeValue.Second(5.5).AsExpression());
@@ -66,7 +66,7 @@ public class FracTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TimeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestFracArea()
     {
         var exp = new Frac(AreaValue.Meter(5.5).AsExpression());
@@ -74,7 +74,7 @@ public class FracTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AreaNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestFracVolume()
     {
         var exp = new Frac(VolumeValue.Meter(5.5).AsExpression());
@@ -82,7 +82,7 @@ public class FracTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.VolumeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestFracException()
     {
         var exp = new Frac(Bool.False);

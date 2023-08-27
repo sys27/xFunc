@@ -7,43 +7,43 @@ namespace xFunc.Tests.Expressions;
 
 public class LnTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteNumberTest()
     {
         var exp = new Ln(Number.Two);
         var expected = new NumberValue(Math.Log(2));
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteComplexTest()
     {
         var complex = new Complex(2, 3);
         var exp = new Ln(new ComplexNumber(complex));
 
-        Assert.Equal(Complex.Log(complex), exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(Complex.Log(complex)));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteRationalTest()
     {
         var exp = new Ln(new Rational(new Number(2), new Number(3)));
         var expected = new NumberValue(-0.4054651081081645);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestException()
         => TestNotSupported(new Ln(Bool.False));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Ln(new Number(5));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

@@ -7,37 +7,37 @@ namespace xFunc.Tests.Expressions.Hyperbolic;
 
 public class HyperbolicArsineTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteNumberTest()
     {
         var exp = new Arsinh(new Number(0.5));
         var result = (AngleValue)exp.Execute();
         var expected = AngleValue.Radian(0.48121182505960347);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteComplexNumberTest()
     {
         var complex = new Complex(3, 2);
         var exp = new Arsinh(new ComplexNumber(complex));
         var result = (Complex)exp.Execute();
 
-        Assert.Equal(1.983387029916535432347076, result.Real, 15);
-        Assert.Equal(0.5706527843210994007, result.Imaginary, 15);
+        Assert.That(result.Real, Is.EqualTo(1.983387029916535432347076).Within(15));
+        Assert.That(result.Imaginary, Is.EqualTo(0.5706527843210994007).Within(15));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestException()
         => TestNotSupported(new Arsinh(Bool.False));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Arsinh(Number.One);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

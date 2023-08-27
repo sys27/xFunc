@@ -5,7 +5,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class RoundTests : TypeAnalyzerBaseTests
 {
-    [Fact]
+    [Test]
     public void TestRoundVariable()
     {
         var exp = new Round(Variable.X, new Number(10));
@@ -13,7 +13,7 @@ public class RoundTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestRoundNumber()
     {
         var exp = new Round(new Number(10), new Number(10));
@@ -21,7 +21,7 @@ public class RoundTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestRoundAngleNumber()
     {
         var exp = new Round(AngleValue.Degree(10).AsExpression(), new Number(10));
@@ -29,7 +29,7 @@ public class RoundTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestRoundPowerNumber()
     {
         var exp = new Round(PowerValue.Watt(10).AsExpression(), new Number(10));
@@ -37,7 +37,7 @@ public class RoundTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.PowerNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestRoundTemperatureNumber()
     {
         var exp = new Round(TemperatureValue.Celsius(10).AsExpression(), new Number(10));
@@ -45,7 +45,7 @@ public class RoundTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TemperatureNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestRoundMassNumber()
     {
         var exp = new Round(MassValue.Gram(10).AsExpression(), new Number(10));
@@ -53,7 +53,7 @@ public class RoundTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.MassNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestRoundLengthNumber()
     {
         var exp = new Round(LengthValue.Meter(10).AsExpression(), new Number(10));
@@ -61,7 +61,7 @@ public class RoundTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.LengthNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestRoundTimeNumber()
     {
         var exp = new Round(TimeValue.Second(10).AsExpression(), new Number(10));
@@ -69,7 +69,7 @@ public class RoundTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TimeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestRoundAreaNumber()
     {
         var exp = new Round(AreaValue.Meter(10).AsExpression(), new Number(10));
@@ -77,7 +77,7 @@ public class RoundTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AreaNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestRoundVolumeNumber()
     {
         var exp = new Round(VolumeValue.Meter(10).AsExpression(), new Number(10));
@@ -85,7 +85,7 @@ public class RoundTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.VolumeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestRoundWithUnsupportedPrecisionException()
     {
         var exp = new Round(new Number(10), new ComplexNumber(10));
@@ -93,7 +93,7 @@ public class RoundTests : TypeAnalyzerBaseTests
         TestDiffParamException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestRoundException()
     {
         var exp = new Round(new ComplexNumber(10), new Number(10));

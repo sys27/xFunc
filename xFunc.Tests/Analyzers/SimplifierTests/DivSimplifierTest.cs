@@ -5,7 +5,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests;
 
 public class DivSimplifierTest : BaseSimplifierTest
 {
-    [Fact(DisplayName = "0 / x")]
+    [Test]
     public void DivZero()
     {
         var div = new Div(Number.Zero, Variable.X);
@@ -14,7 +14,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "x / 0")]
+    [Test]
     public void DivByZero()
     {
         var div = new Div(Variable.X, Number.Zero);
@@ -22,7 +22,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         Assert.Throws<DivideByZeroException>(() => SimplifyTest(div, null));
     }
 
-    [Fact(DisplayName = "0 / 0")]
+    [Test]
     public void ZeroDivByZero()
     {
         var div = new Div(Number.Zero, Number.Zero);
@@ -31,7 +31,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         Assert.True(actual.Value.IsNaN);
     }
 
-    [Fact(DisplayName = "x / 1")]
+    [Test]
     public void DivByOne()
     {
         var div = new Div(Variable.X, Number.One);
@@ -40,7 +40,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "8 / 2")]
+    [Test]
     public void DivTwoNumbers()
     {
         var div = new Div(new Number(8), Number.Two);
@@ -49,7 +49,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "90 deg / 2")]
+    [Test]
     public void DivAngleNumber()
     {
         var div = new Div(
@@ -61,7 +61,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "90 W / 2")]
+    [Test]
     public void DivPowerByNumber()
     {
         var div = new Div(
@@ -73,7 +73,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "90 C° / 2")]
+    [Test]
     public void DivTemperatureByNumber()
     {
         var div = new Div(
@@ -85,7 +85,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "90 g / 2")]
+    [Test]
     public void DivMassByNumber()
     {
         var div = new Div(
@@ -97,7 +97,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "90 m / 2")]
+    [Test]
     public void DivLengthByNumber()
     {
         var div = new Div(
@@ -109,7 +109,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "90 s / 2")]
+    [Test]
     public void DivTimeByNumber()
     {
         var div = new Div(
@@ -121,7 +121,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "90 m^2 / 2")]
+    [Test]
     public void DivAreaByNumber()
     {
         var div = new Div(
@@ -133,7 +133,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "90 m^3 / 2")]
+    [Test]
     public void DivVolumeByNumber()
     {
         var div = new Div(
@@ -145,7 +145,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "(2 * x) / 4")]
+    [Test]
     public void DivDiff_NumMulVar_DivNum()
     {
         var div = new Div(new Mul(Number.Two, Variable.X), new Number(4));
@@ -154,7 +154,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "(x * 2) / 4")]
+    [Test]
     public void DivDiff_VarMulNum_DivNum()
     {
         var div = new Div(new Mul(Variable.X, Number.Two), new Number(4));
@@ -163,7 +163,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "2 / (2 * x)")]
+    [Test]
     public void DivDiffNumDiv_NumMulVar_()
     {
         var div = new Div(Number.Two, new Mul(Number.Two, Variable.X));
@@ -172,7 +172,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "2 / (2 * x)")]
+    [Test]
     public void DivDiffNumDiv_VarMulNum_()
     {
         var div = new Div(Number.Two, new Mul(Variable.X, Number.Two));
@@ -181,7 +181,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "(2 / x) / 2")]
+    [Test]
     public void DivDiff_NumDivVar_DivNum()
     {
         var div = new Div(new Div(Number.Two, Variable.X), Number.Two);
@@ -190,7 +190,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "(x / 2) / 2")]
+    [Test]
     public void DivDiff_VarDivNum_DivNum()
     {
         var div = new Div(new Div(Variable.X, Number.Two), Number.Two);
@@ -199,7 +199,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "2 / (2 / x)")]
+    [Test]
     public void DivDiffNumDiv_NumDivVar_()
     {
         var div = new Div(Number.Two, new Div(Number.Two, Variable.X));
@@ -208,7 +208,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "2 / (x / 2)")]
+    [Test]
     public void DivDiffNumDiv_VarDivNum_()
     {
         var div = new Div(Number.Two, new Div(Variable.X, Number.Two));
@@ -217,7 +217,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact(DisplayName = "x / x")]
+    [Test]
     public void DivSameVars()
     {
         var div = new Div(Variable.X, Variable.X);
@@ -226,7 +226,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         SimplifyTest(div, expected);
     }
 
-    [Fact]
+    [Test]
     public void DivArgumentSimplified()
     {
         var exp = new Div(

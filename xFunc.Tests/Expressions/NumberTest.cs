@@ -5,97 +5,97 @@ namespace xFunc.Tests.Expressions;
 
 public class NumberTest
 {
-    [Fact]
+    [Test]
     public void EqualsNumberNullTest()
     {
         var number = Number.Zero;
 
-        Assert.False(number.Equals(null));
+        Assert.That(number.Equals(null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsObjectNullTest()
     {
         var number = Number.Zero;
 
-        Assert.False(number.Equals((object)null));
+        Assert.That(number.Equals((object)null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsNumberThisTest()
     {
         var number = Number.Zero;
 
-        Assert.True(number.Equals(number));
+        Assert.That(number.Equals(number), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualsObjectThisTest()
     {
         var number = Number.Zero;
 
-        Assert.True(number.Equals((object)number));
+        Assert.That(number.Equals((object)number), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualsTest()
     {
         var left = Number.Zero;
         var right = Number.Zero;
 
-        Assert.True(left.Equals(right));
+        Assert.That(left.Equals(right), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsTest()
     {
         var left = Number.Zero;
         var right = Number.One;
 
-        Assert.False(left.Equals(right));
+        Assert.That(left.Equals(right), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest()
     {
         var number = Number.One;
 
-        Assert.Equal(new NumberValue(1.0), number.Execute());
+        Assert.That(number.Execute(), Is.EqualTo(new NumberValue(1.0)));
     }
 
-    [Fact]
+    [Test]
     public void NanTest()
     {
         var number = new Number(double.NaN);
 
-        Assert.True(number.Value.IsNaN);
+        Assert.That(number.Value.IsNaN, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void PositiveInfinityTest()
     {
         var number = new Number(double.PositiveInfinity);
 
-        Assert.True(number.Value.IsPositiveInfinity);
+        Assert.That(number.Value.IsPositiveInfinity, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NegativeInfinityTest()
     {
         var number = new Number(double.NegativeInfinity);
 
-        Assert.True(number.Value.IsNegativeInfinity);
+        Assert.That(number.Value.IsNegativeInfinity, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void InfinityTest()
     {
         var number = new Number(double.NegativeInfinity);
 
-        Assert.True(number.Value.IsInfinity);
+        Assert.That(number.Value.IsInfinity, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest1()
     {
         var exp = Number.One;
@@ -103,7 +103,7 @@ public class NumberTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest2()
     {
         var exp = Number.One;

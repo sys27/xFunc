@@ -5,19 +5,19 @@ namespace xFunc.Tests.Expressions.Programming;
 
 public class AddAssignTest
 {
-    [Fact]
+    [Test]
     public void NullVariableTest()
     {
         Assert.Throws<ArgumentNullException>(() => new AddAssign(null, null));
     }
 
-    [Fact]
+    [Test]
     public void NullExpTest()
     {
         Assert.Throws<ArgumentNullException>(() => new AddAssign(Variable.X, null));
     }
 
-    [Fact]
+    [Test]
     public void AddAssignCalc()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 10) };
@@ -25,22 +25,22 @@ public class AddAssignTest
         var result = add.Execute(parameters);
         var expected = new NumberValue(12.0);
 
-        Assert.Equal(expected, result);
-        Assert.Equal(expected, parameters["x"]);
+        Assert.That(result, Is.EqualTo(expected));
+        Assert.That(parameters["x"].Value, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void AddAssignAsExpressionTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 10) };
         var add = new Add(Number.One, new AddAssign(Variable.X, Number.Two));
         var result = add.Execute(parameters);
 
-        Assert.Equal(new NumberValue(13.0), result);
-        Assert.Equal(new NumberValue(12.0), parameters["x"]);
+        Assert.That(result, Is.EqualTo(new NumberValue(13.0)));
+        Assert.That(parameters["x"].Value, Is.EqualTo(new NumberValue(12.0)));
     }
 
-    [Fact]
+    [Test]
     public void AddNullParameters()
     {
         var exp = new AddAssign(Variable.X, Number.One);
@@ -48,7 +48,7 @@ public class AddAssignTest
         Assert.Throws<ArgumentNullException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void SubValueBoolParameters()
     {
         var exp = new AddAssign(Variable.X, Bool.False);
@@ -57,7 +57,7 @@ public class AddAssignTest
         Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));
     }
 
-    [Fact]
+    [Test]
     public void BoolAddNumberTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", true) };
@@ -66,7 +66,7 @@ public class AddAssignTest
         Assert.Throws<ResultIsNotSupportedException>(() => add.Execute(parameters));
     }
 
-    [Fact]
+    [Test]
     public void SameEqualsTest()
     {
         var exp = new AddAssign(Variable.X, Number.One);
@@ -74,7 +74,7 @@ public class AddAssignTest
         Assert.True(exp.Equals(exp));
     }
 
-    [Fact]
+    [Test]
     public void EqualsNullTest()
     {
         var exp = new AddAssign(Variable.X, Number.One);
@@ -82,7 +82,7 @@ public class AddAssignTest
         Assert.False(exp.Equals(null));
     }
 
-    [Fact]
+    [Test]
     public void EqualsDifferentTypeTest()
     {
         var exp1 = new AddAssign(Variable.X, Number.One);
@@ -91,7 +91,7 @@ public class AddAssignTest
         Assert.False(exp1.Equals(exp2));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest1()
     {
         var exp = new AddAssign(Variable.X, Number.One);
@@ -99,7 +99,7 @@ public class AddAssignTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest2()
     {
         var exp = new AddAssign(Variable.X, Number.One);
@@ -107,12 +107,12 @@ public class AddAssignTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new AddAssign(Variable.X, Number.Two);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

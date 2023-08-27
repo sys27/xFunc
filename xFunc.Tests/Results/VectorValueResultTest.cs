@@ -5,30 +5,30 @@ namespace xFunc.Tests.Results;
 
 public class VectorValueResultTest
 {
-    [Fact]
+    [Test]
     public void ResultTest()
     {
         var vectorValue = VectorValue.Create(NumberValue.One, NumberValue.Two);
         var result = new VectorValueResult(vectorValue);
 
-        Assert.Equal(vectorValue, result.Result);
+        Assert.That(result.Result, Is.EqualTo(vectorValue));
     }
 
-    [Fact]
+    [Test]
     public void IResultTest()
     {
         var vectorValue = VectorValue.Create(NumberValue.One, NumberValue.Two);
         var result = new VectorValueResult(vectorValue) as IResult;
 
-        Assert.Equal(vectorValue, result.Result);
+        Assert.That(result.Result, Is.EqualTo(vectorValue));
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var vectorValue = VectorValue.Create(NumberValue.One, NumberValue.Two);
         var result = new VectorValueResult(vectorValue);
 
-        Assert.Equal("{1, 2}", result.ToString());
+        Assert.That(result.ToString(), Is.EqualTo("{1, 2}"));
     }
 }

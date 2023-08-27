@@ -5,7 +5,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests;
 
 public class MulSimplifierTest : BaseSimplifierTest
 {
-    [Fact(DisplayName = "x * 2")]
+    [Test]
     public void Order1()
     {
         var add = new Mul(Variable.X, Number.Two);
@@ -14,7 +14,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "0 * 10")]
+    [Test]
     public void MulByFirstZero()
     {
         var mul = new Mul(Number.Zero, new Number(10));
@@ -23,7 +23,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "10 * 0")]
+    [Test]
     public void MulBySecondZero()
     {
         var mul = new Mul(new Number(10), Number.Zero);
@@ -32,7 +32,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "1 * 10")]
+    [Test]
     public void MulFirstOne()
     {
         var mul = new Mul(Number.One, new Number(10));
@@ -41,7 +41,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "10 * 1")]
+    [Test]
     public void MulSecondOne()
     {
         var mul = new Mul(new Number(10), Number.One);
@@ -50,7 +50,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "-1 * 10")]
+    [Test]
     public void MulFirstMinusOne()
     {
         var mul = new Mul(new Number(-1), new Number(10));
@@ -59,7 +59,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "10 * -1")]
+    [Test]
     public void MulSecondMinusOne()
     {
         var mul = new Mul(new Number(10), new Number(-1));
@@ -68,7 +68,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2 * 3")]
+    [Test]
     public void MulTwoNumbers()
     {
         var mul = new Mul(Number.Two, new Number(3));
@@ -77,7 +77,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "90 * 2 deg")]
+    [Test]
     public void MulNumberAngle()
     {
         var mul = new Mul(
@@ -89,7 +89,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "90 deg * 2")]
+    [Test]
     public void MulAngleNumber()
     {
         var mul = new Mul(
@@ -101,7 +101,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "10 * 2 W")]
+    [Test]
     public void MulNumberByPower()
     {
         var mul = new Mul(
@@ -113,7 +113,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2 W * 10")]
+    [Test]
     public void MulPowerByNumber()
     {
         var mul = new Mul(
@@ -125,7 +125,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "10 * 2 C°")]
+    [Test]
     public void MulNumberByTemperature()
     {
         var mul = new Mul(
@@ -137,7 +137,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2 C° * 10")]
+    [Test]
     public void MulTemperatureByNumber()
     {
         var mul = new Mul(
@@ -149,7 +149,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "10 * 2 g")]
+    [Test]
     public void MulNumberByMass()
     {
         var mul = new Mul(
@@ -161,7 +161,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2 g * 10")]
+    [Test]
     public void MulMassByNumber()
     {
         var mul = new Mul(
@@ -173,7 +173,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "10 * 2 m")]
+    [Test]
     public void MulNumberByLength()
     {
         var mul = new Mul(
@@ -185,7 +185,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2 m * 10")]
+    [Test]
     public void MulLengthByNumber()
     {
         var mul = new Mul(
@@ -197,7 +197,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2 m * 2 m")]
+    [Test]
     public void MulLengthByLength()
     {
         var mul = new Mul(
@@ -209,7 +209,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2 m^2 * 2 m")]
+    [Test]
     public void MulAreaByLength()
     {
         var mul = new Mul(
@@ -221,7 +221,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2 m * 2 m^2")]
+    [Test]
     public void MulLengthByArea()
     {
         var mul = new Mul(
@@ -233,7 +233,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "10 * 2 s")]
+    [Test]
     public void MulNumberByTime()
     {
         var mul = new Mul(
@@ -245,7 +245,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2 s * 10")]
+    [Test]
     public void MulTimeByNumber()
     {
         var mul = new Mul(
@@ -257,7 +257,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "10 * 2 m^2")]
+    [Test]
     public void MulNumberByArea()
     {
         var mul = new Mul(
@@ -269,7 +269,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2 m^2 * 10")]
+    [Test]
     public void MulAreaByNumber()
     {
         var mul = new Mul(
@@ -281,7 +281,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "10 * 2 m^3")]
+    [Test]
     public void MulNumberByVolume()
     {
         var mul = new Mul(
@@ -293,7 +293,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2 m^3 * 10")]
+    [Test]
     public void MulVolumeByNumber()
     {
         var mul = new Mul(
@@ -305,7 +305,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2 * (2 * x)")]
+    [Test]
     public void MulDiffNumMul_NumMulVar_()
     {
         var mul = new Mul(Number.Two, new Mul(Number.Two, Variable.X));
@@ -314,7 +314,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2 * (x * 2)")]
+    [Test]
     public void MulDiffNumMul_VarMulNum_()
     {
         var mul = new Mul(Number.Two, new Mul(Variable.X, Number.Two));
@@ -323,7 +323,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "(2 * x) * 2")]
+    [Test]
     public void MulDiff_NumMulVar_MulNum()
     {
         var mul = new Mul(new Mul(Number.Two, Variable.X), Number.Two);
@@ -332,7 +332,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "(x * 2) * 2")]
+    [Test]
     public void MulDiff_VarMulNum_MulNum()
     {
         var mul = new Mul(new Mul(Variable.X, Number.Two), Number.Two);
@@ -341,7 +341,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2 * (2 / x)")]
+    [Test]
     public void MulDiffNumMul_NumDivVar_()
     {
         var mul = new Mul(Number.Two, new Div(Number.Two, Variable.X));
@@ -350,7 +350,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2 * (x / 2)")]
+    [Test]
     public void MulDiffNumMul_VarDivNum_()
     {
         var mul = new Mul(Number.Two, new Div(Variable.X, Number.Two));
@@ -359,7 +359,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "(2 / x) * 2")]
+    [Test]
     public void MulDiff_NumDivVar_MulNum()
     {
         var mul = new Mul(new Div(Number.Two, Variable.X), Number.Two);
@@ -368,7 +368,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "(x / 2) * 2")]
+    [Test]
     public void MulDiff_VarDivNum_MulNum()
     {
         var mul = new Mul(new Div(Variable.X, Number.Two), Number.Two);
@@ -377,7 +377,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "x * x")]
+    [Test]
     public void MulSameVar1()
     {
         var mul = new Mul(Variable.X, Variable.X);
@@ -386,7 +386,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2x * x")]
+    [Test]
     public void MulSameVar2()
     {
         var mul = new Mul(new Mul(Number.Two, Variable.X), Variable.X);
@@ -395,7 +395,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2 * (x + y) * (x + y)")]
+    [Test]
     public void MulComplexX()
     {
         var mul = new Mul(
@@ -410,7 +410,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2x * 3x")]
+    [Test]
     public void MulSameVar3()
     {
         var mul = new Mul(
@@ -422,7 +422,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2 * (x + y) * 3 * (x + y)")]
+    [Test]
     public void MulComplexX2()
     {
         var mul = new Mul(
@@ -437,7 +437,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "x * 2x")]
+    [Test]
     public void MulSameVar4()
     {
         var mul = new Mul(Variable.X, new Mul(Number.Two, Variable.X));
@@ -446,7 +446,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "x * (x * 2)")]
+    [Test]
     public void MulSameVar5()
     {
         var mul = new Mul(Variable.X, new Mul(Variable.X, Number.Two));
@@ -455,7 +455,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2x * x")]
+    [Test]
     public void MulSameVar6()
     {
         var mul = new Mul(new Mul(Number.Two, Variable.X), Variable.X);
@@ -464,7 +464,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "(x * 2) * x")]
+    [Test]
     public void MulSameVar7()
     {
         var mul = new Mul(new Mul(Variable.X, Number.Two), Variable.X);
@@ -473,7 +473,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2x * 3x")]
+    [Test]
     public void MulSameVar8()
     {
         var mul = new Mul(
@@ -485,7 +485,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "(x * 2) * (x * 3)")]
+    [Test]
     public void MulSameVar9()
     {
         var mul = new Mul(
@@ -497,7 +497,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2x * -2x")]
+    [Test]
     public void MulSameVar10()
     {
         var mul = new Mul(
@@ -509,7 +509,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2x * -3x")]
+    [Test]
     public void MulSameVar11()
     {
         var mul = new Mul(
@@ -521,7 +521,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "2x * x * (-3)")]
+    [Test]
     public void MulSameVar12()
     {
         var mul = new Mul(
@@ -533,7 +533,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "x * 2 * -3x")]
+    [Test]
     public void MulSameVar13()
     {
         var mul = new Mul(
@@ -545,7 +545,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact(DisplayName = "cos(cos(x)) * -sin(x)")]
+    [Test]
     public void MulNegativeRightParamTest1()
     {
         var mul = new Mul(
@@ -560,7 +560,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(mul, expected);
     }
 
-    [Fact]
+    [Test]
     public void MulArgumentSimplified()
     {
         var exp = new Mul(
@@ -572,7 +572,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact(DisplayName = "x * (1 / x)")]
+    [Test]
     public void MulDiv1()
     {
         var exp = new Mul(
@@ -584,7 +584,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact(DisplayName = "(2 * x) * (1 / x)")]
+    [Test]
     public void MulDiv2()
     {
         var exp = new Mul(
@@ -596,7 +596,7 @@ public class MulSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact(DisplayName = "(x * 2) * (1 / x)")]
+    [Test]
     public void MulDiv3()
     {
         var exp = new Mul(

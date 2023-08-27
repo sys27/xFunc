@@ -5,30 +5,30 @@ namespace xFunc.Tests.Expressions;
 
 public class RationalTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteTest()
     {
         var exp = new Rational(Number.One, Number.Two);
         var expected = new RationalValue(1, 2);
         var actual = exp.Execute();
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteLeftExceptionTest()
         => TestNotSupported(new Rational(Bool.True, Number.Two));
 
-    [Fact]
+    [Test]
     public void ExecuteRightExceptionTest()
         => TestNotSupported(new Rational(Number.One, Bool.True));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Rational(Number.One, Number.Two);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

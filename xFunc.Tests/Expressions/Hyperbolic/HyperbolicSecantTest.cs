@@ -7,67 +7,67 @@ namespace xFunc.Tests.Expressions.Hyperbolic;
 
 public class HyperbolicSecantTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteNumberTest()
     {
         var exp = new Sech(Number.One);
         var result = (NumberValue)exp.Execute();
         var expected = new NumberValue(0.9998477106193315);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteRadianTest()
     {
         var exp = new Sech(AngleValue.Radian(1).AsExpression());
         var result = (NumberValue)exp.Execute();
         var expected = new NumberValue(0.6480542736638855);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteDegreeTest()
     {
         var exp = new Sech(AngleValue.Degree(1).AsExpression());
         var result = (NumberValue)exp.Execute();
         var expected = new NumberValue(0.9998477106193315);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteGradianTest()
     {
         var exp = new Sech(AngleValue.Gradian(1).AsExpression());
         var result = (NumberValue)exp.Execute();
         var expected = new NumberValue(0.9998766426271892);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteComplexNumberTest()
     {
         var complex = new Complex(3, 2);
         var exp = new Sech(new ComplexNumber(complex));
         var result = (Complex)exp.Execute();
 
-        Assert.Equal(-0.0416749644111442700483, result.Real, 15);
-        Assert.Equal(-0.090611137196237596, result.Imaginary, 15);
+        Assert.That(result.Real, Is.EqualTo(-0.0416749644111442700483).Within(15));
+        Assert.That(result.Imaginary, Is.EqualTo(-0.090611137196237596).Within(15));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestException()
         => TestNotSupported(new Sech(Bool.False));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Sech(Number.One);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

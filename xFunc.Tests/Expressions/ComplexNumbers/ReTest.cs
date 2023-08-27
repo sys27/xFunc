@@ -7,26 +7,26 @@ namespace xFunc.Tests.Expressions.ComplexNumbers;
 
 public class ReTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteComplexNumberTest()
     {
         var complex = new Complex(3.1, 2.5);
         var exp = new Re(new ComplexNumber(complex));
         var expected = new NumberValue(complex.Real);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteExceptionTest()
         => TestNotSupported(new Re(Number.Two));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Re(new ComplexNumber(new Complex(2, 2)));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

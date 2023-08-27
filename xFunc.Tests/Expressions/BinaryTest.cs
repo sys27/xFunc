@@ -5,47 +5,47 @@ namespace xFunc.Tests.Expressions;
 
 public class BinaryTest
 {
-    [Fact]
+    [Test]
     public void EqualsTest1()
     {
         var add1 = new Add(Number.Two, new Number(3));
         var add2 = new Add(Number.Two, new Number(3));
 
-        Assert.Equal(add1, add2);
+        Assert.That(add2, Is.EqualTo(add1));
     }
 
-    [Fact]
+    [Test]
     public void EqualsTest2()
     {
-        var add = new Add(Number.Two, new Number(3));
-        var sub = new Sub(Number.Two, new Number(3));
+        var add = new Add(Number.Two, new Number(3)) as IExpression;
+        var sub = new Sub(Number.Two, new Number(3)) as IExpression;
 
-        Assert.NotEqual<IExpression>(add, sub);
+        Assert.That(sub, Is.Not.EqualTo(add));
     }
 
-    [Fact]
+    [Test]
     public void EqualsSameTest()
     {
         var exp = new Add(Number.One, Number.One);
 
-        Assert.True(exp.Equals(exp));
+        Assert.That(exp.Equals(exp), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualsNullTest()
     {
         var exp = new Add(Number.One, Number.One);
 
-        Assert.False(exp.Equals(null));
+        Assert.That(exp.Equals(null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void LeftNullExceptionTest()
     {
         Assert.Throws<ArgumentNullException>(() => new Add(null, Number.One));
     }
 
-    [Fact]
+    [Test]
     public void RightNullExceptionTest()
     {
         Assert.Throws<ArgumentNullException>(() => new Add(Number.One, null));

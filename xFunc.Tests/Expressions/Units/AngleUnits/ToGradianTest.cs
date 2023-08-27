@@ -5,33 +5,33 @@ namespace xFunc.Tests.Expressions.Units.AngleUnits;
 
 public class ToGradianTest
 {
-    [Fact]
+    [Test]
     public void ExecuteNumberTest()
     {
         var exp = new ToGradian(new Number(10));
         var actual = exp.Execute();
         var expected = AngleValue.Gradian(10);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteAngleTest()
     {
         var exp = new ToGradian(AngleValue.Gradian(10).AsExpression());
         var actual = exp.Execute();
         var expected = AngleValue.Gradian(10);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteBoolTest()
     {
         Assert.Throws<ResultIsNotSupportedException>(() => new ToGradian(Bool.False).Execute());
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest1()
     {
         var exp = new ToGradian(new Number(10));
@@ -39,7 +39,7 @@ public class ToGradianTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest2()
     {
         var exp = new ToGradian(new Number(10));
@@ -47,12 +47,12 @@ public class ToGradianTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new ToGradian(new Number(10));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

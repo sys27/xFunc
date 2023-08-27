@@ -13,7 +13,7 @@ public abstract class BaseParserTests
     {
         var exp = parser.Parse(function);
 
-        Assert.Equal(expected, exp);
+        Assert.That(exp, Is.EqualTo(expected));
     }
 
     protected void ParseErrorTest(string function)

@@ -5,9 +5,9 @@ namespace xFunc.Tests.Expressions.Units.Converters;
 
 public class TimeConverterTests
 {
-    [Theory]
-    [InlineData(null, null)]
-    [InlineData(1, null)]
+    [Test]
+    [TestCase(null, null)]
+    [TestCase(1, null)]
     public void ConvertNull(object value, string unit)
     {
         var converter = new TimeConverter();
@@ -42,16 +42,16 @@ public class TimeConverterTests
         yield return new object[] { number, "year", TimeValue.Year(number) };
     }
 
-    [Theory]
-    [MemberData(nameof(GetConvertTestsData))]
+    [Test]
+    [TestCaseSource(nameof(GetConvertTestsData))]
     public void ConvertTests(object value, string unit, object expected)
     {
         var converter = new TimeConverter();
         var result = converter.Convert(value, unit);
         var resultAsObject = ((IConverter<object>)converter).Convert(value, unit);
 
-        Assert.Equal(expected, result);
-        Assert.Equal(expected, resultAsObject);
+        Assert.That(result, Is.EqualTo(expected));
+        Assert.That(resultAsObject, Is.EqualTo(expected));
     }
 
     public static IEnumerable<object[]> GetConvertUnsupportedUnitData()
@@ -60,8 +60,8 @@ public class TimeConverterTests
         yield return new object[] { new NumberValue(10), "xxx" };
     }
 
-    [Theory]
-    [MemberData(nameof(GetConvertUnsupportedUnitData))]
+    [Test]
+    [TestCaseSource(nameof(GetConvertUnsupportedUnitData))]
     public void ConvertUnsupportedUnit(object value, string unit)
     {
         var converter = new TimeConverter();
@@ -69,7 +69,7 @@ public class TimeConverterTests
         Assert.Throws<UnitIsNotSupportedException>(() => converter.Convert(value, unit));
     }
 
-    [Fact]
+    [Test]
     public void ConvertUnsupportedValue()
     {
         var converter = new TimeConverter();

@@ -5,7 +5,7 @@ namespace xFunc.Tests.Expressions.Programming;
 
 public class ForTest
 {
-    [Fact]
+    [Test]
     public void CalculateForTest()
     {
         var parameters = new ExpressionParameters();
@@ -17,10 +17,10 @@ public class ForTest
         var @for = new For(new Variable("i"), init, cond, iter);
         @for.Execute(parameters);
 
-        Assert.Equal(new NumberValue(10.0), parameters["i"]);
+        Assert.That(parameters["i"].Value, Is.EqualTo(new NumberValue(10.0)));
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var init = new Assign(new Variable("i"), Number.Zero);
@@ -30,6 +30,6 @@ public class ForTest
         var exp = new For(new Variable("i"), init, cond, iter);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

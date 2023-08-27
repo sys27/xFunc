@@ -5,16 +5,16 @@ namespace xFunc.Tests.Expressions.Programming;
 
 public class EqualTest
 {
-    [Fact]
+    [Test]
     public void NumberEqualTest()
     {
         var equal = new Equal(new Number(10), new Number(10));
         var result = (bool)equal.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NumberVarEqualTest()
     {
         var parameters = new ExpressionParameters
@@ -25,19 +25,19 @@ public class EqualTest
         var equal = new Equal(Variable.X, Variable.Y);
         var result = (bool)equal.Execute(parameters);
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void BoolTrueEqualTest()
     {
         var equal = new Equal(Bool.True, Bool.True);
         var result = (bool)equal.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void BoolTrueVarEqualTest()
     {
         var parameters = new ExpressionParameters
@@ -48,19 +48,19 @@ public class EqualTest
         var equal = new Equal(Variable.X, Variable.Y);
         var result = (bool)equal.Execute(parameters);
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void BoolTrueAndFalseEqualTest()
     {
         var equal = new Equal(Bool.True, Bool.False);
         var result = (bool)equal.Execute();
 
-        Assert.False(result);
+        Assert.That(result, Is.False);
     }
 
-    [Fact]
+    [Test]
     public void BoolTrueAndFalseVarEqualTest()
     {
         var parameters = new ExpressionParameters
@@ -71,19 +71,19 @@ public class EqualTest
         var equal = new Equal(Variable.X, Variable.Y);
         var result = (bool)equal.Execute(parameters);
 
-        Assert.False(result);
+        Assert.That(result, Is.False);
     }
 
-    [Fact]
+    [Test]
     public void BoolFalseEqualTest()
     {
         var equal = new Equal(Bool.False, Bool.False);
         var result = (bool)equal.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void BoolFalseVarEqualTest()
     {
         var parameters = new ExpressionParameters
@@ -94,10 +94,10 @@ public class EqualTest
         var equal = new Equal(Variable.X, Variable.Y);
         var result = (bool)equal.Execute(parameters);
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void AngleEqualTest()
     {
         var equal = new Equal(
@@ -106,10 +106,10 @@ public class EqualTest
         );
         var result = (bool)equal.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void PowerEqualTest()
     {
         var equal = new Equal(
@@ -118,10 +118,10 @@ public class EqualTest
         );
         var result = (bool)equal.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void TemperatureEqualTest()
     {
         var equal = new Equal(
@@ -130,10 +130,10 @@ public class EqualTest
         );
         var result = (bool)equal.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void MassEqualTest()
     {
         var equal = new Equal(
@@ -142,10 +142,10 @@ public class EqualTest
         );
         var result = (bool)equal.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LengthEqualTest()
     {
         var equal = new Equal(
@@ -154,10 +154,10 @@ public class EqualTest
         );
         var result = (bool)equal.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void TimeEqualTest()
     {
         var equal = new Equal(
@@ -166,10 +166,10 @@ public class EqualTest
         );
         var result = (bool)equal.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void AreaEqualTest()
     {
         var equal = new Equal(
@@ -178,10 +178,10 @@ public class EqualTest
         );
         var result = (bool)equal.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void VolumeEqualTest()
     {
         var equal = new Equal(
@@ -190,10 +190,10 @@ public class EqualTest
         );
         var result = (bool)equal.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CalculateInvalidParametersTest()
     {
         var equal = new Equal(new ComplexNumber(3, 2), new ComplexNumber(3, 2));
@@ -201,12 +201,12 @@ public class EqualTest
         Assert.Throws<ResultIsNotSupportedException>(() => equal.Execute());
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Equal(Number.Two, new Number(3));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

@@ -5,7 +5,7 @@ namespace xFunc.Tests.Results;
 
 public class MatrixValueResultTest
 {
-    [Fact]
+    [Test]
     public void ResultTest()
     {
         var matrixValue = MatrixValue.Create(new NumberValue[][]
@@ -15,10 +15,10 @@ public class MatrixValueResultTest
         });
         var result = new MatrixValueResult(matrixValue);
 
-        Assert.Equal(matrixValue, result.Result);
+        Assert.That(result.Result, Is.EqualTo(matrixValue));
     }
 
-    [Fact]
+    [Test]
     public void IResultTest()
     {
         var matrixValue = MatrixValue.Create(new NumberValue[][]
@@ -28,10 +28,10 @@ public class MatrixValueResultTest
         });
         var result = new MatrixValueResult(matrixValue) as IResult;
 
-        Assert.Equal(matrixValue, result.Result);
+        Assert.That(result.Result, Is.EqualTo(matrixValue));
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var matrixValue = MatrixValue.Create(new NumberValue[][]
@@ -41,6 +41,6 @@ public class MatrixValueResultTest
         });
         var result = new MatrixValueResult(matrixValue);
 
-        Assert.Equal("{{1, 2}, {2, 1}}", result.ToString());
+        Assert.That(result.ToString(), Is.EqualTo("{{1, 2}, {2, 1}}"));
     }
 }

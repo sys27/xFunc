@@ -4,25 +4,25 @@ namespace xFunc.Tests.Expressions;
 
 public class CallExpressionTest
 {
-    [Fact]
+    [Test]
     public void EqualsNullTest()
     {
         var lambda = new Lambda(Array.Empty<string>(), Number.One).AsExpression();
         var exp = new CallExpression(lambda, ImmutableArray<IExpression>.Empty);
 
-        Assert.False(exp.Equals(null));
+        Assert.That(exp.Equals(null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsSameTest()
     {
         var lambda = new Lambda(Array.Empty<string>(), Number.One).AsExpression();
         var exp = new CallExpression(lambda, ImmutableArray<IExpression>.Empty);
 
-        Assert.True(exp.Equals(exp));
+        Assert.That(exp.Equals(exp), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualsTest()
     {
         var exp1 = new CallExpression(
@@ -32,10 +32,10 @@ public class CallExpressionTest
             new Lambda(Array.Empty<string>(), Number.One).AsExpression(),
             ImmutableArray<IExpression>.Empty);
 
-        Assert.True(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsParametersTest()
     {
         var exp1 = new CallExpression(
@@ -45,10 +45,10 @@ public class CallExpressionTest
             new Lambda(Array.Empty<string>(), Number.One).AsExpression(),
             new IExpression[] { Number.One }.ToImmutableArray());
 
-        Assert.False(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsLambdaTest()
     {
         var exp1 = new CallExpression(
@@ -58,10 +58,10 @@ public class CallExpressionTest
             new Lambda(Array.Empty<string>(), Number.Two).AsExpression(),
             ImmutableArray<IExpression>.Empty);
 
-        Assert.False(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsTest()
     {
         var exp1 = new CallExpression(
@@ -71,30 +71,30 @@ public class CallExpressionTest
             new Lambda(Array.Empty<string>(), Number.One).AsExpression(),
             new IExpression[] { Number.One }.ToImmutableArray());
 
-        Assert.False(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsObjectNullTest()
     {
         var exp = new CallExpression(
             new Lambda(Array.Empty<string>(), Number.One).AsExpression(),
             ImmutableArray<IExpression>.Empty);
 
-        Assert.False(exp.Equals((object)null));
+        Assert.That(exp.Equals((object)null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsObjectSameTest()
     {
         var exp = new CallExpression(
             new Lambda(Array.Empty<string>(), Number.One).AsExpression(),
             ImmutableArray<IExpression>.Empty);
 
-        Assert.True(exp.Equals((object)exp));
+        Assert.That(exp.Equals((object)exp), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualsObjectTest()
     {
         var exp1 = new CallExpression(
@@ -104,10 +104,10 @@ public class CallExpressionTest
             new Lambda(Array.Empty<string>(), Number.One).AsExpression(),
             ImmutableArray<IExpression>.Empty);
 
-        Assert.True(exp1.Equals((object)exp2));
+        Assert.That(exp1.Equals((object)exp2), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsDifferentTypesTest()
     {
         var exp1 = new CallExpression(
@@ -115,10 +115,10 @@ public class CallExpressionTest
             ImmutableArray<IExpression>.Empty);
         var exp2 = Variable.X;
 
-        Assert.False(exp1.Equals((object)exp2));
+        Assert.That(exp1.Equals((object)exp2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsObjectTest()
     {
         var exp1 = new CallExpression(
@@ -128,10 +128,10 @@ public class CallExpressionTest
             new Lambda(Array.Empty<string>(), Number.One).AsExpression(),
             new IExpression[] { Number.One }.ToImmutableArray());
 
-        Assert.False(exp1.Equals((object)exp2));
+        Assert.That(exp1.Equals((object)exp2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest()
     {
         var exp = new CallExpression(
@@ -141,7 +141,7 @@ public class CallExpressionTest
         Assert.Throws<NotSupportedException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteWithNullParametersTest()
     {
         var exp = new CallExpression(
@@ -151,7 +151,7 @@ public class CallExpressionTest
         Assert.Throws<ArgumentNullException>(() => exp.Execute(null));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteWithNotFunctionTest()
     {
         var exp = new CallExpression(
@@ -161,7 +161,7 @@ public class CallExpressionTest
         Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(new ExpressionParameters()));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteWithoutParametersTest()
     {
         var exp = new CallExpression(
@@ -171,10 +171,10 @@ public class CallExpressionTest
         var result = exp.Execute(new ExpressionParameters());
         var expected = Number.One.Value;
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteWithParametersTest()
     {
         var exp = new CallExpression(
@@ -184,10 +184,10 @@ public class CallExpressionTest
         var result = exp.Execute(new ExpressionParameters());
         var expected = Number.One.Value;
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest1()
     {
         var exp = new CallExpression(
@@ -197,7 +197,7 @@ public class CallExpressionTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest2()
     {
         var exp = new CallExpression(
@@ -207,7 +207,7 @@ public class CallExpressionTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new CallExpression(
@@ -215,6 +215,6 @@ public class CallExpressionTest
             ImmutableArray<IExpression>.Empty);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

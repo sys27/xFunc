@@ -5,15 +5,15 @@ namespace xFunc.Tests.Expressions;
 
 public class ToOctTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteNumberTest()
     {
         var exp = new ToOct(Number.Two);
 
-        Assert.Equal("02", exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo("02"));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNumberExceptionTest()
     {
         var exp = new ToOct(new Number(2.5));
@@ -21,32 +21,32 @@ public class ToOctTest : BaseExpressionTests
         Assert.Throws<ArgumentException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteLongMaxNumberTest()
     {
         var exp = new ToOct(new Number(int.MaxValue));
 
-        Assert.Equal("017777777777", exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo("017777777777"));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNegativeNumberTest()
     {
         var exp = new ToOct(new Number(-2));
 
-        Assert.Equal("037777777776", exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo("037777777776"));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteBoolTest()
         => TestNotSupported(new ToOct(Bool.False));
 
-    [Fact]
+    [Test]
     public void CloseTest()
     {
         var exp = new ToOct(new Number(10));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

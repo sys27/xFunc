@@ -5,47 +5,47 @@ namespace xFunc.Tests.ParserTests;
 
 public class AngleTests : BaseParserTests
 {
-    [Theory]
-    [InlineData("1 'deg'")]
-    [InlineData("1 'degree'")]
-    [InlineData("1 'degrees'")]
-    [InlineData("1°")]
+    [Test]
+    [TestCase("1 'deg'")]
+    [TestCase("1 'degree'")]
+    [TestCase("1 'degrees'")]
+    [TestCase("1°")]
     public void AngleDeg(string function)
         => ParseTest(function, AngleValue.Degree(1).AsExpression());
 
-    [Theory]
-    [InlineData("1 'rad'")]
-    [InlineData("1 'radian'")]
-    [InlineData("1 'radians'")]
+    [Test]
+    [TestCase("1 'rad'")]
+    [TestCase("1 'radian'")]
+    [TestCase("1 'radians'")]
     public void AngleRad(string function)
         => ParseTest(function, AngleValue.Radian(1).AsExpression());
 
-    [Theory]
-    [InlineData("1 'grad'")]
-    [InlineData("1 'gradian'")]
-    [InlineData("1 'gradians'")]
+    [Test]
+    [TestCase("1 'grad'")]
+    [TestCase("1 'gradian'")]
+    [TestCase("1 'gradians'")]
     public void AngleGrad(string function)
         => ParseTest(function, AngleValue.Gradian(1).AsExpression());
 
-    [Theory]
-    [InlineData("todeg(1 'deg')")]
-    [InlineData("todegree(1 'deg')")]
+    [Test]
+    [TestCase("todeg(1 'deg')")]
+    [TestCase("todegree(1 'deg')")]
     public void ToDegTest(string function)
         => ParseTest(function, new ToDegree(AngleValue.Degree(1).AsExpression()));
 
-    [Theory]
-    [InlineData("torad(1 'deg')")]
-    [InlineData("toradian(1 'deg')")]
+    [Test]
+    [TestCase("torad(1 'deg')")]
+    [TestCase("toradian(1 'deg')")]
     public void ToRadTest(string function)
         => ParseTest(function, new ToRadian(AngleValue.Degree(1).AsExpression()));
 
-    [Theory]
-    [InlineData("tograd(1 'deg')")]
-    [InlineData("togradian(1 'deg')")]
+    [Test]
+    [TestCase("tograd(1 'deg')")]
+    [TestCase("togradian(1 'deg')")]
     public void ToGradTest(string function)
         => ParseTest(function, new ToGradian(AngleValue.Degree(1).AsExpression()));
 
-    [Fact]
+    [Test]
     public void ToNumberTest()
         => ParseTest("tonumber(1 'deg')", new ToNumber(AngleValue.Degree(1).AsExpression()));
 }

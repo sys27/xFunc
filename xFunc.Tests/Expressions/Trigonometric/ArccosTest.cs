@@ -7,36 +7,36 @@ namespace xFunc.Tests.Expressions.Trigonometric;
 
 public class ArccosTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteNumberTest()
     {
         var exp = new Arccos(Number.One);
         var expected = AngleValue.Radian(0);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteComplexNumberTest()
     {
         var complex = new Complex(3, 2);
         var exp = new Arccos(new ComplexNumber(complex));
         var result = (Complex)exp.Execute();
 
-        Assert.Equal(0.60613782238729386, result.Real, 15);
-        Assert.Equal(-1.9686379257930964, result.Imaginary, 15);
+        Assert.That(result.Real, Is.EqualTo(0.60613782238729386).Within(15));
+        Assert.That(result.Imaginary, Is.EqualTo(-1.9686379257930964).Within(15));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestException()
         => TestNotSupported(new Arccos(Bool.False));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Arccos(Number.One);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

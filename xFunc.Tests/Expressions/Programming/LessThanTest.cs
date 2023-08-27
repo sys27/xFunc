@@ -5,25 +5,25 @@ namespace xFunc.Tests.Expressions.Programming;
 
 public class LessThanTest
 {
-    [Fact]
+    [Test]
     public void CalculateLessTrueTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 0) };
         var lessThen = new LessThan(Variable.X, new Number(10));
 
-        Assert.True((bool)lessThen.Execute(parameters));
+        Assert.That((bool)lessThen.Execute(parameters), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CalculateLessFalseTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 10) };
         var lessThen = new LessThan(Variable.X, new Number(10));
 
-        Assert.False((bool)lessThen.Execute(parameters));
+        Assert.That((bool)lessThen.Execute(parameters), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void LessAngleTest()
     {
         var exp = new LessThan(
@@ -32,10 +32,10 @@ public class LessThanTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessPowerTest()
     {
         var exp = new LessThan(
@@ -44,10 +44,10 @@ public class LessThanTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessTemperatureTest()
     {
         var exp = new LessThan(
@@ -56,10 +56,10 @@ public class LessThanTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessMassTest()
     {
         var exp = new LessThan(
@@ -68,10 +68,10 @@ public class LessThanTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessLengthTest()
     {
         var exp = new LessThan(
@@ -80,10 +80,10 @@ public class LessThanTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessTimeTest()
     {
         var exp = new LessThan(
@@ -92,10 +92,10 @@ public class LessThanTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessAreaTest()
     {
         var exp = new LessThan(
@@ -104,10 +104,10 @@ public class LessThanTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessVolumeTest()
     {
         var exp = new LessThan(
@@ -116,10 +116,10 @@ public class LessThanTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CalculateInvalidTypeTest()
     {
         var lessThen = new LessThan(Bool.True, Bool.True);
@@ -127,12 +127,12 @@ public class LessThanTest
         Assert.Throws<ResultIsNotSupportedException>(() => lessThen.Execute());
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new LessThan(Number.Two, new Number(3));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

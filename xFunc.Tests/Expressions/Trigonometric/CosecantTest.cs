@@ -7,86 +7,86 @@ namespace xFunc.Tests.Expressions.Trigonometric;
 
 public class CosecantTest : BaseExpressionTests
 {
-    [Theory]
-    [InlineData(0.0, double.PositiveInfinity)] // -
-    [InlineData(30.0, 2.0)] // 2
-    [InlineData(45.0, 1.4142135623730951)] // sqrt(2)
-    [InlineData(60.0, 1.1547005383792515)] // 2sqrt(3) / 3
-    [InlineData(90.0, 1.0)] // 1
-    [InlineData(120.0, 1.1547005383792515)] // 2sqrt(3) / 3
-    [InlineData(135.0, 1.4142135623730951)] // sqrt(2)
-    [InlineData(150.0, 2.0)] // 2
-    [InlineData(180.0, double.PositiveInfinity)] // -
-    [InlineData(210.0, -2.0)] // -2
-    [InlineData(225.0, -1.4142135623730951)] // -sqrt(2)
-    [InlineData(240.0, -1.1547005383792515)] // -2sqrt(3) / 3
-    [InlineData(270.0, -1.0)] // -1
-    [InlineData(300.0, 1.1547005383792515)] // 2sqrt(3) / 3
-    [InlineData(315.0, 1.4142135623730951)] // sqrt(2)
-    [InlineData(330.0, 2.0)] // 2
-    [InlineData(360.0, double.PositiveInfinity)] // -
-    [InlineData(1110.0, 2.0)] // 2
-    [InlineData(1770.0, 2.0)] // 2
-    [InlineData(-390.0, 2.0)] // 2
+    [Test]
+    [TestCase(0.0, double.PositiveInfinity)] // -
+    [TestCase(30.0, 2.0)] // 2
+    [TestCase(45.0, 1.4142135623730951)] // sqrt(2)
+    [TestCase(60.0, 1.1547005383792515)] // 2sqrt(3) / 3
+    [TestCase(90.0, 1.0)] // 1
+    [TestCase(120.0, 1.1547005383792515)] // 2sqrt(3) / 3
+    [TestCase(135.0, 1.4142135623730951)] // sqrt(2)
+    [TestCase(150.0, 2.0)] // 2
+    [TestCase(180.0, double.PositiveInfinity)] // -
+    [TestCase(210.0, -2.0)] // -2
+    [TestCase(225.0, -1.4142135623730951)] // -sqrt(2)
+    [TestCase(240.0, -1.1547005383792515)] // -2sqrt(3) / 3
+    [TestCase(270.0, -1.0)] // -1
+    [TestCase(300.0, 1.1547005383792515)] // 2sqrt(3) / 3
+    [TestCase(315.0, 1.4142135623730951)] // sqrt(2)
+    [TestCase(330.0, 2.0)] // 2
+    [TestCase(360.0, double.PositiveInfinity)] // -
+    [TestCase(1110.0, 2.0)] // 2
+    [TestCase(1770.0, 2.0)] // 2
+    [TestCase(-390.0, 2.0)] // 2
     public void ExecuteNumberTest(double degree, double expected)
     {
         var exp = new Csc(new Number(degree));
         var result = (NumberValue)exp.Execute();
 
-        Assert.Equal(expected, result.Number, 15);
+        Assert.That(result.Number, Is.EqualTo(expected).Within(15));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteDegreeTest()
     {
         var exp = new Csc(AngleValue.Degree(1).AsExpression());
         var result = (NumberValue)exp.Execute();
         var expected = new NumberValue(57.298688498550185);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteRadianTest()
     {
         var exp = new Csc(AngleValue.Radian(1).AsExpression());
         var result = (NumberValue)exp.Execute();
         var expected = new NumberValue(1.1883951057781212);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteGradianTest()
     {
         var exp = new Csc(AngleValue.Gradian(1).AsExpression());
         var result = (NumberValue)exp.Execute();
         var expected = new NumberValue(63.664595306000564);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteComplexNumberTest()
     {
         var complex = new Complex(3, 2);
         var exp = new Csc(new ComplexNumber(complex));
         var result = (Complex)exp.Execute();
 
-        Assert.Equal(0.040300578856891527, result.Real, 15);
-        Assert.Equal(0.27254866146294021, result.Imaginary, 15);
+        Assert.That(result.Real, Is.EqualTo(0.040300578856891527).Within(15));
+        Assert.That(result.Imaginary, Is.EqualTo(0.27254866146294021).Within(15));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestException()
         => TestNotSupported(new Csc(Bool.False));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Csc(Number.One);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

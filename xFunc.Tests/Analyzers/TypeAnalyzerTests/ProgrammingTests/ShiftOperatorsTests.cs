@@ -5,9 +5,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests;
 
 public class ShiftOperatorsTests : TypeAnalyzerBaseTests
 {
-    [Theory]
-    [InlineData(typeof(LeftShift))]
-    [InlineData(typeof(RightShift))]
+    [Test]
+    [TestCase(typeof(LeftShift))]
+    [TestCase(typeof(RightShift))]
     public void TestAssignUndefined(Type type)
     {
         var exp = Create(type, Variable.X, Variable.X);
@@ -15,9 +15,9 @@ public class ShiftOperatorsTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Theory]
-    [InlineData(typeof(LeftShift))]
-    [InlineData(typeof(RightShift))]
+    [Test]
+    [TestCase(typeof(LeftShift))]
+    [TestCase(typeof(RightShift))]
     public void TestAssignUndefinedNumber(Type type)
     {
         var exp = Create(type, Variable.X, Number.One);
@@ -25,9 +25,9 @@ public class ShiftOperatorsTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Theory]
-    [InlineData(typeof(LeftShift))]
-    [InlineData(typeof(RightShift))]
+    [Test]
+    [TestCase(typeof(LeftShift))]
+    [TestCase(typeof(RightShift))]
     public void TestAssignNumberUndefined(Type type)
     {
         var exp = Create(type, Number.One, Variable.X);
@@ -35,9 +35,9 @@ public class ShiftOperatorsTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Theory]
-    [InlineData(typeof(LeftShift))]
-    [InlineData(typeof(RightShift))]
+    [Test]
+    [TestCase(typeof(LeftShift))]
+    [TestCase(typeof(RightShift))]
     public void TestAssignNumbers(Type type)
     {
         var exp = Create(type, Number.One, Number.One);
@@ -45,9 +45,9 @@ public class ShiftOperatorsTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Theory]
-    [InlineData(typeof(LeftShift))]
-    [InlineData(typeof(RightShift))]
+    [Test]
+    [TestCase(typeof(LeftShift))]
+    [TestCase(typeof(RightShift))]
     public void TestAssignLeftException(Type type)
     {
         var exp = CreateBinary(type, Bool.False, Number.One);
@@ -55,9 +55,9 @@ public class ShiftOperatorsTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Theory]
-    [InlineData(typeof(LeftShift))]
-    [InlineData(typeof(RightShift))]
+    [Test]
+    [TestCase(typeof(LeftShift))]
+    [TestCase(typeof(RightShift))]
     public void TestAssignRightException(Type type)
     {
         var exp = CreateBinary(type, Number.One, Bool.False);
@@ -65,9 +65,9 @@ public class ShiftOperatorsTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Theory]
-    [InlineData(typeof(LeftShift))]
-    [InlineData(typeof(RightShift))]
+    [Test]
+    [TestCase(typeof(LeftShift))]
+    [TestCase(typeof(RightShift))]
     public void TestAssignException(Type type)
     {
         var exp = Create(type, Bool.False, Bool.False);

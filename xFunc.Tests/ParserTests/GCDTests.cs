@@ -7,18 +7,18 @@ namespace xFunc.Tests.ParserTests;
 
 public class GCDTests : BaseParserTests
 {
-    [Fact]
+    [Test]
     public void CtorNullTest()
         => Assert.Throws<ArgumentNullException>(() => new GCD(new ImmutableArray<IExpression>()));
 
-    [Theory]
-    [InlineData("gcd(12, 16)")]
-    [InlineData("gcf(12, 16)")]
-    [InlineData("hcf(12, 16)")]
+    [Test]
+    [TestCase("gcd(12, 16)")]
+    [TestCase("gcf(12, 16)")]
+    [TestCase("hcf(12, 16)")]
     public void GCDTest(string function)
         => ParseTest(function, new GCD(new Number(12), new Number(16)));
 
-    [Fact]
+    [Test]
     public void GCDOfThreeTest()
     {
         var expected = new GCD(new IExpression[] { new Number(12), new Number(16), new Number(8) });
@@ -26,7 +26,7 @@ public class GCDTests : BaseParserTests
         ParseTest("gcd(12, 16, 8)", expected);
     }
 
-    [Fact]
+    [Test]
     public void UnaryMinusAfterCommaTest()
     {
         var expected = new GCD(Number.Two, new UnaryMinus(Variable.X));
@@ -34,9 +34,9 @@ public class GCDTests : BaseParserTests
         ParseTest("gcd(2, -x)", expected);
     }
 
-    [Theory]
-    [InlineData("lcm(12, 16)")]
-    [InlineData("scm(12, 16)")]
+    [Test]
+    [TestCase("lcm(12, 16)")]
+    [TestCase("scm(12, 16)")]
     public void LCMTest(string function)
         => ParseTest(function, new LCM(new Number(12), new Number(16)));
 }

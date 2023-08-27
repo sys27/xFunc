@@ -7,37 +7,37 @@ namespace xFunc.Tests.Expressions.Hyperbolic;
 
 public class HyperbolicArcosecantTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteNumberTest()
     {
         var exp = new Arcsch(new Number(0.5));
         var result = exp.Execute();
         var expected = AngleValue.Radian(1.2279471772995156);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteComplexNumberTest()
     {
         var complex = new Complex(3, 2);
         var exp = new Arcsch(new ComplexNumber(complex));
         var result = (Complex)exp.Execute();
 
-        Assert.Equal(0.23133469857397318, result.Real, 15);
-        Assert.Equal(-0.15038560432786197, result.Imaginary, 15);
+        Assert.That(result.Real, Is.EqualTo(0.23133469857397318).Within(15));
+        Assert.That(result.Imaginary, Is.EqualTo(-0.15038560432786197).Within(15));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestException()
         => TestNotSupported(new Arcsch(Bool.False));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Arcsch(Number.One);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

@@ -5,7 +5,7 @@ namespace xFunc.Tests.Results;
 
 public class BooleanResultTest
 {
-    [Fact]
+    [Test]
     public void ResultTest()
     {
         var result = new BooleanResult(true);
@@ -13,7 +13,7 @@ public class BooleanResultTest
         Assert.True(result.Result);
     }
 
-    [Fact]
+    [Test]
     public void IResultTest()
     {
         var result = new BooleanResult(true) as IResult;
@@ -21,11 +21,11 @@ public class BooleanResultTest
         Assert.True((bool) result.Result);
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var result = new BooleanResult(true);
 
-        Assert.Equal("True", result.ToString());
+        Assert.That(result.ToString(), Is.EqualTo("True"));
     }
 }

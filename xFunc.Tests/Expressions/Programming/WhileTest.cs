@@ -5,11 +5,13 @@ namespace xFunc.Tests.Expressions.Programming;
 
 public class WhileTest
 {
-    [Fact]
+    [Test]
     public void CalculateWhileTest()
     {
-        var parameters = new ExpressionParameters();
-        parameters.Add(new Parameter("x", 0));
+        var parameters = new ExpressionParameters
+        {
+            new Parameter("x", 0)
+        };
 
         var body = new Assign(Variable.X, new Add(Variable.X, Number.Two));
         var cond = new LessThan(Variable.X, new Number(10));
@@ -17,10 +19,10 @@ public class WhileTest
         var @while = new While(body, cond);
         @while.Execute(parameters);
 
-        Assert.Equal(new NumberValue(10.0), parameters["x"]);
+        Assert.That(parameters["x"].Value, Is.EqualTo(new NumberValue(10.0)));
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var body = new Assign(Variable.X, new Add(Variable.X, Number.Two));
@@ -29,6 +31,6 @@ public class WhileTest
         var exp = new While(body, cond);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

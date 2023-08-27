@@ -5,7 +5,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class RootTests : TypeAnalyzerBaseTests
 {
-    [Fact]
+    [Test]
     public void TestRootUndefined()
     {
         var exp = new Root(Variable.X, Variable.X);
@@ -13,7 +13,7 @@ public class RootTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestRootUndefinedAndNumber()
     {
         var exp = new Root(Variable.X, Number.Two);
@@ -21,7 +21,7 @@ public class RootTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestRootNumberAndUndefined()
     {
         var exp = new Root(Number.Two, Variable.X);
@@ -29,7 +29,7 @@ public class RootTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestRootNumber()
     {
         var exp = new Root(new Number(4), Number.Two);
@@ -37,7 +37,7 @@ public class RootTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestRootUndefinedAndBool()
     {
         var exp = new Root(Variable.X, Bool.False);
@@ -45,7 +45,7 @@ public class RootTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestRootBoolAndUndefined()
     {
         var exp = new Root(Bool.False, Variable.X);
@@ -53,7 +53,7 @@ public class RootTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestRootNumberAndBool()
     {
         var exp = new Root(Number.Two, Bool.False);
@@ -61,7 +61,7 @@ public class RootTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestRootBoolAndNumber()
     {
         var exp = new Root(Bool.False, Number.Two);
@@ -69,7 +69,7 @@ public class RootTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestRootInvalidArgsException()
     {
         var exp = new Root(Bool.False, Bool.False);

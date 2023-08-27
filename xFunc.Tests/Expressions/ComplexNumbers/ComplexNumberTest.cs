@@ -7,54 +7,54 @@ namespace xFunc.Tests.Expressions.ComplexNumbers;
 
 public class ComplexNumberTest
 {
-    [Fact]
+    [Test]
     public void ExecuteTest()
     {
         var complex = new Complex(5, 2);
         var exp = new ComplexNumber(complex);
 
-        Assert.Equal(complex, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(complex));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteWithParamsTest()
     {
         var complex = new Complex(5, 2);
         var exp = new ComplexNumber(complex);
 
-        Assert.Equal(complex, exp.Execute(null));
+        Assert.That(exp.Execute(null), Is.EqualTo(complex));
     }
 
-    [Fact]
+    [Test]
     public void ValueTest()
     {
         var complex = new Complex(5, 2);
         var exp = new ComplexNumber(complex);
 
-        Assert.Equal(complex, exp.Value);
+        Assert.That(exp.Value, Is.EqualTo(complex));
     }
 
-    [Fact]
+    [Test]
     public void CastToComplexTest()
     {
         var complex = new Complex(5, 2);
         var exp = new ComplexNumber(complex);
         var result = (Complex)exp;
 
-        Assert.Equal(complex, result);
+        Assert.That(result, Is.EqualTo(complex));
     }
 
-    [Fact]
+    [Test]
     public void CastToComplexNumberTest()
     {
         var complex = new Complex(5, 2);
         var exp = (ComplexNumber)complex;
         var result = new ComplexNumber(complex);
 
-        Assert.Equal(exp, result);
+        Assert.That(result, Is.EqualTo(exp));
     }
 
-    [Fact]
+    [Test]
     public void EqualsTest()
     {
         var exp1 = new ComplexNumber(new Complex(5, 2));
@@ -63,7 +63,7 @@ public class ComplexNumberTest
         Assert.True(exp1.Equals(exp2));
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsTest()
     {
         var exp1 = new ComplexNumber(new Complex(5, 2));
@@ -72,16 +72,16 @@ public class ComplexNumberTest
         Assert.False(exp1.Equals(exp2));
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsDiffTypesTest()
     {
         var exp1 = new ComplexNumber(new Complex(5, 2));
         var exp2 = Number.Two;
 
-        Assert.False(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ComplexNumberAsVariableTest()
     {
         var exp = new Add(
@@ -96,10 +96,10 @@ public class ComplexNumberTest
         var actual = exp.Execute(parameters);
         var expected = new Complex(3, 2);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ComplexExponentialFormTest1()
     {
         const int r = 2;
@@ -117,10 +117,10 @@ public class ComplexNumberTest
         var actual = exp.Execute();
         var expected = Complex.FromPolarCoordinates(r, phi);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ComplexExponentialFormTest2()
     {
         const int r = 2;
@@ -139,10 +139,10 @@ public class ComplexNumberTest
         var actual = exp.Execute();
         var expected = Complex.FromPolarCoordinates(r, phi);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ComplexNumberAnalyzeNull1()
     {
         var exp = new ComplexNumber(3, 2);
@@ -150,7 +150,7 @@ public class ComplexNumberTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void ComplexNumberAnalyzeNull2()
     {
         var exp = new ComplexNumber(3, 2);
@@ -158,10 +158,13 @@ public class ComplexNumberTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
     }
 
-    [Fact]
+    [Test]
     public void ConvertToComplexTest()
     {
         ComplexNumber exp = null;
-        Assert.Throws<ArgumentNullException>(() => (Complex)exp);
+        Assert.Throws<ArgumentNullException>(() =>
+        {
+            var temp = (Complex)exp;
+        });
     }
 }

@@ -7,11 +7,11 @@ namespace xFunc.Tests.Expressions;
 
 public class SimplifyTest
 {
-    [Fact]
+    [Test]
     public void SimplifierNull()
         => Assert.Throws<ArgumentNullException>(() => new Simplify(null, null));
 
-    [Fact]
+    [Test]
     public void ExecuteTest()
     {
         var simplifier = Substitute.For<ISimplifier>();
@@ -20,10 +20,10 @@ public class SimplifyTest
         var lambda = new Sin(Variable.X).ToLambda(Variable.X.Name);
         var exp = new Simplify(simplifier, lambda.AsExpression());
 
-        Assert.Equal(lambda, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(lambda));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNonLambdaTest()
     {
         var simplifier = Substitute.For<ISimplifier>();
@@ -32,18 +32,18 @@ public class SimplifyTest
         Assert.Throws<ResultIsNotSupportedException>(() => simplify.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNullTest()
     {
         Assert.Throws<ArgumentNullException>(() => new Simplify(null, new Sin(Variable.X)).Execute());
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Simplify(new Simplifier(), new Sin(Variable.X));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

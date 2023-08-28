@@ -5,15 +5,15 @@ namespace xFunc.Tests.ParserTests;
 
 public class TemperatureUnitTests : BaseParserTests
 {
-    [Fact]
+    [Test]
     public void ParseCelsius()
         => ParseTest("1 '°C'", TemperatureValue.Celsius(1).AsExpression());
 
-    [Fact]
+    [Test]
     public void ParseFahrenheit()
         => ParseTest("1 '°F'", TemperatureValue.Fahrenheit(1).AsExpression());
 
-    [Fact]
+    [Test]
     public void ParseKelvin()
         => ParseTest("1 'K'", TemperatureValue.Kelvin(1).AsExpression());
 }

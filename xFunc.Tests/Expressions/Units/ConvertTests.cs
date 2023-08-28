@@ -7,13 +7,13 @@ namespace xFunc.Tests.Expressions.Units;
 
 public class ConvertTests
 {
-    [Fact]
+    [Test]
     public void NullConverterTest()
     {
         Assert.Throws<ArgumentNullException>(() => new Convert(null, null, null));
     }
 
-    [Fact]
+    [Test]
     public void NullValueTest()
     {
         var converter = new Converter();
@@ -21,7 +21,7 @@ public class ConvertTests
         Assert.Throws<ArgumentNullException>(() => new Convert(converter, null, null));
     }
 
-    [Fact]
+    [Test]
     public void NullUnitTest()
     {
         var converter = new Converter();
@@ -30,65 +30,65 @@ public class ConvertTests
         Assert.Throws<ArgumentNullException>(() => new Convert(converter, value, null));
     }
 
-    [Fact]
+    [Test]
     public void EqualSameObjects()
     {
         var converter = new Converter();
         var convert = new Convert(converter, Number.One, new StringExpression("deg"));
 
-        Assert.True(convert.Equals(convert));
+        Assert.That(convert.Equals(convert), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualNull()
     {
         var converter = new Converter();
         var convert = new Convert(converter, Number.One, new StringExpression("deg"));
 
-        Assert.False(convert.Equals(null));
+        Assert.That(convert.Equals(null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualDifferentObject()
     {
         var converter = new Converter();
         var convert = new Convert(converter, Number.One, new StringExpression("deg"));
         var number = Number.One;
 
-        Assert.False(convert.Equals(number));
+        Assert.That(convert.Equals(number), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualDifferentValues()
     {
         var converter = new Converter();
         var convert1 = new Convert(converter, Number.One, new StringExpression("deg"));
         var convert2 = new Convert(converter, Number.Two, new StringExpression("deg"));
 
-        Assert.False(convert1.Equals(convert2));
+        Assert.That(convert1.Equals(convert2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualDifferentUnits()
     {
         var converter = new Converter();
         var convert1 = new Convert(converter, Number.One, new StringExpression("deg"));
         var convert2 = new Convert(converter, Number.One, new StringExpression("rad"));
 
-        Assert.False(convert1.Equals(convert2));
+        Assert.That(convert1.Equals(convert2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualObjects()
     {
         var converter = new Converter();
         var convert1 = new Convert(converter, Number.One, new StringExpression("deg"));
         var convert2 = new Convert(converter, Number.One, new StringExpression("deg"));
 
-        Assert.True(convert1.Equals(convert2));
+        Assert.That(convert1.Equals(convert2), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void Execute()
     {
         var converter = new Converter();
@@ -97,10 +97,10 @@ public class ConvertTests
 
         var result = convert.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNotSupported()
     {
         var converter = new Converter();
@@ -109,16 +109,16 @@ public class ConvertTests
         Assert.Throws<ResultIsNotSupportedException>(() => convert.Execute());
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Convert(new Converter(), Number.One, new StringExpression("deg"));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 
-    [Fact]
+    [Test]
     public void MatrixAnalyzeNull()
     {
         var exp = new Convert(new Converter(), Number.One, new StringExpression("deg"));
@@ -126,7 +126,7 @@ public class ConvertTests
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void MatrixAnalyzeNull2()
     {
         var exp = new Convert(new Converter(), Number.One, new StringExpression("deg"));
@@ -134,7 +134,7 @@ public class ConvertTests
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
     }
 
-    [Fact]
+    [Test]
     public void AnalyzeNotSupported()
     {
         var diff = new Differentiator();

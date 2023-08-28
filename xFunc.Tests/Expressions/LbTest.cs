@@ -5,34 +5,34 @@ namespace xFunc.Tests.Expressions;
 
 public class LbTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteTest()
     {
         var exp = new Lb(Number.Two);
         var expected = new NumberValue(Math.Log(2, 2));
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteRationalTest()
     {
         var exp = new Lb(new Rational(new Number(2), new Number(3)));
         var expected = new NumberValue(-0.5849625007211563);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestException()
         => TestNotSupported(new Lb(Bool.False));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Lb(new Number(5));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

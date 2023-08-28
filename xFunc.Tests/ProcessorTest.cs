@@ -7,19 +7,15 @@ namespace xFunc.Tests;
 
 public class ProcessorTest
 {
-    [Fact]
+    [Test]
     public void SimplifierNull()
         => Assert.Throws<ArgumentNullException>(() => new Processor(null, null, null, null, null));
 
-    [Fact]
+    [Test]
     public void DifferentiatorNull()
-    {
-        var simplifier = new Simplifier();
+        => Assert.Throws<ArgumentNullException>(() => new Processor(new Simplifier(), null));
 
-        Assert.Throws<ArgumentNullException>(() => new Processor(simplifier, null));
-    }
-
-    [Fact]
+    [Test]
     public void ConverterNull()
     {
         var simplifier = new Simplifier();
@@ -28,7 +24,7 @@ public class ProcessorTest
         Assert.Throws<ArgumentNullException>(() => new Processor(simplifier, differentiator, null, null, null));
     }
 
-    [Fact]
+    [Test]
     public void TypeAnalyzerNull()
     {
         var simplifier = new Simplifier();
@@ -38,7 +34,7 @@ public class ProcessorTest
         Assert.Throws<ArgumentNullException>(() => new Processor(simplifier, differentiator, converter, null, null));
     }
 
-    [Fact]
+    [Test]
     public void CtorTest()
     {
         var simplifier = new Simplifier();
@@ -47,7 +43,7 @@ public class ProcessorTest
         var processor = new Processor(simplifier, differentiator);
     }
 
-    [Fact]
+    [Test]
     public void CtorTest2()
     {
         var simplifier = new Simplifier();
@@ -59,16 +55,16 @@ public class ProcessorTest
         var processor = new Processor(simplifier, differentiator, converter, typeAnalyzer, parameters);
     }
 
-    [Fact]
+    [Test]
     public void SolveDoubleTest()
     {
         var processor = new Processor();
         var result = processor.Solve<NumberResult>("1 + 1.1");
 
-        Assert.Equal(2.1, result.Result);
+        Assert.That(result.Result, Is.EqualTo(2.1));
     }
 
-    [Fact]
+    [Test]
     public void SolveComplexTest()
     {
         var processor = new Processor();
@@ -76,39 +72,39 @@ public class ProcessorTest
         var result = processor.Solve<ComplexNumberResult>("conjugate(2.3 + 1.4i)");
         var expected = Complex.Conjugate(new Complex(2.3, 1.4));
 
-        Assert.Equal(expected, result.Result);
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SolveBoolTest()
     {
         var processor = new Processor();
         var result = processor.Solve<BooleanResult>("true & false");
 
-        Assert.False(result.Result);
+        Assert.That(result.Result, Is.False);
     }
 
-    [Fact]
+    [Test]
     public void SolveStringTest()
     {
         var processor = new Processor();
         var result = processor.Solve<StringResult>("'hello'");
         var expected = "hello";
 
-        Assert.Equal(expected, result.Result);
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SolveExpTest()
     {
         var processor = new Processor();
         var result = processor.Solve<LambdaResult>("deriv(() => x)");
         var expected = Number.One.ToLambda();
 
-        Assert.Equal(expected, result.Result);
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SolveAngleTest()
     {
         var processor = new Processor();
@@ -116,10 +112,10 @@ public class ProcessorTest
         var result = processor.Solve<AngleNumberResult>("90 'degree'");
         var expected = AngleValue.Degree(90);
 
-        Assert.Equal(expected, result.Result);
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SolvePowerTest()
     {
         var processor = new Processor();
@@ -127,10 +123,10 @@ public class ProcessorTest
         var result = processor.Solve<PowerNumberResult>("10 'W'");
         var expected = PowerValue.Watt(10);
 
-        Assert.Equal(expected, result.Result);
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SolveTemperatureTest()
     {
         var processor = new Processor();
@@ -138,10 +134,10 @@ public class ProcessorTest
         var result = processor.Solve<TemperatureNumberResult>("10 '°C'");
         var expected = TemperatureValue.Celsius(10);
 
-        Assert.Equal(expected, result.Result);
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SolveMassTest()
     {
         var processor = new Processor();
@@ -149,10 +145,10 @@ public class ProcessorTest
         var result = processor.Solve<MassNumberResult>("10 'g'");
         var expected = MassValue.Gram(10);
 
-        Assert.Equal(expected, result.Result);
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SolveLengthTest()
     {
         var processor = new Processor();
@@ -160,10 +156,10 @@ public class ProcessorTest
         var result = processor.Solve<LengthNumberResult>("10 'm'");
         var expected = LengthValue.Meter(10);
 
-        Assert.Equal(expected, result.Result);
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SolveTimeTest()
     {
         var processor = new Processor();
@@ -171,10 +167,10 @@ public class ProcessorTest
         var result = processor.Solve<TimeNumberResult>("10 's'");
         var expected = TimeValue.Second(10);
 
-        Assert.Equal(expected, result.Result);
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SolveAreaTest()
     {
         var processor = new Processor();
@@ -182,10 +178,10 @@ public class ProcessorTest
         var result = processor.Solve<AreaNumberResult>("10 'm^2'");
         var expected = AreaValue.Meter(10);
 
-        Assert.Equal(expected, result.Result);
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SolveVolumeTest()
     {
         var processor = new Processor();
@@ -193,10 +189,10 @@ public class ProcessorTest
         var result = processor.Solve<VolumeNumberResult>("10 'm^3'");
         var expected = VolumeValue.Meter(10);
 
-        Assert.Equal(expected, result.Result);
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SolveLambdaTest()
     {
         var processor = new Processor();
@@ -204,10 +200,10 @@ public class ProcessorTest
         var result = processor.Solve<LambdaResult>("(x) => x");
         var expected = new Lambda(new[] { "x" }, Variable.X);
 
-        Assert.Equal(expected, result.Result);
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SolveVectorTest()
     {
         var processor = new Processor();
@@ -215,10 +211,10 @@ public class ProcessorTest
         var result = processor.Solve<VectorValueResult>("{1, 2}");
         var expected = VectorValue.Create(NumberValue.One, NumberValue.Two);
 
-        Assert.Equal(expected, result.Result);
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SolveMatrixTest()
     {
         var processor = new Processor();
@@ -230,10 +226,10 @@ public class ProcessorTest
             new NumberValue[] { NumberValue.Two, NumberValue.One },
         });
 
-        Assert.Equal(expected, result.Result);
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SolveRationalTest()
     {
         var processor = new Processor();
@@ -241,10 +237,10 @@ public class ProcessorTest
         var result = processor.Solve<RationalValueResult>("1 // 3");
         var expected = new RationalValue(1, 3);
 
-        Assert.Equal(expected, result.Result);
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ParseTest()
     {
         var processor = new Processor();
@@ -252,10 +248,10 @@ public class ProcessorTest
         var result = processor.Parse("x + 1");
         var expected = new Add(Variable.X, Number.One);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SimplifyTest()
     {
         var processor = new Processor();
@@ -263,19 +259,19 @@ public class ProcessorTest
         var exp = new Add(Number.One, Number.One);
         var result = processor.Simplify(exp);
 
-        Assert.Equal(Number.Two, result);
+        Assert.That(result, Is.EqualTo(Number.Two));
     }
 
-    [Fact]
+    [Test]
     public void SimplifyFunctionTest()
     {
         var processor = new Processor();
         var result = processor.Simplify("1 + 1");
 
-        Assert.Equal(Number.Two, result);
+        Assert.That(result, Is.EqualTo(Number.Two));
     }
 
-    [Fact]
+    [Test]
     public void SimplifyNullTest()
     {
         var processor = new Processor();
@@ -283,25 +279,25 @@ public class ProcessorTest
         Assert.Throws<ArgumentNullException>(() => processor.Simplify(null as IExpression));
     }
 
-    [Fact]
+    [Test]
     public void DifferentiateExpTest()
     {
         var processor = new Processor();
         var result = processor.Differentiate(new Add(Variable.X, Number.One));
 
-        Assert.Equal(Number.One, result);
+        Assert.That(result, Is.EqualTo(Number.One));
     }
 
-    [Fact]
+    [Test]
     public void DifferentiateFunctionTest()
     {
         var processor = new Processor();
         var result = processor.Differentiate("x + 1");
 
-        Assert.Equal(Number.One, result);
+        Assert.That(result, Is.EqualTo(Number.One));
     }
 
-    [Fact]
+    [Test]
     public void DifferentiateNullExpTest()
     {
         var processor = new Processor();
@@ -309,7 +305,7 @@ public class ProcessorTest
         Assert.Throws<ArgumentNullException>(() => processor.Differentiate(null as IExpression));
     }
 
-    [Fact]
+    [Test]
     public void DifferentiateVarTest()
     {
         var processor = new Processor();
@@ -317,10 +313,10 @@ public class ProcessorTest
         var y = Variable.Y;
         var result = processor.Differentiate(new Add(y, Number.One), y);
 
-        Assert.Equal(Number.One, result);
+        Assert.That(result, Is.EqualTo(Number.One));
     }
 
-    [Fact]
+    [Test]
     public void DifferentiateParamsTest()
     {
         var processor = new Processor();
@@ -328,10 +324,10 @@ public class ProcessorTest
         var y = Variable.Y;
         var result = processor.Differentiate(new Add(y, Number.One), y, new ExpressionParameters());
 
-        Assert.Equal(Number.One, result);
+        Assert.That(result, Is.EqualTo(Number.One));
     }
 
-    [Fact]
+    [Test]
     public void AliasTest()
     {
         var processor = new Processor();
@@ -340,10 +336,10 @@ public class ProcessorTest
         var result = processor.Solve<LambdaResult>("s(() => x * x)");
         var expected = new Pow(Variable.X, Number.Two).ToLambda();
 
-        Assert.Equal(expected, result.Result);
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void LambdaClosureTest1()
     {
         var processor = new Processor();
@@ -352,12 +348,12 @@ public class ProcessorTest
         var addResult = processor.Solve<LambdaResult>("add1 := f(1)");
         var result = processor.Solve<NumberResult>("add1(2)");
 
-        Assert.Equal("(x) => (y) => x + y", lambdaResult.Result.ToString());
-        Assert.Equal("(y) => x + y", addResult.Result.ToString());
-        Assert.Equal(3.0, result.Result);
+        Assert.That(lambdaResult.Result.ToString(), Is.EqualTo("(x) => (y) => x + y"));
+        Assert.That(addResult.Result.ToString(), Is.EqualTo("(y) => x + y"));
+        Assert.That(result.Result, Is.EqualTo(3.0));
     }
 
-    [Fact]
+    [Test]
     public void LambdaClosureTest2()
     {
         var processor = new Processor();
@@ -365,11 +361,11 @@ public class ProcessorTest
         var lambdaResult = processor.Solve<LambdaResult>("f := (x) => (y) => x + y");
         var result = processor.Solve<NumberResult>("f(1)(2)");
 
-        Assert.Equal("(x) => (y) => x + y", lambdaResult.Result.ToString());
-        Assert.Equal(3.0, result.Result);
+        Assert.That(lambdaResult.Result.ToString(), Is.EqualTo("(x) => (y) => x + y"));
+        Assert.That(result.Result, Is.EqualTo(3.0));
     }
 
-    [Fact]
+    [Test]
     public void ClosureTest()
     {
         var processor = new Processor();
@@ -378,6 +374,6 @@ public class ProcessorTest
         processor.Solve("(() => x := 2)()");
         var result = processor.Solve<NumberResult>("x");
 
-        Assert.Equal(2.0, result.Result);
+        Assert.That(result.Result, Is.EqualTo(2.0));
     }
 }

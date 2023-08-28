@@ -7,7 +7,7 @@ namespace xFunc.Tests.Expressions.Programming;
 
 public class IfTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void CtorMaxParametersExceeded()
         => Assert.Throws<ArgumentException>(() => new If(new IExpression[]
         {
@@ -18,7 +18,7 @@ public class IfTest : BaseExpressionTests
             Variable.X,
         }.ToImmutableArray()));
 
-    [Fact]
+    [Test]
     public void CalculateIfElseTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 10) };
@@ -26,14 +26,14 @@ public class IfTest : BaseExpressionTests
         var cond = new Equal(Variable.X, new Number(10));
         var @if = new If(cond, new Number(20), Number.Zero);
 
-        Assert.Equal(new NumberValue(20.0), @if.Execute(parameters));
+        Assert.That(@if.Execute(parameters), Is.EqualTo(new NumberValue(20.0)));
 
         parameters["x"] = new NumberValue(0.0);
 
-        Assert.Equal(new NumberValue(0.0), @if.Execute(parameters));
+        Assert.That(@if.Execute(parameters), Is.EqualTo(new NumberValue(0.0)));
     }
 
-    [Fact]
+    [Test]
     public void CalculateIfElseNegativeNumberTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 0) };
@@ -41,14 +41,14 @@ public class IfTest : BaseExpressionTests
         var cond = new Equal(Variable.X, Number.Zero);
         var @if = new If(cond, Number.One, new UnaryMinus(Number.One));
 
-        Assert.Equal(new NumberValue(1.0), @if.Execute(parameters));
+        Assert.That(@if.Execute(parameters), Is.EqualTo(new NumberValue(1.0)));
 
         parameters["x"] = new NumberValue(10);
 
-        Assert.Equal(new NumberValue(-1.0), @if.Execute(parameters));
+        Assert.That(@if.Execute(parameters), Is.EqualTo(new NumberValue(-1.0)));
     }
 
-    [Fact]
+    [Test]
     public void CalculateIfTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 10) };
@@ -56,10 +56,10 @@ public class IfTest : BaseExpressionTests
         var cond = new Equal(Variable.X, new Number(10));
         var @if = new If(cond, new Number(20));
 
-        Assert.Equal(new NumberValue(20.0), @if.Execute(parameters));
+        Assert.That(@if.Execute(parameters), Is.EqualTo(new NumberValue(20.0)));
     }
 
-    [Fact]
+    [Test]
     public void CalculateElseTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 0) };
@@ -68,19 +68,19 @@ public class IfTest : BaseExpressionTests
         var @if = new If(cond, new Number(20));
         var expected = new NumberValue(0.0);
 
-        Assert.Equal(expected, @if.Execute(parameters));
+        Assert.That(@if.Execute(parameters), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new If(new Equal(Variable.X, new Number(10)), new Number(3), Number.Two);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 
-    [Fact]
+    [Test]
     public void ConditionIsNotBoolTest()
     {
         var exp = new If(Number.One, Number.One, Number.One);

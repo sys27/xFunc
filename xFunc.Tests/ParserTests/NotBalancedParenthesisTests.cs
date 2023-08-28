@@ -5,14 +5,14 @@ namespace xFunc.Tests.ParserTests;
 
 public class NotBalancedParenthesisTests : BaseParserTests
 {
-    [Theory]
-    [InlineData("sin(2(")]
-    [InlineData("sin)2)")]
-    [InlineData("sin)2(")]
-    [InlineData("{2,1")]
-    [InlineData("}2,1")]
-    [InlineData("(2")]
-    [InlineData("func(2")]
+    [Test]
+    [TestCase("sin(2(")]
+    [TestCase("sin)2)")]
+    [TestCase("sin)2(")]
+    [TestCase("{2,1")]
+    [TestCase("}2,1")]
+    [TestCase("(2")]
+    [TestCase("func(2")]
     public void NotBalancedTest(string function)
         => ParseErrorTest(function);
 }

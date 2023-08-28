@@ -7,83 +7,83 @@ namespace xFunc.Tests.Results;
 
 public class ComplexNumberResultTest
 {
-    [Fact]
+    [Test]
     public void ResultTest()
     {
         var result = new ComplexNumberResult(new Complex(2.1, 4.7));
 
-        Assert.Equal(new Complex(2.1, 4.7), result.Result);
+        Assert.That(result.Result, Is.EqualTo(new Complex(2.1, 4.7)));
     }
 
-    [Fact]
+    [Test]
     public void IResultTest()
     {
         var result = new ComplexNumberResult(new Complex(2.1, 4.7)) as IResult;
 
-        Assert.Equal(new Complex(2.1, 4.7), result.Result);
+        Assert.That(result.Result, Is.EqualTo(new Complex(2.1, 4.7)));
     }
 
-    [Fact]
+    [Test]
     public void ZeroImToStringTest()
     {
         var token = new ComplexNumberResult(new Complex(5.3, 0));
 
-        Assert.Equal("5.3", token.ToString());
+        Assert.That(token.ToString(), Is.EqualTo("5.3"));
     }
 
-    [Fact]
+    [Test]
     public void PositiveImToStringTest()
     {
         var token = new ComplexNumberResult(new Complex(5.3, 2.12));
 
-        Assert.Equal("5.3+2.12i", token.ToString());
+        Assert.That(token.ToString(), Is.EqualTo("5.3+2.12i"));
     }
 
-    [Fact]
+    [Test]
     public void NegativeImToStringTest()
     {
         var token = new ComplexNumberResult(new Complex(5.3, -2.12));
 
-        Assert.Equal("5.3-2.12i", token.ToString());
+        Assert.That(token.ToString(), Is.EqualTo("5.3-2.12i"));
     }
 
-    [Fact]
+    [Test]
     public void ZeroReToStringTest()
     {
         var token = new ComplexNumberResult(new Complex(0, 1.3));
 
-        Assert.Equal("1.3i", token.ToString());
+        Assert.That(token.ToString(), Is.EqualTo("1.3i"));
     }
 
-    [Fact]
+    [Test]
     public void PositiveReToStringTest()
     {
         var token = new ComplexNumberResult(new Complex(5.3, 2.12));
 
-        Assert.Equal("5.3+2.12i", token.ToString());
+        Assert.That(token.ToString(), Is.EqualTo("5.3+2.12i"));
     }
 
-    [Fact]
+    [Test]
     public void NegativeReToStringTest()
     {
         var token = new ComplexNumberResult(new Complex(-5.3, -2.12));
 
-        Assert.Equal("-5.3-2.12i", token.ToString());
+        Assert.That(token.ToString(), Is.EqualTo("-5.3-2.12i"));
     }
 
-    [Fact]
+    [Test]
     public void ImOneToStringTest()
     {
         var token = new ComplexNumberResult(new Complex(0, 1));
 
-        Assert.Equal("i", token.ToString());
+        Assert.That(token.ToString(), Is.EqualTo("i"));
     }
 
-    [Fact]
+    [Test]
     public void ImNegOneToStringTest()
     {
         var token = new ComplexNumberResult(new Complex(0, -1));
 
-        Assert.Equal("-i", token.ToString());
+        Assert.That(token.ToString(), Is.EqualTo("-i"));
     }
 }

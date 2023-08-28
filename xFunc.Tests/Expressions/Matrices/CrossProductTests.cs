@@ -5,7 +5,7 @@ namespace xFunc.Tests.Expressions.Matrices;
 
 public class CrossProductTests : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteTest()
     {
         var exp = new CrossProduct(
@@ -15,10 +15,10 @@ public class CrossProductTests : BaseExpressionTests
         var result = exp.Execute();
         var expected = VectorValue.Create(new NumberValue(-3), new NumberValue(6), new NumberValue(-3));
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteLeftLessThenThreeTest()
     {
         var exp = new CrossProduct(
@@ -29,7 +29,7 @@ public class CrossProductTests : BaseExpressionTests
         Assert.Throws<ArgumentException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteRightLessThenThreeTest()
     {
         var exp = new CrossProduct(
@@ -40,11 +40,11 @@ public class CrossProductTests : BaseExpressionTests
         Assert.Throws<ArgumentException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTypeExceptionTest()
         => TestNotSupported(new CrossProduct(Number.One, Number.Two));
 
-    [Fact]
+    [Test]
     public void ExecuteLeftTypeExceptionTest()
     {
         var exp = new CrossProduct(
@@ -54,7 +54,7 @@ public class CrossProductTests : BaseExpressionTests
         TestNotSupported(exp);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteRightTypeExceptionTest()
     {
         var exp = new CrossProduct(
@@ -64,7 +64,7 @@ public class CrossProductTests : BaseExpressionTests
         TestNotSupported(exp);
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new CrossProduct(
@@ -73,6 +73,6 @@ public class CrossProductTests : BaseExpressionTests
         );
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

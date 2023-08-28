@@ -6,5 +6,5 @@ namespace xFunc.Tests.Expressions;
 public abstract class BaseExpressionTests : BaseTest
 {
     protected void TestNotSupported(IExpression exp)
-        => Assert.Throws<ResultIsNotSupportedException>(exp.Execute);
+        => Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
 }

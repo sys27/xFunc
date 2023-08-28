@@ -4,7 +4,7 @@ namespace xFunc.Tests.Expressions.Domains;
 
 public class DomainBuilderTests
 {
-    [Fact]
+    [Test]
     public void AddRangeExceeded()
     {
         var domain = new DomainBuilder(1)

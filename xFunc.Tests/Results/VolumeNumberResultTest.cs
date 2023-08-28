@@ -5,30 +5,30 @@ namespace xFunc.Tests.Results;
 
 public class VolumeNumberResultTest
 {
-    [Fact]
+    [Test]
     public void ResultTest()
     {
         var volume = VolumeValue.Meter(10);
         var result = new VolumeNumberResult(volume);
 
-        Assert.Equal(volume, result.Result);
+        Assert.That(result.Result, Is.EqualTo(volume));
     }
 
-    [Fact]
+    [Test]
     public void IResultTest()
     {
         var volume = VolumeValue.Meter(10);
         var result = new VolumeNumberResult(volume) as IResult;
 
-        Assert.Equal(volume, result.Result);
+        Assert.That(result.Result, Is.EqualTo(volume));
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var volume = VolumeValue.Meter(10);
         var result = new VolumeNumberResult(volume);
 
-        Assert.Equal("10 m^3", result.ToString());
+        Assert.That(result.ToString(), Is.EqualTo("10 m^3"));
     }
 }

@@ -2,88 +2,88 @@ namespace xFunc.Tests.Expressions.Units.AngleUnits;
 
 public class AngleUnitTest
 {
-    [Fact]
+    [Test]
     public void EqualsNullTest()
     {
         var a = AngleUnit.Degree;
 
-        Assert.False(a.Equals(null));
+        Assert.That(a.Equals(null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsTest()
     {
         var a = AngleUnit.Degree;
         var b = AngleUnit.Degree;
 
-        Assert.True(a.Equals(b));
+        Assert.That(a.Equals(b), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsTest()
     {
         var a = AngleUnit.Degree;
         var b = AngleUnit.Radian;
 
-        Assert.False(a.Equals(b));
+        Assert.That(a.Equals(b), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ObjectEqualsNullTest()
     {
         var a = AngleUnit.Degree;
 
-        Assert.False(a.Equals(null as object));
+        Assert.That(a.Equals(null as object), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ObjectEqualsTest()
     {
         var a = AngleUnit.Degree;
         var b = AngleUnit.Degree as object;
 
-        Assert.True(a.Equals(b));
+        Assert.That(a.Equals(b), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ObjectNotEqualsTest()
     {
         var a = AngleUnit.Degree;
         var b = 1 as object;
 
-        Assert.False(a.Equals(b));
+        Assert.That(a.Equals(b), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsOperatorTest()
     {
         var a = AngleUnit.Degree;
         var b = AngleUnit.Degree;
 
-        Assert.True(a == b);
+        Assert.That(a == b, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsOperatorTest()
     {
         var a = AngleUnit.Degree;
         var b = AngleUnit.Radian;
 
-        Assert.True(a != b);
+        Assert.That(a != b, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var a = AngleUnit.Degree;
 
-        Assert.Equal("degree", a.ToString());
+        Assert.That(a.ToString(), Is.EqualTo("degree"));
     }
 
-    [Theory]
-    [InlineData(null)]
-    [InlineData("")]
-    [InlineData(" ")]
+    [Test]
+    [TestCase(null)]
+    [TestCase("")]
+    [TestCase(" ")]
     public void FromNameEmptyString(string name)
         => Assert.Throws<ArgumentNullException>(() => AngleUnit.FromName(name, out _));
 }

@@ -5,7 +5,7 @@ namespace xFunc.Tests.ParserTests;
 
 public class IfTests : BaseParserTests
 {
-    [Fact]
+    [Test]
     public void IfThenElseTest()
     {
         var expected = new If(
@@ -19,7 +19,7 @@ public class IfTests : BaseParserTests
         ParseTest("if(x == 0 && y != 0, 2, 8)", expected);
     }
 
-    [Fact]
+    [Test]
     public void IfThenElseAsExpressionTest()
     {
         var expected = new Add(
@@ -34,7 +34,7 @@ public class IfTests : BaseParserTests
         ParseTest("1 + if(x == 0, 2, 8)", expected);
     }
 
-    [Fact]
+    [Test]
     public void IfThenTest()
     {
         var expected = new If(
@@ -48,18 +48,18 @@ public class IfTests : BaseParserTests
         ParseTest("if(x == 0 && y != 0, 2)", expected);
     }
 
-    [Theory]
-    [InlineData("if x == 0 && y != 0, 2, 8)")]
-    [InlineData("if(, 2, 8)")]
-    [InlineData("if(x == 0 && y != 0 2, 8)")]
-    [InlineData("if(x == 0 && y != 0, , 8)")]
-    [InlineData("if(x == 0 && y != 0, 2 8)")]
-    [InlineData("if(x == 0 && y != 0, 2, )")]
-    [InlineData("if(x == 0 && y != 0, 2, 8")]
+    [Test]
+    [TestCase("if x == 0 && y != 0, 2, 8)")]
+    [TestCase("if(, 2, 8)")]
+    [TestCase("if(x == 0 && y != 0 2, 8)")]
+    [TestCase("if(x == 0 && y != 0, , 8)")]
+    [TestCase("if(x == 0 && y != 0, 2 8)")]
+    [TestCase("if(x == 0 && y != 0, 2, )")]
+    [TestCase("if(x == 0 && y != 0, 2, 8")]
     public void IfMissingPartsTest(string function)
         => ParseErrorTest(function);
 
-    [Fact]
+    [Test]
     public void TernaryTest()
     {
         var expected = new If(
@@ -71,14 +71,14 @@ public class IfTests : BaseParserTests
         ParseTest("true ? 1 : -1", expected);
     }
 
-    [Theory]
-    [InlineData("true ? 1 :")]
-    [InlineData("true ? : -1")]
-    [InlineData("true ? 1")]
+    [Test]
+    [TestCase("true ? 1 :")]
+    [TestCase("true ? : -1")]
+    [TestCase("true ? 1")]
     public void TernaryMissingTest(string function)
         => ParseErrorTest(function);
 
-    [Fact]
+    [Test]
     public void TernaryAsExpressionTest()
     {
         var expected = new Sin(

@@ -5,7 +5,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests;
 
 public class PowerSimplifierTest : BaseSimplifierTest
 {
-    [Fact]
+    [Test]
     public void PowerXZero()
     {
         var pow = new Pow(Variable.X, Number.Zero);
@@ -14,7 +14,7 @@ public class PowerSimplifierTest : BaseSimplifierTest
         SimplifyTest(pow, expected);
     }
 
-    [Fact]
+    [Test]
     public void PowerZeroX()
     {
         var pow = new Pow(Number.Zero, Variable.X);
@@ -23,7 +23,7 @@ public class PowerSimplifierTest : BaseSimplifierTest
         SimplifyTest(pow, expected);
     }
 
-    [Fact]
+    [Test]
     public void PowerOne()
     {
         var pow = new Pow(Variable.X, Number.One);
@@ -32,7 +32,7 @@ public class PowerSimplifierTest : BaseSimplifierTest
         SimplifyTest(pow, expected);
     }
 
-    [Fact]
+    [Test]
     public void PowerArgumentSimplified()
     {
         var pow = new Pow(Variable.X, new Add(Number.One, Number.One));
@@ -41,7 +41,7 @@ public class PowerSimplifierTest : BaseSimplifierTest
         SimplifyTest(pow, expected);
     }
 
-    [Fact]
+    [Test]
     public void PowerNotSimplified()
     {
         var pow = new Pow(Variable.X, Variable.X);
@@ -49,7 +49,7 @@ public class PowerSimplifierTest : BaseSimplifierTest
         SimplifyTest(pow, pow);
     }
 
-    [Fact]
+    [Test]
     public void PowLog()
     {
         var pow = new Pow(
@@ -60,7 +60,7 @@ public class PowerSimplifierTest : BaseSimplifierTest
         SimplifyTest(pow, expected);
     }
 
-    [Fact]
+    [Test]
     public void PowLg()
     {
         var pow = new Pow(
@@ -71,7 +71,7 @@ public class PowerSimplifierTest : BaseSimplifierTest
         SimplifyTest(pow, expected);
     }
 
-    [Fact]
+    [Test]
     public void PowLn()
     {
         var pow = new Pow(
@@ -82,7 +82,7 @@ public class PowerSimplifierTest : BaseSimplifierTest
         SimplifyTest(pow, expected);
     }
 
-    [Fact]
+    [Test]
     public void PowLb()
     {
         var pow = new Pow(
@@ -93,7 +93,7 @@ public class PowerSimplifierTest : BaseSimplifierTest
         SimplifyTest(pow, expected);
     }
 
-    [Fact]
+    [Test]
     public void RootOne()
     {
         var root = new Root(Variable.X, Number.One);
@@ -102,7 +102,7 @@ public class PowerSimplifierTest : BaseSimplifierTest
         SimplifyTest(root, expected);
     }
 
-    [Fact]
+    [Test]
     public void RootArgumentSimplified()
     {
         var root = new Root(Variable.X, new Add(Number.One, Number.One));
@@ -111,7 +111,7 @@ public class PowerSimplifierTest : BaseSimplifierTest
         SimplifyTest(root, expected);
     }
 
-    [Fact]
+    [Test]
     public void RootNotSimplified()
     {
         var root = new Root(Variable.X, new Number(5));
@@ -119,7 +119,7 @@ public class PowerSimplifierTest : BaseSimplifierTest
         SimplifyTest(root, root);
     }
 
-    [Fact]
+    [Test]
     public void Exp()
     {
         var exp = new Exp(new Number(30));
@@ -127,7 +127,7 @@ public class PowerSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, exp);
     }
 
-    [Fact]
+    [Test]
     public void ExpLn()
     {
         var exp = new Exp(new Ln(new Number(30)));
@@ -136,7 +136,7 @@ public class PowerSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void ExpArgumentSimplified()
     {
         var exp = new Exp(new Add(Number.One, Number.One));

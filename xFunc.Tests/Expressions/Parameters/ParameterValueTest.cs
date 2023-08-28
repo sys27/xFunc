@@ -5,38 +5,38 @@ namespace xFunc.Tests.Expressions.Parameters;
 
 public class ParameterValueTest
 {
-    [Fact]
+    [Test]
     public void EqualNullTest()
     {
         var value = new ParameterValue(1);
 
-        Assert.False(value.Equals(null as object));
+        Assert.That(value.Equals(null as object), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualObjectTest()
     {
         var x = new ParameterValue(1);
         var y = new ParameterValue(1) as object;
 
-        Assert.True(x.Equals(y));
+        Assert.That(x.Equals(y), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualOperatorTest()
     {
         var x = new ParameterValue(1);
         var y = new ParameterValue(1);
 
-        Assert.True(x == y);
+        Assert.That(x == y, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualOperatorTest()
     {
         var x = new ParameterValue(1);
         var y = new ParameterValue(2);
 
-        Assert.True(x != y);
+        Assert.That(x != y, Is.True);
     }
 }

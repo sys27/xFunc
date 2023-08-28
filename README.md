@@ -132,7 +132,7 @@ xFunc is released under MIT License.
 [Azure Pipelines](https://azure.microsoft.com/en-us/services/devops/pipelines/)  
 [Coverlet](https://github.com/coverlet-coverage/coverlet)  
 [ReportGenerator](https://github.com/danielpalme/ReportGenerator)  
-[xUnit](https://github.com/xunit/xunit)  
+[NUnit](https://github.com/nunit/nunit)  
 [NSubstitute](https://github.com/nsubstitute/NSubstitute)  
 [docfx](https://github.com/dotnet/docfx)  
 [BenchmarkDotNet](https://github.com/dotnet/BenchmarkDotNet)  

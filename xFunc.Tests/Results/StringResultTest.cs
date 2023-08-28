@@ -5,33 +5,31 @@ namespace xFunc.Tests.Results;
 
 public class StringResultTest
 {
-    [Fact]
+    [Test]
     public void ResultTest()
     {
         var result = new StringResult("hello");
 
-        Assert.Equal("hello", result.Result);
+        Assert.That(result.Result, Is.EqualTo("hello"));
     }
 
-    [Fact]
+    [Test]
     public void IResultTest()
     {
         var result = new StringResult("hello") as IResult;
 
-        Assert.Equal("hello", result.Result);
+        Assert.That(result.Result, Is.EqualTo("hello"));
     }
 
-    [Fact]
+    [Test]
     public void NullTest()
-    {
-        Assert.Throws<ArgumentNullException>(() => new StringResult(null));
-    }
+        => Assert.Throws<ArgumentNullException>(() => new StringResult(null));
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var result = new StringResult("hello");
 
-        Assert.Equal("hello", result.ToString());
+        Assert.That(result.ToString(), Is.EqualTo("hello"));
     }
 }

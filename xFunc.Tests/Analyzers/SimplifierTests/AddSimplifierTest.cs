@@ -5,7 +5,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests;
 
 public class AddSimplifierTest : BaseSimplifierTest
 {
-    [Fact(DisplayName = "2 + x")]
+    [Test]
     public void Order1()
     {
         var add = new Add(Number.Two, Variable.X);
@@ -14,7 +14,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "0 + 1")]
+    [Test]
     public void AddFirstZero()
     {
         var add = new Add(Number.Zero, Number.One);
@@ -23,7 +23,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "1 + 0")]
+    [Test]
     public void AddSecondZero()
     {
         var add = new Add(Number.One, Number.Zero);
@@ -32,7 +32,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "3 + 2")]
+    [Test]
     public void AddTwoNumbers()
     {
         var add = new Add(new Number(3), Number.Two);
@@ -41,7 +41,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "90 + 2 rad")]
+    [Test]
     public void AddNumberAngle()
     {
         var add = new Add(
@@ -53,7 +53,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "90 deg + 2")]
+    [Test]
     public void AddAngleNumber()
     {
         var add = new Add(
@@ -65,7 +65,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "90 deg + 2 rad")]
+    [Test]
     public void AddTwoAngles()
     {
         var add = new Add(
@@ -77,7 +77,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 + 10 W")]
+    [Test]
     public void AddNumberAndPower()
     {
         var add = new Add(
@@ -89,7 +89,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 W + 10")]
+    [Test]
     public void AddPowerAndNumber()
     {
         var add = new Add(
@@ -101,7 +101,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 W + 10 kW")]
+    [Test]
     public void AddTwoPowers()
     {
         var add = new Add(
@@ -113,7 +113,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 + 10 C°")]
+    [Test]
     public void AddNumberAndTemperature()
     {
         var add = new Add(
@@ -125,7 +125,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 C° + 10")]
+    [Test]
     public void AddTemperatureAndNumber()
     {
         var add = new Add(
@@ -137,7 +137,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 C° + 10 K")]
+    [Test]
     public void AddTwoTemperatures()
     {
         var add = new Add(
@@ -149,7 +149,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 + 10 g")]
+    [Test]
     public void AddNumberAndMass()
     {
         var add = new Add(
@@ -161,7 +161,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 g + 10")]
+    [Test]
     public void AddMassAndNumber()
     {
         var add = new Add(
@@ -173,7 +173,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 g + 10 kg")]
+    [Test]
     public void AddTwoMasses()
     {
         var add = new Add(
@@ -185,7 +185,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 + 10 m")]
+    [Test]
     public void AddNumberAndLength()
     {
         var add = new Add(
@@ -197,7 +197,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 m + 10")]
+    [Test]
     public void AddLengthAndNumber()
     {
         var add = new Add(
@@ -209,7 +209,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 km + 10 m")]
+    [Test]
     public void AddTwoLengths()
     {
         var add = new Add(
@@ -221,7 +221,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 + 10 s")]
+    [Test]
     public void AddNumberAndTime()
     {
         var add = new Add(
@@ -233,7 +233,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 s + 10")]
+    [Test]
     public void AddTimeAndNumber()
     {
         var add = new Add(
@@ -245,7 +245,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 min + 10 s")]
+    [Test]
     public void AddTwoTimeValues()
     {
         var add = new Add(
@@ -257,7 +257,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 + 10 m^2")]
+    [Test]
     public void AddNumberAndArea()
     {
         var add = new Add(
@@ -269,7 +269,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 m^2 + 10")]
+    [Test]
     public void AddAreaAndNumber()
     {
         var add = new Add(
@@ -281,7 +281,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 km^2 + 500000 m^2")]
+    [Test]
     public void AddTwoAreaValues()
     {
         var add = new Add(
@@ -293,7 +293,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 + 10 m^3")]
+    [Test]
     public void AddNumberAndVolume()
     {
         var add = new Add(
@@ -305,7 +305,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "10 m^3 + 10")]
+    [Test]
     public void AddVolumeAndNumber()
     {
         var add = new Add(
@@ -317,7 +317,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "1 m^3 + 500000 cm^3")]
+    [Test]
     public void AddTwoVolumeValues()
     {
         var add = new Add(
@@ -329,7 +329,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "-x + 2")]
+    [Test]
     public void AddFirstUnaryMinus()
     {
         var add = new Add(new UnaryMinus(Variable.X), Number.Two);
@@ -338,7 +338,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "2 + (-x)")]
+    [Test]
     public void AddSecondUnaryMinus()
     {
         var add = new Add(Number.Two, new UnaryMinus(Variable.X));
@@ -347,7 +347,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "2 + (2 + x)")]
+    [Test]
     public void AddDiffNumAdd_NumAddVar_()
     {
         var add = new Add(Number.Two, new Add(Number.Two, Variable.X));
@@ -356,7 +356,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "2 + (x + 2)")]
+    [Test]
     public void AddDiffNumAdd_VarAddNum_()
     {
         var add = new Add(Number.Two, new Add(Variable.X, Number.Two));
@@ -365,7 +365,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "(2 + x) + 2")]
+    [Test]
     public void AddDiff_NumAddVar_AddNum()
     {
         var add = new Add(new Add(Number.Two, Variable.X), Number.Two);
@@ -374,7 +374,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "(x + 2) + 2")]
+    [Test]
     public void AddDiff_VarAddNum_AddNum()
     {
         var add = new Add(new Add(Variable.X, Number.Two), Number.Two);
@@ -383,7 +383,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "2 + (2 - x)")]
+    [Test]
     public void AddDiffNum_NumSubVar_()
     {
         var add = new Add(Number.Two, new Sub(Number.Two, Variable.X));
@@ -392,7 +392,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "2 + (x - 2)")]
+    [Test]
     public void AddDiffNum_VarSubNum_()
     {
         var add = new Add(Number.Two, new Sub(Variable.X, Number.Two));
@@ -401,7 +401,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "(2 - x) + 2")]
+    [Test]
     public void AddDiff_NumSubVar_AddNum()
     {
         var add = new Add(new Sub(Number.Two, Variable.X), Number.Two);
@@ -410,7 +410,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "(x - 2) + 2")]
+    [Test]
     public void AddDiff_VarSubNum_AddNum()
     {
         var add = new Add(new Sub(Variable.X, Number.Two), Number.Two);
@@ -419,7 +419,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(add, expected);
     }
 
-    [Fact(DisplayName = "x + x")]
+    [Test]
     public void AddSaveVars1()
     {
         var exp = new Add(Variable.X, Variable.X);
@@ -428,7 +428,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact(DisplayName = "2x + x")]
+    [Test]
     public void AddSaveVars2()
     {
         var exp = new Add(new Mul(Number.Two, Variable.X), Variable.X);
@@ -437,7 +437,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact(DisplayName = "2 * (x + y) + (x + y)")]
+    [Test]
     public void AddComplexX()
     {
         var exp = new Add(
@@ -448,7 +448,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact(DisplayName = "x + 2x")]
+    [Test]
     public void AddSaveVars3()
     {
         var exp = new Add(Variable.X, new Mul(Number.Two, Variable.X));
@@ -457,7 +457,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact(DisplayName = "x + x * 2")]
+    [Test]
     public void AddSaveVars4()
     {
         var exp = new Add(Variable.X, new Mul(Variable.X, Number.Two));
@@ -466,7 +466,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact(DisplayName = "2x + 3x")]
+    [Test]
     public void AddSaveVars5()
     {
         var exp = new Add(
@@ -478,7 +478,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact(DisplayName = "2 * (x + y) + 3 * (x + y)")]
+    [Test]
     public void AddComplexX2()
     {
         var exp = new Add(
@@ -493,7 +493,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact(DisplayName = "-x + x")]
+    [Test]
     public void AddSaveVars6()
     {
         var exp = new Add(new UnaryMinus(Variable.X), Variable.X);
@@ -502,7 +502,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact(DisplayName = "-x + 2x")]
+    [Test]
     public void AddSaveVars7()
     {
         var exp = new Add(
@@ -514,7 +514,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact(DisplayName = "x * 2 + x")]
+    [Test]
     public void AddSaveVars8()
     {
         var exp = new Add(new Mul(Variable.X, Number.Two), Variable.X);
@@ -523,7 +523,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact(DisplayName = "x * 2 + x * 3")]
+    [Test]
     public void AddSaveVars9()
     {
         var exp = new Add(
@@ -535,7 +535,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact(DisplayName = "3x + -2x")]
+    [Test]
     public void AddSaveVars10()
     {
         var exp = new Add(
@@ -547,7 +547,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact(DisplayName = "3x + -4x")]
+    [Test]
     public void AddSaveVars11()
     {
         var exp = new Add(
@@ -559,7 +559,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact(DisplayName = "-2x + x * 3")]
+    [Test]
     public void AddSameVars12()
     {
         var exp = new Add(
@@ -571,7 +571,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact(DisplayName = "x * 3 + -2x")]
+    [Test]
     public void AddSameVars13()
     {
         var exp = new Add(
@@ -583,7 +583,7 @@ public class AddSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void AddArgumentSimplified()
     {
         var exp = new Add(

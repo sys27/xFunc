@@ -2,64 +2,64 @@ namespace xFunc.Tests.Expressions.Units.TemperatureUnits;
 
 public class TemperatureUnitTests
 {
-    [Fact]
+    [Test]
     public void EqualTest()
     {
         var left = TemperatureUnit.Celsius;
         var right = TemperatureUnit.Celsius;
 
-        Assert.True(left.Equals(right));
+        Assert.That(left.Equals(right), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualTest()
     {
         var left = TemperatureUnit.Celsius;
         var right = TemperatureUnit.Fahrenheit;
 
-        Assert.False(left.Equals(right));
+        Assert.That(left.Equals(right), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ObjectEqualTest()
     {
         var left = TemperatureUnit.Celsius;
         var right = TemperatureUnit.Celsius as object;
 
-        Assert.True(left.Equals(right));
+        Assert.That(left.Equals(right), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ObjectNotEqualTest()
     {
         var left = TemperatureUnit.Celsius;
         var right = new object();
 
-        Assert.False(left.Equals(right));
+        Assert.That(left.Equals(right), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualOperatorTest()
     {
         var left = TemperatureUnit.Celsius;
         var right = TemperatureUnit.Celsius;
 
-        Assert.True(left == right);
+        Assert.That(left == right, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualOperatorTest()
     {
         var left = TemperatureUnit.Celsius;
         var right = TemperatureUnit.Fahrenheit;
 
-        Assert.True(left != right);
+        Assert.That(left != right, Is.True);
     }
 
-    [Theory]
-    [InlineData(null)]
-    [InlineData("")]
-    [InlineData(" ")]
+    [Test]
+    [TestCase(null)]
+    [TestCase("")]
+    [TestCase(" ")]
     public void FromNameEmptyString(string name)
         => Assert.Throws<ArgumentNullException>(() => TemperatureUnit.FromName(name, out _));
 }

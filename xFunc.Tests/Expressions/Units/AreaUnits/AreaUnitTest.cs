@@ -5,82 +5,82 @@ namespace xFunc.Tests.Expressions.Units.AreaUnits;
 
 public class AreaUnitTest
 {
-    [Fact]
+    [Test]
     public void EqualsNullTest()
     {
         var a = AreaUnit.Meter;
 
-        Assert.False(a.Equals(null));
+        Assert.That(a.Equals(null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsTest()
     {
         var a = AreaUnit.Meter;
         var b = AreaUnit.Meter;
 
-        Assert.True(a.Equals(b));
+        Assert.That(a.Equals(b), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsTest()
     {
         var a = AreaUnit.Meter;
         var b = AreaUnit.Kilometer;
 
-        Assert.False(a.Equals(b));
+        Assert.That(a.Equals(b), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ObjectEqualsNullTest()
     {
         var a = AreaUnit.Meter;
 
-        Assert.False(a.Equals(null as object));
+        Assert.That(a.Equals(null as object), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ObjectEqualsTest()
     {
         var a = AreaUnit.Meter;
         var b = AreaUnit.Meter as object;
 
-        Assert.True(a.Equals(b));
+        Assert.That(a.Equals(b), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ObjectEqualsWithDifferentTypesTest()
     {
         var a = AreaUnit.Meter;
         var b = 1 as object;
 
-        Assert.False(a.Equals(b));
+        Assert.That(a.Equals(b), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsOperatorTest()
     {
         var a = AreaUnit.Meter;
         var b = AreaUnit.Meter;
 
-        Assert.True(a == b);
+        Assert.That(a == b, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsOperatorTest()
     {
         var a = AreaUnit.Meter;
         var b = AreaUnit.Kilometer;
 
-        Assert.True(a != b);
+        Assert.That(a != b, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var a = AreaUnit.Meter;
 
-        Assert.Equal("m^2", a.ToString());
+        Assert.That(a.ToString(), Is.EqualTo("m^2"));
     }
 
     public static IEnumerable<object[]> GetToVolumeUnitTest()
@@ -92,13 +92,13 @@ public class AreaUnitTest
         yield return new object[] { AreaUnit.Yard, VolumeUnit.Yard };
     }
 
-    [Theory]
-    [MemberData(nameof(GetToVolumeUnitTest))]
+    [Test]
+    [TestCaseSource(nameof(GetToVolumeUnitTest))]
     public void ToVolumeUnitTest(AreaUnit unit, VolumeUnit expected)
     {
         var actual = unit.ToVolumeUnit();
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     public static IEnumerable<object[]> GetToVolumeUnitExceptionTest()
@@ -110,15 +110,15 @@ public class AreaUnitTest
         yield return new object[] { AreaUnit.Acre };
     }
 
-    [Theory]
-    [MemberData(nameof(GetToVolumeUnitExceptionTest))]
+    [Test]
+    [TestCaseSource(nameof(GetToVolumeUnitExceptionTest))]
     public void ToVolumeUnitExceptionTest(AreaUnit unit)
-        => Assert.Throws<InvalidOperationException>(unit.ToVolumeUnit);
+        => Assert.Throws<InvalidOperationException>(() => unit.ToVolumeUnit());
 
-    [Theory]
-    [InlineData(null)]
-    [InlineData("")]
-    [InlineData(" ")]
+    [Test]
+    [TestCase(null)]
+    [TestCase("")]
+    [TestCase(" ")]
     public void FromNameEmptyString(string name)
         => Assert.Throws<ArgumentNullException>(() => AreaUnit.FromName(name, out _));
 }

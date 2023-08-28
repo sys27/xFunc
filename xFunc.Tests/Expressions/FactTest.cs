@@ -5,34 +5,34 @@ namespace xFunc.Tests.Expressions;
 
 public class FactTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteTest1()
     {
         var fact = new Fact(new Number(4));
         var expected = new NumberValue(24.0);
 
-        Assert.Equal(expected, fact.Execute());
+        Assert.That(fact.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest2()
     {
         var fact = new Fact(Number.Zero);
         var expected = new NumberValue(1.0);
 
-        Assert.Equal(expected, fact.Execute());
+        Assert.That(fact.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest3()
     {
         var fact = new Fact(Number.One);
         var expected = new NumberValue(1.0);
 
-        Assert.Equal(expected, fact.Execute());
+        Assert.That(fact.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest4()
     {
         var fact = new Fact(new Number(-1));
@@ -41,16 +41,16 @@ public class FactTest : BaseExpressionTests
         Assert.True(actual.IsNaN);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestException()
         => TestNotSupported(new Fact(Bool.False));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Fact(Number.Zero);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

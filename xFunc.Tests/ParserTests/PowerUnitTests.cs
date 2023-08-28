@@ -5,15 +5,15 @@ namespace xFunc.Tests.ParserTests;
 
 public class PowerUnitTests : BaseParserTests
 {
-    [Fact]
+    [Test]
     public void ParseWatt()
         => ParseTest("1 'W'", PowerValue.Watt(1).AsExpression());
 
-    [Fact]
+    [Test]
     public void ParseKilowatt()
         => ParseTest("1 'kW'", PowerValue.Kilowatt(1).AsExpression());
 
-    [Fact]
+    [Test]
     public void ParseHorsepower()
         => ParseTest("1 'hp'", PowerValue.Horsepower(1).AsExpression());
 }

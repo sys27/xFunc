@@ -5,30 +5,30 @@ namespace xFunc.Tests.Results;
 
 public class MassNumberResultTest
 {
-    [Fact]
+    [Test]
     public void ResultTest()
     {
         var power = MassValue.Gram(10);
         var result = new MassNumberResult(power);
 
-        Assert.Equal(power, result.Result);
+        Assert.That(result.Result, Is.EqualTo(power));
     }
 
-    [Fact]
+    [Test]
     public void IResultTest()
     {
         var power = MassValue.Gram(10);
         var result = new MassNumberResult(power) as IResult;
 
-        Assert.Equal(power, result.Result);
+        Assert.That(result.Result, Is.EqualTo(power));
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var power = MassValue.Gram(10);
         var result = new MassNumberResult(power);
 
-        Assert.Equal("10 g", result.ToString());
+        Assert.That(result.ToString(), Is.EqualTo("10 g"));
     }
 }

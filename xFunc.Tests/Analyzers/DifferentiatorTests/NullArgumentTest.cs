@@ -3,7 +3,7 @@
 
 using System.Collections.Immutable;
 using System.Reflection;
-using Xunit.Sdk;
+using NUnit.Framework.Internal;
 
 namespace xFunc.Tests.Analyzers.DifferentiatorTests;
 
@@ -31,88 +31,88 @@ public class NullArgumentTest : BaseTest
             throw;
         }
 
-        throw new XunitException("The exception is expected.");
+        throw new NUnitException("The exception is expected.");
     }
 
-    [Theory]
-    [InlineData(typeof(Abs))]
-    [InlineData(typeof(Add))]
-    [InlineData(typeof(Derivative))]
-    [InlineData(typeof(Div))]
-    [InlineData(typeof(Exp))]
-    [InlineData(typeof(Lb))]
-    [InlineData(typeof(Lg))]
-    [InlineData(typeof(Ln))]
-    [InlineData(typeof(Log))]
-    [InlineData(typeof(Mul))]
-    [InlineData(typeof(Number))]
-    [InlineData(typeof(Angle))]
-    [InlineData(typeof(Pow))]
-    [InlineData(typeof(Root))]
-    [InlineData(typeof(Simplify))]
-    [InlineData(typeof(Sqrt))]
-    [InlineData(typeof(Sub))]
-    [InlineData(typeof(UnaryMinus))]
-    [InlineData(typeof(Variable))]
-    [InlineData(typeof(Arccos))]
-    [InlineData(typeof(Arccot))]
-    [InlineData(typeof(Arccsc))]
-    [InlineData(typeof(Arcsec))]
-    [InlineData(typeof(Arcsin))]
-    [InlineData(typeof(Arctan))]
-    [InlineData(typeof(Cos))]
-    [InlineData(typeof(Cot))]
-    [InlineData(typeof(Csc))]
-    [InlineData(typeof(Sec))]
-    [InlineData(typeof(Sin))]
-    [InlineData(typeof(Tan))]
-    [InlineData(typeof(Arcosh))]
-    [InlineData(typeof(Arcoth))]
-    [InlineData(typeof(Arcsch))]
-    [InlineData(typeof(Arsech))]
-    [InlineData(typeof(Arsinh))]
-    [InlineData(typeof(Artanh))]
-    [InlineData(typeof(Cosh))]
-    [InlineData(typeof(Coth))]
-    [InlineData(typeof(Csch))]
-    [InlineData(typeof(Sech))]
-    [InlineData(typeof(Sinh))]
-    [InlineData(typeof(Tanh))]
+    [Test]
+    [TestCase(typeof(Abs))]
+    [TestCase(typeof(Add))]
+    [TestCase(typeof(Derivative))]
+    [TestCase(typeof(Div))]
+    [TestCase(typeof(Exp))]
+    [TestCase(typeof(Lb))]
+    [TestCase(typeof(Lg))]
+    [TestCase(typeof(Ln))]
+    [TestCase(typeof(Log))]
+    [TestCase(typeof(Mul))]
+    [TestCase(typeof(Number))]
+    [TestCase(typeof(Angle))]
+    [TestCase(typeof(Pow))]
+    [TestCase(typeof(Root))]
+    [TestCase(typeof(Simplify))]
+    [TestCase(typeof(Sqrt))]
+    [TestCase(typeof(Sub))]
+    [TestCase(typeof(UnaryMinus))]
+    [TestCase(typeof(Variable))]
+    [TestCase(typeof(Arccos))]
+    [TestCase(typeof(Arccot))]
+    [TestCase(typeof(Arccsc))]
+    [TestCase(typeof(Arcsec))]
+    [TestCase(typeof(Arcsin))]
+    [TestCase(typeof(Arctan))]
+    [TestCase(typeof(Cos))]
+    [TestCase(typeof(Cot))]
+    [TestCase(typeof(Csc))]
+    [TestCase(typeof(Sec))]
+    [TestCase(typeof(Sin))]
+    [TestCase(typeof(Tan))]
+    [TestCase(typeof(Arcosh))]
+    [TestCase(typeof(Arcoth))]
+    [TestCase(typeof(Arcsch))]
+    [TestCase(typeof(Arsech))]
+    [TestCase(typeof(Arsinh))]
+    [TestCase(typeof(Artanh))]
+    [TestCase(typeof(Cosh))]
+    [TestCase(typeof(Coth))]
+    [TestCase(typeof(Csch))]
+    [TestCase(typeof(Sech))]
+    [TestCase(typeof(Sinh))]
+    [TestCase(typeof(Tanh))]
     public void TestExpressionNullArgument(Type type)
         => TestNullExp(type);
 
-    [Theory]
-    [InlineData(typeof(Abs))]
-    [InlineData(typeof(Exp))]
-    [InlineData(typeof(Lb))]
-    [InlineData(typeof(Lg))]
-    [InlineData(typeof(Ln))]
-    [InlineData(typeof(Sqrt))]
-    [InlineData(typeof(UnaryMinus))]
-    [InlineData(typeof(Arccos))]
-    [InlineData(typeof(Arccot))]
-    [InlineData(typeof(Arccsc))]
-    [InlineData(typeof(Arcsec))]
-    [InlineData(typeof(Arcsin))]
-    [InlineData(typeof(Arctan))]
-    [InlineData(typeof(Cos))]
-    [InlineData(typeof(Cot))]
-    [InlineData(typeof(Csc))]
-    [InlineData(typeof(Sec))]
-    [InlineData(typeof(Sin))]
-    [InlineData(typeof(Tan))]
-    [InlineData(typeof(Arcosh))]
-    [InlineData(typeof(Arcoth))]
-    [InlineData(typeof(Arcsch))]
-    [InlineData(typeof(Arsech))]
-    [InlineData(typeof(Arsinh))]
-    [InlineData(typeof(Artanh))]
-    [InlineData(typeof(Cosh))]
-    [InlineData(typeof(Coth))]
-    [InlineData(typeof(Csch))]
-    [InlineData(typeof(Sech))]
-    [InlineData(typeof(Sinh))]
-    [InlineData(typeof(Tanh))]
+    [Test]
+    [TestCase(typeof(Abs))]
+    [TestCase(typeof(Exp))]
+    [TestCase(typeof(Lb))]
+    [TestCase(typeof(Lg))]
+    [TestCase(typeof(Ln))]
+    [TestCase(typeof(Sqrt))]
+    [TestCase(typeof(UnaryMinus))]
+    [TestCase(typeof(Arccos))]
+    [TestCase(typeof(Arccot))]
+    [TestCase(typeof(Arccsc))]
+    [TestCase(typeof(Arcsec))]
+    [TestCase(typeof(Arcsin))]
+    [TestCase(typeof(Arctan))]
+    [TestCase(typeof(Cos))]
+    [TestCase(typeof(Cot))]
+    [TestCase(typeof(Csc))]
+    [TestCase(typeof(Sec))]
+    [TestCase(typeof(Sin))]
+    [TestCase(typeof(Tan))]
+    [TestCase(typeof(Arcosh))]
+    [TestCase(typeof(Arcoth))]
+    [TestCase(typeof(Arcsch))]
+    [TestCase(typeof(Arsech))]
+    [TestCase(typeof(Arsinh))]
+    [TestCase(typeof(Artanh))]
+    [TestCase(typeof(Cosh))]
+    [TestCase(typeof(Coth))]
+    [TestCase(typeof(Csch))]
+    [TestCase(typeof(Sech))]
+    [TestCase(typeof(Sinh))]
+    [TestCase(typeof(Tanh))]
     public void TestUnaryContextNullArgument(Type type)
     {
         var exp = Create(type, Variable.X);
@@ -120,14 +120,14 @@ public class NullArgumentTest : BaseTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze(differentiator, null));
     }
 
-    [Theory]
-    [InlineData(typeof(Add))]
-    [InlineData(typeof(Div))]
-    [InlineData(typeof(Log))]
-    [InlineData(typeof(Mul))]
-    [InlineData(typeof(Pow))]
-    [InlineData(typeof(Root))]
-    [InlineData(typeof(Sub))]
+    [Test]
+    [TestCase(typeof(Add))]
+    [TestCase(typeof(Div))]
+    [TestCase(typeof(Log))]
+    [TestCase(typeof(Mul))]
+    [TestCase(typeof(Pow))]
+    [TestCase(typeof(Root))]
+    [TestCase(typeof(Sub))]
     public void TestBinaryContextNullArgument(Type type)
     {
         var exp = Create(type, Variable.X, Variable.X);
@@ -135,7 +135,7 @@ public class NullArgumentTest : BaseTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze(differentiator, null));
     }
 
-    [Fact]
+    [Test]
     public void DerivContextArgumentTest()
     {
         var exp = new Derivative(differentiator, new Simplifier(), Variable.X);
@@ -143,7 +143,7 @@ public class NullArgumentTest : BaseTest
         Assert.Throws<ArgumentNullException>(() => differentiator.Analyze(exp, null));
     }
 
-    [Fact]
+    [Test]
     public void NumberContextArgumentTest()
     {
         var exp = Number.One;
@@ -151,7 +151,7 @@ public class NullArgumentTest : BaseTest
         Assert.Throws<ArgumentNullException>(() => differentiator.Analyze(exp, null));
     }
 
-    [Fact]
+    [Test]
     public void AngleContextArgumentTest()
     {
         var exp = AngleValue.Degree(10).AsExpression();
@@ -159,7 +159,7 @@ public class NullArgumentTest : BaseTest
         Assert.Throws<ArgumentNullException>(() => differentiator.Analyze(exp, null));
     }
 
-    [Fact]
+    [Test]
     public void SimplifyContextArgumentTest()
     {
         var exp = new Simplify(new Simplifier(), Variable.X);
@@ -167,7 +167,7 @@ public class NullArgumentTest : BaseTest
         Assert.Throws<ArgumentNullException>(() => differentiator.Analyze(exp, null));
     }
 
-    [Fact]
+    [Test]
     public void VariableContextArgumentTest()
     {
         var exp = Variable.X;
@@ -175,7 +175,7 @@ public class NullArgumentTest : BaseTest
         Assert.Throws<ArgumentNullException>(() => differentiator.Analyze(exp, null));
     }
 
-    [Fact]
+    [Test]
     public void CallExpressionContextNullArgument()
     {
         var exp = new CallExpression(
@@ -185,7 +185,7 @@ public class NullArgumentTest : BaseTest
         Assert.Throws<NotSupportedException>(() => exp.Analyze(differentiator, null));
     }
 
-    [Fact]
+    [Test]
     public void LambdaExpressionContextNullArgument()
     {
         var exp = Variable.X.ToLambdaExpression(Variable.X.Name);

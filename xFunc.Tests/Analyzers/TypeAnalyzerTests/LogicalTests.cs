@@ -5,7 +5,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class LogicalTests : TypeAnalyzerBaseTests
 {
-    [Fact]
+    [Test]
     public void TestBoolValue()
     {
         var exp = Bool.False;
@@ -13,11 +13,11 @@ public class LogicalTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Boolean);
     }
 
-    [Theory]
-    [InlineData(typeof(Equality))]
-    [InlineData(typeof(Implication))]
-    [InlineData(typeof(NAnd))]
-    [InlineData(typeof(NOr))]
+    [Test]
+    [TestCase(typeof(Equality))]
+    [TestCase(typeof(Implication))]
+    [TestCase(typeof(NAnd))]
+    [TestCase(typeof(NOr))]
     public void TestUndefined(Type type)
     {
         var exp = CreateBinary(type, Variable.X, Variable.X);
@@ -25,11 +25,11 @@ public class LogicalTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Boolean);
     }
 
-    [Theory]
-    [InlineData(typeof(Equality))]
-    [InlineData(typeof(Implication))]
-    [InlineData(typeof(NAnd))]
-    [InlineData(typeof(NOr))]
+    [Test]
+    [TestCase(typeof(Equality))]
+    [TestCase(typeof(Implication))]
+    [TestCase(typeof(NAnd))]
+    [TestCase(typeof(NOr))]
     public void TestBoolUndefined(Type type)
     {
         var exp = CreateBinary(type, Bool.True, Variable.X);
@@ -37,11 +37,11 @@ public class LogicalTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Boolean);
     }
 
-    [Theory]
-    [InlineData(typeof(Equality))]
-    [InlineData(typeof(Implication))]
-    [InlineData(typeof(NAnd))]
-    [InlineData(typeof(NOr))]
+    [Test]
+    [TestCase(typeof(Equality))]
+    [TestCase(typeof(Implication))]
+    [TestCase(typeof(NAnd))]
+    [TestCase(typeof(NOr))]
     public void TestUndefinedBool(Type type)
     {
         var exp = CreateBinary(type, Variable.X, Bool.True);
@@ -49,11 +49,11 @@ public class LogicalTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Boolean);
     }
 
-    [Theory]
-    [InlineData(typeof(Equality))]
-    [InlineData(typeof(Implication))]
-    [InlineData(typeof(NAnd))]
-    [InlineData(typeof(NOr))]
+    [Test]
+    [TestCase(typeof(Equality))]
+    [TestCase(typeof(Implication))]
+    [TestCase(typeof(NAnd))]
+    [TestCase(typeof(NOr))]
     public void TestBool(Type type)
     {
         var exp = CreateBinary(type, Bool.False, Bool.True);
@@ -61,11 +61,11 @@ public class LogicalTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Boolean);
     }
 
-    [Theory]
-    [InlineData(typeof(Equality))]
-    [InlineData(typeof(Implication))]
-    [InlineData(typeof(NAnd))]
-    [InlineData(typeof(NOr))]
+    [Test]
+    [TestCase(typeof(Equality))]
+    [TestCase(typeof(Implication))]
+    [TestCase(typeof(NAnd))]
+    [TestCase(typeof(NOr))]
     public void TestComplexBool(Type type)
     {
         var exp = CreateBinary(type, new ComplexNumber(2, 3), Bool.False);
@@ -73,11 +73,11 @@ public class LogicalTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Theory]
-    [InlineData(typeof(Equality))]
-    [InlineData(typeof(Implication))]
-    [InlineData(typeof(NAnd))]
-    [InlineData(typeof(NOr))]
+    [Test]
+    [TestCase(typeof(Equality))]
+    [TestCase(typeof(Implication))]
+    [TestCase(typeof(NAnd))]
+    [TestCase(typeof(NOr))]
     public void TestBoolComplex(Type type)
     {
         var exp = CreateBinary(type, Bool.False, new ComplexNumber(2, 3));
@@ -85,11 +85,11 @@ public class LogicalTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Theory]
-    [InlineData(typeof(Equality))]
-    [InlineData(typeof(Implication))]
-    [InlineData(typeof(NAnd))]
-    [InlineData(typeof(NOr))]
+    [Test]
+    [TestCase(typeof(Equality))]
+    [TestCase(typeof(Implication))]
+    [TestCase(typeof(NAnd))]
+    [TestCase(typeof(NOr))]
     public void TestParamTypeException(Type type)
     {
         var exp = CreateBinary(type, new ComplexNumber(2, 3), new ComplexNumber(2, 3));
@@ -97,7 +97,7 @@ public class LogicalTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestNotUndefined()
     {
         var exp = new Not(Variable.X);
@@ -105,7 +105,7 @@ public class LogicalTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestNotNumber()
     {
         var exp = new Not(Number.One);
@@ -113,7 +113,7 @@ public class LogicalTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestNotBoolean()
     {
         var exp = new Not(Bool.True);
@@ -121,7 +121,7 @@ public class LogicalTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Boolean);
     }
 
-    [Fact]
+    [Test]
     public void TestNotException()
     {
         var exp = new Not(new ComplexNumber(1, 2));

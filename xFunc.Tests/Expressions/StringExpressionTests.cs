@@ -5,100 +5,98 @@ namespace xFunc.Tests.Expressions;
 
 public class StringExpressionTests : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void NullCtor()
     {
         Assert.Throws<ArgumentNullException>(() => new StringExpression(null));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest()
     {
         var exp = new StringExpression("hello");
-        var expected = "hello";
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo("hello"));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteWithParamsTest()
     {
         var exp = new StringExpression("hello");
         var parameters = new ExpressionParameters();
-        var expected = "hello";
 
-        Assert.Equal(expected, exp.Execute(parameters));
+        Assert.That(exp.Execute(parameters), Is.EqualTo("hello"));
     }
 
-    [Fact]
+    [Test]
     public void EqualsNumberNullTest()
     {
         var exp = new StringExpression("hello");
 
-        Assert.False(exp.Equals(null));
+        Assert.That(exp.Equals(null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsObjectNullTest()
     {
         var exp = new StringExpression("hello");
 
-        Assert.False(exp.Equals((object)null));
+        Assert.That(exp.Equals((object)null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsNumberThisTest()
     {
         var exp = new StringExpression("hello");
 
-        Assert.True(exp.Equals(exp));
+        Assert.That(exp.Equals(exp), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualsObjectThisTest()
     {
         var exp = new StringExpression("hello");
 
-        Assert.True(exp.Equals((object)exp));
+        Assert.That(exp.Equals((object)exp), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualsTest()
     {
         var left = new StringExpression("hello");
         var right = new StringExpression("hello");
 
-        Assert.True(left.Equals(right));
+        Assert.That(left.Equals(right), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsTest()
     {
         var left = new StringExpression("hello");
         var right = new StringExpression("hello1");
 
-        Assert.False(left.Equals(right));
+        Assert.That(left.Equals(right), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsWithDifferentTypeTest()
     {
         var left = new StringExpression("hello");
         var right = Number.One;
 
-        Assert.False(left.Equals(right));
+        Assert.That(left.Equals(right), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsAsObjectTest()
     {
         var left = new StringExpression("hello");
         var right = new StringExpression("hello") as object;
 
-        Assert.True(left.Equals(right));
+        Assert.That(left.Equals(right), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest1()
     {
         var exp = new StringExpression("hello");
@@ -106,7 +104,7 @@ public class StringExpressionTests : BaseExpressionTests
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest2()
     {
         var exp = new StringExpression("hello");

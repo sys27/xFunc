@@ -7,7 +7,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests;
 
 public class SimplifierTest : BaseSimplifierTest
 {
-    [Fact]
+    [Test]
     public void DoubleUnary()
     {
         var un = new UnaryMinus(new UnaryMinus(Variable.X));
@@ -16,7 +16,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(un, expected);
     }
 
-    [Fact]
+    [Test]
     public void UnaryNumber()
     {
         var un = new UnaryMinus(Number.One);
@@ -25,7 +25,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(un, expected);
     }
 
-    [Fact]
+    [Test]
     public void UnaryNumberArgumentSimplified()
     {
         var un = new UnaryMinus(
@@ -38,7 +38,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(un, expected);
     }
 
-    [Fact]
+    [Test]
     public void UnaryNumberNotSimplified()
     {
         var un = new UnaryMinus(Variable.X);
@@ -46,7 +46,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(un, un);
     }
 
-    [Fact]
+    [Test]
     public void Define()
     {
         var define = new Assign(Variable.X, new Add(Number.Two, Number.Two));
@@ -55,7 +55,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(define, expected);
     }
 
-    [Fact]
+    [Test]
     public void DefineNotSimplifierTest()
     {
         var define = new Assign(Variable.X, Number.Two);
@@ -63,7 +63,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(define, define);
     }
 
-    [Fact]
+    [Test]
     public void Simplify()
     {
         var simp = new Simplify(simplifier, new Pow(Variable.X, Number.Zero));
@@ -72,7 +72,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(simp, expected);
     }
 
-    [Fact]
+    [Test]
     public void Deriv()
     {
         var diff = new Differentiator();
@@ -83,7 +83,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(simp, expected);
     }
 
-    [Fact]
+    [Test]
     public void DerivNotSimplifiedTest()
     {
         var differentiator = new Differentiator();
@@ -93,7 +93,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, exp);
     }
 
-    [Fact]
+    [Test]
     public void DiffTest()
     {
         var exp = new Count(new IExpression[] { new Add(Number.Two, Number.Two) });
@@ -102,7 +102,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void UnaryMinusNumberTest()
     {
         var exp = new Abs(new UnaryMinus(Variable.X));
@@ -111,7 +111,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void AbsAbsTest()
     {
         var exp = new Abs(new Abs(Variable.X));
@@ -120,7 +120,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void AbsAbsAbsTest()
     {
         var exp = new Abs(new Abs(new Abs(Variable.X)));
@@ -129,7 +129,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void AbsArgumentSimplifiedTest()
     {
         var exp = new Abs(new Add(Number.One, Number.One));
@@ -138,7 +138,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void MatrixTest()
     {
         var exp = new Matrix(new[]
@@ -159,7 +159,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void MatrixNotSimplifiedTest()
     {
         var exp = new Matrix(new[]
@@ -170,7 +170,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, exp);
     }
 
-    [Fact]
+    [Test]
     public void AddAssignTest()
     {
         var exp = new AddAssign(Variable.X, new Add(Number.One, Number.Two));
@@ -179,7 +179,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void AddAssignNotSimplifiedTest()
     {
         var exp = new AddAssign(Variable.X, Number.One);
@@ -187,7 +187,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, exp);
     }
 
-    [Fact]
+    [Test]
     public void CeilArgumentSimplifiedTest()
     {
         var exp = new Ceil(new Add(Number.One, Number.One));
@@ -196,7 +196,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void CeilNotSimplifiedTest()
     {
         var exp = new Ceil(Number.One);
@@ -204,7 +204,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, exp);
     }
 
-    [Fact]
+    [Test]
     public void ModLeftSimplifiedTest()
     {
         var exp = new Mod(new Add(Number.One, Number.One), Number.One);
@@ -213,7 +213,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void ModRightSimplifiedTest()
     {
         var exp = new Mod(Number.One, new Add(Number.One, Number.One));
@@ -222,7 +222,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void ModNotSimplifiedTest()
     {
         var exp = new Mod(Number.One, Number.One);
@@ -230,7 +230,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, exp);
     }
 
-    [Fact]
+    [Test]
     public void CallExpressionSimplifiedTest()
     {
         var exp = new CallExpression(
@@ -243,7 +243,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void CallExpressionNotSimplifiedTest()
     {
         var exp = new CallExpression(
@@ -253,7 +253,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, exp);
     }
 
-    [Fact]
+    [Test]
     public void LambdaExpressionSimplifiedTest()
     {
         var exp = new Lambda(new[] { "x" }, new Add(Variable.X, Number.Zero)).AsExpression();
@@ -262,7 +262,7 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void LambdaExpressionNotSimplifiedTest()
     {
         var exp = new Lambda(new[] { "x" }, Variable.X).AsExpression();
@@ -270,11 +270,11 @@ public class SimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, exp);
     }
 
-    [Theory]
-    [ClassData(typeof(AllExpressionsData))]
+    [Test]
+    [TestCaseSource(typeof(AllExpressionsData))]
     public void TestNullException(Type type) => TestNullExp(type);
 
-    [Fact]
+    [Test]
     public void MulOrderingTest()
     {
         // 2 * (1 * (3 * (x ^ (3 - 1))))

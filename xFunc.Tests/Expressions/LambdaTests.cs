@@ -2,107 +2,107 @@ namespace xFunc.Tests.Expressions;
 
 public class LambdaTests
 {
-    [Fact]
+    [Test]
     public void EqualsTest()
     {
         var f1 = new Lambda(new[] { "x" }, new Sin(Variable.X));
         var f2 = new Lambda(new[] { "x" }, new Sin(Variable.X));
 
-        Assert.True(f1.Equals(f2));
+        Assert.That(f1.Equals(f2), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsTest1()
     {
         var f1 = new Lambda(new[] { "x" }, new Sin(Variable.X));
         var f2 = new Lambda(new[] { "x", "y" }, new Sin(Variable.X));
 
-        Assert.False(f1.Equals(f2));
+        Assert.That(f1.Equals(f2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsTest2()
     {
         var f1 = new Lambda(new[] { "x" }, new Sin(Variable.X));
         var f2 = new Lambda(new[] { "x" }, new Add(Variable.X, Variable.Y));
 
-        Assert.False(f1.Equals(f2));
+        Assert.That(f1.Equals(f2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsObjectTest()
     {
         var f1 = new Lambda(new[] { "x" }, new Sin(Variable.X));
         var f2 = new Lambda(new[] { "x" }, new Sin(Variable.X));
 
-        Assert.True(f1.Equals(f2 as object));
+        Assert.That(f1.Equals(f2 as object), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsObjectTest1()
     {
         var f1 = new Lambda(new[] { "x" }, new Sin(Variable.X));
         var f2 = new Lambda(new[] { "x", "y" }, new Sin(Variable.X));
 
-        Assert.False(f1.Equals(f2 as object));
+        Assert.That(f1.Equals(f2 as object), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsObjectTest2()
     {
         var f1 = new Lambda(new[] { "x" }, new Sin(Variable.X));
         var f2 = new Lambda(new[] { "x" }, new Add(Variable.X, Variable.Y));
 
-        Assert.False(f1.Equals(f2 as object));
+        Assert.That(f1.Equals(f2 as object), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsDiffTypesObjectTest2()
     {
         var f1 = new Lambda(new[] { "x" }, new Sin(Variable.X));
         var f2 = Variable.X;
 
-        Assert.False(f1.Equals(f2 as object));
+        Assert.That(f1.Equals(f2 as object), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsOperatorTest()
     {
         var f1 = new Lambda(new[] { "x" }, new Sin(Variable.X));
         var f2 = new Lambda(new[] { "x" }, new Sin(Variable.X));
 
-        Assert.True(f1 == f2);
+        Assert.That(f1 == f2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsOperatorTest1()
     {
         var f1 = new Lambda(new[] { "x" }, new Sin(Variable.X));
         var f2 = new Lambda(new[] { "x", "y" }, new Sin(Variable.X));
 
-        Assert.True(f1 != f2);
+        Assert.That(f1 != f2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsOperatorTest2()
     {
         var f1 = new Lambda(new[] { "x" }, new Sin(Variable.X));
         var f2 = new Lambda(new[] { "x" }, new Add(Variable.X, Variable.Y));
 
-        Assert.True(f1 != f2);
+        Assert.That(f1 != f2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var function = new Lambda(
             new[] { "x", "y" },
             new Add(Variable.X, Variable.Y));
 
-        Assert.Equal("(x, y) => x + y", function.ToString());
+        Assert.That(function.ToString(), Is.EqualTo("(x, y) => x + y"));
     }
 
-    [Fact]
+    [Test]
     public void CallTest()
     {
         var function = new Lambda(
@@ -117,6 +117,6 @@ public class LambdaTests
         var result = function.Call(parameters);
         var expected = new NumberValue(3.0);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 }

@@ -5,30 +5,30 @@ namespace xFunc.Tests.Results;
 
 public class TimeNumberResultTest
 {
-    [Fact]
+    [Test]
     public void ResultTest()
     {
         var lengthValue = TimeValue.Second(10);
         var result = new TimeNumberResult(lengthValue);
 
-        Assert.Equal(lengthValue, result.Result);
+        Assert.That(result.Result, Is.EqualTo(lengthValue));
     }
 
-    [Fact]
+    [Test]
     public void IResultTest()
     {
         var lengthValue = TimeValue.Second(10);
         var result = new TimeNumberResult(lengthValue) as IResult;
 
-        Assert.Equal(lengthValue, result.Result);
+        Assert.That(result.Result, Is.EqualTo(lengthValue));
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var lengthValue = TimeValue.Second(10);
         var result = new TimeNumberResult(lengthValue);
 
-        Assert.Equal("10 s", result.ToString());
+        Assert.That(result.ToString(), Is.EqualTo("10 s"));
     }
 }

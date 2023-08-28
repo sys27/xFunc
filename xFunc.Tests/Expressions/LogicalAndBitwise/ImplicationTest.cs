@@ -5,32 +5,32 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise;
 
 public class ImplicationTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteTest1()
     {
         var impl = new Implication(Bool.True, Bool.False);
 
-        Assert.False((bool) impl.Execute());
+        Assert.That((bool) impl.Execute(), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest2()
     {
         var impl = new Implication(Bool.True, Bool.True);
 
-        Assert.True((bool) impl.Execute());
+        Assert.That((bool) impl.Execute(), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteResultIsNotSupported()
         => TestNotSupported(new Implication(Number.One, Number.Two));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Implication(Bool.True, Bool.False);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

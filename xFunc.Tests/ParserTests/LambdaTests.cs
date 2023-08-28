@@ -5,11 +5,11 @@ namespace xFunc.Tests.ParserTests;
 
 public class LambdaTests : BaseParserTests
 {
-    [Theory]
-    [InlineData("(x) -> x")]
-    [InlineData("(x) −> x")]
-    [InlineData("(x) => x")]
-    [InlineData("((x) => x)")]
+    [Test]
+    [TestCase("(x) -> x")]
+    [TestCase("(x) −> x")]
+    [TestCase("(x) => x")]
+    [TestCase("((x) => x)")]
     public void ParseLambdaWithOneParameterTest(string function)
     {
         var expected = new Lambda(new[] { "x" }, Variable.X)
@@ -18,7 +18,7 @@ public class LambdaTests : BaseParserTests
         ParseTest(function, expected);
     }
 
-    [Fact]
+    [Test]
     public void ParseLambdaWithoutParametersTest()
     {
         var expected = new Lambda(Array.Empty<string>(), Number.One)
@@ -27,7 +27,7 @@ public class LambdaTests : BaseParserTests
         ParseTest("() => 1", expected);
     }
 
-    [Fact]
+    [Test]
     public void ParseLambdaWithTwoParametersTest()
     {
         var expected = new Lambda(
@@ -38,7 +38,7 @@ public class LambdaTests : BaseParserTests
         ParseTest("(x, y) => x + y", expected);
     }
 
-    [Fact]
+    [Test]
     public void ParseLambdaOfLambdaTest()
     {
         var expected = new Lambda(
@@ -52,17 +52,17 @@ public class LambdaTests : BaseParserTests
         ParseTest("(x) => (y) => x + y", expected);
     }
 
-    [Theory]
-    [InlineData("(x, ")]
-    [InlineData("(x, y")]
-    [InlineData("(x, y)")]
-    [InlineData("(x, y) =>")]
-    [InlineData("(x, x) => x + x")]
-    [InlineData("(x,) => x")]
+    [Test]
+    [TestCase("(x, ")]
+    [TestCase("(x, y")]
+    [TestCase("(x, y)")]
+    [TestCase("(x, y) =>")]
+    [TestCase("(x, x) => x + x")]
+    [TestCase("(x,) => x")]
     public void ParseLambdaErrorTests(string function)
         => ParseErrorTest(function);
 
-    [Fact]
+    [Test]
     public void ParseInlineTest()
     {
         var expected = new CallExpression(
@@ -75,7 +75,7 @@ public class LambdaTests : BaseParserTests
         ParseTest("((x) => sin(x))(90)", expected);
     }
 
-    [Fact]
+    [Test]
     public void ParseInlineWithoutParametersTest()
     {
         var expected = new CallExpression(
@@ -85,7 +85,7 @@ public class LambdaTests : BaseParserTests
         ParseTest("(() => 1)()", expected);
     }
 
-    [Fact]
+    [Test]
     public void ParseInlineTwoParametersTest()
     {
         var expected = new CallExpression(
@@ -99,7 +99,7 @@ public class LambdaTests : BaseParserTests
         ParseTest("((x, y) => x + y)(1, 2)", expected);
     }
 
-    [Fact]
+    [Test]
     public void ParseFunctionWithCallExpression()
     {
         var simplifier = Substitute.For<ISimplifier>();
@@ -112,7 +112,7 @@ public class LambdaTests : BaseParserTests
         ParseTest("simplify((x) => x * x)(1)", expected);
     }
 
-    [Fact]
+    [Test]
     public void ParseNestedCallExpression()
     {
         var expected = new CallExpression(
@@ -124,7 +124,7 @@ public class LambdaTests : BaseParserTests
         ParseTest("f(g)(1)(2)", expected);
     }
 
-    [Fact]
+    [Test]
     public void ParseComplexCallExpression()
     {
         var expected = new Add(

@@ -5,7 +5,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class PowTests : TypeAnalyzerBaseTests
 {
-    [Fact]
+    [Test]
     public void TestPowComplexAndUndefined()
     {
         var exp = new Pow(new ComplexNumber(2, 2), Variable.X);
@@ -13,7 +13,7 @@ public class PowTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestPowComplexAndNumber()
     {
         var exp = new Pow(new ComplexNumber(2, 4), new Number(4));
@@ -21,7 +21,7 @@ public class PowTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestPowComplexAndComplex()
     {
         var exp = new Pow(new ComplexNumber(4, 2), new ComplexNumber(2, 4));
@@ -29,7 +29,7 @@ public class PowTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestPowUndefinedAndNumber()
     {
         var exp = new Pow(Variable.X, Number.Two);
@@ -37,7 +37,7 @@ public class PowTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestPowNumberAndUndefined()
     {
         var exp = new Pow(Number.Two, Variable.X);
@@ -45,7 +45,7 @@ public class PowTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestPowNumber()
     {
         var exp = new Pow(new Number(4), Number.Two);
@@ -53,7 +53,7 @@ public class PowTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestNumberAndComplex()
     {
         var exp = new Pow(Number.Two, new ComplexNumber(2, 4));
@@ -61,7 +61,7 @@ public class PowTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestRationalAndNumber()
     {
         var exp = new Pow(
@@ -71,7 +71,7 @@ public class PowTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.RationalNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestPowException()
     {
         var exp = new Pow(Bool.False, Bool.False);

@@ -5,11 +5,11 @@ namespace xFunc.Tests.Expressions.Programming;
 
 public class IncTest
 {
-    [Fact]
+    [Test]
     public void NullCtorTest()
         => Assert.Throws<ArgumentNullException>(() => new Inc(null));
 
-    [Fact]
+    [Test]
     public void IncCalcTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 10) };
@@ -17,28 +17,28 @@ public class IncTest
         var result = (NumberValue)inc.Execute(parameters);
         var expected = new NumberValue(11.0);
 
-        Assert.Equal(expected, result);
-        Assert.Equal(expected, parameters["x"]);
+        Assert.That(result, Is.EqualTo(expected));
+        Assert.That(parameters["x"].Value, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void IncAsExpExecuteTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 10) };
         var inc = new Add(Number.One, new Inc(Variable.X));
         var result = (NumberValue)inc.Execute(parameters);
 
-        Assert.Equal(new NumberValue(12.0), result);
-        Assert.Equal(new NumberValue(11.0), parameters["x"]);
+        Assert.That(result, Is.EqualTo(new NumberValue(12.0)));
+        Assert.That(parameters["x"].Value, Is.EqualTo(new NumberValue(11.0)));
     }
 
-    [Fact]
+    [Test]
     public void IncNullParameters()
     {
         Assert.Throws<ArgumentNullException>(() => new Inc(Variable.X).Execute());
     }
 
-    [Fact]
+    [Test]
     public void IncBoolTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", true) };
@@ -47,32 +47,32 @@ public class IncTest
         Assert.Throws<ResultIsNotSupportedException>(() => inc.Execute(parameters));
     }
 
-    [Fact]
+    [Test]
     public void SameEqualsTest()
     {
         var inc = new Inc(Variable.X);
 
-        Assert.True(inc.Equals(inc));
+        Assert.That(inc.Equals(inc), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualsNullTest()
     {
         var inc = new Inc(Variable.X);
 
-        Assert.False(inc.Equals(null));
+        Assert.That(inc.Equals(null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsDifferentTypeTest()
     {
         var inc = new Inc(Variable.X);
         var dec = new Dec(Variable.X);
 
-        Assert.False(inc.Equals(dec));
+        Assert.That(inc.Equals(dec), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest1()
     {
         var inc = new Inc(Variable.X);
@@ -80,7 +80,7 @@ public class IncTest
         Assert.Throws<ArgumentNullException>(() => inc.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest2()
     {
         var inc = new Inc(Variable.X);
@@ -88,12 +88,12 @@ public class IncTest
         Assert.Throws<ArgumentNullException>(() => inc.Analyze<string, object>(null, null));
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Inc(Variable.X);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

@@ -5,105 +5,105 @@ namespace xFunc.Tests.Expressions.Units.LengthUnits;
 
 public class LengthValueTest
 {
-    [Fact]
+    [Test]
     public void EqualTest()
     {
         var length1 = LengthValue.Meter(10);
         var length2 = LengthValue.Meter(10);
 
-        Assert.True(length1.Equals(length2));
+        Assert.That(length1.Equals(length2), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualOperatorTest()
     {
         var length1 = LengthValue.Meter(10);
         var length2 = LengthValue.Meter(10);
 
-        Assert.True(length1 == length2);
+        Assert.That(length1 == length2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualTest()
     {
         var length1 = LengthValue.Meter(10);
         var length2 = LengthValue.Meter(12);
 
-        Assert.True(length1 != length2);
+        Assert.That(length1 != length2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessTest()
     {
         var length1 = LengthValue.Meter(10);
         var length2 = LengthValue.Meter(12);
 
-        Assert.True(length1 < length2);
+        Assert.That(length1 < length2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessFalseTest()
     {
         var length1 = LengthValue.Meter(20);
         var length2 = LengthValue.Meter(12);
 
-        Assert.False(length1 < length2);
+        Assert.That(length1 < length2, Is.False);
     }
 
-    [Fact]
+    [Test]
     public void GreaterTest()
     {
         var length1 = LengthValue.Meter(20);
         var length2 = LengthValue.Meter(12);
 
-        Assert.True(length1 > length2);
+        Assert.That(length1 > length2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterFalseTest()
     {
         var length1 = LengthValue.Meter(10);
         var length2 = LengthValue.Meter(12);
 
-        Assert.False(length1 > length2);
+        Assert.That(length1 > length2, Is.False);
     }
 
-    [Fact]
+    [Test]
     public void LessOrEqualTest()
     {
         var length1 = LengthValue.Meter(10);
         var length2 = LengthValue.Meter(10);
 
-        Assert.True(length1 <= length2);
+        Assert.That(length1 <= length2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterOrEqualTest()
     {
         var length1 = LengthValue.Meter(10);
         var length2 = LengthValue.Meter(10);
 
-        Assert.True(length1 >= length2);
+        Assert.That(length1 >= length2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CompareToNull()
     {
         var length = LengthValue.Meter(10);
 
-        Assert.True(length.CompareTo(null) > 0);
+        Assert.That(length.CompareTo(null) > 0, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CompareToObject()
     {
         var length1 = LengthValue.Meter(10);
         var length2 = (object)LengthValue.Meter(10);
 
-        Assert.True(length1.CompareTo(length2) == 0);
+        Assert.That(length1.CompareTo(length2) == 0, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CompareToDouble()
     {
         var length = LengthValue.Meter(10);
@@ -111,188 +111,188 @@ public class LengthValueTest
         Assert.Throws<ArgumentException>(() => length.CompareTo(1));
     }
 
-    [Fact]
+    [Test]
     public void ValueNotEqualTest()
     {
         var length1 = LengthValue.Meter(10);
         var length2 = LengthValue.Meter(12);
 
-        Assert.False(length1.Equals(length2));
+        Assert.That(length1.Equals(length2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void UnitNotEqualTest2()
     {
         var length1 = LengthValue.Meter(10);
         var length2 = LengthValue.Kilometer(10);
 
-        Assert.False(length1.Equals(length2));
+        Assert.That(length1.Equals(length2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualDiffTypeTest()
     {
         var length1 = LengthValue.Meter(10);
         var length2 = 3;
 
-        Assert.False(length1.Equals(length2));
+        Assert.That(length1.Equals(length2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualObjectTest()
     {
         var length1 = LengthValue.Meter(10);
         var length2 = LengthValue.Meter(10);
 
-        Assert.True(length1.Equals(length2 as object));
+        Assert.That(length1.Equals(length2 as object), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualObjectTest()
     {
         var length1 = LengthValue.Meter(10);
         var length2 = LengthValue.Meter(20);
 
-        Assert.False(length1.Equals(length2 as object));
+        Assert.That(length1.Equals(length2 as object), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ToStringMeterTest()
     {
         var length = LengthValue.Meter(10);
 
-        Assert.Equal("10 m", length.ToString());
+        Assert.That(length.ToString(), Is.EqualTo("10 m"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringNanometerTest()
     {
         var length = LengthValue.Nanometer(10);
 
-        Assert.Equal("10 nm", length.ToString());
+        Assert.That(length.ToString(), Is.EqualTo("10 nm"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringMicrometerTest()
     {
         var length = LengthValue.Micrometer(10);
 
-        Assert.Equal("10 µm", length.ToString());
+        Assert.That(length.ToString(), Is.EqualTo("10 µm"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringMillimeterTest()
     {
         var length = LengthValue.Millimeter(10);
 
-        Assert.Equal("10 mm", length.ToString());
+        Assert.That(length.ToString(), Is.EqualTo("10 mm"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringCentimeterTest()
     {
         var length = LengthValue.Centimeter(10);
 
-        Assert.Equal("10 cm", length.ToString());
+        Assert.That(length.ToString(), Is.EqualTo("10 cm"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringDecimeterTest()
     {
         var length = LengthValue.Decimeter(10);
 
-        Assert.Equal("10 dm", length.ToString());
+        Assert.That(length.ToString(), Is.EqualTo("10 dm"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringKilometerTest()
     {
         var length = LengthValue.Kilometer(10);
 
-        Assert.Equal("10 km", length.ToString());
+        Assert.That(length.ToString(), Is.EqualTo("10 km"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringInchTest()
     {
         var length = LengthValue.Inch(10);
 
-        Assert.Equal("10 in", length.ToString());
+        Assert.That(length.ToString(), Is.EqualTo("10 in"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringFootTest()
     {
         var length = LengthValue.Foot(10);
 
-        Assert.Equal("10 ft", length.ToString());
+        Assert.That(length.ToString(), Is.EqualTo("10 ft"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringYardTest()
     {
         var length = LengthValue.Yard(10);
 
-        Assert.Equal("10 yd", length.ToString());
+        Assert.That(length.ToString(), Is.EqualTo("10 yd"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringMileTest()
     {
         var length = LengthValue.Mile(10);
 
-        Assert.Equal("10 mi", length.ToString());
+        Assert.That(length.ToString(), Is.EqualTo("10 mi"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringNauticalMileTest()
     {
         var length = LengthValue.NauticalMile(10);
 
-        Assert.Equal("10 nmi", length.ToString());
+        Assert.That(length.ToString(), Is.EqualTo("10 nmi"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringChainTest()
     {
         var length = LengthValue.Chain(10);
 
-        Assert.Equal("10 ch", length.ToString());
+        Assert.That(length.ToString(), Is.EqualTo("10 ch"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringRodTest()
     {
         var length = LengthValue.Rod(10);
 
-        Assert.Equal("10 rd", length.ToString());
+        Assert.That(length.ToString(), Is.EqualTo("10 rd"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringAstronomicalUnitTest()
     {
         var length = LengthValue.AstronomicalUnit(10);
 
-        Assert.Equal("10 au", length.ToString());
+        Assert.That(length.ToString(), Is.EqualTo("10 au"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringLightYearTest()
     {
         var length = LengthValue.LightYear(10);
 
-        Assert.Equal("10 ly", length.ToString());
+        Assert.That(length.ToString(), Is.EqualTo("10 ly"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringParsecTest()
     {
         var length = LengthValue.Parsec(10);
 
-        Assert.Equal("10 pc", length.ToString());
+        Assert.That(length.ToString(), Is.EqualTo("10 pc"));
     }
 
-    [Fact]
+    [Test]
     public void AddOperatorTest()
     {
         var length1 = LengthValue.Meter(1);
@@ -300,10 +300,10 @@ public class LengthValueTest
         var expected = LengthValue.Meter(1001);
         var result = length1 + length2;
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SubOperatorTest()
     {
         var length1 = LengthValue.Kilometer(1);
@@ -311,10 +311,10 @@ public class LengthValueTest
         var expected = LengthValue.Kilometer(0.999);
         var result = length1 - length2;
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulOperatorTest()
     {
         var length1 = LengthValue.Kilometer(2);
@@ -322,10 +322,10 @@ public class LengthValueTest
         var expected = AreaValue.Kilometer(4);
         var result = length1 * length2;
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulOperatorAreaLengthTest()
     {
         var length1 = AreaValue.Centimeter(20000);
@@ -333,10 +333,10 @@ public class LengthValueTest
         var expected = VolumeValue.Centimeter(40000);
         var result = length1 * length2;
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulOperatorLengthAreaTest()
     {
         var length1 = LengthValue.Meter(2);
@@ -344,7 +344,7 @@ public class LengthValueTest
         var expected = VolumeValue.Centimeter(40000);
         var result = length1 * length2;
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
     public static IEnumerable<object[]> GetConversionTestCases()
@@ -656,13 +656,13 @@ public class LengthValueTest
         yield return new object[] { 10.0, LengthUnit.Parsec, LengthUnit.LightYear, 32.615637769 };
     }
 
-    [Theory]
-    [MemberData(nameof(GetConversionTestCases))]
+    [Test]
+    [TestCaseSource(nameof(GetConversionTestCases))]
     public void ConversionTests(double value, LengthUnit unit, LengthUnit to, double expected)
     {
         var length = new LengthValue(new NumberValue(value), unit);
         var converted = length.To(to);
 
-        Assert.Equal(expected, converted.Value.Number, 5);
+        Assert.That(converted.Value.Number, Is.EqualTo(expected).Within(5));
     }
 }

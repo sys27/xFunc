@@ -5,7 +5,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests;
 
 public class AngleSimplifierTest : BaseSimplifierTest
 {
-    [Fact]
+    [Test]
     public void ToDegreeNumber()
     {
         var exp = new ToDegree(new Number(10));
@@ -14,7 +14,7 @@ public class AngleSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void DegreeToDegree()
     {
         var exp = new ToDegree(AngleValue.Degree(10).AsExpression());
@@ -23,7 +23,7 @@ public class AngleSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void RadianToDegree()
     {
         var exp = new ToDegree(AngleValue.Radian(Math.PI).AsExpression());
@@ -32,7 +32,7 @@ public class AngleSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void ToDegreeArgumentSimplified()
     {
         var exp = new ToDegree(
@@ -45,7 +45,7 @@ public class AngleSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void ToDegreeNotSimplified()
     {
         var exp = new ToDegree(Variable.X);
@@ -53,7 +53,7 @@ public class AngleSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, exp);
     }
 
-    [Fact]
+    [Test]
     public void ToRadianNumber()
     {
         var exp = new ToRadian(new Number(10));
@@ -62,7 +62,7 @@ public class AngleSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void RadianToRadian()
     {
         var exp = new ToRadian(AngleValue.Radian(10).AsExpression());
@@ -71,7 +71,7 @@ public class AngleSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void DegreeToRadian()
     {
         var exp = new ToRadian(AngleValue.Degree(180).AsExpression());
@@ -80,7 +80,7 @@ public class AngleSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void ToRadianArgumentSimplified()
     {
         var exp = new ToRadian(
@@ -93,7 +93,7 @@ public class AngleSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void ToRadianNotSimplified()
     {
         var exp = new ToRadian(Variable.X);
@@ -101,7 +101,7 @@ public class AngleSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, exp);
     }
 
-    [Fact]
+    [Test]
     public void ToGradianNumber()
     {
         var exp = new ToGradian(new Number(10));
@@ -110,7 +110,7 @@ public class AngleSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void GradianToGradian()
     {
         var exp = new ToGradian(AngleValue.Gradian(10).AsExpression());
@@ -119,7 +119,7 @@ public class AngleSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void DegreeToGradian()
     {
         var exp = new ToGradian(AngleValue.Degree(180).AsExpression());
@@ -128,7 +128,7 @@ public class AngleSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void ToGradianArgumentSimplified()
     {
         var exp = new ToGradian(
@@ -141,7 +141,7 @@ public class AngleSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void ToGradianNotSimplified()
     {
         var exp = new ToGradian(Variable.X);

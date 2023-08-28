@@ -5,88 +5,88 @@ namespace xFunc.Tests.Expressions.Units.VolumeUnits;
 
 public class VolumeUnitTest
 {
-    [Fact]
+    [Test]
     public void EqualsNullTest()
     {
         var a = VolumeUnit.Meter;
 
-        Assert.False(a.Equals(null));
+        Assert.That(a.Equals(null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsTest()
     {
         var a = VolumeUnit.Meter;
         var b = VolumeUnit.Meter;
 
-        Assert.True(a.Equals(b));
+        Assert.That(a.Equals(b), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsTest()
     {
         var a = VolumeUnit.Meter;
         var b = VolumeUnit.Centimeter;
 
-        Assert.False(a.Equals(b));
+        Assert.That(a.Equals(b), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ObjectEqualsNullTest()
     {
         var a = VolumeUnit.Meter;
 
-        Assert.False(a.Equals(null as object));
+        Assert.That(a.Equals(null as object), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ObjectEqualsTest()
     {
         var a = VolumeUnit.Meter;
         var b = VolumeUnit.Meter as object;
 
-        Assert.True(a.Equals(b));
+        Assert.That(a.Equals(b), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ObjectEqualsWithDifferentTypesTest()
     {
         var a = VolumeUnit.Meter;
         var b = 1 as object;
 
-        Assert.False(a.Equals(b));
+        Assert.That(a.Equals(b), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsOperatorTest()
     {
         var a = VolumeUnit.Meter;
         var b = VolumeUnit.Meter;
 
-        Assert.True(a == b);
+        Assert.That(a == b, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsOperatorTest()
     {
         var a = VolumeUnit.Meter;
         var b = VolumeUnit.Centimeter;
 
-        Assert.True(a != b);
+        Assert.That(a != b, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var a = VolumeUnit.Meter;
 
-        Assert.Equal("m^3", a.ToString());
+        Assert.That(a.ToString(), Is.EqualTo("m^3"));
     }
 
-    [Theory]
-    [InlineData(null)]
-    [InlineData("")]
-    [InlineData(" ")]
+    [Test]
+    [TestCase(null)]
+    [TestCase("")]
+    [TestCase(" ")]
     public void FromNameEmptyString(string name)
         => Assert.Throws<ArgumentNullException>(() => VolumeUnit.FromName(name, out _));
 }

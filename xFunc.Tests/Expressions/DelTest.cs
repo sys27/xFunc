@@ -7,11 +7,11 @@ namespace xFunc.Tests.Expressions;
 
 public class DelTest
 {
-    [Fact]
+    [Test]
     public void DifferentiatorNull()
         => Assert.Throws<ArgumentNullException>(() => new Del(null, null, null));
 
-    [Fact]
+    [Test]
     public void SimplifierNull()
     {
         var differentiator = Substitute.For<IDifferentiator>();
@@ -19,7 +19,7 @@ public class DelTest
         Assert.Throws<ArgumentNullException>(() => new Del(differentiator, null, null));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest1()
     {
         var exp = new Add(
@@ -38,10 +38,10 @@ public class DelTest
             new Mul(new Number(3), new Pow(new Variable("z"), Number.Two))
         }).ToLambda();
 
-        Assert.Equal(expected, del.Execute());
+        Assert.That(del.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest2()
     {
         var exp = new Add(
@@ -57,10 +57,10 @@ public class DelTest
             new Number(-1),
         }).ToLambda();
 
-        Assert.Equal(expected, del.Execute());
+        Assert.That(del.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNonLambdaTest()
     {
         var differentiator = Substitute.For<IDifferentiator>();
@@ -73,19 +73,15 @@ public class DelTest
         Assert.Throws<ResultIsNotSupportedException>(() => del.Execute());
     }
 
-    [Fact]
+    [Test]
     public void NullDiffTest()
-    {
-        Assert.Throws<ArgumentNullException>(() => new Del(null, null, Variable.X));
-    }
+        => Assert.Throws<ArgumentNullException>(() => new Del(null, null, Variable.X));
 
-    [Fact]
+    [Test]
     public void NullSimplifierTest()
-    {
-        Assert.Throws<ArgumentNullException>(() => new Del(new Differentiator(), null, Variable.X));
-    }
+        => Assert.Throws<ArgumentNullException>(() => new Del(new Differentiator(), null, Variable.X));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Add(
@@ -95,6 +91,6 @@ public class DelTest
         var del = new Del(new Differentiator(), new Simplifier(), exp);
         var clone = del.Clone();
 
-        Assert.Equal(del, clone);
+        Assert.That(clone, Is.EqualTo(del));
     }
 }

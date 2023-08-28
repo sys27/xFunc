@@ -5,7 +5,7 @@ namespace xFunc.Tests.ParserTests;
 
 public class RelationalOperatorTests : BaseParserTests
 {
-    [Fact]
+    [Test]
     public void LessThenTest()
     {
         var expected = new LessThan(Variable.X, Number.Zero);
@@ -13,7 +13,7 @@ public class RelationalOperatorTests : BaseParserTests
         ParseTest("x < 0", expected);
     }
 
-    [Fact]
+    [Test]
     public void LessOrEqualTest()
     {
         var expected = new LessOrEqual(Variable.X, Number.Zero);
@@ -21,7 +21,7 @@ public class RelationalOperatorTests : BaseParserTests
         ParseTest("x <= 0", expected);
     }
 
-    [Fact]
+    [Test]
     public void GreaterThenTest()
     {
         var expected = new GreaterThan(Variable.X, Number.Zero);
@@ -29,7 +29,7 @@ public class RelationalOperatorTests : BaseParserTests
         ParseTest("x > 0", expected);
     }
 
-    [Fact]
+    [Test]
     public void GreaterOrEqualTest()
     {
         var expected = new GreaterOrEqual(Variable.X, Number.Zero);
@@ -37,7 +37,7 @@ public class RelationalOperatorTests : BaseParserTests
         ParseTest("x >= 0", expected);
     }
 
-    [Fact]
+    [Test]
     public void PrecedenceTest()
     {
         var expected = new NotEqual(

@@ -5,27 +5,27 @@ namespace xFunc.Tests.Results;
 
 public class NumberResultTest
 {
-    [Fact]
+    [Test]
     public void ResultTest()
     {
         var result = new NumberResult(10.2);
 
-        Assert.Equal(10.2, result.Result);
+        Assert.That(result.Result, Is.EqualTo(10.2));
     }
 
-    [Fact]
+    [Test]
     public void IResultTest()
     {
         var result = new NumberResult(10.2) as IResult;
 
-        Assert.Equal(10.2, result.Result);
+        Assert.That(result.Result, Is.EqualTo(10.2));
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var result = new NumberResult(10.2);
 
-        Assert.Equal("10.2", result.ToString());
+        Assert.That(result.ToString(), Is.EqualTo("10.2"));
     }
 }

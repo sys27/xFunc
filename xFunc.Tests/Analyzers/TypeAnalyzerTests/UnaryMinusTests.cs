@@ -2,7 +2,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class UnaryMinusTests : TypeAnalyzerBaseTests
 {
-    [Fact]
+    [Test]
     public void TestUnaryMinusUndefined()
     {
         var exp = new UnaryMinus(Variable.X);
@@ -10,7 +10,7 @@ public class UnaryMinusTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestUnaryMinusNumber()
     {
         var exp = new UnaryMinus(new Number(10));
@@ -18,7 +18,7 @@ public class UnaryMinusTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestUnaryMinusAngleNumber()
     {
         var exp = new UnaryMinus(AngleValue.Degree(10).AsExpression());
@@ -26,7 +26,7 @@ public class UnaryMinusTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestUnaryMinusPower()
     {
         var exp = new UnaryMinus(PowerValue.Watt(10).AsExpression());
@@ -34,7 +34,7 @@ public class UnaryMinusTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.PowerNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestUnaryMinusTemperature()
     {
         var exp = new UnaryMinus(TemperatureValue.Celsius(10).AsExpression());
@@ -42,7 +42,7 @@ public class UnaryMinusTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TemperatureNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestUnaryMinusMass()
     {
         var exp = new UnaryMinus(MassValue.Gram(10).AsExpression());
@@ -50,7 +50,7 @@ public class UnaryMinusTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.MassNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestUnaryMinusLength()
     {
         var exp = new UnaryMinus(LengthValue.Meter(10).AsExpression());
@@ -58,7 +58,7 @@ public class UnaryMinusTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.LengthNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestUnaryMinusTime()
     {
         var exp = new UnaryMinus(TimeValue.Second(10).AsExpression());
@@ -66,7 +66,7 @@ public class UnaryMinusTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TimeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestUnaryMinusArea()
     {
         var exp = new UnaryMinus(AreaValue.Meter(10).AsExpression());
@@ -74,7 +74,7 @@ public class UnaryMinusTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AreaNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestUnaryMinusVolume()
     {
         var exp = new UnaryMinus(VolumeValue.Meter(10).AsExpression());
@@ -82,7 +82,7 @@ public class UnaryMinusTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.VolumeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestUnaryMinusComplexNumber()
     {
         var exp = new UnaryMinus(new ComplexNumber(10, 10));
@@ -90,7 +90,7 @@ public class UnaryMinusTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestUnaryMinusRationalNumber()
     {
         var exp = new UnaryMinus(new Rational(Number.One, Number.Two));
@@ -98,7 +98,7 @@ public class UnaryMinusTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.RationalNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestUnaryMinusException()
     {
         var exp = new UnaryMinus(Bool.False);

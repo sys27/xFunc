@@ -7,37 +7,37 @@ namespace xFunc.Tests.Expressions.Trigonometric;
 
 public class ArccscTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteNumberTest()
     {
         var exp = new Arccsc(Number.One);
         var result = exp.Execute();
         var expected = AngleValue.Radian(1.5707963267948966);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteComplexNumberTest()
     {
         var complex = new Complex(3, 2);
         var exp = new Arccsc(new ComplexNumber(complex));
         var result = (Complex)exp.Execute();
 
-        Assert.Equal(0.22996290237720782, result.Real, 15);
-        Assert.Equal(-0.15735549884498545, result.Imaginary, 15);
+        Assert.That(result.Real, Is.EqualTo(0.22996290237720782).Within(15));
+        Assert.That(result.Imaginary, Is.EqualTo(-0.15735549884498545).Within(15));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestException()
         => TestNotSupported(new Arccsc(Bool.False));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Arccsc(Number.One);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

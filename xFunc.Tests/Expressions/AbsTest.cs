@@ -8,97 +8,97 @@ namespace xFunc.Tests.Expressions;
 
 public class AbsTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteTestNumber()
     {
         var exp = new Abs(new Number(-1));
         var expected = new NumberValue(1.0);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestAngleNumber()
     {
         var exp = new Abs(AngleValue.Degree(-10).AsExpression());
         var expected = AngleValue.Degree(10);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestPowerValue()
     {
         var exp = new Abs(PowerValue.Watt(-1).AsExpression());
         var expected = PowerValue.Watt(1);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestTemperatureValue()
     {
         var exp = new Abs(TemperatureValue.Celsius(-1).AsExpression());
         var expected = TemperatureValue.Celsius(1);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestMassValue()
     {
         var exp = new Abs(MassValue.Gram(-1).AsExpression());
         var expected = MassValue.Gram(1);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestLengthValue()
     {
         var exp = new Abs(LengthValue.Meter(-1).AsExpression());
         var expected = LengthValue.Meter(1);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestTimeValue()
     {
         var exp = new Abs(TimeValue.Second(-1).AsExpression());
         var expected = TimeValue.Second(1);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestAreaValue()
     {
         var exp = new Abs(AreaValue.Meter(-1).AsExpression());
         var expected = AreaValue.Meter(1);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestVolumeValue()
     {
         var exp = new Abs(VolumeValue.Meter(-1).AsExpression());
         var expected = VolumeValue.Meter(1);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestComplexNumber()
     {
         var exp = new Abs(new ComplexNumber(4, 2));
         var expected = Complex.Abs(new Complex(4, 2));
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestVector()
     {
         var exp = new Abs(new Vector(new IExpression[]
@@ -107,23 +107,23 @@ public class AbsTest : BaseExpressionTests
         }));
         var expected = new NumberValue(11.2249721603218241567);
 
-        Assert.Equal(expected, (NumberValue)exp.Execute());
+        Assert.That((NumberValue)exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestRational()
     {
         var exp = new Abs(new Rational(new Number(-1), new Number(3)));
         var expected = new RationalValue(1, 3);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestException()
         => TestNotSupported(new Abs(Bool.False));
 
-    [Fact]
+    [Test]
     public void EqualsTest1()
     {
         Variable x1 = "x";
@@ -140,7 +140,7 @@ public class AbsTest : BaseExpressionTests
         Assert.True(abs1.Equals(abs1));
     }
 
-    [Fact]
+    [Test]
     public void EqualsTest2()
     {
         Variable x1 = "x";
@@ -158,12 +158,12 @@ public class AbsTest : BaseExpressionTests
         Assert.False(abs1.Equals(null));
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Abs(Number.Zero);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

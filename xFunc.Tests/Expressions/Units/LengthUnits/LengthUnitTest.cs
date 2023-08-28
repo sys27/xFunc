@@ -5,66 +5,66 @@ namespace xFunc.Tests.Expressions.Units.LengthUnits;
 
 public class LengthUnitTest
 {
-    [Fact]
+    [Test]
     public void EqualsTest()
     {
         var a = LengthUnit.Meter;
         var b = LengthUnit.Meter;
 
-        Assert.True(a.Equals(b));
+        Assert.That(a.Equals(b), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsTest()
     {
         var a = LengthUnit.Meter;
         var b = LengthUnit.Millimeter;
 
-        Assert.False(a.Equals(b));
+        Assert.That(a.Equals(b), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ObjectEqualsTest()
     {
         var a = LengthUnit.Meter;
         var b = LengthUnit.Meter as object;
 
-        Assert.True(a.Equals(b));
+        Assert.That(a.Equals(b), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ObjectEqualsWithDifferentTypesTest()
     {
         var a = LengthUnit.Meter;
         var b = 1 as object;
 
-        Assert.False(a.Equals(b));
+        Assert.That(a.Equals(b), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsOperatorTest()
     {
         var a = LengthUnit.Meter;
         var b = LengthUnit.Meter;
 
-        Assert.True(a == b);
+        Assert.That(a == b, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsOperatorTest()
     {
         var a = LengthUnit.Meter;
         var b = LengthUnit.Millimeter;
 
-        Assert.True(a != b);
+        Assert.That(a != b, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var a = LengthUnit.Meter;
 
-        Assert.Equal("m", a.ToString());
+        Assert.That(a.ToString(), Is.EqualTo("m"));
     }
 
     public static IEnumerable<object[]> GetToAreaUnitTest()
@@ -79,13 +79,13 @@ public class LengthUnitTest
         yield return new object[] { LengthUnit.Mile, AreaUnit.Mile };
     }
 
-    [Theory]
-    [MemberData(nameof(GetToAreaUnitTest))]
+    [Test]
+    [TestCaseSource(nameof(GetToAreaUnitTest))]
     public void ToAreaUnitTest(LengthUnit unit, AreaUnit expected)
     {
         var actual = unit.ToAreaUnit();
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     public static IEnumerable<object[]> GetToAreaUnitExceptionTest()
@@ -101,15 +101,15 @@ public class LengthUnitTest
         yield return new object[] { LengthUnit.Parsec };
     }
 
-    [Theory]
-    [MemberData(nameof(GetToAreaUnitExceptionTest))]
+    [Test]
+    [TestCaseSource(nameof(GetToAreaUnitExceptionTest))]
     public void ToAreaUnitExceptionTest(LengthUnit unit)
-        => Assert.Throws<InvalidOperationException>(unit.ToAreaUnit);
+        => Assert.Throws<InvalidOperationException>(() => unit.ToAreaUnit());
 
-    [Theory]
-    [InlineData(null)]
-    [InlineData("")]
-    [InlineData(" ")]
+    [Test]
+    [TestCase(null)]
+    [TestCase("")]
+    [TestCase(" ")]
     public void FromNameEmptyString(string name)
         => Assert.Throws<ArgumentNullException>(() => LengthUnit.FromName(name, out _));
 }

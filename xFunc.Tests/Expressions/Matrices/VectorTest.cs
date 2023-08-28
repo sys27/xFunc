@@ -5,25 +5,25 @@ namespace xFunc.Tests.Expressions.Matrices;
 
 public class VectorTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void NullArgumentsTest()
     {
         Assert.Throws<ArgumentNullException>(() => new Vector(null));
     }
 
-    [Fact]
+    [Test]
     public void EmptyArgumentsTest()
     {
         Assert.Throws<ArgumentException>(() => new Vector(new IExpression[0]));
     }
 
-    [Fact]
+    [Test]
     public void NullTest()
     {
         Assert.Throws<ArgumentNullException>(() => new Vector(new IExpression[] { null, null }));
     }
 
-    [Fact]
+    [Test]
     public void VectorArgumentIsNotNumber()
     {
         var exp = new Vector(new IExpression[] { Bool.False });
@@ -31,7 +31,7 @@ public class VectorTest : BaseExpressionTests
         TestNotSupported(exp);
     }
 
-    [Fact]
+    [Test]
     public void MulByNumberVectorTest()
     {
         var vector = new Vector(new IExpression[] { Number.Two, new Number(3) });
@@ -41,10 +41,10 @@ public class VectorTest : BaseExpressionTests
         var expected = VectorValue.Create(new NumberValue(10), new NumberValue(15));
         var result = exp.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void AddVectorsTest()
     {
         var vector1 = new Vector(new IExpression[] { Number.Two, new Number(3) });
@@ -54,20 +54,20 @@ public class VectorTest : BaseExpressionTests
         var expected = VectorValue.Create(new NumberValue(9), new NumberValue(4));
         var result = exp.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void VectorWithAddTest()
     {
         var vector = new Vector(new IExpression[] { new Add(Number.Two, new Number(3)) });
         var expected = VectorValue.Create(new NumberValue(5));
         var result = vector.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void AddVectorsDiffSizeTest()
     {
         var vector1 = new Vector(new[] { Number.Two, new Number(3) });
@@ -77,7 +77,7 @@ public class VectorTest : BaseExpressionTests
         Assert.Throws<ArgumentException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void SubVectorsTest()
     {
         var vector1 = new Vector(new IExpression[] { Number.Two, new Number(3) });
@@ -87,10 +87,10 @@ public class VectorTest : BaseExpressionTests
         var expected = VectorValue.Create(new NumberValue(-5), NumberValue.Two);
         var result = exp.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SubVectorsDiffSizeTest()
     {
         var vector1 = new Vector(new[] { Number.Two, new Number(3) });
@@ -100,7 +100,7 @@ public class VectorTest : BaseExpressionTests
         Assert.Throws<ArgumentException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void TransposeVectorTest()
     {
         var vector = new Vector(new[] { Number.One, Number.Two });
@@ -113,10 +113,10 @@ public class VectorTest : BaseExpressionTests
         });
         var result = exp.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void VectorMulMatrixTest()
     {
         var vector = new Vector(new[] { new Number(-2), Number.One });
@@ -130,10 +130,10 @@ public class VectorTest : BaseExpressionTests
         var expected = MatrixValue.Create(new NumberValue(-7));
         var result = exp.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MultiOpMulAdd()
     {
         // ({1, 2, 3} * 4) + {2, 3, 4}
@@ -145,10 +145,10 @@ public class VectorTest : BaseExpressionTests
         var expected = VectorValue.Create(new NumberValue(6), new NumberValue(11), new NumberValue(16));
         var result = add.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MultiOpMulSub()
     {
         // ({1, 2, 3} * 4) - {2, 3, 4}
@@ -160,10 +160,10 @@ public class VectorTest : BaseExpressionTests
         var expected = VectorValue.Create(new NumberValue(2), new NumberValue(5), new NumberValue(8));
         var result = sub.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MultiOpSubMul()
     {
         // ({2, 3, 4} - {1, 2, 3}) * 4
@@ -175,10 +175,10 @@ public class VectorTest : BaseExpressionTests
         var expected = VectorValue.Create(new NumberValue(4), new NumberValue(4), new NumberValue(4));
         var result = mul.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MultiOpAddMul()
     {
         // ({2, 3, 4} + {1, 2, 3}) * 4
@@ -190,10 +190,10 @@ public class VectorTest : BaseExpressionTests
         var expected = VectorValue.Create(new NumberValue(12), new NumberValue(20), new NumberValue(28));
         var result = mul.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MultiOpMulMul()
     {
         // ({1, 2, 3} * 2) * 4
@@ -204,15 +204,15 @@ public class VectorTest : BaseExpressionTests
         var expected = VectorValue.Create(new NumberValue(8), new NumberValue(16), new NumberValue(24));
         var result = mul2.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Vector(new[] { Number.One, Number.Two, new Number(3) });
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

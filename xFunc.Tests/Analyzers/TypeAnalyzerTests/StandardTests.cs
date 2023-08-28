@@ -8,7 +8,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class StandardTests : TypeAnalyzerBaseTests
 {
-    [Fact]
+    [Test]
     public void TestDefineUndefined()
     {
         var exp = new Assign(Variable.X, new Number(-2));
@@ -16,7 +16,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.String);
     }
 
-    [Fact]
+    [Test]
     public void TestDelVector()
     {
         var diff = new Differentiator();
@@ -26,7 +26,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Function);
     }
 
-    [Fact]
+    [Test]
     public void TestDerivExpression()
     {
         var diff = new Differentiator();
@@ -36,7 +36,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Function);
     }
 
-    [Fact]
+    [Test]
     public void TestDerivExpressionWithVar()
     {
         var diff = new Differentiator();
@@ -46,7 +46,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Function);
     }
 
-    [Fact]
+    [Test]
     public void TestDerivNumber()
     {
         var diff = new Differentiator();
@@ -56,7 +56,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestExpUndefined()
     {
         var exp = new Exp(Variable.X);
@@ -64,7 +64,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestExpNumber()
     {
         var exp = new Exp(new Number(10));
@@ -72,7 +72,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestExpComplexNumber()
     {
         var exp = new Exp(new ComplexNumber(10, 10));
@@ -80,7 +80,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestExpException()
     {
         var exp = new Exp(Bool.False);
@@ -88,7 +88,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestFactUndefined()
     {
         var exp = new Fact(Variable.X);
@@ -96,7 +96,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestFactNumber()
     {
         var exp = new Fact(new Number(10));
@@ -104,7 +104,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestFactException()
     {
         var exp = new Fact(Bool.False);
@@ -112,7 +112,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestGCDUndefined()
     {
         var exp = new GCD(new Number(10), Variable.X);
@@ -120,7 +120,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestGCDNumber()
     {
         var exp = new GCD(new IExpression[]
@@ -131,7 +131,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestGCDException()
     {
         var exp = new GCD(new ComplexNumber(10), new Number(10));
@@ -139,7 +139,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         TestDiffParamException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestLCMUndefined()
     {
         var exp = new LCM(new Number(10), Variable.X);
@@ -147,7 +147,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestLCMNumber()
     {
         var exp = new LCM(new IExpression[]
@@ -158,7 +158,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestLCMException()
     {
         var exp = new LCM(new ComplexNumber(10), new Number(10));
@@ -166,7 +166,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         TestDiffParamException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestModUndefined()
     {
         var exp = new Mod(Variable.X, Variable.X);
@@ -174,7 +174,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestModUndefinedAndNumber()
     {
         var exp = new Mod(Variable.X, Number.Two);
@@ -182,7 +182,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestModNumberAndUndefined()
     {
         var exp = new Mod(Number.Two, Variable.X);
@@ -190,7 +190,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestModNumber()
     {
         var exp = new Mod(new Number(4), Number.Two);
@@ -198,7 +198,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestModNumberAndBool()
     {
         var exp = new Mod(new Number(4), Bool.True);
@@ -206,7 +206,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestModBoolAndNumber()
     {
         var exp = new Mod(Bool.False, Number.Two);
@@ -214,7 +214,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestModUndefinedAndBool()
     {
         var exp = new Mod(Variable.X, Bool.False);
@@ -222,7 +222,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestModBoolAndUndefined()
     {
         var exp = new Mod(Bool.False, Variable.X);
@@ -230,7 +230,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestModException()
     {
         var exp = new Mod(Bool.False, Bool.False);
@@ -238,38 +238,38 @@ public class StandardTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestNumber()
     {
         Test(Number.One, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestSimplify()
     {
         var simp = new Simplifier();
         Test(new Simplify(simp, Variable.X), ResultTypes.Function);
     }
 
-    [Fact]
+    [Test]
     public void TestSqrt()
     {
         Test(new Sqrt(Variable.X), ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestUndefine()
     {
         Test(new Unassign(Variable.X), ResultTypes.String);
     }
 
-    [Fact]
+    [Test]
     public void TestCallExpression()
     {
         Test(new CallExpression(new Variable("f"), ImmutableArray<IExpression>.Empty), ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestLambdaExpression()
     {
         var exp = Number.One.ToLambdaExpression();
@@ -277,85 +277,85 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Function);
     }
 
-    [Fact]
+    [Test]
     public void TestVariable()
     {
         Test(new Sqrt(Variable.X), ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestDeletageExpression()
     {
         Test(new DelegateExpression(_ => null), ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestAngleNumber()
     {
         Test(AngleValue.Degree(10).AsExpression(), ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestToDegreeUndefined()
     {
         Test(new ToDegree(Variable.X), ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestToDegreeNumber()
     {
         Test(new ToDegree(new Number(10)), ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestToDegreeAngle()
     {
         Test(new ToDegree(AngleValue.Radian(10).AsExpression()), ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestToDegreeException()
     {
         TestException(new ToDegree(Bool.True));
     }
 
-    [Fact]
+    [Test]
     public void TestToRadianNumber()
     {
         Test(new ToRadian(new Number(10)), ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestToRadianAngle()
     {
         Test(new ToRadian(AngleValue.Degree(10).AsExpression()), ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestToRadianException()
     {
         TestException(new ToRadian(Bool.True));
     }
 
-    [Fact]
+    [Test]
     public void TestToGradianNumber()
     {
         Test(new ToGradian(new Number(10)), ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestToGradianAngle()
     {
         Test(new ToGradian(AngleValue.Radian(10).AsExpression()), ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestToGradianException()
     {
         TestException(new ToGradian(Bool.True));
     }
 
-    [Fact]
+    [Test]
     public void TestStringExpression()
     {
         var exp = new StringExpression("hello");
@@ -363,7 +363,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.String);
     }
 
-    [Fact]
+    [Test]
     public void TestConvertVariable()
     {
         var exp = new Convert(
@@ -375,7 +375,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestConvert()
     {
         var exp = new Convert(
@@ -387,7 +387,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestAngleConvert()
     {
         var exp = new Convert(
@@ -399,7 +399,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestPowerConvert()
     {
         var exp = new Convert(
@@ -411,7 +411,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.PowerNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestTemperatureConvert()
     {
         var exp = new Convert(
@@ -423,7 +423,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TemperatureNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMassConvert()
     {
         var exp = new Convert(
@@ -435,7 +435,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.MassNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestLengthConvert()
     {
         var exp = new Convert(
@@ -447,7 +447,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.LengthNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestTimeConvert()
     {
         var exp = new Convert(
@@ -459,7 +459,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TimeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAreaConvert()
     {
         var exp = new Convert(
@@ -471,7 +471,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AreaNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestVolumeConvert()
     {
         var exp = new Convert(
@@ -483,7 +483,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.VolumeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestConvertException()
     {
         var exp = new Convert(
@@ -495,7 +495,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestRational()
     {
         var exp = new Rational(Number.One, Number.Two);
@@ -503,7 +503,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.RationalNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestRationalLeftUndefined()
     {
         var exp = new Rational(Variable.X, Number.Two);
@@ -511,7 +511,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestRationalRightUndefined()
     {
         var exp = new Rational(Number.One, Variable.X);
@@ -519,7 +519,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestRationalException()
     {
         var exp = new Rational(Bool.True, Bool.False);
@@ -527,7 +527,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestRationalLeftException()
     {
         var exp = new Rational(Bool.True, Number.Two);
@@ -535,7 +535,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestRationalRightException()
     {
         var exp = new Rational(Number.One, Bool.False);
@@ -543,7 +543,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestToRational()
     {
         var exp = new ToRational(Number.Two);
@@ -551,7 +551,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.RationalNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestToRationalUndefined()
     {
         var exp = new ToRational(Variable.X);
@@ -559,7 +559,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestToRationalException()
     {
         var exp = new ToRational(Bool.False);
@@ -567,7 +567,7 @@ public class StandardTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Theory]
-    [ClassData(typeof(AllExpressionsData))]
+    [Test]
+    [TestCaseSource(typeof(AllExpressionsData))]
     public void TestNullException(Type type) => TestNullExp(type);
 }

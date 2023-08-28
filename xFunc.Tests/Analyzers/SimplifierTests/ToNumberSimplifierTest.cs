@@ -5,7 +5,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests;
 
 public class ToNumberSimplifierTest : BaseSimplifierTest
 {
-    [Fact]
+    [Test]
     public void AngleToNumberTest()
     {
         var exp = new ToNumber(AngleValue.Degree(10).AsExpression());
@@ -14,7 +14,7 @@ public class ToNumberSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void PowerToNumberTest()
     {
         var exp = new ToNumber(PowerValue.Watt(10).AsExpression());
@@ -23,7 +23,7 @@ public class ToNumberSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void TemperatureToNumberTest()
     {
         var exp = new ToNumber(TemperatureValue.Celsius(10).AsExpression());
@@ -32,7 +32,7 @@ public class ToNumberSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void MassToNumberTest()
     {
         var exp = new ToNumber(MassValue.Gram(10).AsExpression());
@@ -41,7 +41,7 @@ public class ToNumberSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void LengthToNumberTest()
     {
         var exp = new ToNumber(LengthValue.Meter(10).AsExpression());
@@ -50,7 +50,7 @@ public class ToNumberSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void TimeToNumberTest()
     {
         var exp = new ToNumber(TimeValue.Second(10).AsExpression());
@@ -59,7 +59,7 @@ public class ToNumberSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void AreaToNumberTest()
     {
         var exp = new ToNumber(AreaValue.Meter(10).AsExpression());
@@ -68,7 +68,7 @@ public class ToNumberSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void VolumeToNumberTest()
     {
         var exp = new ToNumber(VolumeValue.Meter(10).AsExpression());
@@ -77,7 +77,7 @@ public class ToNumberSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void ToNumberArgumentSimplifiedTest()
     {
         var exp = new ToNumber(new Add(Number.One, Number.One));
@@ -86,7 +86,7 @@ public class ToNumberSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void ToNumberNotSimplifiedTest()
     {
         var exp = new ToNumber(Variable.X);

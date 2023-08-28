@@ -7,67 +7,67 @@ namespace xFunc.Tests.Expressions.Hyperbolic;
 
 public class HyperbolicCotangentTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteNumberTest()
     {
         var exp = new Coth(Number.One);
         var result = (NumberValue)exp.Execute();
         var expected = new NumberValue(57.30159715911299);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteRadianTest()
     {
         var exp = new Coth(AngleValue.Radian(1).AsExpression());
         var result = (NumberValue)exp.Execute();
         var expected = new NumberValue(1.3130352854993312);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteDegreeTest()
     {
         var exp = new Coth(AngleValue.Degree(1).AsExpression());
         var result = (NumberValue)exp.Execute();
         var expected = new NumberValue(57.30159715911299);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteGradianTest()
     {
         var exp = new Coth(AngleValue.Gradian(1).AsExpression());
         var result = (NumberValue)exp.Execute();
         var expected = new NumberValue(63.66721313838742);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteComplexNumberTest()
     {
         var complex = new Complex(3, 2);
         var exp = new Coth(new ComplexNumber(complex));
         var result = (Complex)exp.Execute();
 
-        Assert.Equal(0.99675779656935837, result.Real, 15);
-        Assert.Equal(0.0037397103763368955, result.Imaginary, 15);
+        Assert.That(result.Real, Is.EqualTo(0.99675779656935837).Within(15));
+        Assert.That(result.Imaginary, Is.EqualTo(0.0037397103763368955).Within(15));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestException()
         => TestNotSupported(new Coth(Bool.False));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Coth(Number.One);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

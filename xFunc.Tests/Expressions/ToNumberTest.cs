@@ -5,102 +5,102 @@ namespace xFunc.Tests.Expressions;
 
 public class ToNumberTest
 {
-    [Fact]
+    [Test]
     public void ExecuteAngleTest()
     {
         var exp = new ToNumber(AngleValue.Degree(10).AsExpression());
         var actual = exp.Execute();
         var expected = new NumberValue(10.0);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecutePowerTest()
     {
         var exp = new ToNumber(PowerValue.Watt(10).AsExpression());
         var actual = exp.Execute();
         var expected = new NumberValue(10.0);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTemperatureTest()
     {
         var exp = new ToNumber(TemperatureValue.Celsius(10).AsExpression());
         var actual = exp.Execute();
         var expected = new NumberValue(10.0);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteMassTest()
     {
         var exp = new ToNumber(MassValue.Gram(10).AsExpression());
         var actual = exp.Execute();
         var expected = new NumberValue(10.0);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteLengthTest()
     {
         var exp = new ToNumber(LengthValue.Meter(10).AsExpression());
         var actual = exp.Execute();
         var expected = new NumberValue(10.0);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTimeTest()
     {
         var exp = new ToNumber(TimeValue.Second(10).AsExpression());
         var actual = exp.Execute();
         var expected = new NumberValue(10.0);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteAreaTest()
     {
         var exp = new ToNumber(AreaValue.Meter(10).AsExpression());
         var actual = exp.Execute();
         var expected = new NumberValue(10.0);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteVolumeTest()
     {
         var exp = new ToNumber(VolumeValue.Meter(10).AsExpression());
         var actual = exp.Execute();
         var expected = new NumberValue(10.0);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteRationalTest()
     {
         var exp = new ToNumber(new Rational(new Number(1), new Number(2)));
         var actual = exp.Execute();
 
-        Assert.Equal(NumberValue.Half, actual);
+        Assert.That(actual, Is.EqualTo(NumberValue.Half));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteBoolTest()
     {
         Assert.Throws<ResultIsNotSupportedException>(() => new ToNumber(Bool.False).Execute());
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest1()
     {
         var exp = new ToNumber(new Number(10));
@@ -108,7 +108,7 @@ public class ToNumberTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest2()
     {
         var exp = new ToNumber(new Number(10));
@@ -116,12 +116,12 @@ public class ToNumberTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new ToNumber(AngleValue.Degree(10).AsExpression());
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

@@ -5,34 +5,34 @@ namespace xFunc.Tests.Expressions.Programming;
 
 public class LessOrEqualTest
 {
-    [Fact]
+    [Test]
     public void CalculateLessTrueTest1()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 0) };
         var lessOrEqual = new LessOrEqual(Variable.X, new Number(10));
 
-        Assert.True((bool)lessOrEqual.Execute(parameters));
+        Assert.That((bool)lessOrEqual.Execute(parameters), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CalculateLessTrueTest2()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 10) };
         var lessOrEqual = new LessOrEqual(Variable.X, new Number(10));
 
-        Assert.True((bool)lessOrEqual.Execute(parameters));
+        Assert.That((bool)lessOrEqual.Execute(parameters), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CalculateLessFalseTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 666) };
         var lessOrEqual = new LessOrEqual(Variable.X, new Number(10));
 
-        Assert.False((bool)lessOrEqual.Execute(parameters));
+        Assert.That((bool)lessOrEqual.Execute(parameters), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void LessOrEqualAngleTest()
     {
         var exp = new LessOrEqual(
@@ -41,10 +41,10 @@ public class LessOrEqualTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessOrEqualPowerTest()
     {
         var exp = new LessOrEqual(
@@ -53,10 +53,10 @@ public class LessOrEqualTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessOrEqualTemperatureTest()
     {
         var exp = new LessOrEqual(
@@ -65,10 +65,10 @@ public class LessOrEqualTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessOrEqualMassTest()
     {
         var exp = new LessOrEqual(
@@ -77,10 +77,10 @@ public class LessOrEqualTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessOrEqualLengthTest()
     {
         var exp = new LessOrEqual(
@@ -89,10 +89,10 @@ public class LessOrEqualTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessOrEqualTimeTest()
     {
         var exp = new LessOrEqual(
@@ -101,10 +101,10 @@ public class LessOrEqualTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessOrEqualAreaTest()
     {
         var exp = new LessOrEqual(
@@ -116,7 +116,7 @@ public class LessOrEqualTest
         Assert.True(result);
     }
 
-    [Fact]
+    [Test]
     public void LessOrEqualVolumeTest()
     {
         var exp = new LessOrEqual(
@@ -125,10 +125,10 @@ public class LessOrEqualTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CalculateInvalidTypeTest()
     {
         var lessOrEqual = new LessOrEqual(Bool.True, Bool.True);
@@ -136,12 +136,12 @@ public class LessOrEqualTest
         Assert.Throws<ResultIsNotSupportedException>(() => lessOrEqual.Execute());
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new LessOrEqual(Number.Two, new Number(3));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

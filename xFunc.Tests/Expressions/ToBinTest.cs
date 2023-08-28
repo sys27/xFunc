@@ -5,19 +5,19 @@ namespace xFunc.Tests.Expressions;
 
 public class ToBinTest : BaseExpressionTests
 {
-    [Theory]
-    [InlineData(0x7F, "0b01111111")]
-    [InlineData(0x7FFF, "0b0111111111111111")]
-    [InlineData(0x7FFFFF, "0b011111111111111111111111")]
-    [InlineData(0x7FFFFFFF, "0b01111111111111111111111111111111")]
+    [Test]
+    [TestCase(0x7F, "0b01111111")]
+    [TestCase(0x7FFF, "0b0111111111111111")]
+    [TestCase(0x7FFFFF, "0b011111111111111111111111")]
+    [TestCase(0x7FFFFFFF, "0b01111111111111111111111111111111")]
     public void ExecuteNumberTest(double number, string result)
     {
         var exp = new ToBin(new Number(number));
 
-        Assert.Equal(result, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(result));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNumberExceptionTest()
     {
         var exp = new ToBin(new Number(2.5));
@@ -25,32 +25,32 @@ public class ToBinTest : BaseExpressionTests
         Assert.Throws<ArgumentException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteLongMaxNumberTest()
     {
         var exp = new ToBin(new Number(int.MaxValue));
 
-        Assert.Equal("0b01111111111111111111111111111111", exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo("0b01111111111111111111111111111111"));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNegativeNumberTest()
     {
         var exp = new ToBin(new Number(-2));
 
-        Assert.Equal("0b11111111111111111111111111111110", exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo("0b11111111111111111111111111111110"));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteBoolTest()
         => TestNotSupported(new ToBin(Bool.False));
 
-    [Fact]
+    [Test]
     public void CloseTest()
     {
         var exp = new ToBin(new Number(10));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

@@ -5,30 +5,30 @@ namespace xFunc.Tests.Results;
 
 public class LambdaResultTest
 {
-    [Fact]
+    [Test]
     public void ResultTest()
     {
         var lambda = new Lambda(new[] { "x" }, Variable.X);
         var result = new LambdaResult(lambda);
 
-        Assert.Equal(lambda, result.Result);
+        Assert.That(result.Result, Is.EqualTo(lambda));
     }
 
-    [Fact]
+    [Test]
     public void IResultTest()
     {
         var lambda = new Lambda(new[] { "x" }, Variable.X);
         var result = new LambdaResult(lambda) as IResult;
 
-        Assert.Equal(lambda, result.Result);
+        Assert.That(result.Result, Is.EqualTo(lambda));
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var lambda = new Lambda(new[] { "x" }, Variable.X);
         var result = new LambdaResult(lambda);
 
-        Assert.Equal("(x) => x", result.ToString());
+        Assert.That(result.ToString(), Is.EqualTo("(x) => x"));
     }
 }

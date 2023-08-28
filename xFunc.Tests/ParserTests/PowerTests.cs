@@ -5,13 +5,13 @@ namespace xFunc.Tests.ParserTests;
 
 public class PowerTests : BaseParserTests
 {
-    [Theory]
-    [InlineData("pow(1, 2)")]
-    [InlineData("1 ^ 2")]
+    [Test]
+    [TestCase("pow(1, 2)")]
+    [TestCase("1 ^ 2")]
     public void PowFuncTest(string function)
         => ParseTest(function, new Pow(Number.One, Number.Two));
 
-    [Fact]
+    [Test]
     public void PowRightAssociativityTest()
     {
         var expected = new Pow(Number.One, new Pow(Number.Two, new Number(3)));
@@ -19,7 +19,7 @@ public class PowerTests : BaseParserTests
         ParseTest("1 ^ 2 ^ 3", expected);
     }
 
-    [Fact]
+    [Test]
     public void PowUnaryMinusTest()
     {
         var expected = new UnaryMinus(new Pow(Number.One, Number.Two));
@@ -27,7 +27,7 @@ public class PowerTests : BaseParserTests
         ParseTest("-1 ^ 2", expected);
     }
 
-    [Fact]
+    [Test]
     public void PowerWithUnaryMinus()
     {
         var expected = new Pow(Number.Two, new UnaryMinus(Number.Two));
@@ -35,7 +35,7 @@ public class PowerTests : BaseParserTests
         ParseTest("2 ^ -2", expected);
     }
 
-    [Fact]
+    [Test]
     public void ImplicitMulAndPowerFunction()
     {
         var expected = new Mul(
@@ -46,7 +46,7 @@ public class PowerTests : BaseParserTests
         ParseTest("2sin(x) ^ 2", expected);
     }
 
-    [Fact]
+    [Test]
     public void ImplicitMulAndPowerVariable()
     {
         var expected = new Mul(
@@ -57,7 +57,7 @@ public class PowerTests : BaseParserTests
         ParseTest("2x^2", expected);
     }
 
-    [Fact]
+    [Test]
     public void ImplicitNegativeNumberMulAndPowerVariable()
     {
         var expected = new Mul(
@@ -68,9 +68,9 @@ public class PowerTests : BaseParserTests
         ParseTest("-2x^2", expected);
     }
 
-    [Theory]
-    [InlineData("2 ^")]
-    [InlineData("2x ^")]
+    [Test]
+    [TestCase("2 ^")]
+    [TestCase("2x ^")]
     public void PowErrorTest(string exp)
         => ParseErrorTest(exp);
 }

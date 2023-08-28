@@ -5,7 +5,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests;
 
 public class ProgrammingTest : TypeAnalyzerBaseTests
 {
-    [Fact]
+    [Test]
     public void TestDec()
     {
         var exp = new Dec(Variable.X);
@@ -13,7 +13,7 @@ public class ProgrammingTest : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestForUndefined()
     {
         var exp = new For(Variable.X, Variable.X, Variable.X, Variable.X);
@@ -21,7 +21,7 @@ public class ProgrammingTest : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestForNumber()
     {
         var exp = new For(Variable.X, Variable.X, Bool.False, Variable.X);
@@ -29,7 +29,7 @@ public class ProgrammingTest : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestForException()
     {
         var exp = new For(Variable.X, Variable.X, new ComplexNumber(2, 3), Variable.X);
@@ -37,7 +37,7 @@ public class ProgrammingTest : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestIfUndefined()
     {
         var exp = new If(Variable.X, new Number(10));
@@ -45,7 +45,7 @@ public class ProgrammingTest : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestIfBool()
     {
         var exp = new If(Bool.False, new Number(10));
@@ -53,7 +53,7 @@ public class ProgrammingTest : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestIfElseBool()
     {
         var exp = new If(Bool.False, new Number(10), Number.Two);
@@ -61,7 +61,7 @@ public class ProgrammingTest : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestIfException()
     {
         var exp = new If(new ComplexNumber(2, 4), new Number(10));
@@ -69,7 +69,7 @@ public class ProgrammingTest : TypeAnalyzerBaseTests
         TestDiffParamException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestInc()
     {
         var exp = new Inc(Variable.X);
@@ -78,7 +78,7 @@ public class ProgrammingTest : TypeAnalyzerBaseTests
     }
 
 
-    [Fact]
+    [Test]
     public void TestWhileUndefined()
     {
         var exp = new While(Variable.X, Variable.X);
@@ -86,7 +86,7 @@ public class ProgrammingTest : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestWhileNumber()
     {
         var exp = new While(Variable.X, Bool.False);
@@ -94,7 +94,7 @@ public class ProgrammingTest : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestWhileException()
     {
         var exp = new While(Variable.X, Number.One);

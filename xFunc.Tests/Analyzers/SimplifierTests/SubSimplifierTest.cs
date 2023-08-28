@@ -5,7 +5,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests;
 
 public class SubSimplifierTest : BaseSimplifierTest
 {
-    [Fact(DisplayName = "0 - x")]
+    [Test]
     public void SubFirstZero()
     {
         var sub = new Sub(Number.Zero, Variable.X);
@@ -14,7 +14,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "x - 0")]
+    [Test]
     public void SubSecondZero()
     {
         var sub = new Sub(Variable.X, Number.Zero);
@@ -23,7 +23,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "3 - 2")]
+    [Test]
     public void SubTwoNumbers()
     {
         var sub = new Sub(new Number(3), Number.Two);
@@ -32,7 +32,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "90 - 2 deg")]
+    [Test]
     public void SubNumberAngle()
     {
         var sub = new Sub(
@@ -44,7 +44,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "90 deg - 2")]
+    [Test]
     public void SubAngleNumber()
     {
         var sub = new Sub(
@@ -56,7 +56,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "2 rad - 90 deg")]
+    [Test]
     public void SubTwoAngles()
     {
         var sub = new Sub(
@@ -68,7 +68,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 - 10 W")]
+    [Test]
     public void SubPowerFromNumber()
     {
         var sub = new Sub(
@@ -80,7 +80,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 W - 10")]
+    [Test]
     public void SubNumberFromPower()
     {
         var sub = new Sub(
@@ -92,7 +92,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 kW - 10 W")]
+    [Test]
     public void SubPowerFromPower()
     {
         var sub = new Sub(
@@ -104,7 +104,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 - 10 C°")]
+    [Test]
     public void SubTemperatureFromNumber()
     {
         var sub = new Sub(
@@ -116,7 +116,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 C° - 10")]
+    [Test]
     public void SubNumberFromTemperature()
     {
         var sub = new Sub(
@@ -128,7 +128,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 K - 10 C°")]
+    [Test]
     public void SubTemperatureFromTemperature()
     {
         var sub = new Sub(
@@ -140,7 +140,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 - 10 g")]
+    [Test]
     public void SubMassFromNumber()
     {
         var sub = new Sub(
@@ -152,7 +152,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 g - 10")]
+    [Test]
     public void SubNumberFromMass()
     {
         var sub = new Sub(
@@ -164,7 +164,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 kg - 10 g")]
+    [Test]
     public void SubMassFromMass()
     {
         var sub = new Sub(
@@ -176,7 +176,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 - 10 m")]
+    [Test]
     public void SubLengthFromNumber()
     {
         var sub = new Sub(
@@ -188,7 +188,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 m - 10")]
+    [Test]
     public void SubNumberFromLength()
     {
         var sub = new Sub(
@@ -200,7 +200,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 km - 10 m")]
+    [Test]
     public void SubLengthFromLength()
     {
         var sub = new Sub(
@@ -212,7 +212,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 - 10 s")]
+    [Test]
     public void SubTimeFromNumber()
     {
         var sub = new Sub(
@@ -224,7 +224,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 s - 10")]
+    [Test]
     public void SubNumberFromTime()
     {
         var sub = new Sub(
@@ -236,7 +236,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 min - 10 s")]
+    [Test]
     public void SubTimeFromTime()
     {
         var sub = new Sub(
@@ -248,7 +248,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 - 10 m^2")]
+    [Test]
     public void SubAreaFromNumber()
     {
         var sub = new Sub(
@@ -260,7 +260,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 m^2 - 10")]
+    [Test]
     public void SubNumberFromArea()
     {
         var sub = new Sub(
@@ -272,7 +272,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 km^2 - 10 m^2")]
+    [Test]
     public void SubAreaFromArea()
     {
         var sub = new Sub(
@@ -284,7 +284,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 - 10 m^3")]
+    [Test]
     public void SubVolumeFromNumber()
     {
         var sub = new Sub(
@@ -296,7 +296,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 m^3 - 10")]
+    [Test]
     public void SubNumberFromVolume()
     {
         var sub = new Sub(
@@ -308,7 +308,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "20 m^3 - 10 cm^3")]
+    [Test]
     public void SubVolumeAndVolume()
     {
         var sub = new Sub(
@@ -320,7 +320,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "2 - -x")]
+    [Test]
     public void SubSecondUnaryMinus()
     {
         var sub = new Sub(Number.Two, new UnaryMinus(Variable.X));
@@ -329,7 +329,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "(2 + x) - 2")]
+    [Test]
     public void SubDiff_NumAddVar_SubNum()
     {
         var sub = new Sub(new Add(Number.Two, Variable.X), Number.Two);
@@ -338,7 +338,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "(x + 2) - 2")]
+    [Test]
     public void SubDiff_VarAddNum_SubNum()
     {
         var sub = new Sub(new Add(Variable.X, Number.Two), Number.Two);
@@ -347,7 +347,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "2 - (2 + x)")]
+    [Test]
     public void SubDiffNumSub_NumAddVar_()
     {
         var sub = new Sub(Number.Two, new Add(Number.Two, Variable.X));
@@ -356,7 +356,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "2 - (x + 2)")]
+    [Test]
     public void SubDiffNumSub_VarAddNum_()
     {
         var sub = new Sub(Number.Two, new Add(Variable.X, Number.Two));
@@ -365,7 +365,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "(2 - x) - 2")]
+    [Test]
     public void SubDiff_NumSubVar_SubNum()
     {
         var sub = new Sub(new Sub(Number.Two, Variable.X), Number.Two);
@@ -374,7 +374,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "(x - 2) - 2")]
+    [Test]
     public void SubDiff_VarSubNum_SubNum()
     {
         var sub = new Sub(new Sub(Variable.X, Number.Two), Number.Two);
@@ -383,7 +383,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "2 - (2 - x)")]
+    [Test]
     public void SubDiffNumSub_NumSubVar_()
     {
         var sub = new Sub(Number.Two, new Sub(Number.Two, Variable.X));
@@ -392,7 +392,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "2 - (x - 2)")]
+    [Test]
     public void SubDiffNumSub_VarSubNum_()
     {
         var sub = new Sub(Number.Two, new Sub(Variable.X, Number.Two));
@@ -401,7 +401,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "x - x")]
+    [Test]
     public void SubSameVars1()
     {
         var sub = new Sub(Variable.X, Variable.X);
@@ -410,7 +410,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "(x - x) - x")]
+    [Test]
     public void SubSameVars2()
     {
         var sub = new Sub(new Sub(Variable.X, Variable.X), Variable.X);
@@ -419,7 +419,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "2x - x")]
+    [Test]
     public void SubSameVars3()
     {
         var sub = new Sub(new Mul(Number.Two, Variable.X), Variable.X);
@@ -428,7 +428,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "x - 2x")]
+    [Test]
     public void SubSameVars4()
     {
         var sub = new Sub(Variable.X, new Mul(Number.Two, Variable.X));
@@ -437,7 +437,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "(x + y) - 2 * (x + y)")]
+    [Test]
     public void SubComplexX()
     {
         var sub = new Sub(
@@ -449,7 +449,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "x - (x * 2)")]
+    [Test]
     public void SubSameVars5()
     {
         var sub = new Sub(Variable.X, new Mul(Variable.X, Number.Two));
@@ -458,7 +458,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "2 * (x + y) - (x + y)")]
+    [Test]
     public void SubComplexX2()
     {
         var sub = new Sub(
@@ -470,7 +470,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "2x - x")]
+    [Test]
     public void SubSameVars6()
     {
         var sub = new Sub(new Mul(Number.Two, Variable.X), Variable.X);
@@ -479,7 +479,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "(x * 2) - x")]
+    [Test]
     public void SubSameVars7()
     {
         var sub = new Sub(new Mul(Variable.X, Number.Two), Variable.X);
@@ -488,7 +488,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "3x - 2x")]
+    [Test]
     public void SubSameVars8()
     {
         var sub = new Sub(
@@ -500,7 +500,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "3 * (x + y) - 2 * (x + y)")]
+    [Test]
     public void SubComplexX3()
     {
         var sub = new Sub(
@@ -512,7 +512,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "(x * 3) - (x * 2)")]
+    [Test]
     public void SubSameVars9()
     {
         var sub = new Sub(
@@ -524,7 +524,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "(x * 4) - (x * 2)")]
+    [Test]
     public void SubSameVars10()
     {
         var sub = new Sub(
@@ -536,7 +536,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(sub, expected);
     }
 
-    [Fact(DisplayName = "3x - x * 2")]
+    [Test]
     public void AddSameVars11()
     {
         var exp = new Sub(
@@ -548,7 +548,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact(DisplayName = "x * 3 - 2x")]
+    [Test]
     public void AddSameVars12()
     {
         var exp = new Sub(
@@ -560,7 +560,7 @@ public class SubSimplifierTest : BaseSimplifierTest
         SimplifyTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void SubArgumentSimplified()
     {
         var exp = new Sub(

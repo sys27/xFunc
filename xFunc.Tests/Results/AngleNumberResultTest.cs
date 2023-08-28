@@ -5,30 +5,30 @@ namespace xFunc.Tests.Results;
 
 public class AngleNumberResultTest
 {
-    [Fact]
+    [Test]
     public void ResultTest()
     {
         var angle = AngleValue.Degree(10);
         var result = new AngleNumberResult(angle);
 
-        Assert.Equal(angle, result.Result);
+        Assert.That(result.Result, Is.EqualTo(angle));
     }
 
-    [Fact]
+    [Test]
     public void IResultTest()
     {
         var angle = AngleValue.Degree(10);
         var result = new AngleNumberResult(angle) as IResult;
 
-        Assert.Equal(angle, result.Result);
+        Assert.That(result.Result, Is.EqualTo(angle));
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var angle = AngleValue.Degree(10);
         var result = new AngleNumberResult(angle);
 
-        Assert.Equal("10 degree", result.ToString());
+        Assert.That(result.ToString(), Is.EqualTo("10 degree"));
     }
 }

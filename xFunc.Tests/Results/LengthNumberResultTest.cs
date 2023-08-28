@@ -5,30 +5,30 @@ namespace xFunc.Tests.Results;
 
 public class LengthNumberResultTest
 {
-    [Fact]
+    [Test]
     public void ResultTest()
     {
         var lengthValue = LengthValue.Meter(10);
         var result = new LengthNumberResult(lengthValue);
 
-        Assert.Equal(lengthValue, result.Result);
+        Assert.That(result.Result, Is.EqualTo(lengthValue));
     }
 
-    [Fact]
+    [Test]
     public void IResultTest()
     {
         var lengthValue = LengthValue.Meter(10);
         var result = new LengthNumberResult(lengthValue) as IResult;
 
-        Assert.Equal(lengthValue, result.Result);
+        Assert.That(result.Result, Is.EqualTo(lengthValue));
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var lengthValue = LengthValue.Meter(10);
         var result = new LengthNumberResult(lengthValue);
 
-        Assert.Equal("10 m", result.ToString());
+        Assert.That(result.ToString(), Is.EqualTo("10 m"));
     }
 }

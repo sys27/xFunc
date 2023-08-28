@@ -5,7 +5,7 @@ namespace xFunc.Tests.Expressions.Statistical;
 
 public class VarTest
 {
-    [Fact]
+    [Test]
     public void OneNumberTest()
     {
         var exp = new Var(new[] { new Number(4) });
@@ -14,33 +14,33 @@ public class VarTest
         Assert.True(result.IsNaN);
     }
 
-    [Fact]
+    [Test]
     public void TwoNumberTest()
     {
         var exp = new Var(new[] { new Number(4), new Number(9) });
         var result = exp.Execute();
         var expected = new NumberValue(12.5);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ThreeNumberTest()
     {
         var exp = new Var(new[] { new Number(9), Number.Two, new Number(4) });
         var result = exp.Execute();
         var expected = new NumberValue(13.0);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void VectorTest()
     {
-        var exp = new Var(new[] { new Vector(new[] { Number.Two, new Number(4), new Number(9) }) });
+        var exp = new Var(new[] { new Vector(new IExpression[] { Number.Two, new Number(4), new Number(9) }) });
         var result = exp.Execute();
         var expected = new NumberValue(13.0);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 }

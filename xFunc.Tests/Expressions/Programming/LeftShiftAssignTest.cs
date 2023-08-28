@@ -5,7 +5,7 @@ namespace xFunc.Tests.Expressions.Programming;
 
 public class LeftShiftAssignTest
 {
-    [Fact]
+    [Test]
     public void ExecuteTest()
     {
         var exp = new LeftShiftAssign(Variable.X, new Number(10));
@@ -16,10 +16,10 @@ public class LeftShiftAssignTest
         var actual = exp.Execute(parameters);
         var expected = new NumberValue(1024.0);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteAsExpressionTest()
     {
         var exp = new Add(Number.One, new LeftShiftAssign(Variable.X, new Number(10)));
@@ -29,11 +29,11 @@ public class LeftShiftAssignTest
         };
         var actual = exp.Execute(parameters);
 
-        Assert.Equal(new NumberValue(1025.0), actual);
-        Assert.Equal(new NumberValue(1024.0), parameters["x"]);
+        Assert.That(actual, Is.EqualTo(new NumberValue(1025.0)));
+        Assert.That(parameters["x"].Value, Is.EqualTo(new NumberValue(1024.0)));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNullParamsTest()
     {
         var exp = new LeftShiftAssign(Variable.X, new Number(10));
@@ -41,7 +41,7 @@ public class LeftShiftAssignTest
         Assert.Throws<ArgumentNullException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteDoubleLeftTest()
     {
         var exp = new LeftShiftAssign(Variable.X, new Number(10));
@@ -53,7 +53,7 @@ public class LeftShiftAssignTest
         Assert.Throws<ArgumentException>(() => exp.Execute(parameters));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteDoubleRightTest()
     {
         var exp = new LeftShiftAssign(Variable.X, new Number(10.1));
@@ -65,7 +65,7 @@ public class LeftShiftAssignTest
         Assert.Throws<ArgumentException>(() => exp.Execute(parameters));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteBoolRightTest()
     {
         var exp = new LeftShiftAssign(Variable.X, Bool.True);
@@ -77,7 +77,7 @@ public class LeftShiftAssignTest
         Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteBoolLeftTest()
     {
         var exp = new LeftShiftAssign(Variable.X, Bool.True);
@@ -89,12 +89,12 @@ public class LeftShiftAssignTest
         Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new LeftShiftAssign(Variable.X, new Number(10));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

@@ -5,7 +5,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class DivTests : TypeAnalyzerBaseTests
 {
-    [Fact]
+    [Test]
     public void TestDivNumberNumberTest()
     {
         var exp = new Div(Number.One, Number.Two);
@@ -13,7 +13,7 @@ public class DivTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestDivComplexNumberComplexNumberTest()
     {
         var exp = new Div(new ComplexNumber(3, 2), new ComplexNumber(2, 4));
@@ -21,7 +21,7 @@ public class DivTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestDivNumberComplexNumberTest()
     {
         var exp = new Div(new Number(3), new ComplexNumber(2, 4));
@@ -29,7 +29,7 @@ public class DivTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestDivComplexNumberNumberTest()
     {
         var exp = new Div(new ComplexNumber(3, 2), Number.Two);
@@ -37,7 +37,7 @@ public class DivTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestDivComplexNumberBoolException()
     {
         var exp = new Div(new ComplexNumber(3, 2), Bool.True);
@@ -45,7 +45,7 @@ public class DivTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestDivBoolComplexNumberException()
     {
         var exp = new Div(Bool.True, new ComplexNumber(3, 2));
@@ -53,7 +53,7 @@ public class DivTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestDivNumberBoolException()
     {
         var exp = new Div(new Number(3), Bool.True);
@@ -61,7 +61,7 @@ public class DivTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestDivBoolNumberException()
     {
         var exp = new Div(Bool.True, new Number(3));
@@ -69,7 +69,7 @@ public class DivTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestDivNumberSqrtComplexTest()
     {
         var exp = new Div(new Sqrt(new Number(-16)), Number.Two);
@@ -77,7 +77,7 @@ public class DivTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestDivTwoVarTest()
     {
         var exp = new Div(Variable.X, Variable.X);
@@ -85,7 +85,7 @@ public class DivTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestDivNumberAndVarTest()
     {
         var exp = new Div(Number.One, Variable.X);
@@ -93,7 +93,7 @@ public class DivTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestDivThreeVarTest()
     {
         var exp = new Div(new Add(Variable.X, Variable.X), Variable.X);
@@ -101,7 +101,7 @@ public class DivTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestDivException()
     {
         var exp = new Div(Bool.False, Bool.False);
@@ -109,7 +109,7 @@ public class DivTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestDivAngleNumber()
     {
         var exp = new Div(
@@ -120,7 +120,7 @@ public class DivTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestDivPowerNumber()
     {
         var exp = new Div(
@@ -131,7 +131,7 @@ public class DivTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.PowerNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestDivTemperatureNumber()
     {
         var exp = new Div(
@@ -142,7 +142,7 @@ public class DivTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TemperatureNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestDivMassNumber()
     {
         var exp = new Div(
@@ -153,7 +153,7 @@ public class DivTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.MassNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestDivLengthNumber()
     {
         var exp = new Div(
@@ -164,7 +164,7 @@ public class DivTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.LengthNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestDivTimeNumber()
     {
         var exp = new Div(
@@ -175,7 +175,7 @@ public class DivTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TimeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestDivAreaNumber()
     {
         var exp = new Div(
@@ -186,7 +186,7 @@ public class DivTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AreaNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestDivVolumeNumber()
     {
         var exp = new Div(
@@ -197,7 +197,7 @@ public class DivTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.VolumeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestDivRationalAndRational()
     {
         var exp = new Div(
@@ -208,7 +208,7 @@ public class DivTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.RationalNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestDivNumberAndRational()
     {
         var exp = new Div(
@@ -219,7 +219,7 @@ public class DivTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.RationalNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestDivRationalAndNumber()
     {
         var exp = new Div(
@@ -242,8 +242,8 @@ public class DivTests : TypeAnalyzerBaseTests
         yield return new object[] { VolumeValue.Meter(90).AsExpression() };
     }
 
-    [Theory]
-    [MemberData(nameof(GetDataForTestDivAngleAndBoolTest))]
+    [Test]
+    [TestCaseSource(nameof(GetDataForTestDivAngleAndBoolTest))]
     public void TestDivAngleAndBoolTest(IExpression left)
     {
         var exp = new Div(left, Bool.False);

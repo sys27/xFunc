@@ -7,9 +7,9 @@ namespace xFunc.Tests.ParserTests;
 
 public class ComplexNumberTests : BaseParserTests
 {
-    [Theory]
-    [InlineData("3+2i")]
-    [InlineData("+3+2i")]
+    [Test]
+    [TestCase("3+2i")]
+    [TestCase("+3+2i")]
     public void ComplexNumberTest(string exp)
     {
         var expected = new Add(
@@ -23,7 +23,7 @@ public class ComplexNumberTests : BaseParserTests
         ParseTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void ComplexNumberNegativeTest()
     {
         var expected = new Sub(
@@ -37,7 +37,7 @@ public class ComplexNumberTests : BaseParserTests
         ParseTest("3-2i", expected);
     }
 
-    [Fact]
+    [Test]
     public void ComplexNumberNegativeAllPartsTest()
     {
         var expected = new Sub(
@@ -51,7 +51,7 @@ public class ComplexNumberTests : BaseParserTests
         ParseTest("-3-2i", expected);
     }
 
-    [Fact]
+    [Test]
     public void ComplexOnlyRePartTest()
     {
         var expected = new Add(
@@ -65,7 +65,7 @@ public class ComplexNumberTests : BaseParserTests
         ParseTest("3+0i", expected);
     }
 
-    [Fact]
+    [Test]
     public void ComplexOnlyImPartTest()
     {
         var expected = new Add(
@@ -79,7 +79,7 @@ public class ComplexNumberTests : BaseParserTests
         ParseTest("0+2i", expected);
     }
 
-    [Fact]
+    [Test]
     public void ComplexOnlyImPartNegativeTest()
     {
         var expected = new Sub(
@@ -93,7 +93,7 @@ public class ComplexNumberTests : BaseParserTests
         ParseTest("0-2i", expected);
     }
 
-    [Fact]
+    [Test]
     public void ComplexWithVarTest1()
     {
         var expected = new Sub(
@@ -110,7 +110,7 @@ public class ComplexNumberTests : BaseParserTests
         ParseTest("x - (0+2i)", expected);
     }
 
-    [Fact]
+    [Test]
     public void ComplexWithVarTest2()
     {
         var expected = new Add(
@@ -127,9 +127,9 @@ public class ComplexNumberTests : BaseParserTests
         ParseTest("x + (3-2i)", expected);
     }
 
-    [Theory]
-    [InlineData("10∠0.78539816339744828°")]
-    [InlineData("10∠+0.78539816339744828°")]
+    [Test]
+    [TestCase("10∠0.78539816339744828°")]
+    [TestCase("10∠+0.78539816339744828°")]
     public void ComplexFromPolarTest(string exp)
     {
         var complex = Complex.FromPolarCoordinates(10, 0.78539816339744828 * Math.PI / 180);
@@ -138,9 +138,9 @@ public class ComplexNumberTests : BaseParserTests
         ParseTest(exp, expected);
     }
 
-    [Theory]
-    [InlineData("10∠-7.1°")]
-    [InlineData("+10∠-7.1°")]
+    [Test]
+    [TestCase("10∠-7.1°")]
+    [TestCase("+10∠-7.1°")]
     public void ComplexFromPolarNegativePhaseTest(string exp)
     {
         var complex = Complex.FromPolarCoordinates(10, -7.1 * Math.PI / 180);
@@ -149,7 +149,7 @@ public class ComplexNumberTests : BaseParserTests
         ParseTest(exp, expected);
     }
 
-    [Fact]
+    [Test]
     public void ComplexFromPolarNegativeMagnitudeTest()
     {
         var complex = Complex.FromPolarCoordinates(10, 7.1 * Math.PI / 180);
@@ -158,16 +158,16 @@ public class ComplexNumberTests : BaseParserTests
         ParseTest("-10∠7.1°", expected);
     }
 
-    [Theory]
-    [InlineData("10∠°")]
-    [InlineData("10∠0.78539816339744828")]
-    [InlineData("x°")]
+    [Test]
+    [TestCase("10∠°")]
+    [TestCase("10∠0.78539816339744828")]
+    [TestCase("x°")]
     public void ComplexFromPolarMissingPartsTest(string exp)
         => ParseErrorTest(exp);
 
-    [Theory]
-    [InlineData("im(3-2i)")]
-    [InlineData("imaginary(3-2i)")]
+    [Test]
+    [TestCase("im(3-2i)")]
+    [TestCase("imaginary(3-2i)")]
     public void ImTest(string function)
     {
         var expected = new Im(
@@ -183,9 +183,9 @@ public class ComplexNumberTests : BaseParserTests
         ParseTest(function, expected);
     }
 
-    [Theory]
-    [InlineData("re(3-2i)")]
-    [InlineData("real(3-2i)")]
+    [Test]
+    [TestCase("re(3-2i)")]
+    [TestCase("real(3-2i)")]
     public void ReTest(string function)
     {
         var expected = new Re(
@@ -201,7 +201,7 @@ public class ComplexNumberTests : BaseParserTests
         ParseTest(function, expected);
     }
 
-    [Fact]
+    [Test]
     public void PhaseTest()
     {
         var expected = new Phase(
@@ -217,7 +217,7 @@ public class ComplexNumberTests : BaseParserTests
         ParseTest("phase(3-2i)", expected);
     }
 
-    [Fact]
+    [Test]
     public void ConjugateTest()
     {
         var expected = new Conjugate(
@@ -233,7 +233,7 @@ public class ComplexNumberTests : BaseParserTests
         ParseTest("conjugate(3-2i)", expected);
     }
 
-    [Fact]
+    [Test]
     public void ReciprocalTest()
     {
         var expected = new Reciprocal(
@@ -249,7 +249,7 @@ public class ComplexNumberTests : BaseParserTests
         ParseTest("reciprocal(3-2i)", expected);
     }
 
-    [Fact]
+    [Test]
     public void ToComplexTest()
         => ParseTest("tocomplex(2)", new ToComplex(Number.Two));
 }

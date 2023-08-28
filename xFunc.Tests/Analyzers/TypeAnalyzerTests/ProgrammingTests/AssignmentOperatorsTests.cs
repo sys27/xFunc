@@ -5,13 +5,13 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests;
 
 public class AssignmentOperatorsTests : TypeAnalyzerBaseTests
 {
-    [Theory]
-    [InlineData(typeof(AddAssign))]
-    [InlineData(typeof(SubAssign))]
-    [InlineData(typeof(MulAssign))]
-    [InlineData(typeof(DivAssign))]
-    [InlineData(typeof(LeftShiftAssign))]
-    [InlineData(typeof(RightShiftAssign))]
+    [Test]
+    [TestCase(typeof(AddAssign))]
+    [TestCase(typeof(SubAssign))]
+    [TestCase(typeof(MulAssign))]
+    [TestCase(typeof(DivAssign))]
+    [TestCase(typeof(LeftShiftAssign))]
+    [TestCase(typeof(RightShiftAssign))]
     public void TestAssignUndefined(Type type)
     {
         var exp = Create(type, Variable.X, Variable.X);
@@ -19,13 +19,13 @@ public class AssignmentOperatorsTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Theory]
-    [InlineData(typeof(AddAssign))]
-    [InlineData(typeof(SubAssign))]
-    [InlineData(typeof(MulAssign))]
-    [InlineData(typeof(DivAssign))]
-    [InlineData(typeof(LeftShiftAssign))]
-    [InlineData(typeof(RightShiftAssign))]
+    [Test]
+    [TestCase(typeof(AddAssign))]
+    [TestCase(typeof(SubAssign))]
+    [TestCase(typeof(MulAssign))]
+    [TestCase(typeof(DivAssign))]
+    [TestCase(typeof(LeftShiftAssign))]
+    [TestCase(typeof(RightShiftAssign))]
     public void TestAssignNumber(Type type)
     {
         var exp = Create(type, Variable.X, new Number(10));
@@ -33,13 +33,13 @@ public class AssignmentOperatorsTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Theory]
-    [InlineData(typeof(AddAssign))]
-    [InlineData(typeof(SubAssign))]
-    [InlineData(typeof(MulAssign))]
-    [InlineData(typeof(DivAssign))]
-    [InlineData(typeof(LeftShiftAssign))]
-    [InlineData(typeof(RightShiftAssign))]
+    [Test]
+    [TestCase(typeof(AddAssign))]
+    [TestCase(typeof(SubAssign))]
+    [TestCase(typeof(MulAssign))]
+    [TestCase(typeof(DivAssign))]
+    [TestCase(typeof(LeftShiftAssign))]
+    [TestCase(typeof(RightShiftAssign))]
     public void TestAssignException(Type type)
     {
         var exp = Create(type, Variable.X, Bool.False);

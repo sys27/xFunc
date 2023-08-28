@@ -7,34 +7,34 @@ namespace xFunc.Tests.Expressions;
 
 public class ExpTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteTest1()
     {
         var exp = new Exp(Number.Two);
         var expected = NumberValue.Exp(new NumberValue(2));
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest2()
     {
         var expected = new Complex(4, 2);
         var exp = new Exp(new ComplexNumber(expected));
 
-        Assert.Equal(Complex.Exp(expected), exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(Complex.Exp(expected)));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteExceptionTest()
         => TestNotSupported(new Exp(Bool.False));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Exp(Number.Zero);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

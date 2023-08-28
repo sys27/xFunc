@@ -9,61 +9,61 @@ namespace xFunc.Tests.Expressions;
 
 public class AddTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteTestNumber1()
     {
         var exp = new Add(Number.One, Number.Two);
         var expected = new NumberValue(3.0);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestNumber2()
     {
         var exp = new Add(new Number(-3), Number.Two);
         var expected = new NumberValue(-1.0);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestComplexNumber()
     {
         var exp = new Add(new ComplexNumber(7, 3), new ComplexNumber(2, 4));
         var expected = new Complex(9, 7);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestNumberComplexNumber()
     {
         var exp = new Add(new Number(7), new ComplexNumber(2, 4));
         var expected = new Complex(9, 4);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestComplexNumberNumber()
     {
         var exp = new Add(new ComplexNumber(7, 3), Number.Two);
         var expected = new Complex(9, 3);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest6()
     {
         var exp = new Add(Number.Two, new Sqrt(new Number(-9)));
         var expected = new Complex(2, 3);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void AddTwoVectorsTest()
     {
         var vector1 = new Vector(new IExpression[] { Number.Two, new Number(3) });
@@ -73,10 +73,10 @@ public class AddTest : BaseExpressionTests
         var expected = VectorValue.Create(new NumberValue(9), new NumberValue(4));
         var result = add.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void AddTwoMatricesTest()
     {
         var matrix1 = new Matrix(new[]
@@ -98,10 +98,10 @@ public class AddTest : BaseExpressionTests
         });
         var result = add.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void Add4MatricesTest()
     {
         var vector1 = new Vector(new IExpression[] { Number.One, Number.Two });
@@ -114,30 +114,30 @@ public class AddTest : BaseExpressionTests
 
         var expected = VectorValue.Create(new NumberValue(4), new NumberValue(8));
 
-        Assert.Equal(expected, add3.Execute());
+        Assert.That(add3.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void AddNumberAndDegree()
     {
         var exp = new Add(Number.One, AngleValue.Degree(10).AsExpression());
         var actual = exp.Execute();
         var expected = AngleValue.Degree(11);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void AddRadianAndNumber()
     {
         var exp = new Add(AngleValue.Radian(10).AsExpression(), Number.One);
         var actual = exp.Execute();
         var expected = AngleValue.Radian(11);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void AddDegreeAndRadian()
     {
         var exp = new Add(
@@ -147,10 +147,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = AngleValue.Degree(190);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void AddGradianAndGradian()
     {
         var exp = new Add(
@@ -160,10 +160,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = AngleValue.Gradian(30);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNumberAndPower()
     {
         var exp = new Add(
@@ -173,10 +173,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = PowerValue.Watt(2);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecutePowerAndNumber()
     {
         var exp = new Add(
@@ -186,10 +186,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = PowerValue.Watt(2);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecutePowerAndPower()
     {
         var exp = new Add(
@@ -199,10 +199,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = PowerValue.Watt(3);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNumberAndTemperature()
     {
         var exp = new Add(
@@ -212,10 +212,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = TemperatureValue.Celsius(2);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTemperatureAndNumber()
     {
         var exp = new Add(
@@ -225,10 +225,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = TemperatureValue.Celsius(2);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTemperatureAndTemperature()
     {
         var exp = new Add(
@@ -238,10 +238,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = TemperatureValue.Celsius(3);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNumberAndMass()
     {
         var exp = new Add(
@@ -251,10 +251,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = MassValue.Gram(2);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteMassAndNumber()
     {
         var exp = new Add(
@@ -264,10 +264,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = MassValue.Gram(2);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteMassAndMass()
     {
         var exp = new Add(
@@ -277,10 +277,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = MassValue.Gram(3);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNumberAndLength()
     {
         var exp = new Add(
@@ -290,10 +290,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = LengthValue.Meter(2);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteLengthAndNumber()
     {
         var exp = new Add(
@@ -303,10 +303,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = LengthValue.Meter(2);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteLengthAndLength()
     {
         var exp = new Add(
@@ -316,10 +316,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = LengthValue.Meter(3);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNumberAndTime()
     {
         var exp = new Add(
@@ -329,10 +329,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = TimeValue.Second(2);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTimeAndNumber()
     {
         var exp = new Add(
@@ -342,10 +342,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = TimeValue.Second(2);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTimeAndTime()
     {
         var exp = new Add(
@@ -355,10 +355,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = TimeValue.Second(3);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNumberAndArea()
     {
         var exp = new Add(
@@ -368,10 +368,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = AreaValue.Meter(2);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteAreaAndNumber()
     {
         var exp = new Add(
@@ -381,10 +381,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = AreaValue.Meter(2);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTimeAndArea()
     {
         var exp = new Add(
@@ -394,10 +394,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = AreaValue.Meter(3);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNumberAndVolume()
     {
         var exp = new Add(
@@ -407,10 +407,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = VolumeValue.Meter(2);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteVolumeAndNumber()
     {
         var exp = new Add(
@@ -420,10 +420,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = VolumeValue.Meter(2);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTimeAndVolume()
     {
         var exp = new Add(
@@ -433,10 +433,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = VolumeValue.Meter(3);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteStringAndString()
     {
         var exp = new Add(
@@ -446,10 +446,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = "ab";
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteStringAndNumber()
     {
         var exp = new Add(
@@ -459,10 +459,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = "a1";
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNumberAndString()
     {
         var exp = new Add(
@@ -472,10 +472,10 @@ public class AddTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = "1b";
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteRationalAndRational()
     {
         var exp = new Add(
@@ -485,10 +485,10 @@ public class AddTest : BaseExpressionTests
         var expected = new RationalValue(5, 2);
         var actual = exp.Execute();
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNumberAndRational()
     {
         var exp = new Add(
@@ -498,10 +498,10 @@ public class AddTest : BaseExpressionTests
         var expected = new RationalValue(3, 1);
         var actual = exp.Execute();
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteRationalAndNumber()
     {
         var exp = new Add(
@@ -511,22 +511,22 @@ public class AddTest : BaseExpressionTests
         var expected = new RationalValue(3, 2);
         var actual = exp.Execute();
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestException()
         => TestNotSupported(new Add(Bool.False, Bool.False));
 
-    [Fact]
+    [Test]
     public void ExecuteComplexNumberAndBool()
         => TestNotSupported(new Add(new ComplexNumber(7, 3), Bool.False));
 
-    [Fact]
+    [Test]
     public void ExecuteBoolAndComplexNumber()
         => TestNotSupported(new Add(Bool.False, new ComplexNumber(7, 3)));
 
-    [Fact]
+    [Test]
     public void AnalyzeNull()
     {
         var exp = new Add(Number.One, Number.One);
@@ -534,7 +534,7 @@ public class AddTest : BaseExpressionTests
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<object>(null));
     }
 
-    [Fact]
+    [Test]
     public void AnalyzeContextNull()
     {
         var exp = new Add(Number.One, Number.One);
@@ -542,12 +542,12 @@ public class AddTest : BaseExpressionTests
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<object, object>(null, null));
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Add(Variable.X, Number.Zero);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

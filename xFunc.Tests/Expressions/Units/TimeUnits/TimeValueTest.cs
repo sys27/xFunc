@@ -5,105 +5,105 @@ namespace xFunc.Tests.Expressions.Units.TimeUnits;
 
 public class TimeValueTest
 {
-    [Fact]
+    [Test]
     public void EqualTest()
     {
         var time1 = TimeValue.Second(10);
         var time2 = TimeValue.Second(10);
 
-        Assert.True(time1.Equals(time2));
+        Assert.That(time1.Equals(time2), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualOperatorTest()
     {
         var time1 = TimeValue.Second(10);
         var time2 = TimeValue.Second(10);
 
-        Assert.True(time1 == time2);
+        Assert.That(time1 == time2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualTest()
     {
         var time1 = TimeValue.Second(10);
         var time2 = TimeValue.Second(12);
 
-        Assert.True(time1 != time2);
+        Assert.That(time1 != time2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessTest()
     {
         var time1 = TimeValue.Second(10);
         var time2 = TimeValue.Second(12);
 
-        Assert.True(time1 < time2);
+        Assert.That(time1 < time2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessFalseTest()
     {
         var time1 = TimeValue.Second(20);
         var time2 = TimeValue.Second(12);
 
-        Assert.False(time1 < time2);
+        Assert.That(time1 < time2, Is.False);
     }
 
-    [Fact]
+    [Test]
     public void GreaterTest()
     {
         var time1 = TimeValue.Second(20);
         var time2 = TimeValue.Second(12);
 
-        Assert.True(time1 > time2);
+        Assert.That(time1 > time2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterFalseTest()
     {
         var time1 = TimeValue.Second(10);
         var time2 = TimeValue.Second(12);
 
-        Assert.False(time1 > time2);
+        Assert.That(time1 > time2, Is.False);
     }
 
-    [Fact]
+    [Test]
     public void LessOrEqualTest()
     {
         var time1 = TimeValue.Second(10);
         var time2 = TimeValue.Second(10);
 
-        Assert.True(time1 <= time2);
+        Assert.That(time1 <= time2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterOrEqualTest()
     {
         var time1 = TimeValue.Second(10);
         var time2 = TimeValue.Second(10);
 
-        Assert.True(time1 >= time2);
+        Assert.That(time1 >= time2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CompareToNull()
     {
         var timeValue = TimeValue.Second(10);
 
-        Assert.True(timeValue.CompareTo(null) > 0);
+        Assert.That(timeValue.CompareTo(null) > 0, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CompareToObject()
     {
         var time1 = TimeValue.Second(10);
         var time2 = (object)TimeValue.Second(10);
 
-        Assert.True(time1.CompareTo(time2) == 0);
+        Assert.That(time1.CompareTo(time2) == 0, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CompareToDouble()
     {
         var timeValue = TimeValue.Second(10);
@@ -111,124 +111,124 @@ public class TimeValueTest
         Assert.Throws<ArgumentException>(() => timeValue.CompareTo(1));
     }
 
-    [Fact]
+    [Test]
     public void ValueNotEqualTest()
     {
         var time1 = TimeValue.Second(10);
         var time2 = TimeValue.Second(12);
 
-        Assert.False(time1.Equals(time2));
+        Assert.That(time1.Equals(time2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void UnitNotEqualTest2()
     {
         var time1 = TimeValue.Second(10);
         var time2 = TimeValue.Minute(10);
 
-        Assert.False(time1.Equals(time2));
+        Assert.That(time1.Equals(time2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualDiffTypeTest()
     {
         var time1 = TimeValue.Second(10);
         var time2 = 3;
 
-        Assert.False(time1.Equals(time2));
+        Assert.That(time1.Equals(time2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualObjectTest()
     {
         var time1 = TimeValue.Second(10);
         var time2 = TimeValue.Second(10);
 
-        Assert.True(time1.Equals(time2 as object));
+        Assert.That(time1.Equals(time2 as object), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualObjectTest()
     {
         var time1 = TimeValue.Second(10);
         var time2 = TimeValue.Second(20);
 
-        Assert.False(time1.Equals(time2 as object));
+        Assert.That(time1.Equals(time2 as object), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ToStringSecondTest()
     {
         var timeValue = TimeValue.Second(10);
 
-        Assert.Equal("10 s", timeValue.ToString());
+        Assert.That(timeValue.ToString(), Is.EqualTo("10 s"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringNanosecondTest()
     {
         var timeValue = TimeValue.Nanosecond(10);
 
-        Assert.Equal("10 ns", timeValue.ToString());
+        Assert.That(timeValue.ToString(), Is.EqualTo("10 ns"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringMicrosecondTest()
     {
         var timeValue = TimeValue.Microsecond(10);
 
-        Assert.Equal("10 μs", timeValue.ToString());
+        Assert.That(timeValue.ToString(), Is.EqualTo("10 μs"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringMillisecondTest()
     {
         var timeValue = TimeValue.Millisecond(10);
 
-        Assert.Equal("10 ms", timeValue.ToString());
+        Assert.That(timeValue.ToString(), Is.EqualTo("10 ms"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringMinuteTest()
     {
         var timeValue = TimeValue.Minute(10);
 
-        Assert.Equal("10 min", timeValue.ToString());
+        Assert.That(timeValue.ToString(), Is.EqualTo("10 min"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringHourTest()
     {
         var timeValue = TimeValue.Hour(10);
 
-        Assert.Equal("10 h", timeValue.ToString());
+        Assert.That(timeValue.ToString(), Is.EqualTo("10 h"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringDayTest()
     {
         var timeValue = TimeValue.Day(10);
 
-        Assert.Equal("10 day", timeValue.ToString());
+        Assert.That(timeValue.ToString(), Is.EqualTo("10 day"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringWeekTest()
     {
         var timeValue = TimeValue.Week(10);
 
-        Assert.Equal("10 week", timeValue.ToString());
+        Assert.That(timeValue.ToString(), Is.EqualTo("10 week"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringYearTest()
     {
         var timeValue = TimeValue.Year(10);
 
-        Assert.Equal("10 year", timeValue.ToString());
+        Assert.That(timeValue.ToString(), Is.EqualTo("10 year"));
     }
 
-    [Fact]
+    [Test]
     public void AddOperatorTest()
     {
         var time1 = TimeValue.Second(1);
@@ -236,10 +236,10 @@ public class TimeValueTest
         var expected = TimeValue.Second(61);
         var result = time1 + time2;
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SubOperatorTest()
     {
         var time1 = TimeValue.Minute(1);
@@ -247,7 +247,7 @@ public class TimeValueTest
         var expected = TimeValue.Minute(0.5);
         var result = time1 - time2;
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
     public static IEnumerable<object[]> GetConversionTestCases()
@@ -342,13 +342,13 @@ public class TimeValueTest
         yield return new object[] { 10.0, TimeUnit.Year, TimeUnit.Day, 3650.0 };
     }
 
-    [Theory]
-    [MemberData(nameof(GetConversionTestCases))]
+    [Test]
+    [TestCaseSource(nameof(GetConversionTestCases))]
     public void ConversionTests(double value, TimeUnit unit, TimeUnit to, double expected)
     {
         var time = new TimeValue(new NumberValue(value), unit);
         var converted = time.To(to);
 
-        Assert.Equal(expected, converted.Value.Number, 5);
+        Assert.That(converted.Value.Number, Is.EqualTo(expected).Within(5));
     }
 }

@@ -110,7 +110,7 @@ public readonly struct TemperatureValue :
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{Value} {Unit.UnitName}";
+        => $"{Value} '{Unit.UnitName}'";
 
     /// <summary>
     /// Determines whether two specified instances of <see cref="TemperatureValue"/> are equal.

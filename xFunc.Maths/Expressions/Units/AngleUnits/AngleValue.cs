@@ -108,7 +108,7 @@ public readonly struct AngleValue : IEquatable<AngleValue>, IComparable<AngleVal
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{Angle} {Unit}";
+        => $"{Angle} '{Unit}'";
 
     /// <summary>
     /// Determines whether two specified instances of <see cref="AngleValue"/> are equal.

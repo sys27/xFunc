@@ -161,7 +161,7 @@ public class AngleValueTest
     {
         var angle = AngleValue.Degree(10);
 
-        Assert.That(angle.ToString(), Is.EqualTo("10 degree"));
+        Assert.That(angle.ToString(), Is.EqualTo("10 'degree'"));
     }
 
     [Test]
@@ -169,7 +169,7 @@ public class AngleValueTest
     {
         var angle = AngleValue.Radian(10);
 
-        Assert.That(angle.ToString(), Is.EqualTo("10 radian"));
+        Assert.That(angle.ToString(), Is.EqualTo("10 'radian'"));
     }
 
     [Test]
@@ -177,7 +177,7 @@ public class AngleValueTest
     {
         var angle = AngleValue.Gradian(10);
 
-        Assert.That(angle.ToString(), Is.EqualTo("10 gradian"));
+        Assert.That(angle.ToString(), Is.EqualTo("10 'gradian'"));
     }
 
     [Test]

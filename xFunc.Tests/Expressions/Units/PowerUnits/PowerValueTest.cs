@@ -161,7 +161,7 @@ public class PowerValueTest
     {
         var power = PowerValue.Watt(10);
 
-        Assert.That(power.ToString(), Is.EqualTo("10 W"));
+        Assert.That(power.ToString(), Is.EqualTo("10 'W'"));
     }
 
     [Test]
@@ -169,7 +169,7 @@ public class PowerValueTest
     {
         var power = PowerValue.Kilowatt(10);
 
-        Assert.That(power.ToString(), Is.EqualTo("10 kW"));
+        Assert.That(power.ToString(), Is.EqualTo("10 'kW'"));
     }
 
     [Test]
@@ -177,7 +177,7 @@ public class PowerValueTest
     {
         var power = PowerValue.Horsepower(10);
 
-        Assert.That(power.ToString(), Is.EqualTo("10 hp"));
+        Assert.That(power.ToString(), Is.EqualTo("10 'hp'"));
     }
 
     public static IEnumerable<object[]> GetConversionTestCases()

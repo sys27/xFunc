@@ -107,7 +107,7 @@ public readonly struct PowerValue : IEquatable<PowerValue>, IComparable<PowerVal
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{Value} {Unit}";
+        => $"{Value} '{Unit}'";
 
     /// <summary>
     /// Determines whether two specified instances of <see cref="PowerValue"/> are equal.

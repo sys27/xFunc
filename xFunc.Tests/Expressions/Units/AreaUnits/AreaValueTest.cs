@@ -161,7 +161,7 @@ public class AreaValueTest
     {
         var areaValue = AreaValue.Meter(10);
 
-        Assert.That(areaValue.ToString(), Is.EqualTo("10 m^2"));
+        Assert.That(areaValue.ToString(), Is.EqualTo("10 'm^2'"));
     }
 
     [Test]

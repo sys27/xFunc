@@ -183,7 +183,7 @@ public class TemperatureValueTest
     {
         var temperature = TemperatureValue.Celsius(10);
 
-        Assert.That(temperature.ToString(), Is.EqualTo("10 °C"));
+        Assert.That(temperature.ToString(), Is.EqualTo("10 '°C'"));
     }
 
     [Test]
@@ -191,7 +191,7 @@ public class TemperatureValueTest
     {
         var temperature = TemperatureValue.Fahrenheit(10);
 
-        Assert.That(temperature.ToString(), Is.EqualTo("10 °F"));
+        Assert.That(temperature.ToString(), Is.EqualTo("10 '°F'"));
     }
 
     [Test]
@@ -199,7 +199,7 @@ public class TemperatureValueTest
     {
         var temperature = TemperatureValue.Kelvin(10);
 
-        Assert.That(temperature.ToString(), Is.EqualTo("10 K"));
+        Assert.That(temperature.ToString(), Is.EqualTo("10 'K'"));
     }
 
     public static IEnumerable<object[]> GetConversionTestCases()

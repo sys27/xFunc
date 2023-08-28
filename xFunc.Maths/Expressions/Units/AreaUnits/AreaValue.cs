@@ -219,7 +219,7 @@ public readonly struct AreaValue : IEquatable<AreaValue>, IComparable<AreaValue>
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{Value} {Unit.UnitName}";
+        => $"{Value} '{Unit.UnitName}'";
 
     /// <summary>
     /// Determines whether two specified instances of <see cref="AreaValue"/> are equal.

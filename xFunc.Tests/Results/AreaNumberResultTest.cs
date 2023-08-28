@@ -29,6 +29,6 @@ public class AreaNumberResultTest
         var areaValue = AreaValue.Meter(10);
         var result = new AreaNumberResult(areaValue);
 
-        Assert.That(result.ToString(), Is.EqualTo("10 m^2"));
+        Assert.That(result.ToString(), Is.EqualTo("10 'm^2'"));
     }
 }

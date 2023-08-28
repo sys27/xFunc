@@ -161,7 +161,7 @@ public class LengthValueTest
     {
         var length = LengthValue.Meter(10);
 
-        Assert.That(length.ToString(), Is.EqualTo("10 m"));
+        Assert.That(length.ToString(), Is.EqualTo("10 'm'"));
     }
 
     [Test]
@@ -169,7 +169,7 @@ public class LengthValueTest
     {
         var length = LengthValue.Nanometer(10);
 
-        Assert.That(length.ToString(), Is.EqualTo("10 nm"));
+        Assert.That(length.ToString(), Is.EqualTo("10 'nm'"));
     }
 
     [Test]
@@ -177,7 +177,7 @@ public class LengthValueTest
     {
         var length = LengthValue.Micrometer(10);
 
-        Assert.That(length.ToString(), Is.EqualTo("10 µm"));
+        Assert.That(length.ToString(), Is.EqualTo("10 'µm'"));
     }
 
     [Test]
@@ -185,7 +185,7 @@ public class LengthValueTest
     {
         var length = LengthValue.Millimeter(10);
 
-        Assert.That(length.ToString(), Is.EqualTo("10 mm"));
+        Assert.That(length.ToString(), Is.EqualTo("10 'mm'"));
     }
 
     [Test]
@@ -193,7 +193,7 @@ public class LengthValueTest
     {
         var length = LengthValue.Centimeter(10);
 
-        Assert.That(length.ToString(), Is.EqualTo("10 cm"));
+        Assert.That(length.ToString(), Is.EqualTo("10 'cm'"));
     }
 
     [Test]
@@ -201,7 +201,7 @@ public class LengthValueTest
     {
         var length = LengthValue.Decimeter(10);
 
-        Assert.That(length.ToString(), Is.EqualTo("10 dm"));
+        Assert.That(length.ToString(), Is.EqualTo("10 'dm'"));
     }
 
     [Test]
@@ -209,7 +209,7 @@ public class LengthValueTest
     {
         var length = LengthValue.Kilometer(10);
 
-        Assert.That(length.ToString(), Is.EqualTo("10 km"));
+        Assert.That(length.ToString(), Is.EqualTo("10 'km'"));
     }
 
     [Test]
@@ -217,7 +217,7 @@ public class LengthValueTest
     {
         var length = LengthValue.Inch(10);
 
-        Assert.That(length.ToString(), Is.EqualTo("10 in"));
+        Assert.That(length.ToString(), Is.EqualTo("10 'in'"));
     }
 
     [Test]
@@ -225,7 +225,7 @@ public class LengthValueTest
     {
         var length = LengthValue.Foot(10);
 
-        Assert.That(length.ToString(), Is.EqualTo("10 ft"));
+        Assert.That(length.ToString(), Is.EqualTo("10 'ft'"));
     }
 
     [Test]
@@ -233,7 +233,7 @@ public class LengthValueTest
     {
         var length = LengthValue.Yard(10);
 
-        Assert.That(length.ToString(), Is.EqualTo("10 yd"));
+        Assert.That(length.ToString(), Is.EqualTo("10 'yd'"));
     }
 
     [Test]
@@ -241,7 +241,7 @@ public class LengthValueTest
     {
         var length = LengthValue.Mile(10);
 
-        Assert.That(length.ToString(), Is.EqualTo("10 mi"));
+        Assert.That(length.ToString(), Is.EqualTo("10 'mi'"));
     }
 
     [Test]
@@ -249,7 +249,7 @@ public class LengthValueTest
     {
         var length = LengthValue.NauticalMile(10);
 
-        Assert.That(length.ToString(), Is.EqualTo("10 nmi"));
+        Assert.That(length.ToString(), Is.EqualTo("10 'nmi'"));
     }
 
     [Test]
@@ -257,7 +257,7 @@ public class LengthValueTest
     {
         var length = LengthValue.Chain(10);
 
-        Assert.That(length.ToString(), Is.EqualTo("10 ch"));
+        Assert.That(length.ToString(), Is.EqualTo("10 'ch'"));
     }
 
     [Test]
@@ -265,7 +265,7 @@ public class LengthValueTest
     {
         var length = LengthValue.Rod(10);
 
-        Assert.That(length.ToString(), Is.EqualTo("10 rd"));
+        Assert.That(length.ToString(), Is.EqualTo("10 'rd'"));
     }
 
     [Test]
@@ -273,7 +273,7 @@ public class LengthValueTest
     {
         var length = LengthValue.AstronomicalUnit(10);
 
-        Assert.That(length.ToString(), Is.EqualTo("10 au"));
+        Assert.That(length.ToString(), Is.EqualTo("10 'au'"));
     }
 
     [Test]
@@ -281,7 +281,7 @@ public class LengthValueTest
     {
         var length = LengthValue.LightYear(10);
 
-        Assert.That(length.ToString(), Is.EqualTo("10 ly"));
+        Assert.That(length.ToString(), Is.EqualTo("10 'ly'"));
     }
 
     [Test]
@@ -289,7 +289,7 @@ public class LengthValueTest
     {
         var length = LengthValue.Parsec(10);
 
-        Assert.That(length.ToString(), Is.EqualTo("10 pc"));
+        Assert.That(length.ToString(), Is.EqualTo("10 'pc'"));
     }
 
     [Test]

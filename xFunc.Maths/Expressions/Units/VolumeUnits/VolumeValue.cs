@@ -171,7 +171,7 @@ public readonly struct VolumeValue : IEquatable<VolumeValue>, IComparable<Volume
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{Value} {Unit.UnitName}";
+        => $"{Value} '{Unit.UnitName}'";
 
     /// <summary>
     /// Determines whether two specified instances of <see cref="VolumeValue"/> are equal.

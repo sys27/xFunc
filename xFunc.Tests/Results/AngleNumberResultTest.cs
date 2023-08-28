@@ -29,6 +29,6 @@ public class AngleNumberResultTest
         var angle = AngleValue.Degree(10);
         var result = new AngleNumberResult(angle);
 
-        Assert.That(result.ToString(), Is.EqualTo("10 degree"));
+        Assert.That(result.ToString(), Is.EqualTo("10 'degree'"));
     }
 }

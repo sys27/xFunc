@@ -29,6 +29,6 @@ public class TemperatureNumberResultTest
         var power = TemperatureValue.Celsius(10);
         var result = new TemperatureNumberResult(power);
 
-        Assert.That(result.ToString(), Is.EqualTo("10 °C"));
+        Assert.That(result.ToString(), Is.EqualTo("10 '°C'"));
     }
 }

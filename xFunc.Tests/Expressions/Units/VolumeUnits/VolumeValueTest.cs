@@ -161,7 +161,7 @@ public class VolumeValueTest
     {
         var areaValue = VolumeValue.Meter(10);
 
-        Assert.That(areaValue.ToString(), Is.EqualTo("10 m^3"));
+        Assert.That(areaValue.ToString(), Is.EqualTo("10 'm^3'"));
     }
 
     [Test]

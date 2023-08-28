@@ -29,6 +29,6 @@ public class VolumeNumberResultTest
         var volume = VolumeValue.Meter(10);
         var result = new VolumeNumberResult(volume);
 
-        Assert.That(result.ToString(), Is.EqualTo("10 m^3"));
+        Assert.That(result.ToString(), Is.EqualTo("10 'm^3'"));
     }
 }

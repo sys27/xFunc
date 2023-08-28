@@ -331,7 +331,7 @@ public readonly struct LengthValue : IEquatable<LengthValue>, IComparable<Length
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{Value} {Unit.UnitName}";
+        => $"{Value} '{Unit.UnitName}'";
 
     /// <summary>
     /// Determines whether two specified instances of <see cref="LengthValue"/> are equal.

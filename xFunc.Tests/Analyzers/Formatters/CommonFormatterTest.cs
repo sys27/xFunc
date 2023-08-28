@@ -266,7 +266,7 @@ public class CommonFormatterTest
     {
         var exp = AngleValue.Degree(10).AsExpression();
 
-        Assert.That(exp.ToString(), Is.EqualTo("10 degree"));
+        Assert.That(exp.ToString(), Is.EqualTo("10 'degree'"));
     }
 
     [Test]
@@ -274,7 +274,7 @@ public class CommonFormatterTest
     {
         var exp = PowerValue.Watt(10).AsExpression();
 
-        Assert.That(exp.ToString(), Is.EqualTo("10 W"));
+        Assert.That(exp.ToString(), Is.EqualTo("10 'W'"));
     }
 
     [Test]
@@ -282,7 +282,7 @@ public class CommonFormatterTest
     {
         var exp = TemperatureValue.Celsius(10).AsExpression();
 
-        Assert.That(exp.ToString(), Is.EqualTo("10 °C"));
+        Assert.That(exp.ToString(), Is.EqualTo("10 '°C'"));
     }
 
     [Test]
@@ -290,7 +290,7 @@ public class CommonFormatterTest
     {
         var exp = MassValue.Gram(10).AsExpression();
 
-        Assert.That(exp.ToString(), Is.EqualTo("10 g"));
+        Assert.That(exp.ToString(), Is.EqualTo("10 'g'"));
     }
 
     [Test]
@@ -298,7 +298,7 @@ public class CommonFormatterTest
     {
         var exp = LengthValue.Meter(10).AsExpression();
 
-        Assert.That(exp.ToString(), Is.EqualTo("10 m"));
+        Assert.That(exp.ToString(), Is.EqualTo("10 'm'"));
     }
 
     [Test]
@@ -306,7 +306,7 @@ public class CommonFormatterTest
     {
         var exp = TimeValue.Second(10).AsExpression();
 
-        Assert.That(exp.ToString(), Is.EqualTo("10 s"));
+        Assert.That(exp.ToString(), Is.EqualTo("10 's'"));
     }
 
     [Test]
@@ -314,7 +314,7 @@ public class CommonFormatterTest
     {
         var exp = AreaValue.Meter(10).AsExpression();
 
-        Assert.That(exp.ToString(), Is.EqualTo("10 m^2"));
+        Assert.That(exp.ToString(), Is.EqualTo("10 'm^2'"));
     }
 
     [Test]
@@ -322,7 +322,7 @@ public class CommonFormatterTest
     {
         var exp = VolumeValue.Meter(10).AsExpression();
 
-        Assert.That(exp.ToString(), Is.EqualTo("10 m^3"));
+        Assert.That(exp.ToString(), Is.EqualTo("10 'm^3'"));
     }
 
     [Test]
@@ -354,7 +354,7 @@ public class CommonFormatterTest
     {
         var exp = new ToNumber(AngleValue.Degree(10).AsExpression());
 
-        Assert.That(exp.ToString(), Is.EqualTo("tonumber(10 degree)"));
+        Assert.That(exp.ToString(), Is.EqualTo("tonumber(10 'degree')"));
     }
 
     [Test]
@@ -555,7 +555,7 @@ public class CommonFormatterTest
             new StringExpression("rad")
         );
 
-        Assert.That(exp.ToString(), Is.EqualTo("convert(90 degree, 'rad')"));
+        Assert.That(exp.ToString(), Is.EqualTo("convert(90 'degree', 'rad')"));
     }
 
     [Test]

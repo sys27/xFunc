@@ -29,6 +29,6 @@ public class MassNumberResultTest
         var power = MassValue.Gram(10);
         var result = new MassNumberResult(power);
 
-        Assert.That(result.ToString(), Is.EqualTo("10 g"));
+        Assert.That(result.ToString(), Is.EqualTo("10 'g'"));
     }
 }

@@ -161,7 +161,7 @@ public class TimeValueTest
     {
         var timeValue = TimeValue.Second(10);
 
-        Assert.That(timeValue.ToString(), Is.EqualTo("10 s"));
+        Assert.That(timeValue.ToString(), Is.EqualTo("10 's'"));
     }
 
     [Test]
@@ -169,7 +169,7 @@ public class TimeValueTest
     {
         var timeValue = TimeValue.Nanosecond(10);
 
-        Assert.That(timeValue.ToString(), Is.EqualTo("10 ns"));
+        Assert.That(timeValue.ToString(), Is.EqualTo("10 'ns'"));
     }
 
     [Test]
@@ -177,7 +177,7 @@ public class TimeValueTest
     {
         var timeValue = TimeValue.Microsecond(10);
 
-        Assert.That(timeValue.ToString(), Is.EqualTo("10 μs"));
+        Assert.That(timeValue.ToString(), Is.EqualTo("10 'μs'"));
     }
 
     [Test]
@@ -185,7 +185,7 @@ public class TimeValueTest
     {
         var timeValue = TimeValue.Millisecond(10);
 
-        Assert.That(timeValue.ToString(), Is.EqualTo("10 ms"));
+        Assert.That(timeValue.ToString(), Is.EqualTo("10 'ms'"));
     }
 
     [Test]
@@ -193,7 +193,7 @@ public class TimeValueTest
     {
         var timeValue = TimeValue.Minute(10);
 
-        Assert.That(timeValue.ToString(), Is.EqualTo("10 min"));
+        Assert.That(timeValue.ToString(), Is.EqualTo("10 'min'"));
     }
 
     [Test]
@@ -201,7 +201,7 @@ public class TimeValueTest
     {
         var timeValue = TimeValue.Hour(10);
 
-        Assert.That(timeValue.ToString(), Is.EqualTo("10 h"));
+        Assert.That(timeValue.ToString(), Is.EqualTo("10 'h'"));
     }
 
     [Test]
@@ -209,7 +209,7 @@ public class TimeValueTest
     {
         var timeValue = TimeValue.Day(10);
 
-        Assert.That(timeValue.ToString(), Is.EqualTo("10 day"));
+        Assert.That(timeValue.ToString(), Is.EqualTo("10 'day'"));
     }
 
     [Test]
@@ -217,7 +217,7 @@ public class TimeValueTest
     {
         var timeValue = TimeValue.Week(10);
 
-        Assert.That(timeValue.ToString(), Is.EqualTo("10 week"));
+        Assert.That(timeValue.ToString(), Is.EqualTo("10 'week'"));
     }
 
     [Test]
@@ -225,7 +225,7 @@ public class TimeValueTest
     {
         var timeValue = TimeValue.Year(10);
 
-        Assert.That(timeValue.ToString(), Is.EqualTo("10 year"));
+        Assert.That(timeValue.ToString(), Is.EqualTo("10 'year'"));
     }
 
     [Test]

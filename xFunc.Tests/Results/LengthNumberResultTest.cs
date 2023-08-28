@@ -29,6 +29,6 @@ public class LengthNumberResultTest
         var lengthValue = LengthValue.Meter(10);
         var result = new LengthNumberResult(lengthValue);
 
-        Assert.That(result.ToString(), Is.EqualTo("10 m"));
+        Assert.That(result.ToString(), Is.EqualTo("10 'm'"));
     }
 }

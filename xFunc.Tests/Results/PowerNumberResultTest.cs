@@ -29,6 +29,6 @@ public class PowerNumberResultTest
         var power = PowerValue.Watt(10);
         var result = new PowerNumberResult(power);
 
-        Assert.That(result.ToString(), Is.EqualTo("10 W"));
+        Assert.That(result.ToString(), Is.EqualTo("10 'W'"));
     }
 }

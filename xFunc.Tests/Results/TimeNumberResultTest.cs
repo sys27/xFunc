@@ -29,6 +29,6 @@ public class TimeNumberResultTest
         var lengthValue = TimeValue.Second(10);
         var result = new TimeNumberResult(lengthValue);
 
-        Assert.That(result.ToString(), Is.EqualTo("10 s"));
+        Assert.That(result.ToString(), Is.EqualTo("10 's'"));
     }
 }

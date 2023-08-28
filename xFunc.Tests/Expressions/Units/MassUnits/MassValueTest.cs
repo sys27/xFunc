@@ -161,7 +161,7 @@ public class MassValueTest
     {
         var mass = MassValue.Milligram(10);
 
-        Assert.That(mass.ToString(), Is.EqualTo("10 mg"));
+        Assert.That(mass.ToString(), Is.EqualTo("10 'mg'"));
     }
 
     [Test]
@@ -169,7 +169,7 @@ public class MassValueTest
     {
         var mass = MassValue.Gram(10);
 
-        Assert.That(mass.ToString(), Is.EqualTo("10 g"));
+        Assert.That(mass.ToString(), Is.EqualTo("10 'g'"));
     }
 
     [Test]
@@ -177,7 +177,7 @@ public class MassValueTest
     {
         var mass = MassValue.Kilogram(10);
 
-        Assert.That(mass.ToString(), Is.EqualTo("10 kg"));
+        Assert.That(mass.ToString(), Is.EqualTo("10 'kg'"));
     }
 
     [Test]
@@ -185,7 +185,7 @@ public class MassValueTest
     {
         var mass = MassValue.Tonne(10);
 
-        Assert.That(mass.ToString(), Is.EqualTo("10 t"));
+        Assert.That(mass.ToString(), Is.EqualTo("10 't'"));
     }
 
     [Test]
@@ -193,7 +193,7 @@ public class MassValueTest
     {
         var mass = MassValue.Ounce(10);
 
-        Assert.That(mass.ToString(), Is.EqualTo("10 oz"));
+        Assert.That(mass.ToString(), Is.EqualTo("10 'oz'"));
     }
 
     [Test]
@@ -201,7 +201,7 @@ public class MassValueTest
     {
         var mass = MassValue.Pound(10);
 
-        Assert.That(mass.ToString(), Is.EqualTo("10 lb"));
+        Assert.That(mass.ToString(), Is.EqualTo("10 'lb'"));
     }
 
     [Test]

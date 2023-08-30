@@ -11,7 +11,7 @@
     <PackageVersion Include="CommandLineParser" Version="2.9.1" />
     <PackageVersion Include="BenchmarkDotNet" Version="0.13.7" />
     <PackageVersion Include="coverlet.msbuild" Version="6.0.0" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.7.1" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
     <PackageVersion Include="ReportGenerator" Version="5.1.24" />
   </ItemGroup>
 </Project>

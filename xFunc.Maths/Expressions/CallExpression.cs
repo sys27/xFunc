@@ -90,6 +90,8 @@ public class CallExpression : IExpression, IEquatable<CallExpression>
             nestedScope[parameter] = new ParameterValue(expression.Execute(nestedScope));
 
         var result = function.Call(nestedScope);
+        if (result is Lambda lambdaResult)
+            return lambdaResult.Capture(nestedScope);
 
         return result;
     }

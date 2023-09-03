@@ -48,7 +48,7 @@ public class LambdaExpression : IExpression, IEquatable<LambdaExpression>
 
     /// <inheritdoc />
     public object Execute(ExpressionParameters? parameters)
-        => Lambda.Capture(parameters);
+        => Lambda;
 
     /// <inheritdoc />
     public string ToString(IFormatter formatter)

@@ -7,6 +7,7 @@
 * [#175](https://github.com/sys27/xFunc/pull/175) - Support rational numbers ([#693](https://github.com/sys27/xFunc/pull/693)).
 * [#667](https://github.com/sys27/xFunc/issues/667) - Migrate to NUnit ([#700](https://github.com/sys27/xFunc/pull/700)).
 * [#701](https://github.com/sys27/xFunc/issues/701) - Align units `ToString` implementation with parser.
+* [#704](https://github.com/sys27/xFunc/issues/704) - Lambda can't resolve a parameter ([#705](https://github.com/sys27/xFunc/pull/705)).
 
 ## xFunc v4.3.0
 

@@ -376,4 +376,15 @@ public class ProcessorTest
 
         Assert.That(result.Result, Is.EqualTo(2.0));
     }
+
+    [Test]
+    public void LambdaExecuteAnotherLambdaTest()
+    {
+        var processor = new Processor();
+        processor.Solve("c := (n, k) => round(n! / (k! * (n - k)!))");
+        processor.Solve("parts := (m, n) => c((m - 1) + (n - 1), m - 1)");
+        var result = processor.Solve<NumberResult>("parts(23, 12)");
+
+        Assert.That(result.Result, Is.EqualTo(193536720.0));
+    }
 }

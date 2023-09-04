@@ -464,6 +464,7 @@ public class ExpressionParameterTest
     [TestCase("tobin", typeof(ToBin))]
     [TestCase("tooct", typeof(ToOct))]
     [TestCase("tohex", typeof(ToHex))]
+    [TestCase("tonumber", typeof(ToNumber))]
     public void LambdaParametersTest(string function, Type type)
     {
         var parameters = new ExpressionParameters();

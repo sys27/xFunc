@@ -1,52 +1,52 @@
 ### Common
 
-| Function (Operation)  | Class                                                                                          | Alternative input                       | Remarks                                                         |
-|-----------------------|------------------------------------------------------------------------------------------------|-----------------------------------------|-----------------------------------------------------------------|
-| abs(x)                | [Abs.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Abs.cs)               |                                         |                                                                 |
-| x + y                 | [Add.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Add.cs)               |                                         |                                                                 |
-| ceil(x)               | [Ceil.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Ceil.cs)             |                                         |                                                                 |
-| name := value         | [Assign.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Assign.cs)         | f := (x) => sin(x), assign(name, value) |                                                                 |
-| deriv(f*, var, point) | [Derivate.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Derivate.cs)     |                                         | * - is required parameter. Defaults: var = "x", point = null.   |
-| x / y                 | [Div.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Div.cs)               |                                         |                                                                 |
-| exp(x)                | [Exp.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Exp.cs)               | e                                       |                                                                 |
-| x!                    | [Fact.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Fact.cs)             | fact(x)                                 |                                                                 |
-| floor(x)              | [Floor.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Floor.cs)           |                                         |                                                                 |
-| frac(x)               | [Frac.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Frac.cs)             |                                         |                                                                 |
-| gcd(x, y)             | [GCD.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/GCD.cs)               | gcf(x, y); hcf(x, y)                    | Also you can use more than 2 parameters. Example: gcd(4, 8, 16) |
-| lb(x)                 | [Lb.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Lb.cs)                 | log2(x)                                 |                                                                 |
-| lcm(x, y)             | [LCM.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/LCM.cs)               | scm(x, y)                               | Also you can use more than 2 parameters. Example: lcm(4, 8, 16) |
-| lg(x)                 | [Lg.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Lg.cs)                 |                                         |                                                                 |
-| ln(x)                 | [Ln.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Ln.cs)                 |                                         |                                                                 |
-| log(base, x)          | [Log.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Log.cs)               |                                         |                                                                 |
-| x % y                 | [Mod.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Mod.cs)               | mod(x, y)                               |                                                                 |
-| x * y                 | [Mul.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Mul.cs)               |                                         |                                                                 |
-| x ^ y                 | [Pow.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Pow.cs)               |                                         |                                                                 |
-| root(x)               | [Root.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Root.cs)             |                                         |                                                                 |
-| round(x, y)           | [Round.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Round.cs)           |                                         | y - is optional                                                 |
-| simplify(exp)         | [Simplify.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Simplify.cs)     |                                         |                                                                 |
-| sqrt(x)               | [Sqrt.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Sqrt.cs)             |                                         |                                                                 |
-| trunc(x)              | [Trunc.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Trunc.cs)           | truncate(x)                             |                                                                 |
-| x - y                 | [Sub.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Sub.cs)               |                                         |                                                                 |
-| -x                    | [UnaryMinus.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/UnaryMinus.cs) |                                         |                                                                 |
-| unassign(name)        | [Unassign.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Unassign.cs)     |                                         |                                                                 |
-| sign(x)               | [Sign.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Sign.cs)             |                                         |                                                                 |
-| tobin(x)              | [ToBin.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/ToBin.cs)           |                                         |                                                                 |
-| tooct(x)              | [ToOct.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/ToOct.cs)           |                                         |                                                                 |
-| tohex(x)              | [ToHex.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/ToHex.cs)           |                                         |                                                                 |
-| convert(x, 'unit')    | [Convert.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Units/Convert.cs) |                                         |                                                                 |
-| a // b                | [Rational.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Rational.cs)     |                                         |                                                                 |
+| Function (Operation)  | Class                                                                                             | Alternative input                       | Remarks                                                         |
+|-----------------------|---------------------------------------------------------------------------------------------------|-----------------------------------------|-----------------------------------------------------------------|
+| abs(x)                | [Abs.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Abs.cs)                  |                                         |                                                                 |
+| x + y                 | [Add.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Add.cs)                  | add(x, y)                               |                                                                 |
+| ceil(x)               | [Ceil.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Ceil.cs)                |                                         |                                                                 |
+| name := value         | [Assign.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Assign.cs)            | f := (x) => sin(x), assign(name, value) |                                                                 |
+| deriv(f*, var, point) | [Derivate.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Derivate.cs)        | derivative(f*, var, point)              | * - is required parameter. Defaults: var = "x", point = null.   |
+| x / y                 | [Div.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Div.cs)                  | div(x, y)                               |                                                                 |
+| exp(x)                | [Exp.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Exp.cs)                  | e^x                                     |                                                                 |
+| x!                    | [Fact.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Fact.cs)                | fact(x)                                 |                                                                 |
+| floor(x)              | [Floor.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Floor.cs)              |                                         |                                                                 |
+| frac(x)               | [Frac.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Frac.cs)                |                                         |                                                                 |
+| gcd(x, y)             | [GCD.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/GCD.cs)                  | gcf(x, y); hcf(x, y)                    | Also you can use more than 2 parameters. Example: gcd(4, 8, 16) |
+| lb(x)                 | [Lb.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Lb.cs)                    | log2(x)                                 |                                                                 |
+| lcm(x, y)             | [LCM.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/LCM.cs)                  | scm(x, y)                               | Also you can use more than 2 parameters. Example: lcm(4, 8, 16) |
+| lg(x)                 | [Lg.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Lg.cs)                    |                                         |                                                                 |
+| ln(x)                 | [Ln.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Ln.cs)                    |                                         |                                                                 |
+| log(base, x)          | [Log.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Log.cs)                  |                                         |                                                                 |
+| x % y                 | [Mod.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Mod.cs)                  | mod(x, y)                               |                                                                 |
+| x * y                 | [Mul.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Mul.cs)                  | mul(x, y)                               |                                                                 |
+| x ^ y                 | [Pow.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Pow.cs)                  | pow(x, y)                               |                                                                 |
+| root(x)               | [Root.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Root.cs)                |                                         |                                                                 |
+| round(x, y)           | [Round.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Round.cs)              |                                         | y - is optional                                                 |
+| simplify(exp)         | [Simplify.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Simplify.cs)        |                                         |                                                                 |
+| sqrt(x)               | [Sqrt.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Sqrt.cs)                |                                         |                                                                 |
+| trunc(x)              | [Trunc.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Trunc.cs)              | truncate(x)                             |                                                                 |
+| x - y                 | [Sub.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Sub.cs)                  | sub(x, y)                               |                                                                 |
+| -x                    | [UnaryMinus.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/UnaryMinus.cs)    |                                         |                                                                 |
+| unassign(name)        | [Unassign.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Unassign.cs)        |                                         |                                                                 |
+| sign(x)               | [Sign.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Sign.cs)                |                                         |                                                                 |
+| tobin(x)              | [ToBin.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/ToBin.cs)              |                                         |                                                                 |
+| tooct(x)              | [ToOct.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/ToOct.cs)              |                                         |                                                                 |
+| tohex(x)              | [ToHex.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/ToHex.cs)              |                                         |                                                                 |
+| convert(x, 'unit')    | [Convert.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Units/Convert.cs)    |                                         |                                                                 |
+| tonumber(x)           | [ToNumber.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Angles/ToNumber.cs) |                                         | converts any unit to a number                                   |
+| a // b                | [Rational.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Rational.cs)        |                                         |                                                                 |
 
 ### Angle
 
-| Function    | Class                                                                                                   | Alternative input         |
-|-------------|---------------------------------------------------------------------------------------------------------|---------------------------|
-| x 'rad'     | [AngleNumber.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Angles/AngleNumber.cs) | x 'radian', x 'radians'   |
-| x 'deg'     | [AngleNumber.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Angles/AngleNumber.cs) | x 'degree', x 'degrees'   |
-| x 'grad'    | [AngleNumber.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Angles/AngleNumber.cs) | x 'gradian', x 'gradians' |
-| todeg(x)    | [ToDegree.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Angles/ToDegree.cs)       | todegree(x)               |
-| torad(x)    | [ToRadian.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Angles/ToRadian.cs)       | toradian(x)               |
-| tograd(x)   | [ToGradian.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Angles/ToGradian.cs)     | togradian(x)              |
-| tonumber(x) | [ToNumber.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Angles/ToNumber.cs)       |                           |
+| Function  | Class                                                                                                   | Alternative input         |
+|-----------|---------------------------------------------------------------------------------------------------------|---------------------------|
+| x 'rad'   | [AngleNumber.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Angles/AngleNumber.cs) | x 'radian', x 'radians'   |
+| x 'deg'   | [AngleNumber.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Angles/AngleNumber.cs) | x 'degree', x 'degrees'   |
+| x 'grad'  | [AngleNumber.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Angles/AngleNumber.cs) | x 'gradian', x 'gradians' |
+| todeg(x)  | [ToDegree.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Angles/ToDegree.cs)       | todegree(x)               |
+| torad(x)  | [ToRadian.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Angles/ToRadian.cs)       | toradian(x)               |
+| tograd(x) | [ToGradian.cs](https://github.com/sys27/xFunc/blob/dev/xFunc.Maths/Expressions/Angles/ToGradian.cs)     | togradian(x)              |
 
 ### Trigonometric and inverse
 
@@ -177,13 +177,3 @@
 | pi   | Math.Pi                   | π                |
 | e    | Math.E                    | exp(x)           |
 | i    | Complex.ImaginaryOne      |                  |
-| g    | 9.80665                   |                  |
-| c    | 299792458                 |                  |
-| h    | 6.62607004E-34            |                  |
-| F    | 96485.33289               |                  |
-| ε    | 8.854187817E-12           |                  |
-| µ    | 1.2566370614E-6           |                  |
-| G    | 6.64078E-11               |                  |
-| α    | 2.5029078750958928222839  |                  |
-| σ    | 5.670367E-8               |                  |
-| γ    | 0.57721566490153286060651 |                  |

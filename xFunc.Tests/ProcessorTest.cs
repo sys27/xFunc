@@ -387,4 +387,26 @@ public class ProcessorTest
 
         Assert.That(result.Result, Is.EqualTo(193536720.0));
     }
+
+    [Test]
+    public void CallExpressionUsesCorrectContext1()
+    {
+        var processor = new Processor();
+        processor.Solve("f := (x) => (y) => x + y");
+        processor.Solve("add1 := f(1)");
+
+        Assert.Throws<KeyNotFoundException>(() => processor.Solve<NumberResult>("add1(x + 2)"));
+    }
+
+    [Test]
+    public void CallExpressionUsesCorrectContext2()
+    {
+        var processor = new Processor();
+        processor.Solve("f := (x) => (y) => x + y");
+        processor.Solve("add1 := f(1)");
+        processor.Solve("x := 3");
+        var result = processor.Solve<NumberResult>("add1(x + 2)");
+
+        Assert.That(result.Result, Is.EqualTo(6));
+    }
 }

@@ -87,7 +87,7 @@ public class CallExpression : IExpression, IEquatable<CallExpression>
         var nestedScope = ExpressionParameters.CreateScoped(function.CapturedScope ?? parameters);
         var zip = function.Parameters.Zip(Parameters, (parameter, expression) => (parameter, expression));
         foreach (var (parameter, expression) in zip)
-            nestedScope[parameter] = new ParameterValue(expression.Execute(nestedScope));
+            nestedScope[parameter] = new ParameterValue(expression.Execute(parameters));
 
         var result = function.Call(nestedScope);
         if (result is Lambda lambdaResult)

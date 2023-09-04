@@ -12,6 +12,11 @@ namespace xFunc.Maths.Expressions;
 public class ToNumber : UnaryExpression
 {
     /// <summary>
+    /// Gets the lambda for the current expression.
+    /// </summary>
+    internal static Lambda Lambda { get; } = new Lambda(new[] { Variable.X.Name }, new ToNumber(Variable.X));
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="ToNumber"/> class.
     /// </summary>
     /// <param name="argument">The argument of function.</param>

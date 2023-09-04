@@ -102,36 +102,6 @@ public partial class ExpressionParameters : IEnumerable<Parameter>, INotifyColle
         // Imaginary unit
         AddConstant(Parameter.Constant("i", Complex.ImaginaryOne));
 
-        // Gravity on Earth
-        AddConstant(Parameter.Constant("g", 9.80665));
-
-        // Speed of Light (c0)
-        AddConstant(Parameter.Constant("c", 299792458));
-
-        // Planck Constant
-        AddConstant(Parameter.Constant("h", 6.62607004E-34));
-
-        // Faraday Constant
-        AddConstant(Parameter.Constant("F", 96485.33289));
-
-        // Electric Constant (ε0)
-        AddConstant(Parameter.Constant("ε", 8.854187817E-12));
-
-        // Magnetic constant (µ0)
-        AddConstant(Parameter.Constant("µ", 1.2566370614E-6));
-
-        // Gravitational constant
-        AddConstant(Parameter.Constant("G", 6.64078E-11));
-
-        // Feigenbaum constant
-        AddConstant(Parameter.Constant("α", 2.5029078750958928222839));
-
-        // Stefan-Boltzmann constant
-        AddConstant(Parameter.Constant("σ", 5.670367E-8));
-
-        // Euler–Mascheroni constant
-        AddConstant(Parameter.Constant("γ", 0.57721566490153286060651));
-
         // functions
         AddConstant(Parameter.Constant("add", Expressions.Add.Lambda));
         AddConstant(Parameter.Constant("sub", Sub.Lambda));
@@ -229,6 +199,7 @@ public partial class ExpressionParameters : IEnumerable<Parameter>, INotifyColle
         AddConstant(Parameter.Constant("tobin", ToBin.Lambda));
         AddConstant(Parameter.Constant("tooct", ToOct.Lambda));
         AddConstant(Parameter.Constant("tohex", ToHex.Lambda));
+        AddConstant(Parameter.Constant("tonumber", ToNumber.Lambda));
     }
 
     private static void AddConstant(Parameter parameter)

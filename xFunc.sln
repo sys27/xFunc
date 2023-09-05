@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xFunc.Maths", "xFunc.Maths\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xFunc.Tests", "xFunc.Tests\xFunc.Tests.csproj", "{A4C3E90E-647D-4DA8-BA97-C9034C301D37}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xFunc.DotnetTool", "xFunc.DotnetTool\xFunc.DotnetTool.csproj", "{907CDF76-60C1-4894-9CB3-496FFFF92E13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xFunc.Cli", "xFunc.Cli\xFunc.Cli.csproj", "{907CDF76-60C1-4894-9CB3-496FFFF92E13}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xFunc.Benchmark", "xFunc.Benchmark\xFunc.Benchmark.csproj", "{EC5FB562-9BFE-4BD9-A3E4-666D3021AF1F}"
 EndProject

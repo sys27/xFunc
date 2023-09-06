@@ -1,7 +1,7 @@
 Master: [![Build Status](https://dev.azure.com/exit/xFunc/_apis/build/status/sys27.xFunc?branchName=master)](https://exit.visualstudio.com/xFunc/_build/latest?definitionId=4&branchName=master) [![codecov](https://codecov.io/gh/sys27/xFunc/branch/master/graph/badge.svg)](https://codecov.io/gh/sys27/xFunc)  
 Dev: [![Build Status](https://dev.azure.com/exit/xFunc/_apis/build/status/sys27.xFunc?branchName=dev)](https://exit.visualstudio.com/xFunc/_build/latest?definitionId=4&branchName=dev) [![codecov](https://codecov.io/gh/sys27/xFunc/branch/dev/graph/badge.svg)](https://codecov.io/gh/sys27/xFunc)  
 xFunc.Maths: [![NuGet](https://img.shields.io/nuget/v/xFunc.Maths.svg)](https://www.nuget.org/packages/xFunc.Maths) [![Downloads](https://img.shields.io/nuget/dt/xFunc.Maths.svg)](https://www.nuget.org/packages/xFunc.Maths)  
-xFunc.DotnetTool: [![NuGet](https://img.shields.io/nuget/v/xFunc.Cli.svg)](https://www.nuget.org/packages/xFunc.Cli)
+xFunc.Cli: [![NuGet](https://img.shields.io/nuget/v/xFunc.Cli.svg)](https://www.nuget.org/packages/xFunc.Cli)
 
 xFunc
 =====

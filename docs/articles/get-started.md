@@ -66,7 +66,7 @@ The `Simplifier` allows you to simplify the expression, in the code shown above,
 xFunc has a CLI tool, to install it use the following command:
 
 ```bash
-dotnet tool install -g xFunc.DotnetTool
+dotnet tool install -g xFunc.Cli
 ```
 
 after that, you will be able to use the `xfunc` command in your terminal. It supports the following commands:
@@ -89,9 +89,26 @@ This command launches the CLI tool in the interactive mode where you can enter e
 
 ```
 > sin(90 'deg')
-> 1
+1
 > cos(90 'deg')
-> 0
+0
 ```
 
 To exit use Cmd+C or Cmd+D on Mac OS.
+
+Also, you are able to save the current progress to a file (by using `#save <path>` command) and run it later with `xfunc run`.
+
+### `xfunc run`
+
+Let's assume you saved your progress to the `test.xf` file with the following content:
+
+```
+sin(90 'deg')
+cos(90 'deg')
+```
+
+So, you can execute it by:
+
+```
+xfunc run test.xf
+```

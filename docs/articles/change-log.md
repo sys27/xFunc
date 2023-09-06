@@ -10,6 +10,7 @@
 * [#704](https://github.com/sys27/xFunc/issues/704) - Lambda can't resolve a parameter ([#705](https://github.com/sys27/xFunc/pull/705)).
 * [#706](https://github.com/sys27/xFunc/issues/706) - `CallExpression` uses incorrect scope for parameters evaluation ([#707](https://github.com/sys27/xFunc/issues/707)).
 * [#708](https://github.com/sys27/xFunc/issues/708) - Remove unnecessary variables.
+* [#710](https://github.com/sys27/xFunc/issues/710) - Add ability to execute expression from files ([#712](https://github.com/sys27/xFunc/pull/712)).
 
 ## xFunc v4.3.0
 

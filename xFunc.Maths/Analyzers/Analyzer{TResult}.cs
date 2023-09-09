@@ -193,6 +193,10 @@ public abstract class Analyzer<TResult> : IAnalyzer<TResult>
         => Analyze(exp as IExpression);
 
     /// <inheritdoc />
+    public virtual TResult Analyze(Curry exp)
+        => Analyze(exp as IExpression);
+
+    /// <inheritdoc />
     public virtual TResult Analyze(Variable exp)
         => Analyze(exp as IExpression);
 

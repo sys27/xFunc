@@ -324,6 +324,13 @@ public interface IAnalyzer<out TResult>
     /// </summary>
     /// <param name="exp">The expression.</param>
     /// <returns>The result of analysis.</returns>
+    TResult Analyze(Curry exp);
+
+    /// <summary>
+    /// Analyzes the specified expression.
+    /// </summary>
+    /// <param name="exp">The expression.</param>
+    /// <returns>The result of analysis.</returns>
     TResult Analyze(Variable exp);
 
     /// <summary>

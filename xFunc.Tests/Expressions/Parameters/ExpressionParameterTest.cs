@@ -255,6 +255,29 @@ public class ExpressionParameterTest
     }
 
     [Test]
+    public void ScopedGetMissingParameter()
+    {
+        var parameters = new ExpressionParameters(false);
+        var scoped = ExpressionParameters.CreateScoped(parameters);
+
+        Assert.Throws<KeyNotFoundException>(() =>
+        {
+            var x = scoped["x"];
+        });
+    }
+
+    [Test]
+    public void ScopedGetMissingWithParentNullParameter()
+    {
+        var scoped = ExpressionParameters.CreateScoped(null);
+
+        Assert.Throws<KeyNotFoundException>(() =>
+        {
+            var x = scoped["x"];
+        });
+    }
+
+    [Test]
     public void ScopedGetParentValue()
     {
         var parameter = new Parameter("x", new ParameterValue(1));
@@ -264,6 +287,19 @@ public class ExpressionParameterTest
         };
         var scoped = ExpressionParameters.CreateScoped(parameters);
         scoped["y"] = new ParameterValue(2);
+
+        var result = scoped[parameter.Key];
+
+        Assert.That(result, Is.EqualTo(parameter.Value));
+    }
+
+    [Test]
+    public void ScopedGetCurrentValue()
+    {
+        var parameters = new ExpressionParameters(false);
+        var scoped = ExpressionParameters.CreateScoped(parameters);
+        var parameter = new Parameter("x", new ParameterValue(1));
+        scoped[parameter.Key] = parameter.Value;
 
         var result = scoped[parameter.Key];
 
@@ -323,7 +359,18 @@ public class ExpressionParameterTest
 
         var result = scoped.Contains(parameter);
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
+    }
+
+    [Test]
+    public void ScopedContainsParentNullValue()
+    {
+        var parameter = new Parameter("x", new ParameterValue(1));
+        var scoped = ExpressionParameters.CreateScoped(null);
+
+        var result = scoped.Contains(parameter);
+
+        Assert.That(result, Is.False);
     }
 
     [Test]
@@ -339,7 +386,7 @@ public class ExpressionParameterTest
 
         var result = scoped.Contains(new Parameter("z", new ParameterValue(1)));
 
-        Assert.False(result);
+        Assert.That(result, Is.False);
     }
 
     [Test]
@@ -376,6 +423,16 @@ public class ExpressionParameterTest
         var result = scoped.Contains(new Parameter("z", new ParameterValue(1)));
 
         Assert.False(result);
+    }
+
+    [Test]
+    public void ScopedContainsKeyParentNullValue()
+    {
+        var scoped = ExpressionParameters.CreateScoped(null);
+
+        var result = scoped.ContainsKey("x");
+
+        Assert.That(result, Is.False);
     }
 
     [Test]

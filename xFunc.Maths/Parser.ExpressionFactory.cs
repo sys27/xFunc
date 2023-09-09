@@ -116,6 +116,8 @@ public partial class Parser
 
             "torational" => new ToRational(arguments),
 
+            "curry" => new Curry(arguments),
+
             "convert" => new Expressions.Units.Convert(converter, arguments),
 
             var id => new CallExpression(new Variable(id), arguments),

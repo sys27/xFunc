@@ -1349,6 +1349,22 @@ public class TypeAnalyzer : ITypeAnalyzer
         => CheckArgument(exp, ResultTypes.Function);
 
     /// <inheritdoc />
+    public virtual ResultTypes Analyze(Curry exp)
+    {
+        if (exp is null)
+            throw new ArgumentNullException(nameof(exp));
+
+        if (exp.Parameters.Length == 0)
+        {
+            var functionResult = exp.Function.Analyze(this);
+            if (functionResult == ResultTypes.Function)
+                return ResultTypes.Function;
+        }
+
+        return ResultTypes.Undefined;
+    }
+
+    /// <inheritdoc />
     public virtual ResultTypes Analyze(Variable exp)
         => CheckArgument(exp, ResultTypes.Undefined);
 

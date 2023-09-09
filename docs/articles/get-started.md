@@ -28,7 +28,7 @@ var exp = new Pow(
 
 ### Execute methods
 
-Let's assume you have `exp` from the [previous step](#parse-you-first-expression). Now you can evaluate it but because the expression has the `x` variable you need to provide a value for it.
+Let's assume you have `exp` from the [previous step](#parse-your-first-expression). Now you can evaluate it but because the expression has the `x` variable you need to provide a value for it.
 
 ```csharp
 var parameters = new ExpressionParameters

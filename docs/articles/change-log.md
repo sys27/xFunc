@@ -11,6 +11,7 @@
 * [#706](https://github.com/sys27/xFunc/issues/706) - `CallExpression` uses incorrect scope for parameters evaluation ([#707](https://github.com/sys27/xFunc/issues/707)).
 * [#708](https://github.com/sys27/xFunc/issues/708) - Remove unnecessary variables.
 * [#710](https://github.com/sys27/xFunc/issues/710) - Add ability to execute expression from files ([#712](https://github.com/sys27/xFunc/pull/712)).
+* [#717](https://github.com/sys27/xFunc/pull/717) - Support partial application of functions ([#718](https://github.com/sys27/xFunc/pull/718)).
 
 ## xFunc v4.3.0
 

@@ -252,6 +252,15 @@ public class CommonFormatter : IFormatter
         => $"{exp.Lambda}";
 
     /// <inheritdoc />
+    public virtual string Analyze(Curry exp)
+    {
+        if (exp.Parameters.Length > 0)
+            return $"curry({exp.Function}, {string.Join(", ", exp.Parameters)})";
+
+        return $"curry({exp.Function})";
+    }
+
+    /// <inheritdoc />
     public virtual string Analyze(Variable exp) => exp.Name;
 
     /// <inheritdoc />

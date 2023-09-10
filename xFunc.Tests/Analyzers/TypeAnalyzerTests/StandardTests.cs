@@ -278,6 +278,32 @@ public class StandardTests : TypeAnalyzerBaseTests
     }
 
     [Test]
+    public void TestCurryWithLambdaExpression()
+    {
+        var exp = new Curry(Number.One.ToLambdaExpression());
+
+        Test(exp, ResultTypes.Function);
+    }
+
+    [Test]
+    public void TestCurryWithNonLambdaExpression()
+    {
+        var exp = new Curry(Number.One);
+
+        Test(exp, ResultTypes.Undefined);
+    }
+
+    [Test]
+    public void TestCurryWithLambdaAndParametersExpression()
+    {
+        var exp = new Curry(
+            Number.One.ToLambdaExpression(),
+            ImmutableArray.Create<IExpression>(Number.One, Number.One));
+
+        Test(exp, ResultTypes.Undefined);
+    }
+
+    [Test]
     public void TestVariable()
     {
         Test(new Sqrt(Variable.X), ResultTypes.Undefined);

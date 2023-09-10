@@ -523,6 +523,24 @@ public class CommonFormatterTest
     }
 
     [Test]
+    public void CurryTest()
+    {
+        var exp = new Curry(new Lambda(Number.One).AsExpression());
+
+        Assert.That(exp.ToString(), Is.EqualTo("curry(() => 1)"));
+    }
+
+    [Test]
+    public void CurryWithParametersTest()
+    {
+        var exp = new Curry(
+            new Lambda(Number.One).AsExpression(),
+            new IExpression[] { Number.One, Number.Two }.ToImmutableArray());
+
+        Assert.That(exp.ToString(), Is.EqualTo("curry(() => 1, 1, 2)"));
+    }
+
+    [Test]
     public void VariableTest()
     {
         var exp = Variable.X;

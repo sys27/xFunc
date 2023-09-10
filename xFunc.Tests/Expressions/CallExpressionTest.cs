@@ -1,3 +1,6 @@
+// Copyright (c) Dmytro Kyshchenko. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
 using System.Collections.Immutable;
 
 namespace xFunc.Tests.Expressions;
@@ -138,7 +141,9 @@ public class CallExpressionTest
             new Lambda(Array.Empty<string>(), Number.One).AsExpression(),
             ImmutableArray<IExpression>.Empty);
 
-        Assert.Throws<NotSupportedException>(() => exp.Execute());
+        var result = exp.Execute();
+
+        Assert.That(result, Is.EqualTo(NumberValue.One));
     }
 
     [Test]
@@ -148,7 +153,9 @@ public class CallExpressionTest
             new Lambda(Array.Empty<string>(), Number.One).AsExpression(),
             ImmutableArray<IExpression>.Empty);
 
-        Assert.Throws<ArgumentNullException>(() => exp.Execute(null));
+        var result = exp.Execute(null);
+
+        Assert.That(result, Is.EqualTo(NumberValue.One));
     }
 
     [Test]

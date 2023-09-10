@@ -260,7 +260,7 @@ public partial class ExpressionParameters : IEnumerable<Parameter>, INotifyColle
     /// <param name="key">The name of parameter.</param>
     /// <param name="parameter">The parameter.</param>
     /// <returns><c>true</c> if the current collection contains specified parameter, otherwise <c>false</c>.</returns>
-    public bool TryGetParameter(string key, [NotNullWhen(true)] out Parameter? parameter)
+    public virtual bool TryGetParameter(string key, [NotNullWhen(true)] out Parameter? parameter)
     {
         if (collection.TryGetValue(key, out var param))
         {
@@ -373,6 +373,6 @@ public partial class ExpressionParameters : IEnumerable<Parameter>, INotifyColle
     /// </summary>
     /// <param name="parameters">The instance of the base parameters collection.</param>
     /// <returns>The expression parameters.</returns>
-    public static ExpressionParameters CreateScoped(ExpressionParameters parameters)
+    public static ExpressionParameters CreateScoped(ExpressionParameters? parameters)
         => new ScopedExpressionParameters(parameters);
 }

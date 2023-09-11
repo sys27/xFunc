@@ -65,7 +65,7 @@ public class Div : BinaryExpression
             (RationalValue left, NumberValue right) => left / right,
             (RationalValue left, RationalValue right) => left / right,
 
-            _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            _ => throw ExecutionException.For(this),
         };
     }
 

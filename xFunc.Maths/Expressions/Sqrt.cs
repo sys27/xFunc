@@ -45,7 +45,7 @@ public class Sqrt : UnaryExpression
         {
             NumberValue number => NumberValue.Sqrt(number),
             Complex complex => Complex.Sqrt(complex),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

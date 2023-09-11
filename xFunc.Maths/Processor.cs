@@ -358,42 +358,17 @@ public class Processor
     /// </remarks>
     /// <param name="expression">The expression.</param>
     /// <param name="variable">The variable.</param>
-    /// <returns>Returns the derivative.</returns>
-    /// <example>
-    ///   <code>
-    ///     var processor = new Processor();
-    ///     var exp = processor.Parse("x ^ 2");
-    ///     var result = processor.Differentiate(exp, Variable.X);
-    ///   </code>
-    /// </example>
-    /// <seealso cref="IExpression"/>
-    /// <seealso cref="Variable"/>
-    public IExpression Differentiate(IExpression expression, Variable variable)
-        => Differentiate(expression, variable, new ExpressionParameters());
-
-    /// <summary>
-    /// Differentiates the specified expression.
-    /// </summary>
-    /// <remarks>
-    /// This method delegates the actual implementation of differentiation of expression to <see cref="IDifferentiator"/>.
-    /// </remarks>
-    /// <param name="expression">The expression.</param>
-    /// <param name="variable">The variable.</param>
-    /// <param name="parameters">The parameters.</param>
     /// <returns>
     /// Returns the derivative.
     /// </returns>
     /// <seealso cref="IExpression"/>
     /// <seealso cref="Variable"/>
-    public IExpression Differentiate(
-        IExpression expression,
-        Variable variable,
-        ExpressionParameters parameters)
+    public IExpression Differentiate(IExpression expression, Variable variable)
     {
         if (expression is null)
             throw new ArgumentNullException(nameof(expression));
 
-        var context = new DifferentiatorContext(parameters, variable);
+        var context = new DifferentiatorContext(variable);
 
         return expression.Analyze(differentiator, context);
     }

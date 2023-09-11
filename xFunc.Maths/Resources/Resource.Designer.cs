@@ -9,8 +9,8 @@
 
 namespace xFunc.Maths.Resources {
     using System;
-
-
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -22,15 +22,15 @@ namespace xFunc.Maths.Resources {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resource {
-
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Resource() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -44,7 +44,7 @@ namespace xFunc.Maths.Resources {
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -58,7 +58,7 @@ namespace xFunc.Maths.Resources {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot parse assignment key..
         /// </summary>
@@ -67,7 +67,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("AssignKeyParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The &apos;)&apos; symbol is expected after &apos;{0}&apos; expression..
         /// </summary>
@@ -76,7 +76,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("CloseParenParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The comma symbol (&apos;,&apos;) is expected after &apos;{0}&apos; expression..
         /// </summary>
@@ -85,7 +85,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("CommaParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to You can&apos;t change constants..
         /// </summary>
@@ -94,7 +94,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("ConstError", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot parse value of &apos;def&apos; expression..
         /// </summary>
@@ -103,7 +103,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("DefValueParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The &apos;°&apos; symbol is required in polar complex number form..
         /// </summary>
@@ -112,7 +112,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("DegreeComplexNumberParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The parameter #{2} has wrong type (Expected: {0}; Actual: {1})..
         /// </summary>
@@ -121,7 +121,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("DifferentParameterTypeMismatchExceptionError", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The domain is invalid..
         /// </summary>
@@ -130,7 +130,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("DomainIsInvalid", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The amount of added ranges exceeded the amount specified on the builder creation..
         /// </summary>
@@ -139,7 +139,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("DomainRangeExceeded", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The domain range is incorrect..
         /// </summary>
@@ -148,7 +148,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("DomainRangeIsIncorrect", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The &apos;start&apos; parameter is greater than &apos;end&apos;..
         /// </summary>
@@ -157,7 +157,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("DomainRangeStartIsGreaterThanEnd", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The &apos;{0}&apos; parameter is already present in the lambda..
         /// </summary>
@@ -166,7 +166,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("DuplidateLambdaParameterParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to An error occurred while parsing the tree..
         /// </summary>
@@ -175,7 +175,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("ErrorWhileParsingTree", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot parse an exponent..
         /// </summary>
@@ -184,7 +184,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("ExponentParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot parse body of &apos;for&apos; expression..
         /// </summary>
@@ -193,7 +193,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("ForBodyParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot parse condition of &apos;for&apos; expression..
         /// </summary>
@@ -202,7 +202,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("ForConditionParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot parse initializer of &apos;for&apos; expression..
         /// </summary>
@@ -211,7 +211,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("ForInitParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot parse iterator of &apos;for&apos; expression..
         /// </summary>
@@ -220,7 +220,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("ForIterParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The &apos;)&apos; symbol is expected at the end of &apos;{0}&apos; definition..
         /// </summary>
@@ -229,7 +229,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("FunctionCloseParenthesisParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The &apos;(&apos; symbol is expected after &apos;{0}&apos; definition..
         /// </summary>
@@ -238,7 +238,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("FunctionOpenParenthesisParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot parse condition of &apos;if&apos; expression..
         /// </summary>
@@ -247,7 +247,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("IfConditionParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot parse &apos;else&apos; statement of &apos;if&apos; expression..
         /// </summary>
@@ -256,7 +256,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("IfElseParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot parse &apos;then&apos; statement of &apos;if&apos; expression..
         /// </summary>
@@ -265,7 +265,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("IfThenParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The left parameter has wrong type (Expected: {0}; Actual: {1})..
         /// </summary>
@@ -274,7 +274,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("LeftParameterTypeMismatchExceptionError", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The number of parameters is less than expected..
         /// </summary>
@@ -283,7 +283,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("LessParams", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The size of matrices is invalid..
         /// </summary>
@@ -292,7 +292,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("MatrixArgException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The matrix declaration should end with the &apos;}&apos; symbol..
         /// </summary>
@@ -301,7 +301,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("MatrixCloseBraceParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Expressions in matrix should be separated by the &apos;,&apos; symbol..
         /// </summary>
@@ -310,7 +310,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("MatrixCommaParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot parse an expression after the comma symbol..
         /// </summary>
@@ -319,7 +319,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("MissingExpParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Can&apos;t parse the body of the lambda expression..
         /// </summary>
@@ -328,7 +328,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("MissingLambdaBodyParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The lambda operator (&apos;=&gt;&apos;) is missng..
         /// </summary>
@@ -337,7 +337,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("MissingLambdaParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The number of parameters is more than expected..
         /// </summary>
@@ -346,7 +346,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("MoreParams", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The function is not specified..
         /// </summary>
@@ -355,7 +355,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("NotSpecifiedFunction", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The symbol &apos;{0}&apos; is not supported..
         /// </summary>
@@ -364,7 +364,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("NotSupportedSymbol", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The parameter list should end with &apos;)&apos; symbol..
         /// </summary>
@@ -373,7 +373,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("ParameterListCloseParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Parameter type mismatch (Expected: {0}; Actual: {1})..
         /// </summary>
@@ -382,7 +382,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("ParameterTypeMismatchExceptionError", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The phase of complex number is expected after the &apos;∠&apos; symbol..
         /// </summary>
@@ -391,7 +391,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("PhaseParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to You cannot change the read-only variable..
         /// </summary>
@@ -400,16 +400,16 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("ReadOnlyError", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to The result of calculation is not supported (Function: &apos;{0}({1})&apos;)..
+        ///   Looks up a localized string similar to The result of evaluation is not supported (&apos;{0}&apos;)..
         /// </summary>
         internal static string ResultIsNotSupported {
             get {
                 return ResourceManager.GetString("ResultIsNotSupported", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The right parameter has wrong type (Expected: {0}; Actual: {1})..
         /// </summary>
@@ -418,7 +418,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("RightParameterTypeMismatchExceptionError", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot parse second operand of &apos;{0}&apos; operator..
         /// </summary>
@@ -427,7 +427,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("SecondOperandParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot find the end of string expression..
         /// </summary>
@@ -436,7 +436,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("StringTokenizeException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The &apos;:&apos; symbol is expected &apos;then&apos; expression..
         /// </summary>
@@ -445,7 +445,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("TernaryColonParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot parse &apos;else&apos; statement of ternary operator..
         /// </summary>
@@ -454,7 +454,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("TernaryElseParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot parse &apos;then&apos; statement of ternary operator..
         /// </summary>
@@ -463,7 +463,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("TernaryThenParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The &apos;{0}&apos; unit is not supported..
         /// </summary>
@@ -472,7 +472,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("UnitIsNotSupportedException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The value is not an integer..
         /// </summary>
@@ -481,7 +481,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("ValueIsNotInteger", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The &apos;{0} ({1})&apos; conversion value is not supported..
         /// </summary>
@@ -490,7 +490,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("ValueIsNotSupportedException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The &apos;{0}&apos; variable not found..
         /// </summary>
@@ -499,7 +499,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("VariableNotFoundExceptionError", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The vector declaration should end with the &apos;}&apos; symbol..
         /// </summary>
@@ -508,7 +508,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("VectorCloseBraceParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Expressions in vector should be separated by the &apos;,&apos; symbol..
         /// </summary>
@@ -517,7 +517,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("VectorCommaParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The size of vector should equal to 3..
         /// </summary>
@@ -526,7 +526,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("VectorCrossException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The vector should not be empty..
         /// </summary>
@@ -535,7 +535,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("VectorEmptyError", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot parse body of &apos;while&apos; expression..
         /// </summary>
@@ -544,7 +544,7 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("WhileBodyParseException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot parse condition of &apos;while&apos; expression..
         /// </summary>

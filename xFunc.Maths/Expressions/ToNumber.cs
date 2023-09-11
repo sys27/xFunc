@@ -52,7 +52,7 @@ public class ToNumber : UnaryExpression
             AreaValue areaValue => areaValue.Value,
             VolumeValue volumeValue => volumeValue.Value,
             RationalValue rationalValue => rationalValue.ToIrrational(),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

@@ -32,7 +32,7 @@ public class ConditionalAndTest
     {
         var and = new ConditionalAnd(Number.One, Number.Two);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => and.Execute());
+        Assert.Throws<ExecutionException>(() => and.Execute());
     }
 
     [Test]

@@ -16,13 +16,10 @@ public class DifferentiatorTest
     }
 
     private IExpression Differentiate(IExpression exp)
-        => exp.Analyze(differentiator, DifferentiatorContext.Default());
+        => exp.Analyze(differentiator, new DifferentiatorContext());
 
     private IExpression Differentiate(IExpression exp, Variable variable)
-        => exp.Analyze(differentiator, new DifferentiatorContext(new ExpressionParameters(), variable));
-
-    private IExpression Differentiate(IExpression exp, Variable variable, ExpressionParameters parameters)
-        => exp.Analyze(differentiator, new DifferentiatorContext(parameters, variable));
+        => exp.Analyze(differentiator, new DifferentiatorContext(variable));
 
     #region Common
 

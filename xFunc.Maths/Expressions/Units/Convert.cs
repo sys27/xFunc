@@ -73,11 +73,11 @@ public class Convert : IExpression
     public override string ToString() => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
-    /// <exception cref="ResultIsNotSupportedException">The result of evaluation of arguments is not supported.</exception>
+    /// <exception cref="ExecutionException">The result of evaluation of arguments is not supported.</exception>
     public object Execute() => Execute(null);
 
     /// <inheritdoc />
-    /// <exception cref="ResultIsNotSupportedException">The result of evaluation of arguments is not supported.</exception>
+    /// <exception cref="ExecutionException">The result of evaluation of arguments is not supported.</exception>
     public object Execute(ExpressionParameters? parameters)
     {
         var valueResult = Value.Execute(parameters);
@@ -86,7 +86,7 @@ public class Convert : IExpression
         return unitResult switch
         {
             string unit => converter.Convert(valueResult, unit),
-            _ => throw new ResultIsNotSupportedException(this, valueResult, unitResult),
+            _ => throw ExecutionException.For(this),
         };
     }
 

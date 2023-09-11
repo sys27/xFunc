@@ -52,7 +52,7 @@ public class Sign : UnaryExpression
             TimeValue time => time.Sign,
             AreaValue area => area.Sign,
             VolumeValue volume => volume.Sign,
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
 
         return new NumberValue(sign);

@@ -31,7 +31,7 @@ public class XOr : BinaryExpression
         {
             (bool left, bool right) => left ^ right,
             (NumberValue left, NumberValue right) => left ^ right,
-            _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            _ => throw ExecutionException.For(this),
         };
     }
 

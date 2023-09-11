@@ -45,7 +45,7 @@ public class Reciprocal : UnaryExpression
         return result switch
         {
             Complex complex => Complex.Reciprocal(complex),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

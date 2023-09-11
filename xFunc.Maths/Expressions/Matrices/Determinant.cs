@@ -43,7 +43,7 @@ public class Determinant : UnaryExpression
         return result switch
         {
             MatrixValue matrix => MatrixValue.Determinant(matrix),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

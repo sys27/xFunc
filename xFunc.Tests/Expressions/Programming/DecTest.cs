@@ -44,7 +44,7 @@ public class DecTest
         var parameters = new ExpressionParameters { new Parameter("x", true) };
         var dec = new Dec(Variable.X);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => dec.Execute(parameters));
+        Assert.Throws<ExecutionException>(() => dec.Execute(parameters));
     }
 
     [Test]

@@ -124,7 +124,7 @@ public class GreaterTest
     {
         var greaterThan = new GreaterThan(Bool.True, Bool.True);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => greaterThan.Execute());
+        Assert.Throws<ExecutionException>(() => greaterThan.Execute());
     }
 
     [Test]

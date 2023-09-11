@@ -41,7 +41,7 @@ public class Vector : DifferentParametersExpression
         {
             var result = this[i].Execute(parameters);
             if (result is not NumberValue number)
-                throw new ResultIsNotSupportedException(this, result);
+                throw ExecutionException.For(this);
 
             values[i] = number;
         }

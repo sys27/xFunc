@@ -32,7 +32,7 @@ public class ConditionalOrTest
     {
         var or = new ConditionalOr(Number.One, Number.Two);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => or.Execute());
+        Assert.Throws<ExecutionException>(() => or.Execute());
     }
 
     [Test]

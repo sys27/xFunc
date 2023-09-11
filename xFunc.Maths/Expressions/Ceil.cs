@@ -51,7 +51,7 @@ public class Ceil : UnaryExpression
             TimeValue time => TimeValue.Ceiling(time),
             AreaValue area => AreaValue.Ceiling(area),
             VolumeValue volume => VolumeValue.Ceiling(volume),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

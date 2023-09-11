@@ -45,7 +45,7 @@ public class ToGradian : UnaryExpression
         {
             NumberValue number => AngleValue.Gradian(number),
             AngleValue angle => angle.ToGradian(),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

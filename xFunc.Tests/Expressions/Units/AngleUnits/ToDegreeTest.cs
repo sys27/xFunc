@@ -28,7 +28,7 @@ public class ToDegreeTest
     [Test]
     public void ExecuteBoolTest()
     {
-        Assert.Throws<ResultIsNotSupportedException>(() => new ToDegree(Bool.False).Execute());
+        Assert.Throws<ExecutionException>(() => new ToDegree(Bool.False).Execute());
     }
 
     [Test]

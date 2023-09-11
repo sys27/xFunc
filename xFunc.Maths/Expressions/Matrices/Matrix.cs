@@ -87,11 +87,8 @@ public class Matrix : IExpression
 
         for (var i = 0; i < Vectors.Length; i++)
         {
-            var result = Vectors[i].Execute(parameters);
-            if (result is not VectorValue vectorValue)
-                throw new ResultIsNotSupportedException(this, result);
-
-            vectors[i] = vectorValue;
+            // we can use direct cast because `Vector` returns only `VectorValue`
+            vectors[i] = (VectorValue)Vectors[i].Execute(parameters);
         }
 
         return Unsafe.As<VectorValue[], MatrixValue>(ref vectors);

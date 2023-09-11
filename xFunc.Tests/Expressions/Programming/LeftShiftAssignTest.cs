@@ -74,7 +74,7 @@ public class LeftShiftAssignTest
             new Parameter("x", 1.0)
         };
 
-        Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));
+        Assert.Throws<ExecutionException>(() => exp.Execute(parameters));
     }
 
     [Test]
@@ -86,7 +86,7 @@ public class LeftShiftAssignTest
             new Parameter("x", false)
         };
 
-        Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));
+        Assert.Throws<ExecutionException>(() => exp.Execute(parameters));
     }
 
     [Test]

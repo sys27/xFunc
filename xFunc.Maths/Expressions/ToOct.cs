@@ -43,7 +43,7 @@ public class ToOct : UnaryExpression
         return result switch
         {
             NumberValue number => NumberValue.ToOct(number),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

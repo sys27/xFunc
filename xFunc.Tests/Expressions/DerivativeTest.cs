@@ -27,16 +27,19 @@ public class DerivativeTest
             .Analyze(Arg.Any<Variable>(), Arg.Any<DifferentiatorContext>())
             .Returns(info => info.Arg<Variable>());
 
-        var simplifier = Substitute.For<ISimplifier>();
+        var parameters = new ExpressionParameters();
 
         var deriv = new Derivative(
             differentiator,
-            simplifier,
+            Substitute.For<ISimplifier>(),
             Variable.X.ToLambdaExpression(),
             Variable.X,
             Number.Two);
+        var expected = new NumberValue(2.0);
+        var result = deriv.Execute(parameters);
 
-        Assert.That(deriv.Execute(), Is.EqualTo(new NumberValue(2.0)));
+        Assert.That(result, Is.EqualTo(expected));
+        Assert.That(parameters.ContainsKey(Variable.X.Name), Is.False);
     }
 
     [Test]
@@ -49,7 +52,7 @@ public class DerivativeTest
             simplifier,
             Number.One);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => derivative.Execute());
+        Assert.Throws<ExecutionException>(() => derivative.Execute());
     }
 
     [Test]

@@ -78,7 +78,7 @@ public class CallExpression : IExpression, IEquatable<CallExpression>
     public object Execute(ExpressionParameters? parameters)
     {
         if (Function.Execute(parameters) is not Lambda function)
-            throw new ResultIsNotSupportedException(this, Function);
+            throw ExecutionException.For(this);
 
         var result = function.Call(Parameters, parameters);
 

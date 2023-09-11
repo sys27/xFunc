@@ -38,7 +38,7 @@ public class NotEqualTest
         };
         var equal = new NotEqual(Variable.X, Variable.Y);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => equal.Execute(parameters));
+        Assert.Throws<ExecutionException>(() => equal.Execute(parameters));
     }
 
     [Test]

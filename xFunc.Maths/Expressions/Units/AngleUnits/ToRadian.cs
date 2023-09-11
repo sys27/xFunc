@@ -45,7 +45,7 @@ public class ToRadian : UnaryExpression
         {
             NumberValue number => AngleValue.Radian(number),
             AngleValue angle => angle.ToRadian(),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

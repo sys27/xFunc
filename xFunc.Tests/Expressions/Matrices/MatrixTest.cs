@@ -12,6 +12,25 @@ public class MatrixTest
         => Assert.Throws<ArgumentNullException>(() => new Matrix(new ImmutableArray<Vector>()));
 
     [Test]
+    public void ExecuteTest()
+    {
+        var matrix = new Matrix(new[]
+        {
+            new Vector(new IExpression[] { new Number(3) }),
+            new Vector(new IExpression[] { new Number(-1) })
+        });
+
+        var result = matrix.Execute();
+        var expected = MatrixValue.Create(new NumberValue[][]
+        {
+            new NumberValue[] { new NumberValue(3) },
+            new NumberValue[] { new NumberValue(-1) },
+        });
+
+        Assert.That(expected, Is.EqualTo(result));
+    }
+
+    [Test]
     public void MulByNumberMatrixTest()
     {
         var vector1 = new Vector(new IExpression[] { Number.Two, new Number(3) });
@@ -415,25 +434,6 @@ public class MatrixTest
             new Vector(new IExpression[] { null, null }),
             new Vector(new IExpression[] { null, null }),
         }));
-    }
-
-    [Test]
-    public void ExecuteTest()
-    {
-        var matrix = new Matrix(new[]
-        {
-            new Vector(new IExpression[] { new Number(3) }),
-            new Vector(new IExpression[] { new Number(-1) })
-        });
-
-        var result = matrix.Execute();
-        var expected = MatrixValue.Create(new NumberValue[][]
-        {
-            new NumberValue[] { new NumberValue(3) },
-            new NumberValue[] { new NumberValue(-1) },
-        });
-
-        Assert.True(expected.Equals(result));
     }
 
     [Test]

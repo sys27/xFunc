@@ -38,7 +38,7 @@ public class Sub : BinaryExpression
     }
 
     /// <inheritdoc />
-    /// <exception cref="ResultIsNotSupportedException">The result of evaluation of Left or Right operand is not supported.</exception>
+    /// <exception cref="ExecutionException">The result of evaluation of Left or Right operand is not supported.</exception>
     public override object Execute(ExpressionParameters? parameters)
     {
         var leftResult = Left.Execute(parameters);
@@ -91,7 +91,7 @@ public class Sub : BinaryExpression
             (VectorValue left, VectorValue right) => left - right,
             (MatrixValue left, MatrixValue right) => left - right,
 
-            _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            _ => throw ExecutionException.For(this),
         };
     }
 

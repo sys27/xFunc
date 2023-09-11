@@ -38,7 +38,7 @@ public class Equal : BinaryExpression
             (TimeValue left, TimeValue right) => left == right,
             (AreaValue left, AreaValue right) => left == right,
             (VolumeValue left, VolumeValue right) => left == right,
-            _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            _ => throw ExecutionException.For(this),
         };
     }
 

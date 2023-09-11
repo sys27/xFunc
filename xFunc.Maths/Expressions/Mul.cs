@@ -94,7 +94,7 @@ public class Mul : BinaryExpression
             (MatrixValue left, VectorValue right) => left * right,
             (VectorValue left, MatrixValue right) => left * right,
 
-            _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            _ => throw ExecutionException.For(this),
         };
     }
 

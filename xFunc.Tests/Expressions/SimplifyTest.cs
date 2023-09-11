@@ -29,7 +29,7 @@ public class SimplifyTest
         var simplifier = Substitute.For<ISimplifier>();
         var simplify = new Simplify(simplifier, Number.One);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => simplify.Execute());
+        Assert.Throws<ExecutionException>(() => simplify.Execute());
     }
 
     [Test]

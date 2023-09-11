@@ -133,7 +133,7 @@ public class GreaterOrEqualTest
     {
         var greaterOrEqual = new GreaterOrEqual(Bool.True, Bool.True);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => greaterOrEqual.Execute());
+        Assert.Throws<ExecutionException>(() => greaterOrEqual.Execute());
     }
 
     [Test]

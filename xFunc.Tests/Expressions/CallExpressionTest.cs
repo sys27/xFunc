@@ -165,7 +165,7 @@ public class CallExpressionTest
             Number.One,
             ImmutableArray<IExpression>.Empty);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(new ExpressionParameters()));
+        Assert.Throws<ExecutionException>(() => exp.Execute(new ExpressionParameters()));
     }
 
     [Test]

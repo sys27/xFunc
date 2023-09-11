@@ -3,6 +3,12 @@
 * The `Helpers` class is removed from the public API (see [#698](https://github.com/sys27/xFunc/pull/698)).
 * `LambdaExpression` doesn't capture context on `Execute` this code moved to `CallExpression` (see [#704](https://github.com/sys27/xFunc/issues/704)).
 * `xFunc.DotnetTool` -> `xFunc.Cli`
+* `While` doesn't inherit `BinaryExpression`, instead it implements `IExpression` directly.
+* `ResultIsNotSupportedException` -> `ExecutionException`. The error message changed.
+* `While`/`For` throws the correct exception when `Condition` doesn't return `bool` (`InvalidCastException` -> `ExecutionException`).
+* `While`/`For` returns `null`.
+* `Derivative`/`If`/`While`/`For` is executed in nested `ExpressionParameters` scope now. It means all variables created in process of expressions evaluation won't affect parent/global scope.
+* The `Parameters` property is removed from `DifferentiatorContext`.
 
 ## xFunc 4.3.0
 

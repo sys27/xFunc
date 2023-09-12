@@ -46,7 +46,7 @@ If you don't need the expression tree at all, you can use `Processor.Solve` meth
 
 ```csharp
 var processor = new Processor();
-var result = processor.Solve<NumberResult>("10 ^ 2");
+var result = processor.Solve("10 ^ 2");
 ```
 
 ## Analyze it

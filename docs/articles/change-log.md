@@ -12,6 +12,7 @@
 * [#708](https://github.com/sys27/xFunc/issues/708) - Remove unnecessary variables.
 * [#710](https://github.com/sys27/xFunc/issues/710) - Add ability to execute expression from files ([#712](https://github.com/sys27/xFunc/pull/712)).
 * [#717](https://github.com/sys27/xFunc/pull/717) - Support partial application of functions ([#718](https://github.com/sys27/xFunc/pull/718)).
+* [#720](https://github.com/sys27/xFunc/pull/720) - New Results API ([#723](https://github.com/sys27/xFunc/pull/723)).
 
 ## xFunc v4.3.0
 

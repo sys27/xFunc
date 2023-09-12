@@ -6,28 +6,31 @@ namespace xFunc.Tests.Results;
 public class LambdaResultTest
 {
     [Test]
-    public void ResultTest()
+    public void TryGetLambdaTest()
     {
-        var lambda = new Lambda(new[] { "x" }, Variable.X);
-        var result = new LambdaResult(lambda);
+        var expected = Variable.X.ToLambda();
+        var areaResult = new Result.LambdaResult(expected);
+        var result = areaResult.TryGetLambda(out var lambdaValue);
 
-        Assert.That(result.Result, Is.EqualTo(lambda));
+        Assert.That(result, Is.True);
+        Assert.That(lambdaValue, Is.EqualTo(expected));
     }
 
     [Test]
-    public void IResultTest()
+    public void TryGetLambdaFalseTest()
     {
-        var lambda = new Lambda(new[] { "x" }, Variable.X);
-        var result = new LambdaResult(lambda) as IResult;
+        var areaResult = new Result.NumberResult(NumberValue.One);
+        var result = areaResult.TryGetLambda(out var lambdaValue);
 
-        Assert.That(result.Result, Is.EqualTo(lambda));
+        Assert.That(result, Is.False);
+        Assert.That(lambdaValue, Is.Null);
     }
 
     [Test]
     public void ToStringTest()
     {
         var lambda = new Lambda(new[] { "x" }, Variable.X);
-        var result = new LambdaResult(lambda);
+        var result = new Result.LambdaResult(lambda);
 
         Assert.That(result.ToString(), Is.EqualTo("(x) => x"));
     }

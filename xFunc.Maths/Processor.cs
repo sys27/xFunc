@@ -1,8 +1,6 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Numerics;
-
 namespace xFunc.Maths;
 
 /// <summary>
@@ -18,19 +16,19 @@ namespace xFunc.Maths;
 ///   <para>To evaluate the function:</para>
 ///   <code>
 ///     var processor = new Processor();
-///     var result = processor.Solve&lt;NumberResult&gt;("2 + 2");
+///     var result = processor.Solve("2 + 2");
 ///   </code>
 ///
 ///   <para>To simplify the expression:</para>
 ///   <code>
 ///     var processor = new Processor();
-///     var result = processor.Solve&lt;LambdaResult&gt;("simplify((x) => arcsin(sin(x)))");
+///     var result = processor.Solve("simplify((x) => arcsin(sin(x)))");
 ///   </code>
 ///
 ///   <para>To differentiate the expression:</para>
 ///   <code>
 ///     var processor = new Processor();
-///     var result = processor.Solve&lt;LambdaResult&gt;("deriv((x) => 2x)");
+///     var result = processor.Solve("deriv((x) => 2x)");
 ///   </code>
 /// </example>
 public class Processor
@@ -111,157 +109,43 @@ public class Processor
     /// <summary>
     /// Evaluates the specified expression.
     /// </summary>
-    /// <param name="function">The function.</param>
-    /// <remarks>
-    /// <para>This method returns untyped <see cref="IResult"/>. Usually this method is useful when you just need a result of evaluation of <paramref name="function"/>, otherwise check generic version of this method.</para>
-    /// <para>If your expression contains any parameter or user-defined function, then they will be resolved from the built-in <see cref="Parameters"/> collection.</para>
-    /// </remarks>
-    /// <returns>The result of evaluation.</returns>
-    /// <seealso cref="IResult"/>
-    public IResult Solve(string function)
-    {
-        var exp = Parse(function);
-        exp.Analyze(typeAnalyzer);
-
-        var result = exp.Execute(Parameters);
-        return result switch
-        {
-            NumberValue number
-                => new NumberResult(number.Number),
-
-            AngleValue angle
-                => new AngleNumberResult(angle),
-
-            PowerValue power
-                => new PowerNumberResult(power),
-
-            TemperatureValue temperature
-                => new TemperatureNumberResult(temperature),
-
-            MassValue mass
-                => new MassNumberResult(mass),
-
-            LengthValue length
-                => new LengthNumberResult(length),
-
-            TimeValue time
-                => new TimeNumberResult(time),
-
-            AreaValue area
-                => new AreaNumberResult(area),
-
-            VolumeValue volume
-                => new VolumeNumberResult(volume),
-
-            Complex complex
-                => new ComplexNumberResult(complex),
-
-            bool boolean
-                => new BooleanResult(boolean),
-
-            string str
-                => new StringResult(str),
-
-            Lambda lambda
-                => new LambdaResult(lambda),
-
-            VectorValue vectorValue
-                => new VectorValueResult(vectorValue),
-
-            MatrixValue matrixValue
-                => new MatrixValueResult(matrixValue),
-
-            RationalValue rationalValue
-                => new RationalValueResult(rationalValue),
-
-            _ => throw new InvalidResultException(),
-        };
-    }
-
-    /// <summary>
-    /// Evaluates the specified function.
-    /// </summary>
-    /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <param name="function">The function.</param>
+    /// <param name="expression">The expression.</param>
     /// <remarks>
     ///   <para>If your expression contains any parameter or user-defined function, then they will be resolved from the built-in <see cref="Parameters"/> collection.</para>
-    ///   <para>
-    ///     This method returns specific implementation of <see cref="IResult"/> and by accessing <see cref="IResult.Result"/> property you will be able to get typed result, for example, <c>double</c> instead of <c>object</c>.
-    ///   </para>
-    ///   <para><see cref="IResult"/> implementations:</para>
-    ///   <list type="bullet">
-    ///     <item>
-    ///       <term><see cref="AngleNumberResult"/></term>
-    ///     </item>
-    ///     <item>
-    ///       <term><see cref="AreaNumberResult"/></term>
-    ///     </item>
-    ///     <item>
-    ///       <term><see cref="BooleanResult"/></term>
-    ///     </item>
-    ///     <item>
-    ///       <term><see cref="ComplexNumberResult"/></term>
-    ///     </item>
-    ///     <item>
-    ///       <term><see cref="LambdaResult"/></term>
-    ///     </item>
-    ///     <item>
-    ///       <term><see cref="LengthNumberResult"/></term>
-    ///     </item>
-    ///     <item>
-    ///       <term><see cref="MassNumberResult"/></term>
-    ///     </item>
-    ///     <item>
-    ///       <term><see cref="MatrixValueResult"/></term>
-    ///     </item>
-    ///     <item>
-    ///       <term><see cref="NumberResult"/></term>
-    ///     </item>
-    ///     <item>
-    ///       <term><see cref="PowerNumberResult"/></term>
-    ///     </item>
-    ///     <item>
-    ///       <term><see cref="StringResult"/></term>
-    ///     </item>
-    ///     <item>
-    ///       <term><see cref="TemperatureNumberResult"/></term>
-    ///     </item>
-    ///     <item>
-    ///       <term><see cref="TimeNumberResult"/></term>
-    ///     </item>
-    ///     <item>
-    ///       <term><see cref="VectorValueResult"/></term>
-    ///     </item>
-    ///     <item>
-    ///       <term><see cref="VolumeNumberResult"/></term>
-    ///     </item>
-    ///   </list>
     /// </remarks>
     /// <returns>The result of evaluation.</returns>
     /// <example>
     ///   <code>
     ///     var processor = new Processor();
-    ///     var result = processor.Solve&lt;NumberResult&gt;("2 + 2");
+    ///     var result = processor.Solve("2 + 2");
     ///   </code>
     /// </example>
-    /// <seealso cref="IResult"/>
-    /// <seealso cref="AngleNumberResult"/>
-    /// <seealso cref="AreaNumberResult"/>
-    /// <seealso cref="BooleanResult"/>
-    /// <seealso cref="ComplexNumberResult"/>
-    /// <seealso cref="LambdaResult"/>
-    /// <seealso cref="LengthNumberResult"/>
-    /// <seealso cref="MassNumberResult"/>
-    /// <seealso cref="MatrixValueResult"/>
-    /// <seealso cref="NumberResult"/>
-    /// <seealso cref="PowerNumberResult"/>
-    /// <seealso cref="StringResult"/>
-    /// <seealso cref="TemperatureNumberResult"/>
-    /// <seealso cref="TimeNumberResult"/>
-    /// <seealso cref="VectorValueResult"/>
-    /// <seealso cref="VolumeNumberResult"/>
-    public TResult Solve<TResult>(string function) where TResult : IResult
-        => (TResult)Solve(function);
+    /// <seealso cref="Result"/>
+    /// <seealso cref="Result.AngleResult"/>
+    /// <seealso cref="Result.AreaResult"/>
+    /// <seealso cref="Result.BooleanResult"/>
+    /// <seealso cref="Result.ComplexNumberResult"/>
+    /// <seealso cref="Result.EmptyResult"/>
+    /// <seealso cref="Result.LambdaResult"/>
+    /// <seealso cref="Result.LengthResult"/>
+    /// <seealso cref="Result.MassResult"/>
+    /// <seealso cref="Result.MatrixResult"/>
+    /// <seealso cref="Result.NumberResult"/>
+    /// <seealso cref="Result.PowerResult"/>
+    /// <seealso cref="Result.StringResult"/>
+    /// <seealso cref="Result.TemperatureResult"/>
+    /// <seealso cref="Result.TimeResult"/>
+    /// <seealso cref="Result.VectorResult"/>
+    /// <seealso cref="Result.VolumeResult"/>
+    public Result Solve(string expression)
+    {
+        var exp = Parse(expression);
+        exp.Analyze(typeAnalyzer);
+
+        var result = exp.Execute(Parameters);
+
+        return Result.Create(result);
+    }
 
     /// <summary>
     /// Simplifies the <paramref name="function"/>.

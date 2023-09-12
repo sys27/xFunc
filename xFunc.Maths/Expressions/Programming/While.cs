@@ -59,7 +59,7 @@ public class While : IExpression
             Body.Execute(nested);
         }
 
-        return null!; // TODO:
+        return EmptyValue.Instance;
     }
 
     /// <inheritdoc />

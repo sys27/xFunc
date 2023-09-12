@@ -6,9 +6,10 @@
 * `While` doesn't inherit `BinaryExpression`, instead it implements `IExpression` directly.
 * `ResultIsNotSupportedException` -> `ExecutionException`. The error message changed.
 * `While`/`For` throws the correct exception when `Condition` doesn't return `bool` (`InvalidCastException` -> `ExecutionException`).
-* `While`/`For` returns `null`.
+* `While`/`For` returns `EmptyValue`.
 * `Derivative`/`If`/`While`/`For` is executed in nested `ExpressionParameters` scope now. It means all variables created in process of expressions evaluation won't affect parent/global scope.
 * The `Parameters` property is removed from `DifferentiatorContext`.
+* The return type of `Processor.Solve` method has change (see [#720](https://github.com/sys27/xFunc/pull/720) - New Results API).
 
 ## xFunc 4.3.0
 

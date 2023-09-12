@@ -52,7 +52,7 @@ public class For : DifferentParametersExpression
             Iteration.Execute(nested);
         }
 
-        return null!; // TODO:
+        return EmptyValue.Instance;
     }
 
     /// <inheritdoc />

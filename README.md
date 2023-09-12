@@ -53,18 +53,16 @@ _Note: The `Parse` method won't simplify the expression automatically, it will r
 
 **Solve:**
 
-This method parses string expression (like the `Parse` method) and then calculates it (returns object which implements the `IResult` interface).
-
-There are two overloads of this method (common and generic). The "common" returns just `IResult` (you can access result by `Result` property). The generic allows to return specific implementation of `IResult` (eg. `NumberResult`).
+This method parses string expression (like the `Parse` method) and then calculates it (returns object which implements the `Result` abstract class).
 
 ```csharp
 var processor = new Processor();
-processor.Solve<NumberResult>("2 + 2"); // will return 4.0 (double)
+var result = processor.Solve("2 + 2");
 
-// or
-
-processor.Solve("2 + 2").Result; // will return 4.0 (object)
+Console.WriteLine(result); // 4.0
 ```
+
+The `result` variable will contain `4` (as `NumberResult` which is the implementation of the `Result` class). It is a hand-made implementation of the discriminated union. The `Result` class provides the abstraction (root class) for DU, whereas implementation for each possible return type is dedicated to the appropriate nested result class. Check documentation for more examples: [Result](https://sys27.github.io/xFunc/api/xFunc.Maths.Results.Result.html), [Processor](https://sys27.github.io/xFunc/api/xFunc.Maths.Processor.html).
 
 If your expression has any parameter, you need to assign a value to it (otherwise xFunc will throw an exception), because `Processor` has a build-in collection of parameters and user functions, you don't need to use `ExpressionParameters` directly:
 
@@ -76,14 +74,12 @@ processor.Solve("x := 10");
 processor.Parameters.Variables.Add("x", 10);
 ```
 
-_Note: The `Solve` method automatically simplifies expression, to control this behavior you can use the `simplify` argument. It's useful for differentiation because it will eliminate unnecessary expression nodes._
-
 **Simplify:**
 
 ```csharp
 var processor = new Processor();
 
-processor.Solve<LambdaResult>("simplify((x) => arcsin(sin(x)))");
+processor.Solve("simplify((x) => arcsin(sin(x)))");
 // or
 processor.Simplify("arcsin(sin(x))");
 // will return simplified expression = "x"
@@ -96,7 +92,7 @@ _Detailed [simplification rules](https://sys27.github.io/xFunc/articles/simplifi
 ```csharp
 var processor = new Processor();
 
-processor.Solve<LambdaResult>("deriv((x) => 2x)");
+processor.Solve("deriv((x) => 2x)");
 // or
 processor.Differentiate("2x");
 // will return "2"

@@ -6,25 +6,29 @@ namespace xFunc.Tests.Results;
 public class BooleanResultTest
 {
     [Test]
-    public void ResultTest()
+    public void TryGetBooleanTest()
     {
-        var result = new BooleanResult(true);
+        var areaResult = new Result.BooleanResult(true);
+        var result = areaResult.TryGetBoolean(out var boolValue);
 
-        Assert.True(result.Result);
+        Assert.That(result, Is.True);
+        Assert.That(boolValue, Is.True);
     }
 
     [Test]
-    public void IResultTest()
+    public void TryGetBoolFalseTest()
     {
-        var result = new BooleanResult(true) as IResult;
+        var areaResult = new Result.NumberResult(NumberValue.One);
+        var result = areaResult.TryGetBoolean(out var boolValue);
 
-        Assert.True((bool) result.Result);
+        Assert.That(result, Is.False);
+        Assert.That(boolValue, Is.Null);
     }
 
     [Test]
     public void ToStringTest()
     {
-        var result = new BooleanResult(true);
+        var result = new Result.BooleanResult(true);
 
         Assert.That(result.ToString(), Is.EqualTo("True"));
     }

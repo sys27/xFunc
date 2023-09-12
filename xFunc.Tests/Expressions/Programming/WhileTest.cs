@@ -90,7 +90,7 @@ public class WhileTest
         var result = loop.Execute(parameters);
 
         Assert.That(parameters["x"].Value, Is.EqualTo(new NumberValue(10.0)));
-        Assert.That(result, Is.Null);
+        Assert.That(result, Is.EqualTo(EmptyValue.Instance));
     }
 
     [Test]

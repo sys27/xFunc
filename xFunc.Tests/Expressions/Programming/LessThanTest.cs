@@ -124,7 +124,7 @@ public class LessThanTest
     {
         var lessThen = new LessThan(Bool.True, Bool.True);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => lessThen.Execute());
+        Assert.Throws<ExecutionException>(() => lessThen.Execute());
     }
 
     [Test]

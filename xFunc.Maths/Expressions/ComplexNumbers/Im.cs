@@ -45,7 +45,7 @@ public class Im : UnaryExpression
         return result switch
         {
             Complex complex => new NumberValue(complex.Imaginary),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

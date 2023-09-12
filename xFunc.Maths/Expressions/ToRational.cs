@@ -38,7 +38,7 @@ public class ToRational : UnaryExpression
         {
             NumberValue number => new RationalValue(number, NumberValue.One),
 
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

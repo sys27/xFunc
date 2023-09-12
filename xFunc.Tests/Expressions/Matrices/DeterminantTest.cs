@@ -86,7 +86,7 @@ public class DeterminantTest
         var vector = new Vector(new IExpression[] { Number.One, new Number(-2), new Number(3) });
         var det = new Determinant(vector);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => det.Execute());
+        Assert.Throws<ExecutionException>(() => det.Execute());
     }
 
     [Test]

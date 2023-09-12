@@ -55,7 +55,7 @@ public class Abs : UnaryExpression
             Complex complex => Complex.Abs(complex),
             VectorValue vector => VectorValue.Abs(vector),
             RationalValue rationalValue => RationalValue.Abs(rationalValue),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

@@ -47,7 +47,7 @@ public class Lg : UnaryExpression
             Complex complex => Complex.Log10(complex),
             RationalValue rationalValue => RationalValue.Lg(rationalValue),
 
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

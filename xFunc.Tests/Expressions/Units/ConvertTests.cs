@@ -106,7 +106,7 @@ public class ConvertTests
         var converter = new Converter();
         var convert = new Convert(converter, Number.One, Number.Two);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => convert.Execute());
+        Assert.Throws<ExecutionException>(() => convert.Execute());
     }
 
     [Test]
@@ -138,7 +138,7 @@ public class ConvertTests
     public void AnalyzeNotSupported()
     {
         var diff = new Differentiator();
-        var context = new DifferentiatorContext(new ExpressionParameters());
+        var context = new DifferentiatorContext();
 
         var exp = new Convert(new Converter(), Number.One, new StringExpression("deg"));
 

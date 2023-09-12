@@ -42,7 +42,7 @@ public class SubAssignTest
         var exp = new SubAssign(Variable.X, Bool.False);
         var parameters = new ExpressionParameters { new Parameter("x", 1) };
 
-        Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));
+        Assert.Throws<ExecutionException>(() => exp.Execute(parameters));
     }
 
     [Test]
@@ -51,7 +51,7 @@ public class SubAssignTest
         var parameters = new ExpressionParameters { new Parameter("x", true) };
         var add = new SubAssign(Variable.X, Number.Two);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => add.Execute(parameters));
+        Assert.Throws<ExecutionException>(() => add.Execute(parameters));
     }
 
     [Test]

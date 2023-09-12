@@ -1420,7 +1420,18 @@ public class Simplifier : Analyzer<IExpression>, ISimplifier
 
     /// <inheritdoc />
     public override IExpression Analyze(While exp)
-        => AnalyzeBinary(exp);
+    {
+        if (exp is null)
+            throw new ArgumentNullException(nameof(exp));
+
+        var body = exp.Body.Analyze(this);
+        var condition = exp.Condition.Analyze(this);
+
+        if (exp.Body != body || exp.Condition != condition)
+            return exp.Clone(body, condition);
+
+        return exp;
+    }
 
     /// <inheritdoc />
     public override IExpression Analyze(LeftShift exp)

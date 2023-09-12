@@ -322,7 +322,7 @@ public class ProcessorTest
         var processor = new Processor();
 
         var y = Variable.Y;
-        var result = processor.Differentiate(new Add(y, Number.One), y, new ExpressionParameters());
+        var result = processor.Differentiate(new Add(y, Number.One), y);
 
         Assert.That(result, Is.EqualTo(Number.One));
     }

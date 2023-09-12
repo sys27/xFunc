@@ -55,7 +55,7 @@ public abstract class VariableUnaryExpression : IExpression
             return parameterValue.Value;
         }
 
-        throw new ResultIsNotSupportedException(this, result);
+        throw ExecutionException.For(this);
     }
 
     /// <summary>

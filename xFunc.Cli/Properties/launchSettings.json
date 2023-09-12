@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "xFunc.DotnetTool": {
+    "xFunc.Cli": {
       "commandName": "Project",
       "commandLineArgs": "interactive"
     }

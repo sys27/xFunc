@@ -46,7 +46,7 @@ public class Root : BinaryExpression
         return (leftResult, rightResult) switch
         {
             (NumberValue number, NumberValue power) => NumberValue.Pow(number, 1 / power),
-            _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            _ => throw ExecutionException.For(this),
         };
     }
 

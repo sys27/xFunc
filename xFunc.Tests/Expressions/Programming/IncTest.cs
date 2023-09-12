@@ -44,7 +44,7 @@ public class IncTest
         var parameters = new ExpressionParameters { new Parameter("x", true) };
         var inc = new Inc(Variable.X);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => inc.Execute(parameters));
+        Assert.Throws<ExecutionException>(() => inc.Execute(parameters));
     }
 
     [Test]

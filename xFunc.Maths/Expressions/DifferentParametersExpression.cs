@@ -76,11 +76,11 @@ public abstract class DifferentParametersExpression : IExpression
     public override string ToString() => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
-    /// <exception cref="ResultIsNotSupportedException">The result of evaluation of arguments is not supported.</exception>
+    /// <exception cref="ExecutionException">The result of evaluation of arguments is not supported.</exception>
     public virtual object Execute() => Execute(null);
 
     /// <inheritdoc />
-    /// <exception cref="ResultIsNotSupportedException">The result of evaluation of arguments is not supported.</exception>
+    /// <exception cref="ExecutionException">The result of evaluation of arguments is not supported.</exception>
     public abstract object Execute(ExpressionParameters? parameters);
 
     /// <inheritdoc />

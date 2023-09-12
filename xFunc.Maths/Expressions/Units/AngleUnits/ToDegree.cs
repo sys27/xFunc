@@ -45,7 +45,7 @@ public class ToDegree : UnaryExpression
         {
             NumberValue number => AngleValue.Degree(number),
             AngleValue angle => angle.ToDegree(),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

@@ -80,19 +80,19 @@ public class Derivative : DifferentParametersExpression
     {
         var result = Expression.Execute(parameters);
         if (result is not Lambda lambda)
-            throw new ResultIsNotSupportedException(this, result);
+            throw ExecutionException.For(this);
 
         var variable = Variable;
-        var context = new DifferentiatorContext(parameters, variable);
+        var context = new DifferentiatorContext(variable);
         var derivative = lambda.Body.Analyze(Differentiator, context);
 
         var point = DerivativePoint;
         if (point is not null)
         {
-            parameters ??= new ExpressionParameters();
-            parameters[variable.Name] = point.Value;
+            var nested = ExpressionParameters.CreateScoped(parameters);
+            nested[variable.Name] = point.Value;
 
-            return derivative.Execute(parameters);
+            return derivative.Execute(nested);
         }
 
         return derivative

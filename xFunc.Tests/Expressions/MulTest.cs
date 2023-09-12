@@ -94,7 +94,7 @@ public class MulTest : BaseExpressionTests
         var boolean = Bool.True;
         var mul = new Mul(complex, boolean);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => mul.Execute());
+        Assert.Throws<ExecutionException>(() => mul.Execute());
     }
 
     [Test]
@@ -104,7 +104,7 @@ public class MulTest : BaseExpressionTests
         var complex = new ComplexNumber(3, 2);
         var mul = new Mul(boolean, complex);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => mul.Execute());
+        Assert.Throws<ExecutionException>(() => mul.Execute());
     }
 
     [Test]

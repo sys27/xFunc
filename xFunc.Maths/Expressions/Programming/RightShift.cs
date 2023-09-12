@@ -29,7 +29,7 @@ public class RightShift : BinaryExpression
         return (leftResult, rightResult) switch
         {
             (NumberValue left, NumberValue right) => NumberValue.RightShift(left, right),
-            _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            _ => throw ExecutionException.For(this),
         };
     }
 

@@ -198,7 +198,7 @@ public class EqualTest
     {
         var equal = new Equal(new ComplexNumber(3, 2), new ComplexNumber(3, 2));
 
-        Assert.Throws<ResultIsNotSupportedException>(() => equal.Execute());
+        Assert.Throws<ExecutionException>(() => equal.Execute());
     }
 
     [Test]

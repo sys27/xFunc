@@ -29,7 +29,7 @@ public class Not : UnaryExpression
         {
             bool boolean => !boolean,
             NumberValue number => ~number,
-            _ => throw new ResultIsNotSupportedException(this, arg),
+            _ => throw ExecutionException.For(this),
         };
     }
 

@@ -51,9 +51,8 @@ public class Del : UnaryExpression
     {
         var result = Argument.Execute(parameters);
         if (result is not Lambda lambda)
-            throw new ResultIsNotSupportedException(this, result);
+            throw ExecutionException.For(this);
 
-        var context = new DifferentiatorContext(parameters);
         var body = lambda.Body;
         var variables = new HashSet<Variable>();
         GetAllVariables(body, variables);
@@ -63,10 +62,8 @@ public class Del : UnaryExpression
 
         foreach (var variable in variables)
         {
-            context.Variable = variable;
-
             vectorItems[i] = body
-                .Analyze(differentiator, context)
+                .Analyze(differentiator, new DifferentiatorContext(variable))
                 .Analyze(simplifier);
 
             i++;

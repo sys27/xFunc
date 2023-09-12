@@ -26,7 +26,7 @@ public class EqualityTest
     {
         var eq = new Equality(Number.One, Number.Two);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => eq.Execute());
+        Assert.Throws<ExecutionException>(() => eq.Execute());
     }
 
     [Test]

@@ -656,7 +656,12 @@ public class CommonFormatter : IFormatter
 
     /// <inheritdoc />
     public virtual string Analyze(While exp)
-        => ToString(exp, "while({0}, {1})");
+    {
+        var body = exp.Body.Analyze(this);
+        var condition = exp.Condition.Analyze(this);
+
+        return string.Format(CultureInfo.InvariantCulture, "while({0}, {1})", body, condition);
+    }
 
     /// <inheritdoc />
     public virtual string Analyze(LeftShift exp)

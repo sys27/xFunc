@@ -66,7 +66,7 @@ public abstract class InverseTrigonometricExpression : UnaryExpression
         {
             NumberValue number => ExecuteInternal(number),
             Complex complex => ExecuteComplex(complex),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 }

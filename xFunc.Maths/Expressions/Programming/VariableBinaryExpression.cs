@@ -63,11 +63,9 @@ public abstract class VariableBinaryExpression : IExpression
 
                 return parameterValue.Value;
             }
-
-            throw new ResultIsNotSupportedException(this, rightResult);
         }
 
-        throw new ResultIsNotSupportedException(this, variableResult);
+        throw ExecutionException.For(this);
     }
 
     /// <summary>

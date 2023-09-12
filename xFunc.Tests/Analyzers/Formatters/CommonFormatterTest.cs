@@ -1504,7 +1504,7 @@ public class CommonFormatterTest
     {
         var exp = new While(new Number(5), new Equal(new Number(5), new Number(5)));
 
-        Assert.That(exp.ToString(), Is.EqualTo("while(5, (5 == 5))"));
+        Assert.That(exp.ToString(), Is.EqualTo("while(5, 5 == 5)"));
     }
 
     [Test]

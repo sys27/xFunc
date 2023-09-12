@@ -51,7 +51,7 @@ public class Floor : UnaryExpression
             TimeValue time => TimeValue.Floor(time),
             AreaValue area => AreaValue.Floor(area),
             VolumeValue volume => VolumeValue.Floor(volume),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

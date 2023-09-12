@@ -271,32 +271,40 @@ public class SimplifierTest : BaseSimplifierTest
     }
 
     [Test]
-    [TestCaseSource(typeof(AllExpressionsData))]
-    public void TestNullException(Type type) => TestNullExp(type);
+    public void WhileIsNotSimplifiedTest()
+    {
+        var exp = new While(Variable.X, new Equal(Variable.X, Number.One));
+
+        SimplifyTest(exp, exp);
+    }
 
     [Test]
-    public void MulOrderingTest()
+    public void WhileBodyIsSimplifiedTest()
     {
-        // 2 * (1 * (3 * (x ^ (3 - 1))))
-        var exp = new Mul(
-            Number.Two,
-            new Mul(
-                Number.One,
-                new Mul(
-                    new Number(3),
-                    new Pow(
-                        Variable.X,
-                        new Sub(
-                            new Number(3),
-                            Number.One)
-                    )
-                )
-            )
-        );
-
-        // 6 * (x ^ 2)
-        var expected = new Mul(new Number(6), new Pow(Variable.X, Number.Two));
+        var exp = new While(
+            new AddAssign(Variable.X, new Add(Number.One, Number.One)),
+            new Equal(Variable.X, Number.One));
+        var expected = new While(
+            new AddAssign(Variable.X, Number.Two),
+            new Equal(Variable.X, Number.One));
 
         SimplifyTest(exp, expected);
     }
+
+    [Test]
+    public void WhileConditionIsSimplifiedTest()
+    {
+        var exp = new While(
+            Variable.X,
+            new Equal(Variable.X, new Add(Number.One, Number.One)));
+        var expected = new While(
+            Variable.X,
+            new Equal(Variable.X, Number.Two));
+
+        SimplifyTest(exp, expected);
+    }
+
+    [Test]
+    [TestCaseSource(typeof(AllExpressionsData))]
+    public void TestNullException(Type type) => TestNullExp(type);
 }

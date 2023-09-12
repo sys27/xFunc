@@ -28,7 +28,7 @@ public class ToGradianTest
     [Test]
     public void ExecuteBoolTest()
     {
-        Assert.Throws<ResultIsNotSupportedException>(() => new ToGradian(Bool.False).Execute());
+        Assert.Throws<ExecutionException>(() => new ToGradian(Bool.False).Execute());
     }
 
     [Test]

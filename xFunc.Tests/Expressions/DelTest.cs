@@ -70,7 +70,7 @@ public class DelTest
             simplifier,
             Number.One);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => del.Execute());
+        Assert.Throws<ExecutionException>(() => del.Execute());
     }
 
     [Test]

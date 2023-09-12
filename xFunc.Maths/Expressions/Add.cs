@@ -95,7 +95,7 @@ public class Add : BinaryExpression
             (string left, var right) => left + right,
             (var left, string right) => left + right,
 
-            _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            _ => throw ExecutionException.For(this),
         };
     }
 

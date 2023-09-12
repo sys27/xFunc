@@ -74,7 +74,7 @@ public class RightShiftAssignTest
             new Parameter("x", 512.0)
         };
 
-        Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));
+        Assert.Throws<ExecutionException>(() => exp.Execute(parameters));
     }
 
     [Test]
@@ -86,7 +86,7 @@ public class RightShiftAssignTest
             new Parameter("x", false)
         };
 
-        Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));
+        Assert.Throws<ExecutionException>(() => exp.Execute(parameters));
     }
 
     [Test]

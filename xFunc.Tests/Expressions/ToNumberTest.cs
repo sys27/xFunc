@@ -97,7 +97,7 @@ public class ToNumberTest
     [Test]
     public void ExecuteBoolTest()
     {
-        Assert.Throws<ResultIsNotSupportedException>(() => new ToNumber(Bool.False).Execute());
+        Assert.Throws<ExecutionException>(() => new ToNumber(Bool.False).Execute());
     }
 
     [Test]

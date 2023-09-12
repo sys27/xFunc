@@ -116,7 +116,7 @@ public class Program
         {
             PrintError(options, ptme);
         }
-        catch (ResultIsNotSupportedException rinse)
+        catch (ExecutionException rinse)
         {
             PrintError(options, rinse);
         }

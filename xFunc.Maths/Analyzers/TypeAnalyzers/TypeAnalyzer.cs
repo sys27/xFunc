@@ -1997,7 +1997,7 @@ public class TypeAnalyzer : ITypeAnalyzer
         if (exp is null)
             throw new ArgumentNullException(nameof(exp));
 
-        var rightResult = exp.Right.Analyze(this);
+        var rightResult = exp.Condition.Analyze(this);
         if (rightResult is ResultTypes.Undefined or ResultTypes.Boolean)
             return ResultTypes.Undefined;
 

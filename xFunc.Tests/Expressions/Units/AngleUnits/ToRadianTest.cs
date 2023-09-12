@@ -28,7 +28,7 @@ public class ToRadianTest
     [Test]
     public void ExecuteBoolTest()
     {
-        Assert.Throws<ResultIsNotSupportedException>(() => new ToRadian(Bool.False).Execute());
+        Assert.Throws<ExecutionException>(() => new ToRadian(Bool.False).Execute());
     }
 
     [Test]

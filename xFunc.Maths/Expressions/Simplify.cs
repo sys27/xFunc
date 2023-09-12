@@ -45,7 +45,7 @@ public class Simplify : UnaryExpression
     {
         var result = Argument.Execute(parameters);
         if (result is not Lambda lambda)
-            throw new ResultIsNotSupportedException(this, result);
+            throw ExecutionException.For(this);
 
         var simplifiedExpression = lambda.Body
             .Analyze(simplifier)

@@ -52,7 +52,7 @@ public class LCM : DifferentParametersExpression
             lcm = result switch
             {
                 NumberValue number => NumberValue.LCM(lcm, number),
-                _ => throw new ResultIsNotSupportedException(this, result),
+                _ => throw ExecutionException.For(this),
             };
         }
 

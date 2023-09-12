@@ -30,7 +30,7 @@ public class Rational : BinaryExpression
         {
             (NumberValue left, NumberValue right) => new RationalValue(left, right),
 
-            _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            _ => throw ExecutionException.For(this),
         };
     }
 

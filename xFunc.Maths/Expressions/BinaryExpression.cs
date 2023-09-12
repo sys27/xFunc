@@ -75,11 +75,11 @@ public abstract class BinaryExpression : IExpression
     public override string ToString() => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
-    /// <exception cref="ResultIsNotSupportedException">The result of Left or Right operand evaluation is not supported by this expression.</exception>
+    /// <exception cref="ExecutionException">The result of Left or Right operand evaluation is not supported by this expression.</exception>
     public object Execute() => Execute(null);
 
     /// <inheritdoc />
-    /// <exception cref="ResultIsNotSupportedException">The result of Left or Right operand evaluation is not supported by this expression.</exception>
+    /// <exception cref="ExecutionException">The result of Left or Right operand evaluation is not supported by this expression.</exception>
     public abstract object Execute(ExpressionParameters? parameters);
 
     /// <inheritdoc />

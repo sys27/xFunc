@@ -51,7 +51,7 @@ public class Frac : UnaryExpression
             TimeValue time => TimeValue.Frac(time),
             AreaValue area => AreaValue.Frac(area),
             VolumeValue volume => VolumeValue.Frac(volume),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

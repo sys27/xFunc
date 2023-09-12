@@ -133,7 +133,7 @@ public class LessOrEqualTest
     {
         var lessOrEqual = new LessOrEqual(Bool.True, Bool.True);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => lessOrEqual.Execute());
+        Assert.Throws<ExecutionException>(() => lessOrEqual.Execute());
     }
 
     [Test]

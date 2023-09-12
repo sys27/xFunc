@@ -42,7 +42,7 @@ public class MulAssignTest
         var exp = new MulAssign(Variable.X, Bool.False);
         var parameters = new ExpressionParameters { new Parameter("x", 1) };
 
-        Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));
+        Assert.Throws<ExecutionException>(() => exp.Execute(parameters));
     }
 
     [Test]
@@ -51,7 +51,7 @@ public class MulAssignTest
         var parameters = new ExpressionParameters { new Parameter("x", true) };
         var mul = new MulAssign(Variable.X, Number.Two);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => mul.Execute(parameters));
+        Assert.Throws<ExecutionException>(() => mul.Execute(parameters));
     }
 
     [Test]

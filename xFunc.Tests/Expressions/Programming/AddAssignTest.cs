@@ -54,7 +54,7 @@ public class AddAssignTest
         var exp = new AddAssign(Variable.X, Bool.False);
         var parameters = new ExpressionParameters { new Parameter("x", 1) };
 
-        Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));
+        Assert.Throws<ExecutionException>(() => exp.Execute(parameters));
     }
 
     [Test]
@@ -63,7 +63,7 @@ public class AddAssignTest
         var parameters = new ExpressionParameters { new Parameter("x", true) };
         var add = new AddAssign(Variable.X, Number.Two);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => add.Execute(parameters));
+        Assert.Throws<ExecutionException>(() => add.Execute(parameters));
     }
 
     [Test]

@@ -118,7 +118,7 @@ public class Curry : IExpression
     public object Execute(ExpressionParameters? parameters)
     {
         if (Function.Execute(parameters) is not Lambda lambda)
-            throw new ResultIsNotSupportedException(this, Function);
+            throw ExecutionException.For(this);
 
         var parametersLength = Parameters.Length;
 

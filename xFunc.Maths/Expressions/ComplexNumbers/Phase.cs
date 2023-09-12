@@ -45,7 +45,7 @@ public class Phase : UnaryExpression
         return result switch
         {
             Complex complex => AngleValue.Radian(complex.Phase),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

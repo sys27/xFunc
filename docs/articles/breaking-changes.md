@@ -1,4 +1,4 @@
-## xFunc 4.4.0 (dev)
+## xFunc 4.4.0
 
 * The `Helpers` class is removed from the public API (see [#698](https://github.com/sys27/xFunc/pull/698)).
 * `LambdaExpression` doesn't capture context on `Execute` this code moved to `CallExpression` (see [#704](https://github.com/sys27/xFunc/issues/704)).

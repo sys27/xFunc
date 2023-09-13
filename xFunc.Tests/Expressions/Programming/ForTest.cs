@@ -20,7 +20,7 @@ public class ForTest
         var result = loop.Execute(parameters);
 
         Assert.That(parameters["i"].Value, Is.EqualTo(new NumberValue(10.0)));
-        Assert.That(result, Is.Null);
+        Assert.That(result, Is.EqualTo(EmptyValue.Instance));
     }
 
     [Test]

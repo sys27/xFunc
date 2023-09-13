@@ -9,52 +9,52 @@ namespace xFunc.Tests.Expressions;
 
 public class MulTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteMulNumberByNumberTest()
     {
         var exp = new Mul(Number.Two, Number.Two);
         var expected = new NumberValue(4.0);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteMulComplexByComplexTest()
     {
         var exp = new Mul(new ComplexNumber(2, 5), new ComplexNumber(3, 2));
         var expected = new Complex(-4, 19);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteMulComplexByNumberTest()
     {
         var exp = new Mul(new ComplexNumber(2, 5), Number.Two);
         var expected = new Complex(4, 10);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteMulNumberByComplexTest()
     {
         var exp = new Mul(Number.Two, new ComplexNumber(3, 2));
         var expected = new Complex(6, 4);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteMulNumberBySqrtComplexTest()
     {
         var exp = new Mul(Number.Two, new Sqrt(new Number(-9)));
         var expected = new Complex(0, 6);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteDotProductTest()
     {
         var vector1 = new Vector(new IExpression[]
@@ -68,10 +68,10 @@ public class MulTest : BaseExpressionTests
         var exp = new Mul(vector1, vector2);
         var expected = new NumberValue(32.0);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteDotProductErrorTest()
     {
         var vector1 = new Vector(new IExpression[]
@@ -87,27 +87,27 @@ public class MulTest : BaseExpressionTests
         Assert.Throws<ArgumentException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteMulComplexByBool()
     {
         var complex = new ComplexNumber(3, 2);
         var boolean = Bool.True;
         var mul = new Mul(complex, boolean);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => mul.Execute());
+        Assert.Throws<ExecutionException>(() => mul.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteMulBoolByComplex()
     {
         var boolean = Bool.True;
         var complex = new ComplexNumber(3, 2);
         var mul = new Mul(boolean, complex);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => mul.Execute());
+        Assert.Throws<ExecutionException>(() => mul.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteMulVectorByMatrixTest()
     {
         var vector = new Vector(new IExpression[]
@@ -126,10 +126,10 @@ public class MulTest : BaseExpressionTests
 
         var expected = MatrixValue.Create(new NumberValue(32));
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteMulMatrixByVectorTest()
     {
         var matrix = new Matrix(new[]
@@ -153,10 +153,10 @@ public class MulTest : BaseExpressionTests
             new NumberValue[] { new NumberValue(6), new NumberValue(12), new NumberValue(18) },
         });
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteMulMatrixByMatrixTest()
     {
         var matrix1 = new Matrix(new[]
@@ -173,10 +173,10 @@ public class MulTest : BaseExpressionTests
 
         var expected = MatrixValue.Create(new NumberValue(32));
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteMulNumberByVectorTest()
     {
         var number = new Number(5);
@@ -190,10 +190,10 @@ public class MulTest : BaseExpressionTests
 
         var expected = VectorValue.Create(new NumberValue(5), new NumberValue(10), new NumberValue(15));
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteMulMatrixByNumberTest()
     {
         var matrix = new Matrix(new[]
@@ -210,10 +210,10 @@ public class MulTest : BaseExpressionTests
             new NumberValue[] { new NumberValue(15), new NumberValue(20) },
         });
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteMulNumberByMatrixTest()
     {
         var number = new Number(5);
@@ -230,30 +230,30 @@ public class MulTest : BaseExpressionTests
             new NumberValue[] { new NumberValue(15), new NumberValue(20) },
         });
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulNumberAndDegree()
     {
         var exp = new Mul(Number.Two, AngleValue.Degree(10).AsExpression());
         var actual = exp.Execute();
         var expected = AngleValue.Degree(20);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulRadianAndNumber()
     {
         var exp = new Mul(AngleValue.Radian(10).AsExpression(), Number.Two);
         var actual = exp.Execute();
         var expected = AngleValue.Radian(20);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulNumberAndPower()
     {
         var exp = new Mul(
@@ -263,10 +263,10 @@ public class MulTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = PowerValue.Watt(20);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulPowerAndNumber()
     {
         var exp = new Mul(
@@ -276,10 +276,10 @@ public class MulTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = PowerValue.Watt(20);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulNumberAndTemperature()
     {
         var exp = new Mul(
@@ -289,10 +289,10 @@ public class MulTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = TemperatureValue.Celsius(20);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulTemperatureAndNumber()
     {
         var exp = new Mul(
@@ -302,10 +302,10 @@ public class MulTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = TemperatureValue.Celsius(20);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulNumberAndMass()
     {
         var exp = new Mul(
@@ -315,10 +315,10 @@ public class MulTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = MassValue.Gram(20);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulMassAndNumber()
     {
         var exp = new Mul(
@@ -328,10 +328,10 @@ public class MulTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = MassValue.Gram(20);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulNumberAndLength()
     {
         var exp = new Mul(
@@ -341,10 +341,10 @@ public class MulTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = LengthValue.Meter(20);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulLengthAndNumber()
     {
         var exp = new Mul(
@@ -354,10 +354,10 @@ public class MulTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = LengthValue.Meter(20);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulLengthAndLength()
     {
         var exp = new Mul(
@@ -367,10 +367,10 @@ public class MulTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = AreaValue.Meter(20);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulAreaAndLength()
     {
         var exp = new Mul(
@@ -380,10 +380,10 @@ public class MulTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = VolumeValue.Meter(20);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulLengthAndArea()
     {
         var exp = new Mul(
@@ -393,10 +393,10 @@ public class MulTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = VolumeValue.Meter(20);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulNumberAndTime()
     {
         var exp = new Mul(
@@ -406,10 +406,10 @@ public class MulTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = TimeValue.Second(20);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulTimeAndNumber()
     {
         var exp = new Mul(
@@ -419,10 +419,10 @@ public class MulTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = TimeValue.Second(20);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulNumberAndArea()
     {
         var exp = new Mul(
@@ -432,10 +432,10 @@ public class MulTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = AreaValue.Meter(20);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulAreaAndNumber()
     {
         var exp = new Mul(
@@ -445,10 +445,10 @@ public class MulTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = AreaValue.Meter(20);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulNumberAndVolume()
     {
         var exp = new Mul(
@@ -458,10 +458,10 @@ public class MulTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = VolumeValue.Meter(20);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulVolumeAndNumber()
     {
         var exp = new Mul(
@@ -471,19 +471,58 @@ public class MulTest : BaseExpressionTests
         var actual = exp.Execute();
         var expected = VolumeValue.Meter(20);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
+    public void ExecuteRationalAndRational()
+    {
+        var exp = new Mul(
+            new Rational(Number.One, Number.Two),
+            new Rational(Number.Two, Number.One)
+        );
+        var expected = new RationalValue(1, 1);
+        var actual = exp.Execute();
+
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void ExecuteNumberAndRational()
+    {
+        var exp = new Mul(
+            Number.One,
+            new Rational(Number.Two, Number.One)
+        );
+        var expected = new RationalValue(2, 1);
+        var actual = exp.Execute();
+
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void ExecuteRationalAndNumber()
+    {
+        var exp = new Mul(
+            new Rational(new Number(3), Number.Two),
+            Number.Two
+        );
+        var expected = new RationalValue(3, 1);
+        var actual = exp.Execute();
+
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
     public void ExecuteMulBoolByBoolTest()
         => TestNotSupported(new Mul(Bool.True, Bool.True));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Mul(Variable.X, Number.Zero);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

@@ -53,7 +53,7 @@ public class If : DifferentParametersExpression
             return Else?.Execute(parameters) ?? new NumberValue(0.0);
         }
 
-        throw new ResultIsNotSupportedException(this, result);
+        throw ExecutionException.For(this);
     }
 
     /// <inheritdoc />

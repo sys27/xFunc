@@ -11,47 +11,47 @@ public class CommonFormatterTest
 {
     #region Common
 
-    [Fact]
+    [Test]
     public void AbsToStringTest()
     {
         var exp = new Abs(new Number(5));
 
-        Assert.Equal("abs(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("abs(5)"));
     }
 
-    [Fact]
+    [Test]
     public void AddToStringTest()
     {
         var exp = new Add(new Number(5), Number.Zero);
 
-        Assert.Equal("5 + 0", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("5 + 0"));
     }
 
-    [Fact]
+    [Test]
     public void AddToStringBinTest()
     {
         var exp = new Mul(Variable.X, new Add(new Number(5), Number.Zero));
 
-        Assert.Equal("x * (5 + 0)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x * (5 + 0)"));
     }
 
-    [Fact]
+    [Test]
     public void CeilToStringTest()
     {
         var ceil = new Ceil(new Number(5.55555555));
 
-        Assert.Equal("ceil(5.55555555)", ceil.ToString());
+        Assert.That(ceil.ToString(), Is.EqualTo("ceil(5.55555555)"));
     }
 
-    [Fact]
+    [Test]
     public void DefineToStringTest()
     {
         var exp = new Assign(Variable.X, Number.Zero);
 
-        Assert.Equal("x := 0", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x := 0"));
     }
 
-    [Fact]
+    [Test]
     public void DelToStringTest()
     {
         var exp = new Del(
@@ -66,487 +66,505 @@ public class CommonFormatterTest
             )
         );
 
-        Assert.Equal("del(((2 * x1) + (x2 ^ 2)) + (x3 ^ 3))", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("del(((2 * x1) + (x2 ^ 2)) + (x3 ^ 3))"));
     }
 
-    [Fact]
+    [Test]
     public void DerivativeToStringExpTest()
     {
         var deriv = new Derivative(new Differentiator(), new Simplifier(), new Sin(Variable.X));
 
-        Assert.Equal("deriv(sin(x))", deriv.ToString());
+        Assert.That(deriv.ToString(), Is.EqualTo("deriv(sin(x))"));
     }
 
-    [Fact]
+    [Test]
     public void DerivativeToStringVarTest()
     {
         var deriv = new Derivative(new Differentiator(), new Simplifier(), new Sin(Variable.X), Variable.X);
 
-        Assert.Equal("deriv(sin(x), x)", deriv.ToString());
+        Assert.That(deriv.ToString(), Is.EqualTo("deriv(sin(x), x)"));
     }
 
-    [Fact]
+    [Test]
     public void DerivativeToStringPointTest()
     {
         var deriv = new Derivative(new Differentiator(), new Simplifier(), new Sin(Variable.X), Variable.X, Number.One);
 
-        Assert.Equal("deriv(sin(x), x, 1)", deriv.ToString());
+        Assert.That(deriv.ToString(), Is.EqualTo("deriv(sin(x), x, 1)"));
     }
 
-    [Fact]
+    [Test]
     public void DivToStringTest()
     {
         var exp = new Div(new Number(5), Number.Zero);
 
-        Assert.Equal("5 / 0", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("5 / 0"));
     }
 
-    [Fact]
+    [Test]
     public void DivToStringBinTest()
     {
         var exp = new Mul(Variable.X, new Div(new Number(5), Number.Zero));
 
-        Assert.Equal("x * (5 / 0)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x * (5 / 0)"));
     }
 
-    [Fact]
+    [Test]
     public void ExpToStringTest()
     {
         var exp = new Exp(new Number(5));
 
-        Assert.Equal("exp(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("exp(5)"));
     }
 
-    [Fact]
+    [Test]
     public void FactToStringTest()
     {
         var exp = new Fact(new Number(5));
 
-        Assert.Equal("5!", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("5!"));
     }
 
-    [Fact]
+    [Test]
     public void FloorToStringTest()
     {
         var exp = new Floor(new Number(5.55555555));
 
-        Assert.Equal("floor(5.55555555)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("floor(5.55555555)"));
     }
 
-    [Fact]
+    [Test]
     public void TruncToStringTest()
     {
         var exp = new Trunc(new Number(5.55555555));
 
-        Assert.Equal("trunc(5.55555555)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("trunc(5.55555555)"));
     }
 
-    [Fact]
+    [Test]
     public void FracToStringTest()
     {
         var exp = new Frac(new Number(5.55555555));
 
-        Assert.Equal("frac(5.55555555)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("frac(5.55555555)"));
     }
 
-    [Fact]
+    [Test]
     public void GCDToStringTest()
     {
         var exp = new GCD(new Number(5), Number.Zero);
 
-        Assert.Equal("gcd(5, 0)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("gcd(5, 0)"));
     }
 
-    [Fact]
+    [Test]
     public void LCMToStringTest()
     {
         var exp = new LCM(new Number(5), Number.Zero);
 
-        Assert.Equal("lcm(5, 0)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("lcm(5, 0)"));
     }
 
-    [Fact]
+    [Test]
     public void LbToStringTest()
     {
         var exp = new Lb(new Number(5));
 
-        Assert.Equal("lb(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("lb(5)"));
     }
 
-    [Fact]
+    [Test]
     public void LgToStringTest()
     {
         var exp = new Lg(new Number(5));
 
-        Assert.Equal("lg(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("lg(5)"));
     }
 
-    [Fact]
+    [Test]
     public void LnToStringTest()
     {
         var exp = new Ln(new Number(5));
 
-        Assert.Equal("ln(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("ln(5)"));
     }
 
-    [Fact]
+    [Test]
     public void LogToStringTest()
     {
         var exp = new Log(Number.Zero, new Number(5));
 
-        Assert.Equal("log(0, 5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("log(0, 5)"));
     }
 
-    [Fact]
+    [Test]
     public void ModToStringTest()
     {
         var exp = new Mod(new Number(5), Number.Zero);
 
-        Assert.Equal("5 % 0", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("5 % 0"));
     }
 
-    [Fact]
+    [Test]
     public void ModToStringBinTest()
     {
         var exp = new Mul(Variable.X, new Mod(new Number(5), Number.Zero));
 
-        Assert.Equal("x * (5 % 0)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x * (5 % 0)"));
     }
 
-    [Fact]
+    [Test]
     public void MulToStringTest()
     {
         var exp = new Mul(new Number(5), Number.Zero);
 
-        Assert.Equal("5 * 0", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("5 * 0"));
     }
 
-    [Fact]
+    [Test]
     public void MulToStringAddTest()
     {
         var exp = new Add(Variable.X, new Mul(new Number(5), Number.Zero));
 
-        Assert.Equal("x + (5 * 0)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x + (5 * 0)"));
     }
 
-    [Fact]
+    [Test]
     public void MulToStringSubTest()
     {
         var exp = new Sub(Variable.X, new Mul(new Number(5), Number.Zero));
 
-        Assert.Equal("x - (5 * 0)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x - (5 * 0)"));
     }
 
-    [Fact]
+    [Test]
     public void MulToStringMulTest()
     {
         var exp = new Mul(Variable.X, new Mul(new Number(5), Number.Zero));
 
-        Assert.Equal("x * (5 * 0)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x * (5 * 0)"));
     }
 
-    [Fact]
+    [Test]
     public void MulToStringDivTest()
     {
         var exp = new Div(Variable.X, new Mul(new Number(5), Number.Zero));
 
-        Assert.Equal("x / (5 * 0)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x / (5 * 0)"));
     }
 
-    [Fact]
+    [Test]
     public void NumberTest()
     {
         var exp = new Number(3.3);
 
-        Assert.Equal("3.3", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("3.3"));
     }
 
-    [Fact]
+    [Test]
     public void AngleNumberTest()
     {
         var exp = AngleValue.Degree(10).AsExpression();
 
-        Assert.Equal("10 degree", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("10 'degree'"));
     }
 
-    [Fact]
+    [Test]
     public void PowerNumberTest()
     {
         var exp = PowerValue.Watt(10).AsExpression();
 
-        Assert.Equal("10 W", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("10 'W'"));
     }
 
-    [Fact]
+    [Test]
     public void TemperatureNumberTest()
     {
         var exp = TemperatureValue.Celsius(10).AsExpression();
 
-        Assert.Equal("10 °C", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("10 '°C'"));
     }
 
-    [Fact]
+    [Test]
     public void MassNumberTest()
     {
         var exp = MassValue.Gram(10).AsExpression();
 
-        Assert.Equal("10 g", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("10 'g'"));
     }
 
-    [Fact]
+    [Test]
     public void LengthNumberTest()
     {
         var exp = LengthValue.Meter(10).AsExpression();
 
-        Assert.Equal("10 m", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("10 'm'"));
     }
 
-    [Fact]
+    [Test]
     public void TimeNumberTest()
     {
         var exp = TimeValue.Second(10).AsExpression();
 
-        Assert.Equal("10 s", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("10 's'"));
     }
 
-    [Fact]
+    [Test]
     public void AreaNumberTest()
     {
         var exp = AreaValue.Meter(10).AsExpression();
 
-        Assert.Equal("10 m^2", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("10 'm^2'"));
     }
 
-    [Fact]
+    [Test]
     public void VolumeNumberTest()
     {
         var exp = VolumeValue.Meter(10).AsExpression();
 
-        Assert.Equal("10 m^3", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("10 'm^3'"));
     }
 
-    [Fact]
+    [Test]
     public void ToDegreeTest()
     {
         var exp = new ToDegree(new Number(10));
 
-        Assert.Equal("todegree(10)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("todegree(10)"));
     }
 
-    [Fact]
+    [Test]
     public void ToRadianTest()
     {
         var exp = new ToRadian(new Number(10));
 
-        Assert.Equal("toradian(10)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("toradian(10)"));
     }
 
-    [Fact]
+    [Test]
     public void ToGradianTest()
     {
         var exp = new ToGradian(new Number(10));
 
-        Assert.Equal("togradian(10)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("togradian(10)"));
     }
 
-    [Fact]
+    [Test]
     public void ToNumberTest()
     {
         var exp = new ToNumber(AngleValue.Degree(10).AsExpression());
 
-        Assert.Equal("tonumber(10 degree)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("tonumber(10 'degree')"));
     }
 
-    [Fact]
+    [Test]
     public void NumberSubTest()
     {
         var exp = new Sub(Number.One, new Number(-3.3));
 
-        Assert.Equal("1 - -3.3", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("1 - -3.3"));
     }
 
-    [Fact]
+    [Test]
     public void PowToStringTest()
     {
         var exp = new Pow(new Number(5), Number.Zero);
 
-        Assert.Equal("5 ^ 0", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("5 ^ 0"));
     }
 
-    [Fact]
+    [Test]
     public void PowToStringAddTest()
     {
         var exp = new Add(Variable.X, new Pow(new Number(5), Number.Zero));
 
-        Assert.Equal("x + (5 ^ 0)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x + (5 ^ 0)"));
     }
 
-    [Fact]
+    [Test]
     public void PowToStringSubTest()
     {
         var exp = new Sub(Variable.X, new Pow(new Number(5), Number.Zero));
 
-        Assert.Equal("x - (5 ^ 0)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x - (5 ^ 0)"));
     }
 
-    [Fact]
+    [Test]
     public void PowToStringMulTest()
     {
         var exp = new Mul(Variable.X, new Pow(new Number(5), Number.Zero));
 
-        Assert.Equal("x * (5 ^ 0)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x * (5 ^ 0)"));
     }
 
-    [Fact]
+    [Test]
     public void PowToStringDivTest()
     {
         var exp = new Div(Variable.X, new Pow(new Number(5), Number.Zero));
 
-        Assert.Equal("x / (5 ^ 0)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x / (5 ^ 0)"));
     }
 
-    [Fact]
+    [Test]
     public void RootToStringTest()
     {
         var exp = new Root(new Number(5), Number.Zero);
 
-        Assert.Equal("root(5, 0)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("root(5, 0)"));
     }
 
-    [Fact]
+    [Test]
     public void RoundToStringTest()
     {
         var exp = new Round(new Number(5), Number.Zero);
 
-        Assert.Equal("round(5, 0)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("round(5, 0)"));
     }
 
-    [Fact]
+    [Test]
     public void SimplifyToStringTest()
     {
         var exp = new Simplify(new Simplifier(), new Sin(Variable.X));
 
-        Assert.Equal("simplify(sin(x))", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("simplify(sin(x))"));
     }
 
-    [Fact]
+    [Test]
     public void SqrtToStringTest()
     {
         var exp = new Sqrt(new Number(5));
 
-        Assert.Equal("sqrt(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("sqrt(5)"));
     }
 
-    [Fact]
+    [Test]
     public void SubToStringTest()
     {
         var exp = new Sub(new Number(5), Number.Zero);
 
-        Assert.Equal("5 - 0", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("5 - 0"));
     }
 
-    [Fact]
+    [Test]
     public void SubToStringSubTest()
     {
         var exp = new Sub(Variable.X, new Sub(new Number(5), Number.Zero));
 
-        Assert.Equal("x - (5 - 0)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x - (5 - 0)"));
     }
 
-    [Fact]
+    [Test]
     public void SubToStringDivTest()
     {
         var exp = new Div(Variable.X, new Sub(new Number(5), Number.Zero));
 
-        Assert.Equal("x / (5 - 0)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x / (5 - 0)"));
     }
 
-    [Fact]
+    [Test]
     public void UnaryMinusToStringTest()
     {
         var exp = new UnaryMinus(new Number(5));
 
-        Assert.Equal("-5", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("-5"));
     }
 
-    [Fact]
+    [Test]
     public void UnaryMinusToStringBinTest()
     {
         var exp = new UnaryMinus(new Add(new Number(5), Number.Zero));
 
-        Assert.Equal("-(5 + 0)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("-(5 + 0)"));
     }
 
-    [Fact]
+    [Test]
     public void UnaryMinusToStringSubTest()
     {
         var exp = new Sub(Number.Zero, new UnaryMinus(new Number(5)));
 
-        Assert.Equal("0 - -5", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("0 - -5"));
     }
 
-    [Fact]
+    [Test]
     public void UndefineToStringTest()
     {
         var exp = new Unassign(Variable.X);
 
-        Assert.Equal("undef(x)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("undef(x)"));
     }
 
-    [Fact]
+    [Test]
     public void LambdaExpressionToStringArgTest()
     {
         var exp = new Add(Variable.X, Variable.Y)
             .ToLambdaExpression(Variable.X, Variable.Y);
 
-        Assert.Equal("(x, y) => x + y", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("(x, y) => x + y"));
     }
 
-    [Fact]
+    [Test]
     public void CallExpressionToStringArgTest()
     {
         var exp = new CallExpression(
             new Variable("f"),
             new IExpression[] { new Number(5), Number.Two }.ToImmutableArray());
 
-        Assert.Equal("f(5, 2)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("f(5, 2)"));
     }
 
-    [Fact]
+    [Test]
     public void InlineCallExpressionToStringArgTest()
     {
         var exp = new CallExpression(
             Variable.X.ToLambdaExpression(Variable.X.Name),
             new IExpression[] { new Number(5) }.ToImmutableArray());
 
-        Assert.Equal("((x) => x)(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("((x) => x)(5)"));
     }
 
-    [Fact]
+    [Test]
+    public void CurryTest()
+    {
+        var exp = new Curry(new Lambda(Number.One).AsExpression());
+
+        Assert.That(exp.ToString(), Is.EqualTo("curry(() => 1)"));
+    }
+
+    [Test]
+    public void CurryWithParametersTest()
+    {
+        var exp = new Curry(
+            new Lambda(Number.One).AsExpression(),
+            new IExpression[] { Number.One, Number.Two }.ToImmutableArray());
+
+        Assert.That(exp.ToString(), Is.EqualTo("curry(() => 1, 1, 2)"));
+    }
+
+    [Test]
     public void VariableTest()
     {
         var exp = Variable.X;
 
-        Assert.Equal("x", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x"));
     }
 
-    [Fact]
+    [Test]
     public void DelegateExpressionTest()
     {
-        var exp = new DelegateExpression(param => 0d);
+        var exp = new DelegateExpression(_ => 0d);
 
-        Assert.Equal("{Delegate Expression}", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("{Delegate Expression}"));
     }
 
-    [Fact]
+    [Test]
     public void StringExpressionTest()
     {
         var exp = new StringExpression("hello");
 
-        Assert.Equal("'hello'", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("'hello'"));
     }
 
-    [Fact]
+    [Test]
     public void ConvertTest()
     {
         var exp = new xFunc.Maths.Expressions.Units.Convert(
@@ -555,475 +573,491 @@ public class CommonFormatterTest
             new StringExpression("rad")
         );
 
-        Assert.Equal("convert(90 degree, 'rad')", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("convert(90 'degree', 'rad')"));
+    }
+
+    [Test]
+    public void RationalTest()
+    {
+        var exp = new Rational(Number.One, Number.Two);
+
+        Assert.That(exp.ToString(), Is.EqualTo("1 // 2"));
+    }
+
+    [Test]
+    public void ToRationalTest()
+    {
+        var exp = new ToRational(Number.Two);
+
+        Assert.That(exp.ToString(), Is.EqualTo("torational(2)"));
     }
 
     #endregion Common
 
     #region Complex Numbers
 
-    [Fact]
+    [Test]
     public void ComplexNumberPositiveNegativeToStringTest()
     {
         var complex = new ComplexNumber(3, -2);
 
-        Assert.Equal("3-2i", complex.ToString());
+        Assert.That(complex.ToString(), Is.EqualTo("3-2i"));
     }
 
-    [Fact]
+    [Test]
     public void ComplexNumberNegativePositiveToStringTest()
     {
         var complex = new ComplexNumber(-3, 2);
 
-        Assert.Equal("-3+2i", complex.ToString());
+        Assert.That(complex.ToString(), Is.EqualTo("-3+2i"));
     }
 
-    [Fact]
+    [Test]
     public void ComplexNumberTwoPositiveToStringTest()
     {
         var complex = new ComplexNumber(3, 2);
 
-        Assert.Equal("3+2i", complex.ToString());
+        Assert.That(complex.ToString(), Is.EqualTo("3+2i"));
     }
 
-    [Fact]
+    [Test]
     public void ComplexNumberTwoNegativeToStringTest()
     {
         var complex = new ComplexNumber(-3, -2);
 
-        Assert.Equal("-3-2i", complex.ToString());
+        Assert.That(complex.ToString(), Is.EqualTo("-3-2i"));
     }
 
-    [Fact]
+    [Test]
     public void ComplexNumberOnlyRealPartToStringTest()
     {
         var complex = new ComplexNumber(-3, 0);
 
-        Assert.Equal("-3", complex.ToString());
+        Assert.That(complex.ToString(), Is.EqualTo("-3"));
     }
 
-    [Fact]
+    [Test]
     public void ComplexNumberOnlyImaginaryPartToStringTest()
     {
         var complex = new ComplexNumber(0, -2);
 
-        Assert.Equal("-2i", complex.ToString());
+        Assert.That(complex.ToString(), Is.EqualTo("-2i"));
     }
 
-    [Fact]
+    [Test]
     public void ComplexNumberBinaryToStringTest()
     {
         var exp = new Add(new ComplexNumber(3, 2), new ComplexNumber(3, 2));
 
-        Assert.Equal("3+2i + 3+2i", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("3+2i + 3+2i"));
     }
 
-    [Fact]
+    [Test]
     public void ComplexNumberAbsToStringTest()
     {
         var exp = new Abs(new ComplexNumber(3, 2));
 
-        Assert.Equal("abs(3+2i)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("abs(3+2i)"));
     }
 
-    [Fact]
+    [Test]
     public void ComplexNumberIToStringTest()
     {
         var exp = new ComplexNumber(0, 1);
 
-        Assert.Equal("i", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("i"));
     }
 
-    [Fact]
+    [Test]
     public void ComplexNumberNegativeIToStringTest()
     {
         var exp = new ComplexNumber(0, -1);
 
-        Assert.Equal("-i", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("-i"));
     }
 
-    [Fact]
+    [Test]
     public void ConjugateToStringTest()
     {
         var complex = new Complex(3.1, 2.5);
         var exp = new Conjugate(new ComplexNumber(complex));
 
-        Assert.Equal("conjugate(3.1+2.5i)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("conjugate(3.1+2.5i)"));
     }
 
-    [Fact]
+    [Test]
     public void ImToStringTest()
     {
         var complex = new Complex(3.1, 2.5);
         var exp = new Im(new ComplexNumber(complex));
 
-        Assert.Equal("im(3.1+2.5i)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("im(3.1+2.5i)"));
     }
 
-    [Fact]
+    [Test]
     public void PhaseToStringTest()
     {
         var complex = new Complex(3.1, 2.5);
         var exp = new Phase(new ComplexNumber(complex));
 
-        Assert.Equal("phase(3.1+2.5i)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("phase(3.1+2.5i)"));
     }
 
-    [Fact]
+    [Test]
     public void ReciprocalToStringTest()
     {
         var complex = new Complex(3.1, 2.5);
         var exp = new Reciprocal(new ComplexNumber(complex));
 
-        Assert.Equal("reciprocal(3.1+2.5i)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("reciprocal(3.1+2.5i)"));
     }
 
-    [Fact]
+    [Test]
     public void ReToStringTest()
     {
         var complex = new Complex(3.1, 2.5);
         var exp = new Re(new ComplexNumber(complex));
 
-        Assert.Equal("re(3.1+2.5i)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("re(3.1+2.5i)"));
     }
 
-    [Fact]
+    [Test]
     public void ToComplexToStringTest()
     {
         var exp = new ToComplex(Number.Two);
 
-        Assert.Equal("tocomplex(2)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("tocomplex(2)"));
     }
 
     #endregion
 
     #region Trigonometric
 
-    [Fact]
+    [Test]
     public void ArccosToStringTest()
     {
         var exp = new Arccos(new Number(5));
 
-        Assert.Equal("arccos(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("arccos(5)"));
     }
 
-    [Fact]
+    [Test]
     public void ArccotToStringTest()
     {
         var exp = new Arccot(new Number(5));
 
-        Assert.Equal("arccot(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("arccot(5)"));
     }
 
-    [Fact]
+    [Test]
     public void ArccscToStringTest()
     {
         var exp = new Arccsc(new Number(5));
 
-        Assert.Equal("arccsc(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("arccsc(5)"));
     }
 
-    [Fact]
+    [Test]
     public void ArcsecToStringTest()
     {
         var exp = new Arcsec(new Number(5));
 
-        Assert.Equal("arcsec(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("arcsec(5)"));
     }
 
-    [Fact]
+    [Test]
     public void ArcsinToStringTest()
     {
         var exp = new Arcsin(new Number(5));
 
-        Assert.Equal("arcsin(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("arcsin(5)"));
     }
 
-    [Fact]
+    [Test]
     public void ArctanToStringTest()
     {
         var exp = new Arctan(new Number(5));
 
-        Assert.Equal("arctan(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("arctan(5)"));
     }
 
-    [Fact]
+    [Test]
     public void CosToStringTest()
     {
         var exp = new Cos(new Number(5));
 
-        Assert.Equal("cos(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("cos(5)"));
     }
 
-    [Fact]
+    [Test]
     public void CotToStringTest()
     {
         var exp = new Cot(new Number(5));
 
-        Assert.Equal("cot(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("cot(5)"));
     }
 
-    [Fact]
+    [Test]
     public void CscToStringTest()
     {
         var exp = new Csc(new Number(5));
 
-        Assert.Equal("csc(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("csc(5)"));
     }
 
-    [Fact]
+    [Test]
     public void SecToStringTest()
     {
         var exp = new Sec(new Number(5));
 
-        Assert.Equal("sec(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("sec(5)"));
     }
 
-    [Fact]
+    [Test]
     public void SinToStringTest()
     {
         var exp = new Sin(new Number(5));
 
-        Assert.Equal("sin(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("sin(5)"));
     }
 
-    [Fact]
+    [Test]
     public void TanToStringTest()
     {
         var exp = new Tan(new Number(5));
 
-        Assert.Equal("tan(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("tan(5)"));
     }
 
     #endregion
 
     #region Hyperbolic
 
-    [Fact]
+    [Test]
     public void ArcoshToStringTest()
     {
         var exp = new Arcosh(new Number(5));
 
-        Assert.Equal("arcosh(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("arcosh(5)"));
     }
 
-    [Fact]
+    [Test]
     public void ArcothToStringTest()
     {
         var exp = new Arcoth(new Number(5));
 
-        Assert.Equal("arcoth(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("arcoth(5)"));
     }
 
-    [Fact]
+    [Test]
     public void ArcschToStringTest()
     {
         var exp = new Arcsch(new Number(5));
 
-        Assert.Equal("arcsch(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("arcsch(5)"));
     }
 
-    [Fact]
+    [Test]
     public void ArsechToStringTest()
     {
         var exp = new Arsech(new Number(5));
 
-        Assert.Equal("arsech(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("arsech(5)"));
     }
 
-    [Fact]
+    [Test]
     public void ArsinhToStringTest()
     {
         var exp = new Arsinh(new Number(5));
 
-        Assert.Equal("arsinh(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("arsinh(5)"));
     }
 
-    [Fact]
+    [Test]
     public void ArtanhToStringTest()
     {
         var exp = new Artanh(new Number(5));
 
-        Assert.Equal("artanh(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("artanh(5)"));
     }
 
-    [Fact]
+    [Test]
     public void CoshToStringTest()
     {
         var exp = new Cosh(new Number(5));
 
-        Assert.Equal("cosh(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("cosh(5)"));
     }
 
-    [Fact]
+    [Test]
     public void CothToStringTest()
     {
         var exp = new Coth(new Number(5));
 
-        Assert.Equal("coth(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("coth(5)"));
     }
 
-    [Fact]
+    [Test]
     public void CschToStringTest()
     {
         var exp = new Csch(new Number(5));
 
-        Assert.Equal("csch(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("csch(5)"));
     }
 
-    [Fact]
+    [Test]
     public void SechToStringTest()
     {
         var exp = new Sech(new Number(5));
 
-        Assert.Equal("sech(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("sech(5)"));
     }
 
-    [Fact]
+    [Test]
     public void SinhToStringTest()
     {
         var exp = new Sinh(new Number(5));
 
-        Assert.Equal("sinh(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("sinh(5)"));
     }
 
-    [Fact]
+    [Test]
     public void TanhToStringTest()
     {
         var exp = new Tanh(new Number(5));
 
-        Assert.Equal("tanh(5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("tanh(5)"));
     }
 
     #endregion
 
     #region Logical and Bitwise
 
-    [Fact]
+    [Test]
     public void BoolToStringTest()
     {
         var exp = Bool.False;
 
-        Assert.Equal("False", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("False"));
     }
 
-    [Fact]
+    [Test]
     public void AndAndToStringTest()
     {
         var exp = new And(Bool.True, new And(Bool.True, Bool.True));
 
-        Assert.Equal("True and (True and True)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("True and (True and True)"));
     }
 
-    [Fact]
+    [Test]
     public void OrToStringTest()
     {
         var exp = new Or(Bool.True, Bool.True);
 
-        Assert.Equal("True or True", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("True or True"));
     }
 
-    [Fact]
+    [Test]
     public void OrOrToStringTest()
     {
         var exp = new Or(Bool.True, new Or(Bool.True, Bool.True));
 
-        Assert.Equal("True or (True or True)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("True or (True or True)"));
     }
 
-    [Fact]
+    [Test]
     public void XOrToStringTest()
     {
         var exp = new XOr(Bool.True, Bool.True);
 
-        Assert.Equal("True xor True", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("True xor True"));
     }
 
-    [Fact]
+    [Test]
     public void XOrXOrToStringTest()
     {
         var exp = new XOr(Bool.True, new XOr(Bool.True, Bool.True));
 
-        Assert.Equal("True xor (True xor True)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("True xor (True xor True)"));
     }
 
-    [Fact]
+    [Test]
     public void NotToStringTest()
     {
         var exp = new Not(Bool.True);
 
-        Assert.Equal("not(True)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("not(True)"));
     }
 
-    [Fact]
+    [Test]
     public void EqualityToStringTest1()
     {
         var eq = new Equality(Bool.True, Bool.False);
 
-        Assert.Equal("True <=> False", eq.ToString());
+        Assert.That(eq.ToString(), Is.EqualTo("True <=> False"));
     }
 
-    [Fact]
+    [Test]
     public void EqualityToStringTest2()
     {
         var eq = new And(new Equality(Bool.True, Bool.False), Bool.False);
 
-        Assert.Equal("(True <=> False) and False", eq.ToString());
+        Assert.That(eq.ToString(), Is.EqualTo("(True <=> False) and False"));
     }
 
-    [Fact]
+    [Test]
     public void ImplicationToStringTest1()
     {
         var eq = new Implication(Bool.True, Bool.False);
 
-        Assert.Equal("True => False", eq.ToString());
+        Assert.That(eq.ToString(), Is.EqualTo("True => False"));
     }
 
-    [Fact]
+    [Test]
     public void ImplicationToStringTest2()
     {
         var eq = new And(new Implication(Bool.True, Bool.False), Bool.False);
 
-        Assert.Equal("(True => False) and False", eq.ToString());
+        Assert.That(eq.ToString(), Is.EqualTo("(True => False) and False"));
     }
 
-    [Fact]
+    [Test]
     public void NAndToStringTest1()
     {
         var eq = new NAnd(Bool.True, Bool.False);
 
-        Assert.Equal("True nand False", eq.ToString());
+        Assert.That(eq.ToString(), Is.EqualTo("True nand False"));
     }
 
-    [Fact]
+    [Test]
     public void NAndToStringTest2()
     {
         var eq = new And(new NAnd(Bool.True, Bool.False), Bool.False);
 
-        Assert.Equal("(True nand False) and False", eq.ToString());
+        Assert.That(eq.ToString(), Is.EqualTo("(True nand False) and False"));
     }
 
-    [Fact]
+    [Test]
     public void NOrToStringTest1()
     {
         var eq = new NOr(Bool.True, Bool.False);
 
-        Assert.Equal("True nor False", eq.ToString());
+        Assert.That(eq.ToString(), Is.EqualTo("True nor False"));
     }
 
-    [Fact]
+    [Test]
     public void NOrToStringTest2()
     {
         var eq = new And(new NOr(Bool.True, Bool.False), Bool.False);
 
-        Assert.Equal("(True nor False) and False", eq.ToString());
+        Assert.That(eq.ToString(), Is.EqualTo("(True nor False) and False"));
     }
 
     #endregion
 
     #region Matrix
 
-    [Fact]
+    [Test]
     public void MatrixToStringTest()
     {
         var matrix = new Matrix(new[]
@@ -1032,10 +1066,10 @@ public class CommonFormatterTest
             new Matrices.Vector(new IExpression[] { new Number(4), Number.Zero })
         });
 
-        Assert.Equal("{{1, -2}, {4, 0}}", matrix.ToString());
+        Assert.That(matrix.ToString(), Is.EqualTo("{{1, -2}, {4, 0}}"));
     }
 
-    [Fact]
+    [Test]
     public void DeterminantToStringTest()
     {
         var matrix = new Matrix(new[]
@@ -1046,10 +1080,10 @@ public class CommonFormatterTest
 
         var det = new Determinant(matrix);
 
-        Assert.Equal("det({{1, -2}, {4, 0}})", det.ToString());
+        Assert.That(det.ToString(), Is.EqualTo("det({{1, -2}, {4, 0}})"));
     }
 
-    [Fact]
+    [Test]
     public void InverseToStringTest()
     {
         var matrix = new Matrix(new[]
@@ -1060,30 +1094,30 @@ public class CommonFormatterTest
 
         var exp = new Inverse(matrix);
 
-        Assert.Equal("inverse({{1, -2}, {4, 0}})", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("inverse({{1, -2}, {4, 0}})"));
     }
 
-    [Fact]
+    [Test]
     public void DotProductToStringTest()
     {
         var left = new Matrices.Vector(new IExpression[] { Number.One, new Number(-2) });
         var right = new Matrices.Vector(new IExpression[] { new Number(4), Number.Zero });
         var exp = new DotProduct(left, right);
 
-        Assert.Equal("dotProduct({1, -2}, {4, 0})", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("dotProduct({1, -2}, {4, 0})"));
     }
 
-    [Fact]
+    [Test]
     public void CrossProductToStringTest()
     {
         var left = new Matrices.Vector(new IExpression[] { Number.One, new Number(-2) });
         var right = new Matrices.Vector(new IExpression[] { new Number(4), Number.Zero });
         var exp = new CrossProduct(left, right);
 
-        Assert.Equal("crossProduct({1, -2}, {4, 0})", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("crossProduct({1, -2}, {4, 0})"));
     }
 
-    [Fact]
+    [Test]
     public void TransposeToStringTest()
     {
         var matrix = new Matrix(new[]
@@ -1094,452 +1128,452 @@ public class CommonFormatterTest
 
         var exp = new Transpose(matrix);
 
-        Assert.Equal("transpose({{1, -2}, {4, 0}})", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("transpose({{1, -2}, {4, 0}})"));
     }
 
     #endregion
 
     #region Statistical
 
-    [Fact]
+    [Test]
     public void AvgToStringTest()
     {
         var sum = new Avg(new IExpression[] { Number.One, Number.Two });
 
-        Assert.Equal("avg(1, 2)", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("avg(1, 2)"));
     }
 
-    [Fact]
+    [Test]
     public void AvgToStringTest2()
     {
         var sum = new Avg(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
-        Assert.Equal("avg({1, 2})", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("avg({1, 2})"));
     }
 
-    [Fact]
+    [Test]
     public void CountToStringTest()
     {
         var sum = new Count(new IExpression[] { Number.One, Number.Two });
 
-        Assert.Equal("count(1, 2)", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("count(1, 2)"));
     }
 
-    [Fact]
+    [Test]
     public void CountToStringTest2()
     {
         var sum = new Count(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
-        Assert.Equal("count({1, 2})", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("count({1, 2})"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var sum = new Max(new IExpression[] { Number.One, Number.Two });
 
-        Assert.Equal("max(1, 2)", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("max(1, 2)"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest2()
     {
         var sum = new Max(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
-        Assert.Equal("max({1, 2})", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("max({1, 2})"));
     }
 
-    [Fact]
+    [Test]
     public void MinToStringTest()
     {
         var sum = new Min(new IExpression[] { Number.One, Number.Two });
 
-        Assert.Equal("min(1, 2)", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("min(1, 2)"));
     }
 
-    [Fact]
+    [Test]
     public void MinToStringTest2()
     {
         var sum = new Min(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
-        Assert.Equal("min({1, 2})", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("min({1, 2})"));
     }
 
-    [Fact]
+    [Test]
     public void ProductToStringTest()
     {
         var sum = new Product(new IExpression[] { Number.One, Number.Two });
 
-        Assert.Equal("product(1, 2)", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("product(1, 2)"));
     }
 
-    [Fact]
+    [Test]
     public void ProductToStringTest2()
     {
         var sum = new Product(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
-        Assert.Equal("product({1, 2})", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("product({1, 2})"));
     }
 
-    [Fact]
+    [Test]
     public void StdevpToStringTest()
     {
         var sum = new Stdevp(new IExpression[] { Number.One, Number.Two });
 
-        Assert.Equal("stdevp(1, 2)", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("stdevp(1, 2)"));
     }
 
-    [Fact]
+    [Test]
     public void StdevpToStringTest2()
     {
         var sum = new Stdevp(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
-        Assert.Equal("stdevp({1, 2})", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("stdevp({1, 2})"));
     }
 
-    [Fact]
+    [Test]
     public void StdevToStringTest()
     {
         var sum = new Stdev(new IExpression[] { Number.One, Number.Two });
 
-        Assert.Equal("stdev(1, 2)", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("stdev(1, 2)"));
     }
 
-    [Fact]
+    [Test]
     public void StdevToStringTest2()
     {
         var sum = new Stdev(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
-        Assert.Equal("stdev({1, 2})", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("stdev({1, 2})"));
     }
 
-    [Fact]
+    [Test]
     public void SumToStringTest()
     {
         var sum = new Sum(new IExpression[] { Number.One, Number.Two });
 
-        Assert.Equal("sum(1, 2)", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("sum(1, 2)"));
     }
 
-    [Fact]
+    [Test]
     public void SumToStringTest2()
     {
         var sum = new Sum(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
-        Assert.Equal("sum({1, 2})", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("sum({1, 2})"));
     }
 
-    [Fact]
+    [Test]
     public void VarpToStringTest()
     {
         var sum = new Varp(new IExpression[] { Number.One, Number.Two });
 
-        Assert.Equal("varp(1, 2)", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("varp(1, 2)"));
     }
 
-    [Fact]
+    [Test]
     public void VarpToStringTest2()
     {
         var sum = new Varp(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
-        Assert.Equal("varp({1, 2})", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("varp({1, 2})"));
     }
 
-    [Fact]
+    [Test]
     public void VarToStringTest()
     {
         var sum = new Var(new IExpression[] { Number.One, Number.Two });
 
-        Assert.Equal("var(1, 2)", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("var(1, 2)"));
     }
 
-    [Fact]
+    [Test]
     public void VarToStringTest2()
     {
         var sum = new Var(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
-        Assert.Equal("var({1, 2})", sum.ToString());
+        Assert.That(sum.ToString(), Is.EqualTo("var({1, 2})"));
     }
 
     #endregion
 
     #region Programming
 
-    [Fact]
+    [Test]
     public void AddAssignToString()
     {
         var exp = new AddAssign(Variable.X, new Number(5));
 
-        Assert.Equal("x += 5", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x += 5"));
     }
 
-    [Fact]
+    [Test]
     public void SubAssignToString()
     {
         var exp = new SubAssign(Variable.X, new Number(5));
 
-        Assert.Equal("x -= 5", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x -= 5"));
     }
 
-    [Fact]
+    [Test]
     public void MulAssignToString()
     {
         var exp = new MulAssign(Variable.X, new Number(5));
 
-        Assert.Equal("x *= 5", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x *= 5"));
     }
 
-    [Fact]
+    [Test]
     public void DivAssignToString()
     {
         var exp = new DivAssign(Variable.X, new Number(5));
 
-        Assert.Equal("x /= 5", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x /= 5"));
     }
 
-    [Fact]
+    [Test]
     public void IncToString()
     {
         var exp = new Inc(Variable.X);
 
-        Assert.Equal("x++", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x++"));
     }
 
-    [Fact]
+    [Test]
     public void DecToString()
     {
         var exp = new Dec(Variable.X);
 
-        Assert.Equal("x--", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("x--"));
     }
 
-    [Fact]
+    [Test]
     public void CondAndToString()
     {
         var exp = new ConditionalAnd(Bool.True, Bool.True);
 
-        Assert.Equal("True && True", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("True && True"));
     }
 
-    [Fact]
+    [Test]
     public void CondAndCondAndToString()
     {
         var exp = new ConditionalAnd(Bool.True, new ConditionalAnd(Bool.True, Bool.True));
 
-        Assert.Equal("True && (True && True)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("True && (True && True)"));
     }
 
-    [Fact]
+    [Test]
     public void CondOrToString()
     {
         var exp = new ConditionalOr(Bool.True, Bool.True);
 
-        Assert.Equal("True || True", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("True || True"));
     }
 
-    [Fact]
+    [Test]
     public void CondOrCondOrToString()
     {
         var exp = new ConditionalOr(Bool.True, new ConditionalOr(Bool.True, Bool.True));
 
-        Assert.Equal("True || (True || True)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("True || (True || True)"));
     }
 
-    [Fact]
+    [Test]
     public void EqualToString()
     {
         var exp = new Equal(new Number(5), new Number(5));
 
-        Assert.Equal("5 == 5", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("5 == 5"));
     }
 
-    [Fact]
+    [Test]
     public void EqualEqualToString()
     {
         var exp = new Equal(Bool.True, new Equal(new Number(5), new Number(5)));
 
-        Assert.Equal("True == (5 == 5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("True == (5 == 5)"));
     }
 
-    [Fact]
+    [Test]
     public void NotEqualToString()
     {
         var exp = new NotEqual(new Number(5), new Number(5));
 
-        Assert.Equal("5 != 5", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("5 != 5"));
     }
 
-    [Fact]
+    [Test]
     public void NotEqualNotEqualToString()
     {
         var exp = new NotEqual(Bool.True, new NotEqual(new Number(5), new Number(5)));
 
-        Assert.Equal("True != (5 != 5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("True != (5 != 5)"));
     }
 
-    [Fact]
+    [Test]
     public void LessToString()
     {
         var exp = new LessThan(new Number(5), new Number(5));
 
-        Assert.Equal("5 < 5", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("5 < 5"));
     }
 
-    [Fact]
+    [Test]
     public void LessLessToString()
     {
         var exp = new ConditionalAnd(Bool.True, new LessThan(new Number(5), new Number(5)));
 
-        Assert.Equal("True && (5 < 5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("True && (5 < 5)"));
     }
 
-    [Fact]
+    [Test]
     public void LessOrEqualToString()
     {
         var exp = new LessOrEqual(new Number(5), new Number(5));
 
-        Assert.Equal("5 <= 5", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("5 <= 5"));
     }
 
-    [Fact]
+    [Test]
     public void LessOrEqualLessOrEqualToString()
     {
         var exp = new ConditionalAnd(Bool.True, new LessOrEqual(new Number(5), new Number(5)));
 
-        Assert.Equal("True && (5 <= 5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("True && (5 <= 5)"));
     }
 
-    [Fact]
+    [Test]
     public void GreatToString()
     {
         var exp = new GreaterThan(new Number(5), new Number(5));
 
-        Assert.Equal("5 > 5", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("5 > 5"));
     }
 
-    [Fact]
+    [Test]
     public void GreatGreatToString()
     {
         var exp = new ConditionalAnd(Bool.True, new GreaterThan(new Number(5), new Number(5)));
 
-        Assert.Equal("True && (5 > 5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("True && (5 > 5)"));
     }
 
-    [Fact]
+    [Test]
     public void GreatOrEqualToString()
     {
         var exp = new GreaterOrEqual(new Number(5), new Number(5));
 
-        Assert.Equal("5 >= 5", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("5 >= 5"));
     }
 
-    [Fact]
+    [Test]
     public void GreatOrEqualGreatOrEqualToString()
     {
         var exp = new ConditionalAnd(Bool.True, new GreaterOrEqual(new Number(5), new Number(5)));
 
-        Assert.Equal("True && (5 >= 5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("True && (5 >= 5)"));
     }
 
-    [Fact]
+    [Test]
     public void IfToString()
     {
         var exp = new If(new Equal(new Number(5), new Number(5)), new Number(5));
 
-        Assert.Equal("if(5 == 5, 5)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("if(5 == 5, 5)"));
     }
 
-    [Fact]
+    [Test]
     public void IfElseToString()
     {
         var exp = new If(new Equal(new Number(5), new Number(5)), new Number(5), Number.Zero);
 
-        Assert.Equal("if(5 == 5, 5, 0)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("if(5 == 5, 5, 0)"));
     }
 
-    [Fact]
+    [Test]
     public void ForToString()
     {
         var exp = new For(new Number(5), new Assign(Variable.X, Number.Zero), new Equal(new Number(5), new Number(5)), new AddAssign(Variable.X, Number.One));
 
-        Assert.Equal("for(5, x := 0, 5 == 5, x += 1)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("for(5, x := 0, 5 == 5, x += 1)"));
     }
 
-    [Fact]
+    [Test]
     public void WhileToString()
     {
         var exp = new While(new Number(5), new Equal(new Number(5), new Number(5)));
 
-        Assert.Equal("while(5, (5 == 5))", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("while(5, 5 == 5)"));
     }
 
-    [Fact]
+    [Test]
     public void SignToString()
     {
         var exp = new Sign(new Number(-5));
         var str = exp.ToString();
 
-        Assert.Equal("sign(-5)", str);
+        Assert.That(str, Is.EqualTo("sign(-5)"));
     }
 
-    [Fact]
+    [Test]
     public void LeftShiftTest()
     {
         var exp = new LeftShift(Number.One, new Number(10));
         var str = exp.ToString();
 
-        Assert.Equal("1 << 10", str);
+        Assert.That(str, Is.EqualTo("1 << 10"));
     }
 
-    [Fact]
+    [Test]
     public void RightShiftTest()
     {
         var exp = new RightShift(Number.One, new Number(10));
         var str = exp.ToString();
 
-        Assert.Equal("1 >> 10", str);
+        Assert.That(str, Is.EqualTo("1 >> 10"));
     }
 
-    [Fact]
+    [Test]
     public void LeftShiftAssignTest()
     {
         var exp = new LeftShiftAssign(Variable.X, new Number(10));
         var str = exp.ToString();
 
-        Assert.Equal("x <<= 10", str);
+        Assert.That(str, Is.EqualTo("x <<= 10"));
     }
 
-    [Fact]
+    [Test]
     public void RightShiftAssignTest()
     {
         var exp = new RightShiftAssign(Variable.X, new Number(10));
         var str = exp.ToString();
 
-        Assert.Equal("x >>= 10", str);
+        Assert.That(str, Is.EqualTo("x >>= 10"));
     }
 
-    [Fact]
+    [Test]
     public void ToBinTest()
     {
         var exp = new ToBin(new Number(10));
 
-        Assert.Equal("tobin(10)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("tobin(10)"));
     }
 
-    [Fact]
+    [Test]
     public void ToOctTest()
     {
         var exp = new ToOct(new Number(10));
 
-        Assert.Equal("tooct(10)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("tooct(10)"));
     }
 
-    [Fact]
+    [Test]
     public void ToHexTest()
     {
         var exp = new ToHex(new Number(10));
 
-        Assert.Equal("tohex(10)", exp.ToString());
+        Assert.That(exp.ToString(), Is.EqualTo("tohex(10)"));
     }
 
     #endregion

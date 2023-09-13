@@ -5,7 +5,7 @@ namespace xFunc.Tests.Expressions.Programming;
 
 public class ConditionalOrTest
 {
-    [Fact]
+    [Test]
     public void CalculateOrTrueTest1()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 0) };
@@ -16,7 +16,7 @@ public class ConditionalOrTest
         Assert.True((bool) or.Execute(parameters));
     }
 
-    [Fact]
+    [Test]
     public void CalculateOrTrueTest2()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 0) };
@@ -27,15 +27,15 @@ public class ConditionalOrTest
         Assert.True((bool) or.Execute(parameters));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteInvalidParametersTest()
     {
         var or = new ConditionalOr(Number.One, Number.Two);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => or.Execute());
+        Assert.Throws<ExecutionException>(() => or.Execute());
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var lessThen = new LessThan(Variable.X, new Number(10));
@@ -43,6 +43,6 @@ public class ConditionalOrTest
         var exp = new ConditionalOr(lessThen, greaterThen);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

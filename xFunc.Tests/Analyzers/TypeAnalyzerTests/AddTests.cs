@@ -7,7 +7,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class AddTests : TypeAnalyzerBaseTests
 {
-    [Fact]
+    [Test]
     public void TestAddTwoNumberTest()
     {
         var add = new Add(Number.One, Number.Two);
@@ -15,7 +15,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(add, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestAddNumberVarTest()
     {
         var add = new Add(Number.One, Variable.X);
@@ -23,7 +23,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(add, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestAddComplicatedTest()
     {
         var add = new Add(new Mul(Number.One, Number.Two), Variable.X);
@@ -31,7 +31,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(add, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestAddTwoVectorTest()
     {
         var add = new Add(
@@ -42,7 +42,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(add, ResultTypes.Vector);
     }
 
-    [Fact]
+    [Test]
     public void TestAddTwoMatrixTest()
     {
         var add = new Add(
@@ -53,7 +53,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(add, ResultTypes.Matrix);
     }
 
-    [Fact]
+    [Test]
     public void TestAddNumberVectorTest()
     {
         var exp = new Add(
@@ -64,7 +64,7 @@ public class AddTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestAddBoolVectorException()
     {
         var exp = new Add(Bool.True, new Vector(new IExpression[] { Number.One }));
@@ -72,7 +72,7 @@ public class AddTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestAddVectorNumberTest()
     {
         var exp = new Add(new Vector(new IExpression[] { Number.One }), Bool.True);
@@ -80,7 +80,7 @@ public class AddTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestAddNumberMatrixTest()
     {
         var exp = new Add(
@@ -91,7 +91,7 @@ public class AddTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestAddMatrixNumberTest()
     {
         var exp = new Add(
@@ -102,7 +102,7 @@ public class AddTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestAddVectorMatrixTest()
     {
         var exp = new Add(
@@ -113,7 +113,7 @@ public class AddTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestAddMatrixVectorTest()
     {
         var exp = new Add(
@@ -124,7 +124,7 @@ public class AddTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestAddNumberComplexNumberTest()
     {
         var add = new Add(Number.One, new ComplexNumber(2, 1));
@@ -132,7 +132,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(add, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddBoolComplexNumberException()
     {
         var add = new Add(Bool.True, new ComplexNumber(2, 1));
@@ -140,7 +140,7 @@ public class AddTests : TypeAnalyzerBaseTests
         TestBinaryException(add);
     }
 
-    [Fact]
+    [Test]
     public void TestAddComplexNumberNumberTest()
     {
         var add = new Add(new ComplexNumber(1, 3), Number.Two);
@@ -148,7 +148,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(add, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddComplexNumberBoolException()
     {
         var add = new Add(new ComplexNumber(1, 3), Bool.True);
@@ -156,7 +156,7 @@ public class AddTests : TypeAnalyzerBaseTests
         TestBinaryException(add);
     }
 
-    [Fact]
+    [Test]
     public void TestAddComplexNumberComplexNumberTest()
     {
         var add = new Add(new ComplexNumber(1, 3), new ComplexNumber(2, 5));
@@ -164,7 +164,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(add, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddNumberAllTest()
     {
         var exp = new Add(
@@ -176,7 +176,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestAddComplexNumberAllTest()
     {
         var exp = new Add(
@@ -188,7 +188,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestAddVectorAllTest()
     {
         var exp = new Add(
@@ -200,7 +200,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestAddMatrixAllTest()
     {
         var matrix = new Matrix(new[]
@@ -216,7 +216,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestAddBoolAndMatrixTest()
     {
         var matrix = new Matrix(new[]
@@ -228,7 +228,7 @@ public class AddTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestAddMatrixAndBoolTest()
     {
         var matrix = new Matrix(new[]
@@ -240,7 +240,7 @@ public class AddTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestAddNumberSqrtComplexTest()
     {
         var exp = new Add(Number.Two, new Sqrt(new Number(-9)));
@@ -248,7 +248,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestAddTwoVarTest()
     {
         var exp = new Add(Variable.X, Variable.X);
@@ -256,7 +256,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestAddThreeVarTest()
     {
         var exp = new Add(new Add(Variable.X, Variable.X), Variable.X);
@@ -264,7 +264,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestAddException()
     {
         var exp = new Add(Bool.False, Bool.False);
@@ -272,7 +272,7 @@ public class AddTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestAddNumberAngle()
     {
         var exp = new Add(
@@ -283,7 +283,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddAngleNumber()
     {
         var exp = new Add(
@@ -294,7 +294,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddAngleAngle()
     {
         var exp = new Add(
@@ -305,7 +305,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddNumberPower()
     {
         var exp = new Add(
@@ -316,7 +316,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.PowerNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddPowerNumber()
     {
         var exp = new Add(
@@ -327,7 +327,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.PowerNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddPowerPower()
     {
         var exp = new Add(
@@ -338,7 +338,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.PowerNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddNumberTemperature()
     {
         var exp = new Add(
@@ -349,7 +349,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TemperatureNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddTemperatureNumber()
     {
         var exp = new Add(
@@ -360,7 +360,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TemperatureNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddTemperatureTemperature()
     {
         var exp = new Add(
@@ -371,7 +371,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TemperatureNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddNumberAndMass()
     {
         var exp = new Add(
@@ -382,7 +382,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.MassNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddMassAndNumber()
     {
         var exp = new Add(
@@ -393,7 +393,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.MassNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddMassAndMass()
     {
         var exp = new Add(
@@ -404,7 +404,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.MassNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddNumberAndLength()
     {
         var exp = new Add(
@@ -415,7 +415,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.LengthNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddLengthAndNumber()
     {
         var exp = new Add(
@@ -426,7 +426,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.LengthNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddLengthAndLength()
     {
         var exp = new Add(
@@ -437,7 +437,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.LengthNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddNumberAndTime()
     {
         var exp = new Add(
@@ -448,7 +448,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TimeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddTimeAndNumber()
     {
         var exp = new Add(
@@ -459,7 +459,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TimeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddTimeAndTime()
     {
         var exp = new Add(
@@ -470,7 +470,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TimeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddNumberAndArea()
     {
         var exp = new Add(
@@ -481,7 +481,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AreaNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddAreaAndNumber()
     {
         var exp = new Add(
@@ -492,7 +492,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AreaNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddAreaAndArea()
     {
         var exp = new Add(
@@ -503,7 +503,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AreaNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddNumberAndVolume()
     {
         var exp = new Add(
@@ -514,7 +514,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.VolumeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddVolumeAndNumber()
     {
         var exp = new Add(
@@ -525,7 +525,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.VolumeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAddVolumeAndVolume()
     {
         var exp = new Add(
@@ -536,7 +536,40 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.VolumeNumber);
     }
 
-    [Fact]
+    [Test]
+    public void TestAddRationalAndRational()
+    {
+        var exp = new Add(
+            new Rational(Number.One, Number.Two),
+            new Rational(Number.Two, Number.One)
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Test]
+    public void TestAddNumberAndRational()
+    {
+        var exp = new Add(
+            Number.One,
+            new Rational(Number.Two, Number.One)
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Test]
+    public void TestAddRationalAndNumber()
+    {
+        var exp = new Add(
+            new Rational(Number.One, Number.Two),
+            Number.One
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Test]
     public void TestAddStringToString()
     {
         var exp = new Add(
@@ -547,7 +580,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.String);
     }
 
-    [Fact]
+    [Test]
     public void TestAddStringToNumber()
     {
         var exp = new Add(
@@ -558,7 +591,7 @@ public class AddTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.String);
     }
 
-    [Fact]
+    [Test]
     public void TestAddNumberToString()
     {
         var exp = new Add(
@@ -596,8 +629,8 @@ public class AddTests : TypeAnalyzerBaseTests
         yield return new object[] { Bool.False, VolumeValue.Meter(90).AsExpression() };
     }
 
-    [Theory]
-    [MemberData(nameof(GetDataForTestAddAngleAndBoolTest))]
+    [Test]
+    [TestCaseSource(nameof(GetDataForTestAddAngleAndBoolTest))]
     public void TestAddAngleAndBoolTest(IExpression left, IExpression right)
     {
         var exp = new Add(left, right);

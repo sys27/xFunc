@@ -5,7 +5,7 @@ namespace xFunc.Tests.Expressions.Matrices;
 
 public class TransposeTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteMatrixTest()
     {
         var matrix = new Matrix(new[]
@@ -22,10 +22,10 @@ public class TransposeTest : BaseExpressionTests
         });
         var exp = new Transpose(matrix);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteVectorTest()
     {
         var vector = new Vector(new[] { Number.One, Number.Two });
@@ -37,10 +37,10 @@ public class TransposeTest : BaseExpressionTests
         });
         var exp = new Transpose(vector);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteWrongArgumentTypeTest()
     {
         var exp = new Transpose(Bool.True);
@@ -48,12 +48,12 @@ public class TransposeTest : BaseExpressionTests
         TestNotSupported(exp);
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Transpose(new Vector(new[] { Number.One, Number.Two }));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

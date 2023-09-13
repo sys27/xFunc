@@ -5,10 +5,10 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class NumericConvertionTests : TypeAnalyzerBaseTests
 {
-    [Theory]
-    [InlineData(typeof(ToBin))]
-    [InlineData(typeof(ToOct))]
-    [InlineData(typeof(ToHex))]
+    [Test]
+    [TestCase(typeof(ToBin))]
+    [TestCase(typeof(ToOct))]
+    [TestCase(typeof(ToHex))]
     public void UndefinedTest(Type type)
     {
         var exp = Create(type, Variable.X);
@@ -16,10 +16,10 @@ public class NumericConvertionTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.String);
     }
 
-    [Theory]
-    [InlineData(typeof(ToBin))]
-    [InlineData(typeof(ToOct))]
-    [InlineData(typeof(ToHex))]
+    [Test]
+    [TestCase(typeof(ToBin))]
+    [TestCase(typeof(ToOct))]
+    [TestCase(typeof(ToHex))]
     public void NumberTest(Type type)
     {
         var exp = Create(type, new Number(10));
@@ -27,10 +27,10 @@ public class NumericConvertionTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.String);
     }
 
-    [Theory]
-    [InlineData(typeof(ToBin))]
-    [InlineData(typeof(ToOct))]
-    [InlineData(typeof(ToHex))]
+    [Test]
+    [TestCase(typeof(ToBin))]
+    [TestCase(typeof(ToOct))]
+    [TestCase(typeof(ToHex))]
     public void BoolTest(Type type)
     {
         var exp = Create(type, Bool.False);

@@ -5,33 +5,33 @@ namespace xFunc.Tests.Expressions.Units.AngleUnits;
 
 public class ToDegreeTest
 {
-    [Fact]
+    [Test]
     public void ExecuteNumberTest()
     {
         var exp = new ToDegree(new Number(10));
         var actual = exp.Execute();
         var expected = AngleValue.Degree(10);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteAngleTest()
     {
         var exp = new ToDegree(AngleValue.Degree(10).AsExpression());
         var actual = exp.Execute();
         var expected = AngleValue.Degree(10);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteBoolTest()
     {
-        Assert.Throws<ResultIsNotSupportedException>(() => new ToDegree(Bool.False).Execute());
+        Assert.Throws<ExecutionException>(() => new ToDegree(Bool.False).Execute());
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest1()
     {
         var exp = new ToDegree(new Number(10));
@@ -39,7 +39,7 @@ public class ToDegreeTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest2()
     {
         var exp = new ToDegree(new Number(10));
@@ -47,12 +47,12 @@ public class ToDegreeTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new ToDegree(new Number(10));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

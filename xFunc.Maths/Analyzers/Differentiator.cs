@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics.CodeAnalysis;
-using static xFunc.Maths.ThrowHelpers;
 
 namespace xFunc.Maths.Analyzers;
 
@@ -16,9 +15,36 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     private void ValidateArguments([NotNull] IExpression? exp, [NotNull] DifferentiatorContext? context)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
         if (context is null)
-            ArgNull(ExceptionArgument.context);
+            throw new ArgumentNullException(nameof(context));
+    }
+
+    private static bool HasVariable(IExpression expression, Variable variable)
+    {
+        while (true)
+        {
+            if (expression is BinaryExpression bin)
+                return HasVariable(bin.Left, variable) ||
+                       HasVariable(bin.Right, variable);
+
+            if (expression is UnaryExpression un)
+            {
+                expression = un.Argument;
+                continue;
+            }
+
+            if (expression is DifferentParametersExpression paramExp)
+            {
+                foreach (var argument in paramExp.Arguments)
+                    if (HasVariable(argument, variable))
+                        return true;
+
+                return false;
+            }
+
+            return expression is Variable v && v.Equals(variable);
+        }
     }
 
     #region Standard
@@ -28,7 +54,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new Mul(
@@ -41,8 +67,8 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        var hasVariableInLeft = Helpers.HasVariable(exp.Left, context.Variable);
-        var hasVariableInRight = Helpers.HasVariable(exp.Right, context.Variable);
+        var hasVariableInLeft = HasVariable(exp.Left, context.Variable);
+        var hasVariableInRight = HasVariable(exp.Right, context.Variable);
 
         return (hasVariableInLeft, hasVariableInRight) switch
         {
@@ -58,7 +84,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         var diff = exp.Expression;
@@ -75,8 +101,8 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        var hasVariableInLeft = Helpers.HasVariable(exp.Left, context.Variable);
-        var hasVariableInRight = Helpers.HasVariable(exp.Right, context.Variable);
+        var hasVariableInLeft = HasVariable(exp.Left, context.Variable);
+        var hasVariableInRight = HasVariable(exp.Right, context.Variable);
 
         return (hasVariableInLeft, hasVariableInRight) switch
         {
@@ -104,7 +130,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new Mul(exp.Argument.Analyze(this, context), exp);
@@ -115,7 +141,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new Div(
@@ -130,7 +156,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new Div(
@@ -145,7 +171,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new Div(exp.Argument.Analyze(this, context), exp.Argument);
@@ -156,7 +182,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (Helpers.HasVariable(exp.Left, context.Variable))
+        if (HasVariable(exp.Left, context.Variable))
         {
             var div = new Div(
                 new Ln(exp.Right),
@@ -165,7 +191,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
             return Analyze(div, context);
         }
 
-        if (Helpers.HasVariable(exp.Right, context.Variable))
+        if (HasVariable(exp.Right, context.Variable))
         {
             return new Div(
                 exp.Right.Analyze(this, context),
@@ -182,8 +208,8 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        var hasVariableInLeft = Helpers.HasVariable(exp.Left, context.Variable);
-        var hasVariableInRight = Helpers.HasVariable(exp.Right, context.Variable);
+        var hasVariableInLeft = HasVariable(exp.Left, context.Variable);
+        var hasVariableInRight = HasVariable(exp.Right, context.Variable);
 
         return (hasVariableInLeft, hasVariableInRight) switch
         {
@@ -279,8 +305,8 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        var hasVariableInLeft = Helpers.HasVariable(exp.Left, context.Variable);
-        var hasVariableInRight = Helpers.HasVariable(exp.Right, context.Variable);
+        var hasVariableInLeft = HasVariable(exp.Left, context.Variable);
+        var hasVariableInRight = HasVariable(exp.Right, context.Variable);
 
         return (hasVariableInLeft, hasVariableInRight) switch
         {
@@ -309,7 +335,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         var pow = new Pow(
@@ -324,7 +350,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return exp.Argument.Analyze(this, context);
@@ -335,7 +361,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new Div(
@@ -348,8 +374,8 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        var hasVariableInLeft = Helpers.HasVariable(exp.Left, context.Variable);
-        var hasVariableInRight = Helpers.HasVariable(exp.Right, context.Variable);
+        var hasVariableInLeft = HasVariable(exp.Left, context.Variable);
+        var hasVariableInRight = HasVariable(exp.Right, context.Variable);
 
         return (hasVariableInLeft, hasVariableInRight) switch
         {
@@ -365,7 +391,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new UnaryMinus(exp.Argument.Analyze(this, context));
@@ -391,7 +417,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new UnaryMinus(
@@ -408,7 +434,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new UnaryMinus(
@@ -424,7 +450,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new UnaryMinus(
@@ -443,7 +469,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new Div(
@@ -461,7 +487,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new Div(
@@ -477,7 +503,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new Div(
@@ -492,7 +518,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new UnaryMinus(
@@ -506,7 +532,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new UnaryMinus(
@@ -534,7 +560,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new Mul(
@@ -549,7 +575,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new Mul(
@@ -562,7 +588,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new Div(
@@ -581,7 +607,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new Div(
@@ -597,7 +623,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new Div(
@@ -612,7 +638,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new UnaryMinus(
@@ -647,7 +673,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new Div(
@@ -663,7 +689,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new Div(
@@ -678,7 +704,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new Mul(
@@ -691,7 +717,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new UnaryMinus(
@@ -707,7 +733,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new UnaryMinus(
@@ -723,7 +749,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new UnaryMinus(
@@ -739,7 +765,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new Mul(
@@ -752,7 +778,7 @@ public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDif
     {
         ValidateArguments(exp, context);
 
-        if (!Helpers.HasVariable(exp, context.Variable))
+        if (!HasVariable(exp, context.Variable))
             return Number.Zero;
 
         return new Div(

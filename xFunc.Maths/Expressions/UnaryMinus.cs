@@ -36,7 +36,8 @@ public class UnaryMinus : UnaryExpression
             AreaValue area => -area,
             VolumeValue volume => -volume,
             Complex complex => Complex.Negate(complex),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            RationalValue rationalValue => -rationalValue,
+            _ => throw ExecutionException.For(this),
         };
     }
 

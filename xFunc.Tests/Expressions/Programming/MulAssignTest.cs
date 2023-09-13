@@ -5,7 +5,7 @@ namespace xFunc.Tests.Expressions.Programming;
 
 public class MulAssignTest
 {
-    [Fact]
+    [Test]
     public void MulAssignCalc()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 10) };
@@ -13,22 +13,22 @@ public class MulAssignTest
         var result = mul.Execute(parameters);
         var expected = new NumberValue(20.0);
 
-        Assert.Equal(expected, result);
-        Assert.Equal(expected, parameters["x"]);
+        Assert.That(result, Is.EqualTo(expected));
+        Assert.That(parameters["x"].Value, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulAssignAsExpressionTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 10) };
         var add = new Add(Number.Two, new MulAssign(Variable.X, Number.Two));
         var result = add.Execute(parameters);
 
-        Assert.Equal(new NumberValue(22.0), result);
-        Assert.Equal(new NumberValue(20.0), parameters["x"]);
+        Assert.That(result, Is.EqualTo(new NumberValue(22.0)));
+        Assert.That(parameters["x"].Value, Is.EqualTo(new NumberValue(20.0)));
     }
 
-    [Fact]
+    [Test]
     public void MulNullParameters()
     {
         var exp = new MulAssign(Variable.X, Number.One);
@@ -36,50 +36,50 @@ public class MulAssignTest
         Assert.Throws<ArgumentNullException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void MulValueBoolParameters()
     {
         var exp = new MulAssign(Variable.X, Bool.False);
         var parameters = new ExpressionParameters { new Parameter("x", 1) };
 
-        Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));
+        Assert.Throws<ExecutionException>(() => exp.Execute(parameters));
     }
 
-    [Fact]
+    [Test]
     public void BoolMulNumberTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", true) };
         var mul = new MulAssign(Variable.X, Number.Two);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => mul.Execute(parameters));
+        Assert.Throws<ExecutionException>(() => mul.Execute(parameters));
     }
 
-    [Fact]
+    [Test]
     public void SameEqualsTest()
     {
         var exp = new MulAssign(Variable.X, Number.One);
 
-        Assert.True(exp.Equals(exp));
+        Assert.That(exp.Equals(exp), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualsNullTest()
     {
         var exp = new MulAssign(Variable.X, Number.One);
 
-        Assert.False(exp.Equals(null));
+        Assert.That(exp.Equals(null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsDifferentTypeTest()
     {
         var exp1 = new MulAssign(Variable.X, Number.One);
         var exp2 = new DivAssign(Variable.X, Number.One);
 
-        Assert.False(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest1()
     {
         var exp = new MulAssign(Variable.X, Number.One);
@@ -87,7 +87,7 @@ public class MulAssignTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest2()
     {
         var exp = new MulAssign(Variable.X, Number.One);
@@ -95,12 +95,12 @@ public class MulAssignTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new MulAssign(Variable.X, Number.Two);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

@@ -5,23 +5,23 @@ namespace xFunc.Tests.ParserTests;
 
 public class StringTests : BaseParserTests
 {
-    [Theory]
-    [InlineData("\"\"", "")]
-    [InlineData("''", "")]
-    [InlineData("\"hello\"", "hello")]
-    [InlineData("'hello'", "hello")]
-    [InlineData("\"hello, 'inline'\"", "hello, 'inline'")]
-    [InlineData("'hello, \"inline\"'", "hello, \"inline\"")]
-    [InlineData("\"sin(x)\"", "sin(x)")]
+    [Test]
+    [TestCase("\"\"", "")]
+    [TestCase("''", "")]
+    [TestCase("\"hello\"", "hello")]
+    [TestCase("'hello'", "hello")]
+    [TestCase("\"hello, 'inline'\"", "hello, 'inline'")]
+    [TestCase("'hello, \"inline\"'", "hello, \"inline\"")]
+    [TestCase("\"sin(x)\"", "sin(x)")]
     public void Quotes(string exp, string result)
         => ParseTest(exp, new StringExpression(result));
 
-    [Theory]
-    [InlineData("\"hello")]
-    [InlineData("'hello")]
-    [InlineData("hello\"")]
-    [InlineData("hello'")]
-    [InlineData("\"hello, 'inside'")]
+    [Test]
+    [TestCase("\"hello")]
+    [TestCase("'hello")]
+    [TestCase("hello\"")]
+    [TestCase("hello'")]
+    [TestCase("\"hello, 'inside'")]
     public void MissingQuote(string exp)
         => ParseErrorTest<TokenizeException>(exp);
 }

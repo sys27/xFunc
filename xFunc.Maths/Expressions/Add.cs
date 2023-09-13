@@ -85,13 +85,17 @@ public class Add : BinaryExpression
             (Complex left, NumberValue right) => left + right,
             (Complex left, Complex right) => left + right,
 
+            (NumberValue left, RationalValue right) => left + right,
+            (RationalValue left, NumberValue right) => left + right,
+            (RationalValue left, RationalValue right) => left + right,
+
             (VectorValue left, VectorValue right) => left + right,
             (MatrixValue left, MatrixValue right) => left + right,
 
             (string left, var right) => left + right,
             (var left, string right) => left + right,
 
-            _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            _ => throw ExecutionException.For(this),
         };
     }
 

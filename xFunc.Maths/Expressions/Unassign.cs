@@ -12,6 +12,7 @@ public class Unassign : IExpression
     /// Initializes a new instance of the <see cref="Unassign"/> class.
     /// </summary>
     /// <param name="key">The key.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="key"/> is <c>null</c>.</exception>
     public Unassign(Variable key)
         => Key = key ?? throw new ArgumentNullException(nameof(key));
 
@@ -34,7 +35,7 @@ public class Unassign : IExpression
     public override string ToString() => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
-    /// <exception cref="NotSupportedException">Always.</exception>
+    /// <exception cref="NotSupportedException">The evaluation of this expression requires <see cref="ExpressionParameters"/>.</exception>
     public object Execute()
         => throw new NotSupportedException();
 

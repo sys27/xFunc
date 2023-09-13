@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "xFunc.Cli": {
+      "commandName": "Project",
+      "commandLineArgs": "interactive"
+    }
+  }
+}

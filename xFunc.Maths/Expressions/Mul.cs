@@ -79,6 +79,10 @@ public class Mul : BinaryExpression
             (Complex left, NumberValue right) => left * right,
             (Complex left, Complex right) => left * right,
 
+            (NumberValue left, RationalValue right) => left * right,
+            (RationalValue left, NumberValue right) => left * right,
+            (RationalValue left, RationalValue right) => left * right,
+
             (VectorValue left, VectorValue right) => left * right,
             (NumberValue left, VectorValue right) => right * left,
             (VectorValue left, NumberValue right) => left * right,
@@ -90,7 +94,7 @@ public class Mul : BinaryExpression
             (MatrixValue left, VectorValue right) => left * right,
             (VectorValue left, MatrixValue right) => left * right,
 
-            _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            _ => throw ExecutionException.For(this),
         };
     }
 

@@ -6,7 +6,6 @@ namespace xFunc.Benchmark.Benchmarks;
 public class DifferentiatorBenchmark
 {
     private Differentiator differentiator;
-    private DifferentiatorContext context;
 
     private IExpression complexExp;
 
@@ -14,7 +13,6 @@ public class DifferentiatorBenchmark
     public void Setup()
     {
         differentiator = new Differentiator();
-        context = DifferentiatorContext.Default();
 
         var processor = new Processor();
 
@@ -23,5 +21,5 @@ public class DifferentiatorBenchmark
 
     [Benchmark]
     public IExpression ComplexExpression()
-        => complexExp.Analyze(differentiator, context);
+        => complexExp.Analyze(differentiator, new DifferentiatorContext());
 }

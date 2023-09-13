@@ -5,35 +5,35 @@ namespace xFunc.Tests.Expressions;
 
 public class ModTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteTest1()
     {
         var exp = new Mod(new Number(25), new Number(7));
         var result = exp.Execute();
         var expected = new NumberValue(4.0);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest2()
     {
         var exp = new Mod(new Number(25), new Number(5));
         var result = exp.Execute();
 
-        Assert.Equal(new NumberValue(0.0), result);
+        Assert.That(result, Is.EqualTo(new NumberValue(0.0)));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest3()
     {
         var exp = new Mod(Number.Zero, new Number(5));
         var result = exp.Execute();
 
-        Assert.Equal(new NumberValue(0.0), result);
+        Assert.That(result, Is.EqualTo(new NumberValue(0.0)));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest4()
     {
         var exp = new Mod(new Number(5), Number.Zero);
@@ -42,16 +42,16 @@ public class ModTest : BaseExpressionTests
         Assert.True(result.IsNaN);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteResultIsNotSupported()
         => TestNotSupported(new Mod(Bool.True, Bool.False));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Mod(new Number(5), Number.Zero);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

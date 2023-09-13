@@ -5,19 +5,19 @@ namespace xFunc.Tests.ParserTests;
 
 public class LogicalOperatorTests : BaseParserTests
 {
-    [Theory]
-    [InlineData("~2")]
-    [InlineData("not(2)")]
+    [Test]
+    [TestCase("~2")]
+    [TestCase("not(2)")]
     public void NotTest(string function)
         => ParseTest(function, new Not(Number.Two));
 
-    [Theory]
-    [InlineData("true & false")]
-    [InlineData("true and false")]
+    [Test]
+    [TestCase("true & false")]
+    [TestCase("true and false")]
     public void BoolConstTest(string function)
         => ParseTest(function, new And(Bool.True, Bool.False));
 
-    [Fact]
+    [Test]
     public void LogicAddPriorityTest()
     {
         var expected = new And(
@@ -28,33 +28,33 @@ public class LogicalOperatorTests : BaseParserTests
         ParseTest("3 > 4 & 1 < 3", expected);
     }
 
-    [Theory]
-    [InlineData("1 | 2")]
-    [InlineData("1 or 2")]
+    [Test]
+    [TestCase("1 | 2")]
+    [TestCase("1 or 2")]
     public void OrTest(string function)
         => ParseTest(function, new Or(Number.One, Number.Two));
 
-    [Fact]
+    [Test]
     public void XOrTest()
         => ParseTest("1 xor 2", new XOr(Number.One, Number.Two));
 
-    [Fact]
+    [Test]
     public void NOrTest()
         => ParseTest("true nor true", new NOr(Bool.True, Bool.True));
 
-    [Fact]
+    [Test]
     public void NAndTest()
         => ParseTest("true nand true", new NAnd(Bool.True, Bool.True));
 
-    [Fact]
+    [Test]
     public void ImplicationTest()
         => ParseTest("true impl true", new Implication(Bool.True, Bool.True));
 
-    [Fact]
+    [Test]
     public void EqualityTest()
         => ParseTest("true eq true", new Equality(Bool.True, Bool.True));
 
-    [Fact]
+    [Test]
     public void AndXOrOrPrecedenceTest()
     {
         var expected = new Or(

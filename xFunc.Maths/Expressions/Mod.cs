@@ -30,7 +30,7 @@ public class Mod : BinaryExpression
         return (leftResult, rightResult) switch
         {
             (NumberValue left, NumberValue right) => left % right,
-            _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            _ => throw ExecutionException.For(this),
         };
     }
 

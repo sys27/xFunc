@@ -43,7 +43,7 @@ public class Inverse : UnaryExpression
         return result switch
         {
             MatrixValue matrix => MatrixValue.Inverse(matrix),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

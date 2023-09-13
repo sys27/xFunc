@@ -194,6 +194,10 @@ public abstract class Analyzer<TResult, TContext> : IAnalyzer<TResult, TContext>
         => Analyze(exp as IExpression, context);
 
     /// <inheritdoc />
+    public virtual TResult Analyze(Curry exp, TContext context)
+        => Analyze(exp as IExpression, context);
+
+    /// <inheritdoc />
     public virtual TResult Analyze(Variable exp, TContext context)
         => Analyze(exp as IExpression, context);
 
@@ -223,6 +227,14 @@ public abstract class Analyzer<TResult, TContext> : IAnalyzer<TResult, TContext>
 
     /// <inheritdoc />
     public virtual TResult Analyze(Expressions.Units.Convert exp, TContext context)
+        => Analyze(exp as IExpression, context);
+
+    /// <inheritdoc />
+    public virtual TResult Analyze(Rational exp, TContext context)
+        => Analyze(exp as IExpression, context);
+
+    /// <inheritdoc />
+    public virtual TResult Analyze(ToRational exp, TContext context)
         => Analyze(exp as IExpression, context);
 
     #endregion Standard

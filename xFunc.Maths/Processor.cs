@@ -1,14 +1,36 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Numerics;
-using static xFunc.Maths.ThrowHelpers;
-
 namespace xFunc.Maths;
 
 /// <summary>
 /// The main point of this library. Brings together all features.
 /// </summary>
+/// <example>
+///   <para>To parse the function to expression tree:</para>
+///   <code>
+///     var processor = new Processor();
+///     var exp = processor.Parse("2 + x");
+///   </code>
+///
+///   <para>To evaluate the function:</para>
+///   <code>
+///     var processor = new Processor();
+///     var result = processor.Solve("2 + 2");
+///   </code>
+///
+///   <para>To simplify the expression:</para>
+///   <code>
+///     var processor = new Processor();
+///     var result = processor.Solve("simplify((x) => arcsin(sin(x)))");
+///   </code>
+///
+///   <para>To differentiate the expression:</para>
+///   <code>
+///     var processor = new Processor();
+///     var result = processor.Solve("deriv((x) => 2x)");
+///   </code>
+/// </example>
 public class Processor
 {
     private readonly ITypeAnalyzer typeAnalyzer;
@@ -20,6 +42,9 @@ public class Processor
     /// <summary>
     /// Initializes a new instance of the <see cref="Processor"/> class.
     /// </summary>
+    /// <remarks>
+    /// Initializes default instance of <see cref="Processor"/> with default implementation of all dependencies. If you can change them, please, see other overloads of this constructor.
+    /// </remarks>
     public Processor()
     {
         simplifier = new Simplifier();
@@ -36,6 +61,8 @@ public class Processor
     /// </summary>
     /// <param name="simplifier">The simplifier.</param>
     /// <param name="differentiator">The differentiator.</param>
+    /// <seealso cref="IDifferentiator"/>
+    /// <seealso cref="ISimplifier"/>
     public Processor(
         ISimplifier simplifier,
         IDifferentiator differentiator)
@@ -56,6 +83,12 @@ public class Processor
     /// <param name="converter">The converter.</param>
     /// <param name="typeAnalyzer">The type analyzer.</param>
     /// <param name="parameters">The collection of parameters.</param>
+    /// <exception cref="ArgumentNullException">Thrown when one of parameters is <c>null</c>.</exception>
+    /// <seealso cref="ITypeAnalyzer"/>
+    /// <seealso cref="IDifferentiator"/>
+    /// <seealso cref="ISimplifier"/>
+    /// <seealso cref="IConverter"/>
+    /// <seealso cref="IParser"/>
     public Processor(
         ISimplifier simplifier,
         IDifferentiator differentiator,
@@ -63,101 +96,72 @@ public class Processor
         ITypeAnalyzer typeAnalyzer,
         ExpressionParameters parameters)
     {
-        if (simplifier is null)
-            ArgNull(ExceptionArgument.simplifier);
-        if (differentiator is null)
-            ArgNull(ExceptionArgument.differentiator);
-        if (converter is null)
-            ArgNull(ExceptionArgument.converter);
-        if (typeAnalyzer is null)
-            ArgNull(ExceptionArgument.typeAnalyzer);
-
         parser = new Parser();
 
-        this.simplifier = simplifier;
-        this.differentiator = differentiator;
-        this.converter = converter;
-        this.typeAnalyzer = typeAnalyzer;
+        this.simplifier = simplifier ?? throw new ArgumentNullException(nameof(simplifier));
+        this.differentiator = differentiator ?? throw new ArgumentNullException(nameof(differentiator));
+        this.converter = converter ?? throw new ArgumentNullException(nameof(converter));
+        this.typeAnalyzer = typeAnalyzer ?? throw new ArgumentNullException(nameof(typeAnalyzer));
 
         Parameters = parameters;
     }
 
     /// <summary>
-    /// Solves the specified expression.
+    /// Evaluates the specified expression.
     /// </summary>
-    /// <param name="function">The function.</param>
-    /// <returns>The result of solving.</returns>
-    public IResult Solve(string function)
+    /// <param name="expression">The expression.</param>
+    /// <remarks>
+    ///   <para>If your expression contains any parameter or user-defined function, then they will be resolved from the built-in <see cref="Parameters"/> collection.</para>
+    /// </remarks>
+    /// <returns>The result of evaluation.</returns>
+    /// <example>
+    ///   <code>
+    ///     var processor = new Processor();
+    ///     var result = processor.Solve("2 + 2");
+    ///   </code>
+    /// </example>
+    /// <seealso cref="Result"/>
+    /// <seealso cref="Result.AngleResult"/>
+    /// <seealso cref="Result.AreaResult"/>
+    /// <seealso cref="Result.BooleanResult"/>
+    /// <seealso cref="Result.ComplexNumberResult"/>
+    /// <seealso cref="Result.EmptyResult"/>
+    /// <seealso cref="Result.LambdaResult"/>
+    /// <seealso cref="Result.LengthResult"/>
+    /// <seealso cref="Result.MassResult"/>
+    /// <seealso cref="Result.MatrixResult"/>
+    /// <seealso cref="Result.NumberResult"/>
+    /// <seealso cref="Result.PowerResult"/>
+    /// <seealso cref="Result.StringResult"/>
+    /// <seealso cref="Result.TemperatureResult"/>
+    /// <seealso cref="Result.TimeResult"/>
+    /// <seealso cref="Result.VectorResult"/>
+    /// <seealso cref="Result.VolumeResult"/>
+    public Result Solve(string expression)
     {
-        var exp = Parse(function);
+        var exp = Parse(expression);
         exp.Analyze(typeAnalyzer);
 
         var result = exp.Execute(Parameters);
-        return result switch
-        {
-            NumberValue number
-                => new NumberResult(number.Number),
 
-            AngleValue angle
-                => new AngleNumberResult(angle),
-
-            PowerValue power
-                => new PowerNumberResult(power),
-
-            TemperatureValue temperature
-                => new TemperatureNumberResult(temperature),
-
-            MassValue mass
-                => new MassNumberResult(mass),
-
-            LengthValue length
-                => new LengthNumberResult(length),
-
-            TimeValue time
-                => new TimeNumberResult(time),
-
-            AreaValue area
-                => new AreaNumberResult(area),
-
-            VolumeValue volume
-                => new VolumeNumberResult(volume),
-
-            Complex complex
-                => new ComplexNumberResult(complex),
-
-            bool boolean
-                => new BooleanResult(boolean),
-
-            string str
-                => new StringResult(str),
-
-            Lambda lambda
-                => new LambdaResult(lambda),
-
-            VectorValue vectorValue
-                => new VectorValueResult(vectorValue),
-
-            MatrixValue matrixValue
-                => new MatrixValueResult(matrixValue),
-
-            _ => throw new InvalidResultException(),
-        };
+        return Result.Create(result);
     }
-
-    /// <summary>
-    /// Solves the specified function.
-    /// </summary>
-    /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <param name="function">The function.</param>
-    /// <returns>The result of solving.</returns>
-    public TResult Solve<TResult>(string function) where TResult : IResult
-        => (TResult)Solve(function);
 
     /// <summary>
     /// Simplifies the <paramref name="function"/>.
     /// </summary>
+    /// <remarks>
+    /// This method delegates the actual implementation of simplification of expression to <see cref="ISimplifier"/>.
+    /// </remarks>
     /// <param name="function">The function.</param>
-    /// <returns>A simplified expression.</returns>
+    /// <returns>The simplified expression.</returns>
+    /// <example>
+    ///   <code>
+    ///     var processor = new Processor();
+    ///     var result = processor.Simplify("arcsin(sin(x))");
+    ///   </code>
+    /// </example>
+    /// <seealso cref="IExpression"/>
     public IExpression Simplify(string function)
     {
         var expression = Parse(function);
@@ -168,8 +172,19 @@ public class Processor
     /// <summary>
     /// Simplifies the <paramref name="expression"/>.
     /// </summary>
+    /// <remarks>
+    /// This method delegates the actual implementation of simplification of expression to <see cref="ISimplifier"/>.
+    /// </remarks>
     /// <param name="expression">A expression to simplify.</param>
     /// <returns>A simplified expression.</returns>
+    /// <example>
+    ///   <code>
+    ///     var processor = new Processor();
+    ///     var exp = processor.Parse("arcsin(sin(x))");
+    ///     var result = processor.Simplify(exp);
+    ///   </code>
+    /// </example>
+    /// <seealso cref="IExpression"/>
     public IExpression Simplify(IExpression expression)
     {
         if (expression is null)
@@ -181,8 +196,18 @@ public class Processor
     /// <summary>
     /// Differentiates the specified expression.
     /// </summary>
+    /// <remarks>
+    /// This method delegates the actual implementation of differentiation of expression to <see cref="IDifferentiator"/>.
+    /// </remarks>
     /// <param name="function">The function.</param>
     /// <returns>Returns the derivative.</returns>
+    /// <example>
+    ///   <code>
+    ///     var processor = new Processor();
+    ///     var result = processor.Differentiate("x ^ 2");
+    ///   </code>
+    /// </example>
+    /// <seealso cref="IExpression"/>
     public IExpression Differentiate(string function)
     {
         var expression = Parse(function);
@@ -193,38 +218,41 @@ public class Processor
     /// <summary>
     /// Differentiates the specified expression.
     /// </summary>
+    /// <remarks>
+    /// This method delegates the actual implementation of differentiation of expression to <see cref="IDifferentiator"/>.
+    /// </remarks>
     /// <param name="expression">The expression.</param>
     /// <returns>Returns the derivative.</returns>
+    /// <example>
+    ///   <code>
+    ///     var processor = new Processor();
+    ///     var exp = processor.Parse("x ^ 2");
+    ///     var result = processor.Differentiate(exp);
+    ///   </code>
+    /// </example>
+    /// <seealso cref="IExpression"/>
     public IExpression Differentiate(IExpression expression)
         => Differentiate(expression, Variable.X);
 
     /// <summary>
     /// Differentiates the specified expression.
     /// </summary>
+    /// <remarks>
+    /// This method delegates the actual implementation of differentiation of expression to <see cref="IDifferentiator"/>.
+    /// </remarks>
     /// <param name="expression">The expression.</param>
     /// <param name="variable">The variable.</param>
-    /// <returns>Returns the derivative.</returns>
-    public IExpression Differentiate(IExpression expression, Variable variable)
-        => Differentiate(expression, variable, new ExpressionParameters());
-
-    /// <summary>
-    /// Differentiates the specified expression.
-    /// </summary>
-    /// <param name="expression">The expression.</param>
-    /// <param name="variable">The variable.</param>
-    /// <param name="parameters">The parameters.</param>
     /// <returns>
     /// Returns the derivative.
     /// </returns>
-    public IExpression Differentiate(
-        IExpression expression,
-        Variable variable,
-        ExpressionParameters parameters)
+    /// <seealso cref="IExpression"/>
+    /// <seealso cref="Variable"/>
+    public IExpression Differentiate(IExpression expression, Variable variable)
     {
         if (expression is null)
             throw new ArgumentNullException(nameof(expression));
 
-        var context = new DifferentiatorContext(parameters, variable);
+        var context = new DifferentiatorContext(variable);
 
         return expression.Analyze(differentiator, context);
     }
@@ -234,8 +262,16 @@ public class Processor
     /// </summary>
     /// <param name="function">The function.</param>
     /// <returns>The parsed expression.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="function"/> is null.</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="function"/> is <c>null</c> or empty.</exception>
     /// <exception cref="ParseException">Error while parsing.</exception>
+    /// <exception cref="TokenizeException">Throw when the lexer encounters the unsupported symbol.</exception>
+    /// <example>
+    ///   <code>
+    ///     var processor = new Processor();
+    ///     var exp = processor.Parse("sin(x)");
+    ///   </code>
+    /// </example>
+    /// <seealso cref="IExpression"/>
     public IExpression Parse(string function)
         => parser.Parse(function);
 
@@ -245,5 +281,6 @@ public class Processor
     /// <value>
     /// The expression parameters object.
     /// </value>
+    /// <seealso cref="ExpressionParameters"/>
     public ExpressionParameters Parameters { get; }
 }

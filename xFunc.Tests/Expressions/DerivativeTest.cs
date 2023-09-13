@@ -1,67 +1,70 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Moq;
+using NSubstitute;
 
 namespace xFunc.Tests.Expressions;
 
 public class DerivativeTest
 {
-    [Fact]
+    [Test]
     public void DifferentiatorNull()
         => Assert.Throws<ArgumentNullException>(() => new Derivative(null, null, Variable.X));
 
-    [Fact]
+    [Test]
     public void SimplifierNull()
     {
-        var differentiator = new Mock<IDifferentiator>().Object;
+        var differentiator = Substitute.For<IDifferentiator>();
 
         Assert.Throws<ArgumentNullException>(() => new Derivative(differentiator, null, Variable.X));
     }
 
-    [Fact]
+    [Test]
     public void ExecutePointTest()
     {
-        var differentiator = new Mock<IDifferentiator>();
+        var differentiator = Substitute.For<IDifferentiator>();
         differentiator
-            .Setup(d => d.Analyze(It.IsAny<Variable>(), It.IsAny<DifferentiatorContext>()))
-            .Returns<Variable, DifferentiatorContext>((exp, _) => exp);
+            .Analyze(Arg.Any<Variable>(), Arg.Any<DifferentiatorContext>())
+            .Returns(info => info.Arg<Variable>());
 
-        var simplifier = new Mock<ISimplifier>();
+        var parameters = new ExpressionParameters();
 
         var deriv = new Derivative(
-            differentiator.Object,
-            simplifier.Object,
+            differentiator,
+            Substitute.For<ISimplifier>(),
             Variable.X.ToLambdaExpression(),
             Variable.X,
             Number.Two);
+        var expected = new NumberValue(2.0);
+        var result = deriv.Execute(parameters);
 
-        Assert.Equal(new NumberValue(2.0), deriv.Execute());
+        Assert.That(result, Is.EqualTo(expected));
+        Assert.That(parameters.ContainsKey(Variable.X.Name), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNonLambdaTest()
     {
-        var differentiator = new Mock<IDifferentiator>();
-        var simplifier = new Mock<ISimplifier>();
+        var differentiator = Substitute.For<IDifferentiator>();
+        var simplifier = Substitute.For<ISimplifier>();
         var derivative = new Derivative(
-            differentiator.Object,
-            simplifier.Object,
+            differentiator,
+            simplifier,
             Number.One);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => derivative.Execute());
+        Assert.Throws<ExecutionException>(() => derivative.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNullDerivTest()
         => Assert.Throws<ArgumentNullException>(() => new Derivative(null, null, Variable.X));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Derivative(new Differentiator(), new Simplifier(), new Sin(Variable.X), Variable.X, Number.One);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

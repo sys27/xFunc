@@ -5,33 +5,36 @@ namespace xFunc.Tests.Results;
 
 public class StringResultTest
 {
-    [Fact]
-    public void ResultTest()
+    [Test]
+    public void TryGetStringTest()
     {
-        var result = new StringResult("hello");
+        var expected = "hello";
+        var areaResult = new Result.StringResult(expected);
+        var result = areaResult.TryGetString(out var stringValue);
 
-        Assert.Equal("hello", result.Result);
+        Assert.That(result, Is.True);
+        Assert.That(stringValue, Is.EqualTo(expected));
     }
 
-    [Fact]
-    public void IResultTest()
+    [Test]
+    public void TryGetStringFalseTest()
     {
-        var result = new StringResult("hello") as IResult;
+        var areaResult = new Result.NumberResult(NumberValue.One);
+        var result = areaResult.TryGetString(out var stringValue);
 
-        Assert.Equal("hello", result.Result);
+        Assert.That(result, Is.False);
+        Assert.That(stringValue, Is.Null);
     }
 
-    [Fact]
+    [Test]
     public void NullTest()
-    {
-        Assert.Throws<ArgumentNullException>(() => new StringResult(null));
-    }
+        => Assert.Throws<ArgumentNullException>(() => new Result.StringResult(null!));
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
-        var result = new StringResult("hello");
+        var result = new Result.StringResult("hello");
 
-        Assert.Equal("hello", result.ToString());
+        Assert.That(result.ToString(), Is.EqualTo("hello"));
     }
 }

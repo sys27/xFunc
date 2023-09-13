@@ -5,7 +5,7 @@ namespace xFunc.Tests.Expressions.Matrices;
 
 public class MatrixValueTests
 {
-    [Fact]
+    [Test]
     public void CtorEmptyVectorTests()
         => Assert.Throws<ArgumentNullException>(() => MatrixValue.Create(Array.Empty<VectorValue>()));
 
@@ -16,8 +16,8 @@ public class MatrixValueTests
         yield return new object[] { MatrixValue.Create(NumberValue.One), default(MatrixValue) };
     }
 
-    [Theory]
-    [MemberData(nameof(NotEqualsTestData))]
+    [Test]
+    [TestCaseSource(nameof(NotEqualsTestData))]
     public void NotEqualsTest(MatrixValue v1, MatrixValue v2)
         => Assert.False(v1.Equals(v2));
 
@@ -28,10 +28,10 @@ public class MatrixValueTests
         yield return new object[] { MatrixValue.Create(NumberValue.One), MatrixValue.Create(NumberValue.One) };
     }
 
-    [Theory]
-    [MemberData(nameof(EqualsTestData))]
+    [Test]
+    [TestCaseSource(nameof(EqualsTestData))]
     public void EqualsTest(MatrixValue v1, MatrixValue v2)
-        => Assert.True(v1.Equals(v2));
+        => Assert.That(v1.Equals(v2), Is.True);
 
     public static IEnumerable<object[]> NotEqualsAsObjectTestData()
     {
@@ -42,36 +42,36 @@ public class MatrixValueTests
         yield return new object[] { MatrixValue.Create(NumberValue.One), true };
     }
 
-    [Theory]
-    [MemberData(nameof(NotEqualsAsObjectTestData))]
+    [Test]
+    [TestCaseSource(nameof(NotEqualsAsObjectTestData))]
     public void NotEqualsAsObjectTest(MatrixValue v1, object v2)
-        => Assert.False(v1.Equals(v2));
+        => Assert.That(v1.Equals(v2), Is.False);
 
-    [Theory]
-    [MemberData(nameof(EqualsTestData))]
+    [Test]
+    [TestCaseSource(nameof(EqualsTestData))]
     public void EqualsAsObjectTest(MatrixValue v1, MatrixValue v2)
-        => Assert.True(v1.Equals(v2 as object));
+        => Assert.That(v1.Equals(v2 as object), Is.True);
 
-    [Theory]
-    [MemberData(nameof(NotEqualsTestData))]
+    [Test]
+    [TestCaseSource(nameof(NotEqualsTestData))]
     public void NotEqualsAsOperatorTest(MatrixValue v1, MatrixValue v2)
-        => Assert.True(v1 != v2);
+        => Assert.That(v1 != v2, Is.True);
 
-    [Theory]
-    [MemberData(nameof(EqualsTestData))]
+    [Test]
+    [TestCaseSource(nameof(EqualsTestData))]
     public void EqualsAsOperatorTest(MatrixValue v1, MatrixValue v2)
-        => Assert.True(v1 == v2);
+        => Assert.That(v1 == v2, Is.True);
 
-    [Fact]
+    [Test]
     public void ToStringEmptyTest()
     {
         var matrix = default(MatrixValue);
         var expected = "{{}}";
 
-        Assert.Equal(expected, matrix.ToString());
+        Assert.That(matrix.ToString(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var matrix = MatrixValue.Create(new NumberValue[][]
@@ -81,6 +81,6 @@ public class MatrixValueTests
         });
         var expected = "{{1}, {2}}";
 
-        Assert.Equal(expected, matrix.ToString());
+        Assert.That(matrix.ToString(), Is.EqualTo(expected));
     }
 }

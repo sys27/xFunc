@@ -5,7 +5,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class ComplexNumberTests : TypeAnalyzerBaseTests
 {
-    [Fact]
+    [Test]
     public void TestComplexNumber()
     {
         var exp = new ComplexNumber(2, 2);
@@ -13,7 +13,7 @@ public class ComplexNumberTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestConjugateUndefined()
     {
         var exp = new Conjugate(Variable.X);
@@ -21,7 +21,7 @@ public class ComplexNumberTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestConjugateComplexNumber()
     {
         var exp = new Conjugate(new ComplexNumber(2, 3));
@@ -29,7 +29,7 @@ public class ComplexNumberTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestConjugateException()
     {
         var exp = new Conjugate(Number.Two);
@@ -37,7 +37,7 @@ public class ComplexNumberTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestImUndefined()
     {
         var exp = new Im(Variable.X);
@@ -45,7 +45,7 @@ public class ComplexNumberTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestImComplexNumber()
     {
         var exp = new Im(new ComplexNumber(2, 3));
@@ -53,7 +53,7 @@ public class ComplexNumberTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestImException()
     {
         var exp = new Im(Number.Two);
@@ -61,7 +61,7 @@ public class ComplexNumberTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestPhaseUndefined()
     {
         var exp = new Phase(Variable.X);
@@ -69,7 +69,7 @@ public class ComplexNumberTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestPhaseComplexNumber()
     {
         var exp = new Phase(new ComplexNumber(2, 3));
@@ -77,7 +77,7 @@ public class ComplexNumberTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestPhaseException()
     {
         var exp = new Phase(Number.Two);
@@ -85,7 +85,7 @@ public class ComplexNumberTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestReUndefined()
     {
         var exp = new Re(Variable.X);
@@ -93,7 +93,7 @@ public class ComplexNumberTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestReComplexNumber()
     {
         var exp = new Re(new ComplexNumber(2, 3));
@@ -101,7 +101,7 @@ public class ComplexNumberTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestReException()
     {
         var exp = new Re(Number.Two);
@@ -109,7 +109,7 @@ public class ComplexNumberTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestReciprocalUndefined()
     {
         var exp = new Reciprocal(Variable.X);
@@ -117,7 +117,7 @@ public class ComplexNumberTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestReciprocalComplexNumber()
     {
         var exp = new Reciprocal(new ComplexNumber(2, 3));
@@ -125,7 +125,7 @@ public class ComplexNumberTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestReciprocalException()
     {
         var exp = new Reciprocal(Number.Two);
@@ -133,15 +133,15 @@ public class ComplexNumberTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void ToComplexUndefined()
         => Test(new ToComplex(Variable.X), ResultTypes.ComplexNumber);
 
-    [Fact]
+    [Test]
     public void ToComplexNubmer()
         => Test(new ToComplex(Number.One), ResultTypes.ComplexNumber);
 
-    [Fact]
+    [Test]
     public void ToComplexException()
         => TestException(new ToComplex(Bool.False));
 }

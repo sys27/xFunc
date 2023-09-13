@@ -5,35 +5,35 @@ namespace xFunc.Tests.ParserTests;
 
 public class HyperbolicTests : BaseParserTests
 {
-    [Theory]
-    [InlineData("sinh(2)")]
-    [InlineData("sh(2)")]
+    [Test]
+    [TestCase("sinh(2)")]
+    [TestCase("sh(2)")]
     public void SinhTest(string function)
         => ParseTest(function, new Sinh(Number.Two));
 
-    [Theory]
-    [InlineData("cosh(2)")]
-    [InlineData("ch(2)")]
+    [Test]
+    [TestCase("cosh(2)")]
+    [TestCase("ch(2)")]
     public void CoshTest(string function)
         => ParseTest(function, new Cosh(Number.Two));
 
-    [Theory]
-    [InlineData("tanh(2)")]
-    [InlineData("th(2)")]
+    [Test]
+    [TestCase("tanh(2)")]
+    [TestCase("th(2)")]
     public void TanhTest(string function)
         => ParseTest(function, new Tanh(Number.Two));
 
-    [Theory]
-    [InlineData("coth(2)")]
-    [InlineData("cth(2)")]
+    [Test]
+    [TestCase("coth(2)")]
+    [TestCase("cth(2)")]
     public void CothTest(string function)
         => ParseTest(function, new Coth(Number.Two));
 
-    [Fact]
+    [Test]
     public void SechTest()
         => ParseTest("sech(2)", new Sech(Number.Two));
 
-    [Fact]
+    [Test]
     public void CschTest()
         => ParseTest("csch(2)", new Csch(Number.Two));
 }

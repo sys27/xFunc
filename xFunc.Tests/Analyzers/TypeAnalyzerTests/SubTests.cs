@@ -7,7 +7,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class SubTests : TypeAnalyzerBaseTests
 {
-    [Fact]
+    [Test]
     public void SubTwoNumberTest()
     {
         var sub = new Sub(Number.One, Number.Two);
@@ -15,7 +15,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(sub, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void SubNumberVarTest()
     {
         var sub = new Sub(Number.One, Variable.X);
@@ -23,7 +23,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(sub, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void SubComplicatedTest()
     {
         var sub = new Sub(new Mul(Number.One, Number.Two), Variable.X);
@@ -31,7 +31,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(sub, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void SubTwoVectorTest()
     {
         var sub = new Sub(
@@ -42,7 +42,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(sub, ResultTypes.Vector);
     }
 
-    [Fact]
+    [Test]
     public void SubTwoMatrixTest()
     {
         var sub = new Sub(
@@ -53,7 +53,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(sub, ResultTypes.Matrix);
     }
 
-    [Fact]
+    [Test]
     public void SubNumberVectorTest()
     {
         var exp = new Sub(
@@ -64,7 +64,7 @@ public class SubTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void SubVectorNumberTest()
     {
         var exp = new Sub(
@@ -75,7 +75,7 @@ public class SubTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void SubNumberMatrixTest()
     {
         var exp = new Sub(
@@ -86,7 +86,7 @@ public class SubTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void SubMatrixNumberTest()
     {
         var exp = new Sub(
@@ -97,7 +97,7 @@ public class SubTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void SubVectorMatrixTest()
     {
         var exp = new Sub(
@@ -108,7 +108,7 @@ public class SubTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void SubMatrixVectorTest()
     {
         var exp = new Sub(
@@ -119,7 +119,7 @@ public class SubTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void SubNumberComplexNumberTest()
     {
         var sub = new Sub(Number.One, new ComplexNumber(2, 1));
@@ -127,7 +127,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(sub, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void SubComplexNumberNumberTest()
     {
         var sub = new Sub(new ComplexNumber(1, 3), Number.Two);
@@ -135,7 +135,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(sub, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void SubComplexNumberComplexNumberTest()
     {
         var sub = new Sub(new ComplexNumber(1, 3), new ComplexNumber(3, 5));
@@ -143,7 +143,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(sub, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void SubComplexNumberBoolException()
     {
         var sub = new Sub(new ComplexNumber(1, 3), Bool.True);
@@ -151,7 +151,7 @@ public class SubTests : TypeAnalyzerBaseTests
         TestBinaryException(sub);
     }
 
-    [Fact]
+    [Test]
     public void SubBoolComplexNumberException()
     {
         var sub = new Sub(Bool.True, new ComplexNumber(1, 3));
@@ -159,7 +159,7 @@ public class SubTests : TypeAnalyzerBaseTests
         TestBinaryException(sub);
     }
 
-    [Fact]
+    [Test]
     public void SubNumberAllTest()
     {
         var exp = new Sub(
@@ -171,7 +171,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void SubComplexNumberAllTest()
     {
         var exp = new Sub(
@@ -183,7 +183,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void SubVectorVectorTest()
     {
         var left = new Vector(new IExpression[] { new Number(3) });
@@ -193,7 +193,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Vector);
     }
 
-    [Fact]
+    [Test]
     public void SubVectorBoolTest()
     {
         var vector = new Vector(new IExpression[] { Number.One });
@@ -202,7 +202,7 @@ public class SubTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void SubBoolVectorTest()
     {
         var vector = new Vector(new IExpression[] { Number.One });
@@ -211,7 +211,7 @@ public class SubTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void SubVectorAllTest()
     {
         var exp = new Sub(
@@ -223,7 +223,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void SubMatrixAllTest()
     {
         var matrix = new Matrix(new[]
@@ -239,7 +239,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestSubBoolAndMatrixTest()
     {
         var matrix = new Matrix(new[]
@@ -251,7 +251,7 @@ public class SubTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestSubMatrixAndBoolTest()
     {
         var matrix = new Matrix(new[]
@@ -263,7 +263,7 @@ public class SubTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void SubNumberComplexTest()
     {
         var exp = new Sub(Number.Two, new Sqrt(new Number(-9)));
@@ -271,7 +271,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void SubTwoVarTest()
     {
         var exp = new Sub(Variable.X, Variable.X);
@@ -279,7 +279,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void SubThreeVarTest()
     {
         var exp = new Sub(new Add(Variable.X, Variable.X), Variable.X);
@@ -287,7 +287,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestSubBoolsException()
     {
         var exp = new Sub(Bool.False, Bool.False);
@@ -295,7 +295,7 @@ public class SubTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestSubNumberAngle()
     {
         var exp = new Sub(
@@ -306,7 +306,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubAngleNumber()
     {
         var exp = new Sub(
@@ -317,7 +317,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubAngleAngle()
     {
         var exp = new Sub(
@@ -328,7 +328,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubNumberPower()
     {
         var exp = new Sub(
@@ -339,7 +339,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.PowerNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubPowerNumber()
     {
         var exp = new Sub(
@@ -350,7 +350,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.PowerNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubPowerPower()
     {
         var exp = new Sub(
@@ -361,7 +361,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.PowerNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubNumberTemperature()
     {
         var exp = new Sub(
@@ -372,7 +372,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TemperatureNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubTemperatureNumber()
     {
         var exp = new Sub(
@@ -383,7 +383,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TemperatureNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubTemperatureTemperature()
     {
         var exp = new Sub(
@@ -394,7 +394,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TemperatureNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubNumberAndMass()
     {
         var exp = new Sub(
@@ -405,7 +405,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.MassNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubMassAndNumber()
     {
         var exp = new Sub(
@@ -416,7 +416,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.MassNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubMassAndMass()
     {
         var exp = new Sub(
@@ -427,7 +427,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.MassNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubNumberAndLength()
     {
         var exp = new Sub(
@@ -438,7 +438,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.LengthNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubLengthAndNumber()
     {
         var exp = new Sub(
@@ -449,7 +449,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.LengthNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubLengthAndLength()
     {
         var exp = new Sub(
@@ -460,7 +460,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.LengthNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubNumberAndTime()
     {
         var exp = new Sub(
@@ -471,7 +471,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TimeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubTimeAndNumber()
     {
         var exp = new Sub(
@@ -482,7 +482,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TimeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubTimeAndTime()
     {
         var exp = new Sub(
@@ -493,7 +493,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TimeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubNumberAndArea()
     {
         var exp = new Sub(
@@ -504,7 +504,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AreaNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubAreaAndNumber()
     {
         var exp = new Sub(
@@ -515,7 +515,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AreaNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubAreaAndArea()
     {
         var exp = new Sub(
@@ -526,7 +526,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AreaNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubNumberAndVolume()
     {
         var exp = new Sub(
@@ -537,7 +537,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.VolumeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubVolumeAndNumber()
     {
         var exp = new Sub(
@@ -548,7 +548,7 @@ public class SubTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.VolumeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestSubVolumeAndVolume()
     {
         var exp = new Sub(
@@ -557,6 +557,39 @@ public class SubTests : TypeAnalyzerBaseTests
         );
 
         Test(exp, ResultTypes.VolumeNumber);
+    }
+
+    [Test]
+    public void TestSubRationalAndRational()
+    {
+        var exp = new Sub(
+            new Rational(Number.One, Number.Two),
+            new Rational(Number.Two, Number.One)
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Test]
+    public void TestSubNumberAndRational()
+    {
+        var exp = new Sub(
+            Number.One,
+            new Rational(Number.Two, Number.One)
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Test]
+    public void TestSubRationalAndNumber()
+    {
+        var exp = new Sub(
+            new Rational(Number.One, Number.Two),
+            Number.One
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
     }
 
     public static IEnumerable<object[]> GetDataForTestSubAngleAndBoolTest()
@@ -586,8 +619,8 @@ public class SubTests : TypeAnalyzerBaseTests
         yield return new object[] { Bool.False, VolumeValue.Meter(90).AsExpression() };
     }
 
-    [Theory]
-    [MemberData(nameof(GetDataForTestSubAngleAndBoolTest))]
+    [Test]
+    [TestCaseSource(nameof(GetDataForTestSubAngleAndBoolTest))]
     public void TestSubAngleAndBoolTest(IExpression left, IExpression right)
     {
         var exp = new Sub(left, right);

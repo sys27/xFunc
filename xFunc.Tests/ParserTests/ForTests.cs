@@ -5,7 +5,7 @@ namespace xFunc.Tests.ParserTests;
 
 public class ForTests : BaseParserTests
 {
-    [Fact]
+    [Test]
     public void ForTest()
     {
         var expected = new For(
@@ -18,7 +18,7 @@ public class ForTests : BaseParserTests
         ParseTest("for(2, x := 0, x < 10, x := x + 1)", expected);
     }
 
-    [Fact]
+    [Test]
     public void ForWithIncTest()
     {
         var expected = new For(
@@ -31,16 +31,16 @@ public class ForTests : BaseParserTests
         ParseTest("for(2, x := 0, x < 10, x++)", expected);
     }
 
-    [Theory]
-    [InlineData("for 2, x := 0, x < 10, x++)")]
-    [InlineData("for(, x := 0, x < 10, x++)")]
-    [InlineData("for(2 x := 0, x < 10, x++)")]
-    [InlineData("for(2, , x < 10, x++)")]
-    [InlineData("for(2, x := z x < 10, x++)")]
-    [InlineData("for(2, x := 0, , x++)")]
-    [InlineData("for(2, x := 0, x < 10 x++)")]
-    [InlineData("for(2, x := 0, x < 10, )")]
-    [InlineData("for(2, x := 0, x < 10, x++")]
+    [Test]
+    [TestCase("for 2, x := 0, x < 10, x++)")]
+    [TestCase("for(, x := 0, x < 10, x++)")]
+    [TestCase("for(2 x := 0, x < 10, x++)")]
+    [TestCase("for(2, , x < 10, x++)")]
+    [TestCase("for(2, x := z x < 10, x++)")]
+    [TestCase("for(2, x := 0, , x++)")]
+    [TestCase("for(2, x := 0, x < 10 x++)")]
+    [TestCase("for(2, x := 0, x < 10, )")]
+    [TestCase("for(2, x := 0, x < 10, x++")]
     public void ForMissingPartsTest(string function)
         => ParseErrorTest(function);
 }

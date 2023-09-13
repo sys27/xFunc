@@ -8,52 +8,23 @@ namespace xFunc.Maths.Analyzers;
 /// </summary>
 public class DifferentiatorContext
 {
-    private Variable variable = default!;
-
     /// <summary>
     /// Initializes a new instance of the <see cref="DifferentiatorContext"/> class.
     /// </summary>
-    /// <param name="parameters">The parameters.</param>
-    public DifferentiatorContext(ExpressionParameters? parameters)
-        : this(parameters, Variable.X)
+    public DifferentiatorContext()
+        : this(Variable.X)
     {
     }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="DifferentiatorContext"/> class.
     /// </summary>
-    /// <param name="parameters">The parameters.</param>
     /// <param name="variable">The variable.</param>
-    public DifferentiatorContext(ExpressionParameters? parameters, Variable variable)
-    {
-        Parameters = parameters;
-        Variable = variable;
-    }
+    public DifferentiatorContext(Variable variable)
+        => Variable = variable ?? throw new ArgumentNullException(nameof(variable));
 
     /// <summary>
-    /// Creates an empty object.
+    /// Gets the variable.
     /// </summary>
-    /// <returns>The differentiator context.</returns>
-    public static DifferentiatorContext Default()
-        => new DifferentiatorContext(new ExpressionParameters());
-
-    /// <summary>
-    /// Gets the parameters.
-    /// </summary>
-    /// <value>
-    /// The parameters.
-    /// </value>
-    public ExpressionParameters? Parameters { get; }
-
-    /// <summary>
-    /// Gets or sets the variable.
-    /// </summary>
-    /// <value>
-    /// The variable.
-    /// </value>
-    public Variable Variable
-    {
-        get => variable;
-        set => variable = value ?? throw new ArgumentNullException(nameof(value));
-    }
+    public Variable Variable { get; }
 }

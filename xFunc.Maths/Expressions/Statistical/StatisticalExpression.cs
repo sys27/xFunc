@@ -56,7 +56,7 @@ public abstract class StatisticalExpression : DifferentParametersExpression
             {
                 var result = this[i].Execute(parameters);
                 if (result is not NumberValue number)
-                    throw new ResultIsNotSupportedException(this, result);
+                    throw ExecutionException.For(this);
 
                 array[i] = number;
             }

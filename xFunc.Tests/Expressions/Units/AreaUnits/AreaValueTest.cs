@@ -5,105 +5,105 @@ namespace xFunc.Tests.Expressions.Units.AreaUnits;
 
 public class AreaValueTest
 {
-    [Fact]
+    [Test]
     public void EqualTest()
     {
         var area1 = AreaValue.Meter(10);
         var area2 = AreaValue.Meter(10);
 
-        Assert.True(area1.Equals(area2));
+        Assert.That(area1.Equals(area2), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualOperatorTest()
     {
         var area1 = AreaValue.Meter(10);
         var area2 = AreaValue.Meter(10);
 
-        Assert.True(area1 == area2);
+        Assert.That(area1 == area2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualTest()
     {
         var area1 = AreaValue.Meter(10);
         var area2 = AreaValue.Meter(12);
 
-        Assert.True(area1 != area2);
+        Assert.That(area1 != area2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessTest()
     {
         var area1 = AreaValue.Meter(10);
         var area2 = AreaValue.Meter(12);
 
-        Assert.True(area1 < area2);
+        Assert.That(area1 < area2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessFalseTest()
     {
         var area1 = AreaValue.Meter(20);
         var area2 = AreaValue.Meter(12);
 
-        Assert.False(area1 < area2);
+        Assert.That(area1 < area2, Is.False);
     }
 
-    [Fact]
+    [Test]
     public void GreaterTest()
     {
         var area1 = AreaValue.Meter(20);
         var area2 = AreaValue.Meter(12);
 
-        Assert.True(area1 > area2);
+        Assert.That(area1 > area2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterFalseTest()
     {
         var area1 = AreaValue.Meter(10);
         var area2 = AreaValue.Meter(12);
 
-        Assert.False(area1 > area2);
+        Assert.That(area1 > area2, Is.False);
     }
 
-    [Fact]
+    [Test]
     public void LessOrEqualTest()
     {
         var area1 = AreaValue.Meter(10);
         var area2 = AreaValue.Meter(10);
 
-        Assert.True(area1 <= area2);
+        Assert.That(area1 <= area2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterOrEqualTest()
     {
         var area1 = AreaValue.Meter(10);
         var area2 = AreaValue.Meter(10);
 
-        Assert.True(area1 >= area2);
+        Assert.That(area1 >= area2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CompareToNull()
     {
         var areaValue = AreaValue.Meter(10);
 
-        Assert.True(areaValue.CompareTo(null) > 0);
+        Assert.That(areaValue.CompareTo(null) > 0, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CompareToObject()
     {
         var area1 = AreaValue.Meter(10);
         var area2 = (object)AreaValue.Meter(10);
 
-        Assert.True(area1.CompareTo(area2) == 0);
+        Assert.That(area1.CompareTo(area2) == 0, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CompareToDouble()
     {
         var areaValue = AreaValue.Meter(10);
@@ -111,60 +111,60 @@ public class AreaValueTest
         Assert.Throws<ArgumentException>(() => areaValue.CompareTo(1));
     }
 
-    [Fact]
+    [Test]
     public void ValueNotEqualTest()
     {
         var area1 = AreaValue.Meter(10);
         var area2 = AreaValue.Meter(12);
 
-        Assert.False(area1.Equals(area2));
+        Assert.That(area1.Equals(area2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void UnitNotEqualTest2()
     {
         var area1 = AreaValue.Meter(10);
         var area2 = AreaValue.Kilometer(10);
 
-        Assert.False(area1.Equals(area2));
+        Assert.That(area1.Equals(area2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualDiffTypeTest()
     {
         var area1 = AreaValue.Meter(10);
         var area2 = 3;
 
-        Assert.False(area1.Equals(area2));
+        Assert.That(area1.Equals(area2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualObjectTest()
     {
         var area1 = AreaValue.Meter(10);
         var area2 = AreaValue.Meter(10);
 
-        Assert.True(area1.Equals(area2 as object));
+        Assert.That(area1.Equals(area2 as object), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualObjectTest()
     {
         var area1 = AreaValue.Meter(10);
         var area2 = AreaValue.Meter(20);
 
-        Assert.False(area1.Equals(area2 as object));
+        Assert.That(area1.Equals(area2 as object), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ToStringSecondTest()
     {
         var areaValue = AreaValue.Meter(10);
 
-        Assert.Equal("10 m^2", areaValue.ToString());
+        Assert.That(areaValue.ToString(), Is.EqualTo("10 'm^2'"));
     }
 
-    [Fact]
+    [Test]
     public void AddOperatorTest()
     {
         var area1 = AreaValue.Meter(1);
@@ -172,10 +172,10 @@ public class AreaValueTest
         var expected = AreaValue.Meter(1000001);
         var result = area1 + area2;
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SubOperatorTest()
     {
         var area1 = AreaValue.Kilometer(1);
@@ -183,7 +183,7 @@ public class AreaValueTest
         var expected = AreaValue.Kilometer(0.5);
         var result = area1 - area2;
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
     public static IEnumerable<object[]> GetConversionTestCases()
@@ -299,13 +299,13 @@ public class AreaValueTest
         yield return new object[] { 10.0, AreaUnit.Acre, AreaUnit.Hectare, 4.0468564224 };
     }
 
-    [Theory]
-    [MemberData(nameof(GetConversionTestCases))]
+    [Test]
+    [TestCaseSource(nameof(GetConversionTestCases))]
     public void ConversionTests(double value, AreaUnit unit, AreaUnit to, double expected)
     {
         var area = new AreaValue(new NumberValue(value), unit);
         var converted = area.To(to);
 
-        Assert.Equal(expected, converted.Value.Number, 5);
+        Assert.That(converted.Value.Number, Is.EqualTo(expected).Within(5));
     }
 }

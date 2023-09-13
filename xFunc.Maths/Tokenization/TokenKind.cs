@@ -313,5 +313,10 @@ internal enum TokenKind
     /// </summary>
     RightShiftAssignOperator,
 
+    /// <summary>
+    /// The '//' token.
+    /// </summary>
+    RationalOperator,
+
     #endregion Operators
 }

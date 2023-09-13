@@ -45,7 +45,7 @@ public class Transpose : UnaryExpression
             VectorValue vector => VectorValue.Transpose(vector),
             MatrixValue matrix => MatrixValue.Transpose(matrix),
 
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

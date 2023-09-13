@@ -114,6 +114,10 @@ public partial class Parser
             "tooct" => new ToOct(arguments),
             "tohex" => new ToHex(arguments),
 
+            "torational" => new ToRational(arguments),
+
+            "curry" => new Curry(arguments),
+
             "convert" => new Expressions.Units.Convert(converter, arguments),
 
             var id => new CallExpression(new Variable(id), arguments),
@@ -211,14 +215,16 @@ public partial class Parser
         return new Sub(first, second);
     }
 
-    private IExpression CreateMulDivMod(in Token token, IExpression first, IExpression second)
+    private IExpression CreateMulDivModRational(in Token token, IExpression first, IExpression second)
     {
         if (token.Is(MultiplicationOperator))
             return new Mul(first, second);
         if (token.Is(DivisionOperator))
             return new Div(first, second);
+        if (token.Is(RationalOperator))
+            return new Rational(first, second);
 
-        Debug.Assert(token.Is(ModuloOperator) || token.Is(ModKeyword), "Only '*', '/', '%', 'mod' are allowed here.");
+        Debug.Assert(token.Is(ModuloOperator) || token.Is(ModKeyword), "Only '*', '/', '//', '%', 'mod' are allowed here.");
 
         return new Mod(first, second);
     }

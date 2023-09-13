@@ -5,25 +5,25 @@ namespace xFunc.Tests.Expressions.Programming;
 
 public class GreaterTest
 {
-    [Fact]
+    [Test]
     public void CalculateGreaterTrueTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 463) };
         var greaterThen = new GreaterThan(Variable.X, new Number(10));
 
-        Assert.True((bool)greaterThen.Execute(parameters));
+        Assert.That((bool)greaterThen.Execute(parameters), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CalculateGreaterFalseTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 0) };
         var greaterThan = new GreaterThan(Variable.X, new Number(10));
 
-        Assert.False((bool)greaterThan.Execute(parameters));
+        Assert.That((bool)greaterThan.Execute(parameters), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void GreaterAngleTest()
     {
         var exp = new GreaterThan(
@@ -32,10 +32,10 @@ public class GreaterTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterPowerTest()
     {
         var exp = new GreaterThan(
@@ -44,10 +44,10 @@ public class GreaterTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterTemperatureTest()
     {
         var exp = new GreaterThan(
@@ -56,10 +56,10 @@ public class GreaterTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterMassTest()
     {
         var exp = new GreaterThan(
@@ -68,10 +68,10 @@ public class GreaterTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterLengthTest()
     {
         var exp = new GreaterThan(
@@ -80,10 +80,10 @@ public class GreaterTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterTimeTest()
     {
         var exp = new GreaterThan(
@@ -92,10 +92,10 @@ public class GreaterTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterAreaTest()
     {
         var exp = new GreaterThan(
@@ -104,10 +104,10 @@ public class GreaterTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterVolumeTest()
     {
         var exp = new GreaterThan(
@@ -116,23 +116,23 @@ public class GreaterTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CalculateInvalidTypeTest()
     {
         var greaterThan = new GreaterThan(Bool.True, Bool.True);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => greaterThan.Execute());
+        Assert.Throws<ExecutionException>(() => greaterThan.Execute());
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new GreaterThan(Number.Two, new Number(3));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

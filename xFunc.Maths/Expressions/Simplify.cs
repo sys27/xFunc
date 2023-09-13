@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Immutable;
-using static xFunc.Maths.ThrowHelpers;
 
 namespace xFunc.Maths.Expressions;
 
@@ -18,14 +17,11 @@ public class Simplify : UnaryExpression
     /// </summary>
     /// <param name="simplifier">The simplifier.</param>
     /// <param name="expression">The argument of function.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="simplifier"/> is <c>null</c>.</exception>
     public Simplify(ISimplifier simplifier, IExpression expression)
         : base(expression)
-    {
-        if (simplifier is null)
-            ArgNull(ExceptionArgument.simplifier);
-
-        this.simplifier = simplifier;
-    }
+        => this.simplifier = simplifier ??
+                             throw new ArgumentNullException(nameof(simplifier));
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Simplify"/> class.
@@ -35,9 +31,7 @@ public class Simplify : UnaryExpression
     /// <seealso cref="IExpression"/>
     internal Simplify(ISimplifier simplifier, ImmutableArray<IExpression> arguments)
         : base(arguments)
-    {
-        this.simplifier = simplifier;
-    }
+        => this.simplifier = simplifier;
 
     /// <summary>
     /// Executes this expression.
@@ -46,13 +40,12 @@ public class Simplify : UnaryExpression
     /// <returns>
     /// A result of the execution.
     /// </returns>
-    /// <exception cref="ArgumentNullException">Simplifier is null.</exception>
     /// <seealso cref="ExpressionParameters" />
     public override object Execute(ExpressionParameters? parameters)
     {
         var result = Argument.Execute(parameters);
         if (result is not Lambda lambda)
-            throw new ResultIsNotSupportedException(this, result);
+            throw ExecutionException.For(this);
 
         var simplifiedExpression = lambda.Body
             .Analyze(simplifier)

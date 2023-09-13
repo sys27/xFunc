@@ -43,7 +43,7 @@ public class ToBin : UnaryExpression
         return result switch
         {
             NumberValue number => NumberValue.ToBin(number),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

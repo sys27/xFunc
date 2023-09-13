@@ -45,7 +45,7 @@ public class ToComplex : UnaryExpression
         return result switch
         {
             NumberValue number => (Complex)number.Number,
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

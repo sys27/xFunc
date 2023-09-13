@@ -5,36 +5,36 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise;
 
 public class EqualityTest
 {
-    [Fact]
+    [Test]
     public void ExecuteTest1()
     {
         var eq = new Equality(Bool.True, Bool.True);
 
-        Assert.True((bool) eq.Execute());
+        Assert.That((bool) eq.Execute(), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest2()
     {
         var eq = new Equality(Bool.True, Bool.False);
 
-        Assert.False((bool) eq.Execute());
+        Assert.That((bool) eq.Execute(), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteResultIsNotSupported()
     {
         var eq = new Equality(Number.One, Number.Two);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => eq.Execute());
+        Assert.Throws<ExecutionException>(() => eq.Execute());
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Equality(Bool.True, Bool.False);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

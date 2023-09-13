@@ -45,7 +45,7 @@ public class Re : UnaryExpression
         return result switch
         {
             Complex complex => new NumberValue(complex.Real),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

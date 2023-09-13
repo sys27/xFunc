@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>xfunc</ToolCommandName>    
+    <PackageId>xFunc.Cli</PackageId>
+    <Version>4.4.0</Version>
+    <Product>xFunc.Maths</Product>
+    <Authors>Dmytro Kyshchenko</Authors>
+    <Company />
+    <Copyright>Copyright ©2012-2023 Dmytro Kyshchenko</Copyright>
+    <Description>xFunc provides a powerful parser and analyzer for mathematical expressions. It excels at calculating derivatives, simplifying expressions, and achieving high performance.</Description>
+    <PackageProjectUrl>https://github.com/sys27/xFunc</PackageProjectUrl>
+    <PackageIcon>xFunc.png</PackageIcon>
+    <PackageTags>math formula parse parser math-parser logic simplification derivative differentiation truth-table condition complex-numbers trigonometry unit-converter</PackageTags>
+    <AssemblyVersion>4.4.0</AssemblyVersion>
+    <FileVersion>4.4.0</FileVersion>
+    <RepositoryUrl>https://github.com/sys27/xFunc</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageReleaseNotes>https://sys27.github.io/xFunc/articles/change-log.html
+https://sys27.github.io/xFunc/articles/breaking-changes.html</PackageReleaseNotes>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="CommandLine" />
+    <Using Include="CommandLine.Text" />
+    <Using Include="xFunc.Maths" />
+    <Using Include="xFunc.Maths.Analyzers" />
+    <Using Include="xFunc.Maths.Analyzers.TypeAnalyzers" />
+    <Using Include="xFunc.Maths.Expressions" />
+    <Using Include="xFunc.Maths.Expressions.Parameters" />
+    <Using Include="xFunc.Maths.Expressions.Matrices" />
+    <Using Include="xFunc.Maths.Expressions.Units" />
+    <Using Include="xFunc.Maths.Results" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+    <PackageReference Include="Nerdbank.GitVersioning" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\xFunc.Maths\xFunc.Maths.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE" Link="LICENSE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\xFunc.png" Pack="true" PackagePath="" />
+    <None Include="..\README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+</Project>

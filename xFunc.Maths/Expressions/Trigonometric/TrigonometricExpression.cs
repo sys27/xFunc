@@ -66,7 +66,7 @@ public abstract class TrigonometricExpression : UnaryExpression
             NumberValue number => ExecuteInternal(AngleValue.Degree(number).ToRadian()),
             AngleValue angle => ExecuteInternal(angle.ToRadian()),
             Complex complex => ExecuteComplex(complex),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 }

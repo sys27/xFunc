@@ -5,7 +5,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests;
 
 public class LogSimplifierTest : BaseSimplifierTest
 {
-    [Fact]
+    [Test]
     public void Log()
     {
         var log = new Log(Variable.X, Variable.X);
@@ -14,7 +14,7 @@ public class LogSimplifierTest : BaseSimplifierTest
         SimplifyTest(log, expected);
     }
 
-    [Fact]
+    [Test]
     public void LogNotSimplified()
     {
         var log = new Log(new Number(3), new Number(11));
@@ -22,7 +22,7 @@ public class LogSimplifierTest : BaseSimplifierTest
         SimplifyTest(log, log);
     }
 
-    [Fact]
+    [Test]
     public void LogArgumentSimplified()
     {
         var log = new Log(Variable.X, new Add(Number.One, Number.One));
@@ -31,7 +31,7 @@ public class LogSimplifierTest : BaseSimplifierTest
         SimplifyTest(log, expected);
     }
 
-    [Fact]
+    [Test]
     public void Ln()
     {
         var ln = new Ln(new Variable("e"));
@@ -40,7 +40,7 @@ public class LogSimplifierTest : BaseSimplifierTest
         SimplifyTest(ln, expected);
     }
 
-    [Fact]
+    [Test]
     public void LnArgumentSimplified()
     {
         var log = new Ln(new Add(Number.Two, Number.Two));
@@ -49,7 +49,7 @@ public class LogSimplifierTest : BaseSimplifierTest
         SimplifyTest(log, expected);
     }
 
-    [Fact]
+    [Test]
     public void LnNotSimplified()
     {
         var ln = new Ln(new Variable("z"));
@@ -57,7 +57,7 @@ public class LogSimplifierTest : BaseSimplifierTest
         SimplifyTest(ln, ln);
     }
 
-    [Fact]
+    [Test]
     public void Lg()
     {
         var log = new Lg(new Number(10));
@@ -66,7 +66,7 @@ public class LogSimplifierTest : BaseSimplifierTest
         SimplifyTest(log, expected);
     }
 
-    [Fact]
+    [Test]
     public void LgArgumentSimplified()
     {
         var log = new Lg(new Add(Number.Two, Number.Two));
@@ -75,7 +75,7 @@ public class LogSimplifierTest : BaseSimplifierTest
         SimplifyTest(log, expected);
     }
 
-    [Fact]
+    [Test]
     public void LgNotSimplified()
     {
         var log = new Lg(new Number(101));
@@ -83,7 +83,7 @@ public class LogSimplifierTest : BaseSimplifierTest
         SimplifyTest(log, log);
     }
 
-    [Fact]
+    [Test]
     public void Lb()
     {
         var log = new Lb(Number.Two);
@@ -92,7 +92,7 @@ public class LogSimplifierTest : BaseSimplifierTest
         SimplifyTest(log, expected);
     }
 
-    [Fact]
+    [Test]
     public void LbArgumentSimplified()
     {
         var log = new Lb(new Add(Number.Two, Number.Two));
@@ -101,7 +101,7 @@ public class LogSimplifierTest : BaseSimplifierTest
         SimplifyTest(log, expected);
     }
 
-    [Fact]
+    [Test]
     public void LbNotSimplified()
     {
         var log = new Lb(new Number(3));

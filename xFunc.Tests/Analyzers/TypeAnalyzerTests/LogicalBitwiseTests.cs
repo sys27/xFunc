@@ -5,10 +5,10 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class LogicalBitwiseTests : TypeAnalyzerBaseTests
 {
-    [Theory]
-    [InlineData(typeof(And))]
-    [InlineData(typeof(Or))]
-    [InlineData(typeof(XOr))]
+    [Test]
+    [TestCase(typeof(And))]
+    [TestCase(typeof(Or))]
+    [TestCase(typeof(XOr))]
     public void TestLeftUndefined(Type type)
     {
         var exp = Create(type, Variable.X, Number.One);
@@ -16,10 +16,10 @@ public class LogicalBitwiseTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Theory]
-    [InlineData(typeof(And))]
-    [InlineData(typeof(Or))]
-    [InlineData(typeof(XOr))]
+    [Test]
+    [TestCase(typeof(And))]
+    [TestCase(typeof(Or))]
+    [TestCase(typeof(XOr))]
     public void TestRightUndefined(Type type)
     {
         var exp = Create(type, Number.One, Variable.X);
@@ -27,10 +27,10 @@ public class LogicalBitwiseTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Theory]
-    [InlineData(typeof(And))]
-    [InlineData(typeof(Or))]
-    [InlineData(typeof(XOr))]
+    [Test]
+    [TestCase(typeof(And))]
+    [TestCase(typeof(Or))]
+    [TestCase(typeof(XOr))]
     public void TestNumber(Type type)
     {
         var exp = Create(type, Number.One, Number.One);
@@ -38,10 +38,10 @@ public class LogicalBitwiseTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Theory]
-    [InlineData(typeof(And))]
-    [InlineData(typeof(Or))]
-    [InlineData(typeof(XOr))]
+    [Test]
+    [TestCase(typeof(And))]
+    [TestCase(typeof(Or))]
+    [TestCase(typeof(XOr))]
     public void TestBool(Type type)
     {
         var exp = Create(type, Bool.True, Bool.True);
@@ -49,10 +49,10 @@ public class LogicalBitwiseTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Boolean);
     }
 
-    [Theory]
-    [InlineData(typeof(And))]
-    [InlineData(typeof(Or))]
-    [InlineData(typeof(XOr))]
+    [Test]
+    [TestCase(typeof(And))]
+    [TestCase(typeof(Or))]
+    [TestCase(typeof(XOr))]
     public void TestComplexAndNumber(Type type)
     {
         var exp = CreateBinary(type, new ComplexNumber(3, 2), Number.One);
@@ -60,10 +60,10 @@ public class LogicalBitwiseTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Theory]
-    [InlineData(typeof(And))]
-    [InlineData(typeof(Or))]
-    [InlineData(typeof(XOr))]
+    [Test]
+    [TestCase(typeof(And))]
+    [TestCase(typeof(Or))]
+    [TestCase(typeof(XOr))]
     public void TestNumberAndComplex(Type type)
     {
         var exp = CreateBinary(type, Number.One, new ComplexNumber(3, 2));
@@ -71,10 +71,10 @@ public class LogicalBitwiseTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Theory]
-    [InlineData(typeof(And))]
-    [InlineData(typeof(Or))]
-    [InlineData(typeof(XOr))]
+    [Test]
+    [TestCase(typeof(And))]
+    [TestCase(typeof(Or))]
+    [TestCase(typeof(XOr))]
     public void TestComplexAndBool(Type type)
     {
         var exp = CreateBinary(type, new ComplexNumber(3, 2), Bool.False);
@@ -82,10 +82,10 @@ public class LogicalBitwiseTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Theory]
-    [InlineData(typeof(And))]
-    [InlineData(typeof(Or))]
-    [InlineData(typeof(XOr))]
+    [Test]
+    [TestCase(typeof(And))]
+    [TestCase(typeof(Or))]
+    [TestCase(typeof(XOr))]
     public void TestBoolAndComplex(Type type)
     {
         var exp = CreateBinary(type, Bool.False, new ComplexNumber(3, 2));
@@ -93,10 +93,10 @@ public class LogicalBitwiseTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Theory]
-    [InlineData(typeof(And))]
-    [InlineData(typeof(Or))]
-    [InlineData(typeof(XOr))]
+    [Test]
+    [TestCase(typeof(And))]
+    [TestCase(typeof(Or))]
+    [TestCase(typeof(XOr))]
     public void TestParamTypeException(Type type)
     {
         var exp = Create(type, new ComplexNumber(3, 2), new ComplexNumber(3, 2));

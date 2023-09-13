@@ -5,24 +5,24 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise;
 
 public class NotTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteTest1()
     {
         var exp = new Not(Number.Two);
         var expected = new NumberValue(-3.0);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest3()
     {
         var exp = new Not(Bool.True);
 
-        Assert.False((bool) exp.Execute());
+        Assert.That((bool) exp.Execute(), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestValueIsNotInt()
     {
         var exp = new Not(new Number(1.5));
@@ -30,16 +30,16 @@ public class NotTest : BaseExpressionTests
         Assert.Throws<ArgumentException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteResultIsNotSupported()
         => TestNotSupported(new Not(new ComplexNumber(1)));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Not(Bool.False);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

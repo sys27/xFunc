@@ -29,6 +29,7 @@ public class Convert : IExpression
     /// </summary>
     /// <param name="converter">The converter.</param>
     /// <param name="arguments">The list of arguments.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="converter"/> is <c>null</c>.</exception>
     internal Convert(IConverter converter, ImmutableArray<IExpression> arguments)
     {
         this.converter = converter ?? throw new ArgumentNullException(nameof(converter));
@@ -72,9 +73,11 @@ public class Convert : IExpression
     public override string ToString() => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
+    /// <exception cref="ExecutionException">The result of evaluation of arguments is not supported.</exception>
     public object Execute() => Execute(null);
 
     /// <inheritdoc />
+    /// <exception cref="ExecutionException">The result of evaluation of arguments is not supported.</exception>
     public object Execute(ExpressionParameters? parameters)
     {
         var valueResult = Value.Execute(parameters);
@@ -83,11 +86,12 @@ public class Convert : IExpression
         return unitResult switch
         {
             string unit => converter.Convert(valueResult, unit),
-            _ => throw new ResultIsNotSupportedException(this, valueResult, unitResult),
+            _ => throw ExecutionException.For(this),
         };
     }
 
     /// <inheritdoc />
+    /// <exception cref="ArgumentNullException"><paramref name="analyzer"/> is <c>null</c>.</exception>
     public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
     {
         if (analyzer is null)
@@ -97,6 +101,7 @@ public class Convert : IExpression
     }
 
     /// <inheritdoc />
+    /// <exception cref="ArgumentNullException"><paramref name="analyzer"/> is <c>null</c>.</exception>
     public TResult Analyze<TResult, TContext>(
         IAnalyzer<TResult, TContext> analyzer,
         TContext context)

@@ -29,7 +29,7 @@ public class Implication : BinaryExpression
         return (left, right) switch
         {
             (bool leftBool, bool rightBool) => !leftBool | rightBool,
-            _ => throw new ResultIsNotSupportedException(this, left, right),
+            _ => throw ExecutionException.For(this),
         };
     }
 

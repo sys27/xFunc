@@ -36,10 +36,23 @@ public class For : DifferentParametersExpression
     /// <inheritdoc />
     public override object Execute(ExpressionParameters? parameters)
     {
-        for (Initialization.Execute(parameters); (bool)Condition.Execute(parameters); Iteration.Execute(parameters))
-            Body.Execute(parameters);
+        var nested = ExpressionParameters.CreateScoped(parameters);
+        Initialization.Execute(nested);
 
-        return double.NaN;
+        while (true)
+        {
+            var condition = Condition.Execute(nested);
+            if (condition is not bool conditionResult)
+                throw ExecutionException.For(this);
+
+            if (!conditionResult)
+                break;
+
+            Body.Execute(nested);
+            Iteration.Execute(nested);
+        }
+
+        return EmptyValue.Instance;
     }
 
     /// <inheritdoc />

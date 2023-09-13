@@ -155,7 +155,7 @@ public readonly struct MassValue : IEquatable<MassValue>, IComparable<MassValue>
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{Value} {Unit.UnitName}";
+        => $"{Value} '{Unit.UnitName}'";
 
     /// <summary>
     /// Determines whether two specified instances of <see cref="MassValue"/> are equal.

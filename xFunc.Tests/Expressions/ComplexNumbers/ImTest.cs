@@ -7,26 +7,26 @@ namespace xFunc.Tests.Expressions.ComplexNumbers;
 
 public class ImTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteComplexNumberTest()
     {
         var complex = new Complex(3.1, 2.5);
         var exp = new Im(new ComplexNumber(complex));
         var expected = new NumberValue(complex.Imaginary);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteExceptionTest()
         => TestNotSupported(new Im(Number.Two));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Im(new ComplexNumber(new Complex(2, 2)));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

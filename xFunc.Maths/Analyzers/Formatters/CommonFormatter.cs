@@ -10,7 +10,6 @@ namespace xFunc.Maths.Analyzers.Formatters;
 /// <summary>
 /// Converts expressions into string.
 /// </summary>
-/// <seealso cref="IFormatter" />
 public class CommonFormatter : IFormatter
 {
     /// <summary>
@@ -253,6 +252,15 @@ public class CommonFormatter : IFormatter
         => $"{exp.Lambda}";
 
     /// <inheritdoc />
+    public virtual string Analyze(Curry exp)
+    {
+        if (exp.Parameters.Length > 0)
+            return $"curry({exp.Function}, {string.Join(", ", exp.Parameters)})";
+
+        return $"curry({exp.Function})";
+    }
+
+    /// <inheritdoc />
     public virtual string Analyze(Variable exp) => exp.Name;
 
     /// <inheritdoc />
@@ -287,6 +295,14 @@ public class CommonFormatter : IFormatter
 
         return $"convert({value}, {unit})";
     }
+
+    /// <inheritdoc />
+    public virtual string Analyze(Rational exp)
+        => ToString(exp, "{0} // {1}");
+
+    /// <inheritdoc />
+    public virtual string Analyze(ToRational exp)
+        => ToString(exp, "torational({0})");
 
     #endregion Standard
 
@@ -640,7 +656,12 @@ public class CommonFormatter : IFormatter
 
     /// <inheritdoc />
     public virtual string Analyze(While exp)
-        => ToString(exp, "while({0}, {1})");
+    {
+        var body = exp.Body.Analyze(this);
+        var condition = exp.Condition.Analyze(this);
+
+        return string.Format(CultureInfo.InvariantCulture, "while({0}, {1})", body, condition);
+    }
 
     /// <inheritdoc />
     public virtual string Analyze(LeftShift exp)

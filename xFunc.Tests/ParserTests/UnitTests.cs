@@ -5,9 +5,9 @@ namespace xFunc.Tests.ParserTests;
 
 public class UnitTests : BaseParserTests
 {
-    [Theory]
-    [InlineData("convert(1, 'rad')")]
-    [InlineData("convert(1, \"rad\")")]
+    [Test]
+    [TestCase("convert(1, 'rad')")]
+    [TestCase("convert(1, \"rad\")")]
     public void ConvertParseTest(string function)
     {
         var converter = new Converter();

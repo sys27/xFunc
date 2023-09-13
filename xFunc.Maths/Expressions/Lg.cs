@@ -45,7 +45,9 @@ public class Lg : UnaryExpression
         {
             NumberValue number => NumberValue.Lg(number),
             Complex complex => Complex.Log10(complex),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            RationalValue rationalValue => RationalValue.Lg(rationalValue),
+
+            _ => throw ExecutionException.For(this),
         };
     }
 

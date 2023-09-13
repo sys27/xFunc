@@ -5,7 +5,7 @@ namespace xFunc.Tests.ParserTests;
 
 public class WhileTests : BaseParserTests
 {
-    [Fact]
+    [Test]
     public void WhileTest()
     {
         var expected = new While(
@@ -16,12 +16,12 @@ public class WhileTests : BaseParserTests
         ParseTest("while(x := x + 1, 1 == 1)", expected);
     }
 
-    [Theory]
-    [InlineData("while x := x + 1, 1 == 1)")]
-    [InlineData("while(, 1 == 1)")]
-    [InlineData("while(x := x + 1 1 == 1)")]
-    [InlineData("while(x := x + 1, )")]
-    [InlineData("while(x := x + 1, 1 == 1")]
+    [Test]
+    [TestCase("while x := x + 1, 1 == 1)")]
+    [TestCase("while(, 1 == 1)")]
+    [TestCase("while(x := x + 1 1 == 1)")]
+    [TestCase("while(x := x + 1, )")]
+    [TestCase("while(x := x + 1, 1 == 1")]
     public void WhileMissingPartsTest(string function)
         => ParseErrorTest(function);
 }

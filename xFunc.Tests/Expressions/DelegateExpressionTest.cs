@@ -5,7 +5,7 @@ namespace xFunc.Tests.Expressions;
 
 public class DelegateExpressionTest
 {
-    [Fact]
+    [Test]
     public void ExecuteTest1()
     {
         var parameters = new ExpressionParameters()
@@ -16,73 +16,73 @@ public class DelegateExpressionTest
 
         var result = func.Execute(parameters);
 
-        Assert.Equal(new NumberValue(11.0), result);
+        Assert.That(result, Is.EqualTo(new NumberValue(11.0)));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest2()
     {
         var func = new DelegateExpression(_ => 10.0);
 
         var result = func.Execute(null);
 
-        Assert.Equal(10.0, result);
+        Assert.That(result, Is.EqualTo(10.0));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest4()
     {
         var func = new DelegateExpression(_ => 1.0);
         var result = func.Execute();
 
-        Assert.Equal(new NumberValue(1.0), result);
+        Assert.That(result, Is.EqualTo(new NumberValue(1.0)));
     }
 
-    [Fact]
+    [Test]
     public void EqualRefTest()
     {
         var exp = new DelegateExpression(_ => 1.0);
 
-        Assert.True(exp.Equals(exp));
+        Assert.That(exp.Equals(exp), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualRefNullTest()
     {
         var exp = new DelegateExpression(_ => 1.0);
 
-        Assert.False(exp.Equals(null));
+        Assert.That(exp.Equals(null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualDiffTypeTest()
     {
         var exp1 = new DelegateExpression(_ => 1.0);
         var exp2 = Number.Two;
 
-        Assert.False(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualSameTest()
     {
         Func<ExpressionParameters, object> d = _ => 1.0;
         var exp1 = new DelegateExpression(d);
         var exp2 = new DelegateExpression(d);
 
-        Assert.True(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualDiffTest()
     {
         var exp1 = new DelegateExpression(_ => 1.0);
         var exp2 = new DelegateExpression(_ => 2.0);
 
-        Assert.False(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest1()
     {
         var exp = new DelegateExpression(_ => 1.0);
@@ -90,7 +90,7 @@ public class DelegateExpressionTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest2()
     {
         var exp = new DelegateExpression(_ => 1.0);

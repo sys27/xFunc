@@ -5,19 +5,19 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class TrigonometricTests : TypeAnalyzerBaseTests
 {
-    [Theory]
-    [InlineData(typeof(Arccos))]
-    [InlineData(typeof(Arccot))]
-    [InlineData(typeof(Arccsc))]
-    [InlineData(typeof(Arcsec))]
-    [InlineData(typeof(Arcsin))]
-    [InlineData(typeof(Arctan))]
-    [InlineData(typeof(Cos))]
-    [InlineData(typeof(Cot))]
-    [InlineData(typeof(Csc))]
-    [InlineData(typeof(Sec))]
-    [InlineData(typeof(Sin))]
-    [InlineData(typeof(Tan))]
+    [Test]
+    [TestCase(typeof(Arccos))]
+    [TestCase(typeof(Arccot))]
+    [TestCase(typeof(Arccsc))]
+    [TestCase(typeof(Arcsec))]
+    [TestCase(typeof(Arcsin))]
+    [TestCase(typeof(Arctan))]
+    [TestCase(typeof(Cos))]
+    [TestCase(typeof(Cot))]
+    [TestCase(typeof(Csc))]
+    [TestCase(typeof(Sec))]
+    [TestCase(typeof(Sin))]
+    [TestCase(typeof(Tan))]
     public void TestUndefined(Type type)
     {
         var exp = Create(type, Variable.X);
@@ -25,13 +25,13 @@ public class TrigonometricTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Theory]
-    [InlineData(typeof(Arccos))]
-    [InlineData(typeof(Arccot))]
-    [InlineData(typeof(Arccsc))]
-    [InlineData(typeof(Arcsec))]
-    [InlineData(typeof(Arcsin))]
-    [InlineData(typeof(Arctan))]
+    [Test]
+    [TestCase(typeof(Arccos))]
+    [TestCase(typeof(Arccot))]
+    [TestCase(typeof(Arccsc))]
+    [TestCase(typeof(Arcsec))]
+    [TestCase(typeof(Arcsin))]
+    [TestCase(typeof(Arctan))]
     public void TestReserveNumber(Type type)
     {
         var exp = Create(type, Number.Two);
@@ -39,13 +39,13 @@ public class TrigonometricTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AngleNumber);
     }
 
-    [Theory]
-    [InlineData(typeof(Cos))]
-    [InlineData(typeof(Cot))]
-    [InlineData(typeof(Csc))]
-    [InlineData(typeof(Sec))]
-    [InlineData(typeof(Sin))]
-    [InlineData(typeof(Tan))]
+    [Test]
+    [TestCase(typeof(Cos))]
+    [TestCase(typeof(Cot))]
+    [TestCase(typeof(Csc))]
+    [TestCase(typeof(Sec))]
+    [TestCase(typeof(Sin))]
+    [TestCase(typeof(Tan))]
     public void TestNumber(Type type)
     {
         var exp = Create(type, Number.Two);
@@ -53,13 +53,13 @@ public class TrigonometricTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Theory]
-    [InlineData(typeof(Cos))]
-    [InlineData(typeof(Cot))]
-    [InlineData(typeof(Csc))]
-    [InlineData(typeof(Sec))]
-    [InlineData(typeof(Sin))]
-    [InlineData(typeof(Tan))]
+    [Test]
+    [TestCase(typeof(Cos))]
+    [TestCase(typeof(Cot))]
+    [TestCase(typeof(Csc))]
+    [TestCase(typeof(Sec))]
+    [TestCase(typeof(Sin))]
+    [TestCase(typeof(Tan))]
     public void TestAngleNumber(Type type)
     {
         var exp = Create(type, AngleValue.Degree(10).AsExpression());
@@ -67,19 +67,19 @@ public class TrigonometricTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Theory]
-    [InlineData(typeof(Arccos))]
-    [InlineData(typeof(Arccot))]
-    [InlineData(typeof(Arccsc))]
-    [InlineData(typeof(Arcsec))]
-    [InlineData(typeof(Arcsin))]
-    [InlineData(typeof(Arctan))]
-    [InlineData(typeof(Cos))]
-    [InlineData(typeof(Cot))]
-    [InlineData(typeof(Csc))]
-    [InlineData(typeof(Sec))]
-    [InlineData(typeof(Sin))]
-    [InlineData(typeof(Tan))]
+    [Test]
+    [TestCase(typeof(Arccos))]
+    [TestCase(typeof(Arccot))]
+    [TestCase(typeof(Arccsc))]
+    [TestCase(typeof(Arcsec))]
+    [TestCase(typeof(Arcsin))]
+    [TestCase(typeof(Arctan))]
+    [TestCase(typeof(Cos))]
+    [TestCase(typeof(Cot))]
+    [TestCase(typeof(Csc))]
+    [TestCase(typeof(Sec))]
+    [TestCase(typeof(Sin))]
+    [TestCase(typeof(Tan))]
     public void TestComplexNumber(Type type)
     {
         var exp = Create(type, new ComplexNumber(2, 2));
@@ -87,19 +87,19 @@ public class TrigonometricTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Theory]
-    [InlineData(typeof(Arccos))]
-    [InlineData(typeof(Arccot))]
-    [InlineData(typeof(Arccsc))]
-    [InlineData(typeof(Arcsec))]
-    [InlineData(typeof(Arcsin))]
-    [InlineData(typeof(Arctan))]
-    [InlineData(typeof(Cos))]
-    [InlineData(typeof(Cot))]
-    [InlineData(typeof(Csc))]
-    [InlineData(typeof(Sec))]
-    [InlineData(typeof(Sin))]
-    [InlineData(typeof(Tan))]
+    [Test]
+    [TestCase(typeof(Arccos))]
+    [TestCase(typeof(Arccot))]
+    [TestCase(typeof(Arccsc))]
+    [TestCase(typeof(Arcsec))]
+    [TestCase(typeof(Arcsin))]
+    [TestCase(typeof(Arctan))]
+    [TestCase(typeof(Cos))]
+    [TestCase(typeof(Cot))]
+    [TestCase(typeof(Csc))]
+    [TestCase(typeof(Sec))]
+    [TestCase(typeof(Sin))]
+    [TestCase(typeof(Tan))]
     public void TestParameterException(Type type)
     {
         var exp = Create(type, Bool.False);

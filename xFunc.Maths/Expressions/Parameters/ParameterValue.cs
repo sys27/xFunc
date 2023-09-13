@@ -107,6 +107,12 @@ public readonly struct ParameterValue : IEquatable<ParameterValue>
     {
     }
 
+    /// <inheritdoc cref="ParameterValue(object)"/>
+    public ParameterValue(RationalValue rationalValue)
+        : this(rationalValue as object)
+    {
+    }
+
     /// <summary>
     /// Initializes a new instance of the <see cref="ParameterValue" /> struct.
     /// </summary>
@@ -131,14 +137,15 @@ public readonly struct ParameterValue : IEquatable<ParameterValue>
                 or VectorValue
                 or MatrixValue
                 or string
-                or Lambda,
+                or Lambda
+                or RationalValue,
             "Unsupported parameter value.");
 
         Value = value;
     }
 
     /// <summary>
-    /// Converts a value to <see cref="ParameterValue"/>.
+    /// Converts the <paramref name="value"/> to <see cref="ParameterValue"/>.
     /// </summary>
     /// <param name="value">The value.</param>
     /// <returns>The parameter value.</returns>
@@ -203,6 +210,10 @@ public readonly struct ParameterValue : IEquatable<ParameterValue>
 
     /// <inheritdoc cref="ParameterValue.op_Implicit(double)"/>
     public static implicit operator ParameterValue(Lambda value)
+        => new ParameterValue(value);
+
+    /// <inheritdoc cref="ParameterValue.op_Implicit(double)"/>
+    public static implicit operator ParameterValue(RationalValue value)
         => new ParameterValue(value);
 
     /// <inheritdoc />

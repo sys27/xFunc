@@ -5,32 +5,32 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise;
 
 public class NAndTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteTest1()
     {
         var nand = new NAnd(Bool.True, Bool.True);
 
-        Assert.False((bool) nand.Execute());
+        Assert.That((bool) nand.Execute(), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest2()
     {
         var nand = new NAnd(Bool.False, Bool.True);
 
-        Assert.True((bool) nand.Execute());
+        Assert.That((bool) nand.Execute(), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteResultIsNotSupported()
         => TestNotSupported(new NAnd(Number.One, Number.Two));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new NAnd(Bool.True, Bool.False);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

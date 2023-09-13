@@ -6,7 +6,7 @@ using System.Globalization;
 namespace xFunc.Maths.Expressions.Parameters;
 
 /// <summary>
-/// Item of <see cref="ExpressionParameters"/>.
+/// Represents the item of <see cref="ExpressionParameters"/>.
 /// </summary>
 public class Parameter : IComparable<Parameter>, IEquatable<Parameter>
 {
@@ -18,6 +18,7 @@ public class Parameter : IComparable<Parameter>, IEquatable<Parameter>
     /// <param name="key">The name of parameter.</param>
     /// <param name="value">The value of parameter.</param>
     /// <param name="type">The type of parameter.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is <c>null</c> or empty.</exception>
     public Parameter(string key, ParameterValue value, ParameterType type = ParameterType.Normal)
     {
         if (string.IsNullOrWhiteSpace(key))
@@ -142,6 +143,7 @@ public class Parameter : IComparable<Parameter>, IEquatable<Parameter>
     /// <summary>
     /// Gets or sets the value of parameter.
     /// </summary>
+    /// <exception cref="ParameterIsReadOnlyException">Thrown when the user tries to update read-only or constant parameter.</exception>
     public ParameterValue Value
     {
         get => value;

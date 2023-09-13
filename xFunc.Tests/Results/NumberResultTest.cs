@@ -5,27 +5,32 @@ namespace xFunc.Tests.Results;
 
 public class NumberResultTest
 {
-    [Fact]
-    public void ResultTest()
+    [Test]
+    public void TryGetNumberTest()
     {
-        var result = new NumberResult(10.2);
+        var expected = NumberValue.One;
+        var areaResult = new Result.NumberResult(expected);
+        var result = areaResult.TryGetNumber(out var numberValue);
 
-        Assert.Equal(10.2, result.Result);
+        Assert.That(result, Is.True);
+        Assert.That(numberValue, Is.EqualTo(expected));
     }
 
-    [Fact]
-    public void IResultTest()
+    [Test]
+    public void TryGetNumberFalseTest()
     {
-        var result = new NumberResult(10.2) as IResult;
+        var areaResult = new Result.AngleResult(AngleValue.Degree(10));
+        var result = areaResult.TryGetNumber(out var numberValue);
 
-        Assert.Equal(10.2, result.Result);
+        Assert.That(result, Is.False);
+        Assert.That(numberValue, Is.Null);
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
-        var result = new NumberResult(10.2);
+        var result = new Result.NumberResult(10.2);
 
-        Assert.Equal("10.2", result.ToString());
+        Assert.That(result.ToString(), Is.EqualTo("10.2"));
     }
 }

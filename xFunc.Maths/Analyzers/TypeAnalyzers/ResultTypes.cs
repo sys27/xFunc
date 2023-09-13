@@ -95,4 +95,9 @@ public enum ResultTypes
     /// The expression returns a volume number.
     /// </summary>
     VolumeNumber = 1 << 15,
+
+    /// <summary>
+    /// The returns a rational number.
+    /// </summary>
+    RationalNumber = 1 << 16,
 }

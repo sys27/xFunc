@@ -5,7 +5,7 @@ namespace xFunc.Tests.Expressions.Matrices;
 
 public class VectorValueTests
 {
-    [Fact]
+    [Test]
     public void CtorEmptyArrayTest()
         => Assert.Throws<ArgumentNullException>(() => VectorValue.Create(Array.Empty<NumberValue>()));
 
@@ -16,8 +16,8 @@ public class VectorValueTests
         yield return new object[] { VectorValue.Create(NumberValue.One), default(VectorValue) };
     }
 
-    [Theory]
-    [MemberData(nameof(NotEqualsTestData))]
+    [Test]
+    [TestCaseSource(nameof(NotEqualsTestData))]
     public void NotEqualsTest(VectorValue v1, VectorValue v2)
         => Assert.False(v1.Equals(v2));
 
@@ -28,8 +28,8 @@ public class VectorValueTests
         yield return new object[] { VectorValue.Create(NumberValue.One), VectorValue.Create(NumberValue.One) };
     }
 
-    [Theory]
-    [MemberData(nameof(EqualsTestData))]
+    [Test]
+    [TestCaseSource(nameof(EqualsTestData))]
     public void EqualsTest(VectorValue v1, VectorValue v2)
         => Assert.True(v1.Equals(v2));
 
@@ -42,42 +42,42 @@ public class VectorValueTests
         yield return new object[] { VectorValue.Create(NumberValue.One), true };
     }
 
-    [Theory]
-    [MemberData(nameof(NotEqualsAsObjectTestData))]
+    [Test]
+    [TestCaseSource(nameof(NotEqualsAsObjectTestData))]
     public void NotEqualsAsObjectTest(VectorValue v1, object v2)
-        => Assert.False(v1.Equals(v2));
+        => Assert.That(v1.Equals(v2), Is.False);
 
-    [Theory]
-    [MemberData(nameof(EqualsTestData))]
+    [Test]
+    [TestCaseSource(nameof(EqualsTestData))]
     public void EqualsAsObjectTest(VectorValue v1, VectorValue v2)
-        => Assert.True(v1.Equals(v2 as object));
+        => Assert.That(v1.Equals(v2 as object), Is.True);
 
-    [Theory]
-    [MemberData(nameof(NotEqualsTestData))]
+    [Test]
+    [TestCaseSource(nameof(NotEqualsTestData))]
     public void NotEqualsAsOperatorTest(VectorValue v1, VectorValue v2)
-        => Assert.True(v1 != v2);
+        => Assert.That(v1 != v2, Is.True);
 
-    [Theory]
-    [MemberData(nameof(EqualsTestData))]
+    [Test]
+    [TestCaseSource(nameof(EqualsTestData))]
     public void EqualsAsOperatorTest(VectorValue v1, VectorValue v2)
-        => Assert.True(v1 == v2);
+        => Assert.That(v1 == v2, Is.True);
 
-    [Fact]
+    [Test]
     public void ToStringEmptyTest()
     {
         var vector = default(VectorValue);
         var expected = "{}";
 
-        Assert.Equal(expected, vector.ToString());
+        Assert.That(vector.ToString(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var vector = VectorValue.Create(NumberValue.One, NumberValue.Two);
         var expected = "{1, 2}";
 
-        Assert.Equal(expected, vector.ToString());
+        Assert.That(vector.ToString(), Is.EqualTo(expected));
     }
 
     public static IEnumerable<object[]> AbsTestData()
@@ -118,10 +118,10 @@ public class VectorValueTests
         };
     }
 
-    [Theory]
-    [MemberData(nameof(AbsTestData))]
+    [Test]
+    [TestCaseSource(nameof(AbsTestData))]
     public void AbsTest(VectorValue vector, NumberValue expected)
-        => Assert.Equal(expected, VectorValue.Abs(vector));
+        => Assert.That(VectorValue.Abs(vector), Is.EqualTo(expected));
 
     public static IEnumerable<object[]> AddTestData()
     {
@@ -198,10 +198,10 @@ public class VectorValueTests
         };
     }
 
-    [Theory]
-    [MemberData(nameof(AddTestData))]
+    [Test]
+    [TestCaseSource(nameof(AddTestData))]
     public void AddTest(VectorValue v1, VectorValue v2, VectorValue expected)
-        => Assert.Equal(expected, v1 + v2);
+        => Assert.That(v1 + v2, Is.EqualTo(expected));
 
     public static IEnumerable<object[]> SubTestData()
     {
@@ -278,10 +278,10 @@ public class VectorValueTests
         };
     }
 
-    [Theory]
-    [MemberData(nameof(SubTestData))]
+    [Test]
+    [TestCaseSource(nameof(SubTestData))]
     public void SubTest(VectorValue v1, VectorValue v2, VectorValue expected)
-        => Assert.Equal(expected, v1 - v2);
+        => Assert.That(v1 - v2, Is.EqualTo(expected));
 
     public static IEnumerable<object[]> MulByScalarTestData()
     {
@@ -341,10 +341,10 @@ public class VectorValueTests
         };
     }
 
-    [Theory]
-    [MemberData(nameof(MulByScalarTestData))]
+    [Test]
+    [TestCaseSource(nameof(MulByScalarTestData))]
     public void MulByScalarTest(VectorValue v1, NumberValue v2, VectorValue expected)
-        => Assert.Equal(expected, v1 * v2);
+        => Assert.That(v1 * v2, Is.EqualTo(expected));
 
     public static IEnumerable<object[]> MulTestData()
     {
@@ -404,10 +404,10 @@ public class VectorValueTests
         };
     }
 
-    [Theory]
-    [MemberData(nameof(MulTestData))]
+    [Test]
+    [TestCaseSource(nameof(MulTestData))]
     public void MulTest(VectorValue v1, VectorValue v2, NumberValue expected)
-        => Assert.Equal(expected, v1 * v2);
+        => Assert.That(v1 * v2, Is.EqualTo(expected));
 
     public static IEnumerable<object[]> SumTestData()
     {
@@ -447,8 +447,8 @@ public class VectorValueTests
         };
     }
 
-    [Theory]
-    [MemberData(nameof(SumTestData))]
+    [Test]
+    [TestCaseSource(nameof(SumTestData))]
     public void SumTest(VectorValue v1, NumberValue expected)
-        => Assert.Equal(expected, v1.Sum());
+        => Assert.That(v1.Sum(), Is.EqualTo(expected));
 }

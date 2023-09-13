@@ -5,105 +5,105 @@ namespace xFunc.Tests.Expressions.Units.AngleUnits;
 
 public class AngleValueTest
 {
-    [Fact]
+    [Test]
     public void EqualTest()
     {
         var angle1 = AngleValue.Degree(10);
         var angle2 = AngleValue.Degree(10);
 
-        Assert.True(angle1.Equals(angle2));
+        Assert.That(angle1.Equals(angle2), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualOperatorTest()
     {
         var angle1 = AngleValue.Degree(10);
         var angle2 = AngleValue.Degree(10);
 
-        Assert.True(angle1 == angle2);
+        Assert.That(angle1 == angle2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualTest()
     {
         var angle1 = AngleValue.Degree(10);
         var angle2 = AngleValue.Degree(12);
 
-        Assert.True(angle1 != angle2);
+        Assert.That(angle1 != angle2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessTest()
     {
         var angle1 = AngleValue.Degree(10);
         var angle2 = AngleValue.Degree(12);
 
-        Assert.True(angle1 < angle2);
+        Assert.That(angle1 < angle2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessFalseTest()
     {
         var angle1 = AngleValue.Degree(20);
         var angle2 = AngleValue.Degree(12);
 
-        Assert.False(angle1 < angle2);
+        Assert.That(angle1 < angle2, Is.False);
     }
 
-    [Fact]
+    [Test]
     public void GreaterTest()
     {
         var angle1 = AngleValue.Degree(20);
         var angle2 = AngleValue.Degree(12);
 
-        Assert.True(angle1 > angle2);
+        Assert.That(angle1 > angle2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterFalseTest()
     {
         var angle1 = AngleValue.Degree(10);
         var angle2 = AngleValue.Degree(12);
 
-        Assert.False(angle1 > angle2);
+        Assert.That(angle1 > angle2, Is.False);
     }
 
-    [Fact]
+    [Test]
     public void LessOrEqualTest()
     {
         var angle1 = AngleValue.Degree(10);
         var angle2 = AngleValue.Degree(10);
 
-        Assert.True(angle1 <= angle2);
+        Assert.That(angle1 <= angle2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterOrEqualTest()
     {
         var angle1 = AngleValue.Degree(10);
         var angle2 = AngleValue.Degree(10);
 
-        Assert.True(angle1 >= angle2);
+        Assert.That(angle1 >= angle2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CompareToNull()
     {
         var angle = AngleValue.Degree(10);
 
-        Assert.True(angle.CompareTo(null) > 0);
+        Assert.That(angle.CompareTo(null) > 0, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CompareToObject()
     {
         var angle1 = AngleValue.Degree(10);
         var angle2 = (object)AngleValue.Degree(10);
 
-        Assert.True(angle1.CompareTo(angle2) == 0);
+        Assert.That(angle1.CompareTo(angle2) == 0, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CompareToDouble()
     {
         var angle = AngleValue.Degree(10);
@@ -111,163 +111,163 @@ public class AngleValueTest
         Assert.Throws<ArgumentException>(() => angle.CompareTo(1));
     }
 
-    [Fact]
+    [Test]
     public void ValueNotEqualTest()
     {
         var angle1 = AngleValue.Degree(10);
         var angle2 = AngleValue.Degree(12);
 
-        Assert.False(angle1.Equals(angle2));
+        Assert.That(angle1.Equals(angle2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void UnitNotEqualTest2()
     {
         var angle1 = AngleValue.Degree(10);
         var angle2 = AngleValue.Radian(10);
 
-        Assert.False(angle1.Equals(angle2));
+        Assert.That(angle1.Equals(angle2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualDiffTypeTest()
     {
         var angle1 = AngleValue.Degree(10);
         var angle2 = 3;
 
-        Assert.False(angle1.Equals(angle2));
+        Assert.That(angle1.Equals(angle2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualObjectTest()
     {
         var angle1 = AngleValue.Degree(10);
         var angle2 = AngleValue.Degree(10);
 
-        Assert.True(angle1.Equals(angle2 as object));
+        Assert.That(angle1.Equals(angle2 as object), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualObjectTest()
     {
         var angle1 = AngleValue.Degree(10);
         var angle2 = AngleValue.Degree(20);
 
-        Assert.False(angle1.Equals(angle2 as object));
+        Assert.That(angle1.Equals(angle2 as object), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ToStringDegreeTest()
     {
         var angle = AngleValue.Degree(10);
 
-        Assert.Equal("10 degree", angle.ToString());
+        Assert.That(angle.ToString(), Is.EqualTo("10 'degree'"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringRadianTest()
     {
         var angle = AngleValue.Radian(10);
 
-        Assert.Equal("10 radian", angle.ToString());
+        Assert.That(angle.ToString(), Is.EqualTo("10 'radian'"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringGradianTest()
     {
         var angle = AngleValue.Gradian(10);
 
-        Assert.Equal("10 gradian", angle.ToString());
+        Assert.That(angle.ToString(), Is.EqualTo("10 'gradian'"));
     }
 
-    [Fact]
+    [Test]
     public void DegreeToDegreeTest()
     {
         var angle = AngleValue.Degree(10);
         var actual = angle.To(AngleUnit.Degree);
         var expected = AngleValue.Degree(10);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void DegreeToRadianTest()
     {
         var angle = AngleValue.Degree(10);
         var actual = angle.To(AngleUnit.Radian);
         var expected = AngleValue.Radian(10 * Math.PI / 180);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void DegreeToGradianTest()
     {
         var angle = AngleValue.Degree(10);
         var actual = angle.To(AngleUnit.Gradian);
         var expected = AngleValue.Gradian(10 / 0.9);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void RadianToDegreeTest()
     {
         var angle = AngleValue.Radian(10);
         var actual = angle.To(AngleUnit.Degree);
         var expected = AngleValue.Degree(10 * 180 / Math.PI);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void RadianToRadianTest()
     {
         var angle = AngleValue.Radian(10);
         var actual = angle.To(AngleUnit.Radian);
         var expected = AngleValue.Radian(10);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void RadianToGradianTest()
     {
         var angle = AngleValue.Radian(10);
         var actual = angle.To(AngleUnit.Gradian);
         var expected = AngleValue.Gradian(10 * 200 / Math.PI);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void GradianToDegreeTest()
     {
         var angle = AngleValue.Gradian(10);
         var actual = angle.To(AngleUnit.Degree);
         var expected = AngleValue.Degree(10 * 0.9);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void GradianToRadianTest()
     {
         var angle = AngleValue.Gradian(10);
         var actual = angle.To(AngleUnit.Radian);
         var expected = AngleValue.Radian(10 * Math.PI / 200);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void GradianToGradianTest()
     {
         var angle = AngleValue.Gradian(10);
         var actual = angle.To(AngleUnit.Gradian);
         var expected = AngleValue.Gradian(10);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     public static IEnumerable<object[]> NormalizeTestsCases()
@@ -292,14 +292,14 @@ public class AngleValueTest
         yield return new object[] { -434.0, AngleUnit.Gradian, 366 };
     }
 
-    [Theory]
-    [MemberData(nameof(NormalizeTestsCases))]
+    [Test]
+    [TestCaseSource(nameof(NormalizeTestsCases))]
     public void NormalizeTests(double angleValue, AngleUnit unit, double expectedValue)
     {
         var angle = new AngleValue(new NumberValue(angleValue), unit);
         var normalized = angle.Normalize();
         var expected = new AngleValue(new NumberValue(expectedValue), unit);
 
-        Assert.Equal(expected, normalized);
+        Assert.That(normalized, Is.EqualTo(expected));
     }
 }

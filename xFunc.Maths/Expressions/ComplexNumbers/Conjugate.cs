@@ -45,7 +45,7 @@ public class Conjugate : UnaryExpression
         return result switch
         {
             Complex complex => Complex.Conjugate(complex),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

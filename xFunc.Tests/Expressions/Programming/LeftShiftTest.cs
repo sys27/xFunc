@@ -5,17 +5,17 @@ namespace xFunc.Tests.Expressions.Programming;
 
 public class LeftShiftTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteTest()
     {
         var exp = new LeftShift(Number.One, new Number(10));
         var actual = exp.Execute();
         var expected = new NumberValue(1024.0);
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteDoubleLeftTest()
     {
         var exp = new LeftShift(new Number(1.5), new Number(10));
@@ -23,7 +23,7 @@ public class LeftShiftTest : BaseExpressionTests
         Assert.Throws<ArgumentException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteDoubleRightTest()
     {
         var exp = new LeftShift(Number.One, new Number(10.1));
@@ -31,16 +31,16 @@ public class LeftShiftTest : BaseExpressionTests
         Assert.Throws<ArgumentException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteBoolTest()
         => TestNotSupported(new LeftShift(Bool.False, Bool.True));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new LeftShift(Number.One, new Number(10));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

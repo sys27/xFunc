@@ -1,51 +1,49 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Moq;
+using NSubstitute;
 
 namespace xFunc.Tests.Expressions;
 
 public class SimplifyTest
 {
-    [Fact]
+    [Test]
     public void SimplifierNull()
         => Assert.Throws<ArgumentNullException>(() => new Simplify(null, null));
 
-    [Fact]
+    [Test]
     public void ExecuteTest()
     {
-        var mock = new Mock<ISimplifier>();
-        mock
-            .Setup(x => x.Analyze(It.IsAny<Sin>()))
-            .Returns<IExpression>(x => x);
+        var simplifier = Substitute.For<ISimplifier>();
+        simplifier.Analyze(Arg.Any<Sin>()).Returns(info => info.Arg<Sin>());
 
         var lambda = new Sin(Variable.X).ToLambda(Variable.X.Name);
-        var exp = new Simplify(mock.Object, lambda.AsExpression());
+        var exp = new Simplify(simplifier, lambda.AsExpression());
 
-        Assert.Equal(lambda, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(lambda));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNonLambdaTest()
     {
-        var simplifier = new Mock<ISimplifier>();
-        var simplify = new Simplify(simplifier.Object, Number.One);
+        var simplifier = Substitute.For<ISimplifier>();
+        var simplify = new Simplify(simplifier, Number.One);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => simplify.Execute());
+        Assert.Throws<ExecutionException>(() => simplify.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNullTest()
     {
         Assert.Throws<ArgumentNullException>(() => new Simplify(null, new Sin(Variable.X)).Execute());
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Simplify(new Simplifier(), new Sin(Variable.X));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

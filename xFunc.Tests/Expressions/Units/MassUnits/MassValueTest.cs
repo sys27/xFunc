@@ -5,105 +5,105 @@ namespace xFunc.Tests.Expressions.Units.MassUnits;
 
 public class MassValueTest
 {
-    [Fact]
+    [Test]
     public void EqualTest()
     {
         var mass1 = MassValue.Gram(10);
         var mass2 = MassValue.Gram(10);
 
-        Assert.True(mass1.Equals(mass2));
+        Assert.That(mass1.Equals(mass2), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualOperatorTest()
     {
         var mass1 = MassValue.Gram(10);
         var mass2 = MassValue.Gram(10);
 
-        Assert.True(mass1 == mass2);
+        Assert.That(mass1 == mass2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualTest()
     {
         var mass1 = MassValue.Gram(10);
         var mass2 = MassValue.Gram(12);
 
-        Assert.True(mass1 != mass2);
+        Assert.That(mass1 != mass2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessTest()
     {
         var mass1 = MassValue.Gram(10);
         var mass2 = MassValue.Gram(12);
 
-        Assert.True(mass1 < mass2);
+        Assert.That(mass1 < mass2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void LessFalseTest()
     {
         var mass1 = MassValue.Gram(20);
         var mass2 = MassValue.Gram(12);
 
-        Assert.False(mass1 < mass2);
+        Assert.That(mass1 < mass2, Is.False);
     }
 
-    [Fact]
+    [Test]
     public void GreaterTest()
     {
         var mass1 = MassValue.Gram(20);
         var mass2 = MassValue.Gram(12);
 
-        Assert.True(mass1 > mass2);
+        Assert.That(mass1 > mass2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterFalseTest()
     {
         var mass1 = MassValue.Gram(10);
         var mass2 = MassValue.Gram(12);
 
-        Assert.False(mass1 > mass2);
+        Assert.That(mass1 > mass2, Is.False);
     }
 
-    [Fact]
+    [Test]
     public void LessOrEqualTest()
     {
         var mass1 = MassValue.Gram(10);
         var mass2 = MassValue.Gram(10);
 
-        Assert.True(mass1 <= mass2);
+        Assert.That(mass1 <= mass2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterOrEqualTest()
     {
         var mass1 = MassValue.Gram(10);
         var mass2 = MassValue.Gram(10);
 
-        Assert.True(mass1 >= mass2);
+        Assert.That(mass1 >= mass2, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CompareToNull()
     {
         var mass = MassValue.Gram(10);
 
-        Assert.True(mass.CompareTo(null) > 0);
+        Assert.That(mass.CompareTo(null) > 0, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CompareToObject()
     {
         var mass1 = MassValue.Gram(10);
         var mass2 = (object)MassValue.Gram(10);
 
-        Assert.True(mass1.CompareTo(mass2) == 0);
+        Assert.That(mass1.CompareTo(mass2) == 0, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CompareToDouble()
     {
         var mass = MassValue.Gram(10);
@@ -111,100 +111,100 @@ public class MassValueTest
         Assert.Throws<ArgumentException>(() => mass.CompareTo(1));
     }
 
-    [Fact]
+    [Test]
     public void ValueNotEqualTest()
     {
         var mass1 = MassValue.Gram(10);
         var mass2 = MassValue.Gram(12);
 
-        Assert.False(mass1.Equals(mass2));
+        Assert.That(mass1.Equals(mass2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void UnitNotEqualTest2()
     {
         var mass1 = MassValue.Gram(10);
         var mass2 = MassValue.Kilogram(10);
 
-        Assert.False(mass1.Equals(mass2));
+        Assert.That(mass1.Equals(mass2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualDiffTypeTest()
     {
         var mass1 = MassValue.Gram(10);
         var mass2 = 3;
 
-        Assert.False(mass1.Equals(mass2));
+        Assert.That(mass1.Equals(mass2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualObjectTest()
     {
         var mass1 = MassValue.Gram(10);
         var mass2 = MassValue.Gram(10);
 
-        Assert.True(mass1.Equals(mass2 as object));
+        Assert.That(mass1.Equals(mass2 as object), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualObjectTest()
     {
         var mass1 = MassValue.Gram(10);
         var mass2 = MassValue.Gram(20);
 
-        Assert.False(mass1.Equals(mass2 as object));
+        Assert.That(mass1.Equals(mass2 as object), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ToStringMilligramTest()
     {
         var mass = MassValue.Milligram(10);
 
-        Assert.Equal("10 mg", mass.ToString());
+        Assert.That(mass.ToString(), Is.EqualTo("10 'mg'"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringGramTest()
     {
         var mass = MassValue.Gram(10);
 
-        Assert.Equal("10 g", mass.ToString());
+        Assert.That(mass.ToString(), Is.EqualTo("10 'g'"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringKilogramTest()
     {
         var mass = MassValue.Kilogram(10);
 
-        Assert.Equal("10 kg", mass.ToString());
+        Assert.That(mass.ToString(), Is.EqualTo("10 'kg'"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringTonneTest()
     {
         var mass = MassValue.Tonne(10);
 
-        Assert.Equal("10 t", mass.ToString());
+        Assert.That(mass.ToString(), Is.EqualTo("10 't'"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringOunceTest()
     {
         var mass = MassValue.Ounce(10);
 
-        Assert.Equal("10 oz", mass.ToString());
+        Assert.That(mass.ToString(), Is.EqualTo("10 'oz'"));
     }
 
-    [Fact]
+    [Test]
     public void ToStringPoundTest()
     {
         var mass = MassValue.Pound(10);
 
-        Assert.Equal("10 lb", mass.ToString());
+        Assert.That(mass.ToString(), Is.EqualTo("10 'lb'"));
     }
 
-    [Fact]
+    [Test]
     public void AddOperatorTest()
     {
         var mass1 = MassValue.Gram(1);
@@ -212,10 +212,10 @@ public class MassValueTest
         var expected = MassValue.Gram(1001);
         var result = mass1 + mass2;
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SubOperatorTest()
     {
         var mass1 = MassValue.Kilogram(1);
@@ -223,7 +223,7 @@ public class MassValueTest
         var expected = MassValue.Kilogram(0.999);
         var result = mass1 - mass2;
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
     public static IEnumerable<object[]> GetConversionTestCases()
@@ -266,13 +266,13 @@ public class MassValueTest
         yield return new object[] { 10.0, MassUnit.Pound, MassUnit.Ounce, 160.0 };
     }
 
-    [Theory]
-    [MemberData(nameof(GetConversionTestCases))]
+    [Test]
+    [TestCaseSource(nameof(GetConversionTestCases))]
     public void ConversionTests(double value, MassUnit unit, MassUnit to, double expected)
     {
         var mass = new MassValue(new NumberValue(value), unit);
         var converted = mass.To(to);
 
-        Assert.Equal(expected, converted.Value.Number, 6);
+        Assert.That(converted.Value.Number, Is.EqualTo(expected).Within(6));
     }
 }

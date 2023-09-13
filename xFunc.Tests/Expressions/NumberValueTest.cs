@@ -5,188 +5,188 @@ namespace xFunc.Tests.Expressions;
 
 public class NumberValueTest
 {
-    [Fact]
+    [Test]
     public void EqualObjectTest()
     {
         var x = new NumberValue(1);
         var y = (object)new NumberValue(1.0);
 
-        Assert.True(x.Equals(y));
+        Assert.That(x.Equals(y), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualObjectTest()
     {
         var x = new NumberValue(1);
         var y = new object();
 
-        Assert.False(x.Equals(y));
+        Assert.That(x.Equals(y), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualNumberTest()
     {
         var x = new NumberValue(1);
         var y = new NumberValue(1);
 
-        Assert.True(x == y);
+        Assert.That(x == y, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualNumberTest()
     {
         var x = new NumberValue(1);
         var y = new NumberValue(2);
 
-        Assert.True(x != y);
+        Assert.That(x != y, Is.True);
     }
 
 
-    [Fact]
+    [Test]
     public void EqualDoubleTest()
     {
         var x = new NumberValue(1);
         var y = 1.0;
 
-        Assert.True(x == y);
-        Assert.True(y == x);
+        Assert.That(x == y, Is.True);
+        Assert.That(y == x, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualDoubleTest()
     {
         var x = new NumberValue(1);
         var y = 2.0;
 
-        Assert.True(x != y);
-        Assert.True(y != x);
+        Assert.That(x != y, Is.True);
+        Assert.That(y != x, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NumberLessNumberTest()
     {
         var x = new NumberValue(1);
         var y = new NumberValue(2);
 
-        Assert.True(x < y);
-        Assert.True(x <= y);
+        Assert.That(x < y, Is.True);
+        Assert.That(x <= y, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NumberLessDoubleTest()
     {
         var x = new NumberValue(1);
         var y = 2.0;
 
-        Assert.True(x < y);
-        Assert.True(x <= y);
+        Assert.That(x < y, Is.True);
+        Assert.That(x <= y, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void DoubleLessNumberTest()
     {
         var x = 1.0;
         var y = new NumberValue(2.0);
 
-        Assert.True(x < y);
-        Assert.True(x <= y);
+        Assert.That(x < y, Is.True);
+        Assert.That(x <= y, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NumberGreaterNumberTest()
     {
         var x = new NumberValue(1);
         var y = new NumberValue(2);
 
-        Assert.True(y > x);
-        Assert.True(y >= x);
+        Assert.That(y > x, Is.True);
+        Assert.That(y >= x, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NumberGreaterDoubleTest()
     {
         var x = new NumberValue(1);
         var y = 2.0;
 
-        Assert.True(y > x);
-        Assert.True(y >= x);
+        Assert.That(y > x, Is.True);
+        Assert.That(y >= x, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void DoubleGreaterNumberTest()
     {
         var x = 1.0;
         var y = new NumberValue(2);
 
-        Assert.True(y > x);
-        Assert.True(y >= x);
+        Assert.That(y > x, Is.True);
+        Assert.That(y >= x, Is.True);
     }
 
     // ....
 
-    [Fact]
+    [Test]
     public void NumberLessOrEqualNumberTest()
     {
         var x = new NumberValue(1);
         var y = new NumberValue(1);
 
-        Assert.True(x <= y);
+        Assert.That(x <= y, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NumberLessOrEqualDoubleTest()
     {
         var x = new NumberValue(1);
         var y = 1.0;
 
-        Assert.True(x <= y);
+        Assert.That(x <= y, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void DoubleLessOrEqualNumberTest()
     {
         var x = 1.0;
         var y = new NumberValue(1.0);
 
-        Assert.True(x <= y);
+        Assert.That(x <= y, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NumberGreaterOrEqualNumberTest()
     {
         var x = new NumberValue(1);
         var y = new NumberValue(1);
 
-        Assert.True(y >= x);
+        Assert.That(y >= x, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NumberGreaterOrEqualDoubleTest()
     {
         var x = new NumberValue(1);
         var y = 1.0;
 
-        Assert.True(y >= x);
+        Assert.That(y >= x, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void DoubleGreaterOrEqualNumberTest()
     {
         var x = 1.0;
         var y = new NumberValue(1);
 
-        Assert.True(y >= x);
+        Assert.That(y >= x, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CompareNullTest()
     {
         var x = new NumberValue(1);
 
-        Assert.Equal(1, x.CompareTo(null));
+        Assert.That(x.CompareTo(null), Is.EqualTo(1));
     }
 
-    [Fact]
+    [Test]
     public void CompareToDifferentTypeTest()
     {
         var x = NumberValue.One;
@@ -195,12 +195,12 @@ public class NumberValueTest
         Assert.Throws<ArgumentException>(() => x.CompareTo(y));
     }
 
-    [Fact]
+    [Test]
     public void RoundTest()
     {
         var x = new NumberValue(1.5);
         var expected = new NumberValue(2.0);
 
-        Assert.Equal(expected, NumberValue.Round(x));
+        Assert.That(NumberValue.Round(x), Is.EqualTo(expected));
     }
 }

@@ -48,7 +48,7 @@ public class LambdaExpression : IExpression, IEquatable<LambdaExpression>
 
     /// <inheritdoc />
     public object Execute(ExpressionParameters? parameters)
-        => Lambda.Capture(parameters);
+        => Lambda;
 
     /// <inheritdoc />
     public string ToString(IFormatter formatter)
@@ -59,6 +59,7 @@ public class LambdaExpression : IExpression, IEquatable<LambdaExpression>
         => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
+    /// <exception cref="ArgumentNullException"><paramref name="analyzer"/> is <c>null</c>.</exception>
     public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
     {
         if (analyzer is null)
@@ -68,6 +69,7 @@ public class LambdaExpression : IExpression, IEquatable<LambdaExpression>
     }
 
     /// <inheritdoc />
+    /// <exception cref="ArgumentNullException"><paramref name="analyzer"/> is <c>null</c>.</exception>
     public TResult Analyze<TResult, TContext>(
         IAnalyzer<TResult, TContext> analyzer,
         TContext context)

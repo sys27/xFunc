@@ -7,25 +7,25 @@ namespace xFunc.Tests.Expressions;
 
 public class GCDTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void CalculateTest1()
     {
         var exp = new GCD(new Number(12), new Number(16));
         var expected = new NumberValue(4.0);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void CalculateTest2()
     {
         var exp = new GCD(new IExpression[] { new Number(64), new Number(16), new Number(8) });
         var expected = new NumberValue(8.0);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void CalculateWrongArgumentTypeTest()
     {
         var exp = new GCD(new IExpression[] { Bool.True, new Number(16), new Number(8) });
@@ -33,20 +33,20 @@ public class GCDTest : BaseExpressionTests
         TestNotSupported(exp);
     }
 
-    [Fact]
+    [Test]
     public void NullArgTest()
         => Assert.Throws<ArgumentNullException>(() => new GCD(null));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new GCD(Variable.X, Number.Zero);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 
-    [Fact]
+    [Test]
     public void CloneWithArgsTest()
     {
         var exp = new GCD(Variable.X, Number.Zero);
@@ -54,10 +54,10 @@ public class GCDTest : BaseExpressionTests
         var clone = exp.Clone(args);
         var expected = new GCD(args);
 
-        Assert.Equal(expected, clone);
+        Assert.That(clone, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void EqualsSameTest()
     {
         var exp = new GCD(new IExpression[] { new Number(16), new Number(8) });
@@ -65,7 +65,7 @@ public class GCDTest : BaseExpressionTests
         Assert.True(exp.Equals(exp));
     }
 
-    [Fact]
+    [Test]
     public void EqualsNullTest()
     {
         var exp = new GCD(new IExpression[] { new Number(16), new Number(8) });
@@ -73,7 +73,7 @@ public class GCDTest : BaseExpressionTests
         Assert.False(exp.Equals(null));
     }
 
-    [Fact]
+    [Test]
     public void EqualsDiffTypesTest()
     {
         var exp = new GCD(new IExpression[] { new Number(16), new Number(8) });
@@ -82,7 +82,7 @@ public class GCDTest : BaseExpressionTests
         Assert.False(exp.Equals(number));
     }
 
-    [Fact]
+    [Test]
     public void EqualsDiffCountTest()
     {
         var exp1 = new GCD(new IExpression[] { new Number(16), new Number(8) });
@@ -91,7 +91,7 @@ public class GCDTest : BaseExpressionTests
         Assert.False(exp1.Equals(exp2));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest1()
     {
         var exp = new GCD(new IExpression[] { new Number(16), new Number(8) });
@@ -99,7 +99,7 @@ public class GCDTest : BaseExpressionTests
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest2()
     {
         var exp = new GCD(new IExpression[] { new Number(16), new Number(8) });

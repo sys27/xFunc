@@ -43,7 +43,7 @@ public class ToHex : UnaryExpression
         return result switch
         {
             NumberValue number => NumberValue.ToHex(number),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 

@@ -5,34 +5,34 @@ namespace xFunc.Tests.Expressions.Programming;
 
 public class GreaterOrEqualTest
 {
-    [Fact]
+    [Test]
     public void CalculateGreaterTrueTest1()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 463) };
         var greaterOrEqual = new GreaterOrEqual(Variable.X, new Number(10));
 
-        Assert.True((bool)greaterOrEqual.Execute(parameters));
+        Assert.That((bool)greaterOrEqual.Execute(parameters), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CalculateGreaterTrueTest2()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 10) };
         var greaterOrEqual = new GreaterOrEqual(Variable.X, new Number(10));
 
-        Assert.True((bool)greaterOrEqual.Execute(parameters));
+        Assert.That((bool)greaterOrEqual.Execute(parameters), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CalculateGreaterFalseTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 0) };
         var greaterOrEqual = new GreaterOrEqual(Variable.X, new Number(10));
 
-        Assert.False((bool)greaterOrEqual.Execute(parameters));
+        Assert.That((bool)greaterOrEqual.Execute(parameters), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void GreaterOrEqualAngleTest()
     {
         var exp = new GreaterOrEqual(
@@ -41,10 +41,10 @@ public class GreaterOrEqualTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterOrEqualPowerTest()
     {
         var exp = new GreaterOrEqual(
@@ -53,10 +53,10 @@ public class GreaterOrEqualTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterOrEqualTemperatureTest()
     {
         var exp = new GreaterOrEqual(
@@ -65,10 +65,10 @@ public class GreaterOrEqualTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterOrEqualMassTest()
     {
         var exp = new GreaterOrEqual(
@@ -77,10 +77,10 @@ public class GreaterOrEqualTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterOrEqualLengthTest()
     {
         var exp = new GreaterOrEqual(
@@ -89,10 +89,10 @@ public class GreaterOrEqualTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterOrEqualTimeTest()
     {
         var exp = new GreaterOrEqual(
@@ -101,10 +101,10 @@ public class GreaterOrEqualTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterOrEqualAreaTest()
     {
         var exp = new GreaterOrEqual(
@@ -113,10 +113,10 @@ public class GreaterOrEqualTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void GreaterOrEqualVolumeTest()
     {
         var exp = new GreaterOrEqual(
@@ -125,23 +125,23 @@ public class GreaterOrEqualTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CalculateInvalidTypeTest()
     {
         var greaterOrEqual = new GreaterOrEqual(Bool.True, Bool.True);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => greaterOrEqual.Execute());
+        Assert.Throws<ExecutionException>(() => greaterOrEqual.Execute());
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new GreaterOrEqual(Number.Two, new Number(3));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

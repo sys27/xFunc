@@ -22,6 +22,7 @@ public class Variable : IExpression, IEquatable<Variable>
     /// Initializes a new instance of the <see cref="Variable"/> class.
     /// </summary>
     /// <param name="name">A name of variable.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="name"/> is <c>null</c> or empty.</exception>
     public Variable(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
@@ -35,6 +36,7 @@ public class Variable : IExpression, IEquatable<Variable>
     /// </summary>
     /// <param name="variable">The value to convert.</param>
     /// <returns>An object that contains the converted value.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="variable"/> is <c>null</c>.</exception>
     public static implicit operator string(Variable? variable)
         => variable?.Name ?? throw new ArgumentNullException(nameof(variable));
 
@@ -88,10 +90,11 @@ public class Variable : IExpression, IEquatable<Variable>
         => ToString(CommonFormatter.Instance);
 
     /// <inheritdoc />
-    /// <exception cref="NotSupportedException">Always.</exception>
+    /// <exception cref="NotSupportedException">The evaluation of variable requires <see cref="ExpressionParameters"/>.</exception>
     public object Execute() => throw new NotSupportedException();
 
     /// <inheritdoc />
+    /// <exception cref="ArgumentNullException"><paramref name="parameters"/> is <c>null</c>.</exception>
     public object Execute(ExpressionParameters? parameters)
     {
         if (parameters is null)

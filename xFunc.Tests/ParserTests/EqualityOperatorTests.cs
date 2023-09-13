@@ -5,15 +5,15 @@ namespace xFunc.Tests.ParserTests;
 
 public class EqualityOperatorTests : BaseParserTests
 {
-    [Fact]
+    [Test]
     public void EqualTest()
         => ParseTest("x == 0", new Equal(Variable.X, Number.Zero));
 
-    [Fact]
+    [Test]
     public void NotEqualTest()
         => ParseTest("x != 0", new NotEqual(Variable.X, Number.Zero));
 
-    [Fact]
+    [Test]
     public void PrecedenceTest()
     {
         var expected = new And(

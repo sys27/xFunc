@@ -61,7 +61,7 @@ public abstract class HyperbolicExpression : UnaryExpression
             NumberValue number => ExecuteInternal(AngleValue.Degree(number)),
             AngleValue angle => ExecuteInternal(angle),
             Complex complex => ExecuteComplex(complex),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            _ => throw ExecutionException.For(this),
         };
     }
 }

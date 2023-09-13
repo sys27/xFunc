@@ -5,32 +5,32 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise;
 
 public class OrTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteTest1()
     {
         var exp = new Or(Number.One, Number.Two);
         var expected = new NumberValue(3.0);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest3()
     {
         var exp = new Or(Bool.True, Bool.False);
 
-        Assert.True((bool)exp.Execute());
+        Assert.That((bool)exp.Execute(), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest4()
     {
         var exp = new Or(Bool.False, Bool.False);
 
-        Assert.False((bool)exp.Execute());
+        Assert.That((bool)exp.Execute(), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestLeftIsNotInt()
     {
         var exp = new Or(new Number(1.5), Number.One);
@@ -38,7 +38,7 @@ public class OrTest : BaseExpressionTests
         Assert.Throws<ArgumentException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestRightIsNotInt()
     {
         var exp = new Or(Number.One, new Number(1.5));
@@ -46,16 +46,16 @@ public class OrTest : BaseExpressionTests
         Assert.Throws<ArgumentException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteResultIsNotSupported()
         => TestNotSupported(new Or(new ComplexNumber(1), new ComplexNumber(2)));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Or(Bool.True, Bool.False);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

@@ -52,7 +52,7 @@ public class GCD : DifferentParametersExpression
             gcd = result switch
             {
                 NumberValue number => NumberValue.GCD(gcd, number),
-                _ => throw new ResultIsNotSupportedException(this, result),
+                _ => throw ExecutionException.For(this),
             };
         }
 

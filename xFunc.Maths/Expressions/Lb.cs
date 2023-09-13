@@ -43,7 +43,9 @@ public class Lb : UnaryExpression
         return result switch
         {
             NumberValue number => NumberValue.Lb(number),
-            _ => throw new ResultIsNotSupportedException(this, result),
+            RationalValue rationalValue => RationalValue.Lb(rationalValue),
+
+            _ => throw ExecutionException.For(this),
         };
     }
 

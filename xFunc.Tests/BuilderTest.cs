@@ -5,41 +5,41 @@ namespace xFunc.Tests;
 
 public class BuilderTest
 {
-    [Fact]
+    [Test]
     public void ExpCtorTest()
     {
-        var exp = new Builder((IExpression)Number.Two).Expression;
+        var exp = new Builder(Number.Two).Expression;
 
-        Assert.Equal(exp, Number.Two);
+        Assert.That(exp, Is.EqualTo(Number.Two));
     }
 
-    [Fact]
+    [Test]
     public void NumberCtorTest()
     {
         var exp = new Builder(2).Expression;
 
-        Assert.Equal(exp, Number.Two);
+        Assert.That(exp, Is.EqualTo(Number.Two));
     }
 
-    [Fact]
+    [Test]
     public void VariableCtorTest()
     {
         var exp = new Builder("x").Expression;
 
-        Assert.Equal(exp, Variable.X);
+        Assert.That(exp, Is.EqualTo(Variable.X));
     }
 
-    [Fact]
+    [Test]
     public void ExpressionTest()
     {
         var exp = new Builder(3)
             .Custom(exp => new Sin(exp))
             .Expression;
 
-        Assert.Equal(exp, new Sin(new Number(3)));
+        Assert.That(exp, Is.EqualTo(new Sin(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void ExpressionNullTest()
     {
         var builder = new Builder(3);
@@ -47,7 +47,7 @@ public class BuilderTest
         Assert.Throws<ArgumentNullException>(() => builder.Custom(null));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest()
     {
         var exp = new Builder(3)
@@ -56,10 +56,10 @@ public class BuilderTest
 
         var expected = new NumberValue(5.0);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(expected, Is.EqualTo(exp.Execute()));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteWithParamsTest()
     {
         var exp = new Builder(3)
@@ -68,10 +68,10 @@ public class BuilderTest
 
         var expected = new NumberValue(5.0);
 
-        Assert.Equal(expected, exp.Execute(new ExpressionParameters()));
+        Assert.That(expected, Is.EqualTo(exp.Execute(new ExpressionParameters())));
     }
 
-    [Fact]
+    [Test]
     public void NullParamTest()
     {
         Assert.Throws<ArgumentNullException>(() => new Builder((IExpression)null));
@@ -79,420 +79,420 @@ public class BuilderTest
 
     #region Standart
 
-    [Fact]
+    [Test]
     public void AddExpTest()
     {
-        var builder = new Builder(3).Add((IExpression)Number.Two);
+        var builder = new Builder(3).Add(Number.Two);
 
-        Assert.Equal(builder.Expression, new Add(new Number(3), Number.Two));
+        Assert.That(builder.Expression, Is.EqualTo(new Add(new Number(3), Number.Two)));
     }
 
-    [Fact]
+    [Test]
     public void AddNumberTest()
     {
         var builder = new Builder(3).Add(2);
 
-        Assert.Equal(builder.Expression, new Add(new Number(3), Number.Two));
+        Assert.That(builder.Expression, Is.EqualTo(new Add(new Number(3), Number.Two)));
     }
 
-    [Fact]
+    [Test]
     public void AddVariableTest()
     {
         var builder = new Builder(3).Add("x");
 
-        Assert.Equal(builder.Expression, new Add(new Number(3), Variable.X));
+        Assert.That(builder.Expression, Is.EqualTo(new Add(new Number(3), Variable.X)));
     }
 
-    [Fact]
+    [Test]
     public void SubExpTest()
     {
-        var builder = new Builder(3).Sub((IExpression)Number.Two);
+        var builder = new Builder(3).Sub(Number.Two);
 
-        Assert.Equal(builder.Expression, new Sub(new Number(3), Number.Two));
+        Assert.That(builder.Expression, Is.EqualTo(new Sub(new Number(3), Number.Two)));
     }
 
-    [Fact]
+    [Test]
     public void SubNumberTest()
     {
         var builder = new Builder(3).Sub(2);
 
-        Assert.Equal(builder.Expression, new Sub(new Number(3), Number.Two));
+        Assert.That(builder.Expression, Is.EqualTo(new Sub(new Number(3), Number.Two)));
     }
 
-    [Fact]
+    [Test]
     public void SubVariableTest()
     {
         var builder = new Builder(3).Sub("x");
 
-        Assert.Equal(builder.Expression, new Sub(new Number(3), Variable.X));
+        Assert.That(builder.Expression, Is.EqualTo(new Sub(new Number(3), Variable.X)));
     }
 
-    [Fact]
+    [Test]
     public void MulExpTest()
     {
-        var builder = new Builder(3).Mul((IExpression)Number.Two);
+        var builder = new Builder(3).Mul(Number.Two);
 
-        Assert.Equal(builder.Expression, new Mul(new Number(3), Number.Two));
+        Assert.That(builder.Expression, Is.EqualTo(new Mul(new Number(3), Number.Two)));
     }
 
-    [Fact]
+    [Test]
     public void MulNumberTest()
     {
         var builder = new Builder(3).Mul(2);
 
-        Assert.Equal(builder.Expression, new Mul(new Number(3), Number.Two));
+        Assert.That(builder.Expression, Is.EqualTo(new Mul(new Number(3), Number.Two)));
     }
 
-    [Fact]
+    [Test]
     public void MulVariableTest()
     {
         var builder = new Builder(3).Mul("x");
 
-        Assert.Equal(builder.Expression, new Mul(new Number(3), Variable.X));
+        Assert.That(builder.Expression, Is.EqualTo(new Mul(new Number(3), Variable.X)));
     }
 
-    [Fact]
+    [Test]
     public void DivExpTest()
     {
-        var builder = new Builder(3).Div((IExpression)Number.Two);
+        var builder = new Builder(3).Div(Number.Two);
 
-        Assert.Equal(builder.Expression, new Div(new Number(3), Number.Two));
+        Assert.That(builder.Expression, Is.EqualTo(new Div(new Number(3), Number.Two)));
     }
 
-    [Fact]
+    [Test]
     public void DivNumberTest()
     {
         var builder = new Builder(3).Div(2);
 
-        Assert.Equal(builder.Expression, new Div(new Number(3), Number.Two));
+        Assert.That(builder.Expression, Is.EqualTo(new Div(new Number(3), Number.Two)));
     }
 
-    [Fact]
+    [Test]
     public void DivVariableTest()
     {
         var builder = new Builder(3).Div("x");
 
-        Assert.Equal(builder.Expression, new Div(new Number(3), Variable.X));
+        Assert.That(builder.Expression, Is.EqualTo(new Div(new Number(3), Variable.X)));
     }
 
-    [Fact]
+    [Test]
     public void PowExpTest()
     {
-        var builder = new Builder(3).Pow((IExpression)Number.Two);
+        var builder = new Builder(3).Pow(Number.Two);
 
-        Assert.Equal(builder.Expression, new Pow(new Number(3), Number.Two));
+        Assert.That(builder.Expression, Is.EqualTo(new Pow(new Number(3), Number.Two)));
     }
 
-    [Fact]
+    [Test]
     public void PowNumberTest()
     {
         var builder = new Builder(3).Pow(2);
 
-        Assert.Equal(builder.Expression, new Pow(new Number(3), Number.Two));
+        Assert.That(builder.Expression, Is.EqualTo(new Pow(new Number(3), Number.Two)));
     }
 
-    [Fact]
+    [Test]
     public void PowVariableTest()
     {
         var builder = new Builder(3).Pow("x");
 
-        Assert.Equal(builder.Expression, new Pow(new Number(3), Variable.X));
+        Assert.That(builder.Expression, Is.EqualTo(new Pow(new Number(3), Variable.X)));
     }
 
-    [Fact]
+    [Test]
     public void SqrtNumberTest()
     {
         var builder = new Builder(3).Sqrt();
 
-        Assert.Equal(builder.Expression, new Sqrt(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Sqrt(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void RootExpTest()
     {
-        var builder = new Builder(3).Root((IExpression)Number.Two);
+        var builder = new Builder(3).Root(Number.Two);
 
-        Assert.Equal(builder.Expression, new Root(new Number(3), Number.Two));
+        Assert.That(builder.Expression, Is.EqualTo(new Root(new Number(3), Number.Two)));
     }
 
-    [Fact]
+    [Test]
     public void RootNumberTest()
     {
         var builder = new Builder(3).Root(2);
 
-        Assert.Equal(builder.Expression, new Root(new Number(3), Number.Two));
+        Assert.That(builder.Expression, Is.EqualTo(new Root(new Number(3), Number.Two)));
     }
 
-    [Fact]
+    [Test]
     public void RootVariableTest()
     {
         var builder = new Builder(3).Root("x");
 
-        Assert.Equal(builder.Expression, new Root(new Number(3), Variable.X));
+        Assert.That(builder.Expression, Is.EqualTo(new Root(new Number(3), Variable.X)));
     }
 
-    [Fact]
+    [Test]
     public void AbsNumberTest()
     {
         var builder = new Builder(3).Abs();
 
-        Assert.Equal(builder.Expression, new Abs(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Abs(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void LogExpTest()
     {
-        var builder = new Builder(3).Log((IExpression)Number.Two);
+        var builder = new Builder(3).Log(Number.Two);
 
-        Assert.Equal(builder.Expression, new Log(Number.Two, new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Log(Number.Two, new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void LogNumberTest()
     {
         var builder = new Builder(3).Log(2);
 
-        Assert.Equal(builder.Expression, new Log(Number.Two, new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Log(Number.Two, new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void LogVariableTest()
     {
         var builder = new Builder(3).Log("x");
 
-        Assert.Equal(builder.Expression, new Log(Variable.X, new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Log(Variable.X, new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void LnNumberTest()
     {
         var builder = new Builder(3).Ln();
 
-        Assert.Equal(builder.Expression, new Ln(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Ln(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void LgNumberTest()
     {
         var builder = new Builder(3).Lg();
 
-        Assert.Equal(builder.Expression, new Lg(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Lg(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void LbNumberTest()
     {
         var builder = new Builder(3).Lb();
 
-        Assert.Equal(builder.Expression, new Lb(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Lb(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void ExpNumberTest()
     {
         var builder = new Builder(3).Exp();
 
-        Assert.Equal(builder.Expression, new Exp(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Exp(new Number(3))));
     }
 
     #endregion Standart
 
     #region Trigonometric
 
-    [Fact]
+    [Test]
     public void SinTest()
     {
         var builder = new Builder(3).Sin();
 
-        Assert.Equal(builder.Expression, new Sin(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Sin(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void CosTest()
     {
         var builder = new Builder(3).Cos();
 
-        Assert.Equal(builder.Expression, new Cos(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Cos(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void TanTest()
     {
         var builder = new Builder(3).Tan();
 
-        Assert.Equal(builder.Expression, new Tan(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Tan(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void CotTest()
     {
         var builder = new Builder(3).Cot();
 
-        Assert.Equal(builder.Expression, new Cot(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Cot(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void SecTest()
     {
         var builder = new Builder(3).Sec();
 
-        Assert.Equal(builder.Expression, new Sec(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Sec(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void CscTest()
     {
         var builder = new Builder(3).Csc();
 
-        Assert.Equal(builder.Expression, new Csc(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Csc(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void ArcsinTest()
     {
         var builder = new Builder(3).Arcsin();
 
-        Assert.Equal(builder.Expression, new Arcsin(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Arcsin(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void ArccosTest()
     {
         var builder = new Builder(3).Arccos();
 
-        Assert.Equal(builder.Expression, new Arccos(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Arccos(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void ArctanTest()
     {
         var builder = new Builder(3).Arctan();
 
-        Assert.Equal(builder.Expression, new Arctan(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Arctan(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void ArccotTest()
     {
         var builder = new Builder(3).Arccot();
 
-        Assert.Equal(builder.Expression, new Arccot(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Arccot(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void ArcsecTest()
     {
         var builder = new Builder(3).Arcsec();
 
-        Assert.Equal(builder.Expression, new Arcsec(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Arcsec(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void ArccscTest()
     {
         var builder = new Builder(3).Arccsc();
 
-        Assert.Equal(builder.Expression, new Arccsc(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Arccsc(new Number(3))));
     }
 
     #endregion Trigonometric
 
     #region Hyperbolic
 
-    [Fact]
+    [Test]
     public void SinhTest()
     {
         var builder = new Builder(3).Sinh();
 
-        Assert.Equal(builder.Expression, new Sinh(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Sinh(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void CoshTest()
     {
         var builder = new Builder(3).Cosh();
 
-        Assert.Equal(builder.Expression, new Cosh(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Cosh(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void TanhTest()
     {
         var builder = new Builder(3).Tanh();
 
-        Assert.Equal(builder.Expression, new Tanh(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Tanh(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void CothTest()
     {
         var builder = new Builder(3).Coth();
 
-        Assert.Equal(builder.Expression, new Coth(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Coth(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void SechTest()
     {
         var builder = new Builder(3).Sech();
 
-        Assert.Equal(builder.Expression, new Sech(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Sech(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void CschTest()
     {
         var builder = new Builder(3).Csch();
 
-        Assert.Equal(builder.Expression, new Csch(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Csch(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void ArsinhTest()
     {
         var builder = new Builder(3).Arsinh();
 
-        Assert.Equal(builder.Expression, new Arsinh(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Arsinh(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void ArcoshTest()
     {
         var builder = new Builder(3).Arcosh();
 
-        Assert.Equal(builder.Expression, new Arcosh(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Arcosh(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void ArtanhTest()
     {
         var builder = new Builder(3).Artanh();
 
-        Assert.Equal(builder.Expression, new Artanh(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Artanh(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void ArcothTest()
     {
         var builder = new Builder(3).Arcoth();
 
-        Assert.Equal(builder.Expression, new Arcoth(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Arcoth(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void ArsechTest()
     {
         var builder = new Builder(3).Arsech();
 
-        Assert.Equal(builder.Expression, new Arsech(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Arsech(new Number(3))));
     }
 
-    [Fact]
+    [Test]
     public void ArcschTest()
     {
         var builder = new Builder(3).Arcsch();
 
-        Assert.Equal(builder.Expression, new Arcsch(new Number(3)));
+        Assert.That(builder.Expression, Is.EqualTo(new Arcsch(new Number(3))));
     }
 
     #endregion Hyperbolic

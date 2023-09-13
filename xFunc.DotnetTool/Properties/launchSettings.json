@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "xFunc.DotnetTool": {
-      "commandName": "Project",
-      "commandLineArgs": "interactive"
-    }
-  }
-}

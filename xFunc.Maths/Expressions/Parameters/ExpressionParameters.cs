@@ -25,9 +25,7 @@ public partial class ExpressionParameters : IEnumerable<Parameter>, INotifyColle
         InitializeConstants();
     }
 
-    /// <summary>
-    /// Occurs when the collection changes.
-    /// </summary>
+    /// <inheritdoc/>
     public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
     /// <summary>
@@ -70,6 +68,7 @@ public partial class ExpressionParameters : IEnumerable<Parameter>, INotifyColle
     /// </summary>
     /// <param name="parameters">The parameters.</param>
     /// <param name="initConstants">if set to <c>true</c> initialize constants.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="parameters"/> is <c>null</c>.</exception>
     public ExpressionParameters(IEnumerable<Parameter>? parameters, bool initConstants)
     {
         if (parameters is null)
@@ -102,36 +101,6 @@ public partial class ExpressionParameters : IEnumerable<Parameter>, INotifyColle
 
         // Imaginary unit
         AddConstant(Parameter.Constant("i", Complex.ImaginaryOne));
-
-        // Gravity on Earth
-        AddConstant(Parameter.Constant("g", 9.80665));
-
-        // Speed of Light (c0)
-        AddConstant(Parameter.Constant("c", 299792458));
-
-        // Planck Constant
-        AddConstant(Parameter.Constant("h", 6.62607004E-34));
-
-        // Faraday Constant
-        AddConstant(Parameter.Constant("F", 96485.33289));
-
-        // Electric Constant (ε0)
-        AddConstant(Parameter.Constant("ε", 8.854187817E-12));
-
-        // Magnetic constant (µ0)
-        AddConstant(Parameter.Constant("µ", 1.2566370614E-6));
-
-        // Gravitational constant
-        AddConstant(Parameter.Constant("G", 6.64078E-11));
-
-        // Feigenbaum constant
-        AddConstant(Parameter.Constant("α", 2.5029078750958928222839));
-
-        // Stefan-Boltzmann constant
-        AddConstant(Parameter.Constant("σ", 5.670367E-8));
-
-        // Euler–Mascheroni constant
-        AddConstant(Parameter.Constant("γ", 0.57721566490153286060651));
 
         // functions
         AddConstant(Parameter.Constant("add", Expressions.Add.Lambda));
@@ -230,6 +199,7 @@ public partial class ExpressionParameters : IEnumerable<Parameter>, INotifyColle
         AddConstant(Parameter.Constant("tobin", ToBin.Lambda));
         AddConstant(Parameter.Constant("tooct", ToOct.Lambda));
         AddConstant(Parameter.Constant("tohex", ToHex.Lambda));
+        AddConstant(Parameter.Constant("tonumber", ToNumber.Lambda));
     }
 
     private static void AddConstant(Parameter parameter)
@@ -290,7 +260,7 @@ public partial class ExpressionParameters : IEnumerable<Parameter>, INotifyColle
     /// <param name="key">The name of parameter.</param>
     /// <param name="parameter">The parameter.</param>
     /// <returns><c>true</c> if the current collection contains specified parameter, otherwise <c>false</c>.</returns>
-    public bool TryGetParameter(string key, [NotNullWhen(true)] out Parameter? parameter)
+    public virtual bool TryGetParameter(string key, [NotNullWhen(true)] out Parameter? parameter)
     {
         if (collection.TryGetValue(key, out var param))
         {
@@ -403,6 +373,6 @@ public partial class ExpressionParameters : IEnumerable<Parameter>, INotifyColle
     /// </summary>
     /// <param name="parameters">The instance of the base parameters collection.</param>
     /// <returns>The expression parameters.</returns>
-    public static ExpressionParameters CreateScoped(ExpressionParameters parameters)
+    public static ExpressionParameters CreateScoped(ExpressionParameters? parameters)
         => new ScopedExpressionParameters(parameters);
 }

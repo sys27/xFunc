@@ -2,7 +2,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class TruncTests : TypeAnalyzerBaseTests
 {
-    [Fact]
+    [Test]
     public void TestTruncUndefined()
     {
         var exp = new Trunc(Variable.X);
@@ -10,7 +10,7 @@ public class TruncTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestTruncNumber()
     {
         var exp = new Trunc(new Number(10));
@@ -18,7 +18,7 @@ public class TruncTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestTruncAngle()
     {
         var exp = new Trunc(AngleValue.Degree(5.5).AsExpression());
@@ -26,7 +26,7 @@ public class TruncTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestTruncPower()
     {
         var exp = new Trunc(PowerValue.Watt(5.5).AsExpression());
@@ -34,7 +34,7 @@ public class TruncTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.PowerNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestTruncTemperature()
     {
         var exp = new Trunc(TemperatureValue.Celsius(5.5).AsExpression());
@@ -42,7 +42,7 @@ public class TruncTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TemperatureNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestTruncMass()
     {
         var exp = new Trunc(MassValue.Gram(5.5).AsExpression());
@@ -50,7 +50,7 @@ public class TruncTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.MassNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestTruncLength()
     {
         var exp = new Trunc(LengthValue.Meter(5.5).AsExpression());
@@ -58,7 +58,7 @@ public class TruncTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.LengthNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestTimeLength()
     {
         var exp = new Trunc(TimeValue.Second(5.5).AsExpression());
@@ -66,7 +66,7 @@ public class TruncTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TimeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAreaLength()
     {
         var exp = new Trunc(AreaValue.Meter(5.5).AsExpression());
@@ -74,7 +74,7 @@ public class TruncTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AreaNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestVolumeLength()
     {
         var exp = new Trunc(VolumeValue.Meter(5.5).AsExpression());
@@ -82,7 +82,7 @@ public class TruncTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.VolumeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestTruncException()
     {
         var exp = new Trunc(Bool.False);

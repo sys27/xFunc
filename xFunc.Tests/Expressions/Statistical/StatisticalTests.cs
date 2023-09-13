@@ -5,19 +5,19 @@ using System.Collections.Immutable;
 
 namespace xFunc.Tests.Expressions.Statistical;
 
-public class StatisticalTests :  BaseExpressionTests
+public class StatisticalTests : BaseExpressionTests
 {
-    [Theory]
-    [InlineData(typeof(Avg))]
-    [InlineData(typeof(Count))]
-    [InlineData(typeof(Max))]
-    [InlineData(typeof(Min))]
-    [InlineData(typeof(Product))]
-    [InlineData(typeof(Stdev))]
-    [InlineData(typeof(Stdevp))]
-    [InlineData(typeof(Sum))]
-    [InlineData(typeof(Var))]
-    [InlineData(typeof(Varp))]
+    [Test]
+    [TestCase(typeof(Avg))]
+    [TestCase(typeof(Count))]
+    [TestCase(typeof(Max))]
+    [TestCase(typeof(Min))]
+    [TestCase(typeof(Product))]
+    [TestCase(typeof(Stdev))]
+    [TestCase(typeof(Stdevp))]
+    [TestCase(typeof(Sum))]
+    [TestCase(typeof(Var))]
+    [TestCase(typeof(Varp))]
     public void NotSupportedException(Type type)
     {
         var exp = Create(type, new IExpression[] { Bool.False, Bool.False });
@@ -25,36 +25,36 @@ public class StatisticalTests :  BaseExpressionTests
         TestNotSupported(exp);
     }
 
-    [Theory]
-    [InlineData(typeof(Avg))]
-    [InlineData(typeof(Count))]
-    [InlineData(typeof(Max))]
-    [InlineData(typeof(Min))]
-    [InlineData(typeof(Product))]
-    [InlineData(typeof(Stdev))]
-    [InlineData(typeof(Stdevp))]
-    [InlineData(typeof(Sum))]
-    [InlineData(typeof(Var))]
-    [InlineData(typeof(Varp))]
+    [Test]
+    [TestCase(typeof(Avg))]
+    [TestCase(typeof(Count))]
+    [TestCase(typeof(Max))]
+    [TestCase(typeof(Min))]
+    [TestCase(typeof(Product))]
+    [TestCase(typeof(Stdev))]
+    [TestCase(typeof(Stdevp))]
+    [TestCase(typeof(Sum))]
+    [TestCase(typeof(Var))]
+    [TestCase(typeof(Varp))]
     public void CloneTest(Type type)
     {
         var exp = Create<StatisticalExpression>(type, new IExpression[] { Number.One, Number.Two });
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 
-    [Theory]
-    [InlineData(typeof(Avg))]
-    [InlineData(typeof(Count))]
-    [InlineData(typeof(Max))]
-    [InlineData(typeof(Min))]
-    [InlineData(typeof(Product))]
-    [InlineData(typeof(Stdev))]
-    [InlineData(typeof(Stdevp))]
-    [InlineData(typeof(Sum))]
-    [InlineData(typeof(Var))]
-    [InlineData(typeof(Varp))]
+    [Test]
+    [TestCase(typeof(Avg))]
+    [TestCase(typeof(Count))]
+    [TestCase(typeof(Max))]
+    [TestCase(typeof(Min))]
+    [TestCase(typeof(Product))]
+    [TestCase(typeof(Stdev))]
+    [TestCase(typeof(Stdevp))]
+    [TestCase(typeof(Sum))]
+    [TestCase(typeof(Var))]
+    [TestCase(typeof(Varp))]
     public void CloneWithReplaceTest(Type type)
     {
         var exp = Create<StatisticalExpression>(type, new IExpression[] { Number.One, Number.Two });
@@ -62,6 +62,6 @@ public class StatisticalTests :  BaseExpressionTests
         var clone = exp.Clone(arg);
         var expected = Create(type, arg);
 
-        Assert.Equal(expected, clone);
+        Assert.That(clone, Is.EqualTo(expected));
     }
 }

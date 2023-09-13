@@ -5,22 +5,22 @@
     <LangVersion>latest</LangVersion>
     <RootNamespace>xFunc.Maths</RootNamespace>
     <PackageId>xFunc.Maths</PackageId>
-    <Version>4.3.0</Version>
+    <Version>4.4.0</Version>
     <Product>xFunc.Maths</Product>
     <Authors>Dmytro Kyshchenko</Authors>
     <Company />
     <Copyright>Copyright © 2012-2023 Dmytro Kyshchenko</Copyright>
-    <Description>xFunc.Maths is a simple and easy to use library that allows you to build mathematical expressions.</Description>
+    <Description>xFunc provides a powerful parser and analyzer for mathematical expressions. It excels at calculating derivatives, simplifying expressions, and achieving high performance.</Description>
     <PackageProjectUrl>https://github.com/sys27/xFunc</PackageProjectUrl>
     <PackageIcon>xFunc.png</PackageIcon>
-    <PackageTags>Math Expression Expressions Parser MathParser Differentiation Simplification</PackageTags>
+    <PackageTags>math formula parse parser math-parser logic simplification derivative differentiation truth-table condition complex-numbers trigonometry unit-converter</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
-    <AssemblyVersion>4.3.0</AssemblyVersion>
-    <FileVersion>4.3.0</FileVersion>
+    <AssemblyVersion>4.4.0</AssemblyVersion>
+    <FileVersion>4.4.0</FileVersion>
     <RepositoryUrl>https://github.com/sys27/xFunc</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <PackageReleaseNotes>https://github.com/sys27/xFunc/wiki/ChangeLog
-https://github.com/sys27/xFunc/wiki/Breaking-Changes</PackageReleaseNotes>
+    <PackageReleaseNotes>https://sys27.github.io/xFunc/articles/change-log.html
+https://sys27.github.io/xFunc/articles/breaking-changes.html</PackageReleaseNotes>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
@@ -111,5 +111,4 @@ https://github.com/sys27/xFunc/wiki/Breaking-Changes</PackageReleaseNotes>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
 </Project>

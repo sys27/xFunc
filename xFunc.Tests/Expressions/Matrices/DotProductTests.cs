@@ -7,11 +7,11 @@ namespace xFunc.Tests.Expressions.Matrices;
 
 public class DotProductTests : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void CtorNullTest()
         => Assert.Throws<ArgumentNullException>(() => new DotProduct(new ImmutableArray<IExpression>()));
 
-    [Fact]
+    [Test]
     public void ExecuteTest()
     {
         var exp = new DotProduct(
@@ -21,14 +21,14 @@ public class DotProductTests : BaseExpressionTests
         var result = exp.Execute();
         var expected = new NumberValue(32.0);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTypeExceptionTest()
         => TestNotSupported(new DotProduct(Number.One, Number.Two));
 
-    [Fact]
+    [Test]
     public void ExecuteLeftTypeExceptionTest()
     {
         var exp = new DotProduct(
@@ -38,7 +38,7 @@ public class DotProductTests : BaseExpressionTests
         TestNotSupported(exp);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteRightTypeExceptionTest()
     {
         var exp = new DotProduct(
@@ -48,7 +48,7 @@ public class DotProductTests : BaseExpressionTests
         TestNotSupported(exp);
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new DotProduct(
@@ -57,6 +57,6 @@ public class DotProductTests : BaseExpressionTests
         );
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

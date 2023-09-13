@@ -5,7 +5,7 @@ namespace xFunc.Tests.ParserTests;
 
 public class UnassignTests : BaseParserTests
 {
-    [Fact]
+    [Test]
     public void UndefParseTest()
     {
         var expected = new Unassign(new Variable("f"));
@@ -13,10 +13,10 @@ public class UnassignTests : BaseParserTests
         ParseTest("unassign(f)", expected);
     }
 
-    [Theory]
-    [InlineData("unassign x)")]
-    [InlineData("unassign()")]
-    [InlineData("unassign(x")]
+    [Test]
+    [TestCase("unassign x)")]
+    [TestCase("unassign()")]
+    [TestCase("unassign(x")]
     public void UndefMissingPartsTest(string function)
         => ParseErrorTest(function);
 }

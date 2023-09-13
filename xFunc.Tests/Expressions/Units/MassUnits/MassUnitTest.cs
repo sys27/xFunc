@@ -5,72 +5,72 @@ namespace xFunc.Tests.Expressions.Units.MassUnits;
 
 public class MassUnitTest
 {
-    [Fact]
+    [Test]
     public void EqualsTest()
     {
         var a = MassUnit.Kilogram;
         var b = MassUnit.Kilogram;
 
-        Assert.True(a.Equals(b));
+        Assert.That(a.Equals(b), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsTest()
     {
         var a = MassUnit.Kilogram;
         var b = MassUnit.Gram;
 
-        Assert.False(a.Equals(b));
+        Assert.That(a.Equals(b), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ObjectEqualsTest()
     {
         var a = MassUnit.Kilogram;
         var b = MassUnit.Kilogram as object;
 
-        Assert.True(a.Equals(b));
+        Assert.That(a.Equals(b), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ObjectEqualsWithDifferentTypesTest()
     {
         var a = MassUnit.Kilogram;
         var b = 1 as object;
 
-        Assert.False(a.Equals(b));
+        Assert.That(a.Equals(b), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsOperatorTest()
     {
         var a = MassUnit.Kilogram;
         var b = MassUnit.Kilogram;
 
-        Assert.True(a == b);
+        Assert.That(a == b, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsOperatorTest()
     {
         var a = MassUnit.Kilogram;
         var b = MassUnit.Gram;
 
-        Assert.True(a != b);
+        Assert.That(a != b, Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ToStringTest()
     {
         var a = MassUnit.Kilogram;
 
-        Assert.Equal("kg", a.ToString());
+        Assert.That(a.ToString(), Is.EqualTo("kg"));
     }
 
-    [Theory]
-    [InlineData(null)]
-    [InlineData("")]
-    [InlineData(" ")]
+    [Test]
+    [TestCase(null)]
+    [TestCase("")]
+    [TestCase(" ")]
     public void FromNameEmptyString(string name)
         => Assert.Throws<ArgumentNullException>(() => MassUnit.FromName(name, out _));
 }

@@ -5,32 +5,32 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise;
 
 public class XOrTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteTest1()
     {
         var exp = new XOr(Number.One, Number.Two);
         var expected = new NumberValue(3.0);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest3()
     {
         var exp = new XOr(Bool.True, Bool.True);
 
-        Assert.False((bool)exp.Execute());
+        Assert.That((bool)exp.Execute(), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest4()
     {
         var exp = new XOr(Bool.False, Bool.True);
 
-        Assert.True((bool)exp.Execute());
+        Assert.That((bool)exp.Execute(), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestLeftIsNotInt()
     {
         var exp = new XOr(new Number(1.5), Number.One);
@@ -38,7 +38,7 @@ public class XOrTest : BaseExpressionTests
         Assert.Throws<ArgumentException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTestRightIsNotInt()
     {
         var exp = new XOr(Number.One, new Number(1.5));
@@ -46,7 +46,7 @@ public class XOrTest : BaseExpressionTests
         Assert.Throws<ArgumentException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteResultIsNotSupported()
     {
         var exp = new XOr(new ComplexNumber(1), new ComplexNumber(2));
@@ -54,12 +54,12 @@ public class XOrTest : BaseExpressionTests
         TestNotSupported(exp);
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new XOr(Bool.True, Bool.False);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

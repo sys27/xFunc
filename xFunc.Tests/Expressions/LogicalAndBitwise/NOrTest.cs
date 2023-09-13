@@ -5,32 +5,32 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise;
 
 public class NOrTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteTest1()
     {
         var nor = new NOr(Bool.False, Bool.True);
 
-        Assert.False((bool) nor.Execute());
+        Assert.That((bool) nor.Execute(), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest2()
     {
         var nor = new NOr(Bool.False, Bool.False);
 
-        Assert.True((bool) nor.Execute());
+        Assert.That((bool) nor.Execute(), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteResultIsNotSupported()
         => TestNotSupported(new NOr(Number.One, Number.Two));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new NOr(Bool.True, Bool.False);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

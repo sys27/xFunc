@@ -5,19 +5,19 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class HyperbolicTests : TypeAnalyzerBaseTests
 {
-    [Theory]
-    [InlineData(typeof(Arcosh))]
-    [InlineData(typeof(Arcoth))]
-    [InlineData(typeof(Arcsch))]
-    [InlineData(typeof(Arsech))]
-    [InlineData(typeof(Arsinh))]
-    [InlineData(typeof(Artanh))]
-    [InlineData(typeof(Cosh))]
-    [InlineData(typeof(Coth))]
-    [InlineData(typeof(Csch))]
-    [InlineData(typeof(Sech))]
-    [InlineData(typeof(Sinh))]
-    [InlineData(typeof(Tanh))]
+    [Test]
+    [TestCase(typeof(Arcosh))]
+    [TestCase(typeof(Arcoth))]
+    [TestCase(typeof(Arcsch))]
+    [TestCase(typeof(Arsech))]
+    [TestCase(typeof(Arsinh))]
+    [TestCase(typeof(Artanh))]
+    [TestCase(typeof(Cosh))]
+    [TestCase(typeof(Coth))]
+    [TestCase(typeof(Csch))]
+    [TestCase(typeof(Sech))]
+    [TestCase(typeof(Sinh))]
+    [TestCase(typeof(Tanh))]
     public void TestUndefined(Type type)
     {
         var exp = Create(type, Variable.X);
@@ -25,13 +25,13 @@ public class HyperbolicTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Theory]
-    [InlineData(typeof(Arcosh))]
-    [InlineData(typeof(Arcoth))]
-    [InlineData(typeof(Arcsch))]
-    [InlineData(typeof(Arsech))]
-    [InlineData(typeof(Arsinh))]
-    [InlineData(typeof(Artanh))]
+    [Test]
+    [TestCase(typeof(Arcosh))]
+    [TestCase(typeof(Arcoth))]
+    [TestCase(typeof(Arcsch))]
+    [TestCase(typeof(Arsech))]
+    [TestCase(typeof(Arsinh))]
+    [TestCase(typeof(Artanh))]
     public void TestAngleNumber(Type type)
     {
         var exp = Create(type, Number.Two);
@@ -39,13 +39,13 @@ public class HyperbolicTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AngleNumber);
     }
 
-    [Theory]
-    [InlineData(typeof(Cosh))]
-    [InlineData(typeof(Coth))]
-    [InlineData(typeof(Csch))]
-    [InlineData(typeof(Sech))]
-    [InlineData(typeof(Sinh))]
-    [InlineData(typeof(Tanh))]
+    [Test]
+    [TestCase(typeof(Cosh))]
+    [TestCase(typeof(Coth))]
+    [TestCase(typeof(Csch))]
+    [TestCase(typeof(Sech))]
+    [TestCase(typeof(Sinh))]
+    [TestCase(typeof(Tanh))]
     public void TestNumber(Type type)
     {
         var exp = Create(type, Number.Two);
@@ -53,19 +53,19 @@ public class HyperbolicTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Theory]
-    [InlineData(typeof(Arcosh))]
-    [InlineData(typeof(Arcoth))]
-    [InlineData(typeof(Arcsch))]
-    [InlineData(typeof(Arsech))]
-    [InlineData(typeof(Arsinh))]
-    [InlineData(typeof(Artanh))]
-    [InlineData(typeof(Cosh))]
-    [InlineData(typeof(Coth))]
-    [InlineData(typeof(Csch))]
-    [InlineData(typeof(Sech))]
-    [InlineData(typeof(Sinh))]
-    [InlineData(typeof(Tanh))]
+    [Test]
+    [TestCase(typeof(Arcosh))]
+    [TestCase(typeof(Arcoth))]
+    [TestCase(typeof(Arcsch))]
+    [TestCase(typeof(Arsech))]
+    [TestCase(typeof(Arsinh))]
+    [TestCase(typeof(Artanh))]
+    [TestCase(typeof(Cosh))]
+    [TestCase(typeof(Coth))]
+    [TestCase(typeof(Csch))]
+    [TestCase(typeof(Sech))]
+    [TestCase(typeof(Sinh))]
+    [TestCase(typeof(Tanh))]
     public void TestComplexNumber(Type type)
     {
         var exp = Create(type, new ComplexNumber(2, 2));
@@ -73,19 +73,19 @@ public class HyperbolicTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Theory]
-    [InlineData(typeof(Arcosh))]
-    [InlineData(typeof(Arcoth))]
-    [InlineData(typeof(Arcsch))]
-    [InlineData(typeof(Arsech))]
-    [InlineData(typeof(Arsinh))]
-    [InlineData(typeof(Artanh))]
-    [InlineData(typeof(Cosh))]
-    [InlineData(typeof(Coth))]
-    [InlineData(typeof(Csch))]
-    [InlineData(typeof(Sech))]
-    [InlineData(typeof(Sinh))]
-    [InlineData(typeof(Tanh))]
+    [Test]
+    [TestCase(typeof(Arcosh))]
+    [TestCase(typeof(Arcoth))]
+    [TestCase(typeof(Arcsch))]
+    [TestCase(typeof(Arsech))]
+    [TestCase(typeof(Arsinh))]
+    [TestCase(typeof(Artanh))]
+    [TestCase(typeof(Cosh))]
+    [TestCase(typeof(Coth))]
+    [TestCase(typeof(Csch))]
+    [TestCase(typeof(Sech))]
+    [TestCase(typeof(Sinh))]
+    [TestCase(typeof(Tanh))]
     public void TestParameterException(Type type)
     {
         var exp = Create(type, Bool.False);

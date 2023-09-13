@@ -5,9 +5,9 @@ namespace xFunc.Tests.Expressions.Units.Converters;
 
 public class ConverterTests
 {
-    [Theory]
-    [InlineData(null, null)]
-    [InlineData(1, null)]
+    [Test]
+    [TestCase(null, null)]
+    [TestCase(1, null)]
     public void ConvertNull(object value, string unit)
     {
         var converter = new Converter();
@@ -30,17 +30,17 @@ public class ConverterTests
         yield return new object[] { temperature, "k", temperature.ToKelvin() };
     }
 
-    [Theory]
-    [MemberData(nameof(GetConvertTestsData))]
+    [Test]
+    [TestCaseSource(nameof(GetConvertTestsData))]
     public void ConvertTests(object value, string unit, object expected)
     {
         var converter = new Converter();
         var result = converter.Convert(value, unit);
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ConvertUnsupportedUnit()
     {
         var converter = new Converter();

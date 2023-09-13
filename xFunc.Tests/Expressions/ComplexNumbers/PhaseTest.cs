@@ -7,26 +7,26 @@ namespace xFunc.Tests.Expressions.ComplexNumbers;
 
 public class PhaseTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteTest()
     {
         var complex = new Complex(3.1, 2.5);
         var exp = new Phase(new ComplexNumber(complex));
         var expected = AngleValue.Radian(complex.Phase);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteExceptionTest()
         => TestNotSupported(new Phase(Number.Two));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Phase(new ComplexNumber(new Complex(2, 2)));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

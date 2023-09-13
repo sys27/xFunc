@@ -1,26 +1,29 @@
+// Copyright (c) Dmytro Kyshchenko. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
 namespace xFunc.Tests.Expressions;
 
 public class LambdaExpressionTest
 {
-    [Fact]
+    [Test]
     public void EqualsNullTest()
     {
         var lambda = new Lambda(new[] { "x" }, Variable.X)
             .AsExpression();
 
-        Assert.False(lambda.Equals(null));
+        Assert.That(lambda.Equals(null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsSameTest()
     {
         var lambda = new Lambda(new[] { "x" }, Variable.X)
             .AsExpression();
 
-        Assert.True(lambda.Equals(lambda));
+        Assert.That(lambda.Equals(lambda), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualsTest()
     {
         var lambda1 = new Lambda(new[] { "x" }, Variable.X)
@@ -28,10 +31,10 @@ public class LambdaExpressionTest
         var lambda2 = new Lambda(new[] { "x" }, Variable.X)
             .AsExpression();
 
-        Assert.True(lambda1.Equals(lambda2));
+        Assert.That(lambda1.Equals(lambda2), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsTest()
     {
         var lambda1 = new Lambda(new[] { "x" }, Variable.X)
@@ -39,28 +42,28 @@ public class LambdaExpressionTest
         var lambda2 = new Lambda(new[] { "y" }, Variable.Y)
             .AsExpression();
 
-        Assert.False(lambda1.Equals(lambda2));
+        Assert.That(lambda1.Equals(lambda2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsObjectNullTest()
     {
         var lambda = new Lambda(new[] { "x" }, Variable.X)
             .AsExpression();
 
-        Assert.False(lambda.Equals((object)null));
+        Assert.That(lambda.Equals((object)null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsObjectSameTest()
     {
         var lambda = new Lambda(new[] { "x" }, Variable.X)
             .AsExpression();
 
-        Assert.True(lambda.Equals((object)lambda));
+        Assert.That(lambda.Equals((object)lambda), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualsObjectTest()
     {
         var lambda1 = new Lambda(new[] { "x" }, Variable.X)
@@ -68,20 +71,20 @@ public class LambdaExpressionTest
         var lambda2 = new Lambda(new[] { "x" }, Variable.X)
             .AsExpression();
 
-        Assert.True(lambda1.Equals((object)lambda2));
+        Assert.That(lambda1.Equals((object)lambda2), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsDifferentTypesTest()
     {
         var lambda1 = new Lambda(new[] { "x" }, Variable.X)
             .AsExpression();
         var lambda2 = Variable.X;
 
-        Assert.False(lambda1.Equals((object)lambda2));
+        Assert.That(lambda1.Equals((object)lambda2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsObjectTest()
     {
         var lambda1 = new Lambda(new[] { "x" }, Variable.X)
@@ -89,10 +92,10 @@ public class LambdaExpressionTest
         var lambda2 = new Lambda(new[] { "y" }, Variable.Y)
             .AsExpression();
 
-        Assert.False(lambda1.Equals((object)lambda2));
+        Assert.That(lambda1.Equals((object)lambda2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsParameterObjectTest()
     {
         var lambda1 = new Lambda(new[] { "x" }, Variable.X)
@@ -100,10 +103,10 @@ public class LambdaExpressionTest
         var lambda2 = new Lambda(new[] { "y" }, Variable.X)
             .AsExpression();
 
-        Assert.False(lambda1.Equals((object)lambda2));
+        Assert.That(lambda1.Equals((object)lambda2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsBodyObjectTest()
     {
         var lambda1 = new Lambda(new[] { "x" }, Variable.X)
@@ -111,10 +114,10 @@ public class LambdaExpressionTest
         var lambda2 = new Lambda(new[] { "x" }, Variable.Y)
             .AsExpression();
 
-        Assert.False(lambda1.Equals((object)lambda2));
+        Assert.That(lambda1.Equals((object)lambda2), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest()
     {
         var exp = new Lambda(new[] { "x" }, Variable.X)
@@ -122,10 +125,10 @@ public class LambdaExpressionTest
 
         var result = exp.Execute();
 
-        Assert.Equal(exp.Lambda, result);
+        Assert.That(result, Is.EqualTo(exp.Lambda));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteWithParametersTest()
     {
         var exp = new Lambda(new[] { "x" }, Variable.X)
@@ -133,10 +136,10 @@ public class LambdaExpressionTest
 
         var result = exp.Execute(new ExpressionParameters());
 
-        Assert.Equal(exp.Lambda, result);
+        Assert.That(result, Is.EqualTo(exp.Lambda));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest1()
     {
         var exp = new Lambda(new[] { "x" }, Variable.X)
@@ -145,7 +148,7 @@ public class LambdaExpressionTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest2()
     {
         var exp = new Lambda(new[] { "x" }, Variable.X)
@@ -154,13 +157,13 @@ public class LambdaExpressionTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Lambda(new[] { "x" }, Variable.X)
             .AsExpression();
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

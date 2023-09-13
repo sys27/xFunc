@@ -5,7 +5,7 @@ namespace xFunc.Tests.Expressions.Matrices;
 
 public class InverseTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void ExecuteMatrixTest()
     {
         var matrix = new Matrix(new[]
@@ -25,10 +25,10 @@ public class InverseTest : BaseExpressionTests
 
         var exp = new Inverse(matrix);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteIsNotSquareTest()
     {
         var matrix = new Matrix(new[]
@@ -42,7 +42,7 @@ public class InverseTest : BaseExpressionTests
         Assert.Throws<ArgumentException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteVectorTest()
     {
         var vector = new Vector(new[] { new Number(3), new Number(7), Number.Two, new Number(5) });
@@ -51,7 +51,7 @@ public class InverseTest : BaseExpressionTests
         TestNotSupported(exp);
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Inverse(new Matrix(new[]
@@ -62,6 +62,6 @@ public class InverseTest : BaseExpressionTests
         }));
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

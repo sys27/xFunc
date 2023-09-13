@@ -203,7 +203,7 @@ public readonly struct TimeValue : IEquatable<TimeValue>, IComparable<TimeValue>
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{Value} {Unit.UnitName}";
+        => $"{Value} '{Unit.UnitName}'";
 
     /// <summary>
     /// Determines whether two specified instances of <see cref="TimeValue"/> are equal.

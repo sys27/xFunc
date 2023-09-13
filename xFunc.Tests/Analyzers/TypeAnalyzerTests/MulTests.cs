@@ -5,7 +5,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class MulTests : TypeAnalyzerBaseTests
 {
-    [Fact]
+    [Test]
     public void TestMulTwoNumberTest()
     {
         var mul = new Mul(Number.One, Number.Two);
@@ -13,7 +13,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(mul, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestMulNumberVarTest()
     {
         var mul = new Mul(Number.One, Variable.X);
@@ -21,7 +21,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(mul, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestMulNumberBoolTest()
     {
         var mul = new Mul(Number.One, Bool.True);
@@ -29,7 +29,7 @@ public class MulTests : TypeAnalyzerBaseTests
         TestBinaryException(mul);
     }
 
-    [Fact]
+    [Test]
     public void TestMulBoolNumberTest()
     {
         var mul = new Mul(Bool.True, Number.One);
@@ -37,7 +37,7 @@ public class MulTests : TypeAnalyzerBaseTests
         TestBinaryException(mul);
     }
 
-    [Fact]
+    [Test]
     public void TestMulVarNumberTest()
     {
         var mul = new Mul(Variable.X, Number.One);
@@ -45,7 +45,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(mul, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestMulTwoMatrixTest()
     {
         var mul = new Mul(
@@ -56,7 +56,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(mul, ResultTypes.Matrix);
     }
 
-    [Fact]
+    [Test]
     public void TestMulLeftMatrixRightException()
     {
         var mul = new Mul(
@@ -67,7 +67,7 @@ public class MulTests : TypeAnalyzerBaseTests
         TestBinaryException(mul);
     }
 
-    [Fact]
+    [Test]
     public void TestMulRightMatrixLeftException()
     {
         var mul = new Mul(
@@ -78,7 +78,7 @@ public class MulTests : TypeAnalyzerBaseTests
         TestBinaryException(mul);
     }
 
-    [Fact]
+    [Test]
     public void TestMulNumberVectorTest()
     {
         var mul = new Mul(
@@ -89,7 +89,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(mul, ResultTypes.Vector);
     }
 
-    [Fact]
+    [Test]
     public void TestMulVectorNumber()
     {
         var mul = new Mul(
@@ -100,7 +100,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(mul, ResultTypes.Vector);
     }
 
-    [Fact]
+    [Test]
     public void TestMulVectors()
     {
         var mul = new Mul(
@@ -111,7 +111,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(mul, ResultTypes.Vector);
     }
 
-    [Fact]
+    [Test]
     public void TestMulNumberMatrixTest()
     {
         var mul = new Mul(
@@ -122,7 +122,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(mul, ResultTypes.Matrix);
     }
 
-    [Fact]
+    [Test]
     public void TestMulMatrixAndNumberTest()
     {
         var mul = new Mul(
@@ -133,7 +133,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(mul, ResultTypes.Matrix);
     }
 
-    [Fact]
+    [Test]
     public void TestMulVectorMatrixTest()
     {
         var mul = new Mul(
@@ -144,7 +144,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(mul, ResultTypes.Matrix);
     }
 
-    [Fact]
+    [Test]
     public void TestMulMatrixAndVectorTest()
     {
         var mul = new Mul(
@@ -155,7 +155,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(mul, ResultTypes.Matrix);
     }
 
-    [Fact]
+    [Test]
     public void TestMulVectorBoolException()
     {
         var mul = new Mul(new Vector(new IExpression[] { Number.One }), Bool.False);
@@ -163,7 +163,7 @@ public class MulTests : TypeAnalyzerBaseTests
         TestBinaryException(mul);
     }
 
-    [Fact]
+    [Test]
     public void TestMulBoolVectorException()
     {
         var mul = new Mul(Bool.False, new Vector(new IExpression[] { Number.One }));
@@ -171,7 +171,7 @@ public class MulTests : TypeAnalyzerBaseTests
         TestBinaryException(mul);
     }
 
-    [Fact]
+    [Test]
     public void TestMulComplexNumberComplexNumberTest()
     {
         var exp = new Mul(new ComplexNumber(2, 5), new ComplexNumber(3, 2));
@@ -179,7 +179,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulComplexNumberNumberTest()
     {
         var exp = new Mul(new ComplexNumber(2, 5), Number.Two);
@@ -187,7 +187,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulComplexNumberBoolTest()
     {
         var exp = new Mul(new ComplexNumber(2, 5), Bool.True);
@@ -195,7 +195,7 @@ public class MulTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestMulNumberComplexNumberTest()
     {
         var exp = new Mul(Number.Two, new ComplexNumber(3, 2));
@@ -203,7 +203,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.ComplexNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulBoolComplexNumberTest()
     {
         var exp = new Mul(Bool.True, new ComplexNumber(2, 5));
@@ -211,7 +211,7 @@ public class MulTests : TypeAnalyzerBaseTests
         TestBinaryException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestMulException()
     {
         var exp = new Mul(Bool.False, Bool.True);
@@ -219,7 +219,7 @@ public class MulTests : TypeAnalyzerBaseTests
         TestException(exp);
     }
 
-    [Fact]
+    [Test]
     public void TestMulNumberAngle()
     {
         var exp = new Mul(
@@ -230,7 +230,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulAngleNumber()
     {
         var exp = new Mul(
@@ -241,7 +241,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulNumberPower()
     {
         var exp = new Mul(
@@ -252,7 +252,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.PowerNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulPowerNumber()
     {
         var exp = new Mul(
@@ -263,7 +263,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.PowerNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulNumberTemperature()
     {
         var exp = new Mul(
@@ -274,7 +274,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TemperatureNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulTemperatureNumber()
     {
         var exp = new Mul(
@@ -285,7 +285,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TemperatureNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulNumberAndMass()
     {
         var exp = new Mul(
@@ -296,7 +296,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.MassNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulMassAndNumber()
     {
         var exp = new Mul(
@@ -307,7 +307,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.MassNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulNumberAndLength()
     {
         var exp = new Mul(
@@ -318,7 +318,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.LengthNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulLengthAndNumber()
     {
         var exp = new Mul(
@@ -329,7 +329,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.LengthNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulLengthAndLength()
     {
         var exp = new Mul(
@@ -340,7 +340,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AreaNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulAreaAndLength()
     {
         var exp = new Mul(
@@ -351,7 +351,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.VolumeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulLengthAndArea()
     {
         var exp = new Mul(
@@ -362,7 +362,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.VolumeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulNumberAndTime()
     {
         var exp = new Mul(
@@ -373,7 +373,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TimeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulTimeAndNumber()
     {
         var exp = new Mul(
@@ -384,7 +384,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TimeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulNumberAndArea()
     {
         var exp = new Mul(
@@ -395,7 +395,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AreaNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulAreaAndNumber()
     {
         var exp = new Mul(
@@ -406,7 +406,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AreaNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulNumberAndVolume()
     {
         var exp = new Mul(
@@ -417,7 +417,7 @@ public class MulTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.VolumeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestMulVolumeAndNumber()
     {
         var exp = new Mul(
@@ -426,6 +426,39 @@ public class MulTests : TypeAnalyzerBaseTests
         );
 
         Test(exp, ResultTypes.VolumeNumber);
+    }
+
+    [Test]
+    public void TestMulRationalAndRational()
+    {
+        var exp = new Mul(
+            new Rational(Number.One, Number.Two),
+            new Rational(Number.Two, Number.One)
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Test]
+    public void TestMulNumberAndRational()
+    {
+        var exp = new Mul(
+            Number.One,
+            new Rational(Number.Two, Number.One)
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Test]
+    public void TestMulRationalAndNumber()
+    {
+        var exp = new Mul(
+            new Rational(Number.One, Number.Two),
+            Number.One
+        );
+
+        Test(exp, ResultTypes.RationalNumber);
     }
 
     public static IEnumerable<object[]> GetDataForTestMulAngleAndBoolTest()
@@ -455,8 +488,8 @@ public class MulTests : TypeAnalyzerBaseTests
         yield return new object[] { Bool.False, VolumeValue.Meter(90).AsExpression() };
     }
 
-    [Theory]
-    [MemberData(nameof(GetDataForTestMulAngleAndBoolTest))]
+    [Test]
+    [TestCaseSource(nameof(GetDataForTestMulAngleAndBoolTest))]
     public void TestMulAngleAndBoolTest(IExpression left, IExpression right)
     {
         var exp = new Mul(left, right);

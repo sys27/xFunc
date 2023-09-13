@@ -5,7 +5,7 @@ namespace xFunc.Tests.Expressions.Programming;
 
 public class ConditionalAndTest
 {
-    [Fact]
+    [Test]
     public void CalculateAndTrueTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 0) };
@@ -13,10 +13,10 @@ public class ConditionalAndTest
         var greaterThen = new GreaterThan(Variable.X, new Number(-10));
         var and = new ConditionalAnd(lessThen, greaterThen);
 
-        Assert.True((bool) and.Execute(parameters));
+        Assert.That((bool) and.Execute(parameters), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void CalculateAndFalseTest()
     {
         var parameters = new ExpressionParameters { new Parameter("x", 0) };
@@ -24,18 +24,18 @@ public class ConditionalAndTest
         var greaterThen = new GreaterThan(Variable.X, new Number(10));
         var and = new ConditionalAnd(lessThen, greaterThen);
 
-        Assert.False((bool) and.Execute(parameters));
+        Assert.That((bool) and.Execute(parameters), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void CalculateInvalidParametersTest()
     {
         var and = new ConditionalAnd(Number.One, Number.Two);
 
-        Assert.Throws<ResultIsNotSupportedException>(() => and.Execute());
+        Assert.Throws<ExecutionException>(() => and.Execute());
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var lessThen = new LessThan(Variable.X, new Number(10));
@@ -43,6 +43,6 @@ public class ConditionalAndTest
         var exp = new ConditionalAnd(lessThen, greaterThen);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 }

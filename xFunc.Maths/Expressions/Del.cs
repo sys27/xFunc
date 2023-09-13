@@ -4,7 +4,6 @@
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
-using static xFunc.Maths.ThrowHelpers;
 
 namespace xFunc.Maths.Expressions;
 
@@ -26,13 +25,8 @@ public class Del : UnaryExpression
     public Del(IDifferentiator differentiator, ISimplifier simplifier, IExpression expression)
         : base(expression)
     {
-        if (differentiator is null)
-            ArgNull(ExceptionArgument.differentiator);
-        if (simplifier is null)
-            ArgNull(ExceptionArgument.simplifier);
-
-        this.differentiator = differentiator;
-        this.simplifier = simplifier;
+        this.differentiator = differentiator ?? throw new ArgumentNullException(nameof(differentiator));
+        this.simplifier = simplifier ?? throw new ArgumentNullException(nameof(simplifier));
     }
 
     /// <summary>
@@ -57,23 +51,19 @@ public class Del : UnaryExpression
     {
         var result = Argument.Execute(parameters);
         if (result is not Lambda lambda)
-            throw new ResultIsNotSupportedException(this, result);
+            throw ExecutionException.For(this);
 
-        var context = new DifferentiatorContext(parameters);
         var body = lambda.Body;
-        var variables = Helpers.GetAllVariables(body);
-        if (!variables.TryGetNonEnumeratedCount(out var variablesCount))
-            variablesCount = variables.Count();
+        var variables = new HashSet<Variable>();
+        GetAllVariables(body, variables);
 
-        var vectorItems = new IExpression[variablesCount];
+        var vectorItems = new IExpression[variables.Count];
         var i = 0;
 
         foreach (var variable in variables)
         {
-            context.Variable = variable;
-
             vectorItems[i] = body
-                .Analyze(differentiator, context)
+                .Analyze(differentiator, new DifferentiatorContext(variable))
                 .Analyze(simplifier);
 
             i++;
@@ -83,6 +73,28 @@ public class Del : UnaryExpression
             .ToLambda(lambda.Parameters);
 
         return resultLambda;
+    }
+
+    private static void GetAllVariables(IExpression expression, HashSet<Variable> collection)
+    {
+        if (expression is UnaryExpression un)
+        {
+            GetAllVariables(un.Argument, collection);
+        }
+        else if (expression is BinaryExpression bin)
+        {
+            GetAllVariables(bin.Left, collection);
+            GetAllVariables(bin.Right, collection);
+        }
+        else if (expression is DifferentParametersExpression diff)
+        {
+            foreach (var exp in diff.Arguments)
+                GetAllVariables(exp, collection);
+        }
+        else if (expression is Variable variable)
+        {
+            collection.Add(variable);
+        }
     }
 
     /// <inheritdoc />

@@ -7,11 +7,30 @@ namespace xFunc.Tests.Expressions.Matrices;
 
 public class MatrixTest
 {
-    [Fact]
+    [Test]
     public void CtorNullTest()
         => Assert.Throws<ArgumentNullException>(() => new Matrix(new ImmutableArray<Vector>()));
 
-    [Fact]
+    [Test]
+    public void ExecuteTest()
+    {
+        var matrix = new Matrix(new[]
+        {
+            new Vector(new IExpression[] { new Number(3) }),
+            new Vector(new IExpression[] { new Number(-1) })
+        });
+
+        var result = matrix.Execute();
+        var expected = MatrixValue.Create(new NumberValue[][]
+        {
+            new NumberValue[] { new NumberValue(3) },
+            new NumberValue[] { new NumberValue(-1) },
+        });
+
+        Assert.That(expected, Is.EqualTo(result));
+    }
+
+    [Test]
     public void MulByNumberMatrixTest()
     {
         var vector1 = new Vector(new IExpression[] { Number.Two, new Number(3) });
@@ -27,10 +46,10 @@ public class MatrixTest
         });
         var result = exp.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void AddMatricesTest()
     {
         var matrix1 = new Matrix(new[]
@@ -52,10 +71,10 @@ public class MatrixTest
         });
         var result = exp.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void AddMatricesDiffSizeTest1()
     {
         Assert.Throws<InvalidMatrixException>(() =>
@@ -66,7 +85,7 @@ public class MatrixTest
             }));
     }
 
-    [Fact]
+    [Test]
     public void AddMatricesDiffSizeTest2()
     {
         var matrix1 = new Matrix(new[]
@@ -85,7 +104,7 @@ public class MatrixTest
         Assert.Throws<ArgumentException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void SubMatricesTest()
     {
         var matrix1 = new Matrix(new[]
@@ -107,10 +126,10 @@ public class MatrixTest
         });
         var result = exp.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void SubMatricesDiffSizeTest1()
     {
         Assert.Throws<InvalidMatrixException>(() =>
@@ -121,7 +140,7 @@ public class MatrixTest
             }));
     }
 
-    [Fact]
+    [Test]
     public void SubMatricesDiffSizeTest2()
     {
         var matrix1 = new Matrix(new[]
@@ -140,7 +159,7 @@ public class MatrixTest
         Assert.Throws<ArgumentException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void TransposeMatrixTest()
     {
         var matrix = new Matrix(new[]
@@ -158,10 +177,10 @@ public class MatrixTest
         });
         var result = exp.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulMatrices1()
     {
         var left = new Matrix(new[]
@@ -183,10 +202,10 @@ public class MatrixTest
         });
         var result = exp.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulMatrices2()
     {
         var left = new Matrix(new[]
@@ -211,10 +230,10 @@ public class MatrixTest
         });
         var result = exp.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MulMatrices3()
     {
         var left = new Matrix(new[]
@@ -232,7 +251,7 @@ public class MatrixTest
         Assert.Throws<ArgumentException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void MulMatrices4()
     {
         var left = new Matrix(new[]
@@ -315,10 +334,10 @@ public class MatrixTest
             },
         });
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void MatrixMulVectorTest()
     {
         var vector = new Vector(new IExpression[] { new Number(-2), Number.One });
@@ -336,10 +355,10 @@ public class MatrixTest
         });
         var result = exp.Execute();
 
-        Assert.Equal(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void DetTest()
     {
         var matrix = new Matrix(new[]
@@ -353,10 +372,10 @@ public class MatrixTest
         var det = exp.Execute();
         var expected = new NumberValue(204.0);
 
-        Assert.Equal(expected, det);
+        Assert.That(det, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void InverseTest()
     {
         var matrix = new Matrix(new[]
@@ -378,10 +397,10 @@ public class MatrixTest
 
         var actual = exp.Execute();
 
-        Assert.Equal(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new Matrix(new[]
@@ -392,22 +411,22 @@ public class MatrixTest
         });
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 
-    [Fact]
+    [Test]
     public void NullVectorArrayTest()
     {
         Assert.Throws<ArgumentNullException>(() => new Matrix(null));
     }
 
-    [Fact]
+    [Test]
     public void NullTest()
     {
         Assert.Throws<ArgumentException>(() => new Matrix(new Vector[0]));
     }
 
-    [Fact]
+    [Test]
     public void NullVectorElementTest()
     {
         Assert.Throws<ArgumentNullException>(() => new Matrix(new[]
@@ -417,26 +436,7 @@ public class MatrixTest
         }));
     }
 
-    [Fact]
-    public void ExecuteTest()
-    {
-        var matrix = new Matrix(new[]
-        {
-            new Vector(new IExpression[] { new Number(3) }),
-            new Vector(new IExpression[] { new Number(-1) })
-        });
-
-        var result = matrix.Execute();
-        var expected = MatrixValue.Create(new NumberValue[][]
-        {
-            new NumberValue[] { new NumberValue(3) },
-            new NumberValue[] { new NumberValue(-1) },
-        });
-
-        Assert.True(expected.Equals(result));
-    }
-
-    [Fact]
+    [Test]
     public void MatrixAnalyzeNull()
     {
         var exp = new Matrix(new[]
@@ -448,7 +448,7 @@ public class MatrixTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void MatrixAnalyzeNull2()
     {
         var exp = new Matrix(new[]
@@ -460,7 +460,7 @@ public class MatrixTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
     }
 
-    [Fact]
+    [Test]
     public void EqualsTest()
     {
         var matrix = new Matrix(new[]
@@ -472,7 +472,7 @@ public class MatrixTest
         Assert.True(matrix.Equals(matrix));
     }
 
-    [Fact]
+    [Test]
     public void EqualsNullTest()
     {
         var matrix = new Matrix(new[]
@@ -484,7 +484,7 @@ public class MatrixTest
         Assert.False(matrix.Equals(null));
     }
 
-    [Fact]
+    [Test]
     public void EqualsDiffTypeTest()
     {
         var matrix = new Matrix(new[]
@@ -497,7 +497,7 @@ public class MatrixTest
         Assert.False(matrix.Equals(number));
     }
 
-    [Fact]
+    [Test]
     public void EqualsDiffCountTest()
     {
         var matrix1 = new Matrix(new[]

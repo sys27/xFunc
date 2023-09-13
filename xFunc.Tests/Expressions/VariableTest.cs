@@ -5,13 +5,13 @@ namespace xFunc.Tests.Expressions;
 
 public class VariableTest
 {
-    [Fact]
+    [Test]
     public void NullTest()
     {
         Assert.Throws<ArgumentNullException>(() => new Variable(null));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNotSupportedTest()
     {
         var exp = Variable.X;
@@ -19,7 +19,7 @@ public class VariableTest
         Assert.Throws<NotSupportedException>(() => exp.Execute());
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNullTest()
     {
         var exp = Variable.X;
@@ -27,7 +27,7 @@ public class VariableTest
         Assert.Throws<ArgumentNullException>(() => exp.Execute(null));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest()
     {
         var exp = Variable.X;
@@ -36,94 +36,97 @@ public class VariableTest
 
         var result = exp.Execute(parameters);
 
-        Assert.Equal(new NumberValue(1.0), result);
+        Assert.That(result, Is.EqualTo(new NumberValue(1.0)));
     }
 
-    [Fact]
+    [Test]
     public void ConvertToString()
     {
-        var exp = Variable.X;
+        var exp = (string)Variable.X;
 
-        Assert.Equal("x", exp);
+        Assert.That(exp, Is.EqualTo("x"));
     }
 
-    [Fact]
+    [Test]
     public void StringToConvert()
     {
-        var exp = "x";
+        var exp = (Variable)"x";
         var result = Variable.X;
 
-        Assert.Equal<Variable>(result, exp);
+        Assert.That(exp, Is.EqualTo(result));
     }
 
-    [Fact]
+    [Test]
     public void EqualsVariableNullTest()
     {
         var variable = Variable.X;
 
-        Assert.False(variable.Equals(null));
+        Assert.That(variable.Equals(null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsObjectNullTest()
     {
         var variable = Variable.X;
 
-        Assert.False(variable.Equals((object)null));
+        Assert.That(variable.Equals((object)null), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsVariableThisTest()
     {
         var variable = Variable.X;
 
-        Assert.True(variable.Equals(variable));
+        Assert.That(variable.Equals(variable), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualsObjectThisTest()
     {
         var variable = Variable.X;
 
-        Assert.True(variable.Equals((object)variable));
+        Assert.That(variable.Equals((object)variable), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void EqualsTest()
     {
         var left = Variable.X;
         var right = Variable.X;
 
-        Assert.True(left.Equals(right));
+        Assert.That(left.Equals(right), Is.True);
     }
 
-    [Fact]
+    [Test]
     public void NotEqualsTest()
     {
         var left = Variable.X;
         var right = Variable.Y;
 
-        Assert.False(left.Equals(right));
+        Assert.That(left.Equals(right), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void EqualsDiffTypesTest()
     {
         var left = Variable.X;
         var right = Number.Two;
 
-        Assert.False(left.Equals(right));
+        Assert.That(left.Equals(right), Is.False);
     }
 
-    [Fact]
+    [Test]
     public void ImplicitNullToString()
     {
         Variable x = null;
 
-        Assert.Throws<ArgumentNullException>(() => (string)x);
+        Assert.Throws<ArgumentNullException>(() =>
+        {
+            var temp = (string)x;
+        });
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest1()
     {
         var exp = Variable.X;
@@ -131,7 +134,7 @@ public class VariableTest
         Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
     }
 
-    [Fact]
+    [Test]
     public void NullAnalyzerTest2()
     {
         var exp = Variable.X;

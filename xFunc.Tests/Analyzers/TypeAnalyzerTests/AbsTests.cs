@@ -5,7 +5,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class AbsTests : TypeAnalyzerBaseTests
 {
-    [Fact]
+    [Test]
     public void TestAbsNumber()
     {
         var exp = new Abs(new Number(-2));
@@ -13,7 +13,7 @@ public class AbsTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestAbsAngleNumber()
     {
         var exp = new Abs(AngleValue.Degree(1).AsExpression());
@@ -21,7 +21,7 @@ public class AbsTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AngleNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAbsPowerNumber()
     {
         var exp = new Abs(PowerValue.Watt(1).AsExpression());
@@ -29,7 +29,7 @@ public class AbsTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.PowerNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAbsTemperatureNumber()
     {
         var exp = new Abs(TemperatureValue.Celsius(1).AsExpression());
@@ -37,7 +37,7 @@ public class AbsTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TemperatureNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAbsMassNumber()
     {
         var exp = new Abs(MassValue.Gram(1).AsExpression());
@@ -45,7 +45,7 @@ public class AbsTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.MassNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAbsLengthNumber()
     {
         var exp = new Abs(LengthValue.Meter(1).AsExpression());
@@ -53,7 +53,7 @@ public class AbsTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.LengthNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAbsTimeNumber()
     {
         var exp = new Abs(TimeValue.Second(1).AsExpression());
@@ -61,7 +61,7 @@ public class AbsTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.TimeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAbsAreaNumber()
     {
         var exp = new Abs(AreaValue.Meter(1).AsExpression());
@@ -69,7 +69,7 @@ public class AbsTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.AreaNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAbsVolumeNumber()
     {
         var exp = new Abs(VolumeValue.Meter(1).AsExpression());
@@ -77,7 +77,7 @@ public class AbsTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.VolumeNumber);
     }
 
-    [Fact]
+    [Test]
     public void TestAbsComplexNumber()
     {
         var exp = new Abs(new ComplexNumber(2, 2));
@@ -85,7 +85,7 @@ public class AbsTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
     public void TestAbsVariable()
     {
         var exp = new Abs(Variable.X);
@@ -93,7 +93,7 @@ public class AbsTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void TestAbsVector()
     {
         var exp = new Abs(new Vector(new IExpression[] { Number.One }));
@@ -101,7 +101,15 @@ public class AbsTests : TypeAnalyzerBaseTests
         Test(exp, ResultTypes.Number);
     }
 
-    [Fact]
+    [Test]
+    public void TestAbsRational()
+    {
+        var exp = new Abs(new Rational(new Number(1), new Number(2)));
+
+        Test(exp, ResultTypes.RationalNumber);
+    }
+
+    [Test]
     public void TestAbsException()
     {
         var exp = new Abs(Bool.False);

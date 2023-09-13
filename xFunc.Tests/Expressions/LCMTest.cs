@@ -7,42 +7,42 @@ namespace xFunc.Tests.Expressions;
 
 public class LCMTest : BaseExpressionTests
 {
-    [Fact]
+    [Test]
     public void NullArgTest()
         => Assert.Throws<ArgumentNullException>(() => new LCM(null));
 
-    [Fact]
+    [Test]
     public void ExecuteTest1()
     {
         var exp = new LCM(new Number(12), new Number(16));
         var expected = new NumberValue(48.0);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteTest2()
     {
         var exp = new LCM(new IExpression[] { new Number(4), new Number(16), new Number(8) });
         var expected = new NumberValue(16.0);
 
-        Assert.Equal(expected, exp.Execute());
+        Assert.That(exp.Execute(), Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void ExecuteNotSupportedTest()
         => TestNotSupported(new LCM(new IExpression[] { Bool.False, Bool.True }));
 
-    [Fact]
+    [Test]
     public void CloneTest()
     {
         var exp = new LCM(Variable.X, Number.Zero);
         var clone = exp.Clone();
 
-        Assert.Equal(exp, clone);
+        Assert.That(clone, Is.EqualTo(exp));
     }
 
-    [Fact]
+    [Test]
     public void CloneWithArgsTest()
     {
         var exp = new LCM(Variable.X, Number.Zero);
@@ -50,6 +50,6 @@ public class LCMTest : BaseExpressionTests
         var clone = exp.Clone(args);
         var expected = new LCM(args);
 
-        Assert.Equal(expected, clone);
+        Assert.That(clone, Is.EqualTo(expected));
     }
 }

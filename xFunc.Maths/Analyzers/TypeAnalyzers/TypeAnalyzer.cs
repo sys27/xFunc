@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics.CodeAnalysis;
-using static xFunc.Maths.ThrowHelpers;
 
 namespace xFunc.Maths.Analyzers.TypeAnalyzers;
 
@@ -64,7 +63,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     private ResultTypes CheckArgument([NotNull] IExpression? exp, ResultTypes result)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         return result;
     }
@@ -72,7 +71,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     private ResultTypes CheckNumericConversion([NotNull] UnaryExpression? exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
 
@@ -86,7 +85,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     private ResultTypes CheckTrigonometric([NotNull] UnaryExpression? exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
 
@@ -102,7 +101,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     private ResultTypes CheckInverseTrigonometric([NotNull] UnaryExpression? exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
 
@@ -118,7 +117,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     private ResultTypes CheckStatistical([NotNull] DifferentParametersExpression? exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         if (exp.ParametersCount == 1)
         {
@@ -145,7 +144,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     private ResultTypes AnalyzeRelational([NotNull] BinaryExpression? exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var leftResult = exp.Left.Analyze(this);
         var rightResult = exp.Right.Analyze(this);
@@ -216,7 +215,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     private ResultTypes AnalyzeLogical([NotNull] BinaryExpression? exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var leftResult = exp.Left.Analyze(this);
         var rightResult = exp.Right.Analyze(this);
@@ -239,7 +238,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     private ResultTypes AnalyzeLogicalAndBitwise([NotNull] BinaryExpression? exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var leftResult = exp.Left.Analyze(this);
         var rightResult = exp.Right.Analyze(this);
@@ -266,7 +265,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     private ResultTypes AnalyzeEquality([NotNull] BinaryExpression? exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var leftResult = exp.Left.Analyze(this);
         var rightResult = exp.Right.Analyze(this);
@@ -343,7 +342,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     private ResultTypes AnalyzeBinaryAssign([NotNull] VariableBinaryExpression? exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var rightResult = exp.Value.Analyze(this);
 
@@ -359,7 +358,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     private ResultTypes AnalyzeShift([NotNull] BinaryExpression? exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var leftResult = exp.Left.Analyze(this);
         var rightResult = exp.Right.Analyze(this);
@@ -382,7 +381,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     private ResultTypes AngleConversion([NotNull] UnaryExpression? exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
 
@@ -406,7 +405,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Abs exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
 
@@ -423,6 +422,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.TimeNumber => ResultTypes.TimeNumber,
             ResultTypes.AreaNumber => ResultTypes.AreaNumber,
             ResultTypes.VolumeNumber => ResultTypes.VolumeNumber,
+            ResultTypes.RationalNumber => ResultTypes.RationalNumber,
             _ => NumbersOrComplexOrVector.ThrowFor(result),
         };
     }
@@ -431,7 +431,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Add exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var leftResult = exp.Left.Analyze(this);
         var rightResult = exp.Right.Analyze(this);
@@ -489,6 +489,11 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
                 => ResultTypes.ComplexNumber,
 
+            (ResultTypes.RationalNumber, ResultTypes.RationalNumber) or
+                (ResultTypes.Number, ResultTypes.RationalNumber) or
+                (ResultTypes.RationalNumber, ResultTypes.Number)
+                => ResultTypes.RationalNumber,
+
             (ResultTypes.Vector, ResultTypes.Vector) => ResultTypes.Vector,
             (ResultTypes.Matrix, ResultTypes.Matrix) => ResultTypes.Matrix,
 
@@ -540,7 +545,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Ceil exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
 
@@ -572,7 +577,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Derivative exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         if (exp.ParametersCount == 1)
             return ResultTypes.Function;
@@ -590,7 +595,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Div exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var leftResult = exp.Left.Analyze(this);
         var rightResult = exp.Right.Analyze(this);
@@ -632,6 +637,11 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
                 => ResultTypes.ComplexNumber,
 
+            (ResultTypes.RationalNumber, ResultTypes.RationalNumber) or
+                (ResultTypes.Number, ResultTypes.RationalNumber) or
+                (ResultTypes.RationalNumber, ResultTypes.Number)
+                => ResultTypes.RationalNumber,
+
             (_, ResultTypes.Number) => NumbersOrComplex.ThrowForLeft(leftResult),
             (ResultTypes.Number, _) => NumbersOrComplex.ThrowForRight(rightResult),
 
@@ -656,7 +666,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Exp exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
 
@@ -673,7 +683,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Fact exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
         if (result is ResultTypes.Undefined or ResultTypes.Number)
@@ -686,7 +696,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Floor exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
 
@@ -710,7 +720,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Trunc exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
 
@@ -734,7 +744,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Frac exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
 
@@ -758,7 +768,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(GCD exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var enumerator = exp.Arguments.GetEnumerator();
         for (var i = 0; enumerator.MoveNext(); i++)
@@ -777,20 +787,20 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Lb exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
-        if (result is ResultTypes.Undefined or ResultTypes.Number)
+        if (result is ResultTypes.Undefined or ResultTypes.Number or ResultTypes.RationalNumber)
             return ResultTypes.Number;
 
-        return ResultTypes.Number.ThrowFor(result);
+        return (ResultTypes.Number | ResultTypes.RationalNumber).ThrowFor(result);
     }
 
     /// <inheritdoc />
     public virtual ResultTypes Analyze(LCM exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var enumerator = exp.Arguments.GetEnumerator();
         for (var i = 0; enumerator.MoveNext(); i++)
@@ -809,7 +819,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Lg exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
 
@@ -818,6 +828,8 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.Undefined => ResultTypes.Undefined,
             ResultTypes.Number => ResultTypes.Number,
             ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
+            ResultTypes.RationalNumber => ResultTypes.Number,
+
             _ => NumberOrComplex.ThrowFor(result),
         };
     }
@@ -826,7 +838,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Ln exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
 
@@ -835,6 +847,8 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.Undefined => ResultTypes.Undefined,
             ResultTypes.Number => ResultTypes.Number,
             ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
+            ResultTypes.RationalNumber => ResultTypes.Number,
+
             _ => NumberOrComplex.ThrowFor(result),
         };
     }
@@ -843,7 +857,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Log exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var leftResult = exp.Left.Analyze(this);
         var rightResult = exp.Right.Analyze(this);
@@ -856,6 +870,7 @@ public class TypeAnalyzer : ITypeAnalyzer
 
             (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Number,
             (ResultTypes.Number, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
+            (ResultTypes.Number, ResultTypes.RationalNumber) => ResultTypes.Number,
 
             (ResultTypes.Number, _) => NumberOrComplex.ThrowForRight(rightResult),
 
@@ -867,7 +882,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Mod exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var leftResult = exp.Left.Analyze(this);
         var rightResult = exp.Right.Analyze(this);
@@ -893,7 +908,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Mul exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var leftResult = exp.Left.Analyze(this);
         var rightResult = exp.Right.Analyze(this);
@@ -949,6 +964,11 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (ResultTypes.ComplexNumber, ResultTypes.Number) or
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
                 => ResultTypes.ComplexNumber,
+
+            (ResultTypes.RationalNumber, ResultTypes.RationalNumber) or
+                (ResultTypes.Number, ResultTypes.RationalNumber) or
+                (ResultTypes.RationalNumber, ResultTypes.Number)
+                => ResultTypes.RationalNumber,
 
             (ResultTypes.Vector, ResultTypes.Number) or
                 (ResultTypes.Number, ResultTypes.Vector) or
@@ -1058,7 +1078,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(ToNumber exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
 
@@ -1072,7 +1092,8 @@ public class TypeAnalyzer : ITypeAnalyzer
                 ResultTypes.LengthNumber or
                 ResultTypes.TimeNumber or
                 ResultTypes.AreaNumber or
-                ResultTypes.VolumeNumber
+                ResultTypes.VolumeNumber or
+                ResultTypes.RationalNumber
                 => ResultTypes.Number,
             _ => Units.ThrowFor(result),
         };
@@ -1082,7 +1103,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Pow exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var leftResult = exp.Left.Analyze(this);
         var rightResult = exp.Right.Analyze(this);
@@ -1102,6 +1123,9 @@ public class TypeAnalyzer : ITypeAnalyzer
             (ResultTypes.Number, ResultTypes.Number)
                 => ResultTypes.Undefined,
 
+            (ResultTypes.RationalNumber, ResultTypes.Number)
+                => ResultTypes.RationalNumber,
+
             _ => ResultTypes.Number.ThrowForLeft(leftResult),
         };
     }
@@ -1110,7 +1134,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Root exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var leftResult = exp.Left.Analyze(this);
         var rightResult = exp.Right.Analyze(this);
@@ -1136,7 +1160,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Round exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var number = exp.Argument.Analyze(this);
         var digits = exp.Digits?.Analyze(this) ?? ResultTypes.None;
@@ -1180,7 +1204,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Sub exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var leftResult = exp.Left.Analyze(this);
         var rightResult = exp.Right.Analyze(this);
@@ -1238,6 +1262,11 @@ public class TypeAnalyzer : ITypeAnalyzer
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber)
                 => ResultTypes.ComplexNumber,
 
+            (ResultTypes.RationalNumber, ResultTypes.RationalNumber) or
+                (ResultTypes.Number, ResultTypes.RationalNumber) or
+                (ResultTypes.RationalNumber, ResultTypes.Number)
+                => ResultTypes.RationalNumber,
+
             (ResultTypes.Vector, ResultTypes.Vector) => ResultTypes.Vector,
             (ResultTypes.Matrix, ResultTypes.Matrix) => ResultTypes.Matrix,
 
@@ -1285,7 +1314,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(UnaryMinus exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
 
@@ -1302,6 +1331,7 @@ public class TypeAnalyzer : ITypeAnalyzer
             ResultTypes.AreaNumber => ResultTypes.AreaNumber,
             ResultTypes.VolumeNumber => ResultTypes.VolumeNumber,
             ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
+            ResultTypes.RationalNumber => ResultTypes.RationalNumber,
             _ => NumberOrComplex.ThrowFor(result),
         };
     }
@@ -1319,6 +1349,22 @@ public class TypeAnalyzer : ITypeAnalyzer
         => CheckArgument(exp, ResultTypes.Function);
 
     /// <inheritdoc />
+    public virtual ResultTypes Analyze(Curry exp)
+    {
+        if (exp is null)
+            throw new ArgumentNullException(nameof(exp));
+
+        if (exp.Parameters.Length == 0)
+        {
+            var functionResult = exp.Function.Analyze(this);
+            if (functionResult == ResultTypes.Function)
+                return ResultTypes.Function;
+        }
+
+        return ResultTypes.Undefined;
+    }
+
+    /// <inheritdoc />
     public virtual ResultTypes Analyze(Variable exp)
         => CheckArgument(exp, ResultTypes.Undefined);
 
@@ -1330,7 +1376,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Sign exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
 
@@ -1372,7 +1418,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Expressions.Units.Convert exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var valueResult = exp.Value.Analyze(this);
 
@@ -1393,6 +1439,50 @@ public class TypeAnalyzer : ITypeAnalyzer
         };
     }
 
+    /// <inheritdoc />
+    public virtual ResultTypes Analyze(Rational exp)
+    {
+        if (exp is null)
+            throw new ArgumentNullException(nameof(exp));
+
+        var leftResult = exp.Left.Analyze(this);
+        var rightResult = exp.Right.Analyze(this);
+
+        return (leftResult, rightResult) switch
+        {
+            (ResultTypes.Undefined, _) or (_, ResultTypes.Undefined)
+                => ResultTypes.Undefined,
+
+            (ResultTypes.Number, ResultTypes.Number)
+                => ResultTypes.RationalNumber,
+
+            (ResultTypes.Number, _)
+                => ResultTypes.Number.ThrowForRight(rightResult),
+
+            (_, ResultTypes.Number)
+                => ResultTypes.Number.ThrowForLeft(leftResult),
+
+            _ => throw new ParameterTypeMismatchException(),
+        };
+    }
+
+    /// <inheritdoc />
+    public virtual ResultTypes Analyze(ToRational exp)
+    {
+        if (exp is null)
+            throw new ArgumentNullException(nameof(exp));
+
+        var argumentResult = exp.Argument.Analyze(this);
+
+        return argumentResult switch
+        {
+            ResultTypes.Undefined => ResultTypes.Undefined,
+            ResultTypes.Number => ResultTypes.RationalNumber,
+
+            _ => throw new ParameterTypeMismatchException(ResultTypes.Number, argumentResult),
+        };
+    }
+
     #endregion Standard
 
     #region Matrix
@@ -1401,7 +1491,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Vector exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var enumerator = exp.Arguments.GetEnumerator();
         for (var i = 0; enumerator.MoveNext(); i++)
@@ -1420,7 +1510,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Matrix exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         foreach (var item in exp.Vectors)
         {
@@ -1436,7 +1526,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Determinant exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
         if (result is ResultTypes.Undefined or ResultTypes.Matrix)
@@ -1449,7 +1539,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Inverse exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
         if (result is ResultTypes.Undefined or ResultTypes.Matrix)
@@ -1462,7 +1552,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Transpose exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
         if (result is ResultTypes.Undefined or ResultTypes.Vector or ResultTypes.Matrix)
@@ -1475,7 +1565,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(DotProduct exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var leftResult = exp.Left.Analyze(this);
         var rightResult = exp.Right.Analyze(this);
@@ -1498,7 +1588,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(CrossProduct exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var leftResult = exp.Left.Analyze(this);
         var rightResult = exp.Right.Analyze(this);
@@ -1529,7 +1619,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Conjugate exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
         if (result is ResultTypes.Undefined or ResultTypes.ComplexNumber)
@@ -1542,7 +1632,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Im exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
         if (result is ResultTypes.Undefined or ResultTypes.ComplexNumber)
@@ -1555,7 +1645,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Phase exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
         if (result is ResultTypes.Undefined or ResultTypes.ComplexNumber)
@@ -1568,7 +1658,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Re exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
         if (result is ResultTypes.Undefined or ResultTypes.ComplexNumber)
@@ -1581,7 +1671,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Reciprocal exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
         if (result is ResultTypes.Undefined or ResultTypes.ComplexNumber)
@@ -1594,7 +1684,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(ToComplex exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
 
@@ -1790,7 +1880,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(Not exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Argument.Analyze(this);
 
@@ -1839,7 +1929,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(For exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var result = exp.Condition.Analyze(this);
         if (result is ResultTypes.Undefined or ResultTypes.Boolean)
@@ -1860,7 +1950,7 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(If exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
         var conditionResult = exp.Condition.Analyze(this);
         if (conditionResult == ResultTypes.Undefined)
@@ -1905,9 +1995,9 @@ public class TypeAnalyzer : ITypeAnalyzer
     public virtual ResultTypes Analyze(While exp)
     {
         if (exp is null)
-            ArgNull(ExceptionArgument.exp);
+            throw new ArgumentNullException(nameof(exp));
 
-        var rightResult = exp.Right.Analyze(this);
+        var rightResult = exp.Condition.Analyze(this);
         if (rightResult is ResultTypes.Undefined or ResultTypes.Boolean)
             return ResultTypes.Undefined;
 

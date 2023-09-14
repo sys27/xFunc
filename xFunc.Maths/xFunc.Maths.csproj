@@ -5,7 +5,7 @@
     <LangVersion>latest</LangVersion>
     <RootNamespace>xFunc.Maths</RootNamespace>
     <PackageId>xFunc.Maths</PackageId>
-    <Version>4.4.0</Version>
+    <Version>4.5.0</Version>
     <Product>xFunc.Maths</Product>
     <Authors>Dmytro Kyshchenko</Authors>
     <Company />
@@ -15,8 +15,8 @@
     <PackageIcon>xFunc.png</PackageIcon>
     <PackageTags>math formula parse parser math-parser logic simplification derivative differentiation truth-table condition complex-numbers trigonometry unit-converter</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
-    <AssemblyVersion>4.4.0</AssemblyVersion>
-    <FileVersion>4.4.0</FileVersion>
+    <AssemblyVersion>4.5.0</AssemblyVersion>
+    <FileVersion>4.5.0</FileVersion>
     <RepositoryUrl>https://github.com/sys27/xFunc</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageReleaseNotes>https://sys27.github.io/xFunc/articles/change-log.html

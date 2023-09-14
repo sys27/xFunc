@@ -21,9 +21,11 @@ internal ref partial struct Lexer
 
         var keyword = function[..endIndex];
 
-        var lowerKeyword = keyword.Length <= 1024
-            ? stackalloc char[keyword.Length]
-            : new char[keyword.Length];
+        // keyword shouldn't be bigger than the biggest valid keyword
+        if (keyword.Length > "unassign".Length)
+            return false;
+
+        Span<char> lowerKeyword = stackalloc char[keyword.Length];
 
         keyword.ToLowerInvariant(lowerKeyword);
 

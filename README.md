@@ -14,11 +14,20 @@ Note: The WPF application (xFunc UI) was migrated to a separate repository [xFun
 
 ## Features:
 
-* Calculating expressions ([supported functions and operators](https://sys27.github.io/xFunc/articles/supported-functions-and-operations.html));
-* Supporting measures of angles;
-* Derivative and simplifying expressions;
-* Plotting graphs;
-* Truth tables;
+* Evaluate expressions (see all [supported functions and operators](https://sys27.github.io/xFunc/articles/supported-functions-and-operations.html)):
+  * basic arithmetic operators: `+`, `-`, `*`, `/`, `^`, etc.
+  * trigonometric functions: `sin(x)`, `cos(x)`, `tan(x)`, etc.
+  * inverse trigonometric functions: `arcsin(x)`, `arccos(x)`, `arctan(x)`, etc.
+  * hyperbolic functions:`sinh(x)`, `cosh(x)`, `tanh(x)`, etc.
+  * inverse hyperbolic functions: `arsinh(x)`, `arcosh(x)`, `artanh(x)`, etc.
+  * complex numbers: `1 + 2i`, `im(x)`, `re(x)`, etc.
+  * vector/matrix: `{1, 2, 3}`, `{{1, 2}, {3, 4}}`, etc.
+  * statistical: `sum(a, b, c)`, `avg(a, b, c)`, etc.
+  * bitwise operators: `x or y`, `x and y`, etc.
+  * units: `90 'deg'` - angles, `10 'm'` - length, `10 'min'` - time, etc.
+  * lambdas: `f := (x) => x ^ 2`, `(f := (x) => x ^ 2)(3)`, `curry(f)`, etc.
+* Derivative calculation; 
+* Simplify expressions ([simplification rules](https://sys27.github.io/xFunc/articles/simplification-rules.html));
 * Supported Framework: .NET 6+;
 
 ## Usage
@@ -84,8 +93,6 @@ processor.Solve("simplify((x) => arcsin(sin(x)))");
 processor.Simplify("arcsin(sin(x))");
 // will return simplified expression = "x"
 ```
-
-_Detailed [simplification rules](https://sys27.github.io/xFunc/articles/simplification-rules.html)_
 
 **Differentiate:**
 

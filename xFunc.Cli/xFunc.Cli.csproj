@@ -15,7 +15,7 @@
     <Description>xFunc provides a powerful parser and analyzer for mathematical expressions. It excels at calculating derivatives, simplifying expressions, and achieving high performance.</Description>
     <PackageProjectUrl>https://github.com/sys27/xFunc</PackageProjectUrl>
     <PackageIcon>xFunc.png</PackageIcon>
-    <PackageTags>math formula parse parser math-parser logic simplification derivative differentiation truth-table condition complex-numbers trigonometry unit-converter</PackageTags>
+    <PackageTags>math formula parse parser math-parser logic simplification derivative differentiation condition complex-numbers trigonometry unit-converter</PackageTags>
     <AssemblyVersion>4.5.0</AssemblyVersion>
     <FileVersion>4.5.0</FileVersion>
     <RepositoryUrl>https://github.com/sys27/xFunc</RepositoryUrl>

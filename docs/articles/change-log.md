@@ -1,5 +1,9 @@
 # ChangeLog
 
+## xFunc v4.5.0 (dev)
+
+* [#733](https://github.com/sys27/xFunc/pull/733) - Lexer optimization.
+
 ## xFunc v4.4.0
 
 * [#680](https://github.com/sys27/xFunc/issues/680) - Remove Moq. ([#651](https://github.com/sys27/xFunc/pull/651)).

@@ -38,8 +38,7 @@ internal ref partial struct Lexer
         while (HasSymbols())
         {
             var result = CreateNumberToken() ||
-                         CreateKeywordToken() ||
-                         CreateIdToken() ||
+                         CreateIdOrKeywordToken() ||
                          CreateOperatorToken() ||
                          CreateSymbol() ||
                          CreateStringToken();

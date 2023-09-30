@@ -25,7 +25,7 @@ Note: The WPF application (xFunc UI) was migrated to a separate repository [xFun
   * statistical: `sum(a, b, c)`, `avg(a, b, c)`, etc.
   * bitwise operators: `x or y`, `x and y`, etc.
   * units: `90 'deg'` - angles, `10 'm'` - length, `10 'min'` - time, etc.
-  * lambdas: `f := (x) => x ^ 2`, `(f := (x) => x ^ 2)(3)`, `curry(f)`, etc.
+  * lambdas: `f := (x) => x ^ 2`, `((x) => x ^ 2)(3)`, `curry(f)`, etc.
 * Derivative calculation; 
 * Simplify expressions ([simplification rules](https://sys27.github.io/xFunc/articles/simplification-rules.html));
 * Supported Framework: .NET 6+;

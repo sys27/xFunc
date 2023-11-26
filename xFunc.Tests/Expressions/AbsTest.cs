@@ -136,8 +136,8 @@ public class AbsTest : BaseExpressionTests
         var mul2 = new Mul(num2, x2);
         var abs2 = new Abs(mul2);
 
-        Assert.True(abs1.Equals(abs2));
-        Assert.True(abs1.Equals(abs1));
+        Assert.That(abs1.Equals(abs2));
+        Assert.That(abs1.Equals(abs1));
     }
 
     [Test]
@@ -153,9 +153,9 @@ public class AbsTest : BaseExpressionTests
         var mul2 = new Mul(num2, x2);
         var abs2 = new Abs(mul2);
 
-        Assert.False(abs1.Equals(abs2));
-        Assert.False(abs1.Equals(mul2));
-        Assert.False(abs1.Equals(null));
+        Assert.That(abs1.Equals(abs2), Is.False);
+        Assert.That(abs1.Equals(mul2), Is.False);
+        Assert.That(abs1.Equals(null), Is.False);
     }
 
     [Test]

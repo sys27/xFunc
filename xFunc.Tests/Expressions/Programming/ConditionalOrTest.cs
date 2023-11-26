@@ -13,7 +13,7 @@ public class ConditionalOrTest
         var greaterThen = new GreaterThan(Variable.X, new Number(-10));
         var or = new ConditionalOr(lessThen, greaterThen);
 
-        Assert.True((bool) or.Execute(parameters));
+        Assert.That((bool) or.Execute(parameters));
     }
 
     [Test]
@@ -24,7 +24,7 @@ public class ConditionalOrTest
         var greaterThen = new GreaterThan(Variable.X, new Number(-10));
         var or = new ConditionalOr(lessThen, greaterThen);
 
-        Assert.True((bool) or.Execute(parameters));
+        Assert.That((bool) or.Execute(parameters));
     }
 
     [Test]

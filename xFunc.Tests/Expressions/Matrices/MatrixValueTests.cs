@@ -19,7 +19,7 @@ public class MatrixValueTests
     [Test]
     [TestCaseSource(nameof(NotEqualsTestData))]
     public void NotEqualsTest(MatrixValue v1, MatrixValue v2)
-        => Assert.False(v1.Equals(v2));
+        => Assert.That(v1.Equals(v2), Is.False);
 
     public static IEnumerable<object[]> EqualsTestData()
     {

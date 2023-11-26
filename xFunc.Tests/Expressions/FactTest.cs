@@ -38,7 +38,7 @@ public class FactTest : BaseExpressionTests
         var fact = new Fact(new Number(-1));
         var actual = (NumberValue)fact.Execute();
 
-        Assert.True(actual.IsNaN);
+        Assert.That(actual.IsNaN);
     }
 
     [Test]

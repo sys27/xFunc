@@ -60,7 +60,7 @@ public class ComplexNumberTest
         var exp1 = new ComplexNumber(new Complex(5, 2));
         var exp2 = new ComplexNumber(new Complex(5, 2));
 
-        Assert.True(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2));
     }
 
     [Test]
@@ -69,7 +69,7 @@ public class ComplexNumberTest
         var exp1 = new ComplexNumber(new Complex(5, 2));
         var exp2 = new ComplexNumber(new Complex(3, 2));
 
-        Assert.False(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.False);
     }
 
     [Test]

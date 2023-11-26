@@ -158,7 +158,7 @@ public class ParameterTest
         var parameter = new Parameter("x", 1);
         var isEqual = parameter.Equals(null);
 
-        Assert.False(isEqual);
+        Assert.That(isEqual, Is.False);
     }
 
     [Test]
@@ -167,7 +167,7 @@ public class ParameterTest
         var parameter = new Parameter("x", 1);
         var isEqual = parameter.Equals(parameter);
 
-        Assert.True(isEqual);
+        Assert.That(isEqual);
     }
 
     [Test]
@@ -177,7 +177,7 @@ public class ParameterTest
         var parameter2 = new Parameter("x", 1);
         var isEqual = parameter1.Equals((object)parameter2);
 
-        Assert.True(isEqual);
+        Assert.That(isEqual);
     }
 
     [Test]
@@ -187,7 +187,7 @@ public class ParameterTest
         var obj = new object();
         var isEqual = parameter.Equals(obj);
 
-        Assert.False(isEqual);
+        Assert.That(isEqual, Is.False);
     }
 
     [Test]
@@ -197,7 +197,7 @@ public class ParameterTest
         var parameter2 = new Parameter("x", 1);
         var isEqual = parameter1.Equals(parameter2);
 
-        Assert.True(isEqual);
+        Assert.That(isEqual);
     }
 
     [Test]
@@ -207,7 +207,7 @@ public class ParameterTest
         var parameter2 = new Parameter("y", 1);
         var isEqual = parameter1.Equals(parameter2);
 
-        Assert.False(isEqual);
+        Assert.That(isEqual, Is.False);
     }
 
     [Test]
@@ -217,7 +217,7 @@ public class ParameterTest
         var parameter2 = new Parameter("x", 2);
         var isEqual = parameter1.Equals(parameter2);
 
-        Assert.False(isEqual);
+        Assert.That(isEqual, Is.False);
     }
 
     [Test]
@@ -226,7 +226,7 @@ public class ParameterTest
         var x = new Parameter("x", 1);
         var y = new Parameter("x", 1);
 
-        Assert.True(x == y);
+        Assert.That(x == y);
     }
 
     [Test]
@@ -235,7 +235,7 @@ public class ParameterTest
         var x = new Parameter("x", 1);
         var y = new Parameter("x", 2);
 
-        Assert.True(x != y);
+        Assert.That(x != y);
     }
 
     [Test]
@@ -244,7 +244,7 @@ public class ParameterTest
         var parameter1 = new Parameter("x", 1);
         var parameter2 = new Parameter("a", 2);
 
-        Assert.True(parameter1 > parameter2);
+        Assert.That(parameter1 > parameter2);
     }
 
     [Test]
@@ -252,7 +252,7 @@ public class ParameterTest
     {
         var parameter2 = new Parameter("a", 2);
 
-        Assert.False(null > parameter2);
+        Assert.That(null > parameter2, Is.False);
     }
 
     [Test]
@@ -260,7 +260,7 @@ public class ParameterTest
     {
         var parameter1 = new Parameter("x", 1);
 
-        Assert.False(parameter1 > null);
+        Assert.That(parameter1 > null, Is.False);
     }
 
     [Test]
@@ -269,7 +269,7 @@ public class ParameterTest
         var parameter1 = new Parameter("x", 1);
         var parameter2 = new Parameter("y", 2);
 
-        Assert.True(parameter1 < parameter2);
+        Assert.That(parameter1 < parameter2);
     }
 
     [Test]
@@ -277,7 +277,7 @@ public class ParameterTest
     {
         var parameter2 = new Parameter("y", 2);
 
-        Assert.False(null < parameter2);
+        Assert.That(null < parameter2, Is.False);
     }
 
     [Test]
@@ -285,7 +285,7 @@ public class ParameterTest
     {
         var parameter1 = new Parameter("x", 1);
 
-        Assert.False(parameter1 < null);
+        Assert.That(parameter1 < null, Is.False);
     }
 
     [Test]
@@ -294,7 +294,7 @@ public class ParameterTest
         var parameter1 = new Parameter("x", 1);
         var parameter2 = new Parameter("a", 2);
 
-        Assert.True(parameter1 >= parameter2);
+        Assert.That(parameter1 >= parameter2);
     }
 
     [Test]
@@ -303,7 +303,7 @@ public class ParameterTest
         var parameter1 = new Parameter("x", 1);
         var parameter2 = new Parameter("y", 2);
 
-        Assert.True(parameter1 <= parameter2);
+        Assert.That(parameter1 <= parameter2);
     }
 
     [Test]

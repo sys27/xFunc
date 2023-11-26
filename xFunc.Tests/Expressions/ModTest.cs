@@ -39,7 +39,7 @@ public class ModTest : BaseExpressionTests
         var exp = new Mod(new Number(5), Number.Zero);
         var result = (NumberValue)exp.Execute();
 
-        Assert.True(result.IsNaN);
+        Assert.That(result.IsNaN);
     }
 
     [Test]

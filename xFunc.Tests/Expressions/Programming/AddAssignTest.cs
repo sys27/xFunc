@@ -71,7 +71,7 @@ public class AddAssignTest
     {
         var exp = new AddAssign(Variable.X, Number.One);
 
-        Assert.True(exp.Equals(exp));
+        Assert.That(exp.Equals(exp));
     }
 
     [Test]
@@ -79,7 +79,7 @@ public class AddAssignTest
     {
         var exp = new AddAssign(Variable.X, Number.One);
 
-        Assert.False(exp.Equals(null));
+        Assert.That(exp.Equals(null), Is.False);
     }
 
     [Test]
@@ -88,7 +88,7 @@ public class AddAssignTest
         var exp1 = new AddAssign(Variable.X, Number.One);
         var exp2 = new SubAssign(Variable.X, Number.One);
 
-        Assert.False(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.False);
     }
 
     [Test]

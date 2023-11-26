@@ -18,7 +18,7 @@ public class ExpressionParameterTest
     {
         var parameters = new ExpressionParameters(true);
 
-        CollectionAssert.IsNotEmpty(parameters);
+        Assert.That(parameters, Is.Not.Empty);
     }
 
     [Test]
@@ -26,7 +26,7 @@ public class ExpressionParameterTest
     {
         var parameters = new ExpressionParameters(false);
 
-        CollectionAssert.IsEmpty(parameters);
+        Assert.That(parameters, Is.Empty);
     }
 
     [Test]
@@ -56,13 +56,13 @@ public class ExpressionParameterTest
             isExecuted = true;
 
             Assert.That(args.Action, Is.EqualTo(NotifyCollectionChangedAction.Add));
-            Assert.Null(args.OldItems);
+            Assert.That(args.OldItems, Is.Null);
             Assert.That(args.NewItems, Has.Count.EqualTo(1));
         };
 
         parameters.Add(new Parameter("xxx", 1.0));
 
-        Assert.True(isExecuted);
+        Assert.That(isExecuted);
     }
 
     [Test]
@@ -167,7 +167,7 @@ public class ExpressionParameterTest
         };
 
         Assert.That(parameters.ContainsKey("x"), Is.True);
-        CollectionAssert.Contains(parameters, new Parameter("x", 2.3));
+        Assert.That(parameters, Contains.Item(new Parameter("x", 2.3)));
         Assert.That(parameters["x"].Value, Is.EqualTo(new NumberValue(2.3)));
     }
 
@@ -225,7 +225,7 @@ public class ExpressionParameterTest
         parameters["a"] = 2;
         parameters.Remove("a");
 
-        CollectionAssert.IsEmpty(parameters);
+        Assert.That(parameters, Is.Empty);
     }
 
     [Test]
@@ -238,7 +238,7 @@ public class ExpressionParameterTest
 
         parameters.Clear();
 
-        CollectionAssert.IsEmpty(parameters);
+        Assert.That(parameters, Is.Empty);
     }
 
     [Test]
@@ -404,7 +404,7 @@ public class ExpressionParameterTest
 
         var result = scoped.Contains(y);
 
-        Assert.True(result);
+        Assert.That(result);
     }
 
     [Test]
@@ -422,7 +422,7 @@ public class ExpressionParameterTest
 
         var result = scoped.Contains(new Parameter("z", new ParameterValue(1)));
 
-        Assert.False(result);
+        Assert.That(result, Is.False);
     }
 
     [Test]

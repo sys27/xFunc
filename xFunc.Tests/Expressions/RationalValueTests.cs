@@ -171,7 +171,7 @@ public class RationalValueTests
         var a = new RationalValue(3, 4);
         var b = new RationalValue(4, 2);
 
-        Assert.True(a < b);
+        Assert.That(a < b);
     }
 
     [Test]
@@ -180,7 +180,7 @@ public class RationalValueTests
         var a = new RationalValue(3, 4);
         var b = new RationalValue(3, 4);
 
-        Assert.True(a <= b);
+        Assert.That(a <= b);
     }
 
     [Test]

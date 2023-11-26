@@ -469,7 +469,7 @@ public class MatrixTest
             new Vector(new IExpression[] { new Number(-1) })
         });
 
-        Assert.True(matrix.Equals(matrix));
+        Assert.That(matrix.Equals(matrix));
     }
 
     [Test]
@@ -481,7 +481,7 @@ public class MatrixTest
             new Vector(new IExpression[] { new Number(-1) })
         });
 
-        Assert.False(matrix.Equals(null));
+        Assert.That(matrix.Equals(null), Is.False);
     }
 
     [Test]
@@ -494,7 +494,7 @@ public class MatrixTest
         });
         var number = Number.Two;
 
-        Assert.False(matrix.Equals(number));
+        Assert.That(matrix.Equals(number), Is.False);
     }
 
     [Test]
@@ -510,6 +510,6 @@ public class MatrixTest
             new Vector(new IExpression[] { new Number(3) }),
         });
 
-        Assert.False(matrix1.Equals(matrix2));
+        Assert.That(matrix1.Equals(matrix2), Is.False);
     }
 }

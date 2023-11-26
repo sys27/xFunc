@@ -19,7 +19,7 @@ public class VectorValueTests
     [Test]
     [TestCaseSource(nameof(NotEqualsTestData))]
     public void NotEqualsTest(VectorValue v1, VectorValue v2)
-        => Assert.False(v1.Equals(v2));
+        => Assert.That(v1.Equals(v2), Is.False);
 
     public static IEnumerable<object[]> EqualsTestData()
     {
@@ -31,7 +31,7 @@ public class VectorValueTests
     [Test]
     [TestCaseSource(nameof(EqualsTestData))]
     public void EqualsTest(VectorValue v1, VectorValue v2)
-        => Assert.True(v1.Equals(v2));
+        => Assert.That(v1.Equals(v2));
 
     public static IEnumerable<object[]> NotEqualsAsObjectTestData()
     {

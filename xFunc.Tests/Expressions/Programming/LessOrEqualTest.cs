@@ -113,7 +113,7 @@ public class LessOrEqualTest
         );
         var result = (bool)exp.Execute();
 
-        Assert.True(result);
+        Assert.That(result);
     }
 
     [Test]

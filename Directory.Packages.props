@@ -3,13 +3,13 @@
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
     <PackageVersion Include="Nerdbank.GitVersioning" Version="3.6.133" />
     <PackageVersion Include="NSubstitute" Version="5.1.0" />
-    <PackageVersion Include="NUnit" Version="4.0.0" />
+    <PackageVersion Include="NUnit" Version="4.0.1" />
     <PackageVersion Include="NUnit.Analyzers" Version="3.9.0" />
     <PackageVersion Include="NUnit3TestAdapter" Version="4.5.0" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.507" />
     <PackageVersion Include="System.Collections.Immutable" Version="8.0.0" />
     <PackageVersion Include="CommandLineParser" Version="2.9.1" />
-    <PackageVersion Include="BenchmarkDotNet" Version="0.13.10" />
+    <PackageVersion Include="BenchmarkDotNet" Version="0.13.11" />
     <PackageVersion Include="coverlet.msbuild" Version="6.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageVersion Include="ReportGenerator" Version="5.2.0" />

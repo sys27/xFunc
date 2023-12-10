@@ -78,7 +78,7 @@ public struct Builder
     /// <returns>The builder.</returns>
     /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
     public Builder Add(double summand)
-        => Add((IExpression)new Number(summand));
+        => Add(new Number(summand));
 
     /// <summary>
     /// Creates the <seealso cref="Expressions.Add"/> operation. The Current state is used as summand.
@@ -109,7 +109,7 @@ public struct Builder
     /// <returns>The builder.</returns>
     /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
     public Builder Div(double denominator)
-        => Div((IExpression)new Number(denominator));
+        => Div(new Number(denominator));
 
     /// <summary>
     /// Creates the <seealso cref="Expressions.Div"/> operation. The Current state is used as numerator.
@@ -152,7 +152,7 @@ public struct Builder
     /// <returns>The builder.</returns>
     /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
     public Builder Mul(double factor)
-        => Mul((IExpression)new Number(factor));
+        => Mul(new Number(factor));
 
     /// <summary>
     /// Creates the <seealso cref="Expressions.Mul"/> operation. The Current state is used as factor.
@@ -183,7 +183,7 @@ public struct Builder
     /// <returns>The builder.</returns>
     /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
     public Builder Log(double @base)
-        => Log((IExpression)new Number(@base));
+        => Log(new Number(@base));
 
     /// <summary>
     /// Creates the <seealso cref="Expressions.Log"/> operation. The Current state is used as argument.
@@ -250,7 +250,7 @@ public struct Builder
     /// <returns>The builder.</returns>
     /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
     public Builder Pow(double exponent)
-        => Pow((IExpression)new Number(exponent));
+        => Pow(new Number(exponent));
 
     /// <summary>
     /// Creates the <seealso cref="Expressions.Pow"/> operation. The Current state is used as base of power.
@@ -281,7 +281,7 @@ public struct Builder
     /// <returns>The builder.</returns>
     /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
     public Builder Root(double degree)
-        => Root((IExpression)new Number(degree));
+        => Root(new Number(degree));
 
     /// <summary>
     /// Creates the <seealso cref="Expressions.Root"/> operation. The Current state is used as radicand.
@@ -324,7 +324,7 @@ public struct Builder
     /// <returns>The builder.</returns>
     /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
     public Builder Sub(double subtrahend)
-        => Sub((IExpression)new Number(subtrahend));
+        => Sub(new Number(subtrahend));
 
     /// <summary>
     /// Creates the <seealso cref="Expressions.Sub"/> operation. The Current state is used as minuend.

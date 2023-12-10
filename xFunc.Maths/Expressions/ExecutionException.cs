@@ -3,7 +3,6 @@
 
 using System.Globalization;
 using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
 
 namespace xFunc.Maths.Expressions;
 
@@ -37,16 +36,6 @@ public class ExecutionException : Exception
     /// <param name="inner">The inner.</param>
     public ExecutionException(string message, Exception inner)
         : base(message, inner)
-    {
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ExecutionException"/> class.
-    /// </summary>
-    /// <param name="info">The <see cref="SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
-    /// <param name="context">The <see cref="StreamingContext" /> that contains contextual information about the source or destination.</param>
-    protected ExecutionException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
     {
     }
 

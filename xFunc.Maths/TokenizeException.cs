@@ -3,7 +3,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Runtime.Serialization;
 
 namespace xFunc.Maths;
 
@@ -47,16 +46,6 @@ public class TokenizeException : Exception
     /// <param name="inner">The exception that is the cause of the current exception.</param>
     public TokenizeException(string message, Exception inner)
         : base(message, inner)
-    {
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="TokenizeException"/> class with serialized data.
-    /// </summary>
-    /// <param name="info">The object that holds the serialized object data.</param>
-    /// <param name="context">The contextual information about the source or destination.</param>
-    protected TokenizeException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
     {
     }
 }

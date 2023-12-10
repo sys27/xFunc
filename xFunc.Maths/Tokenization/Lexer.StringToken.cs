@@ -13,20 +13,8 @@ internal ref partial struct Lexer
         if (function[0] != quote)
             return false;
 
-        var endIndex = 1;
-        var foundClosingQuote = false;
-        while (endIndex < function.Length)
-        {
-            if (function[endIndex] == quote)
-            {
-                foundClosingQuote = true;
-                break;
-            }
-
-            endIndex++;
-        }
-
-        if (!foundClosingQuote)
+        var endIndex = function[1..].IndexOf(quote) + 1;
+        if (endIndex == 0)
             throw new TokenizeException(Resource.StringTokenizeException);
 
         var stringValue = function[1..endIndex];

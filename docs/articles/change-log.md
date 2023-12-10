@@ -1,5 +1,13 @@
 # ChangeLog
 
+## xFunc v4.5.0 (dev)
+
+## xFunc v4.4.1
+
+* [#733](https://github.com/sys27/xFunc/pull/733) - Lexer optimization.
+* [#743](https://github.com/sys27/xFunc/issues/743) - Upgrade to .NET 8. ([#744](https://github.com/sys27/xFunc/pull/744))
+* [#749](https://github.com/sys27/xFunc/issues/749) - Remove the obsolete serialization APIs. ([#750](https://github.com/sys27/xFunc/pull/750))
+
 ## xFunc v4.4.0
 
 * [#680](https://github.com/sys27/xFunc/issues/680) - Remove Moq. ([#651](https://github.com/sys27/xFunc/pull/651)).

@@ -28,7 +28,7 @@ public class DivSimplifierTest : BaseSimplifierTest
         var div = new Div(Number.Zero, Number.Zero);
         var actual = (Number)div.Analyze(simplifier);
 
-        Assert.True(actual.Value.IsNaN);
+        Assert.That(actual.Value.IsNaN);
     }
 
     [Test]

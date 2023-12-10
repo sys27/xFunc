@@ -1,8 +1,6 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Runtime.Serialization;
-
 namespace xFunc.Maths;
 
 /// <summary>
@@ -34,16 +32,6 @@ public class ParseException : Exception
     /// <param name="inner">The exception that is the cause of the current exception.</param>
     public ParseException(string message, Exception inner)
         : base(message, inner)
-    {
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ParseException"/> class with serialized data.
-    /// </summary>
-    /// <param name="info">The object that holds the serialized object data.</param>
-    /// <param name="context">The contextual information about the source or destination.</param>
-    protected ParseException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
     {
     }
 }

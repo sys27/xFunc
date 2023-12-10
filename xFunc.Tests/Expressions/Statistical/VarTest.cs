@@ -11,7 +11,7 @@ public class VarTest
         var exp = new Var(new[] { new Number(4) });
         var result = (NumberValue)exp.Execute();
 
-        Assert.True(result.IsNaN);
+        Assert.That(result.IsNaN);
     }
 
     [Test]

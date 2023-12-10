@@ -14,7 +14,7 @@ public class StdevTest
         var exp = new Stdev(new[] { new Number(4) });
         var result = (Complex)exp.Execute();
 
-        Assert.True(Complex.IsNaN(result));
+        Assert.That(Complex.IsNaN(result));
     }
 
     [Test]

@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Globalization;
-using System.Runtime.Serialization;
 
 namespace xFunc.Maths.Analyzers.TypeAnalyzers;
 
@@ -77,16 +76,6 @@ public class BinaryParameterTypeMismatchException : ParameterTypeMismatchExcepti
     /// <param name="inner">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
     public BinaryParameterTypeMismatchException(string message, Exception inner)
         : base(message, inner)
-    {
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="BinaryParameterTypeMismatchException"/> class.
-    /// </summary>
-    /// <param name="info">The <see cref="SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
-    /// <param name="context">The <see cref="StreamingContext" /> that contains contextual information about the source or destination.</param>
-    protected BinaryParameterTypeMismatchException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
     {
     }
 }

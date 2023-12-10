@@ -62,7 +62,7 @@ public class GCDTest : BaseExpressionTests
     {
         var exp = new GCD(new IExpression[] { new Number(16), new Number(8) });
 
-        Assert.True(exp.Equals(exp));
+        Assert.That(exp.Equals(exp));
     }
 
     [Test]
@@ -70,7 +70,7 @@ public class GCDTest : BaseExpressionTests
     {
         var exp = new GCD(new IExpression[] { new Number(16), new Number(8) });
 
-        Assert.False(exp.Equals(null));
+        Assert.That(exp.Equals(null), Is.False);
     }
 
     [Test]
@@ -79,7 +79,7 @@ public class GCDTest : BaseExpressionTests
         var exp = new GCD(new IExpression[] { new Number(16), new Number(8) });
         var number = Number.Two;
 
-        Assert.False(exp.Equals(number));
+        Assert.That(exp.Equals(number), Is.False);
     }
 
     [Test]
@@ -88,7 +88,7 @@ public class GCDTest : BaseExpressionTests
         var exp1 = new GCD(new IExpression[] { new Number(16), new Number(8) });
         var exp2 = new GCD(new IExpression[] { new Number(16), new Number(8), Number.Two });
 
-        Assert.False(exp1.Equals(exp2));
+        Assert.That(exp1.Equals(exp2), Is.False);
     }
 
     [Test]

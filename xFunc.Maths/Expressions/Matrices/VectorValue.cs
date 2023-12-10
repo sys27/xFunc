@@ -174,12 +174,12 @@ public readonly struct VectorValue : IEquatable<VectorValue>, IEnumerable<Number
     /// <returns>The sum of the values in the vector.</returns>
     public NumberValue Sum()
     {
-        var sum = NumberValue.Zero;
+        var sum = 0.0;
 
-        for (var i = 0; i < Size; i++)
-            sum += array[i];
+        for (var i = 0; i < array.Length; i++)
+            sum += array[i].Number;
 
-        return sum;
+        return new NumberValue(sum);
     }
 
     /// <summary>

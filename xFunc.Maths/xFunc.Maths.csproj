@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <RootNamespace>xFunc.Maths</RootNamespace>
     <PackageId>xFunc.Maths</PackageId>
-    <Version>4.4.0</Version>
+    <Version>4.4.1</Version>
     <Product>xFunc.Maths</Product>
     <Authors>Dmytro Kyshchenko</Authors>
     <Company />
@@ -13,10 +13,10 @@
     <Description>xFunc provides a powerful parser and analyzer for mathematical expressions. It excels at calculating derivatives, simplifying expressions, and achieving high performance.</Description>
     <PackageProjectUrl>https://github.com/sys27/xFunc</PackageProjectUrl>
     <PackageIcon>xFunc.png</PackageIcon>
-    <PackageTags>math formula parse parser math-parser logic simplification derivative differentiation truth-table condition complex-numbers trigonometry unit-converter</PackageTags>
+    <PackageTags>math formula parse parser math-parser logic simplification derivative differentiation condition complex-numbers trigonometry unit-converter</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
-    <AssemblyVersion>4.4.0</AssemblyVersion>
-    <FileVersion>4.4.0</FileVersion>
+    <AssemblyVersion>4.4.1</AssemblyVersion>
+    <FileVersion>4.4.1</FileVersion>
     <RepositoryUrl>https://github.com/sys27/xFunc</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageReleaseNotes>https://sys27.github.io/xFunc/articles/change-log.html

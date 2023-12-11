@@ -6,6 +6,4 @@ namespace xFunc.Maths.Analyzers;
 /// <summary>
 /// The interface for differentiator.
 /// </summary>
-public interface IDifferentiator : IAnalyzer<IExpression, DifferentiatorContext>
-{
-}
+public interface IDifferentiator : IAnalyzer<IExpression, DifferentiatorContext>;

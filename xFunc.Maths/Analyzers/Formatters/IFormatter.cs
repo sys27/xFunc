@@ -7,6 +7,4 @@ namespace xFunc.Maths.Analyzers.Formatters;
 /// The common interface for expression formatters.
 /// </summary>
 /// <seealso cref="IAnalyzer{TResult}" />
-public interface IFormatter : IAnalyzer<string>
-{
-}
+public interface IFormatter : IAnalyzer<string>;

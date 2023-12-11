@@ -6,6 +6,4 @@ namespace xFunc.Maths.Analyzers;
 /// <summary>
 /// The interface for mathematical expression simplifier.
 /// </summary>
-public interface ISimplifier : IAnalyzer<IExpression>
-{
-}
+public interface ISimplifier : IAnalyzer<IExpression>;

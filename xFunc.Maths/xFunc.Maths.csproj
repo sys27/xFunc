@@ -9,7 +9,7 @@
     <Product>xFunc.Maths</Product>
     <Authors>Dmytro Kyshchenko</Authors>
     <Company />
-    <Copyright>Copyright © 2012-2023 Dmytro Kyshchenko</Copyright>
+    <Copyright>Copyright © 2012-2024 Dmytro Kyshchenko</Copyright>
     <Description>xFunc provides a powerful parser and analyzer for mathematical expressions. It excels at calculating derivatives, simplifying expressions, and achieving high performance.</Description>
     <PackageProjectUrl>https://github.com/sys27/xFunc</PackageProjectUrl>
     <PackageIcon>xFunc.png</PackageIcon>

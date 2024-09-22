@@ -48,9 +48,8 @@ jobs:
         arguments: '--nologo --no-build -c $(buildConfiguration) -p:CollectCoverage=true -p:CoverletOutput=$(Build.SourcesDirectory)/coverage/'
         publishTestResults: true
 
-    - task: PublishCodeCoverageResults@1
+    - task: PublishCodeCoverageResults@2
       inputs:
-        codeCoverageTool: 'Cobertura'
         summaryFileLocation: '$(Build.SourcesDirectory)/coverage/coverage.cobertura.xml'
         pathToSources: '$(Build.SourcesDirectory)/coverage/'
         failIfCoverageEmpty: true

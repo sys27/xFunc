@@ -20,7 +20,7 @@ public class Arcsec : InverseTrigonometricExpression
     /// <summary>
     /// Gets the lambda for the current expression.
     /// </summary>
-    internal static Lambda Lambda { get; } = new Lambda(new[] { Variable.X.Name }, new Arcsec(Variable.X));
+    internal static Lambda Lambda { get; } = new Lambda([Variable.X.Name], new Arcsec(Variable.X));
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Arcsec"/> class.

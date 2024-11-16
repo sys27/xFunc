@@ -14,7 +14,7 @@ public class Arctan : InverseTrigonometricExpression
     /// <summary>
     /// Gets the lambda for the current expression.
     /// </summary>
-    internal static Lambda Lambda { get; } = new Lambda(new[] { Variable.X.Name }, new Arctan(Variable.X));
+    internal static Lambda Lambda { get; } = new Lambda([Variable.X.Name], new Arctan(Variable.X));
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Arctan"/> class.

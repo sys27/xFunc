@@ -15,7 +15,7 @@ public class Round : DifferentParametersExpression
     /// Gets the lambda for the current expression.
     /// </summary>
     internal static Lambda Lambda { get; } = new Lambda(
-        new[] { Variable.X.Name, Variable.Y.Name },
+        [Variable.X.Name, Variable.Y.Name],
         new Round(Variable.X, Variable.Y));
 
     /// <summary>

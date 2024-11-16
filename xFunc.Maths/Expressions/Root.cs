@@ -14,7 +14,7 @@ public class Root : BinaryExpression
     /// Gets the lambda for the current expression.
     /// </summary>
     internal static Lambda Lambda { get; } = new Lambda(
-        new[] { Variable.X.Name, Variable.Y.Name },
+        [Variable.X.Name, Variable.Y.Name],
         new Root(Variable.X, Variable.Y));
 
     /// <summary>

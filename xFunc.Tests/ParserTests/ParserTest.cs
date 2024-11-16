@@ -144,7 +144,7 @@ public class ParserTest : BaseParserTests
     {
         var expected = new CallExpression(
             new Lambda(
-                new[] { Variable.X.Name },
+                [Variable.X.Name],
                 new Fact(new Sub(Variable.X, Number.One))
             ).AsExpression(),
             Number.Two);

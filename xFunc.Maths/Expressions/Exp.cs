@@ -14,7 +14,7 @@ public class Exp : UnaryExpression
     /// <summary>
     /// Gets the lambda for the current expression.
     /// </summary>
-    internal static Lambda Lambda { get; } = new Lambda(new[] { Variable.X.Name }, new Exp(Variable.X));
+    internal static Lambda Lambda { get; } = new Lambda([Variable.X.Name], new Exp(Variable.X));
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Exp"/> class.

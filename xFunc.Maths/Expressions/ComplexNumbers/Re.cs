@@ -16,7 +16,7 @@ public class Re : UnaryExpression
     /// <summary>
     /// Gets the lambda for the current expression.
     /// </summary>
-    internal static Lambda Lambda { get; } = new Lambda(new[] { Variable.X.Name }, new Re(Variable.X));
+    internal static Lambda Lambda { get; } = new Lambda([Variable.X.Name], new Re(Variable.X));
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Re"/> class.

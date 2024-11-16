@@ -51,7 +51,7 @@ public class AssignTests : BaseParserTests
     {
         var expected = new Assign(
             new Variable("f"),
-            new Lambda(new[] { Variable.X.Name }, Variable.X).AsExpression());
+            new Lambda([Variable.X.Name], Variable.X).AsExpression());
 
         ParseTest("f := (x) => x", expected);
     }
@@ -303,7 +303,7 @@ public class AssignTests : BaseParserTests
             new Assign(
                 new Variable("f"),
                 new Lambda(
-                    new[] { Variable.X.Name },
+                    [Variable.X.Name],
                     new Mul(Variable.X, Variable.X)).AsExpression()),
             Number.Two);
 

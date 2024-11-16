@@ -1,7 +1,6 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Collections.Immutable;
 using System.Reflection;
 using NUnit.Framework.Internal;
 
@@ -17,11 +16,11 @@ public class NullArgumentTest : BaseTest
         {
             var context = typeof(DifferentiatorContext);
             var method = typeof(Differentiator)
-                .GetMethod(nameof(Differentiator.Analyze), new[] { type, context });
+                .GetMethod(nameof(Differentiator.Analyze), [type, context]);
             if (method is null)
                 throw new InvalidOperationException("The 'Analyze' method not found.");
 
-            method.Invoke(differentiator, new[] { exp, null });
+            method.Invoke(differentiator, [exp, null]);
         }
         catch (TargetInvocationException e)
         {
@@ -180,7 +179,7 @@ public class NullArgumentTest : BaseTest
     {
         var exp = new CallExpression(
             Variable.X.ToLambdaExpression(Variable.X.Name),
-            new IExpression[] { Variable.X }.ToImmutableArray());
+            [..new IExpression[] { Variable.X }]);
 
         Assert.Throws<NotSupportedException>(() => exp.Analyze(differentiator, null));
     }

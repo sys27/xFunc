@@ -17,7 +17,7 @@ public class If : DifferentParametersExpression
     /// <param name="condition">The condition.</param>
     /// <param name="then">The "then" statement.</param>
     public If(IExpression condition, IExpression then)
-        : this(ImmutableArray.Create(condition, then))
+        : this([condition, then])
     {
     }
 
@@ -28,7 +28,7 @@ public class If : DifferentParametersExpression
     /// <param name="then">The "then" statement.</param>
     /// <param name="else">The "else" statement.</param>
     public If(IExpression condition, IExpression then, IExpression @else)
-        : this(ImmutableArray.Create(condition, then, @else))
+        : this([condition, then, @else])
     {
     }
 

@@ -20,7 +20,7 @@ public class Derivative : DifferentParametersExpression
         IDifferentiator differentiator,
         ISimplifier simplifier,
         IExpression expression)
-        : this(differentiator, simplifier, ImmutableArray.Create(expression))
+        : this(differentiator, simplifier, [expression])
     {
     }
 
@@ -36,7 +36,7 @@ public class Derivative : DifferentParametersExpression
         ISimplifier simplifier,
         IExpression expression,
         Variable variable)
-        : this(differentiator, simplifier, ImmutableArray.Create(expression, variable))
+        : this(differentiator, simplifier, [expression, variable])
     {
     }
 
@@ -54,7 +54,7 @@ public class Derivative : DifferentParametersExpression
         IExpression expression,
         Variable variable,
         Number point)
-        : this(differentiator, simplifier, ImmutableArray.Create(expression, variable, point))
+        : this(differentiator, simplifier, [expression, variable, point])
     {
     }
 

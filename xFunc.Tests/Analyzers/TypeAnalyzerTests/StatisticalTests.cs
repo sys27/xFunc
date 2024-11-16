@@ -18,7 +18,7 @@ public class StatisticalTests : TypeAnalyzerBaseTests
     [TestCase(typeof(Varp))]
     public void TestUndefined(Type type)
     {
-        var exp = Create(type, new IExpression[] { Variable.X, Variable.Y });
+        var exp = Create(type, [Variable.X, Variable.Y]);
 
         Test(exp, ResultTypes.Undefined);
     }
@@ -36,7 +36,7 @@ public class StatisticalTests : TypeAnalyzerBaseTests
     [TestCase(typeof(Varp))]
     public void TestAvgNumber(Type type)
     {
-        var exp = Create(type, new IExpression[] { new Number(3), Number.Two });
+        var exp = Create(type, [new Number(3), Number.Two]);
 
         Test(exp, ResultTypes.Number);
     }
@@ -76,7 +76,7 @@ public class StatisticalTests : TypeAnalyzerBaseTests
     [TestCase(typeof(Varp))]
     public void TestOneParamException(Type type)
     {
-        var exp = CreateDiff(type, new IExpression[] { Bool.False });
+        var exp = CreateDiff(type, [Bool.False]);
 
         TestDiffParamException(exp);
     }
@@ -94,7 +94,7 @@ public class StatisticalTests : TypeAnalyzerBaseTests
     [TestCase(typeof(Varp))]
     public void TestParamException(Type type)
     {
-        var exp = CreateDiff(type, new IExpression[] { Bool.False, Bool.False });
+        var exp = CreateDiff(type, [Bool.False, Bool.False]);
 
         TestDiffParamException(exp);
     }

@@ -42,8 +42,8 @@ public abstract class TypeAnalyzerBaseTests : BaseTest
         try
         {
             var method = typeof(TypeAnalyzer)
-                .GetMethod(nameof(TypeAnalyzer.Analyze), new[] { type });
-            method.Invoke(analyzer, new object[] { null });
+                .GetMethod(nameof(TypeAnalyzer.Analyze), [type]);
+            method.Invoke(analyzer, [null]);
         }
         catch (TargetInvocationException e)
         {

@@ -1,8 +1,6 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Collections.Immutable;
-
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests;
 
 public class AddTests : TypeAnalyzerBaseTests
@@ -171,7 +169,7 @@ public class AddTests : TypeAnalyzerBaseTests
             Number.One,
             new CallExpression(
                 new Variable("f"),
-                new IExpression[] { Number.One }.ToImmutableArray()));
+                [..new IExpression[] { Number.One }]));
 
         Test(exp, ResultTypes.Undefined);
     }
@@ -183,7 +181,7 @@ public class AddTests : TypeAnalyzerBaseTests
             new ComplexNumber(3, 2),
             new CallExpression(
                 new Variable("f"),
-                new IExpression[] { Number.One }.ToImmutableArray()));
+                [..new IExpression[] { Number.One }]));
 
         Test(exp, ResultTypes.Undefined);
     }
@@ -195,7 +193,7 @@ public class AddTests : TypeAnalyzerBaseTests
             new Vector(new IExpression[] { Number.One }),
             new CallExpression(
                 new Variable("f"),
-                new IExpression[] { Number.One }.ToImmutableArray()));
+                [..new IExpression[] { Number.One }]));
 
         Test(exp, ResultTypes.Undefined);
     }
@@ -211,7 +209,7 @@ public class AddTests : TypeAnalyzerBaseTests
             matrix,
             new CallExpression(
                 new Variable("f"),
-                new IExpression[] { Number.One }.ToImmutableArray()));
+                [..new IExpression[] { Number.One }]));
 
         Test(exp, ResultTypes.Undefined);
     }
@@ -604,29 +602,29 @@ public class AddTests : TypeAnalyzerBaseTests
 
     public static IEnumerable<object[]> GetDataForTestAddAngleAndBoolTest()
     {
-        yield return new object[] { AngleValue.Degree(90).AsExpression(), Bool.False };
-        yield return new object[] { Bool.False, AngleValue.Degree(90).AsExpression() };
+        yield return [AngleValue.Degree(90).AsExpression(), Bool.False];
+        yield return [Bool.False, AngleValue.Degree(90).AsExpression()];
 
-        yield return new object[] { PowerValue.Watt(90).AsExpression(), Bool.False };
-        yield return new object[] { Bool.False, PowerValue.Watt(90).AsExpression() };
+        yield return [PowerValue.Watt(90).AsExpression(), Bool.False];
+        yield return [Bool.False, PowerValue.Watt(90).AsExpression()];
 
-        yield return new object[] { TemperatureValue.Celsius(90).AsExpression(), Bool.False };
-        yield return new object[] { Bool.False, TemperatureValue.Celsius(90).AsExpression() };
+        yield return [TemperatureValue.Celsius(90).AsExpression(), Bool.False];
+        yield return [Bool.False, TemperatureValue.Celsius(90).AsExpression()];
 
-        yield return new object[] { MassValue.Gram(90).AsExpression(), Bool.False };
-        yield return new object[] { Bool.False, MassValue.Gram(90).AsExpression() };
+        yield return [MassValue.Gram(90).AsExpression(), Bool.False];
+        yield return [Bool.False, MassValue.Gram(90).AsExpression()];
 
-        yield return new object[] { LengthValue.Meter(90).AsExpression(), Bool.False };
-        yield return new object[] { Bool.False, LengthValue.Meter(90).AsExpression() };
+        yield return [LengthValue.Meter(90).AsExpression(), Bool.False];
+        yield return [Bool.False, LengthValue.Meter(90).AsExpression()];
 
-        yield return new object[] { TimeValue.Second(90).AsExpression(), Bool.False };
-        yield return new object[] { Bool.False, TimeValue.Second(90).AsExpression() };
+        yield return [TimeValue.Second(90).AsExpression(), Bool.False];
+        yield return [Bool.False, TimeValue.Second(90).AsExpression()];
 
-        yield return new object[] { AreaValue.Meter(90).AsExpression(), Bool.False };
-        yield return new object[] { Bool.False, AreaValue.Meter(90).AsExpression() };
+        yield return [AreaValue.Meter(90).AsExpression(), Bool.False];
+        yield return [Bool.False, AreaValue.Meter(90).AsExpression()];
 
-        yield return new object[] { VolumeValue.Meter(90).AsExpression(), Bool.False };
-        yield return new object[] { Bool.False, VolumeValue.Meter(90).AsExpression() };
+        yield return [VolumeValue.Meter(90).AsExpression(), Bool.False];
+        yield return [Bool.False, VolumeValue.Meter(90).AsExpression()];
     }
 
     [Test]

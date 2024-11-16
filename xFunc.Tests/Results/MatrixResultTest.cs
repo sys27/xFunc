@@ -31,8 +31,8 @@ public class MatrixResultTest
     {
         var matrixValue = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { NumberValue.One, NumberValue.Two },
-            new NumberValue[] { NumberValue.Two, NumberValue.One },
+            [NumberValue.One, NumberValue.Two],
+            [NumberValue.Two, NumberValue.One],
         });
         var result = new Result.MatrixResult(matrixValue);
 

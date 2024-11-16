@@ -19,15 +19,15 @@ public class PowerConverterTests
     {
         var power = PowerValue.Watt(10);
 
-        yield return new object[] { power, "w", power.ToWatt() };
-        yield return new object[] { power, "kw", power.ToKilowatt() };
-        yield return new object[] { power, "hp", power.ToHorsepower() };
+        yield return [power, "w", power.ToWatt()];
+        yield return [power, "kw", power.ToKilowatt()];
+        yield return [power, "hp", power.ToHorsepower()];
 
         var number = new NumberValue(10);
 
-        yield return new object[] { number, "w", PowerValue.Watt(number) };
-        yield return new object[] { number, "kw", PowerValue.Kilowatt(number) };
-        yield return new object[] { number, "hp", PowerValue.Horsepower(number) };
+        yield return [number, "w", PowerValue.Watt(number)];
+        yield return [number, "kw", PowerValue.Kilowatt(number)];
+        yield return [number, "hp", PowerValue.Horsepower(number)];
     }
 
     [Test]
@@ -42,8 +42,8 @@ public class PowerConverterTests
 
     public static IEnumerable<object[]> GetConvertUnsupportedUnitData()
     {
-        yield return new object[] { PowerValue.Watt(10), "xxx" };
-        yield return new object[] { new NumberValue(10), "xxx" };
+        yield return [PowerValue.Watt(10), "xxx"];
+        yield return [new NumberValue(10), "xxx"];
     }
 
     [Test]

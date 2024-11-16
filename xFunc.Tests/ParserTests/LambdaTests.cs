@@ -140,8 +140,8 @@ public class LambdaTests : BaseParserTests
     public void ParseCurryFunction()
     {
         var expected = new Curry(
-            new Lambda(new[] { "a", "b" }, new Add(new Variable("a"), new Variable("b"))).AsExpression(),
-            new IExpression[] { Number.One }.ToImmutableArray());
+            new Lambda(["a", "b"], new Add(new Variable("a"), new Variable("b"))).AsExpression(),
+            [Number.One]);
 
         ParseTest("curry((a, b) => a + b, 1)", expected);
     }

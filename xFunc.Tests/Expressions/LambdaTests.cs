@@ -1,8 +1,6 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Collections.Immutable;
-
 namespace xFunc.Tests.Expressions;
 
 public class LambdaTests
@@ -133,8 +131,8 @@ public class LambdaTests
             new Add(Variable.X, Variable.Y));
 
         var result = function.Call(
-            new IExpression[] { Number.One, Number.Two }.ToImmutableArray(),
-            new ExpressionParameters());
+            [Number.One, Number.Two],
+            []);
 
         Assert.That(result, Is.EqualTo(new NumberValue(3)));
     }
@@ -145,14 +143,11 @@ public class LambdaTests
         var function = new Lambda(
             new[] { "x", "y" },
             new Add(new Add(Variable.X, Variable.Y), new Variable("a")));
-        function = function.Capture(new ExpressionParameters
-        {
-            new Parameter("a", 3.0)
-        });
+        function = function.Capture([new Parameter("a", 3.0)]);
 
         var result = function.Call(
-            new IExpression[] { Number.One, Number.Two }.ToImmutableArray(),
-            new ExpressionParameters());
+            [Number.One, Number.Two],
+            []);
 
         Assert.That(result, Is.EqualTo(new NumberValue(6)));
     }
@@ -161,13 +156,13 @@ public class LambdaTests
     public void CallReturnLambdaTest()
     {
         var function = new Lambda(
-            new[] { "x" },
-            new Lambda(new[] { "y" }, new Add(Variable.X, Variable.Y)).AsExpression());
+            ["x"],
+            new Lambda(["y"], new Add(Variable.X, Variable.Y)).AsExpression());
 
         var result = function.Call(
-            new IExpression[] { Number.One, Number.Two }.ToImmutableArray(),
-            new ExpressionParameters());
-        var expected = new Lambda(new[] { "y" }, new Add(Variable.X, Variable.Y));
+            [Number.One, Number.Two],
+            []);
+        var expected = new Lambda(["y"], new Add(Variable.X, Variable.Y));
 
         Assert.That(result, Is.EqualTo(expected));
     }

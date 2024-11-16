@@ -20,7 +20,7 @@ public class StatisticalTests : BaseExpressionTests
     [TestCase(typeof(Varp))]
     public void NotSupportedException(Type type)
     {
-        var exp = Create(type, new IExpression[] { Bool.False, Bool.False });
+        var exp = Create(type, [Bool.False, Bool.False]);
 
         TestNotSupported(exp);
     }
@@ -38,7 +38,7 @@ public class StatisticalTests : BaseExpressionTests
     [TestCase(typeof(Varp))]
     public void CloneTest(Type type)
     {
-        var exp = Create<StatisticalExpression>(type, new IExpression[] { Number.One, Number.Two });
+        var exp = Create<StatisticalExpression>(type, [Number.One, Number.Two]);
         var clone = exp.Clone();
 
         Assert.That(clone, Is.EqualTo(exp));
@@ -57,7 +57,7 @@ public class StatisticalTests : BaseExpressionTests
     [TestCase(typeof(Varp))]
     public void CloneWithReplaceTest(Type type)
     {
-        var exp = Create<StatisticalExpression>(type, new IExpression[] { Number.One, Number.Two });
+        var exp = Create<StatisticalExpression>(type, [Number.One, Number.Two]);
         var arg = ImmutableArray.Create<IExpression>(Number.One);
         var clone = exp.Clone(arg);
         var expected = Create(type, arg);

@@ -1,7 +1,6 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Collections.Immutable;
 using System.Numerics;
 using Matrices = xFunc.Maths.Expressions.Matrices;
 
@@ -507,7 +506,7 @@ public class CommonFormatterTest
     {
         var exp = new CallExpression(
             new Variable("f"),
-            new IExpression[] { new Number(5), Number.Two }.ToImmutableArray());
+            [..new IExpression[] { new Number(5), Number.Two }]);
 
         Assert.That(exp.ToString(), Is.EqualTo("f(5, 2)"));
     }
@@ -517,7 +516,7 @@ public class CommonFormatterTest
     {
         var exp = new CallExpression(
             Variable.X.ToLambdaExpression(Variable.X.Name),
-            new IExpression[] { new Number(5) }.ToImmutableArray());
+            [..new IExpression[] { new Number(5) }]);
 
         Assert.That(exp.ToString(), Is.EqualTo("((x) => x)(5)"));
     }
@@ -535,7 +534,7 @@ public class CommonFormatterTest
     {
         var exp = new Curry(
             new Lambda(Number.One).AsExpression(),
-            new IExpression[] { Number.One, Number.Two }.ToImmutableArray());
+            [..new IExpression[] { Number.One, Number.Two }]);
 
         Assert.That(exp.ToString(), Is.EqualTo("curry(() => 1, 1, 2)"));
     }

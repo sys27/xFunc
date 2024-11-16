@@ -19,27 +19,27 @@ public class TimeConverterTests
     {
         var lengthValue = TimeValue.Second(10);
 
-        yield return new object[] { lengthValue, "s", lengthValue.ToSecond() };
-        yield return new object[] { lengthValue, "ns", lengthValue.ToNanosecond() };
-        yield return new object[] { lengthValue, "μs", lengthValue.ToMicrosecond() };
-        yield return new object[] { lengthValue, "ms", lengthValue.ToMillisecond() };
-        yield return new object[] { lengthValue, "min", lengthValue.ToMinute() };
-        yield return new object[] { lengthValue, "h", lengthValue.ToHour() };
-        yield return new object[] { lengthValue, "day", lengthValue.ToDay() };
-        yield return new object[] { lengthValue, "week", lengthValue.ToWeek() };
-        yield return new object[] { lengthValue, "year", lengthValue.ToYear() };
+        yield return [lengthValue, "s", lengthValue.ToSecond()];
+        yield return [lengthValue, "ns", lengthValue.ToNanosecond()];
+        yield return [lengthValue, "μs", lengthValue.ToMicrosecond()];
+        yield return [lengthValue, "ms", lengthValue.ToMillisecond()];
+        yield return [lengthValue, "min", lengthValue.ToMinute()];
+        yield return [lengthValue, "h", lengthValue.ToHour()];
+        yield return [lengthValue, "day", lengthValue.ToDay()];
+        yield return [lengthValue, "week", lengthValue.ToWeek()];
+        yield return [lengthValue, "year", lengthValue.ToYear()];
 
         var number = new NumberValue(10);
 
-        yield return new object[] { number, "s", TimeValue.Second(number) };
-        yield return new object[] { number, "ns", TimeValue.Nanosecond(number) };
-        yield return new object[] { number, "μs", TimeValue.Microsecond(number) };
-        yield return new object[] { number, "ms", TimeValue.Millisecond(number) };
-        yield return new object[] { number, "min", TimeValue.Minute(number) };
-        yield return new object[] { number, "h", TimeValue.Hour(number) };
-        yield return new object[] { number, "day", TimeValue.Day(number) };
-        yield return new object[] { number, "week", TimeValue.Week(number) };
-        yield return new object[] { number, "year", TimeValue.Year(number) };
+        yield return [number, "s", TimeValue.Second(number)];
+        yield return [number, "ns", TimeValue.Nanosecond(number)];
+        yield return [number, "μs", TimeValue.Microsecond(number)];
+        yield return [number, "ms", TimeValue.Millisecond(number)];
+        yield return [number, "min", TimeValue.Minute(number)];
+        yield return [number, "h", TimeValue.Hour(number)];
+        yield return [number, "day", TimeValue.Day(number)];
+        yield return [number, "week", TimeValue.Week(number)];
+        yield return [number, "year", TimeValue.Year(number)];
     }
 
     [Test]
@@ -56,8 +56,8 @@ public class TimeConverterTests
 
     public static IEnumerable<object[]> GetConvertUnsupportedUnitData()
     {
-        yield return new object[] { TimeValue.Second(10), "xxx" };
-        yield return new object[] { new NumberValue(10), "xxx" };
+        yield return [TimeValue.Second(10), "xxx"];
+        yield return [new NumberValue(10), "xxx"];
     }
 
     [Test]

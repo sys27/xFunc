@@ -137,7 +137,7 @@ public class Curry : IExpression
 
         var result = Parameters.Aggregate(
             lambda,
-            (current, parameter) => (Lambda)current.Call(ImmutableArray.Create(parameter), parameters));
+            (current, parameter) => (Lambda)current.Call([parameter], parameters));
 
         return result;
     }

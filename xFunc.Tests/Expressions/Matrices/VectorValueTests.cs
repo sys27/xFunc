@@ -11,9 +11,9 @@ public class VectorValueTests
 
     public static IEnumerable<object[]> NotEqualsTestData()
     {
-        yield return new object[] { default(VectorValue), VectorValue.Create(NumberValue.One) };
+        yield return [default(VectorValue), VectorValue.Create(NumberValue.One)];
 
-        yield return new object[] { VectorValue.Create(NumberValue.One), default(VectorValue) };
+        yield return [VectorValue.Create(NumberValue.One), default(VectorValue)];
     }
 
     [Test]
@@ -23,9 +23,9 @@ public class VectorValueTests
 
     public static IEnumerable<object[]> EqualsTestData()
     {
-        yield return new object[] { default(VectorValue), default(VectorValue) };
+        yield return [default(VectorValue), default(VectorValue)];
 
-        yield return new object[] { VectorValue.Create(NumberValue.One), VectorValue.Create(NumberValue.One) };
+        yield return [VectorValue.Create(NumberValue.One), VectorValue.Create(NumberValue.One)];
     }
 
     [Test]
@@ -35,11 +35,11 @@ public class VectorValueTests
 
     public static IEnumerable<object[]> NotEqualsAsObjectTestData()
     {
-        yield return new object[] { default(VectorValue), VectorValue.Create(NumberValue.One) };
+        yield return [default(VectorValue), VectorValue.Create(NumberValue.One)];
 
-        yield return new object[] { VectorValue.Create(NumberValue.One), default(VectorValue) };
+        yield return [VectorValue.Create(NumberValue.One), default(VectorValue)];
 
-        yield return new object[] { VectorValue.Create(NumberValue.One), true };
+        yield return [VectorValue.Create(NumberValue.One), true];
     }
 
     [Test]
@@ -82,14 +82,14 @@ public class VectorValueTests
 
     public static IEnumerable<object[]> AbsTestData()
     {
-        yield return new object[]
-        {
+        yield return
+        [
             VectorValue.Create(new NumberValue(1), new NumberValue(2), new NumberValue(3)),
             new NumberValue(3.7416573867739413)
-        };
+        ];
 
-        yield return new object[]
-        {
+        yield return
+        [
             VectorValue.Create(
                 new NumberValue(1),
                 new NumberValue(2),
@@ -100,10 +100,10 @@ public class VectorValueTests
                 new NumberValue(7),
                 new NumberValue(8)),
             new NumberValue(14.2828568570857)
-        };
+        ];
 
-        yield return new object[]
-        {
+        yield return
+        [
             VectorValue.Create(
                 new NumberValue(1),
                 new NumberValue(2),
@@ -115,7 +115,7 @@ public class VectorValueTests
                 new NumberValue(8),
                 new NumberValue(9)),
             new NumberValue(16.881943016134134)
-        };
+        ];
     }
 
     [Test]
@@ -125,15 +125,15 @@ public class VectorValueTests
 
     public static IEnumerable<object[]> AddTestData()
     {
-        yield return new object[]
-        {
+        yield return
+        [
             VectorValue.Create(new NumberValue(1), new NumberValue(2), new NumberValue(3)),
             VectorValue.Create(new NumberValue(3), new NumberValue(2), new NumberValue(1)),
-            VectorValue.Create(new NumberValue(4), new NumberValue(4), new NumberValue(4)),
-        };
+            VectorValue.Create(new NumberValue(4), new NumberValue(4), new NumberValue(4))
+        ];
 
-        yield return new object[]
-        {
+        yield return
+        [
             VectorValue.Create(
                 new NumberValue(1),
                 new NumberValue(2),
@@ -160,11 +160,11 @@ public class VectorValueTests
                 new NumberValue(10),
                 new NumberValue(12),
                 new NumberValue(14),
-                new NumberValue(16)),
-        };
+                new NumberValue(16))
+        ];
 
-        yield return new object[]
-        {
+        yield return
+        [
             VectorValue.Create(
                 new NumberValue(1),
                 new NumberValue(2),
@@ -194,8 +194,8 @@ public class VectorValueTests
                 new NumberValue(12),
                 new NumberValue(14),
                 new NumberValue(16),
-                new NumberValue(18)),
-        };
+                new NumberValue(18))
+        ];
     }
 
     [Test]
@@ -205,15 +205,15 @@ public class VectorValueTests
 
     public static IEnumerable<object[]> SubTestData()
     {
-        yield return new object[]
-        {
+        yield return
+        [
             VectorValue.Create(new NumberValue(1), new NumberValue(2), new NumberValue(3)),
             VectorValue.Create(new NumberValue(3), new NumberValue(2), new NumberValue(1)),
-            VectorValue.Create(new NumberValue(-2), new NumberValue(0), new NumberValue(2)),
-        };
+            VectorValue.Create(new NumberValue(-2), new NumberValue(0), new NumberValue(2))
+        ];
 
-        yield return new object[]
-        {
+        yield return
+        [
             VectorValue.Create(
                 new NumberValue(1),
                 new NumberValue(2),
@@ -240,11 +240,11 @@ public class VectorValueTests
                 new NumberValue(0),
                 new NumberValue(0),
                 new NumberValue(0),
-                new NumberValue(0)),
-        };
+                new NumberValue(0))
+        ];
 
-        yield return new object[]
-        {
+        yield return
+        [
             VectorValue.Create(
                 new NumberValue(10),
                 new NumberValue(20),
@@ -274,8 +274,8 @@ public class VectorValueTests
                 new NumberValue(54),
                 new NumberValue(63),
                 new NumberValue(72),
-                new NumberValue(81)),
-        };
+                new NumberValue(81))
+        ];
     }
 
     [Test]
@@ -285,15 +285,15 @@ public class VectorValueTests
 
     public static IEnumerable<object[]> MulByScalarTestData()
     {
-        yield return new object[]
-        {
+        yield return
+        [
             VectorValue.Create(new NumberValue(1), new NumberValue(2), new NumberValue(3)),
             NumberValue.Two,
-            VectorValue.Create(new NumberValue(2), new NumberValue(4), new NumberValue(6)),
-        };
+            VectorValue.Create(new NumberValue(2), new NumberValue(4), new NumberValue(6))
+        ];
 
-        yield return new object[]
-        {
+        yield return
+        [
             VectorValue.Create(
                 new NumberValue(1),
                 new NumberValue(2),
@@ -312,11 +312,11 @@ public class VectorValueTests
                 new NumberValue(10),
                 new NumberValue(12),
                 new NumberValue(14),
-                new NumberValue(16)),
-        };
+                new NumberValue(16))
+        ];
 
-        yield return new object[]
-        {
+        yield return
+        [
             VectorValue.Create(
                 new NumberValue(1),
                 new NumberValue(2),
@@ -337,8 +337,8 @@ public class VectorValueTests
                 new NumberValue(12),
                 new NumberValue(14),
                 new NumberValue(16),
-                new NumberValue(18)),
-        };
+                new NumberValue(18))
+        ];
     }
 
     [Test]
@@ -348,15 +348,15 @@ public class VectorValueTests
 
     public static IEnumerable<object[]> MulTestData()
     {
-        yield return new object[]
-        {
+        yield return
+        [
             VectorValue.Create(new NumberValue(1), new NumberValue(2), new NumberValue(3)),
             VectorValue.Create(new NumberValue(3), new NumberValue(2), new NumberValue(1)),
-            new NumberValue(10),
-        };
+            new NumberValue(10)
+        ];
 
-        yield return new object[]
-        {
+        yield return
+        [
             VectorValue.Create(
                 new NumberValue(1),
                 new NumberValue(2),
@@ -375,11 +375,11 @@ public class VectorValueTests
                 new NumberValue(6),
                 new NumberValue(7),
                 new NumberValue(8)),
-            new NumberValue(204),
-        };
+            new NumberValue(204)
+        ];
 
-        yield return new object[]
-        {
+        yield return
+        [
             VectorValue.Create(
                 new NumberValue(10),
                 new NumberValue(20),
@@ -400,8 +400,8 @@ public class VectorValueTests
                 new NumberValue(7),
                 new NumberValue(8),
                 new NumberValue(9)),
-            new NumberValue(2850),
-        };
+            new NumberValue(2850)
+        ];
     }
 
     [Test]
@@ -411,14 +411,14 @@ public class VectorValueTests
 
     public static IEnumerable<object[]> SumTestData()
     {
-        yield return new object[]
-        {
+        yield return
+        [
             VectorValue.Create(new NumberValue(1), new NumberValue(2), new NumberValue(3)),
-            new NumberValue(6),
-        };
+            new NumberValue(6)
+        ];
 
-        yield return new object[]
-        {
+        yield return
+        [
             VectorValue.Create(
                 new NumberValue(1),
                 new NumberValue(2),
@@ -428,11 +428,11 @@ public class VectorValueTests
                 new NumberValue(6),
                 new NumberValue(7),
                 new NumberValue(8)),
-            new NumberValue(36),
-        };
+            new NumberValue(36)
+        ];
 
-        yield return new object[]
-        {
+        yield return
+        [
             VectorValue.Create(
                 new NumberValue(10),
                 new NumberValue(20),
@@ -443,8 +443,8 @@ public class VectorValueTests
                 new NumberValue(70),
                 new NumberValue(80),
                 new NumberValue(90)),
-            new NumberValue(450),
-        };
+            new NumberValue(450)
+        ];
     }
 
     [Test]

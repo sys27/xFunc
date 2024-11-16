@@ -17,10 +17,10 @@ public class InverseTest : BaseExpressionTests
         });
         var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { new NumberValue(0.0970873786407767), new NumberValue(-0.18270079435128), new NumberValue(-0.114739629302736), new NumberValue(0.224183583406884) },
-            new NumberValue[] { new NumberValue(-0.0194174757281553), new NumberValue(0.145631067961165), new NumberValue(-0.0679611650485437), new NumberValue(0.00970873786407767) },
-            new NumberValue[] { new NumberValue(-0.087378640776699), new NumberValue(0.0644307149161518), new NumberValue(0.103265666372463), new NumberValue(-0.00176522506619595) },
-            new NumberValue[] { new NumberValue(0.203883495145631), new NumberValue(-0.120035304501324), new NumberValue(0.122683142100618), new NumberValue(-0.147396293027361) },
+            [new NumberValue(0.0970873786407767), new NumberValue(-0.18270079435128), new NumberValue(-0.114739629302736), new NumberValue(0.224183583406884)],
+            [new NumberValue(-0.0194174757281553), new NumberValue(0.145631067961165), new NumberValue(-0.0679611650485437), new NumberValue(0.00970873786407767)],
+            [new NumberValue(-0.087378640776699), new NumberValue(0.0644307149161518), new NumberValue(0.103265666372463), new NumberValue(-0.00176522506619595)],
+            [new NumberValue(0.203883495145631), new NumberValue(-0.120035304501324), new NumberValue(0.122683142100618), new NumberValue(-0.147396293027361)],
         });
 
         var exp = new Inverse(matrix);

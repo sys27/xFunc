@@ -108,8 +108,8 @@ public class VectorTest : BaseExpressionTests
 
         var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { NumberValue.One },
-            new NumberValue[] { NumberValue.Two },
+            [NumberValue.One],
+            [NumberValue.Two],
         });
         var result = exp.Execute();
 

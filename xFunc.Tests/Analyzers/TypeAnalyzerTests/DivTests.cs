@@ -232,14 +232,14 @@ public class DivTests : TypeAnalyzerBaseTests
 
     public static IEnumerable<object[]> GetDataForTestDivAngleAndBoolTest()
     {
-        yield return new object[] { AngleValue.Degree(90).AsExpression() };
-        yield return new object[] { PowerValue.Watt(90).AsExpression() };
-        yield return new object[] { TemperatureValue.Celsius(90).AsExpression() };
-        yield return new object[] { MassValue.Gram(90).AsExpression() };
-        yield return new object[] { LengthValue.Meter(90).AsExpression() };
-        yield return new object[] { TimeValue.Second(90).AsExpression() };
-        yield return new object[] { AreaValue.Meter(90).AsExpression() };
-        yield return new object[] { VolumeValue.Meter(90).AsExpression() };
+        yield return [AngleValue.Degree(90).AsExpression()];
+        yield return [PowerValue.Watt(90).AsExpression()];
+        yield return [TemperatureValue.Celsius(90).AsExpression()];
+        yield return [MassValue.Gram(90).AsExpression()];
+        yield return [LengthValue.Meter(90).AsExpression()];
+        yield return [TimeValue.Second(90).AsExpression()];
+        yield return [AreaValue.Meter(90).AsExpression()];
+        yield return [VolumeValue.Meter(90).AsExpression()];
     }
 
     [Test]

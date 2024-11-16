@@ -182,15 +182,15 @@ public class PowerValueTest
 
     public static IEnumerable<object[]> GetConversionTestCases()
     {
-        yield return new object[] { 10.0, PowerUnit.Watt, PowerUnit.Watt, 10.0 };
-        yield return new object[] { 10.0, PowerUnit.Watt, PowerUnit.Kilowatt, 10.0 / 1000 };
-        yield return new object[] { 10.0, PowerUnit.Watt, PowerUnit.Horsepower, 10.0 / 745.69987158227022 };
-        yield return new object[] { 10.0, PowerUnit.Kilowatt, PowerUnit.Kilowatt, 10.0 };
-        yield return new object[] { 10.0, PowerUnit.Kilowatt, PowerUnit.Watt, 10.0 * 1000 };
-        yield return new object[] { 10.0, PowerUnit.Kilowatt, PowerUnit.Horsepower, 10.0 * 1000 / 745.69987158227022 };
-        yield return new object[] { 10.0, PowerUnit.Horsepower, PowerUnit.Horsepower, 10.0 };
-        yield return new object[] { 10.0, PowerUnit.Horsepower, PowerUnit.Watt, 10.0 * 745.69987158227022 };
-        yield return new object[] { 10.0, PowerUnit.Horsepower, PowerUnit.Kilowatt, 10.0 * 745.69987158227022 / 1000 };
+        yield return [10.0, PowerUnit.Watt, PowerUnit.Watt, 10.0];
+        yield return [10.0, PowerUnit.Watt, PowerUnit.Kilowatt, 10.0 / 1000];
+        yield return [10.0, PowerUnit.Watt, PowerUnit.Horsepower, 10.0 / 745.69987158227022];
+        yield return [10.0, PowerUnit.Kilowatt, PowerUnit.Kilowatt, 10.0];
+        yield return [10.0, PowerUnit.Kilowatt, PowerUnit.Watt, 10.0 * 1000];
+        yield return [10.0, PowerUnit.Kilowatt, PowerUnit.Horsepower, 10.0 * 1000 / 745.69987158227022];
+        yield return [10.0, PowerUnit.Horsepower, PowerUnit.Horsepower, 10.0];
+        yield return [10.0, PowerUnit.Horsepower, PowerUnit.Watt, 10.0 * 745.69987158227022];
+        yield return [10.0, PowerUnit.Horsepower, PowerUnit.Kilowatt, 10.0 * 745.69987158227022 / 1000];
     }
 
     [Test]

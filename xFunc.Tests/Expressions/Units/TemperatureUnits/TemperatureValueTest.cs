@@ -204,17 +204,17 @@ public class TemperatureValueTest
 
     public static IEnumerable<object[]> GetConversionTestCases()
     {
-        yield return new object[] { 10.0, TemperatureUnit.Celsius, TemperatureUnit.Celsius, 10.0 };
-        yield return new object[] { 10.0, TemperatureUnit.Celsius, TemperatureUnit.Fahrenheit, 50.0 };
-        yield return new object[] { 10.0, TemperatureUnit.Celsius, TemperatureUnit.Kelvin, 283.15 };
+        yield return [10.0, TemperatureUnit.Celsius, TemperatureUnit.Celsius, 10.0];
+        yield return [10.0, TemperatureUnit.Celsius, TemperatureUnit.Fahrenheit, 50.0];
+        yield return [10.0, TemperatureUnit.Celsius, TemperatureUnit.Kelvin, 283.15];
 
-        yield return new object[] { 10.0, TemperatureUnit.Fahrenheit, TemperatureUnit.Fahrenheit, 10.0 };
-        yield return new object[] { 10.0, TemperatureUnit.Fahrenheit, TemperatureUnit.Celsius, -12.222222 };
-        yield return new object[] { 10.0, TemperatureUnit.Fahrenheit, TemperatureUnit.Kelvin, 260.927778 };
+        yield return [10.0, TemperatureUnit.Fahrenheit, TemperatureUnit.Fahrenheit, 10.0];
+        yield return [10.0, TemperatureUnit.Fahrenheit, TemperatureUnit.Celsius, -12.222222];
+        yield return [10.0, TemperatureUnit.Fahrenheit, TemperatureUnit.Kelvin, 260.927778];
 
-        yield return new object[] { 10.0, TemperatureUnit.Kelvin, TemperatureUnit.Kelvin, 10.0 };
-        yield return new object[] { 10.0, TemperatureUnit.Kelvin, TemperatureUnit.Celsius, -263.15 };
-        yield return new object[] { 10.0, TemperatureUnit.Kelvin, TemperatureUnit.Fahrenheit, -441.66999999999996 };
+        yield return [10.0, TemperatureUnit.Kelvin, TemperatureUnit.Kelvin, 10.0];
+        yield return [10.0, TemperatureUnit.Kelvin, TemperatureUnit.Celsius, -263.15];
+        yield return [10.0, TemperatureUnit.Kelvin, TemperatureUnit.Fahrenheit, -441.66999999999996];
     }
 
     [Test]

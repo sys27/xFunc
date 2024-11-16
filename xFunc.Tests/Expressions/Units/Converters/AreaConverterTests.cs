@@ -19,29 +19,29 @@ public class AreaConverterTests
     {
         var areaValue = AreaValue.Meter(10);
 
-        yield return new object[] { areaValue, "m^2", areaValue.ToMeter() };
-        yield return new object[] { areaValue, "mm^2", areaValue.ToMillimeter() };
-        yield return new object[] { areaValue, "cm^2", areaValue.ToCentimeter() };
-        yield return new object[] { areaValue, "km^2", areaValue.ToKilometer() };
-        yield return new object[] { areaValue, "in^2", areaValue.ToInch() };
-        yield return new object[] { areaValue, "ft^2", areaValue.ToFoot() };
-        yield return new object[] { areaValue, "yd^2", areaValue.ToYard() };
-        yield return new object[] { areaValue, "mi^2", areaValue.ToMile() };
-        yield return new object[] { areaValue, "ha", areaValue.ToHectare() };
-        yield return new object[] { areaValue, "ac", areaValue.ToAcre() };
+        yield return [areaValue, "m^2", areaValue.ToMeter()];
+        yield return [areaValue, "mm^2", areaValue.ToMillimeter()];
+        yield return [areaValue, "cm^2", areaValue.ToCentimeter()];
+        yield return [areaValue, "km^2", areaValue.ToKilometer()];
+        yield return [areaValue, "in^2", areaValue.ToInch()];
+        yield return [areaValue, "ft^2", areaValue.ToFoot()];
+        yield return [areaValue, "yd^2", areaValue.ToYard()];
+        yield return [areaValue, "mi^2", areaValue.ToMile()];
+        yield return [areaValue, "ha", areaValue.ToHectare()];
+        yield return [areaValue, "ac", areaValue.ToAcre()];
 
         var number = new NumberValue(10);
 
-        yield return new object[] { number, "m^2", AreaValue.Meter(number) };
-        yield return new object[] { number, "mm^2", AreaValue.Millimeter(number) };
-        yield return new object[] { number, "cm^2", AreaValue.Centimeter(number) };
-        yield return new object[] { number, "km^2", AreaValue.Kilometer(number) };
-        yield return new object[] { number, "in^2", AreaValue.Inch(number) };
-        yield return new object[] { number, "ft^2", AreaValue.Foot(number) };
-        yield return new object[] { number, "yd^2", AreaValue.Yard(number) };
-        yield return new object[] { number, "mi^2", AreaValue.Mile(number) };
-        yield return new object[] { number, "ha", AreaValue.Hectare(number) };
-        yield return new object[] { number, "ac", AreaValue.Acre(number) };
+        yield return [number, "m^2", AreaValue.Meter(number)];
+        yield return [number, "mm^2", AreaValue.Millimeter(number)];
+        yield return [number, "cm^2", AreaValue.Centimeter(number)];
+        yield return [number, "km^2", AreaValue.Kilometer(number)];
+        yield return [number, "in^2", AreaValue.Inch(number)];
+        yield return [number, "ft^2", AreaValue.Foot(number)];
+        yield return [number, "yd^2", AreaValue.Yard(number)];
+        yield return [number, "mi^2", AreaValue.Mile(number)];
+        yield return [number, "ha", AreaValue.Hectare(number)];
+        yield return [number, "ac", AreaValue.Acre(number)];
     }
 
     [Test]
@@ -58,8 +58,8 @@ public class AreaConverterTests
 
     public static IEnumerable<object[]> GetConvertUnsupportedUnitData()
     {
-        yield return new object[] { AreaValue.Meter(10), "xxx" };
-        yield return new object[] { new NumberValue(10), "xxx" };
+        yield return [AreaValue.Meter(10), "xxx"];
+        yield return [new NumberValue(10), "xxx"];
     }
 
     [Test]

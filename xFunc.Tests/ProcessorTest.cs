@@ -222,8 +222,8 @@ public class ProcessorTest
         var result = processor.Solve("{{1, 2}, {2, 1}}");
         var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { NumberValue.One, NumberValue.Two },
-            new NumberValue[] { NumberValue.Two, NumberValue.One },
+            [NumberValue.One, NumberValue.Two],
+            [NumberValue.Two, NumberValue.One],
         });
 
         Assert.That(result.Matrix, Is.EqualTo(expected));

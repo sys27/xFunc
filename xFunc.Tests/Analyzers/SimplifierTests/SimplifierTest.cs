@@ -1,8 +1,6 @@
 // Copyright (c) Dmytro Kyshchenko. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Collections.Immutable;
-
 namespace xFunc.Tests.Analyzers.SimplifierTests;
 
 public class SimplifierTest : BaseSimplifierTest
@@ -235,10 +233,10 @@ public class SimplifierTest : BaseSimplifierTest
     {
         var exp = new CallExpression(
             new Lambda(new[] { "x" }, new Add(Variable.X, Number.Zero)).AsExpression(),
-            new IExpression[] { new Add(Number.One, Number.One) }.ToImmutableArray());
+            [..new IExpression[] { new Add(Number.One, Number.One) }]);
         var expected = new CallExpression(
             new Lambda(new[] { "x" }, Variable.X).AsExpression(),
-            new IExpression[] { Number.Two }.ToImmutableArray());
+            [..new IExpression[] { Number.Two }]);
 
         SimplifyTest(exp, expected);
     }
@@ -248,7 +246,7 @@ public class SimplifierTest : BaseSimplifierTest
     {
         var exp = new CallExpression(
             new Lambda(new[] { "x" }, Variable.X).AsExpression(),
-            new IExpression[] { Variable.X }.ToImmutableArray());
+            [..new IExpression[] { Variable.X }]);
 
         SimplifyTest(exp, exp);
     }

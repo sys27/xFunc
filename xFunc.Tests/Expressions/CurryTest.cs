@@ -53,7 +53,7 @@ public class CurryTest : BaseExpressionTests
     {
         var exp = new Curry(
             Number.One.ToLambdaExpression(),
-            new IExpression[] { Number.One }.ToImmutableArray());
+            [Number.One]);
 
         Assert.Throws<ArgumentException>(() => exp.Execute());
     }
@@ -63,7 +63,7 @@ public class CurryTest : BaseExpressionTests
     {
         var exp = new Curry(
             Variable.X.ToLambdaExpression("x"),
-            new IExpression[] { Number.One }.ToImmutableArray());
+            [Number.One]);
 
         var result = exp.Execute();
 
@@ -88,7 +88,7 @@ public class CurryTest : BaseExpressionTests
     {
         var exp = new Curry(
             new Add(Variable.X, Variable.Y).ToLambdaExpression("x", "y"),
-            new IExpression[] { Number.One }.ToImmutableArray());
+            [Number.One]);
         var expected = new Add(Variable.X, Variable.Y).ToLambda("y");
 
         var result = exp.Execute();

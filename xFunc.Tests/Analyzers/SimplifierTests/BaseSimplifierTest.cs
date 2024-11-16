@@ -27,8 +27,8 @@ public abstract class BaseSimplifierTest : BaseTest
         try
         {
             var method = typeof(Simplifier)
-                .GetMethod(nameof(Simplifier.Analyze), new[] { type });
-            method.Invoke(simplifier, new object[] { null });
+                .GetMethod(nameof(Simplifier.Analyze), [type]);
+            method.Invoke(simplifier, [null]);
         }
         catch (TargetInvocationException e)
         {

@@ -272,24 +272,24 @@ public class AngleValueTest
 
     public static IEnumerable<object[]> NormalizeTestsCases()
     {
-        yield return new object[] { 0, AngleUnit.Degree, 0 };
-        yield return new object[] { 0, AngleUnit.Radian, 0 };
-        yield return new object[] { 0, AngleUnit.Gradian, 0 };
-        yield return new object[] { 90, AngleUnit.Degree, 90 };
-        yield return new object[] { 1.5707963267948966, AngleUnit.Radian, 1.5707963267948966 };
-        yield return new object[] { 100, AngleUnit.Gradian, 100 };
-        yield return new object[] { 360, AngleUnit.Degree, 0 };
-        yield return new object[] { 6.283185307179586, AngleUnit.Radian, 0 };
-        yield return new object[] { 400, AngleUnit.Gradian, 0 };
-        yield return new object[] { 1110.0, AngleUnit.Degree, 30 };
-        yield return new object[] { 19.37315469713706, AngleUnit.Radian, 0.5235987755982988 };
-        yield return new object[] { 1233, AngleUnit.Gradian, 33 };
-        yield return new object[] { 1770.0, AngleUnit.Degree, 330 };
-        yield return new object[] { 30.892327760299633, AngleUnit.Radian, 5.759586531581287 };
-        yield return new object[] { 1966, AngleUnit.Gradian, 366 };
-        yield return new object[] { -390.0, AngleUnit.Degree, 330 };
-        yield return new object[] { -6.8067840827778845, AngleUnit.Radian, 5.759586531581287 };
-        yield return new object[] { -434.0, AngleUnit.Gradian, 366 };
+        yield return [0, AngleUnit.Degree, 0];
+        yield return [0, AngleUnit.Radian, 0];
+        yield return [0, AngleUnit.Gradian, 0];
+        yield return [90, AngleUnit.Degree, 90];
+        yield return [1.5707963267948966, AngleUnit.Radian, 1.5707963267948966];
+        yield return [100, AngleUnit.Gradian, 100];
+        yield return [360, AngleUnit.Degree, 0];
+        yield return [6.283185307179586, AngleUnit.Radian, 0];
+        yield return [400, AngleUnit.Gradian, 0];
+        yield return [1110.0, AngleUnit.Degree, 30];
+        yield return [19.37315469713706, AngleUnit.Radian, 0.5235987755982988];
+        yield return [1233, AngleUnit.Gradian, 33];
+        yield return [1770.0, AngleUnit.Degree, 330];
+        yield return [30.892327760299633, AngleUnit.Radian, 5.759586531581287];
+        yield return [1966, AngleUnit.Gradian, 366];
+        yield return [-390.0, AngleUnit.Degree, 330];
+        yield return [-6.8067840827778845, AngleUnit.Radian, 5.759586531581287];
+        yield return [-434.0, AngleUnit.Gradian, 366];
     }
 
     [Test]

@@ -19,27 +19,27 @@ public class AngleConverterTests
     {
         var angle = AngleValue.Degree(90);
 
-        yield return new object[] { angle, "rad", angle.ToRadian() };
-        yield return new object[] { angle, "radian", angle.ToRadian() };
-        yield return new object[] { angle, "radians", angle.ToRadian() };
-        yield return new object[] { angle, "deg", angle.ToDegree() };
-        yield return new object[] { angle, "degree", angle.ToDegree() };
-        yield return new object[] { angle, "degrees", angle.ToDegree() };
-        yield return new object[] { angle, "grad", angle.ToGradian() };
-        yield return new object[] { angle, "gradian", angle.ToGradian() };
-        yield return new object[] { angle, "gradians", angle.ToGradian() };
+        yield return [angle, "rad", angle.ToRadian()];
+        yield return [angle, "radian", angle.ToRadian()];
+        yield return [angle, "radians", angle.ToRadian()];
+        yield return [angle, "deg", angle.ToDegree()];
+        yield return [angle, "degree", angle.ToDegree()];
+        yield return [angle, "degrees", angle.ToDegree()];
+        yield return [angle, "grad", angle.ToGradian()];
+        yield return [angle, "gradian", angle.ToGradian()];
+        yield return [angle, "gradians", angle.ToGradian()];
 
         var number = new NumberValue(10);
 
-        yield return new object[] { number, "rad", AngleValue.Radian(number) };
-        yield return new object[] { number, "radian", AngleValue.Radian(number) };
-        yield return new object[] { number, "radians", AngleValue.Radian(number) };
-        yield return new object[] { number, "deg", AngleValue.Degree(number) };
-        yield return new object[] { number, "degree", AngleValue.Degree(number) };
-        yield return new object[] { number, "degrees", AngleValue.Degree(number) };
-        yield return new object[] { number, "grad", AngleValue.Gradian(number) };
-        yield return new object[] { number, "gradian", AngleValue.Gradian(number) };
-        yield return new object[] { number, "gradians", AngleValue.Gradian(number) };
+        yield return [number, "rad", AngleValue.Radian(number)];
+        yield return [number, "radian", AngleValue.Radian(number)];
+        yield return [number, "radians", AngleValue.Radian(number)];
+        yield return [number, "deg", AngleValue.Degree(number)];
+        yield return [number, "degree", AngleValue.Degree(number)];
+        yield return [number, "degrees", AngleValue.Degree(number)];
+        yield return [number, "grad", AngleValue.Gradian(number)];
+        yield return [number, "gradian", AngleValue.Gradian(number)];
+        yield return [number, "gradians", AngleValue.Gradian(number)];
     }
 
     [Test]
@@ -54,8 +54,8 @@ public class AngleConverterTests
 
     public static IEnumerable<object[]> GetConvertUnsupportedUnitData()
     {
-        yield return new object[] { AngleValue.Degree(90), "xxx" };
-        yield return new object[] { new NumberValue(10), "xxx" };
+        yield return [AngleValue.Degree(90), "xxx"];
+        yield return [new NumberValue(10), "xxx"];
     }
 
     [Test]

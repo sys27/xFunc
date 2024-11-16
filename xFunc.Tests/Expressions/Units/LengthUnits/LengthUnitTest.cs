@@ -69,14 +69,14 @@ public class LengthUnitTest
 
     public static IEnumerable<object[]> GetToAreaUnitTest()
     {
-        yield return new object[] { LengthUnit.Meter, AreaUnit.Meter };
-        yield return new object[] { LengthUnit.Millimeter, AreaUnit.Millimeter };
-        yield return new object[] { LengthUnit.Centimeter, AreaUnit.Centimeter };
-        yield return new object[] { LengthUnit.Kilometer, AreaUnit.Kilometer };
-        yield return new object[] { LengthUnit.Inch, AreaUnit.Inch };
-        yield return new object[] { LengthUnit.Foot, AreaUnit.Foot };
-        yield return new object[] { LengthUnit.Yard, AreaUnit.Yard };
-        yield return new object[] { LengthUnit.Mile, AreaUnit.Mile };
+        yield return [LengthUnit.Meter, AreaUnit.Meter];
+        yield return [LengthUnit.Millimeter, AreaUnit.Millimeter];
+        yield return [LengthUnit.Centimeter, AreaUnit.Centimeter];
+        yield return [LengthUnit.Kilometer, AreaUnit.Kilometer];
+        yield return [LengthUnit.Inch, AreaUnit.Inch];
+        yield return [LengthUnit.Foot, AreaUnit.Foot];
+        yield return [LengthUnit.Yard, AreaUnit.Yard];
+        yield return [LengthUnit.Mile, AreaUnit.Mile];
     }
 
     [Test]
@@ -90,15 +90,15 @@ public class LengthUnitTest
 
     public static IEnumerable<object[]> GetToAreaUnitExceptionTest()
     {
-        yield return new object[] { LengthUnit.Nanometer };
-        yield return new object[] { LengthUnit.Micrometer };
-        yield return new object[] { LengthUnit.Decimeter };
-        yield return new object[] { LengthUnit.NauticalMile };
-        yield return new object[] { LengthUnit.Chain };
-        yield return new object[] { LengthUnit.Rod };
-        yield return new object[] { LengthUnit.AstronomicalUnit };
-        yield return new object[] { LengthUnit.LightYear };
-        yield return new object[] { LengthUnit.Parsec };
+        yield return [LengthUnit.Nanometer];
+        yield return [LengthUnit.Micrometer];
+        yield return [LengthUnit.Decimeter];
+        yield return [LengthUnit.NauticalMile];
+        yield return [LengthUnit.Chain];
+        yield return [LengthUnit.Rod];
+        yield return [LengthUnit.AstronomicalUnit];
+        yield return [LengthUnit.LightYear];
+        yield return [LengthUnit.Parsec];
     }
 
     [Test]

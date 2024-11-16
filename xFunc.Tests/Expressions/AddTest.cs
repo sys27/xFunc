@@ -93,8 +93,8 @@ public class AddTest : BaseExpressionTests
 
         var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { new NumberValue(15), new NumberValue(5) },
-            new NumberValue[] { new NumberValue(6), new NumberValue(4) },
+            [new NumberValue(15), new NumberValue(5)],
+            [new NumberValue(6), new NumberValue(4)],
         });
         var result = add.Execute();
 

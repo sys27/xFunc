@@ -33,7 +33,7 @@ public readonly struct MatrixValue : IEquatable<MatrixValue>
     public static MatrixValue Create(NumberValue value)
         => new MatrixValue(new NumberValue[][]
         {
-            new NumberValue[] { value },
+            [value],
         });
 
     /// <summary>
@@ -42,7 +42,7 @@ public readonly struct MatrixValue : IEquatable<MatrixValue>
     /// <param name="value">The item of a new matrix.</param>
     /// <returns>The matrix.</returns>
     public static MatrixValue Create(VectorValue value)
-        => new MatrixValue(new[] { value });
+        => new MatrixValue([value]);
 
     /// <summary>
     /// Creates a new instance of <see cref="MatrixValue"/>.

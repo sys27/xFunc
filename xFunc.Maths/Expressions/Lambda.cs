@@ -16,7 +16,7 @@ public readonly struct Lambda : IEquatable<Lambda>
     /// </summary>
     /// <param name="body">The body of the function.</param>
     public Lambda(IExpression body)
-        : this(ImmutableArray.Create<string>(), body, null)
+        : this([], body, null)
     {
     }
 
@@ -26,7 +26,7 @@ public readonly struct Lambda : IEquatable<Lambda>
     /// <param name="parameters">The list of parameters of the function.</param>
     /// <param name="body">The body of the function.</param>
     public Lambda(IEnumerable<string> parameters, IExpression body)
-        : this(parameters.ToImmutableArray(), body, null)
+        : this([..parameters], body, null)
     {
     }
 
@@ -133,9 +133,9 @@ public readonly struct Lambda : IEquatable<Lambda>
         var body = Body;
 
         for (var i = Parameters.Length - 1; i > 0; i--)
-            body = new LambdaExpression(new Lambda(ImmutableArray.Create(Parameters[i]), body));
+            body = new LambdaExpression(new Lambda([Parameters[i]], body));
 
-        var lambda = new Lambda(ImmutableArray.Create(Parameters[0]), body);
+        var lambda = new Lambda([Parameters[0]], body);
 
         return lambda;
     }

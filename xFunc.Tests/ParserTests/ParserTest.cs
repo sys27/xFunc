@@ -82,7 +82,7 @@ public class ParserTest : BaseParserTests
             Number.One,
             new CallExpression(
                 new Variable("func"),
-                new IExpression[] { Variable.X }.ToImmutableArray())
+                [Variable.X])
         );
 
         ParseTest("1 + func(x)", expected);

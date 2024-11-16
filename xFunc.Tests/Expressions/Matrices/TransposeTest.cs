@@ -17,8 +17,8 @@ public class TransposeTest : BaseExpressionTests
 
         var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { NumberValue.One, new NumberValue(3), new NumberValue(5) },
-            new NumberValue[] { NumberValue.Two, new NumberValue(4), new NumberValue(6) },
+            [NumberValue.One, new NumberValue(3), new NumberValue(5)],
+            [NumberValue.Two, new NumberValue(4), new NumberValue(6)],
         });
         var exp = new Transpose(matrix);
 
@@ -32,8 +32,8 @@ public class TransposeTest : BaseExpressionTests
 
         var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { NumberValue.One },
-            new NumberValue[] { NumberValue.Two },
+            [NumberValue.One],
+            [NumberValue.Two],
         });
         var exp = new Transpose(vector);
 

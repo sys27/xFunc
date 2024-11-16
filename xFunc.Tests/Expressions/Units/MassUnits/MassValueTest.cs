@@ -228,42 +228,42 @@ public class MassValueTest
 
     public static IEnumerable<object[]> GetConversionTestCases()
     {
-        yield return new object[] { 10.0, MassUnit.Milligram, MassUnit.Milligram, 10.0 };
-        yield return new object[] { 1000.0, MassUnit.Milligram, MassUnit.Gram, 1.0 };
-        yield return new object[] { 1000000.0, MassUnit.Milligram, MassUnit.Kilogram, 1.0 };
-        yield return new object[] { 1000000000.0, MassUnit.Milligram, MassUnit.Tonne, 1.0 };
-        yield return new object[] { 1000.0, MassUnit.Milligram, MassUnit.Ounce, 0.0352739619 };
-        yield return new object[] { 1000.0, MassUnit.Milligram, MassUnit.Pound, 0.0022046226 };
-        yield return new object[] { 10.0, MassUnit.Gram, MassUnit.Gram, 10.0 };
-        yield return new object[] { 10.0, MassUnit.Gram, MassUnit.Milligram, 10000.0 };
-        yield return new object[] { 10.0, MassUnit.Gram, MassUnit.Kilogram, 0.01 };
-        yield return new object[] { 1000.0, MassUnit.Gram, MassUnit.Tonne, 0.001 };
-        yield return new object[] { 10.0, MassUnit.Gram, MassUnit.Ounce, 0.35273962 };
-        yield return new object[] { 10.0, MassUnit.Gram, MassUnit.Pound, 0.022046226 };
-        yield return new object[] { 10.0, MassUnit.Kilogram, MassUnit.Kilogram, 10.0 };
-        yield return new object[] { 10.0, MassUnit.Kilogram, MassUnit.Milligram, 10000000.0 };
-        yield return new object[] { 10.0, MassUnit.Kilogram, MassUnit.Gram, 10000 };
-        yield return new object[] { 10.0, MassUnit.Kilogram, MassUnit.Tonne, 0.01 };
-        yield return new object[] { 10.0, MassUnit.Kilogram, MassUnit.Ounce, 352.739619807 };
-        yield return new object[] { 10.0, MassUnit.Kilogram, MassUnit.Pound, 22.046226218 };
-        yield return new object[] { 10.0, MassUnit.Tonne, MassUnit.Tonne, 10.0 };
-        yield return new object[] { 10.0, MassUnit.Tonne, MassUnit.Milligram, 10000000000.0 };
-        yield return new object[] { 10.0, MassUnit.Tonne, MassUnit.Gram, 10000000.0 };
-        yield return new object[] { 10.0, MassUnit.Tonne, MassUnit.Kilogram, 10000.0 };
-        yield return new object[] { 1.0, MassUnit.Tonne, MassUnit.Ounce, 35273.961980687 };
-        yield return new object[] { 1.0, MassUnit.Tonne, MassUnit.Pound, 2204.622621849 };
-        yield return new object[] { 10.0, MassUnit.Ounce, MassUnit.Ounce, 10.0 };
-        yield return new object[] { 10.0, MassUnit.Ounce, MassUnit.Milligram, 283495.231 };
-        yield return new object[] { 10.0, MassUnit.Ounce, MassUnit.Gram, 283.495231 };
-        yield return new object[] { 10.0, MassUnit.Ounce, MassUnit.Kilogram, 0.283495231 };
-        yield return new object[] { 10.0, MassUnit.Ounce, MassUnit.Tonne, 0.000283495 };
-        yield return new object[] { 1.0, MassUnit.Ounce, MassUnit.Pound, 0.0625 };
-        yield return new object[] { 10.0, MassUnit.Pound, MassUnit.Pound, 10.0 };
-        yield return new object[] { 10.0, MassUnit.Pound, MassUnit.Milligram, 4535923.7 };
-        yield return new object[] { 10.0, MassUnit.Pound, MassUnit.Gram, 4535.9237 };
-        yield return new object[] { 10.0, MassUnit.Pound, MassUnit.Kilogram, 4.5359237 };
-        yield return new object[] { 10.0, MassUnit.Pound, MassUnit.Tonne, 0.004535924 };
-        yield return new object[] { 10.0, MassUnit.Pound, MassUnit.Ounce, 160.0 };
+        yield return [10.0, MassUnit.Milligram, MassUnit.Milligram, 10.0];
+        yield return [1000.0, MassUnit.Milligram, MassUnit.Gram, 1.0];
+        yield return [1000000.0, MassUnit.Milligram, MassUnit.Kilogram, 1.0];
+        yield return [1000000000.0, MassUnit.Milligram, MassUnit.Tonne, 1.0];
+        yield return [1000.0, MassUnit.Milligram, MassUnit.Ounce, 0.0352739619];
+        yield return [1000.0, MassUnit.Milligram, MassUnit.Pound, 0.0022046226];
+        yield return [10.0, MassUnit.Gram, MassUnit.Gram, 10.0];
+        yield return [10.0, MassUnit.Gram, MassUnit.Milligram, 10000.0];
+        yield return [10.0, MassUnit.Gram, MassUnit.Kilogram, 0.01];
+        yield return [1000.0, MassUnit.Gram, MassUnit.Tonne, 0.001];
+        yield return [10.0, MassUnit.Gram, MassUnit.Ounce, 0.35273962];
+        yield return [10.0, MassUnit.Gram, MassUnit.Pound, 0.022046226];
+        yield return [10.0, MassUnit.Kilogram, MassUnit.Kilogram, 10.0];
+        yield return [10.0, MassUnit.Kilogram, MassUnit.Milligram, 10000000.0];
+        yield return [10.0, MassUnit.Kilogram, MassUnit.Gram, 10000];
+        yield return [10.0, MassUnit.Kilogram, MassUnit.Tonne, 0.01];
+        yield return [10.0, MassUnit.Kilogram, MassUnit.Ounce, 352.739619807];
+        yield return [10.0, MassUnit.Kilogram, MassUnit.Pound, 22.046226218];
+        yield return [10.0, MassUnit.Tonne, MassUnit.Tonne, 10.0];
+        yield return [10.0, MassUnit.Tonne, MassUnit.Milligram, 10000000000.0];
+        yield return [10.0, MassUnit.Tonne, MassUnit.Gram, 10000000.0];
+        yield return [10.0, MassUnit.Tonne, MassUnit.Kilogram, 10000.0];
+        yield return [1.0, MassUnit.Tonne, MassUnit.Ounce, 35273.961980687];
+        yield return [1.0, MassUnit.Tonne, MassUnit.Pound, 2204.622621849];
+        yield return [10.0, MassUnit.Ounce, MassUnit.Ounce, 10.0];
+        yield return [10.0, MassUnit.Ounce, MassUnit.Milligram, 283495.231];
+        yield return [10.0, MassUnit.Ounce, MassUnit.Gram, 283.495231];
+        yield return [10.0, MassUnit.Ounce, MassUnit.Kilogram, 0.283495231];
+        yield return [10.0, MassUnit.Ounce, MassUnit.Tonne, 0.000283495];
+        yield return [1.0, MassUnit.Ounce, MassUnit.Pound, 0.0625];
+        yield return [10.0, MassUnit.Pound, MassUnit.Pound, 10.0];
+        yield return [10.0, MassUnit.Pound, MassUnit.Milligram, 4535923.7];
+        yield return [10.0, MassUnit.Pound, MassUnit.Gram, 4535.9237];
+        yield return [10.0, MassUnit.Pound, MassUnit.Kilogram, 4.5359237];
+        yield return [10.0, MassUnit.Pound, MassUnit.Tonne, 0.004535924];
+        yield return [10.0, MassUnit.Pound, MassUnit.Ounce, 160.0];
     }
 
     [Test]

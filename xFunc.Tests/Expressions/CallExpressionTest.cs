@@ -46,7 +46,7 @@ public class CallExpressionTest
             ImmutableArray<IExpression>.Empty);
         var exp2 = new CallExpression(
             new Lambda(Array.Empty<string>(), Number.One).AsExpression(),
-            new IExpression[] { Number.One }.ToImmutableArray());
+            [Number.One]);
 
         Assert.That(exp1.Equals(exp2), Is.False);
     }
@@ -72,7 +72,7 @@ public class CallExpressionTest
             ImmutableArray<IExpression>.Empty);
         var exp2 = new CallExpression(
             new Lambda(Array.Empty<string>(), Number.One).AsExpression(),
-            new IExpression[] { Number.One }.ToImmutableArray());
+            [Number.One]);
 
         Assert.That(exp1.Equals(exp2), Is.False);
     }
@@ -129,7 +129,7 @@ public class CallExpressionTest
             ImmutableArray<IExpression>.Empty);
         var exp2 = new CallExpression(
             new Lambda(Array.Empty<string>(), Number.One).AsExpression(),
-            new IExpression[] { Number.One }.ToImmutableArray());
+            [Number.One]);
 
         Assert.That(exp1.Equals((object)exp2), Is.False);
     }
@@ -165,7 +165,7 @@ public class CallExpressionTest
             Number.One,
             ImmutableArray<IExpression>.Empty);
 
-        Assert.Throws<ExecutionException>(() => exp.Execute(new ExpressionParameters()));
+        Assert.Throws<ExecutionException>(() => exp.Execute([]));
     }
 
     [Test]
@@ -175,7 +175,7 @@ public class CallExpressionTest
             new Lambda(Array.Empty<string>(), Number.One).AsExpression(),
             ImmutableArray<IExpression>.Empty);
 
-        var result = exp.Execute(new ExpressionParameters());
+        var result = exp.Execute([]);
         var expected = Number.One.Value;
 
         Assert.That(result, Is.EqualTo(expected));
@@ -185,10 +185,10 @@ public class CallExpressionTest
     public void ExecuteWithParametersTest()
     {
         var exp = new CallExpression(
-            new Lambda(new[] { Variable.X.Name }, Variable.X).AsExpression(),
-            new IExpression[] { Number.One }.ToImmutableArray());
+            new Lambda([Variable.X.Name], Variable.X).AsExpression(),
+            [Number.One]);
 
-        var result = exp.Execute(new ExpressionParameters());
+        var result = exp.Execute([]);
         var expected = Number.One.Value;
 
         Assert.That(result, Is.EqualTo(expected));

@@ -85,11 +85,11 @@ public class AreaUnitTest
 
     public static IEnumerable<object[]> GetToVolumeUnitTest()
     {
-        yield return new object[] { AreaUnit.Meter, VolumeUnit.Meter };
-        yield return new object[] { AreaUnit.Centimeter, VolumeUnit.Centimeter };
-        yield return new object[] { AreaUnit.Inch, VolumeUnit.Inch };
-        yield return new object[] { AreaUnit.Foot, VolumeUnit.Foot };
-        yield return new object[] { AreaUnit.Yard, VolumeUnit.Yard };
+        yield return [AreaUnit.Meter, VolumeUnit.Meter];
+        yield return [AreaUnit.Centimeter, VolumeUnit.Centimeter];
+        yield return [AreaUnit.Inch, VolumeUnit.Inch];
+        yield return [AreaUnit.Foot, VolumeUnit.Foot];
+        yield return [AreaUnit.Yard, VolumeUnit.Yard];
     }
 
     [Test]
@@ -103,11 +103,11 @@ public class AreaUnitTest
 
     public static IEnumerable<object[]> GetToVolumeUnitExceptionTest()
     {
-        yield return new object[] { AreaUnit.Millimeter };
-        yield return new object[] { AreaUnit.Kilometer };
-        yield return new object[] { AreaUnit.Mile };
-        yield return new object[] { AreaUnit.Hectare };
-        yield return new object[] { AreaUnit.Acre };
+        yield return [AreaUnit.Millimeter];
+        yield return [AreaUnit.Kilometer];
+        yield return [AreaUnit.Mile];
+        yield return [AreaUnit.Hectare];
+        yield return [AreaUnit.Acre];
     }
 
     [Test]

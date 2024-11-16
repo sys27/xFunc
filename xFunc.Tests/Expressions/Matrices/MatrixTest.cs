@@ -23,8 +23,8 @@ public class MatrixTest
         var result = matrix.Execute();
         var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { new NumberValue(3) },
-            new NumberValue[] { new NumberValue(-1) },
+            [new NumberValue(3)],
+            [new NumberValue(-1)],
         });
 
         Assert.That(expected, Is.EqualTo(result));
@@ -41,8 +41,8 @@ public class MatrixTest
 
         var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { new NumberValue(10), new NumberValue(15) },
-            new NumberValue[] { new NumberValue(45), new NumberValue(25) },
+            [new NumberValue(10), new NumberValue(15)],
+            [new NumberValue(45), new NumberValue(25)],
         });
         var result = exp.Execute();
 
@@ -66,8 +66,8 @@ public class MatrixTest
 
         var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { new NumberValue(15), new NumberValue(5) },
-            new NumberValue[] { new NumberValue(6), new NumberValue(4) },
+            [new NumberValue(15), new NumberValue(5)],
+            [new NumberValue(6), new NumberValue(4)],
         });
         var result = exp.Execute();
 
@@ -121,8 +121,8 @@ public class MatrixTest
 
         var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { new NumberValue(-3), new NumberValue(1) },
-            new NumberValue[] { new NumberValue(-2), new NumberValue(-2) },
+            [new NumberValue(-3), new NumberValue(1)],
+            [new NumberValue(-2), new NumberValue(-2)],
         });
         var result = exp.Execute();
 
@@ -172,8 +172,8 @@ public class MatrixTest
 
         var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { NumberValue.One, new NumberValue(3), new NumberValue(5) },
-            new NumberValue[] { NumberValue.Two, new NumberValue(4), new NumberValue(6) },
+            [NumberValue.One, new NumberValue(3), new NumberValue(5)],
+            [NumberValue.Two, new NumberValue(4), new NumberValue(6)],
         });
         var result = exp.Execute();
 
@@ -197,8 +197,8 @@ public class MatrixTest
 
         var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { new NumberValue(-7) },
-            new NumberValue[] { new NumberValue(11) },
+            [new NumberValue(-7)],
+            [new NumberValue(11)],
         });
         var result = exp.Execute();
 
@@ -224,9 +224,9 @@ public class MatrixTest
 
         var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { new NumberValue(11), new NumberValue(-22), new NumberValue(29) },
-            new NumberValue[] { new NumberValue(9), new NumberValue(-27), new NumberValue(32) },
-            new NumberValue[] { new NumberValue(13), new NumberValue(-17), new NumberValue(26) },
+            [new NumberValue(11), new NumberValue(-22), new NumberValue(29)],
+            [new NumberValue(9), new NumberValue(-27), new NumberValue(32)],
+            [new NumberValue(13), new NumberValue(-17), new NumberValue(26)],
         });
         var result = exp.Execute();
 
@@ -288,50 +288,39 @@ public class MatrixTest
         var exp = new Mul(left, right);
         var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[]
-            {
-                NumberValue.One, NumberValue.Two, new NumberValue(3), new NumberValue(4), new NumberValue(5), new NumberValue(6), new NumberValue(7), new NumberValue(8), new NumberValue(9), new NumberValue(10), new NumberValue(11),
-            },
-            new NumberValue[]
-            {
-                NumberValue.Two, new NumberValue(4), new NumberValue(6), new NumberValue(8), new NumberValue(10), new NumberValue(12), new NumberValue(14), new NumberValue(16), new NumberValue(18), new NumberValue(20), new NumberValue(22),
-            },
-            new NumberValue[]
-            {
-                new NumberValue(3), new NumberValue(6), new NumberValue(9), new NumberValue(12), new NumberValue(15), new NumberValue(18), new NumberValue(21), new NumberValue(24), new NumberValue(27), new NumberValue(30), new NumberValue(33),
-            },
-            new NumberValue[]
-            {
-                new NumberValue(4), new NumberValue(8), new NumberValue(12), new NumberValue(16), new NumberValue(20), new NumberValue(24), new NumberValue(28), new NumberValue(32), new NumberValue(36), new NumberValue(40), new NumberValue(44),
-            },
-            new NumberValue[]
-            {
-                new NumberValue(5), new NumberValue(10), new NumberValue(15), new NumberValue(20), new NumberValue(25), new NumberValue(30), new NumberValue(35), new NumberValue(40), new NumberValue(45), new NumberValue(50), new NumberValue(55),
-            },
-            new NumberValue[]
-            {
-                new NumberValue(6), new NumberValue(12), new NumberValue(18), new NumberValue(24), new NumberValue(30), new NumberValue(36), new NumberValue(42), new NumberValue(48), new NumberValue(54), new NumberValue(60), new NumberValue(66),
-            },
-            new NumberValue[]
-            {
-                new NumberValue(7), new NumberValue(14), new NumberValue(21), new NumberValue(28), new NumberValue(35), new NumberValue(42), new NumberValue(49), new NumberValue(56), new NumberValue(63), new NumberValue(70), new NumberValue(77),
-            },
-            new NumberValue[]
-            {
-                new NumberValue(8), new NumberValue(16), new NumberValue(24), new NumberValue(32), new NumberValue(40), new NumberValue(48), new NumberValue(56), new NumberValue(64), new NumberValue(72), new NumberValue(80), new NumberValue(88),
-            },
-            new NumberValue[]
-            {
-                new NumberValue(9), new NumberValue(18), new NumberValue(27), new NumberValue(36), new NumberValue(45), new NumberValue(54), new NumberValue(63), new NumberValue(72), new NumberValue(81), new NumberValue(90), new NumberValue(99),
-            },
-            new NumberValue[]
-            {
-                new NumberValue(10), new NumberValue(20), new NumberValue(30), new NumberValue(40), new NumberValue(50), new NumberValue(60), new NumberValue(70), new NumberValue(80), new NumberValue(90), new NumberValue(100), new NumberValue(110),
-            },
-            new NumberValue[]
-            {
-                new NumberValue(11), new NumberValue(22), new NumberValue(33), new NumberValue(44), new NumberValue(55), new NumberValue(66), new NumberValue(77), new NumberValue(88), new NumberValue(99), new NumberValue(110), new NumberValue(121),
-            },
+            [
+                NumberValue.One, NumberValue.Two, new NumberValue(3), new NumberValue(4), new NumberValue(5), new NumberValue(6), new NumberValue(7), new NumberValue(8), new NumberValue(9), new NumberValue(10), new NumberValue(11)
+            ],
+            [
+                NumberValue.Two, new NumberValue(4), new NumberValue(6), new NumberValue(8), new NumberValue(10), new NumberValue(12), new NumberValue(14), new NumberValue(16), new NumberValue(18), new NumberValue(20), new NumberValue(22)
+            ],
+            [
+                new NumberValue(3), new NumberValue(6), new NumberValue(9), new NumberValue(12), new NumberValue(15), new NumberValue(18), new NumberValue(21), new NumberValue(24), new NumberValue(27), new NumberValue(30), new NumberValue(33)
+            ],
+            [
+                new NumberValue(4), new NumberValue(8), new NumberValue(12), new NumberValue(16), new NumberValue(20), new NumberValue(24), new NumberValue(28), new NumberValue(32), new NumberValue(36), new NumberValue(40), new NumberValue(44)
+            ],
+            [
+                new NumberValue(5), new NumberValue(10), new NumberValue(15), new NumberValue(20), new NumberValue(25), new NumberValue(30), new NumberValue(35), new NumberValue(40), new NumberValue(45), new NumberValue(50), new NumberValue(55)
+            ],
+            [
+                new NumberValue(6), new NumberValue(12), new NumberValue(18), new NumberValue(24), new NumberValue(30), new NumberValue(36), new NumberValue(42), new NumberValue(48), new NumberValue(54), new NumberValue(60), new NumberValue(66)
+            ],
+            [
+                new NumberValue(7), new NumberValue(14), new NumberValue(21), new NumberValue(28), new NumberValue(35), new NumberValue(42), new NumberValue(49), new NumberValue(56), new NumberValue(63), new NumberValue(70), new NumberValue(77)
+            ],
+            [
+                new NumberValue(8), new NumberValue(16), new NumberValue(24), new NumberValue(32), new NumberValue(40), new NumberValue(48), new NumberValue(56), new NumberValue(64), new NumberValue(72), new NumberValue(80), new NumberValue(88)
+            ],
+            [
+                new NumberValue(9), new NumberValue(18), new NumberValue(27), new NumberValue(36), new NumberValue(45), new NumberValue(54), new NumberValue(63), new NumberValue(72), new NumberValue(81), new NumberValue(90), new NumberValue(99)
+            ],
+            [
+                new NumberValue(10), new NumberValue(20), new NumberValue(30), new NumberValue(40), new NumberValue(50), new NumberValue(60), new NumberValue(70), new NumberValue(80), new NumberValue(90), new NumberValue(100), new NumberValue(110)
+            ],
+            [
+                new NumberValue(11), new NumberValue(22), new NumberValue(33), new NumberValue(44), new NumberValue(55), new NumberValue(66), new NumberValue(77), new NumberValue(88), new NumberValue(99), new NumberValue(110), new NumberValue(121)
+            ],
         });
 
         Assert.That(exp.Execute(), Is.EqualTo(expected));
@@ -350,8 +339,8 @@ public class MatrixTest
 
         var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { new NumberValue(-6), new NumberValue(3) },
-            new NumberValue[] { new NumberValue(2), new NumberValue(-1) },
+            [new NumberValue(-6), new NumberValue(3)],
+            [new NumberValue(2), new NumberValue(-1)],
         });
         var result = exp.Execute();
 
@@ -387,13 +376,12 @@ public class MatrixTest
         });
         var exp = new Inverse(matrix);
 
-        var expected = MatrixValue.Create(new[]
-        {
-            new NumberValue[] { new NumberValue(0.0970873786407767), new NumberValue(-0.18270079435128), new NumberValue(-0.114739629302736), new NumberValue(0.224183583406884) },
-            new NumberValue[] { new NumberValue(-0.0194174757281553), new NumberValue(0.145631067961165), new NumberValue(-0.0679611650485437), new NumberValue(0.00970873786407767) },
-            new NumberValue[] { new NumberValue(-0.087378640776699), new NumberValue(0.0644307149161518), new NumberValue(0.103265666372463), new NumberValue(-0.00176522506619595) },
-            new NumberValue[] { new NumberValue(0.203883495145631), new NumberValue(-0.120035304501324), new NumberValue(0.122683142100618), new NumberValue(-0.147396293027361) },
-        });
+        var expected = MatrixValue.Create([
+            [new NumberValue(0.0970873786407767), new NumberValue(-0.18270079435128), new NumberValue(-0.114739629302736), new NumberValue(0.224183583406884)],
+            [new NumberValue(-0.0194174757281553), new NumberValue(0.145631067961165), new NumberValue(-0.0679611650485437), new NumberValue(0.00970873786407767)],
+            [new NumberValue(-0.087378640776699), new NumberValue(0.0644307149161518), new NumberValue(0.103265666372463), new NumberValue(-0.00176522506619595)],
+            [new NumberValue(0.203883495145631), new NumberValue(-0.120035304501324), new NumberValue(0.122683142100618), new NumberValue(-0.147396293027361)]
+        ]);
 
         var actual = exp.Execute();
 

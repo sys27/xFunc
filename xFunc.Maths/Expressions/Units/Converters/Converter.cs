@@ -14,8 +14,8 @@ public class Converter : IConverter
     /// Initializes a new instance of the <see cref="Converter"/> class.
     /// </summary>
     public Converter()
-        => converters = new IConverter<object>[]
-        {
+        => converters =
+        [
             new AngleConverter(),
             new PowerConverter(),
             new TemperatureConverter(),
@@ -23,8 +23,8 @@ public class Converter : IConverter
             new AreaConverter(),
             new LengthConverter(),
             new TimeConverter(),
-            new VolumeConverter(),
-        };
+            new VolumeConverter()
+        ];
 
     /// <inheritdoc />
     public object Convert(object value, string unit)

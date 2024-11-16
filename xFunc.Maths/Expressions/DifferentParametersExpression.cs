@@ -15,7 +15,7 @@ public abstract class DifferentParametersExpression : IExpression
     /// </summary>
     /// <param name="arguments">The arguments.</param>
     protected DifferentParametersExpression(IEnumerable<IExpression> arguments)
-        : this(arguments.ToImmutableArray())
+        : this([..arguments])
     {
     }
 

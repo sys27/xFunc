@@ -19,15 +19,15 @@ public class TemperatureConverterTests
     {
         var temperature = TemperatureValue.Celsius(10);
 
-        yield return new object[] { temperature, "°c", temperature.ToCelsius() };
-        yield return new object[] { temperature, "°f", temperature.ToFahrenheit() };
-        yield return new object[] { temperature, "k", temperature.ToKelvin() };
+        yield return [temperature, "°c", temperature.ToCelsius()];
+        yield return [temperature, "°f", temperature.ToFahrenheit()];
+        yield return [temperature, "k", temperature.ToKelvin()];
 
         var number = new NumberValue(10);
 
-        yield return new object[] { number, "°c", TemperatureValue.Celsius(number) };
-        yield return new object[] { number, "°f", TemperatureValue.Fahrenheit(number) };
-        yield return new object[] { number, "k", TemperatureValue.Kelvin(number) };
+        yield return [number, "°c", TemperatureValue.Celsius(number)];
+        yield return [number, "°f", TemperatureValue.Fahrenheit(number)];
+        yield return [number, "k", TemperatureValue.Kelvin(number)];
     }
 
     [Test]
@@ -42,8 +42,8 @@ public class TemperatureConverterTests
 
     public static IEnumerable<object[]> GetConvertUnsupportedUnitData()
     {
-        yield return new object[] { TemperatureValue.Celsius(10), "xxx" };
-        yield return new object[] { new NumberValue(10), "xxx" };
+        yield return [TemperatureValue.Celsius(10), "xxx"];
+        yield return [new NumberValue(10), "xxx"];
     }
 
     [Test]

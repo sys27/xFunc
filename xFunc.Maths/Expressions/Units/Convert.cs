@@ -20,7 +20,7 @@ public class Convert : IExpression
     /// <param name="value">The value to convert.</param>
     /// <param name="unit">The target unit.</param>
     public Convert(IConverter converter, IExpression value, IExpression unit)
-        : this(converter, ImmutableArray.Create(value, unit))
+        : this(converter, [value, unit])
     {
     }
 

@@ -23,7 +23,7 @@ public class Round : DifferentParametersExpression
     /// </summary>
     /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded.</param>
     public Round(IExpression argument)
-        : this(ImmutableArray.Create(argument))
+        : this([argument])
     {
     }
 
@@ -33,7 +33,7 @@ public class Round : DifferentParametersExpression
     /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded.</param>
     /// <param name="digits">The expression that represents the number of fractional digits in the return value.</param>
     public Round(IExpression argument, IExpression digits)
-        : this(ImmutableArray.Create(argument, digits))
+        : this([argument, digits])
     {
     }
 

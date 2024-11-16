@@ -148,9 +148,9 @@ public class MulTest : BaseExpressionTests
 
         var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { new NumberValue(4), new NumberValue(8), new NumberValue(12) },
-            new NumberValue[] { new NumberValue(5), new NumberValue(10), new NumberValue(15) },
-            new NumberValue[] { new NumberValue(6), new NumberValue(12), new NumberValue(18) },
+            [new NumberValue(4), new NumberValue(8), new NumberValue(12)],
+            [new NumberValue(5), new NumberValue(10), new NumberValue(15)],
+            [new NumberValue(6), new NumberValue(12), new NumberValue(18)],
         });
 
         Assert.That(exp.Execute(), Is.EqualTo(expected));
@@ -206,8 +206,8 @@ public class MulTest : BaseExpressionTests
 
         var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { new NumberValue(5), new NumberValue(10) },
-            new NumberValue[] { new NumberValue(15), new NumberValue(20) },
+            [new NumberValue(5), new NumberValue(10)],
+            [new NumberValue(15), new NumberValue(20)],
         });
 
         Assert.That(exp.Execute(), Is.EqualTo(expected));
@@ -226,8 +226,8 @@ public class MulTest : BaseExpressionTests
 
         var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { new NumberValue(5), new NumberValue(10) },
-            new NumberValue[] { new NumberValue(15), new NumberValue(20) },
+            [new NumberValue(5), new NumberValue(10)],
+            [new NumberValue(15), new NumberValue(20)],
         });
 
         Assert.That(exp.Execute(), Is.EqualTo(expected));

@@ -298,7 +298,7 @@ public class StandardTests : TypeAnalyzerBaseTests
     {
         var exp = new Curry(
             Number.One.ToLambdaExpression(),
-            ImmutableArray.Create<IExpression>(Number.One, Number.One));
+            [Number.One, Number.One]);
 
         Test(exp, ResultTypes.Undefined);
     }

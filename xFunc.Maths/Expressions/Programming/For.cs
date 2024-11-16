@@ -19,7 +19,7 @@ public class For : DifferentParametersExpression
     /// <param name="cond">The condition section.</param>
     /// <param name="iter">The iterator section.</param>
     public For(IExpression body, IExpression init, IExpression cond, IExpression iter)
-        : this(ImmutableArray.Create(body, init, cond, iter))
+        : this([body, init, cond, iter])
     {
     }
 

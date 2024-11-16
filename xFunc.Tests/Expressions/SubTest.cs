@@ -84,8 +84,8 @@ public class SubTest : BaseExpressionTests
 
         var expected = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { new NumberValue(-3), NumberValue.One, },
-            new NumberValue[] { new NumberValue(-2), new NumberValue(-2), },
+            [new NumberValue(-3), NumberValue.One],
+            [new NumberValue(-2), new NumberValue(-2)],
         });
         var result = sub.Execute();
 

@@ -9,12 +9,12 @@ public class DomainRangeTests
 {
     public static IEnumerable<object[]> GetCtorTestData()
     {
-        yield return new object[] { NumberValue.NegativeInfinity, true, NumberValue.One, false };
-        yield return new object[] { NumberValue.PositiveInfinity, true, NumberValue.One, false };
-        yield return new object[] { NumberValue.One, false, NumberValue.NegativeInfinity, true };
-        yield return new object[] { NumberValue.One, false, NumberValue.PositiveInfinity, true };
-        yield return new object[] { NumberValue.NegativeInfinity, true, NumberValue.PositiveInfinity, true };
-        yield return new object[] { NumberValue.Two, true, NumberValue.One, true };
+        yield return [NumberValue.NegativeInfinity, true, NumberValue.One, false];
+        yield return [NumberValue.PositiveInfinity, true, NumberValue.One, false];
+        yield return [NumberValue.One, false, NumberValue.NegativeInfinity, true];
+        yield return [NumberValue.One, false, NumberValue.PositiveInfinity, true];
+        yield return [NumberValue.NegativeInfinity, true, NumberValue.PositiveInfinity, true];
+        yield return [NumberValue.Two, true, NumberValue.One, true];
     }
 
     [Test]
@@ -114,10 +114,10 @@ public class DomainRangeTests
 
     public static IEnumerable<object[]> GetToStringTestData()
     {
-        yield return new object[] { new DomainRange(-NumberValue.One, true, NumberValue.One, true), "[-1; 1]" };
-        yield return new object[] { new DomainRange(-NumberValue.One, true, NumberValue.One, false), "[-1; 1)" };
-        yield return new object[] { new DomainRange(-NumberValue.One, false, NumberValue.One, true), "(-1; 1]" };
-        yield return new object[] { new DomainRange(-NumberValue.One, false, NumberValue.One, false), "(-1; 1)" };
+        yield return [new DomainRange(-NumberValue.One, true, NumberValue.One, true), "[-1; 1]"];
+        yield return [new DomainRange(-NumberValue.One, true, NumberValue.One, false), "[-1; 1)"];
+        yield return [new DomainRange(-NumberValue.One, false, NumberValue.One, true), "(-1; 1]"];
+        yield return [new DomainRange(-NumberValue.One, false, NumberValue.One, false), "(-1; 1)"];
     }
 
     [Test]
@@ -127,10 +127,10 @@ public class DomainRangeTests
 
     public static IEnumerable<object[]> GetInRangeTestData()
     {
-        yield return new object[] { new DomainRange(-NumberValue.One, true, NumberValue.One, true), NumberValue.Zero };
-        yield return new object[] { new DomainRange(-NumberValue.One, true, NumberValue.One, false), NumberValue.Zero };
-        yield return new object[] { new DomainRange(-NumberValue.One, false, NumberValue.One, true), NumberValue.Zero };
-        yield return new object[] { new DomainRange(-NumberValue.One, false, NumberValue.One, false), NumberValue.Zero };
+        yield return [new DomainRange(-NumberValue.One, true, NumberValue.One, true), NumberValue.Zero];
+        yield return [new DomainRange(-NumberValue.One, true, NumberValue.One, false), NumberValue.Zero];
+        yield return [new DomainRange(-NumberValue.One, false, NumberValue.One, true), NumberValue.Zero];
+        yield return [new DomainRange(-NumberValue.One, false, NumberValue.One, false), NumberValue.Zero];
     }
 
     [Test]
@@ -140,10 +140,10 @@ public class DomainRangeTests
 
     public static IEnumerable<object[]> GetNotInRangeTestTest()
     {
-        yield return new object[] { new DomainRange(-NumberValue.One, true, NumberValue.One, true), NumberValue.Two };
-        yield return new object[] { new DomainRange(-NumberValue.One, true, NumberValue.One, false), NumberValue.Two };
-        yield return new object[] { new DomainRange(-NumberValue.One, false, NumberValue.One, true), NumberValue.Two };
-        yield return new object[] { new DomainRange(-NumberValue.One, false, NumberValue.One, false), NumberValue.Two };
+        yield return [new DomainRange(-NumberValue.One, true, NumberValue.One, true), NumberValue.Two];
+        yield return [new DomainRange(-NumberValue.One, true, NumberValue.One, false), NumberValue.Two];
+        yield return [new DomainRange(-NumberValue.One, false, NumberValue.One, true), NumberValue.Two];
+        yield return [new DomainRange(-NumberValue.One, false, NumberValue.One, false), NumberValue.Two];
     }
 
     [Test]

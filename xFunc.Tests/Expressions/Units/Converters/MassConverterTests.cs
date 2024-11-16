@@ -19,21 +19,21 @@ public class MassConverterTests
     {
         var mass = MassValue.Gram(10);
 
-        yield return new object[] { mass, "mg", mass.ToMilligram() };
-        yield return new object[] { mass, "g", mass.ToGram() };
-        yield return new object[] { mass, "kg", mass.ToKilogram() };
-        yield return new object[] { mass, "t", mass.ToTonne() };
-        yield return new object[] { mass, "oz", mass.ToOunce() };
-        yield return new object[] { mass, "lb", mass.ToPound() };
+        yield return [mass, "mg", mass.ToMilligram()];
+        yield return [mass, "g", mass.ToGram()];
+        yield return [mass, "kg", mass.ToKilogram()];
+        yield return [mass, "t", mass.ToTonne()];
+        yield return [mass, "oz", mass.ToOunce()];
+        yield return [mass, "lb", mass.ToPound()];
 
         var number = new NumberValue(10);
 
-        yield return new object[] { number, "mg", MassValue.Milligram(number) };
-        yield return new object[] { number, "g", MassValue.Gram(number) };
-        yield return new object[] { number, "kg", MassValue.Kilogram(number) };
-        yield return new object[] { number, "t", MassValue.Tonne(number) };
-        yield return new object[] { number, "oz", MassValue.Ounce(number) };
-        yield return new object[] { number, "lb", MassValue.Pound(number) };
+        yield return [number, "mg", MassValue.Milligram(number)];
+        yield return [number, "g", MassValue.Gram(number)];
+        yield return [number, "kg", MassValue.Kilogram(number)];
+        yield return [number, "t", MassValue.Tonne(number)];
+        yield return [number, "oz", MassValue.Ounce(number)];
+        yield return [number, "lb", MassValue.Pound(number)];
     }
 
     [Test]
@@ -50,8 +50,8 @@ public class MassConverterTests
 
     public static IEnumerable<object[]> GetConvertUnsupportedUnitData()
     {
-        yield return new object[] { MassValue.Gram(10), "xxx" };
-        yield return new object[] { new NumberValue(10), "xxx" };
+        yield return [MassValue.Gram(10), "xxx"];
+        yield return [new NumberValue(10), "xxx"];
     }
 
     [Test]

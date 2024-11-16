@@ -19,15 +19,15 @@ public class ConverterTests
     {
         var angle = AngleValue.Radian(90);
 
-        yield return new object[] { angle, "rad", angle.ToRadian() };
+        yield return [angle, "rad", angle.ToRadian()];
 
         var power = PowerValue.Watt(10);
 
-        yield return new object[] { power, "w", power.ToWatt() };
+        yield return [power, "w", power.ToWatt()];
 
         var temperature = TemperatureValue.Celsius(10);
 
-        yield return new object[] { temperature, "k", temperature.ToKelvin() };
+        yield return [temperature, "k", temperature.ToKelvin()];
     }
 
     [Test]

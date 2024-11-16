@@ -32,57 +32,57 @@ public class TrigonometricSimplifierTest : BaseSimplifierTest
 
     public static IEnumerable<object[]> GetInverseDomainTestData()
     {
-        yield return new object[] { new Sin(new Arcsin(Variable.X)), new Sin(new Arcsin(Variable.X)) };
+        yield return [new Sin(new Arcsin(Variable.X)), new Sin(new Arcsin(Variable.X))];
 
-        yield return new object[] { new Sin(new Arcsin(Number.One)), Number.One };
+        yield return [new Sin(new Arcsin(Number.One)), Number.One];
 
-        yield return new object[] { new Sin(new Arcsin(Number.Two)), new Sin(new Arcsin(Number.Two)) };
+        yield return [new Sin(new Arcsin(Number.Two)), new Sin(new Arcsin(Number.Two))];
 
-        yield return new object[] { new Cos(new Arccos(Variable.X)), new Cos(new Arccos(Variable.X)) };
+        yield return [new Cos(new Arccos(Variable.X)), new Cos(new Arccos(Variable.X))];
 
-        yield return new object[] { new Cos(new Arccos(Number.One)), Number.One };
+        yield return [new Cos(new Arccos(Number.One)), Number.One];
 
-        yield return new object[] { new Cos(new Arccos(Number.Two)), new Cos(new Arccos(Number.Two)) };
+        yield return [new Cos(new Arccos(Number.Two)), new Cos(new Arccos(Number.Two))];
 
-        yield return new object[] { new Sec(new Arcsec(Variable.X)), new Sec(new Arcsec(Variable.X)) };
+        yield return [new Sec(new Arcsec(Variable.X)), new Sec(new Arcsec(Variable.X))];
 
-        yield return new object[] { new Sec(new Arcsec(Number.Two)), Number.Two };
+        yield return [new Sec(new Arcsec(Number.Two)), Number.Two];
 
-        yield return new object[] { new Sec(new Arcsec(Number.Zero)), new Sec(new Arcsec(Number.Zero)) };
+        yield return [new Sec(new Arcsec(Number.Zero)), new Sec(new Arcsec(Number.Zero))];
 
-        yield return new object[] { new Csc(new Arccsc(Variable.X)), new Csc(new Arccsc(Variable.X)) };
+        yield return [new Csc(new Arccsc(Variable.X)), new Csc(new Arccsc(Variable.X))];
 
-        yield return new object[] { new Csc(new Arccsc(Number.Two)), Number.Two };
+        yield return [new Csc(new Arccsc(Number.Two)), Number.Two];
 
-        yield return new object[] { new Csc(new Arccsc(Number.Zero)), new Csc(new Arccsc(Number.Zero)) };
+        yield return [new Csc(new Arccsc(Number.Zero)), new Csc(new Arccsc(Number.Zero))];
 
-        yield return new object[] { new Cosh(new Arcosh(Number.Zero)), new Cosh(new Arcosh(Number.Zero)) };
+        yield return [new Cosh(new Arcosh(Number.Zero)), new Cosh(new Arcosh(Number.Zero))];
 
-        yield return new object[] { new Cosh(new Arcosh(Number.One)), Number.One };
+        yield return [new Cosh(new Arcosh(Number.One)), Number.One];
 
-        yield return new object[] { new Tanh(new Artanh(new Number(-1))), new Tanh(new Artanh(new Number(-1))) };
+        yield return [new Tanh(new Artanh(new Number(-1))), new Tanh(new Artanh(new Number(-1)))];
 
-        yield return new object[] { new Tanh(new Artanh(Number.One)), new Tanh(new Artanh(Number.One)) };
+        yield return [new Tanh(new Artanh(Number.One)), new Tanh(new Artanh(Number.One))];
 
-        yield return new object[] { new Tanh(new Artanh(Number.Zero)), Number.Zero };
+        yield return [new Tanh(new Artanh(Number.Zero)), Number.Zero];
 
-        yield return new object[] { new Csch(new Arcsch(new Number(-1))), new Number(-1) };
+        yield return [new Csch(new Arcsch(new Number(-1))), new Number(-1)];
 
-        yield return new object[] { new Csch(new Arcsch(Number.One)), Number.One };
+        yield return [new Csch(new Arcsch(Number.One)), Number.One];
 
-        yield return new object[] { new Csch(new Arcsch(Number.Zero)), new Csch(new Arcsch(Number.Zero)) };
+        yield return [new Csch(new Arcsch(Number.Zero)), new Csch(new Arcsch(Number.Zero))];
 
-        yield return new object[] { new Sech(new Arsech(new Number(-1))), new Sech(new Arsech(new Number(-1))) };
+        yield return [new Sech(new Arsech(new Number(-1))), new Sech(new Arsech(new Number(-1)))];
 
-        yield return new object[] { new Sech(new Arsech(Number.Two)), new Sech(new Arsech(Number.Two)) };
+        yield return [new Sech(new Arsech(Number.Two)), new Sech(new Arsech(Number.Two))];
 
-        yield return new object[] { new Sech(new Arsech(Number.One)), Number.One };
+        yield return [new Sech(new Arsech(Number.One)), Number.One];
 
-        yield return new object[] { new Coth(new Arcoth(new Number(-2))), new Number(-2) };
+        yield return [new Coth(new Arcoth(new Number(-2))), new Number(-2)];
 
-        yield return new object[] { new Coth(new Arcoth(Number.Zero)), new Coth(new Arcoth(Number.Zero)) };
+        yield return [new Coth(new Arcoth(Number.Zero)), new Coth(new Arcoth(Number.Zero))];
 
-        yield return new object[] { new Coth(new Arcoth(Number.Two)), Number.Two };
+        yield return [new Coth(new Arcoth(Number.Two)), Number.Two];
     }
 
     [Test]

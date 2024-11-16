@@ -11,9 +11,9 @@ public class MatrixValueTests
 
     public static IEnumerable<object[]> NotEqualsTestData()
     {
-        yield return new object[] { default(MatrixValue), MatrixValue.Create(NumberValue.One) };
+        yield return [default(MatrixValue), MatrixValue.Create(NumberValue.One)];
 
-        yield return new object[] { MatrixValue.Create(NumberValue.One), default(MatrixValue) };
+        yield return [MatrixValue.Create(NumberValue.One), default(MatrixValue)];
     }
 
     [Test]
@@ -23,9 +23,9 @@ public class MatrixValueTests
 
     public static IEnumerable<object[]> EqualsTestData()
     {
-        yield return new object[] { default(MatrixValue), default(MatrixValue) };
+        yield return [default(MatrixValue), default(MatrixValue)];
 
-        yield return new object[] { MatrixValue.Create(NumberValue.One), MatrixValue.Create(NumberValue.One) };
+        yield return [MatrixValue.Create(NumberValue.One), MatrixValue.Create(NumberValue.One)];
     }
 
     [Test]
@@ -35,11 +35,11 @@ public class MatrixValueTests
 
     public static IEnumerable<object[]> NotEqualsAsObjectTestData()
     {
-        yield return new object[] { default(MatrixValue), MatrixValue.Create(NumberValue.One) };
+        yield return [default(MatrixValue), MatrixValue.Create(NumberValue.One)];
 
-        yield return new object[] { MatrixValue.Create(NumberValue.One), default(MatrixValue) };
+        yield return [MatrixValue.Create(NumberValue.One), default(MatrixValue)];
 
-        yield return new object[] { MatrixValue.Create(NumberValue.One), true };
+        yield return [MatrixValue.Create(NumberValue.One), true];
     }
 
     [Test]
@@ -76,8 +76,8 @@ public class MatrixValueTests
     {
         var matrix = MatrixValue.Create(new NumberValue[][]
         {
-            new NumberValue[] { NumberValue.One },
-            new NumberValue[] { NumberValue.Two },
+            [NumberValue.One],
+            [NumberValue.Two],
         });
         var expected = "{{1}, {2}}";
 

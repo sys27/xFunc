@@ -17,7 +17,7 @@ public class CallExpression : IExpression, IEquatable<CallExpression>
     /// <param name="function">The expression that returns function.</param>
     /// <param name="argument">The parameter of the function.</param>
     public CallExpression(IExpression function, IExpression argument)
-        : this(function, ImmutableArray.Create(argument))
+        : this(function, [argument])
     {
     }
 
@@ -28,7 +28,7 @@ public class CallExpression : IExpression, IEquatable<CallExpression>
     /// <param name="argument1">The first parameter of the function.</param>
     /// <param name="argument2">The second parameter of the function.</param>
     public CallExpression(IExpression function, IExpression argument1, IExpression argument2)
-        : this(function, ImmutableArray.Create(argument1, argument2))
+        : this(function, [argument1, argument2])
     {
     }
 

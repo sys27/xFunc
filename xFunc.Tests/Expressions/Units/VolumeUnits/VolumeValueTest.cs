@@ -188,61 +188,61 @@ public class VolumeValueTest
 
     public static IEnumerable<object[]> GetConversionTestCases()
     {
-        yield return new object[] { 10.0, VolumeUnit.Meter, VolumeUnit.Meter, 10.0 };
-        yield return new object[] { 10.0, VolumeUnit.Meter, VolumeUnit.Centimeter, 10000000.0 };
-        yield return new object[] { 10.0, VolumeUnit.Meter, VolumeUnit.Liter, 10000.0 };
-        yield return new object[] { 10.0, VolumeUnit.Meter, VolumeUnit.Inch, 610236.10035 };
-        yield return new object[] { 10.0, VolumeUnit.Meter, VolumeUnit.Foot, 353.14666721 };
-        yield return new object[] { 10.0, VolumeUnit.Meter, VolumeUnit.Yard, 13.079506193 };
-        yield return new object[] { 10.0, VolumeUnit.Meter, VolumeUnit.Gallon, 2641.7205124 };
+        yield return [10.0, VolumeUnit.Meter, VolumeUnit.Meter, 10.0];
+        yield return [10.0, VolumeUnit.Meter, VolumeUnit.Centimeter, 10000000.0];
+        yield return [10.0, VolumeUnit.Meter, VolumeUnit.Liter, 10000.0];
+        yield return [10.0, VolumeUnit.Meter, VolumeUnit.Inch, 610236.10035];
+        yield return [10.0, VolumeUnit.Meter, VolumeUnit.Foot, 353.14666721];
+        yield return [10.0, VolumeUnit.Meter, VolumeUnit.Yard, 13.079506193];
+        yield return [10.0, VolumeUnit.Meter, VolumeUnit.Gallon, 2641.7205124];
 
-        yield return new object[] { 10.0, VolumeUnit.Centimeter, VolumeUnit.Centimeter, 10.0 };
-        yield return new object[] { 10.0, VolumeUnit.Centimeter, VolumeUnit.Meter, 0.00001 };
-        yield return new object[] { 10.0, VolumeUnit.Centimeter, VolumeUnit.Liter, 0.01 };
-        yield return new object[] { 10.0, VolumeUnit.Centimeter, VolumeUnit.Inch, 0.6102374409 };
-        yield return new object[] { 10.0, VolumeUnit.Centimeter, VolumeUnit.Foot, 0.0003531467 };
-        yield return new object[] { 10.0, VolumeUnit.Centimeter, VolumeUnit.Yard, 0.0000130795 };
-        yield return new object[] { 10.0, VolumeUnit.Centimeter, VolumeUnit.Gallon, 0.0026417205 };
+        yield return [10.0, VolumeUnit.Centimeter, VolumeUnit.Centimeter, 10.0];
+        yield return [10.0, VolumeUnit.Centimeter, VolumeUnit.Meter, 0.00001];
+        yield return [10.0, VolumeUnit.Centimeter, VolumeUnit.Liter, 0.01];
+        yield return [10.0, VolumeUnit.Centimeter, VolumeUnit.Inch, 0.6102374409];
+        yield return [10.0, VolumeUnit.Centimeter, VolumeUnit.Foot, 0.0003531467];
+        yield return [10.0, VolumeUnit.Centimeter, VolumeUnit.Yard, 0.0000130795];
+        yield return [10.0, VolumeUnit.Centimeter, VolumeUnit.Gallon, 0.0026417205];
 
-        yield return new object[] { 10.0, VolumeUnit.Liter, VolumeUnit.Liter, 10.0 };
-        yield return new object[] { 10.0, VolumeUnit.Liter, VolumeUnit.Meter, 0.01 };
-        yield return new object[] { 10.0, VolumeUnit.Liter, VolumeUnit.Centimeter, 10000.0 };
-        yield return new object[] { 10.0, VolumeUnit.Liter, VolumeUnit.Inch, 610.2361 };
-        yield return new object[] { 10.0, VolumeUnit.Liter, VolumeUnit.Foot, 0.3531466672 };
-        yield return new object[] { 10.0, VolumeUnit.Liter, VolumeUnit.Yard, 0.0130795062 };
-        yield return new object[] { 10.0, VolumeUnit.Liter, VolumeUnit.Gallon, 2.6417205236 };
+        yield return [10.0, VolumeUnit.Liter, VolumeUnit.Liter, 10.0];
+        yield return [10.0, VolumeUnit.Liter, VolumeUnit.Meter, 0.01];
+        yield return [10.0, VolumeUnit.Liter, VolumeUnit.Centimeter, 10000.0];
+        yield return [10.0, VolumeUnit.Liter, VolumeUnit.Inch, 610.2361];
+        yield return [10.0, VolumeUnit.Liter, VolumeUnit.Foot, 0.3531466672];
+        yield return [10.0, VolumeUnit.Liter, VolumeUnit.Yard, 0.0130795062];
+        yield return [10.0, VolumeUnit.Liter, VolumeUnit.Gallon, 2.6417205236];
 
-        yield return new object[] { 10.0, VolumeUnit.Inch, VolumeUnit.Inch, 10.0 };
-        yield return new object[] { 10.0, VolumeUnit.Inch, VolumeUnit.Meter, 0.0001638706 };
-        yield return new object[] { 10.0, VolumeUnit.Inch, VolumeUnit.Centimeter, 163.871 };
-        yield return new object[] { 10.0, VolumeUnit.Inch, VolumeUnit.Liter, 0.16387064 };
-        yield return new object[] { 10.0, VolumeUnit.Inch, VolumeUnit.Foot, 0.005787037 };
-        yield return new object[] { 10.0, VolumeUnit.Inch, VolumeUnit.Yard, 0.0002143347 };
-        yield return new object[] { 10.0, VolumeUnit.Inch, VolumeUnit.Gallon, 0.0432900433 };
+        yield return [10.0, VolumeUnit.Inch, VolumeUnit.Inch, 10.0];
+        yield return [10.0, VolumeUnit.Inch, VolumeUnit.Meter, 0.0001638706];
+        yield return [10.0, VolumeUnit.Inch, VolumeUnit.Centimeter, 163.871];
+        yield return [10.0, VolumeUnit.Inch, VolumeUnit.Liter, 0.16387064];
+        yield return [10.0, VolumeUnit.Inch, VolumeUnit.Foot, 0.005787037];
+        yield return [10.0, VolumeUnit.Inch, VolumeUnit.Yard, 0.0002143347];
+        yield return [10.0, VolumeUnit.Inch, VolumeUnit.Gallon, 0.0432900433];
 
-        yield return new object[] { 10.0, VolumeUnit.Foot, VolumeUnit.Foot, 10.0 };
-        yield return new object[] { 10.0, VolumeUnit.Foot, VolumeUnit.Meter, 0.2831684659 };
-        yield return new object[] { 10.0, VolumeUnit.Foot, VolumeUnit.Centimeter, 283168.466 };
-        yield return new object[] { 10.0, VolumeUnit.Foot, VolumeUnit.Liter, 283.16846592 };
-        yield return new object[] { 10.0, VolumeUnit.Foot, VolumeUnit.Inch, 17279.96204 };
-        yield return new object[] { 10.0, VolumeUnit.Foot, VolumeUnit.Yard, 0.3703703704 };
-        yield return new object[] { 10.0, VolumeUnit.Foot, VolumeUnit.Gallon, 74.805194805 };
+        yield return [10.0, VolumeUnit.Foot, VolumeUnit.Foot, 10.0];
+        yield return [10.0, VolumeUnit.Foot, VolumeUnit.Meter, 0.2831684659];
+        yield return [10.0, VolumeUnit.Foot, VolumeUnit.Centimeter, 283168.466];
+        yield return [10.0, VolumeUnit.Foot, VolumeUnit.Liter, 283.16846592];
+        yield return [10.0, VolumeUnit.Foot, VolumeUnit.Inch, 17279.96204];
+        yield return [10.0, VolumeUnit.Foot, VolumeUnit.Yard, 0.3703703704];
+        yield return [10.0, VolumeUnit.Foot, VolumeUnit.Gallon, 74.805194805];
 
-        yield return new object[] { 10.0, VolumeUnit.Yard, VolumeUnit.Yard, 10.0 };
-        yield return new object[] { 10.0, VolumeUnit.Yard, VolumeUnit.Meter, 7.6455485798 };
-        yield return new object[] { 10.0, VolumeUnit.Yard, VolumeUnit.Centimeter, 7645548.58 };
-        yield return new object[] { 10.0, VolumeUnit.Yard, VolumeUnit.Liter, 7645.5485798 };
-        yield return new object[] { 10.0, VolumeUnit.Yard, VolumeUnit.Inch, 466558.97505 };
-        yield return new object[] { 10.0, VolumeUnit.Yard, VolumeUnit.Foot, 270.0 };
-        yield return new object[] { 10.0, VolumeUnit.Yard, VolumeUnit.Gallon, 2019.74025 };
+        yield return [10.0, VolumeUnit.Yard, VolumeUnit.Yard, 10.0];
+        yield return [10.0, VolumeUnit.Yard, VolumeUnit.Meter, 7.6455485798];
+        yield return [10.0, VolumeUnit.Yard, VolumeUnit.Centimeter, 7645548.58];
+        yield return [10.0, VolumeUnit.Yard, VolumeUnit.Liter, 7645.5485798];
+        yield return [10.0, VolumeUnit.Yard, VolumeUnit.Inch, 466558.97505];
+        yield return [10.0, VolumeUnit.Yard, VolumeUnit.Foot, 270.0];
+        yield return [10.0, VolumeUnit.Yard, VolumeUnit.Gallon, 2019.74025];
 
-        yield return new object[] { 10.0, VolumeUnit.Gallon, VolumeUnit.Gallon, 10.0 };
-        yield return new object[] { 10.0, VolumeUnit.Gallon, VolumeUnit.Meter, 0.0378541178 };
-        yield return new object[] { 10.0, VolumeUnit.Gallon, VolumeUnit.Centimeter, 37854.118 };
-        yield return new object[] { 10.0, VolumeUnit.Gallon, VolumeUnit.Liter, 37.85411784 };
-        yield return new object[] { 10.0, VolumeUnit.Gallon, VolumeUnit.Inch, 2309.99494 };
-        yield return new object[] { 10.0, VolumeUnit.Gallon, VolumeUnit.Foot, 1.3368055556 };
-        yield return new object[] { 10.0, VolumeUnit.Gallon, VolumeUnit.Yard, 0.0495113169 };
+        yield return [10.0, VolumeUnit.Gallon, VolumeUnit.Gallon, 10.0];
+        yield return [10.0, VolumeUnit.Gallon, VolumeUnit.Meter, 0.0378541178];
+        yield return [10.0, VolumeUnit.Gallon, VolumeUnit.Centimeter, 37854.118];
+        yield return [10.0, VolumeUnit.Gallon, VolumeUnit.Liter, 37.85411784];
+        yield return [10.0, VolumeUnit.Gallon, VolumeUnit.Inch, 2309.99494];
+        yield return [10.0, VolumeUnit.Gallon, VolumeUnit.Foot, 1.3368055556];
+        yield return [10.0, VolumeUnit.Gallon, VolumeUnit.Yard, 0.0495113169];
     }
 
     [Test]

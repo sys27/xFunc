@@ -30,7 +30,7 @@ public readonly struct VectorValue : IEquatable<VectorValue>, IEnumerable<Number
     /// <param name="value">The item of a new vector.</param>
     /// <returns>The vector.</returns>
     public static VectorValue Create(NumberValue value)
-        => new VectorValue(new[] { value });
+        => new VectorValue([value]);
 
     /// <summary>
     /// Creates a new instance of <see cref="VectorValue"/>.
@@ -339,11 +339,10 @@ public readonly struct VectorValue : IEquatable<VectorValue>, IEnumerable<Number
         if (left.Size != 3 || right.Size != 3)
             throw new ArgumentException(Resource.VectorCrossException);
 
-        return new VectorValue(new[]
-        {
+        return new VectorValue([
             left[1] * right[2] - left[2] * right[1],
             left[2] * right[0] - left[0] * right[2],
-            left[0] * right[1] - left[1] * right[0],
-        });
+            left[0] * right[1] - left[1] * right[0]
+        ]);
     }
 }

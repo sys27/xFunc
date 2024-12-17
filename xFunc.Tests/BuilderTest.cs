@@ -26,7 +26,7 @@ public class BuilderTest
     {
         var exp = new Builder("x").Expression;
 
-        Assert.That(exp, Is.EqualTo(Variable.X));
+        Assert.That(exp, Is.EqualTo(Variable.X as IExpression));
     }
 
     [Test]

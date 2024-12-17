@@ -53,7 +53,7 @@ public class VariableTest
         var exp = (Variable)"x";
         var result = Variable.X;
 
-        Assert.That(exp, Is.EqualTo(result));
+        Assert.That(exp, Is.EqualTo(result as IExpression));
     }
 
     [Test]

@@ -912,7 +912,7 @@ public class DifferentiatorTest
         var exp = Variable.Y;
         var deriv = Differentiate(exp);
 
-        Assert.That(deriv, Is.EqualTo(Variable.Y));
+        Assert.That(deriv, Is.EqualTo(Variable.Y as IExpression));
     }
 
     #endregion Common

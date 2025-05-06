@@ -12,6 +12,6 @@
     <PackageVersion Include="BenchmarkDotNet" Version="0.14.0" />
     <PackageVersion Include="coverlet.msbuild" Version="6.0.4" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
-    <PackageVersion Include="ReportGenerator" Version="5.4.5" />
+    <PackageVersion Include="ReportGenerator" Version="5.4.6" />
   </ItemGroup>
 </Project>

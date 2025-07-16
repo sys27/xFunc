@@ -1,7 +1,10 @@
 <Project>
-  <Target Name="CoverletGetPathMap" DependsOnTargets="InitializeSourceRootMappedPaths" Returns="@(_LocalTopLevelSourceRoot)" Condition="'$(DeterministicSourcePaths)' == 'true'">
+  <Target Name="CoverletGetPathMap"
+          DependsOnTargets="InitializeSourceRootMappedPaths"
+          Returns="@(_LocalTopLevelSourceRoot)"
+          Condition="'$(DeterministicSourcePaths)' == 'true'">
     <ItemGroup>
-      <_LocalTopLevelSourceRoot Include="@(SourceRoot)" Condition="'%(SourceRoot.NestedRoot)' == ''" />
+      <_LocalTopLevelSourceRoot Include="@(SourceRoot)" Condition="'%(SourceRoot.NestedRoot)' == ''"/>
     </ItemGroup>
   </Target>
 </Project>

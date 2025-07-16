@@ -106,6 +106,8 @@ https://sys27.github.io/xFunc/articles/breaking-changes.html</PackageReleaseNote
   </ItemGroup>
 
   <ItemGroup>
+
+    <PackageReference Include="Microsoft.NET.ILLink.Tasks" />
     <EmbeddedResource Update="Resources\Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>

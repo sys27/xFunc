@@ -2,16 +2,16 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <PackAsTool>true</PackAsTool>
-    <ToolCommandName>xfunc</ToolCommandName>    
+    <ToolCommandName>xfunc</ToolCommandName>
     <PackageId>xFunc.Cli</PackageId>
     <Version>4.5.0</Version>
     <Product>xFunc.Maths</Product>
     <Authors>Dmytro Kyshchenko</Authors>
     <Company />
-    <Copyright>Copyright ©2012-2024 Dmytro Kyshchenko</Copyright>
+    <Copyright>Copyright © 2012-2025 Dmytro Kyshchenko</Copyright>
     <Description>xFunc provides a powerful parser and analyzer for mathematical expressions. It excels at calculating derivatives, simplifying expressions, and achieving high performance.</Description>
     <PackageProjectUrl>https://github.com/sys27/xFunc</PackageProjectUrl>
     <PackageIcon>xFunc.png</PackageIcon>

@@ -27,7 +27,7 @@ public abstract class DifferentParametersExpression : IExpression
     /// <exception cref="ArgumentException">The amount of argument in the <paramref name="arguments"/> collection is less than <c>MinParametersCount</c> or greater than <c>MaxParametersCount</c>.</exception>
     protected DifferentParametersExpression(ImmutableArray<IExpression> arguments)
     {
-        if (arguments == null)
+        if (arguments.IsDefault)
             throw new ArgumentNullException(nameof(arguments));
 
         if (arguments.Length < MinParametersCount)

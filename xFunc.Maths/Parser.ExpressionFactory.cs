@@ -82,8 +82,7 @@ public partial class Parser
             "deriv" or "derivative" => new Derivative(differentiator, simplifier, arguments),
             "simplify" => new Simplify(simplifier, arguments),
 
-            "del" => new Del(differentiator, simplifier, arguments),
-            "nabla" => new Del(differentiator, simplifier, arguments),
+            "del" or "nabla" => new Del(differentiator, simplifier, arguments),
 
             "transpose" => new Transpose(arguments),
             "det" or "determinant" => new Determinant(arguments),

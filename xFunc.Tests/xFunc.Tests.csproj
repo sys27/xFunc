@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <IsPackable>false</IsPackable>
     <RootNamespace>xFunc.Tests</RootNamespace>
@@ -46,7 +46,7 @@
     <Using Include="xFunc.Maths.Tokenization" />
     <Using Include="NUnit.Framework" />
   </ItemGroup>
-  
+
   <Target Name="GenerateHtmlCoverageReport" AfterTargets="GenerateCoverageResultAfterTest" Condition="'$(CollectCoverage)' == 'true'">
     <ReportGenerator ReportFiles="$(CoverletOutput)/coverage.cobertura.xml" TargetDirectory="$(CoverletOutput)" ReportTypes="HtmlInline_AzurePipelines" />
   </Target>

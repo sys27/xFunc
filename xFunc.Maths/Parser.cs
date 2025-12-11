@@ -143,7 +143,7 @@ public partial class Parser : IParser
            ParseTernary(ref tokenReader);
 
     private IExpression? ParseAssignOperators(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
+        => tokenReader.Scoped(this, static (parser, ref reader) =>
         {
             var variable = parser.ParseVariable(ref reader);
             if (variable is null)
@@ -167,7 +167,7 @@ public partial class Parser : IParser
         });
 
     private IExpression? ParseTernary(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
+        => tokenReader.Scoped(this, static (parser, ref reader) =>
         {
             var condition = parser.ParseConditionalOrOperator(ref reader);
             if (condition is null)
@@ -425,7 +425,7 @@ public partial class Parser : IParser
            ParseLeftUnary(ref tokenReader);
 
     private IExpression? ParseMulImplicitLeftUnary(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
+        => tokenReader.Scoped(this, static (parser, ref reader) =>
         {
             var minusOperator = reader.GetCurrentAndAdvance(MinusOperator);
             var number = parser.ParseNumberAndUnit(ref reader);
@@ -500,7 +500,7 @@ public partial class Parser : IParser
            ParseFactorialOrCallExpression(ref tokenReader);
 
     private IExpression? ParseIncDec(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
+        => tokenReader.Scoped(this, static (parser, ref reader) =>
         {
             var variable = parser.ParseVariable(ref reader);
             if (variable is null)
@@ -623,7 +623,7 @@ public partial class Parser : IParser
     }
 
     private IExpression? ParseParenthesesExpression(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
+        => tokenReader.Scoped(this, static (parser, ref reader) =>
         {
             if (!reader.CheckAndAdvance(OpenParenthesisSymbol))
                 return null;
@@ -869,7 +869,7 @@ public partial class Parser : IParser
         };
 
     private IExpression? ParsePolarComplexNumber(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser _, ref TokenReader reader) =>
+        => tokenReader.Scoped(this, static (_, ref reader) =>
         {
             // plus symbol can be ignored
             reader.GetCurrentAndAdvance(PlusOperator);
@@ -953,7 +953,7 @@ public partial class Parser : IParser
     }
 
     private IExpression? ParseMatrix(ref TokenReader tokenReader)
-        => tokenReader.Scoped(this, static (Parser parser, ref TokenReader reader) =>
+        => tokenReader.Scoped(this, static (parser, ref reader) =>
         {
             if (!reader.CheckAndAdvance(OpenBraceSymbol))
                 return null;

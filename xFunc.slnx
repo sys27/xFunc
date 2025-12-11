@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".stylecop.json" />
+    <File Path="Directory.Build.targets" />
+    <File Path="Directory.Packages.props" />
+    <File Path="version.json" />
+    <File Path="xFunc Grammar.txt" />
+    <File Path="xFunc.ruleset" />
+  </Folder>
+  <Project Path="xFunc.Benchmark/xFunc.Benchmark.csproj" />
+  <Project Path="xFunc.Cli/xFunc.Cli.csproj" />
+  <Project Path="xFunc.Maths/xFunc.Maths.csproj" />
+  <Project Path="xFunc.Tests/xFunc.Tests.csproj" />
+</Solution>

@@ -19,7 +19,7 @@ public class Matrix : IExpression
     /// <param name="vectors">The vectors.</param>
     /// <exception cref="ArgumentNullException"><paramref name="vectors"/> is null.</exception>
     public Matrix(Vector[] vectors)
-        : this(vectors.ToImmutableArray())
+        : this(vectors is null ? default : vectors.ToImmutableArray())
     {
     }
 
@@ -30,7 +30,7 @@ public class Matrix : IExpression
     /// <exception cref="ArgumentNullException"><paramref name="vectors"/> is null.</exception>
     public Matrix(ImmutableArray<Vector> vectors)
     {
-        if (vectors == null)
+        if (vectors.IsDefault)
             throw new ArgumentNullException(nameof(vectors));
 
         if (vectors.Length < MinParametersCount)

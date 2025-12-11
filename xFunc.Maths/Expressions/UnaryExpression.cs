@@ -26,7 +26,7 @@ public abstract class UnaryExpression : IExpression
     /// <exception cref="ParseException">The <paramref name="arguments"/> collection should have only one argument.</exception>
     protected UnaryExpression(ImmutableArray<IExpression> arguments)
     {
-        if (arguments == null)
+        if (arguments.IsDefault)
             throw new ArgumentNullException(nameof(arguments));
 
         if (arguments.Length < 1)

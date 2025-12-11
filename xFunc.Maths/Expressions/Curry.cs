@@ -75,7 +75,7 @@ public class Curry : IExpression
     /// <exception cref="ArgumentException">The amount of argument in the <paramref name="arguments"/> collection is less than 1.</exception>
     internal Curry(ImmutableArray<IExpression> arguments)
     {
-        Debug.Assert(arguments != null, "arguments == null");
+        Debug.Assert(!arguments.IsDefault, "arguments == null");
 
         if (arguments.Length < 1)
             throw new ArgumentException(Resource.LessParams, nameof(arguments));

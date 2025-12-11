@@ -18,15 +18,15 @@ jobs:
       vmImage: 'ubuntu-latest'
 
     variables:
-      solution: 'xFunc.sln'
+      solution: 'xFunc.slnx'
       buildConfiguration: 'Release'
 
     steps:
     - task: UseDotNet@2
-      displayName: 'Install .NET 9'
+      displayName: 'Install .NET 10'
       inputs:
         packageType: 'sdk'
-        version: '9.0.x'
+        version: '10.0.x'
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet restore'
@@ -71,7 +71,7 @@ jobs:
 
     - task: PublishPipelineArtifact@1
       inputs:
-        path: xFunc.Maths/bin/Release/net8.0
+        path: xFunc.Maths/bin/Release/net10.0
         artifact: xFunc.Maths
 
     - task: PublishPipelineArtifact@1

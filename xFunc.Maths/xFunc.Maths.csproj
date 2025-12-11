@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <RootNamespace>xFunc.Maths</RootNamespace>
     <PackageId>xFunc.Maths</PackageId>
@@ -9,7 +9,7 @@
     <Product>xFunc.Maths</Product>
     <Authors>Dmytro Kyshchenko</Authors>
     <Company />
-    <Copyright>Copyright © 2012-2024 Dmytro Kyshchenko</Copyright>
+    <Copyright>Copyright © 2012-2025 Dmytro Kyshchenko</Copyright>
     <Description>xFunc provides a powerful parser and analyzer for mathematical expressions. It excels at calculating derivatives, simplifying expressions, and achieving high performance.</Description>
     <PackageProjectUrl>https://github.com/sys27/xFunc</PackageProjectUrl>
     <PackageIcon>xFunc.png</PackageIcon>
@@ -40,8 +40,9 @@ https://sys27.github.io/xFunc/articles/breaking-changes.html</PackageReleaseNote
     <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
     <EnablePackageValidation>true</EnablePackageValidation>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <RollForward>LatestMajor</RollForward>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <Using Include="xFunc.Maths" />
     <Using Include="xFunc.Maths.Analyzers" />

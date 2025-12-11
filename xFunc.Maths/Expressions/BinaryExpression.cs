@@ -30,7 +30,7 @@ public abstract class BinaryExpression : IExpression
     /// <exception cref="ParseException">The <paramref name="arguments"/> collection should have only two arguments.</exception>
     protected BinaryExpression(ImmutableArray<IExpression> arguments)
     {
-        if (arguments == null)
+        if (arguments.IsDefault)
             throw new ArgumentNullException(nameof(arguments));
 
         if (arguments.Length < 2)

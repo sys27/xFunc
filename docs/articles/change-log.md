@@ -2,6 +2,9 @@
 
 ## xFunc v4.5.0 (dev)
 
+* [#895](https://github.com/sys27/xFunc/issues/895) - Incorrect formatting of factorial.
+* [#896](https://github.com/sys27/xFunc/issues/896) - Upgrade to .NET 10.
+
 ## xFunc v4.4.1
 
 * [#733](https://github.com/sys27/xFunc/pull/733) - Lexer optimization.

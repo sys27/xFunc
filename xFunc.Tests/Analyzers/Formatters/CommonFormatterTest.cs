@@ -125,6 +125,14 @@ public class CommonFormatterTest
     }
 
     [Test]
+    public void FactWithBinaryToStringTest()
+    {
+        var exp = new Fact(new Add(Number.One, Number.Two));
+
+        Assert.That(exp.ToString(), Is.EqualTo("(1 + 2)!"));
+    }
+
+    [Test]
     public void FloorToStringTest()
     {
         var exp = new Floor(new Number(5.55555555));

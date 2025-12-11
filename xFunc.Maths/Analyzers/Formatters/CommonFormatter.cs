@@ -103,7 +103,12 @@ public class CommonFormatter : IFormatter
 
     /// <inheritdoc />
     public virtual string Analyze(Fact exp)
-        => ToString(exp, "{0}!");
+    {
+        if (exp.Argument is BinaryExpression)
+            return ToString(exp, "({0})!");
+
+        return ToString(exp, "{0}!");
+    }
 
     /// <inheritdoc />
     public virtual string Analyze(Floor exp)

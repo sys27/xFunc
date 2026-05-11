@@ -6,9 +6,9 @@ using System.Reflection;
 
 namespace xFunc.Tests;
 
-public class AllExpressionsData : IEnumerable<object[]>
+public class AllExpressionsData : IEnumerable<object>
 {
-    public IEnumerator<object[]> GetEnumerator()
+    public IEnumerator<object> GetEnumerator()
     {
         var iExp = typeof(IExpression);
         var asm = Assembly.GetAssembly(iExp);
@@ -22,8 +22,7 @@ public class AllExpressionsData : IEnumerable<object[]>
 
         var types = asm
             .GetTypes()
-            .Where(type => iExp.IsAssignableFrom(type) && !type.IsAbstract && !exclude.Contains(type))
-            .Select(type => new[] { type });
+            .Where(type => iExp.IsAssignableFrom(type) && !type.IsAbstract && !exclude.Contains(type));
 
         return types.GetEnumerator();
     }

@@ -3,21 +3,23 @@
 
 using System.Reflection;
 using NUnit.Framework.Internal;
+using xFunc.Maths.Analyzers2;
+using Simplifier = xFunc.Maths.Analyzers.Simplifier;
 
 namespace xFunc.Tests.Analyzers.SimplifierTests;
 
 public abstract class BaseSimplifierTest : BaseTest
 {
-    protected readonly ISimplifier simplifier;
+    protected readonly IAnalyzer2 simplifier;
 
     protected BaseSimplifierTest()
     {
-        simplifier = new Simplifier();
+        simplifier = new Simplifier2();
     }
 
     protected void SimplifyTest(IExpression exp, IExpression expected)
     {
-        var simple = exp.Analyze(simplifier);
+        var simple = simplifier.Analyze(exp);
 
         Assert.That(simple, Is.EqualTo(expected));
     }
